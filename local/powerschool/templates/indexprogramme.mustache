@@ -1,0 +1,69 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_powerschool/index
+
+
+    Example context (json):
+    {
+
+    }
+}}
+
+<div class="d-flex flex-wrap align-items-center">
+  <div class="form-group fitem">
+
+    
+  <input type="button" class="btn btn-info align-items-center" value="suivant" onclick="location.href='{{programme}}'"> 
+  </div>
+
+</div>
+
+<h1>Programme de cours</h1>
+
+<div class="table card mt-2 mb-2">
+    <form class="fcontainer collapseable collapse  show">
+        <div class="form-group">
+          <label for="date">Date du jour</label>
+          <input type="date" class="form-control" id="date" name="date">
+        </div>
+        <div class="form-group">
+            <label for="semestre">Semestre</label>
+            <input type="text" class="form-control" id="semestre" name="semestre" placeholder="Entrez le semestre">
+          </div>
+        <div class="form-group">
+          <label for="specialite">Spécialité</label>
+          <input type="text" class="form-control" id="specialite" name="specialite" placeholder="Entrez la spécialité">
+        </div>
+        <div class="form-group">
+          <label for="cycle">Cycle</label>
+          <select class="form-control" id="cycle" name="cycle">
+            <option value="">Sélectionnez un cycle</option>
+            <option value="Licence">Licence</option>
+            <option value="Master">Master</option>
+            <option value="Doctorat">Doctorat</option>
+          </select>
+        </div>
+               <div class="form-group">
+          <label for="cours">Cours</label>
+          <input type="text" class="form-control" id="cours" name="cours" placeholder="Entrez le cours">
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </form>
+</div>
+
+<hr>
