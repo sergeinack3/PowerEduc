@@ -177,7 +177,7 @@ class programme extends moodleform {
      * @param string $datedebut la date de debut de l'annee
      * @param string $datefin date de fin de l'annee 
      */
-    public function update_programme(int $id, int $idanneescolaire, int $idcourses, int $idsemestre,int $idspecialite,int $idcycle, string $datecours,string $heuredebutcours,string $heurefincours ): bool
+    public function update_programme($id,$idanneescolaire,$idcourses,$idsemestre,$idspecialite,$idcycle,$datecours,$heuredebutcours, $heurefincours )
     {
         global $DB;
         global $USER;
@@ -195,8 +195,9 @@ class programme extends moodleform {
         $object->timemodified = time();
 
 
+        // var_dump($object->datecours );die;
 
-        return $DB->update_record('programme', $object);
+    $DB->update_record('programme', $object);
     }
 
 

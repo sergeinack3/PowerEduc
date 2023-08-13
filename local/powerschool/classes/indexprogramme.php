@@ -47,91 +47,90 @@ class indexprogramme extends moodleform {
         $campus = new campus();
         $cours = $specialite = $cycle =  array();
         
-       
-        // $sql1 = "SELECT * FROM {course} ";
-        $sql2 = "SELECT * FROM {semestre} ";
-        // $sql3 = "SELECT * FROM {specialite} ";
-        // $sql4 = "SELECT * FROM {cycle} ";
-        // $sql5 = "SELECT * FROM {anneescolaire} ";
-
-        // $cours = $campus->select($sql1);
-        $semestre = $campus->select($sql2);
-        // $specialite = $campus->select($sql3);
-        // $cycle = $campus->select($sql4);
-        // $anneescoalire = $campus->select($sql5);
         
+        $sql1 = "SELECT * FROM {course} ";
+        $sql2 = "SELECT * FROM {semestre} ";
+        $sql3 = "SELECT * FROM {specialite} ";
+        $sql4 = "SELECT * FROM {cycle} ";
+        $sql5 = "SELECT * FROM {anneescolaire} ";
 
-
+        $cours = $campus->select($sql1);
+        $semestre = $campus->select($sql2);
+        $specialite = $campus->select($sql3);
+        $cycle = $campus->select($sql4);
+        $anneescoalire = $campus->select($sql5);
+        
+        
+        
         $mform = $this->_form; // Don't forget the underscore!
-
+        
         $mform->addElement('header','programme', 'Programmation des cours');
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
     
-        // foreach ($cours as $key => $val)
-        // {
-        //     $selectcours[$key] = $val->fullname;
-        // }
+        foreach ($cours as $key => $val)
+        {
+            $selectcours[$key] = $val->fullname;
+        }
 
         foreach ($semestre as $key => $val)
         {
             $selectsemestre[$key] = $val->libellesemestre;
         }
         
-        // foreach ($specialite as $key => $val)
-        // {
-        //     $selectspecialite[$key] = $val->libellespecialite;
-        // }
+        foreach ($specialite as $key => $val)
+        {
+            $selectspecialite[$key] = $val->libellespecialite;
+        }
 
-        // foreach ($cycle as $key => $val)
-        // {
-        //     $selectcycle[$key] = $val->libellecycle;
-        // }
+        foreach ($cycle as $key => $val)
+        {
+            $selectcycle[$key] = $val->libellecycle;
+        }
 
-        // foreach ($anneescoalire as $key => $val)
-        // {
-        //     $selectanneescolaire[$key] = date('Y',$val->datedebut)." - ".date('Y',$val->datefin);
-        // }
+        foreach ($anneescoalire as $key => $val)
+        {
+            $selectanneescolaire[$key] = date('Y',$val->datedebut)." - ".date('Y',$val->datefin);
+        }
         
         // var_dump( $campus->selectcampus($sql)); 
         // die;
-        $mform->addElement('date_selector', 'idanneescolaire', 'Date du cours' ); // Add elements to your form
-        $mform->setType('idanneescolaire', PARAM_TEXT);                   //Set type of element
-        $mform->setDefault('idanneescolaire', '');        //Default value
-        $mform->addRule('idanneescolaire', 'Choix de la date du cours', 'required', null, 'client');
-        $mform->addHelpButton('idanneescolaire', 'Anneescolaire');
+        // die;
+        // $mform->addElement('select', 'idanneescolaire', 'Date du cours' ); // Add elements to your form
+        // $mform->setDefault('idanneescolaire', '');        //Default value
+        // $mform->addRule('idanneescolaire', 'Choix de la date du cours', 'required', null, 'client');
+        // $mform->addHelpButton('idanneescolaire', 'Anneescolaire');
 
-        // $mform->addElement('select', 'idcourses', 'Cours', $selectcours ); // Add elements to your form
-        // $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
-        // $mform->setDefault('idcourses', '');        //Default value
-        // $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
-        // $mform->addHelpButton('idcourses', 'cours');
+        $mform->addElement('select', 'idcourses', 'Cours', $selectcours ); // Add elements to your form
+        $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idcourses', '');        //Default value
+        $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
+        $mform->addHelpButton('idcourses', 'cours');
 
         $mform->addElement('select', 'idsemestre', 'Semestre', $selectsemestre ); // Add elements to your form
-        $mform->setType('idsemestre', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idsemestre', '');        //Default value
         $mform->addRule('idsemestre', 'Choix du Semestre', 'required', null, 'client');
         $mform->addHelpButton('idsemestre', 'semestre');
 
-        // $mform->addElement('select', 'idspecialite', 'Specialite', $selectspecialite ); // Add elements to your form
-        // $mform->setType('idspecialite', PARAM_TEXT);                   //Set type of element
-        // $mform->setDefault('idspecialite', '');        //Default value
-        // $mform->addRule('idspecialite', 'Choix de la specialite', 'required', null, 'client');
-        // $mform->addHelpButton('idspecialite', 'specialite');
+        $mform->addElement('select', 'idspecialite', 'Specialite', $selectspecialite ); // Add elements to your form
+        $mform->setType('idspecialite', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idspecialite', '');        //Default value
+        $mform->addRule('idspecialite', 'Choix de la specialite', 'required', null, 'client');
+        $mform->addHelpButton('idspecialite', 'specialite');
 
-        // $mform->addElement('select', 'idcycle', 'cycle', $selectcycle ); // Add elements to your form
-        // $mform->setType('idcycle', PARAM_TEXT);                   //Set type of element
-        // $mform->setDefault('idcycle', '');        //Default value
-        // $mform->addRule('idcycle', 'Choix du Semestre', 'required', null, 'client');
-        // $mform->addHelpButton('idcycle', 'cycle');
+        $mform->addElement('select', 'idcycle', 'cycle', $selectcycle ); // Add elements to your form
+        $mform->setType('idcycle', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idcycle', '');        //Default value
+        $mform->addRule('idcycle', 'Choix du Semestre', 'required', null, 'client');
+        $mform->addHelpButton('idcycle', 'cycle');
 
-        // $mform->addElement('date_time_selector', 'datecours', 'Date du Cours' ); // Add elements to your form
-        // $mform->setType('datecours', PARAM_TEXT);                   //Set type of element
-        // $mform->setDefault('datecours', '');        //Default value
-        // $mform->addRule('datecours', ' date de cours ', 'required', null, 'client');
-        // $mform->addHelpButton('datecours', 'datecours');
-
+        $mform->addElement('date_time_selector', 'datecours', 'Date du Cours' ); // Add elements to your form
+        $mform->setType('datecours', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('datecours', '');        //Default value
+        $mform->addRule('datecours', ' date de cours ', 'required', null, 'client');
+        $mform->addHelpButton('datecours', 'datecours');
+        
 
        
 

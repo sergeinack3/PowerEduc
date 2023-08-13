@@ -47,6 +47,7 @@ $PAGE->navbar->add(get_string('indexprogramme', 'local_powerschool'), $managemen
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 
 $mform=new indexprogramme();
+// die;
 
 
 
@@ -135,7 +136,6 @@ $month = new Month($mois??null,$annee??null,$semestre??null);
 $start = $month->getStartingDay();
 $getWeeks = $month->getWeeks();
 $getMonth = $month->toString();
-
 $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify('last monday');
 
 $end = (clone $start)->modify('+'.(6 + 7 * ($getWeeks - 1)).'days');
@@ -146,18 +146,18 @@ $eventsByDay = $month->getEventsByDay($start,$end,$semestre);
 
 
 
-var_dump($start);
-var_dump($end);
+// var_dump($start);
+// var_dump($end);
 
 
-die;
+// die;
 
 
 echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 
 // echo '<i href="/powereduc03/local/powerschool/programme.php" class="fa fa-arrow-left fa-2x"style="color: #1D7DC2;"> </i> ';
 
-echo ' <a type="button" class="btn btn-info" href="/powereduc03/local/powerschool/programme.php"> <i class="fa fa-arrow-left "> </i> </a>';
+echo ' <a type="button" class="btn btn-info" href="/moodle1/local/powerschool/programme.php"> <i class="fa fa-arrow-left "> </i> </a>';
 
 
 // echo ' <a href="/powereduc03/local/powerschool/programme.php> 
@@ -171,8 +171,8 @@ $mform->display();
 echo '<div class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
             <h1>'.$getMonth. '</h1>
         <div>  
-                <a href="/powereduc03/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'" class="btn btn-primary"> &lt;</a>
-                <a href="/powereduc03/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'" class="btn btn-primary">&gt;</a>
+                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'" class="btn btn-primary"> &lt;</a>
+                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'" class="btn btn-primary">&gt;</a>
         </div>
      </div>';
 
@@ -202,7 +202,7 @@ for($i = 0 ; $i < $getWeeks; $i++){
         $heuredebut = $event->heuredebutcours;
         $heurefin = $event->heurefincours;
         echo '<div>'
-        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/powereduc03/local/powerschool/programmeedit.php?id='.$event->id.'">'.$eventday.'</a>
+        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'">'.$eventday.'</a>
         </div>';
       }
        '</td>';

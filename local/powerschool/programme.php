@@ -72,30 +72,29 @@ $recordtoinsert = $fromform;
         for($i=0;$i<=4;$i++)
         {
 
-            $date = $recordtoinsert->datecours ;
+            // $date = $recordtoinsert->datecours ;
+            $date = $recordtoinsert->datecours + ($i * 604800);
             $sem = $mform->definir_semestre($date);
 
             $recordtoinsert->idsemestre = $sem;
+            // var_dump(date("Y/m/d",$date));
+            
 
-            var_dump($recordtoinsert);
-            die;
-
-            $date = $date->modify("+".($i)."week");
-
+            // $date = $date->modify("+".($i)."week");
+            $recordtoinsert->datecours=$date;
         
             
 
-        var_dump($sem);
-        var_dump($recordtoinsert);
+        
            
-            // $DB->insert_record('programme', $recordtoinsert);
+            $DB->insert_record('programme', $recordtoinsert);
             // redirect($CFG->wwwroot . '/local/powerschool/programme.php', 'Enregistrement effectué');
             // exit;
 
             
         
         }
-        die;
+        // die;
         
 }
 
@@ -240,7 +239,7 @@ echo $OUTPUT->render_from_template('local_powerschool/programme', $templateconte
 // echo ' </table>
 //         </div>';
 
-echo ' <a type="button" class="btn btn-danger" href="/powereduc03/local/powerschool/indexprogramme.php">Voir le Calendrier </a>';
+echo ' <a type="button" class="btn btn-danger" href="/moodle1/local/powerschool/indexprogramme.php">Voir le Calendrier </a>';
 
 
 echo $OUTPUT->footer();

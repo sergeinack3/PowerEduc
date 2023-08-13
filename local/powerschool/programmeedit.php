@@ -53,11 +53,14 @@ $recordtoinsert = new programme();
 
     if($fromform->id) {
 
-       
-        // var_dump($fromform);
+        $ggg=$_POST["datecours"];
+   
+        $fromform->datecours= strtotime($ggg["day"]."-".$ggg["month"]."-".$ggg["year"]);
+        // $fromform
+        // var_dump($_POST["datecours"]);
         // die;
 
-        $recordtoinsert->update_programme($fromform->id,$fromform->idanneescolaire, $fromform->idcourses,$fromform->idsemestre,$fromform->idspecialite,$fromform->idcycle,$fromform->$datecours,$fromform->heuredebutcours,$fromform->heurefincours);
+        $recordtoinsert->update_programme($fromform->id,$fromform->idanneescolaire, $fromform->idcourses,$fromform->idsemestre,$fromform->idspecialite,$fromform->idcycle,$fromform->datecours,$fromform->heuredebutcours,$fromform->heurefincours);
         redirect($CFG->wwwroot . '/local/powerschool/programme.php', 'Bien modifier');
         
     }
