@@ -148,7 +148,7 @@ class Month {
     /**
      * recuperer les evenements situé entre 2 dates
      */
-    public function getEvents (\DateTime $start, \DateTime $end , ?string $semestre = null ):array{
+    public function getEvents (\DateTime $start, \DateTime $end , ?string $semestre = null,$idca,$specialite=null,$cycle=null):array{
 
         
     global $DB;
@@ -160,11 +160,15 @@ class Month {
             AND p.idcycle = cy.id  ";
 
     }
-    else{
+    else if($specialite==null && $cycle==null){
 
         $sql = "SELECT * FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy, {programme} p WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
-        AND p.idcycle = cy.id  AND FROM_UNIXTIME(datecours) BETWEEN '{$start->format('Y-m-d 00:00:00')} ' AND '{$end->format('Y-m-d 23:59:59')} ' AND idsemestre=$semestre";
+        AND p.idcycle = cy.id AND idcampus='".$idca."'  AND FROM_UNIXTIME(datecours) BETWEEN '{$start->format('Y-m-d 00:00:00')} ' AND '{$end->format('Y-m-d 23:59:59')} ' AND idsemestre=$semestre";
       
+    }else{
+        $sql = "SELECT * FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy, {programme} p WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
+        AND p.idcycle = cy.id AND idcycle='".$cycle."' AND idspecialite='".$specialite."' AND idcampus='".$idca."'  AND FROM_UNIXTIME(datecours) BETWEEN '{$start->format('Y-m-d 00:00:00')} ' AND '{$end->format('Y-m-d 23:59:59')} ' AND idsemestre=$semestre";
+
     }
         $req= $DB->get_records_sql($sql);
 
@@ -176,9 +180,9 @@ class Month {
         return $req;
     }
 
-    public function getEventsByDay (\DateTime $start, \DateTime $end, ?string $semestre = null ){
+    public function getEventsByDay (\DateTime $start, \DateTime $end, ?string $semestre = null,$idca,$specialite=null,$cycle=null ){
 
-        $events = $this->getEvents($start,$end,$semestre);
+        $events = $this->getEvents($start,$end,$semestre,$idca,$specialite,$cycle);
         $days = [];
 
         foreach($events as $event)

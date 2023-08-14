@@ -41,9 +41,9 @@ class programme extends moodleform {
         
        
         $sql1 = "SELECT * FROM {course} ";
-        $sql2 = "SELECT * FROM {semestre} ";
-        $sql3 = "SELECT * FROM {specialite} ";
-        $sql4 = "SELECT * FROM {cycle} ";
+        $sql2 = "SELECT * FROM {semestre}";
+        $sql3 = "SELECT s.id,libellespecialite FROM {specialite} s,{filiere} f WHERE f.id=s.idfiliere AND idcampus='".$_GET["idca"]."'";
+        $sql4 = "SELECT * FROM {cycle} WHERE idcampus='".$_GET["idca"]."'";
         $sql5 = "SELECT * FROM {anneescolaire} ";
         
         $sql6 = "SELECT * FROM {periode} ";
@@ -104,11 +104,11 @@ class programme extends moodleform {
         $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
         $mform->addHelpButton('idcourses', 'cours');
 
-        // $mform->addElement('select', 'idsemestre', 'Semestre', $selectsemestre ); // Add elements to your form
-        // $mform->setType('idsemestre', PARAM_TEXT);                   //Set type of element
-        // $mform->setDefault('idsemestre', '');        //Default value
-        // $mform->addRule('idsemestre', 'Choix du Semestre', 'required', null, 'client');
-        // $mform->addHelpButton('idsemestre', 'semestre');
+        $mform->addElement('select', 'idsemestre', 'Semestre', $selectsemestre ); // Add elements to your form
+        $mform->setType('idsemestre', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idsemestre', '');        //Default value
+        $mform->addRule('idsemestre', 'Choix du Semestre', 'required', null, 'client');
+        $mform->addHelpButton('idsemestre', 'semestre');
 
         $mform->addElement('select', 'idspecialite', 'Specialite', $selectspecialite ); // Add elements to your form
         $mform->setType('idspecialite', PARAM_TEXT);                   //Set type of element
@@ -139,6 +139,11 @@ class programme extends moodleform {
         $mform->setDefault('heurefincours', '');        //Default value
         $mform->addRule('heurefincours', ' Heure fin du cours', 'required', null, 'client');
         $mform->addHelpButton('heurefincours', 'heure');
+       
+        $mform->addElement('text', 'nobresemaine', 'Nombre de Semaine' ); // Add elements to your form
+        $mform->setType('nobresemaine', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('nobresemaine', '');        //Default value
+        $mform->addHelpButton('nobresemaine', 'heure');
 
         // $periode = ['une seance', 'sur un mois', 'sur deux mois', 'sur toute'];
 
@@ -238,25 +243,34 @@ class programme extends moodleform {
      * Permet de classer un cours en fonction d'une date dans un semestre
      * @param $datecours c'est la date du cours choisir
      */
-    public function definir_semestre (int $datecours){
+    public function definir_semestre (int $datecours,$id){
         global $DB;
 
 
-        $sqlsemestre = "SELECT * FROM {semestre} WHERE $datecours BETWEEN  datedebutsemestre AND datefinsemestre";
+        $sqlsemestre = "SELECT * FROM {semestre} WHERE id='".$id."' AND $datecours BETWEEN  datedebutsemestre AND datefinsemestre";
 
         // var_dump($sqlsemestre);
 
         $semestre = $DB->get_records_sql($sqlsemestre);
         
         // var_dump($semestre);
+      if($semestre)
+      {
 
-        foreach ($semestre as $key => $val)
-        {
-            $idsemestre = $val->id;
-
+          foreach ($semestre as $key => $val)
+          {
+              $idsemestre = $val->id;
+  
+          }
+  
+         return $idsemestre;
         }
+        else
+        {
+          return null;
+          ;
 
-       return $idsemestre;
+      }
 
     }
 

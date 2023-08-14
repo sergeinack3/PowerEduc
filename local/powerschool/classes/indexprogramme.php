@@ -50,8 +50,8 @@ class indexprogramme extends moodleform {
         
         $sql1 = "SELECT * FROM {course} ";
         $sql2 = "SELECT * FROM {semestre} ";
-        $sql3 = "SELECT * FROM {specialite} ";
-        $sql4 = "SELECT * FROM {cycle} ";
+        $sql3 = "SELECT s.id,libellespecialite FROM {specialite} s,{filiere} f WHERE s.idfiliere=f.id AND idcampus='".$_GET["idca"]."'";
+        $sql4 = "SELECT * FROM {cycle} WHERE idcampus='".$_GET["idca"]."'";
         $sql5 = "SELECT * FROM {anneescolaire} ";
 
         $cours = $campus->select($sql1);
@@ -101,6 +101,12 @@ class indexprogramme extends moodleform {
         // $mform->setDefault('idanneescolaire', '');        //Default value
         // $mform->addRule('idanneescolaire', 'Choix de la date du cours', 'required', null, 'client');
         // $mform->addHelpButton('idanneescolaire', 'Anneescolaire');
+
+
+
+        $mform->addElement('hidden', 'idcampus' ); // Add elements to your form
+        $mform->setType('idcampus', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idcampus', $_GET["idca"]);        //Default value
 
         $mform->addElement('select', 'idcourses', 'Cours', $selectcours ); // Add elements to your form
         $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
