@@ -60,6 +60,8 @@ $recordtoinsert = new programme();
         // var_dump($_POST["datecours"]);
         // die;
 
+        $fromform->idspecialite=$_POST["idspecialite"];
+        $fromform->idcycle=$_POST["idcycle"];
         $recordtoinsert->update_programme($fromform->id,$fromform->idanneescolaire, $fromform->idcourses,$fromform->idsemestre,$fromform->idspecialite,$fromform->idcycle,$fromform->datecours,$fromform->heuredebutcours,$fromform->heurefincours);
         redirect($CFG->wwwroot . '/local/powerschool/programme.php', 'Bien modifier');
         

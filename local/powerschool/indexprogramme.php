@@ -56,24 +56,33 @@ if ($mform->is_cancelled()) {
 
     redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
 
-} else if ($fromform = $mform->get_data()) {
+} else if ($_SERVER['REQUEST_METHOD'] === 'POST'&&!empty($_POST["idsemestre"])) {
 
 
 $recordtoinsert = new stdClass();
 
 $recordtoinsert = $fromform;
 
+$datesea=$_POST["datecours"];
+$datecours= strtotime($datesea["day"]."-".$datesea["month"]."-".$datesea["year"]);
 
-    $date = $fromform->idanneescolaire;
+    $date =$datecours;
 
     $annee = date('Y',$date);
     $mois = date('m',$date);
 
-    $semestre = $fromform->idsemestre;
+    // var_dump($annee,$mois);die;
+    $semestre = $_POST["idsemestre"];
+    $campus = $_POST["idcampus"];
+
+    $specialite = $_POST["idspecialite"];
+    $cycle = $_POST["idcycle"];
     
 
-    redirect($CFG->wwwroot . "/local/powerschool/indexprogramme.php?mois=$mois&annee=$annee&semestre=$semestre", 'valider');
+    redirect($CFG->wwwroot . "/local/powerschool/indexprogramme.php?mois=$mois&annee=$annee&semestre=$semestre&idca=$campus&idsp=$specialite&idcy=$cycle", 'valider');
   
+}else{
+    // var_dump("kl");die;
 }
 
 
@@ -141,8 +150,8 @@ $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify
 $end = (clone $start)->modify('+'.(6 + 7 * ($getWeeks - 1)).'days');
 var_dump($month->toString());
 var_dump($semestre);
-$events = $month->getEvents($start,$end,$semestre);
-$eventsByDay = $month->getEventsByDay($start,$end,$semestre);
+$events = $month->getEvents($start,$end,$semestre,$_GET["idca"],$_GET["idsp"],$_GET["idcy"]);
+$eventsByDay = $month->getEventsByDay($start,$end,$semestre,$_GET["idca"],$_GET["idsp"],$_GET["idcy"]);
 
 
 
@@ -171,8 +180,8 @@ $mform->display();
 echo '<div class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
             <h1>'.$getMonth. '</h1>
         <div>  
-                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'" class="btn btn-primary"> &lt;</a>
-                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'" class="btn btn-primary">&gt;</a>
+                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'" class="btn btn-primary"> &lt;</a>
+                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'" class="btn btn-primary">&gt;</a>
         </div>
      </div>';
 
@@ -202,7 +211,7 @@ for($i = 0 ; $i < $getWeeks; $i++){
         $heuredebut = $event->heuredebutcours;
         $heurefin = $event->heurefincours;
         echo '<div>'
-        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'">'.$eventday.'</a>
+        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'&idca='.$_GET["idca"].'">'.$eventday.'</a>
         </div>';
       }
        '</td>';

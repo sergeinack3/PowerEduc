@@ -53,47 +53,74 @@ if ($mform->is_cancelled()) {
 
     redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
 
-} else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromform = $mform->get_data()) {
+} else if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST["idsemestre"])) {
 
 
 $recordtoinsert = new stdClass();
 
-$recordtoinsert = $fromform;
+// var_dump($_POST["heuredebutcours"]);die;
+// $recordtoinsert = $fromform;
 
     // var_dump($recordtoinsert);
     // var_dump($mform->definir_semestre($recordtoinsert->datecours));
     // die;
 
   
-        $periode = $mform->periode($recordtoinsert->idperiode);
+        // $periode = $mform->periode($recordtoinsert->idperiode);
 
         
-            
-        for($i=0;$i<=4;$i++)
+        $recordtoinsert->heuredebutcours=$_POST["heuredebutcours"];            
+        $recordtoinsert->heurefincours=$_POST["heurefincours"]; 
+        // $recordtoinsert->idsalle=$_POST["idsalle"]; 
+        $recordtoinsert->idcourses=$_POST["idcourses"]; 
+        $recordtoinsert->idspecialite=$_POST["idspecialite"]; 
+        $recordtoinsert->idcycle=$_POST["idcycle"]; 
+        $recordtoinsert->idanneescolaire=$_POST["idanneescolaire"]; 
+        
+        $recordtoinsert->usermodified=$USER->id; 
+        $recordtoinsert->timecreated=time(); 
+        $recordtoinsert->timemodified=time(); 
+        
+    $datesea=$_POST["datecours"];
+    $recordtoinsert->datecours= strtotime($datesea["day"]."-".$datesea["month"]."-".$datesea["year"]);
+
+    $semver = $mform->definir_semestre($recordtoinsert->datecours,$_POST["idsemestre"]);
+    if($semver==null)
+    {
+
+        \core\notification::add('Cette Date n\'est pas dans ce semestre', \core\output\notification::NOTIFY_ERROR);
+    }
+    else
+    {
+        for($i=0;$i<=$_POST["nobresemaine"];$i++)
         {
+            $datesea=$_POST["datecours"];
+            $recordtoinsert->datecours= strtotime($datesea["day"]."-".$datesea["month"]."-".$datesea["year"]);
 
             // $date = $recordtoinsert->datecours ;
-            $date = $recordtoinsert->datecours + ($i * 604800);
-            $sem = $mform->definir_semestre($date);
+            $date =  $recordtoinsert->datecours + ($i * 604800);
+            // var_dump(date("Y/m/d",$recordtoinsert->datecours));
+            $sem = $mform->definir_semestre($date,$_POST["idsemestre"]);
 
             $recordtoinsert->idsemestre = $sem;
             // var_dump(date("Y/m/d",$date));
-            
-
-            // $date = $date->modify("+".($i)."week");
             $recordtoinsert->datecours=$date;
-        
-            
-
-        
            
             $DB->insert_record('programme', $recordtoinsert);
-            // redirect($CFG->wwwroot . '/local/powerschool/programme.php', 'Enregistrement effectué');
-            // exit;
 
-            
+            // $date = $date->modify("+".($i)."week");
         
-        }
+            
+
+        
+        //    var_dump($recordtoinsert);
+        // exit;
+        
+        
+        
+    }
+    redirect($CFG->wwwroot . '/local/powerschool/programme.php', 'Enregistrement effectué');
+    }
         // die;
         
 }
@@ -106,7 +133,7 @@ if($_GET['id']) {
 }
 
 $sql = "SELECT * FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy, {programme} p WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
-        AND p.idcycle = cy.id  ";
+        AND p.idcycle = cy.id  AND cy.idcampus='".$_GET["idca"]."'";
 
     $programmes = $DB->get_records_sql($sql);
 
@@ -127,12 +154,19 @@ $sql = "SELECT * FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy, {prog
     // die;
 // $programme = $DB->get_records('programme', null, 'id');
 
+$campus=$DB->get_records('campus');
+
+$campuss=(object)[
+    'campus'=>array_values($campus),
+    'confpaie'=>new moodle_url('/local/powerschool/programme.php'),
+            ]; 
 $templatecontext = (object)[
     'programme' => array_values($programmes),
     'programmeedit' => new moodle_url('/local/powerschool/programmeedit.php'),
     'programmesupp'=> new moodle_url('/local/powerschool/programme.php'),
     'affecter' => new moodle_url('/local/powerschool/affecter.php'),
     'periode' => new moodle_url('/local/powerschool/periode.php'),
+    'idca' =>$_GET["idca"],
 ];
 
 $menu = (object)[
@@ -190,6 +224,8 @@ echo $OUTPUT->header();
 // echo $OUTPUT->render_from_template('local_powerschool/tableau', $getWeeks);
 
 echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
+
 $mform->display();
 
 echo $OUTPUT->render_from_template('local_powerschool/programme', $templatecontext);
@@ -239,7 +275,7 @@ echo $OUTPUT->render_from_template('local_powerschool/programme', $templateconte
 // echo ' </table>
 //         </div>';
 
-echo ' <a type="button" class="btn btn-danger" href="/moodle1/local/powerschool/indexprogramme.php">Voir le Calendrier </a>';
+echo ' <a type="button" class="btn btn-danger" href="/moodle1/local/powerschool/indexprogramme.php?idca='.$_GET["idca"].'">Voir le Calendrier </a>';
 
 
 echo $OUTPUT->footer();
