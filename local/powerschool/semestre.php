@@ -38,7 +38,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Enregistrer un semestre');
 $PAGE->set_heading('Enregistrer un semestre');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+$PAGE->navbar->add(get_string('reglages', 'local_powerschool'),  new moodle_url('/local/powerschool/reglages.php'));
 $PAGE->navbar->add(get_string('semestre', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -163,19 +163,34 @@ $templatecontext = (object)[
     'campus' => new moodle_url('/local/powerschool/campus.php'),
 ];
 
+// $menu = (object)[
+//     'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
+//     'campus' => new moodle_url('/local/powerschool/campus.php'),
+//     'semestre' => new moodle_url('/local/powerschool/semestre.php'),
+//     'salle' => new moodle_url('/local/powerschool/salle.php'),
+//     'filiere' => new moodle_url('/local/powerschool/filiere.php'),
+//     'cycle' => new moodle_url('/local/powerschool/cycle.php'),
+//     'modepayement' => new moodle_url('/local/powerschool/modepayement.php'),
+//     'matiere' => new moodle_url('/local/powerschool/matiere.php'),
+//     'seance' => new moodle_url('/local/powerschool/seance.php'),
+//     'inscription' => new moodle_url('/local/powerschool/inscription.php'),
+//     'enseigner' => new moodle_url('/local/powerschool/enseigner.php'),
+//     'paiement' => new moodle_url('/local/powerschool/paiement.php'),
+// ];
+
 $menu = (object)[
-    'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
-    'campus' => new moodle_url('/local/powerschool/campus.php'),
-    'semestre' => new moodle_url('/local/powerschool/semestre.php'),
-    'salle' => new moodle_url('/local/powerschool/salle.php'),
-    'filiere' => new moodle_url('/local/powerschool/filiere.php'),
-    'cycle' => new moodle_url('/local/powerschool/cycle.php'),
-    'modepayement' => new moodle_url('/local/powerschool/modepayement.php'),
-    'matiere' => new moodle_url('/local/powerschool/matiere.php'),
+    'statistique' => new moodle_url('/local/powerschool/statistique.php'),
+    'reglage' => new moodle_url('/local/powerschool/reglages.php'),
+    // 'matiere' => new moodle_url('/local/powerschool/matiere.php'),
     'seance' => new moodle_url('/local/powerschool/seance.php'),
+    'programme' => new moodle_url('/local/powerschool/programme.php'),
+
     'inscription' => new moodle_url('/local/powerschool/inscription.php'),
-    'enseigner' => new moodle_url('/local/powerschool/enseigner.php'),
-    'paiement' => new moodle_url('/local/powerschool/paiement.php'),
+    // 'notes' => new moodle_url('/local/powerschool/note.php'),
+    'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
+    'configurermini' => new moodle_url('/local/powerschool/configurationmini.php'),
+    // 'gerer' => new moodle_url('/local/powerschool/gerer.php'),
+
 ];
 
 

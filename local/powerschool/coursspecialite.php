@@ -35,10 +35,10 @@ $context = context_system::instance();
 
 $PAGE->set_url(new moodle_url('/local/powerschool/coursspecialite.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Enregistrer une coursspecialite');
-$PAGE->set_heading('Enregistrer une coursspecialite');
+$PAGE->set_title(get_string('coursspecialite', 'local_powerschool'));
+$PAGE->set_heading(get_string('coursspecialite', 'local_powerschool'));
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new moodle_url('/local/powerschool/configurationmini.php'));
 $PAGE->navbar->add(get_string('coursspecialite', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -151,8 +151,8 @@ $campuss=(object)[
     ];
 echo $OUTPUT->header();
 
-echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
+echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 $mform->display();
 
 
