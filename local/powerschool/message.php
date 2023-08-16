@@ -34,19 +34,19 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/message:managemessages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/inscription.php'));
+$PAGE->set_url(new moodle_url('/local/powerschool/message.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Personnaliser le message');
-$PAGE->set_heading('Personnaliser le message');
+$PAGE->set_title(get_string('message', 'local_powerschool'));
+$PAGE->set_heading(get_string('message', 'local_powerschool'));
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
-$PAGE->navbar->add(get_string('Message', 'local_powerschool'), $managementurl);
+$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new moodle_url('/local/powerschool/configurationmini.php'));
+$PAGE->navbar->add(get_string('message', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 
 $mform=new message();
 
-
+// var_dump($PAGE);die;
 
 if ($mform->is_cancelled()) {
 
@@ -141,9 +141,9 @@ $campuss=(object)[
 echo $OUTPUT->header();
 // echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 
-echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 
 echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
+echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 $mform->display();
 
 

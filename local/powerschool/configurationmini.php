@@ -35,11 +35,11 @@ $context = context_system::instance();
 
 $PAGE->set_url(new moodle_url('/local/powerschool/configurationmini.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Configuration Minimal');
-$PAGE->set_heading('Configuration Minimal');
+$PAGE->set_title(get_string('configurationminini', 'local_powerschool'));
+$PAGE->set_heading(get_string('configurationminini', 'local_powerschool'));
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
-$PAGE->navbar->add(get_string('seance', 'local_powerschool'), $managementurl);
+$PAGE->navbar->add('Administration du Site', $CFG->wwwroot.'/admin/search.php');
+$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 

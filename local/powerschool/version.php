@@ -26,5 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'local_powerschool';
 $plugin->version = 2023100500;
 $plugin->requires = 2010052300; // Moodle version
-
-
+$plugin->release='1.0';
+$plugin->maturity = MATURITY_STABLE;
+$plugin->langs = array('en', 'fr');
