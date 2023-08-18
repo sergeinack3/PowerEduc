@@ -55,7 +55,7 @@ $recordtoinsert = new coursspecialite();
 
 
         // var_dump($fromform->id, $fromform->idcourses,$_POST["idspecialite"],$_POST["idcycle"],$_POST["idcampus"]);die;
-        $recordtoinsert->update_coursspecialite($fromform->id, $fromform->idcourses,$_POST["idspecialite"],$_POST["idcycle"]);
+        $recordtoinsert->update_coursspecialite($fromform->id, $fromform->idcourses,$_POST["idspecialite"],$_POST["idcycle"],$_POST["credit"]);
         redirect($CFG->wwwroot . '/local/powerschool/coursspecialite.php?idca='.$_POST["idcampus"].'', 'Bien modifier');
         
     }

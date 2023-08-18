@@ -39,7 +39,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Configuration Bulletin');
 $PAGE->set_heading('Configuration Bulletin');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+// $PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
 $PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -162,7 +162,7 @@ $menu = (object)[
 echo $OUTPUT->header();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 $mform->display();
 
 

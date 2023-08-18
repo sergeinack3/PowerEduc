@@ -68,10 +68,10 @@ $recordtoinsert->timecreated=time();
     if (!$mform->verificycle($_POST["libellecycle"])) {
         # code...
         $DB->insert_record('cycle', $recordtoinsert);
-        redirect($CFG->wwwroot . '/local/powerschool/cycle.php', 'Enregistrement effectué');
+        redirect($CFG->wwwroot . '/local/powerschool/cycle.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
         exit;
     }else{
-        redirect($CFG->wwwroot . '/local/powerschool/cycle.php', 'Ce cycle execite déjà');
+        redirect($CFG->wwwroot . '/local/powerschool/cycle.php?idca='.$_POST["idcampus"].'', 'Ce cycle execite déjà');
 
     }
  
@@ -163,7 +163,7 @@ $menu = (object)[
 echo $OUTPUT->header();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 $mform->display();
 

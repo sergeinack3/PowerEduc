@@ -49,13 +49,10 @@ class coursspecialite extends moodleform {
         $campuss = $campus->select($sql4);
         foreach($campuss as $key => $ca)
         {}
-        if($ca->libelletype=="universite")
-        {
-            $sql3 = "SELECT * FROM {cycle} ";
-        }else{
-            $sql3 = "SELECT * FROM {cycle} where libellecycle='standard'";
-
-        }
+        
+        
+            $sql3 = "SELECT id,libellecycle FROM {cycle} WHERE idcampus='".$_GET["idca"]."'";
+        
         $cycle = $campus->select($sql3);
 
         $mform = $this->_form; // Don't forget the underscore!
@@ -136,7 +133,7 @@ class coursspecialite extends moodleform {
      * @param string $datedebut la date de debut de l'annee
      * @param string $datefin date de fin de l'annee 
      */
-    public function update_coursspecialite($id, $idcourse,$idspecialite,$idcycle ): bool
+    public function update_coursspecialite($id, $idcourse,$idspecialite,$idcycle,$credit ): bool
     {
         global $DB;
         global $USER;
@@ -145,6 +142,7 @@ class coursspecialite extends moodleform {
         $object->idcourses = $idcourse ;
         $object->idspecialite = $idspecialite ;
         $object->idcycle = $idcycle;
+        $object->credit = $credit;
         $object->usermodified = $USER->id;
         $object->timemodified = time();
 

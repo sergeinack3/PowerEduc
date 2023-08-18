@@ -38,8 +38,8 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Liste de vos paiement');
 $PAGE->set_heading('Liste de vos paiement');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
-$PAGE->navbar->add(get_string('paiement', 'local_powerschool'), $managementurl);
+// $PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+// $PAGE->navbar->add(get_string('paiement', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 

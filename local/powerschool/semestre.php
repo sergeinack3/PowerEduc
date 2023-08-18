@@ -87,7 +87,7 @@ $recordtoinsert = $fromform;
                     redirect($CFG->wwwroot . '/local/powerschool/semestre.php', 'Enregistrement effectué'); 
                 }else{
                     \core\notification::add('Mettez la date du prochaine Semestre a la suite de la precedante', \core\output\notification::NOTIFY_ERROR);
-                    // redirect($CFG->wwwroot . '/local/powerschool/semestre.php', 'Mettez la date du prochaine Semestre a la suite de la precedante');
+                    // redirect($CFG->wwwroot . '/local/powerschool/semestre.php');
                 }
 
             }else{
@@ -103,7 +103,7 @@ $recordtoinsert = $fromform;
                 -Soit vos etes de l\'année scolaire...<br/> ', \core\output\notification::NOTIFY_ERROR);
 
             }
-        exit;
+        // exit;
      } 
      else {
         // redirect($CFG->wwwroot . '/local/powerschool/semestre.php', 'Ce semestre execite déjà');
@@ -197,7 +197,7 @@ $menu = (object)[
 echo $OUTPUT->header();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 
 
 echo $OUTPUT->skip_link_target();

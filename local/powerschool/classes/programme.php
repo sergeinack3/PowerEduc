@@ -48,12 +48,15 @@ class programme extends moodleform {
         
         $sql6 = "SELECT * FROM {periode} ";
 
+        $sql7 = "SELECT id,numerosalle FROM {salle} WHERE idcampus='".$_GET["idca"]."'";
+
         $cours = $campus->select($sql1);
         $semestre = $campus->select($sql2);
         $specialite = $campus->select($sql3);
         $cycle = $campus->select($sql4);
         $anneescoalire = $campus->select($sql5);
         $periode = $campus->select($sql6);
+        $salle = $campus->select($sql7);
         
 
 
@@ -89,9 +92,16 @@ class programme extends moodleform {
         {
             $selectperiode[$key] = $val->libelleperiode;
         }
+        foreach ($salle as $key => $val)
+        {
+            $selectsalle[$key] = $val->numerosalle;
+        }
         
         // var_dump( $campus->selectcampus($sql)); 
         // die;
+        $mform->addElement('hidden', 'idcampus'); // Add elements to your form
+        $mform->setDefault('idcampus', $_GET["idca"]); // Add elements to your form
+
         $mform->addElement('select', 'idanneescolaire', 'Annee scolaire', $selectanneescolaire ); // Add elements to your form
         $mform->setType('idanneescolaire', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idanneescolaire', '');        //Default value
@@ -121,6 +131,12 @@ class programme extends moodleform {
         $mform->setDefault('idcycle', '');        //Default value
         $mform->addRule('idcycle', 'Choix du Semestre', 'required', null, 'client');
         $mform->addHelpButton('idcycle', 'cycle');
+    
+        $mform->addElement('select', 'idsalle', 'Salle', $selectsalle ); // Add elements to your form
+        $mform->setType('idsalle', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idsalle', '');        //Default value
+        $mform->addRule('idsalle', 'Choix une salle', 'required', null, 'client');
+        $mform->addHelpButton('idsalle', 'Salle');
 
         $mform->addElement('date_selector', 'datecours', 'Date du Cours' ); // Add elements to your form
         // $mform->setType('datecours', PARAM_TEXT);                   //Set type of element
@@ -147,11 +163,11 @@ class programme extends moodleform {
 
         // $periode = ['une seance', 'sur un mois', 'sur deux mois', 'sur toute'];
 
-        $mform->addElement('select', 'idperiode', 'periode', $selectperiode ); // Add elements to your form
-        $mform->setType('idperiode', PARAM_TEXT);                   //Set type of element
-        $mform->setDefault('idperiode', '');        //Default value
-        $mform->addRule('idperiode', ' Heure fin du cours', 'required', null, 'client');
-        $mform->addHelpButton('idperiode', 'heure');
+        // $mform->addElement('select', 'idperiode', 'periode', $selectperiode ); // Add elements to your form
+        // $mform->setType('idperiode', PARAM_TEXT);                   //Set type of element
+        // $mform->setDefault('idperiode', '');        //Default value
+        // $mform->addRule('idperiode', ' Heure fin du cours', 'required', null, 'client');
+        // $mform->addHelpButton('idperiode', 'heure');
 
         $mform->addElement('hidden', 'usermodified'); // Add elements to your form
         $mform->setType('usermodified', PARAM_INT);                   //Set type of element

@@ -41,7 +41,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('indexprogramme de Cours');
 $PAGE->set_heading('indexprogramme de Cours');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+$PAGE->navbar->add(get_string('programme', 'local_powerschool'),  new moodle_url('/local/powerschool/programme.php'));
 $PAGE->navbar->add(get_string('indexprogramme', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -208,10 +208,11 @@ for($i = 0 ; $i < $getWeeks; $i++){
 
 
         $eventday = $event->fullname;
+        $specialitecy = $event->libellespecialite."-".$event->libellecycle;
         $heuredebut = $event->heuredebutcours;
         $heurefin = $event->heurefincours;
         echo '<div>'
-        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'&idca='.$_GET["idca"].'">'.$eventday.'</a>
+        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'&idca='.$_GET["idca"].'">'.$eventday.' '.$specialitecy.'</a>
         </div>';
       }
        '</td>';

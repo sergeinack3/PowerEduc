@@ -88,9 +88,20 @@ $recordtoinsert = new stdClass();
        $recordtoinsert->idspecialite=$_POST["idspecialite"];
        //    $recordtoinsert->timecreated=$_POST["timecreated"];
        //    $recordtoinsert->timemodified=$_POST["timemodified"];
-       
-       $DB->insert_record('seance', $recordtoinsert);
-       redirect($CFG->wwwroot . '/local/powerschool/seance.php', 'Enregistrement effectué');
+       $sqlsemestre = "SELECT * FROM {semestre} WHERE id='".$_POST["idsemestre"]."' AND $recordtoinsert->dateseance BETWEEN  datedebutsemestre AND datefinsemestre";
+       $bdu=$DB->get_records_sql($sqlsemestre);
+
+    // var_dump($_POST["idcycle"]);die;
+      if($bdu)
+      {
+
+          $DB->insert_record('seance', $recordtoinsert);
+          redirect($CFG->wwwroot . '/local/powerschool/seance.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
+      }else{
+
+          \core\notification::add('Entrée une date qui appartient dans le semestre que vous avez choisi', \core\output\notification::NOTIFY_ERROR);
+          redirect($CFG->wwwroot . '/local/powerschool/seance.php?idca='.$_POST["idcampus"].'');
+      }
        exit;
     }else{
        redirect($CFG->wwwroot . '/local/powerschool/seance.php', 'Entré bien les heures');

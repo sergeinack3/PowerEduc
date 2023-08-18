@@ -145,7 +145,7 @@ $menu = (object)[
 echo $OUTPUT->header();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 $mform->display();
 
 

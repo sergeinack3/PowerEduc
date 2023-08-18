@@ -182,7 +182,7 @@ foreach($annee as $key){
 
     // echo $OUTPUT->notifications();
 echo $OUTPUT->header();
-echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 echo '<div style="margin-top:70px;"></div>';
 
 echo $OUTPUT->skip_link_target();

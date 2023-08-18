@@ -30,7 +30,7 @@ global $DB;
 
 require_login();
 $context = context_system::instance();
-require_capability('local/powerschool:managepages', $context);
+// require_capability('local/powerschool:managepages', $context);
 
 // $PAGE->set_url(new moodle_url('/local/powerschool/anneescolaireedit.php'));
 $PAGE->set_context(\context_system::instance());

@@ -59,17 +59,20 @@ $PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementur
 //cours
 
 //filiere
-$sql="SELECT * FROM {filiere}";
+$sql="SELECT * FROM {filiere} WHERE idcampus='".$_GET["idca"]."'";
 $filiere=$DB->get_records_sql($sql);
-
+$campus=$DB->get_records("campus");
 $templatecontext = (object)[
     'filiere'=>array_values($filiere),
+    'campus'=>array_values($campus),
     'ajoute'=> new moodle_url('/local/powerschool/inscription.php'),
     'affectercours'=> new moodle_url('/local/powerschool/inscription.php'),
     'ajou'=> new moodle_url('/local/powerschool/classes/entrernote.php'),
     'coursid'=> new moodle_url('/local/powerschool/entrernote.php'),
     'bulletinnote'=> new moodle_url('/local/powerschool/bulletinnote.php'),
-    'root'=>$CFG->wwwroot
+    'campuslien'=> new moodle_url('/local/powerschool/bulletin.php'),
+    'root'=>$CFG->wwwroot,
+    'idca'=>$_GET["idca"],
 
  ];
 

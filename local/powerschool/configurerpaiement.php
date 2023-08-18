@@ -133,6 +133,8 @@ $menumini = (object)[
     'coursspecialite' => new moodle_url('/local/powerschool/coursspecialite.php'),
     'salleele' => new moodle_url('/local/powerschool/salleele.php'),
     'tranche' => new moodle_url('/local/powerschool/tranche.php'),
+    'confinot' => new moodle_url('/local/powerschool/configurationnote.php'),
+
     'logo' => new moodle_url('/local/powerschool/logo.php'),
     'message' => new moodle_url('/local/powerschool/message.php'),
 
