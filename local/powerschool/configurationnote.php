@@ -20,12 +20,11 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use core\progress\display;
-use local_powerschool\specialite;
-use local_powerschool\tranche;
+use local_powerschool\configurationnote;
+use local_powerschool\periode;
 
 require_once(__DIR__ . '/../../config.php');
-require_once($CFG->dirroot.'/local/powerschool/classes/tranche.php');
+require_once($CFG->dirroot.'/local/powerschool/classes/configurationnote.php');
 
 global $DB;
 global $USER;
@@ -34,17 +33,17 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/powerschool:managepages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/tranche.php'));
+$PAGE->set_url(new moodle_url('/local/powerschool/configurationnote.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Enregistrer une '.get_string('tranche', 'local_powerschool'));
-$PAGE->set_heading('Enregistrer une '.get_string('tranche', 'local_powerschool'));
+$PAGE->set_title(get_string('confignote', 'local_powerschool'));
+$PAGE->set_heading(get_string('confignote', 'local_powerschool'));
 
 $PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new moodle_url('/local/powerschool/configurationmini.php'));
-$PAGE->navbar->add(get_string('tranche', 'local_powerschool'), $managementurl);
+$PAGE->navbar->add(get_string('confignote', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 
-$mform=new tranche();
+$mform=new configurationnote();
 
 
 
@@ -61,49 +60,41 @@ $recordtoinsert = $fromform;
 
     // var_dump($fromform);
     // die;
- 
-        $DB->insert_record('tranche', $recordtoinsert);
-        redirect($CFG->wwwroot . '/local/powerschool/tranche.php', 'Enregistrement effectué');
+    if(($fromform->normal+$fromform->cc)>100)
+    {
+        \core\notification::add('L\'addiction du pourcentage de la normal et du controle continue ne peut pas dépasser 100%', \core\output\notification::NOTIFY_ERROR);
+        redirect($CFG->wwwroot . '/local/powerschool/configurationnote.php?');
+    
+    }
+    else{
+
+        $DB->insert_record('configurationnote', $recordtoinsert);
+        redirect($CFG->wwwroot . '/local/powerschool/configurationnote.php', 'Enregistrement effectué');
         exit;
+    }
 }
 
 if($_GET['id']) {
 
-    $mform->supp_tranche($_GET['id']);
-    redirect($CFG->wwwroot . '/local/powerschool/tranche.php', 'Information Bien supprimée');
+    $mform->supp_periode($_GET['id']);
+    redirect($CFG->wwwroot . '/local/powerschool/configurationnote.php', 'Information Bien supprimée');
         
 }
 
 
-$sql = "SELECT * FROM {tranche}  ";
 
-$tranche = $DB->get_records_sql($sql);
-
-// $specialite = $DB->get_records('specialite', null, 'id');
-
-// var_dump($specialites);
+// var_dump($mform->selectperiode());
 // die;
+$sqlconf="SELECT con.id,normal,cc,libellecampus FROM {configurationnote} con,{campus} c WHERE con.idcampus=c.id";
+$periode = $DB->get_records_sql($sqlconf);
 
 $templatecontext = (object)[
-    'tranche' => array_values($tranche),
-    'trancheedit' => new moodle_url('/local/powerschool/trancheedit.php'),
-    'tranchesupp'=> new moodle_url('/local/powerschool/tranche.php'),
-    'cycle' => new moodle_url('/local/powerschool/cycle.php'),
+    'periode' => array_values($periode),
+    'periodeedit' => new moodle_url('/local/powerschool/configurationnoteedit.php'),
+    'periodesupp'=> new moodle_url('/local/powerschool/configurationnote.php'),
+    'coursspecialite'=> new moodle_url('/local/powerschool/coursspecialite.php'),
+    'programme' => new moodle_url('/local/powerschool/programme.php'),
 ];
-
-$menumini = (object)[
-    'affecterprof' => new moodle_url('/local/powerschool/affecterprof.php'),
-    'configurerpaie' => new moodle_url('/local/powerschool/configurerpaiement.php'),
-    'coursspecialite' => new moodle_url('/local/powerschool/coursspecialite.php'),
-    'salleele' => new moodle_url('/local/powerschool/salleele.php'),
-    'tranche' => new moodle_url('/local/powerschool/tranche.php'),
-    'confinot' => new moodle_url('/local/powerschool/configurationnote.php'),
-    'logo' => new moodle_url('/local/powerschool/logo.php'),
-    'message' => new moodle_url('/local/powerschool/message.php'),
-
-
-];
-
 
 // $menu = (object)[
 //     'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
@@ -111,29 +102,26 @@ $menumini = (object)[
 //     'semestre' => new moodle_url('/local/powerschool/semestre.php'),
 //     'salle' => new moodle_url('/local/powerschool/salle.php'),
 //     'filiere' => new moodle_url('/local/powerschool/filiere.php'),
-//     'specialite' => new moodle_url('/local/powerschool/specialite.php'),
 //     'cycle' => new moodle_url('/local/powerschool/cycle.php'),
+//     'periode' => new moodle_url('/local/powerschool/periode.php'),
 //     'modepayement' => new moodle_url('/local/powerschool/modepayement.php'),
 //     'matiere' => new moodle_url('/local/powerschool/matiere.php'),
 //     'seance' => new moodle_url('/local/powerschool/seance.php'),
 //     'inscription' => new moodle_url('/local/powerschool/inscription.php'),
 //     'enseigner' => new moodle_url('/local/powerschool/enseigner.php'),
 //     'paiement' => new moodle_url('/local/powerschool/paiement.php'),
-//     'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
+//     'programme' => new moodle_url('/local/powerschool/programme.php'),
 // ];
-
 
 
 echo $OUTPUT->header();
 
-echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
+
 // echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
-echo html_writer::start_tag("div",array("style"=>"margin-top:40px"));
-echo html_writer::end_tag("div");
 $mform->display();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/tranche', $templatecontext);
+echo $OUTPUT->render_from_template('local_powerschool/configurationnote', $templatecontext);
 
 
 echo $OUTPUT->footer();

@@ -39,7 +39,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('inscription de Cours');
 $PAGE->set_heading('inscription de Cours');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('moodle1/admin/search.php'));
+$PAGE->navbar->add('Administration du Site', $CFG->wwwroot.'/admin/search.php');
 $PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');

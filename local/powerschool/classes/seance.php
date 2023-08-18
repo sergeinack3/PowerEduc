@@ -41,7 +41,7 @@ class seance extends moodleform {
         $sql1 = "SELECT * FROM {course} ";
         $sql2 = "SELECT s.id,numerosalle,libellecampus,capacitesalle FROM {salle} s,{campus} c WHERE s.idcampus=c.id AND idcampus='".$_GET["idca"]."'";
         $sql3 = "SELECT s.id,libellespecialite FROM {specialite} s,{filiere} f WHERE s.idfiliere=f.id AND f.idcampus='".$_GET["idca"]."'";
-        $sql4 = "SELECT * FROM {cycle} ";
+        $sql4 = "SELECT id,libellecycle FROM {cycle} WHERE idcampus='".$_GET["idca"]."'";
         $sql5 = "SELECT * FROM {semestre} ";
 
         $cours = $campus->select($sql1);
@@ -82,6 +82,10 @@ class seance extends moodleform {
         }
         // var_dump( $campus->selectcampus($sql)); 
         // die;
+
+        $mform->addElement('hidden', 'idcampus'); // Add elements to your form
+        $mform->setDefault('idcampus', $_GET["idca"]); // Add elements to your form
+
         $mform->addElement('select', 'idcourses', 'Cours', $selectcours ); // Add elements to your form
         // $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
         // $mform->setDefault('idcourses', '');        //Default value

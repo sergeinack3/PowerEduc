@@ -52,5 +52,8 @@ $string['configurerpaie'] = 'Configuration des differentes Tranches paiement';
 $string['sallele'] = 'affecter les etudiants dans une classe';
 $string['sallelere'] = 'retirer les etudiants dans une classe';
 $string['message'] = 'Personnalisé votre message';
+$string['confignote'] = 'Configuration des notes';
+$string['pourcentage'] = 'Pourcentage';
+$string['indexprogramme'] = 'Calendrier de programme';
 
 ?>

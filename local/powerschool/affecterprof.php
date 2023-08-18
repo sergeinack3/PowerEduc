@@ -60,20 +60,53 @@ $recordtoinsert = $fromform;
 }
 
 //elle permet faire une affectation d'un professeur à une matiere dans une specialite et un cycle precis
-if (!empty($_POST["professeur"])&& !empty($_POST["specialite"])&& !empty($_POST["cycle"])&& !empty($_POST["cours"]) && !empty($_POST["semestre"])) {
+if (!empty($_POST["professeur"])&& !empty($_POST["specialite"])&& !empty($_POST["cycle"])&& !empty($_POST["cours"]) && !empty($_POST["semestre"]) && !empty($_POST["salle"])) {
 //  var_dump("df");die;
      $cours=$DB->get_records_sql("SELECT cse.id as idcouse FROM {coursspecialite} as csp,{courssemestre} cse WHERE csp.id=cse.idcoursspecialite AND idsemestre='".$_POST["semestre"]."' AND idcourses='".$_POST["cours"]."' AND idspecialite='".$_POST["specialite"]."' AND idcycle='".$_POST["cycle"]."'");
      foreach ($cours as $key => $value) {
          
     }
-    $recordtoinsert = new stdClass();
-    $recordtoinsert->idcourssemestre = $value->idcouse;
-    // var_dump($recordtoinsert->idcourssemestre);die;
-     $recordtoinsert->idprof =$_POST["professeur"];
-    //  var_dump($_POST["professeur"],$_POST["specialite"],$_POST["cycle"],$_POST["cours"],$_POST["semestre"],$recordtoinsert->idcourssemestre,$recordtoinsert->idprof,$USER->id);die;
-   
-     $DB->execute("INSERT INTO mdl_affecterprof VALUES (0,'".$recordtoinsert->idcourssemestre."', '".$recordtoinsert->idprof."', '".$USER->id."','".time()."','".time()."')");
-    //  $DB->insert_record('affecterprof', $recordtoinsert);
+
+    $verifisaletsql="SELECT * FROM {salleele} sa,{inscription} i WHERE sa.idsalle='".$_POST["salle"]."'
+                     AND sa.idetudiant=i.idetudiant AND i.idspecialite='".$_POST["specialite"]."' AND i.idcycle='".$_POST["cycle"]."'";
+                    
+    $verifisal=$DB->get_records_sql($verifisaletsql);
+        // var_dump($verifisal);die;
+if($verifisal)
+  {
+
+    $veriprof=$DB->get_records_sql("SELECT * FROM {coursspecialite} as csp,{courssemestre} cse,{affecterprof} af WHERE af.idcourssemestre=cse.id AND csp.id=cse.idcoursspecialite AND idsemestre='".$_POST["semestre"]."' AND idcourses='".$_POST["cours"]."' AND idspecialite='".$_POST["specialite"]."' AND idcycle='".$_POST["cycle"]."' AND idprof='".$_POST["professeur"]."'");
+
+    if(!$veriprof)
+    {
+
+        $recordtoinsert = new stdClass();
+        $recordtoinsert->idcourssemestre = $value->idcouse;
+        // var_dump($recordtoinsert->idcourssemestre);die;
+        $recordtoinsert->idprof =$_POST["professeur"];
+        //  var_dump($_POST["professeur"],$_POST["specialite"],$_POST["cycle"],$_POST["cours"],$_POST["semestre"],$recordtoinsert->idcourssemestre,$recordtoinsert->idprof,$USER->id);die;
+    
+        $DB->execute("INSERT INTO mdl_affecterprof VALUES (0,'".$recordtoinsert->idcourssemestre."', '".$recordtoinsert->idprof."', '".$USER->id."','".time()."','".time()."','".$_POST["salle"]."')");
+        //  $DB->insert_record('affecterprof', $recordtoinsert);
+        
+    }
+    else
+    {
+
+        \core\notification::add('Vous ne pouvez pas affecter un cours dans le meme semestre un meme professeur'.$value->libellespecialite.'', \core\output\notification::NOTIFY_ERROR);
+        redirect($CFG->wwwroot . '/local/powerschool/affecterprof.php?idca='.$_POST["idcampus"].'');
+    }
+  }
+  else{
+    $speci=$DB->get_records_sql("SELECT * FROM {specialite} WHERE id='".$_POST["specialite"]."'");
+
+    foreach ($speci as $key => $value) {
+        # code...
+    }
+    \core\notification::add('Cette salle n\'appertient pas à cette specialité '.$value->libellespecialite.'', \core\output\notification::NOTIFY_ERROR);
+    redirect($CFG->wwwroot . '/local/powerschool/affecterprof.php?idca='.$_POST["idcampus"].'');
+
+  }
 }
 
 if($_GET['id']) {
@@ -91,8 +124,12 @@ $professeur=$DB->get_records_sql($sql);
 $sql="SELECT sp.id,libellespecialite FROM {specialite} sp,{filiere} f WHERE sp.idfiliere=f.id AND idcampus='".$_GET["idca"]."'";
 $specialite=$DB->get_records_sql($sql);
 
-$affecter=$DB->get_recordset_sql("SELECT af.id as idaffe,libellecycle,libellespecialite,libellesemestre,fullname,firstname,lastname FROM {coursspecialite} as csp,{courssemestre} cse,{affecterprof} af,
-                            {semestre} se,{specialite} sp,{cycle} cy,{course} cou,{user} as us,{filiere} f WHERE sp.idfiliere=f.id AND csp.id=cse.idcoursspecialite AND us.id=idprof
+$sql1="SELECT * FROM {salle} WHERE idcampus='".$_GET["idca"]."'";
+$salle=$DB->get_records_sql($sql1);
+
+// var_dump($salle);die;
+$affecter=$DB->get_recordset_sql("SELECT af.id as idaffe,libellecycle,libellespecialite,libellesemestre,fullname,firstname,lastname,numerosalle FROM {coursspecialite} as csp,{courssemestre} cse,{affecterprof} af,
+                            {semestre} se,{specialite} sp,{cycle} cy,{course} cou,{user} as us,{filiere} f,{salle} sal WHERE sal.id=af.idsalle AND sp.idfiliere=f.id AND csp.id=cse.idcoursspecialite AND us.id=idprof
                             AND idsemestre=se.id AND idcourses=cou.id AND idspecialite=sp.id AND idcycle=cy.id AND af.idcourssemestre=cse.id AND f.idcampus='".$_GET["idca"]."'");
 // $affecterprof = $DB->get_recordset_sql('affecterprof', null, 'id');
 $affecterprof = array();
@@ -103,6 +140,7 @@ $templatecontext = (object)[
     'affecterprof' => array_values($affecterprof),
     'professeur' => array_values($professeur),
     'specialite' => array_values($specialite),
+    'sallee' => array_values($salle),
     'affecterprofedit' => new moodle_url('/local/powerschool/affecterprofedit.php'),
     'affecterprofsupp'=> new moodle_url('/local/powerschool/affecterprof.php'),
     'salle' => new moodle_url('/local/powerschool/salle.php'),
@@ -118,6 +156,7 @@ $menumini = (object)[
     'coursspecialite' => new moodle_url('/local/powerschool/coursspecialite.php'),
     'salleele' => new moodle_url('/local/powerschool/salleele.php'),
     'tranche' => new moodle_url('/local/powerschool/tranche.php'),
+    'confinot' => new moodle_url('/local/powerschool/configurationnote.php'),
     'logo' => new moodle_url('/local/powerschool/logo.php'),
     'message' => new moodle_url('/local/powerschool/message.php'),
 

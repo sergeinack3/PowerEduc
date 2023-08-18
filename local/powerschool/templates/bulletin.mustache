@@ -6,7 +6,17 @@
 </head>
 <body>
        <div class="d-flex justify-content-around mt-5">
-          <div class="col-4">
+          
+            <div class="col-3">
+                    <label>Choisir l'etablissement</label>
+                        <select name="campus"onchange="if (this.value) location.href=this.value;" class="form-control ">
+                        <option value=""></option>
+                        {{#campus}}
+                        <option value="{{campuslien}}?idca={{id}}">{{libellecampus}}</option>
+                        {{/campus}}
+                        </select>
+            </div>
+          <div class="col-3">
               <label>Choisir filiere</label>
               <select class="form-control filiere" name="filiere">
                 <option value=""></option>
@@ -15,14 +25,14 @@
               {{/filiere}}
               </select>
           </div>
-          <div class="col-4">
+          <div class="col-3">
               <label>Choisir Specialite</label>
               <select class="form-control specialite" name="specialite">
              
               </select>
           </div>
                 <!--<option value="{{id}}">{{libellespecialite}}</option>-->
-          <div class="col-4">
+          <div class="col-3">
               <label>Choisir Cycle</label>
               <select class="form-control cycle" name="cycle">
               </select>

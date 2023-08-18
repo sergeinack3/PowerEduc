@@ -39,6 +39,7 @@ class cycle extends moodleform {
         $rolecasql="SELECT * FROM {campus} c,{typecampus} t WHERE c.idtypecampus=t.id AND c.id='".$_GET["idca"]."'";
         $campus=$DB->get_records_sql($rolecasql);
 
+        
     foreach($campus as $key => $cam)
     {}
     if($cam->libelletype=="universite"){

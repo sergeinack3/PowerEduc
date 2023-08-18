@@ -36,6 +36,12 @@ $sqlcredit="SELECT SUM(credit) as credi FROM {listenote} li,{affecterprof} af,{c
   foreach ($infor as $key => $value1) {
       # code...
     }
+  $sqlpornote="SELECT * FROM {configurationnote} WHERE idcampus='".$value1->idcampus."'";
+  $pournote=$DB->get_records_sql($sqlpornote);
+
+  foreach ($pournote as $key => $valuepour) {
+    # code...
+  }
     // var_dump($value1->logocampus);die;
 
 foreach ($credit as $key => $value2) {
@@ -46,6 +52,7 @@ foreach ($datees as $key => $date) {
     # code...
 }
 
+// var_dump($value1->logocampus,$infor);die;
 
 // Définissez le contenu HTML à convertir en PDF
 $html = '
@@ -307,7 +314,7 @@ $html = '
                     }
                     if ("universite"===$value1->libelletype) {
                         # code...
-                        $html.= '<td>'.((($item->note3*70/100))+(($item->note2*(30)/100))).'</td>';
+                        $html.= '<td>'.((($item->note3*$valuepour->normal/100))+(($item->note2*($valuepour->cc)/100))).'</td>';
                         $somp=((($item->note3*70/100))+(($item->note2*(30)/100)));
                     }
 

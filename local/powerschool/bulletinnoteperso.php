@@ -36,11 +36,11 @@ $context = context_system::instance();
 
 $PAGE->set_url(new moodle_url('/local/powerschool/rentrernote.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Entrer les '.$_GET['libelcou'].'');
+// $PAGE->set_title('Entrer les '.$_GET['libelcou'].'');
 $PAGE->set_heading('Vos Notes ');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
-$PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementurl);
+// $PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+// $PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 

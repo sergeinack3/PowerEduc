@@ -21,10 +21,11 @@
  */
 
 use core\progress\display;
-use local_powerschool\campus;
+use local_powerschool\configurationnote;
+use local_powerschool\periode;
 
 require_once(__DIR__ . '/../../config.php');
-require_once($CFG->dirroot.'/local/powerschool/classes/campus.php');
+require_once($CFG->dirroot.'/local/powerschool/classes/configurationnote.php');
 
 global $DB;
 
@@ -34,36 +35,27 @@ $context = context_system::instance();
 
 // $PAGE->set_url(new moodle_url('/local/powerschool/anneescolaireedit.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Modifier un Campus');
-$PAGE->set_heading('Modifier un Campus');
+$PAGE->set_title('Modifier un periode');
+$PAGE->set_heading('Modifier un periode');
 
 
 $id = optional_param('id',null,PARAM_INT);
 
-$mform=new campus();
+$mform=new configurationnote();
 
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/campus.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/periode.php', 'annuler');
 
 } else if ($fromform = $mform->get_data()) {
 
-$recordtoinsert = new campus();
+$recordtoinsert = new configurationnote();
 
     if($fromform->id) {
 
-//         $file_content=$mform->get_file_content('logocampus');
-//    $unique_filename =  $mform->get_new_filename('logocampus');
-// //    var_dump($unique_filename);
-// //    die;
-//         $destination_path =$CFG->wwwroot .'/local/powerschool/logo/' . $unique_filename;
-//         file_put_contents($destination_path, $file_content);
-
-       
-    
-        $recordtoinsert->update_campus($fromform->id, $fromform->libellecampus, $fromform->adressecampus,$fromform->codepostalcampus, $fromform->villecampus,$fromform->payscampus, $fromform->telcampus,$fromform->emailcampus,$fromform->sitecampus,$destination_path,$fromform->abrecampus,$fromform->idtypecampus);
-        redirect($CFG->wwwroot . '/local/powerschool/campus.php', 'Bien modifier');
+        $recordtoinsert->update_periode($fromform->id, $fromform->normal,$fromform->cc,$fromform->idcampus,$fromform->idanneescolaire );
+        redirect($CFG->wwwroot . '/local/powerschool/configurationnote.php', 'Bien modifier');
         
     }
 
@@ -72,12 +64,12 @@ $recordtoinsert = new campus();
 if ($id) {
     // Add extra data to the form.
     global $DB;
-    $newcampus = new campus();
-    $campus = $newcampus->get_campus($id);
-    if (!$campus) {
+    $newperiode = new configurationnote();
+    $periode = $newperiode->get_periode($id);
+    if (!$periode) {
         throw new invalid_parameter_exception('Message not found');
     }
-    $mform->set_data($campus);
+    $mform->set_data($periode);
 }
 
 

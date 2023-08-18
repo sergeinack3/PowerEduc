@@ -38,7 +38,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Enregistrer un cours par semestre');
 $PAGE->set_heading('Enregistrer un cours par semestre');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+$PAGE->navbar->add(get_string('coursspecialite', 'local_powerschool'),  new moodle_url('/local/powerschool/coursspecialite.php'));
 $PAGE->navbar->add(get_string('courssemestre', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -113,7 +113,7 @@ $menu = (object)[
 echo $OUTPUT->header();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 $mform->display();
 
 

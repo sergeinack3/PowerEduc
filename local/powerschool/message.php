@@ -129,6 +129,8 @@ $menumini = (object)[
     'salleele' => new moodle_url('/local/powerschool/salleele.php'),
     'message' => new moodle_url('/local/powerschool/message.php'),
     'logo' => new moodle_url('/local/powerschool/logo.php'),
+    'confinot' => new moodle_url('/local/powerschool/configurationnote.php'),
+
 
 ];
 
