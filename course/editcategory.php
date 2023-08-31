@@ -96,6 +96,7 @@ $mform = new core_course_editcategory_form(null, array(
     'context' => $context,
     'itemid' => $itemid
 ));
+// $mformcamp = new core_course_editcategory_form();
 $mform->set_data(file_prepare_standard_editor(
     $category,
     'description',
@@ -107,6 +108,11 @@ $mform->set_data(file_prepare_standard_editor(
 ));
 
 $manageurl = new moodle_url('/course/management.php');
+$campusurl = new moodle_url('/local/powerschool/campus.php');
+$filiereurl = new moodle_url('/local/powerschool/filiere.php');
+$specialiteurl = new moodle_url('/local/powerschool/specialite.php');
+$cycleurl = new moodle_url('/local/powerschool/coursspecialite.php');
+$semestreurl = new moodle_url('/local/powerschool/courssemestre.php');
 if ($mform->is_cancelled()) {
     if ($id) {
         $manageurl->param('categoryid', $id);
@@ -121,7 +127,28 @@ if ($mform->is_cancelled()) {
         }
         $coursecat->update($data, $mform->get_description_editor_options());
     } else {
+        // var_dump($_POST["filiere"]);die;
         $category = core_course_category::create($data, $mform->get_description_editor_options());
+    }
+    if ($data->campus!=null) {
+      
+       redirect($campusurl);
+    }
+    if ($_POST["filiere"]!=null) {
+      
+       redirect($filiereurl);
+    }
+    if ($_POST["specialite"]!=null) {
+        $specialiteurl->param('idca',$_POST["idca"]);
+       redirect($specialiteurl);
+    }
+    if ($_POST["cycle"]!=null) {
+        $cycleurl->param('idca',$_POST["idca"]);
+       redirect($cycleurl);
+    }
+    if ($_POST["semestre"]!=null) {
+        $semestreurl->param('idca',$_POST["idca"]);
+       redirect($semestreurl);
     }
     $manageurl->param('categoryid', $category->id);
     redirect($manageurl);

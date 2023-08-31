@@ -65,17 +65,18 @@ $menu = (object)[
     // 'notes' => new moodle_url('/local/powerschool/note.php'),
     'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
     'configurermini' => new moodle_url('/local/powerschool/configurationmini.php'),
+    'listeetudiant' => new moodle_url('/local/powerschool/listeetudiant.php'),
     // 'gerer' => new moodle_url('/local/powerschool/gerer.php'),
 
     //navbar
     'statistiquenavr'=>get_string('statistique', 'local_powerschool'),
     'reglagenavr'=>get_string('reglages', 'local_powerschool'),
+    'listeetudiantnavr'=>get_string('listeetudiant', 'local_powerschool'),
     'seancenavr'=>get_string('seance', 'local_powerschool'),
     'programmenavr'=>get_string('programme', 'local_powerschool'),
     'inscriptionnavr'=>get_string('inscription', 'local_powerschool'),
     'configurationminini'=>get_string('configurationminini', 'local_powerschool'),
     'bulletinnavr'=>get_string('bulletin', 'local_powerschool'),
-
 ];
 
 
@@ -100,7 +101,7 @@ echo" <ul class='list-group list-group-flush'>";
     echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/filiere.php'),get_string('filiere', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
     echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/specialite.php'),get_string('specialite', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
     echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/cycle.php'),get_string('cycle', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
-    echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/logo.php'),"Logo",array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
+    // echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/logo.php'),"Logo",array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
     echo "<li class='list-group-item '>".html_writer::link(new moodle_url('/local/powerschool/modepaiement.php'),get_string('modepaiement', 'local_powerschool'),array("class"=>"fw-bold text-decoration-none fs-1 text-uppercase"))."</li>";echo "<br/>";
  echo"</ul>";
 echo html_writer::end_div();

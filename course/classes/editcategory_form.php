@@ -43,7 +43,13 @@ class core_course_editcategory_form extends moodleform {
         $mform = $this->_form;
         $categoryid = $this->_customdata['categoryid'];
         $parent = $this->_customdata['parent'];
-
+        $campus=$_GET['campus'];
+        $filiere=$_GET['filiere'];
+        $specialite=$_GET['specialite'];
+        $idca=$_GET['idca'];
+        $cycle=$_GET['cycle'];
+        $semestre=$_GET['semestre'];
+        // var_dump($campus);die;
         // Get list of categories to use as parents, with site as the first one.
         $options = array();
         if (has_capability('moodle/category:manage', context_system::instance()) || $parent == 0) {
@@ -62,11 +68,73 @@ class core_course_editcategory_form extends moodleform {
             $options += core_course_category::make_categories_list('moodle/category:manage');
             $strsubmit = get_string('createcategory');
         }
+        if($campus!=null)
+        {
 
+            $mform->addElement('hidden',"campus");
+            $mform->setDefault('campus',$campus);
+
+        }
+        if($filiere!=null)
+        {
+
+            $mform->addElement('hidden',"filiere");
+            $mform->setDefault('filiere',$filiere);
+
+        }
+        if($specialite!=null)
+        {
+
+            $mform->addElement('hidden',"specialite");
+            $mform->setDefault('specialite',$specialite);
+            $mform->addElement('hidden',"idca");
+            $mform->setDefault('idca',$idca);
+
+        }
+        if($cycle!=null)
+        {
+
+            $mform->addElement('hidden',"cycle");
+            $mform->setDefault('cycle',$cycle);
+            $mform->addElement('hidden',"idca");
+            $mform->setDefault('idca',$idca);
+
+        }
+        if($semestre!=null)
+        {
+
+            $mform->addElement('hidden',"semestre");
+            $mform->setDefault('semestre',$semestre);
+            $mform->addElement('hidden',"idca");
+            $mform->setDefault('idca',$idca);
+
+        }
+        // var_dump($options);die;
         $mform->addElement('autocomplete', 'parent', get_string('parentcategory'), $options);
         $mform->addRule('parent', null, 'required', null, 'client');
 
         $mform->addElement('text', 'name', get_string('categoryname'), array('size' => '30'));
+       
+        if($campus!=null)
+        {
+            $mform->setDefault('name',$campus);
+        }
+        if($filiere!=null)
+        {
+            $mform->setDefault('name',$filiere);
+        }
+        if($specialite!=null)
+        {
+            $mform->setDefault('name',$specialite);
+        }
+        if($cycle!=null)
+        {
+            $mform->setDefault('name',$cycle);
+        }
+        if($semestre!=null)
+        {
+            $mform->setDefault('name',$semestre);
+        }
         $mform->addRule('name', get_string('required'), 'required', null);
         $mform->setType('name', PARAM_TEXT);
 

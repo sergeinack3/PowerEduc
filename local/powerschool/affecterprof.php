@@ -86,9 +86,65 @@ if($verifisal)
         $recordtoinsert->idprof =$_POST["professeur"];
         //  var_dump($_POST["professeur"],$_POST["specialite"],$_POST["cycle"],$_POST["cours"],$_POST["semestre"],$recordtoinsert->idcourssemestre,$recordtoinsert->idprof,$USER->id);die;
     
-        $DB->execute("INSERT INTO mdl_affecterprof VALUES (0,'".$recordtoinsert->idcourssemestre."', '".$recordtoinsert->idprof."', '".$USER->id."','".time()."','".time()."','".$_POST["salle"]."')");
-        //  $DB->insert_record('affecterprof', $recordtoinsert);
+
+
+        $sql_cours = "SELECT e.id as iden FROM {enrol} e ,{course} c
+                     WHERE e.enrol='manual' AND e.courseid=c.id  AND courseid='".$_POST["cours"]."'";
+
+
+        $recuperer_cours = $DB->get_records_sql($sql_cours);
+
         
+        foreach ($recuperer_cours as $key=>$val){
+            $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$_POST["cours"]."'");
+            foreach ($cont as $key => $value4) {
+                // array_push($tarcon,$value4->id);
+                // var_dump($value4->id,$val->fullname);die;
+                }
+            
+            $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->iden."' AND userid='".$recordtoinsert->idprof."'";
+            $verif=$DB->get_records_sql($sql_verienr);
+            // var_dump($verif);die;
+            if (!$verif) {
+                # code...
+                // var_dump(  $val->iden );
+                // die;
+      
+        // $sql_enrol = "INSERT INTO {user_enrolments} (`status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) 
+        //             VALUES ('0',$val->enroleid,$recordtoinsert->idprof,'0','0',$USER->id,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
+        $sql_enrol = [
+        
+            "status"=>0,
+            "enrolid"=> $val->iden,
+            "userid"=>$recordtoinsert->idprof,
+            "timestart"=>0,
+            "timeend"=>0,
+            "modifierid"=>$USER->id,
+            "timecreated"=>time(),
+            "timemodified"=>time()];
+        $sql_roleass=[
+                "roleid"=>3,
+                "contextid"=>$value4->id,
+                "userid"=>$recordtoinsert->idprof,
+                "timemodified"=>time(),
+                "modifierid"=>$USER->id,
+                "itemid"=>0,
+                "sortorder"=>0,
+            ];
+            // var_dump($recuperer_cours);die;
+            
+            // var_dump($sql_enrol);
+            // die;
+            
+            $DB->insert_record('user_enrolments', $sql_enrol);
+            $DB->insert_record('role_assignments', $sql_roleass);
+
+            
+        }    
+        //  $DB->insert_record('affecterprof', $recordtoinsert);
+    }
+          $DB->execute("INSERT INTO mdl_affecterprof VALUES (0,'".$recordtoinsert->idcourssemestre."', '".$recordtoinsert->idprof."', '".$USER->id."','".time()."','".time()."','".$_POST["salle"]."')");
+
     }
     else
     {
@@ -118,7 +174,7 @@ if($_GET['id']) {
 }
 
 //professeur
-$sql="SELECT us.id as userid,firstname,lastname FROM {user} as us,{role_assignments} WHERE us.id=userid AND roleid=4";
+$sql="SELECT us.id as userid,firstname,lastname FROM {user} as us,{role_assignments} WHERE us.id=userid AND roleid=3";
 $professeur=$DB->get_records_sql($sql);
 //specialite
 $sql="SELECT sp.id,libellespecialite FROM {specialite} sp,{filiere} f WHERE sp.idfiliere=f.id AND idcampus='".$_GET["idca"]."'";
@@ -187,6 +243,7 @@ echo $OUTPUT->header();
 
 
 echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
+echo '<div style="margin-top:80px";><wxcvbn</div>';
 echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 // $mform->display();
 

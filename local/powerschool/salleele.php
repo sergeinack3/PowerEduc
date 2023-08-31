@@ -59,6 +59,71 @@ $PAGE->navbar->add(get_string('sallele', 'local_powerschool'), $managementurl);
 //cours
 
 //filiere
+// $sql3="SELECT i.id, u.firstname, u.lastname, a.datedebut, a.datefin, c.libellecampus, c.villecampus, 
+//     s.libellespecialite, s.abreviationspecialite , cy.libellecycle, cy.nombreannee,u.id as userid,numerosalle,capacitesalle
+//     FROM {inscription} i, {anneescolaire} a, {user} u, {specialite} s, {campus} c, {cycle} cy,{salleele} saet,{salle} sa
+//     WHERE i.idanneescolaire=a.id AND saet.idetudiant=u.id AND sa.id=saet.idsalle AND etudiantpresen=1 AND i.idspecialite=s.id AND i.idcampus=c.id AND i.idcycle =cy.id AND i.idcampus='".$_GET["idca"]."'";
+
+$sql3="SELECT
+s.libellespecialite,
+cy.libellecycle,
+GROUP_CONCAT(DISTINCT CONCAT(sa.numerosalle, ' - ', sa.capacitesalle) ORDER BY sa.numerosalle ASC SEPARATOR ', ') AS salles_occupees
+FROM
+{inscription} i
+JOIN
+{anneescolaire} a ON i.idanneescolaire = a.id
+JOIN
+{user} u ON i.idetudiant = u.id
+JOIN
+{specialite} s ON i.idspecialite = s.id
+JOIN
+{campus} c ON i.idcampus = c.id
+JOIN
+{cycle} cy ON i.idcycle = cy.id
+JOIN
+{salleele} saet ON u.id = saet.idetudiant
+JOIN
+{salle} sa ON saet.idsalle = sa.id
+WHERE
+etudiantpresen = 1 AND i.idcampus = '".$_GET["idca"]."'
+GROUP BY
+s.libellespecialite, cy.libellecycle
+ORDER BY
+s.libellespecialite ASC, cy.libellecycle ASC;
+";
+$salleocc=$DB->get_records_sql($sql3);
+$sql4="SELECT
+s.libellespecialite,
+cy.libellecycle,
+GROUP_CONCAT(DISTINCT CONCAT(sa.numerosalle, ' - ', sa.capacitesalle) ORDER BY sa.numerosalle ASC SEPARATOR ', ') AS salles_occupees
+FROM
+{inscription} i
+JOIN
+{anneescolaire} a ON i.idanneescolaire = a.id
+JOIN
+{user} u ON i.idetudiant = u.id
+JOIN
+{specialite} s ON i.idspecialite = s.id
+JOIN
+{campus} c ON i.idcampus = c.id
+JOIN
+{cycle} cy ON i.idcycle = cy.id
+JOIN
+{salleele} saet ON u.id = saet.idetudiant
+JOIN
+{salle} sa ON saet.idsalle = sa.id
+WHERE
+(etudiantpresen = 0 OR sa.id NOT IN (SELECT saaa.id FROM {salle} saaa, {salleele} saa WHERE saaa.id = saa.idsalle AND saa.etudiantpresen = 1 AND saaa.idcampus = '".$_GET["idca"]."'))
+    AND i.idcampus = '".$_GET["idca"]."'
+GROUP BY
+s.libellespecialite, cy.libellecycle
+ORDER BY
+s.libellespecialite ASC, cy.libellecycle ASC;
+";
+$sallenonoc=$DB->get_records_sql($sql4);
+// Remplacez 'valeur_idca' par la valeur de $_GET["idca"]
+// var_dump($sallenonoc);die;
+
 $sql="SELECT * FROM {filiere} WHERE idcampus='".$_GET["idca"]."'";
 $sql1="SELECT * FROM {salle} WHERE idcampus='".$_GET["idca"]."'";
 $sql2="SELECT * FROM {campus}";
@@ -70,6 +135,7 @@ $templatecontext = (object)[
     'filiere'=>array_values($filiere),
     'campus'=>array_values($campus),
     'salle'=>array_values($salle),
+    'salleocc'=>array_values($salleocc),
     'ajoute'=> new moodle_url('/local/powerschool/inscription.php'),
     'affectercours'=> new moodle_url('/local/powerschool/inscription.php'),
     'ajou'=> new moodle_url('/local/powerschool/classes/entrernote.php'),

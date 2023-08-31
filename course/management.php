@@ -166,22 +166,22 @@ $notificationspass = array();
 $notificationsfail = array();
 
 if ($action !== false && confirm_sesskey()) {
-    // Actions:
-    // - resortcategories : Resort the courses in the given category.
-    // - resortcourses : Resort courses
-    // - showcourse : make a course visible.
-    // - hidecourse : make a course hidden.
-    // - movecourseup : move the selected course up one.
-    // - movecoursedown : move the selected course down.
-    // - showcategory : make a category visible.
-    // - hidecategory : make a category hidden.
-    // - movecategoryup : move category up.
-    // - movecategorydown : move category down.
-    // - deletecategory : delete the category either in full, or moving contents.
-    // - bulkaction : performs bulk actions:
-    //    - bulkmovecourses.
-    //    - bulkmovecategories.
-    //    - bulkresortcategories.
+//     Actions:
+//     - resortcategories : Resort the courses in the given category.
+//     - resortcourses : Resort courses
+//     - showcourse : make a course visible.
+//     - hidecourse : make a course hidden.
+//     - movecourseup : move the selected course up one.
+//     - movecoursedown : move the selected course down.
+//     - showcategory : make a category visible.
+//     - hidecategory : make a category hidden.
+//     - movecategoryup : move category up.
+//     - movecategorydown : move category down.
+//     - deletecategory : delete the category either in full, or moving contents.
+//     - bulkaction : performs bulk actions:
+//        - bulkmovecourses.
+//        - bulkmovecategories.
+//        - bulkresortcategories.
     $redirectback = false;
     $redirectmessage = false;
     switch ($action) {
@@ -270,11 +270,11 @@ if ($action !== false && confirm_sesskey()) {
                     echo $renderer->continue_button($continueurl);
                 } else {
                     // Some error in parameters (user is cheating?)
-                    $mform->display();
+                    // $mform->display();
                 }
             } else {
                 // Display the form.
-                $mform->display();
+                // $mform->display();
             }
             // Finish output and exit.
             echo $renderer->footer();

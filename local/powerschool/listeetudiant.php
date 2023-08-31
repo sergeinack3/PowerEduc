@@ -21,10 +21,10 @@
  */
 
 use core\progress\display;
-use local_powerschool\note;
+use local_powerschool\inscription;
 
 require_once(__DIR__ . '/../../config.php');
-require_once($CFG->dirroot.'/local/powerschool/classes/note.php');
+require_once($CFG->dirroot.'/local/powerschool/classes/inscription.php');
 // require_once('tcpdf/tcpdf.php');
 
 global $DB;
@@ -34,20 +34,15 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/message:managemessages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/rentrernote.php'));
+$PAGE->set_url(new moodle_url('/local/powerschool/inscription.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Entrer les '.$_GET['libelcou'].'');
-$PAGE->set_heading('Bulletin de Notes');
+$PAGE->set_title('Liste des etudiants');
+$PAGE->set_heading('Liste des Etudiants Et affectation de cours');
 
 $PAGE->navbar->add('Administration du Site', $CFG->wwwroot.'/admin/search.php');
-$PAGE->navbar->add(get_string('bulletin', 'local_powerschool'), $managementurl);
+$PAGE->navbar->add(get_string('listeetudiant', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
-
-// $mform=new note();
-
-
-
 
 
 
@@ -56,27 +51,70 @@ $PAGE->navbar->add(get_string('bulletin', 'local_powerschool'), $managementurl);
 
 // $inscription =$tab = array();
 
-//cours
+$sql_inscrip = "SELECT i.id, u.firstname, u.lastname, a.datedebut, a.datefin, c.libellecampus, c.villecampus, 
+                s.libellespecialite, s.abreviationspecialite , cy.libellecycle, cy.nombreannee,s.idfiliere,idcycle,i.idcampus,idspecialite
+                FROM {inscription} i, {anneescolaire} a, {user} u, {specialite} s, {campus} c, {cycle} cy
+                WHERE i.idanneescolaire=a.id AND i.idspecialite=s.id AND i.idetudiant=u.id 
+                AND i.idcampus=c.id AND i.idcycle = cy.id AND i.idspecialite='".$_GET["specialite"]."' AND i.idcycle='".$_GET["cycle"]."' AND i.idanneescolaire='".$_GET["annee"]."' AND s.idfiliere='".$_GET["filiere"]."' AND i.idcampus='".$_GET["campus"]."'" ;
 
-//filiere
-$sql="SELECT * FROM {filiere} WHERE idcampus='".$_GET["idca"]."'";
-$filiere=$DB->get_records_sql($sql);
+// $inscription = $DB->get_records('inscription', null, 'id');
+
+
+// var_dump($sql_inscrip);
+// die;
+$inscription = $DB->get_records_sql($sql_inscrip);
+// $i=0;
+
+// var_dump($inscription);
+// die;
+foreach ($inscription as $key ){
+
+    $time = $key->datedebut;
+    $timef = $key->datefin;
+
+    $dated = date('Y',$time);
+    $datef = date('Y',$timef);
+
+    $key->datedebut = $dated;
+    $key->datefin = $datef;
+
+}
+
+// var_dump($i);
+// var_dump($inscription);
+// die;
+$annee=$DB->get_records("anneescolaire");
 $campus=$DB->get_records("campus");
+foreach($annee as $key => $ab)
+            {
+                $time = $ab->datedebut;
+                $timef = $ab->datefin;
+
+                $dated = date('Y',$time);
+                $datef = date('Y',$timef);
+
+                $ab->datedebut = $dated;
+                $ab->datefin = $datef;
+            }
 $templatecontext = (object)[
-    'filiere'=>array_values($filiere),
-    'campus'=>array_values($campus),
-    'ajoute'=> new moodle_url('/local/powerschool/inscription.php'),
+    'inscription' => array_values($inscription),
+    // 'nb'=>array_values($tab),
+    'inscriptionedit' => new moodle_url('/local/powerschool/inscriptionedit.php'),
+    'inscriptionpayer'=> new moodle_url('/local/powerschool/paiement.php'),
     'affectercours'=> new moodle_url('/local/powerschool/inscription.php'),
-    'ajou'=> new moodle_url('/local/powerschool/classes/entrernote.php'),
-    'coursid'=> new moodle_url('/local/powerschool/entrernote.php'),
-    'bulletinnote'=> new moodle_url('/local/powerschool/bulletinnote.php'),
-    'campuslien'=> new moodle_url('/local/powerschool/bulletin.php'),
-    'root'=>$CFG->wwwroot,
-    'idca'=>$_GET["idca"],
+    'suppins'=> new moodle_url('/local/powerschool/inscription.php'),
+    // 'imprimer' => new moodle_url('/local/powerschool/imp.php'),
+    'anneee'=>array_values($annee),
+    'roote'=>$CFG->wwwroot,
+    'campus1' => array_values($campus),
+    'idca'=>$_GET["campus"],
+    'idsp'=>$_GET["specialite"],
+    'idcy'=>$_GET["cycle"],
+    'idan'=>$_GET["annee"],
+    'idfi'=>$_GET["filiere"],
+];
 
- ];
-
-//  $menu = (object)[
+// $menu = (object)[
 //     'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
 //     'campus' => new moodle_url('/local/powerschool/campus.php'),
 //     'semestre' => new moodle_url('/local/powerschool/semestre.php'),
@@ -97,9 +135,7 @@ $templatecontext = (object)[
 //     'modepaie' => new moodle_url('/local/powerschool/modepaiement.php'),
 //     'statistique' => new moodle_url('/local/powerschool/statistique.php'),
 
-
 // ];
-
 $menu = (object)[
     'statistique' => new moodle_url('/local/powerschool/statistique.php'),
     'reglage' => new moodle_url('/local/powerschool/reglages.php'),
@@ -132,7 +168,7 @@ echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 // $mform->display();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/bulletin', $templatecontext);
+echo $OUTPUT->render_from_template('local_powerschool/listeetudiant', $templatecontext);
 
 
 echo $OUTPUT->footer();

@@ -38,7 +38,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Enregistrer une paiement');
 $PAGE->set_heading('Enregistrer une paiement');
 
-$PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
+$PAGE->navbar->add(get_string('inscription', 'local_powerschool'),  new moodle_url('/local/powerschool/inscription.php'));
 $PAGE->navbar->add(get_string('paiement', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -52,8 +52,10 @@ if ($mform->is_cancelled()) {
 
     redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
 
-} else if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST["idfi"])) {
+} else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    // var_dump($_POST["idfi"]);die;
+    // die;
 
 $recordtoinsert = new stdClass();
 
@@ -83,8 +85,8 @@ foreach ($filiercycltr as $key => $value) {
                     // var_dump($value1->mont==$value->somme,$value->somme);
                     // var_dump($value->somme,$value1->mont,$fromform->idtranc);die;
                     if ($value->somme==$value1->mont) {
-                       
-                        redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST['idinscription'].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'', 'Cet etudiant a déjà fini cette etape de la passion');
+                        \core\notification::add('Cet etudiant a déjà fini cette etape de la passion', \core\output\notification::NOTIFY_ERROR);
+                        redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST['idinscription'].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'');
                     }else{
                         $recordtoinsert->idmodepaie=$_POST["idmodepaie"];
                         // var_dump($_POST["idmodepaie"]);die;

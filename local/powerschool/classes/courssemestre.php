@@ -74,6 +74,15 @@ class courssemestre extends moodleform {
         $mform->addRule('idcoursspecialite', 'Choix du Cours', 'required', null, 'client');
         $mform->addHelpButton('idcoursspecialite', 'cours');
 
+        $mform->addElement('hidden','idcycle');
+        $mform->setDefault('idcycle', $_GET["idcy"]);
+   
+        $mform->addElement('hidden','idcampus');
+        $mform->setDefault('idcampus', $_GET["idca"]);
+        
+        $mform->addElement('hidden','idspecialite');
+        $mform->setDefault('idspecialite', $_GET["idsp"]);
+
         $mform->addElement('select', 'idsemestre', 'Semestre', $selectsemestre ); // Add elements to your form
         $mform->setType('idsemestre', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idsemestre', '');        //Default value
@@ -85,6 +94,10 @@ class courssemestre extends moodleform {
         $mform->setDefault('nombreheure', '');        //Default value
         $mform->addRule('nombreheure', ' Nombre Heure', 'required', null, 'client');
         $mform->addHelpButton('nombreheure', 'heure');
+
+        $mform->addElement('hidden', 'idspc'); // Add elements to your form
+        $mform->setType('idspc', PARAM_INT);                   //Set type of element
+        $mform->setDefault('idspc', $_GET["idcosp"]);        //Default value
 
         $mform->addElement('hidden', 'usermodified'); // Add elements to your form
         $mform->setType('usermodified', PARAM_INT);                   //Set type of element
@@ -143,6 +156,26 @@ class courssemestre extends moodleform {
         return $DB->get_record('courssemestre', ['id' => $courssemestreid]);
     }
 
+    // public function veri_semes($idcourss,$idsem)
+    // {
+    //     global $DB;
+    //     $true=$DB->get_records_sql("SELECT * FROM {courssemestre} WHERE idcoursspecialite='".$idcourss."' AND idsemestre='".$idsem."'");
+    //     foreach($true as $key => $value)
+    //     {
+
+    //     }
+    //     $vercou=$DB->get_records_sql("SELECT * FROM {coursspecialite} WHERE id='".$value->idcoursspecialite."'");
+    //     foreach($vercou as $key => $value1)
+    //     {
+            
+    //     }
+    //     $vercoucysp=$DB->get_records_sql("SELECT * FROM {coursspecialite} WHERE id='".$value->idcoursspecialite."' AND idcycle='".$value1->idcycle."' AND idspecialite='".$value1->idspecialite."'");
+    //     var_dump($idcourss);die;
+    //     if($vercoucysp)
+    //     {
+    //        return true; 
+    //     }
+    // }
 
 
     /** pour supprimer une annéee scolaire

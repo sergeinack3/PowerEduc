@@ -50,7 +50,7 @@
                     <td>{{libellespecialite}}  ({{abreviationspecialite}})  </td>
                     <td>{{libellecycle}} ({{nombreannee}} ans) </td>
                     <td>
-                        <input type="button" class="btn btn-primary" value="modifier" onclick="location.href='{{inscriptionedit}}?id={{id}}'">
+                        <input type="button" class="btn btn-danger" value="Supprimer" onclick="location.href='{{suppins}}?idins={{id}}'">
                         <input type="button" class="btn btn-warning local_annee_delete_button" value="payer" onclick="location.href='{{inscriptionpayer}}?idins={{id}}&idfi={{idfiliere}}&idcy={{idcycle}}&idca={{idcampus}}&idsp={{idspecialite}}'">
                         <input type="button" class="btn btn-info local_annee_delete_button" value="affecter" action="affectercours" onclick="location.href='{{affectercours}}?id={{id}}'">
                     </td>

@@ -164,7 +164,11 @@ if ($editform->is_cancelled()) {
     // Process data if submitted.
     if (empty($course->id)) {
         // In creating the course.
-        $course = create_course($data, $editoroptions);
+        // var_dump($_POST["idcy"],$_POST["idsp"],$_POST["idfil"],$_POST["idca"],$_POST["idsem"]);
+        // die;
+
+        // var_dump($_POST["idca"]);die;
+        $course = create_course($data, $editoroptions,$_POST["idcy"],$_POST["idsp"],$_POST["idfil"],$_POST["idca"],$_POST["idsem"]);
 
         // Get the context of the newly created course.
         $context = context_course::instance($course->id, MUST_EXIST);
@@ -185,7 +189,16 @@ if ($editform->is_cancelled()) {
         }
 
         // The URL to take them to if they chose save and display.
-        $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
+        if($_POST["idca"]!=null || $_POST["idca"]!=0)
+        {
+
+            $courssp = new moodle_url('/local/powerschool/coursspecialite.php', array('idca' => $_POST["idca"]));
+            redirect($courssp);
+        }
+        else{
+
+            $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
+        }
     } else {
         // Save any changes to the files used in the editor.
         update_course($data, $editoroptions);

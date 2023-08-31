@@ -87,7 +87,7 @@ $recordtoinsert = new stdClass();
 
     $verda=$datesea["day"]."-".$datesea["month"]."-".$datesea["year"];
 
-    $verappart=$DB->get_records_sql("SELECT * FROM {programme} WHERE idspecialite='".$_POST["idspecialite"]."' AND idcycle='".$_POST["idcycle"]."' AND DATE_FORMAT(FROM_UNIXTIME(datecours), '%e-%c-%Y')='".$verda."'AND idsemestre='".$_POST["idsemestre"]."'");
+    $verappart=$DB->get_records_sql("SELECT * FROM {programme} WHERE idspecialite='".$_POST["idspecialite"]."' AND idcycle='".$_POST["idcycle"]."' AND DATE_FORMAT(FROM_UNIXTIME(datecours), '%e-%c-%Y')='".$verda."'AND idsemestre='".$_POST["idsemestre"]."' AND heuredebutcours='".$_POST["heuredebutcours"]."' AND heurefincours='".$_POST["heurefincours"]."'");
     // var_dump($verappart,$verda,$_POST["idspecialite"],$_POST["idcycle"],$_POST["idsemestre"]);die;
 if(!$verappart){
 
@@ -243,17 +243,18 @@ $menu = (object)[
     // 'notes' => new moodle_url('/local/powerschool/note.php'),
     'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
     'configurermini' => new moodle_url('/local/powerschool/configurationmini.php'),
+    'listeetudiant' => new moodle_url('/local/powerschool/listeetudiant.php'),
     // 'gerer' => new moodle_url('/local/powerschool/gerer.php'),
 
     //navbar
     'statistiquenavr'=>get_string('statistique', 'local_powerschool'),
     'reglagenavr'=>get_string('reglages', 'local_powerschool'),
+    'listeetudiantnavr'=>get_string('listeetudiant', 'local_powerschool'),
     'seancenavr'=>get_string('seance', 'local_powerschool'),
     'programmenavr'=>get_string('programme', 'local_powerschool'),
     'inscriptionnavr'=>get_string('inscription', 'local_powerschool'),
     'configurationminini'=>get_string('configurationminini', 'local_powerschool'),
     'bulletinnavr'=>get_string('bulletin', 'local_powerschool'),
-
 ];
 
 echo $OUTPUT->header();

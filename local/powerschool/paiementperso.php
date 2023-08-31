@@ -103,7 +103,7 @@ $PAGE->set_heading('Liste de vos paiement');
 // $sql="SELECT * FROM {paiement} as pa RIGHT JOIN {tranche} as t ON pa.idtranche=t.id WHERE pa.idinscription=:idins";
 
 // $paiement = $DB->get_records_sql($sql,array("idins"=>$_GET["idins"]));
-$sqlfi="SELECT idfiliere FROM {inscription} i,{specialite} s,{cycle} c WHERE i.idspecialite=s.id AND c.id=i.idcycle AND idetudiant='".$USER->id."'";
+$sqlfi="SELECT idfiliere,i.idcampus,i.idspecialite FROM {inscription} i,{specialite} s,{cycle} c WHERE i.idspecialite=s.id AND c.id=i.idcycle AND idetudiant='".$USER->id."'";
 $fil=$DB->get_records_sql($sqlfi);
 
 // var_dump($fil);die;
@@ -111,11 +111,25 @@ foreach($fil as $key => $idfil)
 {
 
 }
-$sql1="SELECT * FROM {filierecycletranc} as filcy ,{filiere} as fil,{tranche} as tran
-       WHERE filcy.idfiliere=fil.id AND tran.id=filcy.idtranc AND idfiliere='".$idfil->idfiliere."'";
 
-$sqlsommmm="SELECT sum(somme) as som FROM {filierecycletranc} as filcy ,{filiere} as fil,{tranche} as tran
+$campuss=$DB->get_records("campus",array("id"=>$idfil->idcampus));
+
+// var_dump($campuss);die;
+foreach($campuss as $key => $vaca){}
+if($vaca->idtypecampus==1)
+{
+    $sqlsommmm="SELECT sum(somme) as som FROM {filierecycletranc} as filcy ,{filiere} as fil,{tranche} as tran
        WHERE filcy.idfiliere=fil.id AND tran.id=filcy.idtranc AND idfiliere='".$idfil->idfiliere."'";
+    $sql1="SELECT * FROM {filierecycletranc} as filcy ,{filiere} as fil,{tranche} as tran
+        WHERE filcy.idfiliere=fil.id AND tran.id=filcy.idtranc AND idfiliere='".$idfil->idfiliere."'";
+}else{
+    $sql1="SELECT * FROM {filierecycletranc} as filcy ,{filiere} as fil,{tranche} as tran
+        WHERE filcy.idfiliere=fil.id AND tran.id=filcy.idtranc AND idfiliere='".$idfil->idfiliere."' AND filcy.idspecialite='".$idfil->idspecialite."'";
+    $sqlsommmm="SELECT sum(somme) as som FROM {filierecycletranc} as filcy ,{filiere} as fil,{tranche} as tran
+       WHERE filcy.idfiliere=fil.id AND tran.id=filcy.idtranc AND filcy.idfiliere='".$idfil->idfiliere."' AND filcy.idspecialite='".$idfil->idspecialite."'";
+    // var_dump("ok");die;
+
+}
 
 $sql = "SELECT pa.id as paid,libelletranche,pa.timecreated,pa.montant,libellemodepaiement,idinscription as idins,t.id as traid FROM 
 {paiement} as pa JOIN {tranche} as t ON pa.idtranche = t.id JOIN {modepaiement} as mo ON pa.idmodepaie=mo.id 
@@ -132,6 +146,7 @@ $sql_som="SELECT SUM(montant) as mnt FROM {paiement} p,{inscription} i WHERE p.i
 
 // var_dump($rs);die;
 $sommes=$DB->get_records_sql($sql_som);
+// var_dump($sommes);die;
 
 foreach($sommes as $key=> $somme)
 {}
@@ -162,8 +177,9 @@ foreach($filicycy as $key => $fiifi)
 // die;
 $sommmm=$DB->get_records_sql($sqlsommmm);
 foreach ($sommmm as $key => $value) { 
+    // var_dump($sommmm,$idfil->idspecialite);
 }
-
+// die;
 $templatecontext = (object)[
     'paiement' => array_values($paiement),
     'filierecycletran' => array_values($filicycy),
@@ -195,7 +211,7 @@ $templatecontext = (object)[
 
 
 $menu = (object)[
-    'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
+    'programme' => new moodle_url('/local/powerschool/programmeperso.php'),
     'paiement' => new moodle_url('/local/powerschool/paiementperso.php'),
     'note' => new moodle_url('/local/powerschool/bulletinnoteperso.php'),
 

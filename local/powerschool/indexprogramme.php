@@ -77,9 +77,10 @@ $datecours= strtotime($datesea["day"]."-".$datesea["month"]."-".$datesea["year"]
 
     $specialite = $_POST["idspecialite"];
     $cycle = $_POST["idcycle"];
+    $salle = $_POST["idsalle"];
     
 
-    redirect($CFG->wwwroot . "/local/powerschool/indexprogramme.php?mois=$mois&annee=$annee&semestre=$semestre&idca=$campus&idsp=$specialite&idcy=$cycle", 'valider');
+    redirect($CFG->wwwroot . "/local/powerschool/indexprogramme.php?mois=$mois&annee=$annee&semestre=$semestre&idca=$campus&idsp=$specialite&idcy=$cycle&idsa=$salle", 'valider');
   
 }else{
     // var_dump("kl");die;
@@ -132,8 +133,103 @@ $menu = (object)[
     'programme' => new moodle_url('/local/powerschool/programme.php'),
 ];
 
+$sqllu = "SELECT fullname,DATE_FORMAT(FROM_UNIXTIME(p.datecours),'%D %b %Y') as datec,heuredebutcours,heurefincours FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy,{salle} sa, {programme} p
+WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
+AND p.idcycle = cy.id AND idcycle='".$_GET["idcy"]."' AND idspecialite='".$_GET["idsp"]."' AND sa.idcampus='".$_GET["idca"]."'AND idsemestre='".$_GET["semestre"]."'
+AND sa.id=p.idsalle AND p.idsalle='".$_GET["idsa"]."' AND DAYOFWEEK(FROM_UNIXTIME(p.datecours))=2";
 
+$lundi=$DB->get_records_sql($sqllu);
+$sqlma = "SELECT fullname,DATE_FORMAT(FROM_UNIXTIME(p.datecours),'%D %b %Y') as datec,heuredebutcours,heurefincours FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy,{salle} sa, {programme} p
+WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
+AND p.idcycle = cy.id AND idcycle='".$_GET["idcy"]."' AND idspecialite='".$_GET["idsp"]."' AND sa.idcampus='".$_GET["idca"]."'AND idsemestre='".$_GET["semestre"]."'
+AND sa.id=p.idsalle AND p.idsalle='".$_GET["idsa"]."' AND DAYOFWEEK(FROM_UNIXTIME(p.datecours))=3";
 
+$mardi=$DB->get_records_sql($sqlma);
+$sqlme = "SELECT fullname,DATE_FORMAT(FROM_UNIXTIME(p.datecours),'%D %b %Y') as datec,heuredebutcours,heurefincours FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy,{salle} sa, {programme} p
+WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
+AND p.idcycle = cy.id AND idcycle='".$_GET["idcy"]."' AND idspecialite='".$_GET["idsp"]."' AND sa.idcampus='".$_GET["idca"]."'AND idsemestre='".$_GET["semestre"]."'
+AND sa.id=p.idsalle AND p.idsalle='".$_GET["idsa"]."' AND DAYOFWEEK(FROM_UNIXTIME(p.datecours))=4";
+
+$mercredi=$DB->get_records_sql($sqlme);
+$sqljeu = "SELECT fullname,DATE_FORMAT(FROM_UNIXTIME(p.datecours),'%D %b %Y') as datec,heuredebutcours,heurefincours FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy,{salle} sa, {programme} p
+WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
+AND p.idcycle = cy.id AND idcycle='".$_GET["idcy"]."' AND idspecialite='".$_GET["idsp"]."' AND sa.idcampus='".$_GET["idca"]."'AND idsemestre='".$_GET["semestre"]."'
+AND sa.id=p.idsalle AND p.idsalle='".$_GET["idsa"]."' AND DAYOFWEEK(FROM_UNIXTIME(p.datecours))=5";
+
+$jeudi=$DB->get_records_sql($sqljeu);
+$sqlven = "SELECT fullname,DATE_FORMAT(FROM_UNIXTIME(p.datecours),'%D %b %Y') as datec,heuredebutcours,heurefincours FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy,{salle} sa, {programme} p
+WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
+AND p.idcycle = cy.id AND idcycle='".$_GET["idcy"]."' AND idspecialite='".$_GET["idsp"]."' AND sa.idcampus='".$_GET["idca"]."'AND idsemestre='".$_GET["semestre"]."'
+AND sa.id=p.idsalle AND p.idsalle='".$_GET["idsa"]."' AND DAYOFWEEK(FROM_UNIXTIME(p.datecours))=6";
+
+$vendredi=$DB->get_records_sql($sqlven);
+$sqlsad = "SELECT fullname,DATE_FORMAT(FROM_UNIXTIME(p.datecours),'%D %b %Y') as datec,heuredebutcours,heurefincours FROM {course} c, {semestre} s,{specialite} sp,{cycle} cy,{salle} sa, {programme} p
+WHERE p.idcourses = c.id AND p.idsemestre =s.id AND p.idspecialite = sp.id
+AND p.idcycle = cy.id AND idcycle='".$_GET["idcy"]."' AND idspecialite='".$_GET["idsp"]."' AND sa.idcampus='".$_GET["idca"]."'AND idsemestre='".$_GET["semestre"]."'
+AND sa.id=p.idsalle AND p.idsalle='".$_GET["idsa"]."' AND DAYOFWEEK(FROM_UNIXTIME(p.datecours))=7";
+
+$samedi=$DB->get_records_sql($sqlsad);
+// var_dump($oo);
+// die;
+$progr='
+<div class="table card mt-2 mb-2">
+<table class="table">
+<tr>
+<th>Lundi</th>
+<th>Mardi</th>
+<th>Mercredi</th>
+<th>Jeudi</th>
+<th>Vendredi</th>
+<th>Samedi</th>
+</tr>
+<tr>
+ <td >';
+ foreach($lundi as $key => $valuel)
+ {
+    $progr.='<div style="border-top:1px solid black;margin-top:20px;">'.$valuel->fullname.'  '.$valuel->heuredebutcours.'h-'.$valuel->heurefincours.'h</div>';
+ }
+ $progr.='</td>';
+ $progr.='<td>';
+  foreach($mardi as $key => $valuel)
+ {
+    $progr.='<div style="border-top:1px solid black;margin-top:20px;">'.$valuel->fullname.'  '.$valuel->heuredebutcours.'h-'.$valuel->heurefincours.'h</div>';
+ }
+ $progr.='</td>';
+        
+ $progr.='<td>';
+  foreach($mercredi as $key => $valuel)
+ {
+    $progr.='<div style="border-top:1px solid black;margin-top:20px;">'.$valuel->fullname.'  '.$valuel->heuredebutcours.'h-'.$valuel->heurefincours.'h</div>';
+ }
+ $progr.='</td>';
+        
+ $progr.='<td>';
+  foreach($jeudi as $key => $valuel)
+ {
+    $progr.='<div style="border-top:1px solid black;margin-top:20px;">'.$valuel->fullname.'  '.$valuel->heuredebutcours.'h-'.$valuel->heurefincours.'h</div>';
+ }
+ $progr.='</td>';
+        
+ $progr.='<td>';
+  foreach($vendredi as $key => $valuel)
+ {
+    $progr.='<div style="border-top:1px solid black;margin-top:20px;">'.$valuel->fullname.'  '.$valuel->heuredebutcours.'h-'.$valuel->heurefincours.'h</div>';
+ }
+ $progr.='</td>';
+        
+ $progr.='<td>';
+  foreach($samedi as $key => $valuel)
+ {
+    $progr.='<div style="border-top:1px solid black;margin-top:20px;">'.$valuel->fullname.'  '.$valuel->heuredebutcours.'h-'.$valuel->heurefincours.'h</div>';
+ }
+ $progr.='</td>';
+        
+       $progr.='</tr>
+   </table>
+</div>';
+   $templatecontext=[
+        'program'=>$progr
+   ];
 echo $OUTPUT->header();
 
 
@@ -148,10 +244,10 @@ $getMonth = $month->toString();
 $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify('last monday');
 
 $end = (clone $start)->modify('+'.(6 + 7 * ($getWeeks - 1)).'days');
-var_dump($month->toString());
-var_dump($semestre);
-$events = $month->getEvents($start,$end,$semestre,$_GET["idca"],$_GET["idsp"],$_GET["idcy"]);
-$eventsByDay = $month->getEventsByDay($start,$end,$semestre,$_GET["idca"],$_GET["idsp"],$_GET["idcy"]);
+// var_dump($month->toString());
+// var_dump($semestre);
+$events = $month->getEvents($start,$end,$semestre,$_GET["idca"],$_GET["idsp"],$_GET["idcy"],$_GET["idsa"]);
+$eventsByDay = $month->getEventsByDay($start,$end,$semestre,$_GET["idca"],$_GET["idsp"],$_GET["idcy"],$_GET["idsa"]);
 
 
 
@@ -166,7 +262,7 @@ echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 
 // echo '<i href="/powereduc03/local/powerschool/programme.php" class="fa fa-arrow-left fa-2x"style="color: #1D7DC2;"> </i> ';
 
-echo ' <a type="button" class="btn btn-info" href="/moodle1/local/powerschool/programme.php"> <i class="fa fa-arrow-left "> </i> </a>';
+// echo ' <a type="button" class="btn btn-info" href="/moodle1/local/powerschool/programme.php"> <i class="fa fa-arrow-left "> </i> </a>';
 
 
 // echo ' <a href="/powereduc03/local/powerschool/programme.php> 
@@ -180,8 +276,8 @@ $mform->display();
 echo '<div class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
             <h1>'.$getMonth. '</h1>
         <div>  
-                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'" class="btn btn-primary"> &lt;</a>
-                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'" class="btn btn-primary">&gt;</a>
+                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->previousmonth()->month.'&annee='.$month->previousmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'&idsa='.$_GET["idsa"].'" class="btn btn-primary"> &lt;</a>
+                <a href="/moodle1/local/powerschool/indexprogramme.php?mois='.$month->nextmonth()->month.'&annee='.$month->nextmonth()->year.'&semestre='.$semestre.'&idca='.$_GET["idca"].'&idsp='.$_GET["idsp"].'&idcy='.$_GET["idcy"].'&idsa='.$_GET["idsa"].'" class="btn btn-primary">&gt;</a>
         </div>
      </div>';
 
@@ -208,11 +304,12 @@ for($i = 0 ; $i < $getWeeks; $i++){
 
 
         $eventday = $event->fullname;
+        $salle = $event->numerosalle;
         $specialitecy = $event->libellespecialite."-".$event->libellecycle;
         $heuredebut = $event->heuredebutcours;
         $heurefin = $event->heurefincours;
         echo '<div>'
-        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'&idca='.$_GET["idca"].'">'.$eventday.' '.$specialitecy.'</a>
+        .$heuredebut.'h -'.$heurefin.'h :   '.'<a href="/moodle1/local/powerschool/programmeedit.php?id='.$event->id.'&idca='.$_GET["idca"].'">'.$eventday.' '.$specialitecy.' '.$salle.'</a>
         </div>';
       }
        '</td>';
@@ -222,5 +319,6 @@ for($i = 0 ; $i < $getWeeks; $i++){
 echo ' </table>
         </div>';
 
-// echo $OUTPUT->render_from_template('local_powerschool/indexindexprogramme', $templatecontext);
+// echo $progr;
+echo $OUTPUT->render_from_template('local_powerschool/indexprogramme', $templatecontext);
 echo $OUTPUT->footer();

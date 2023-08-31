@@ -54,7 +54,7 @@ class inscription extends moodleform {
 
         $mform = $this->_form; // Don't forget the underscore!
 
-        $mform->addElement('header','inscription', ' Informations sur l étudiant');
+        $mform->addElement('header','inscription', " Informations sur l'apprenant");
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);

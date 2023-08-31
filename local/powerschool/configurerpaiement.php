@@ -99,13 +99,17 @@ if($rol->libelletype=="universite")
       {filierecycletranc} as conf,{filiere} as f,{tranche} as t,{cycle} as cy WHERE
       conf.idfiliere=f.id AND conf.idtranc=t.id AND conf.idcycle=cy.id AND f.idcampus='".$_GET["idca"]."'";
 }else{
-    $sql="SELECT conf.id as idconf,libellefiliere,libelletranche,libellespecialite,somme,datelimite FROM
+    $sql="SELECT conf.id as idconf,libellefiliere,libelletranche,libellespecialite,somme,datelimite,f.idcampus FROM
       {filierecycletranc} as conf,{filiere} as f,{tranche} as t,{specialite} as sp WHERE
       conf.idfiliere=f.id AND conf.idtranc=t.id AND conf.idspecialite=sp.id AND f.idcampus='".$_GET["idca"]."'";
 }
 $configurer = $DB->get_records_sql($sql);
 // var_dump($configurer);die;
-
+foreach($configurer as $key =>$vaconf)
+{
+   $dated=date("d-m-Y",$vaconf->datelimite);
+   $vaconf->datelimite=$dated;
+}
 $templatecontext = (object)[
     'configurer' => array_values($configurer),
     'configedit' => new moodle_url('/local/powerschool/configurerpaiementedit.php'),
@@ -147,6 +151,7 @@ $campuss=(object)[
 ];
 echo $OUTPUT->header();
 echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
+echo'<div style="margin-top:45px;"></div>';
 
 // $campuss="<label>Choisir l'etablissement</label>
 // <select name='campus'onchange='if (this.value) location.href=this.value;' class='form-control '>

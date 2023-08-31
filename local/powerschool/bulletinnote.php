@@ -40,7 +40,7 @@ $PAGE->set_title('Entrer les '.$_GET['libelcou'].'');
 $PAGE->set_heading('Bulletin de Notes ');
 
 $PAGE->navbar->add('Administration du Site',  new moodle_url('/local/powerschool/index.php'));
-$PAGE->navbar->add(get_string('inscription', 'local_powerschool'), $managementurl);
+$PAGE->navbar->add(get_string('bulletin', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 

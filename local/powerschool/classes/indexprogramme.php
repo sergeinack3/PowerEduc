@@ -49,12 +49,14 @@ class indexprogramme extends moodleform {
         
         
         $sql1 = "SELECT * FROM {course} ";
+        $sql6 = "SELECT * FROM {salle} WHERE idcampus='".$_GET["idca"]."'";
         $sql2 = "SELECT * FROM {semestre} ";
         $sql3 = "SELECT s.id,libellespecialite FROM {specialite} s,{filiere} f WHERE s.idfiliere=f.id AND idcampus='".$_GET["idca"]."'";
         $sql4 = "SELECT * FROM {cycle} WHERE idcampus='".$_GET["idca"]."'";
         $sql5 = "SELECT * FROM {anneescolaire} ";
 
         $cours = $campus->select($sql1);
+        $salle = $campus->select($sql6);
         $semestre = $campus->select($sql2);
         $specialite = $campus->select($sql3);
         $cycle = $campus->select($sql4);
@@ -88,6 +90,10 @@ class indexprogramme extends moodleform {
         {
             $selectcycle[$key] = $val->libellecycle;
         }
+        foreach ($salle as $key => $val)
+        {
+            $selectsalle[$key] = $val->numerosalle;
+        }
 
         foreach ($anneescoalire as $key => $val)
         {
@@ -108,11 +114,11 @@ class indexprogramme extends moodleform {
         $mform->setType('idcampus', PARAM_TEXT);                   //Set type of element
         $mform->setDefault('idcampus', $_GET["idca"]);        //Default value
 
-        $mform->addElement('select', 'idcourses', 'Cours', $selectcours ); // Add elements to your form
-        $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
-        $mform->setDefault('idcourses', '');        //Default value
-        $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
-        $mform->addHelpButton('idcourses', 'cours');
+        // $mform->addElement('select', 'idcourses', 'Cours', $selectcours ); // Add elements to your form
+        // $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
+        // $mform->setDefault('idcourses', '');        //Default value
+        // $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
+        // $mform->addHelpButton('idcourses', 'cours');
 
         $mform->addElement('select', 'idsemestre', 'Semestre', $selectsemestre ); // Add elements to your form
         $mform->setDefault('idsemestre', '');        //Default value
@@ -130,6 +136,12 @@ class indexprogramme extends moodleform {
         $mform->setDefault('idcycle', '');        //Default value
         $mform->addRule('idcycle', 'Choix du Semestre', 'required', null, 'client');
         $mform->addHelpButton('idcycle', 'cycle');
+     
+        $mform->addElement('select', 'idsalle', 'Salle', $selectsalle ); // Add elements to your form
+        $mform->setType('idsalle', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idsalle', '');        //Default value
+        $mform->addRule('idsalle', 'Choix de la salle', 'required', null, 'client');
+        $mform->addHelpButton('idsalle', 'cycle');
 
         $mform->addElement('date_time_selector', 'datecours', 'Date du Cours' ); // Add elements to your form
         $mform->setType('datecours', PARAM_TEXT);                   //Set type of element

@@ -69,7 +69,7 @@ class programme extends moodleform {
     
         foreach ($cours as $key => $val)
         {
-            $selectcours[$key] = $val->fullname;
+            $selectcours[$key] = $val->fullname."($val->shortname)";
         }
         foreach ($semestre as $key => $val)
         {

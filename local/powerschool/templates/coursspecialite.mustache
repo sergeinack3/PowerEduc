@@ -28,44 +28,108 @@
   <div class="form-group fitem">
 
     
-  <input type="button" class="btn btn-info align-items-center" value="suivant" onclick="location.href='{{affecterprof}}'"> 
+<!--  <input type="button" class="btn btn-info align-items-center" value="suivant" onclick="location.href='{{affecterprof}}'"> -->
   </div>
 
 </div>
 
-<h1>Liste des cours_specialites</h1>
+<div class="d-flex justify-content-around">
 
-<div class="table card mt-2 mb-2">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">id</th>
-                <th scope="col">Cours</th>
-                <th scope="col">Specialites</th>
-                <th scope="col">Cycles</th>
-                <th scope="col">Credit ou Coef</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            {{#coursspecialite}}
-            <tbody>
-              <tr>
+    <div class="table card mt-2 mb-2">
+    <h1 class="text-center">Entrer le Semestre</h1>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Specialites</th>
+                    <th scope="col">Cycles</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                {{#coursspecialite1}}
+                <tbody>
+                  <tr>
+                    
+                        <td>{{libellespecialite}} ({{abreviationspecialite}}) </td>
+                        <td>{{libellecycle}} ({{nombreannee}}) </td>
+                        <td>
+                            <input type="button" class="btn btn-warning local_annee_delete_button" value="semestre" onclick="location.href='{{affectersemes}}?idcosp={{id}}&idcy={{idcy}}&idsp={{idsp}}&idca={{idcampus}}'">
+                             <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{coursspecialitesupp}}?id={{id}}'">
+
+                        </td>
+                    </tr>
+                </tbody>
                 
-                    <th scope="row">{{id}} </th>
-                    <td>{{fullname}} ({{shortname}}) </td>
-                    <td>{{libellespecialite}} ({{abreviationspecialite}}) </td>
-                    <td>{{libellecycle}} ({{nombreannee}}) </td>
-                    <td>{{credit}} </td>
-                    <td>
-                        <input type="button" class="btn btn-primary" value="modifier" onclick="location.href='{{coursspecialiteedit}}?id={{id}}&idca={{idca}}'">
-                        <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{coursspecialitesupp}}?id={{id}}'">
-                        <input type="button" class="btn btn-warning local_annee_delete_button" value="semestre" onclick="location.href='{{affectersemes}}?idcosp={{id}}'">
-                    </td>
-                </tr>
-            </tbody>
-            
-            {{/coursspecialite}}
-          </table>
+                {{/coursspecialite1}}
+              </table>
+    </div>
+    <div class="table card mt-2 mb-2">
+    <h1 class="text-center">Ajouter un cours</h1>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Specialites</th>
+                    <th scope="col">Cycles</th>
+                    <th scope="col">Semestre</th>
+                    <th scope="col">Nombre Heure</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                {{#coursspecialite}}
+                <tbody>
+                  <tr>
+                    
+                        <td>{{libellespecialite}} ({{abreviationspecialite}}) </td>
+                        <td>{{libellecycle}} ({{nombreannee}}) </td>
+                        <td>{{libellesemestre}}{{idcatsem}}</td>
+                        <td>{{nombreheure}}</td>
+                        <td>
+                            <!--<input type="button" class="btn btn-primary" value="modifier" onclick="location.href='{{coursspecialiteedit}}?id={{id}}&idca={{idca}}'">-->
+                            <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{coursspecialitesupp}}?id={{id}}'">
+                            <input type="button" class="btn btn-warning local_annee_delete_button" value="Ajouter un cours" onclick="location.href='{{cours}}?category={{idcatsem}}&returnto=catmanage&idcy={{idcy}}&idsp={{idspecialite}}&idca={{idcampus}}&idsem={{idsemestre}}&idfil={{idfiliere}}&libelle=courssp'">
+                        </td>
+                    </tr>
+                </tbody>
+                
+                {{/coursspecialite}}
+              </table>
+    </div>
 </div>
+
+ <div class="table card mt-2 mb-2">
+    <h1 class="text-center">Liste des cours_specialites</h1>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Specialites</th>
+                    <th scope="col">Cycles</th>
+                    <th scope="col">Semestre</th>
+                    <th scope="col">Cours</th>
+                    <th scope="col">Nombre Heure</th>
+                    <th scope="col">Coef ou credit</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                {{#coursspecialite2}}
+                <tbody>
+                  <tr>
+                    
+                        <td>{{libellespecialite}} ({{abreviationspecialite}}) </td>
+                        <td>{{libellecycle}} ({{nombreannee}}) </td>
+                        <td>{{libellesemestre}}{{idcatsem}}</td>
+                        <td>{{fullname}}{{idcatsem}}</td>
+                        <td>{{nombreheure}}h</td>
+                        <td>{{credit}}</td>
+                        <td>
+                            <input type="button" class="btn btn-primary" value="Ajouter credit" onclick="location.href='{{creditt}}?idspco={{id}}&idca={{idca}}'">
+                            <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{coursspecialitesupp}}?id={{id}}'">
+                            <!--<input type="button" class="btn btn-warning local_annee_delete_button" value="Ajouter un cours" onclick="location.href='{{cours}}?category={{idcatsem}}&returnto=catmanage&idcy={{idcy}}&idsp={{idspecialite}}&idca={{idcampus}}&idsem={{idsemestre}}&idfil={{idfiliere}}'">-->
+                        </td>
+                    </tr>
+                </tbody>
+                
+                {{/coursspecialite2}}
+              </table>
+    </div>
+
 
 <hr>

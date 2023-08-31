@@ -39,7 +39,7 @@ $string['modepaiement'] = 'Modes de Paiement';
 $string['seance'] = 'Seance';
 $string['statistique'] = 'Statistique';
 $string['inscription'] = 'Inscription';
-$string['semestre'] = 'Configuration des semestres';
+$string['semestre'] = 'Configuration des differentes parties de l\'année scolaire ';
 $string['accueilp'] = 'Accueil de Powerschool';
 $string['courssemestre'] = 'Configuration des cours par semestres';
 $string['coursspecialite'] = 'Configuration des cours par specialités';
@@ -55,5 +55,8 @@ $string['message'] = 'Personnalisé votre message';
 $string['confignote'] = 'Configuration des notes';
 $string['pourcentage'] = 'Pourcentage';
 $string['indexprogramme'] = 'Calendrier de programme';
+$string['paiement'] = 'paiement';
+$string['listeetudiant'] = 'Liste des etudiants';
+$string['logo'] = 'Logo';
 
 ?>
