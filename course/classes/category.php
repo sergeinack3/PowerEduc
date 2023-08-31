@@ -2691,6 +2691,8 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
             }
         }
         return $names;
+
+        // var_dump($names);die;
     }
 
     /**

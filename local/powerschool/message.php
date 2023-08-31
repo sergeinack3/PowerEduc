@@ -106,9 +106,9 @@ if($_GET['id']) {
 // var_dump($i);
 // var_dump($inscription);
 // die;
-
+$message=$DB->get_records("messagesstocke",array("idcampus"=>$_GET["idca"]));
 $templatecontext = (object)[
-    // 'inscription' => array_values($inscription),
+    'message' => array_values($message),
     // 'nb'=>array_values($tab),
     'messagesc' => new moodle_url('/local/powerschool/PHPMailer/email.php'),
     'inscriptionpayer'=> new moodle_url('/local/powerschool/paiement.php'),
@@ -143,8 +143,8 @@ $campuss=(object)[
 echo $OUTPUT->header();
 // echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 
-
 echo $OUTPUT->render_from_template('local_powerschool/navbarconfiguration', $menumini);
+echo'<div style="margin-top:55px"></div>';
 echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
 $mform->display();
 

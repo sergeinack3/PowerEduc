@@ -26,15 +26,9 @@
 <html>
  <head>
  </head>
-<h1>Quelles sont les specialites que vous aviez?</h1>
-<label>Choisir la filiere</label>
-<select name="filiere" class="form-control col-3 filiere">
-<option value=""></option>
-{{#filiere}}
-<option value="{{id}}">{{libellefiliere}}</option>
-{{/filiere}}
-</select>
-  <table class="table">
+    <h1>Quelles sont les specialites que vous aviez?</h1>
+
+    <table class="table">
 
           
             <tbody>
@@ -47,9 +41,35 @@
                    {{{table2}}}
                 </tbody> 
       </table>
+ <div class="d-flex justify-content-aroun">
+   <div class="col-6 mt-5">
+    <label>Choisir la filiere</label>
+    <select name="filiere" class="form-control col-3 filiere">
+    <option value=""></option>
+    {{#filiere}}
+    <option value="{{id}}">{{libellefiliere}}</option>
+    {{/filiere}}
+    </select>
+    <button class="btn btn-primary ajou  mt-5">ajouter</button>
+  </div>
+  <div class="col-6 mt-5">
+    <label>Choisir la categorie</label>
+    <select name="specialitecat" onchange="if (this.value) location.href=this.value;" class="form-control col-3 filiere">
+    <option value=""></option>
+    {{#specialitecat}}
+    <option value="{{specialitecate}}?idca={{idca}}&specialite={{libellespecialite}}&idsp={{idsp}}&idfi={{idfi}}">{{libellespecialite}}</option>
+    {{/specialitecat}}
+    </select>
+    <form method="POST" action={{catspecialite}}?parent={{category}}&specialite={{specialiteca}}&idca={{idca}}>
+        <input type="hidden" value="{{idca}}" name="campus"/>
+        <input type="hidden" value="{{specialiteca}}" name="filieree"/>
+        <input type="submit" class="btn btn-primary  mt-5" value="Ajouter categorie" class="cat"/>
+    </form>
+   </div>
+ </div>  
+  
       <input type="hidden" value="{{root}}" class="roote"/>
       <input type="hidden" value="{{idca}}" class="campus"/>
-      <button class="btn btn-primary ajou">ajouter</button>
   {{! <table class="table">
             <tbody>
                <tr>
@@ -72,14 +92,14 @@
                 </tr>
             </tbody> 
   </table> }}
-<div class="d-flex flex-wrap align-items-center">
+<!--<div class="d-flex flex-wrap align-items-center">
     <div class="form-group fitem">
   
       
     <input type="button" class="btn btn-info align-items-center" value="suivant" onclick="location.href='{{cycle}}'"> 
     </div>
   
-</div>
+</div>-->
 <h1>Liste des specialites</h1>
 
 <div class="table card mt-2 mb-2">

@@ -55,6 +55,9 @@ $string['message'] = 'Personnalisé votre message EN';
 $string['confignote'] = 'Configuration des notes EN';
 $string['pourcentage'] = 'Pourcentage EN';
 $string['indexprogramme'] = 'Calendrier de programme EN';
+$string['paiement'] = 'paiement EN';
+$string['listeetudiant'] = 'Liste des etudiants EN';
+$string['logo'] = 'Logo EN';
 
 
 

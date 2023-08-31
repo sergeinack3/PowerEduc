@@ -38,7 +38,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Enregistrer un cours par semestre');
 $PAGE->set_heading('Enregistrer un cours par semestre');
 
-$PAGE->navbar->add(get_string('coursspecialite', 'local_powerschool'),  new moodle_url('/local/powerschool/coursspecialite.php'));
+$PAGE->navbar->add(get_string('coursspecialite', 'local_powerschool'),  new moodle_url('/local/powerschool/coursspecialite.php?idca='.$_GET["idca"].''));
 $PAGE->navbar->add(get_string('courssemestre', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -60,11 +60,115 @@ $recordtoinsert = $fromform;
 
     // var_dump($fromform);
     // die;
- 
-        $DB->insert_record('courssemestre', $recordtoinsert);
-        redirect($CFG->wwwroot . '/local/powerschool/courssemestre.php?idcosp='.$_POST["idcoursspecialite"].'', 'Enregistrement effectué');
-        exit;
+    // if(!$mform->veri_semes($_POST["idspc"],$_POST["idsemestre"]))
+    // {
+    //    var_dump($_POST["idspc"],$_POST["idsemestre"]);die;
+    
+            $semestre=$DB->get_records("semestre",array("id"=>$_POST["idsemestre"]));
+            foreach ($semestre as $key => $valuesem) {
+                # code...
+            }
+
+            $cycle=$DB->get_records("cycle",array("id"=>$_POST["idcycle"]));
+            foreach ($cycle as $key => $valuecycl) {
+                # code...
+            }
+            
+            $camp=$DB->get_records("campus",array("id"=>$_POST["idcampus"]));
+            foreach ($camp as $key => $value) {
+                # code...
+            }
+            $categcamp=$DB->get_records("course_categories",array("name"=>$value->libellecampus,"depth"=>1));
+            foreach ($categcamp as $key => $valuecam) {
+                # code...
+            }
+
+            $specia=$DB->get_records("specialite",array("id"=>$_POST["idspecialite"]));
+            foreach ($specia as $key => $value2) {
+                # code...
+            }
+            $filiere=$DB->get_records("filiere",array("id"=>$value2->idfiliere));
+            foreach ($filiere as $key => $value3) {
+                # code...
+            }
+            $categfil=$DB->get_records("course_categories",array("name"=>$value3->libellefiliere,"depth"=>2));
+            // var_dump($filiere);
+            foreach ($categfil as $key => $valuefil) {
+                # code...
+                $fff=explode("/",$valuefil->path);
+                $iddc=array_search($valuecam->id,$fff);
+                if($iddc!==false)
+                {
+                    $idcatfil=$valuefil->id;
+                    // var_dump( $idcatfil);
+                }
+            }
+            $categ=$DB->get_records("course_categories",array("name"=>$value2->libellespecialite,"depth"=>3));
+            foreach ($categ as $key => $value1) {
+                # code...
+                $fff=explode("/",$value1->path);
+                $iddc=array_search($valuecam->id,$fff);
+                $iddfil=array_search($idcatfil,$fff);
+                if($iddc!==false && $iddfil!==false)
+                {
+                    $idcat=$value1->id;
+
+                    // var_dump($idcat);
+                }
+            }
+            $categcy=$DB->get_records("course_categories",array("name"=>$valuecycl->libellecycle,"depth"=>4));
+            // var_dump( $categcy);
+            // die;
+            foreach ($categcy as $key => $value1cy) {
+                # code...
+                $fffcy=explode("/",$value1cy->path);
+                $iddc=array_search($valuecam->id,$fffcy);
+                $iddfil=array_search($idcatfil,$fffcy);
+                $iddsp=array_search( $idcat,$fffcy);
+                if($iddc!==false&&$iddfil!==false&&$iddsp!==false)
+                {
+                    $idcatcy=$value1cy->id;
+                    // var_dump($idcatcy);
+                }
+            }
+            $categsem=$DB->get_records("course_categories",array("name"=>$valuesem->libellesemestre,"depth"=>5));
+            // var_dump( $categcy);
+            // die;
+            foreach ($categsem as $key => $value1sem) {
+                # code...
+                $fffsem=explode("/",$value1sem->path);
+                $iddc=array_search($valuecam->id,$fffsem);
+                $iddfil=array_search($idcatfil,$fffsem);
+                $iddsp=array_search( $idcat,$fffsem);
+                $iddcy=array_search( $idcatcy,$fffsem);
+                if($iddc!==false&&$iddfil!==false&&$iddsp!==false&&$iddcy!==false)
+                {
+                    $idcatsem=$value1sem->id;
+                    var_dump($idcatcy);
+                }
+            }
+            // var_dump( $idcat);die;
+//  die;
+if($idcatsem==null || $idcatsem==0)
+{
+
+    $DB->insert_record('courssemestre', $recordtoinsert);
+    redirect($CFG->wwwroot . '/course/editcategory.php?parent='.$idcatcy.'&semestre='.$valuesem->libellesemestre.'', 'Enregistrement effectué');
+}else{
+    // var_dump("rien");die;
+    $DB->insert_record('courssemestre', $recordtoinsert);
+    redirect($CFG->wwwroot . '/local/powerschool/courssemestre.php?idcosp='.$_POST["idcoursspecialite"].'', 'Enregistrement effectué');
 }
+}
+// else{
+//     // var_dump("kgvb,;bv;,nb");die;
+//     \core\notification::add('Cette configuration a été fait précedemment enregistré regarder dans le tableau,liberez le d\'abord dans ce tableau', \core\output\notification::NOTIFY_ERROR);
+
+//     redirect($CFG->wwwroot . '/local/powerschool/courssemestre.php?idcosp='.$_POST["idspc"].'');
+// }
+
+        // exit;
+// }
 
 if($_GET['id']) {
 

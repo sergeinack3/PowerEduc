@@ -103,7 +103,29 @@ class course_edit_form extends moodleform {
                 $mform->setConstant('category', $course->category);
             }
         }
+        $mform->addElement('hidden', 'idcy', null);
+        $mform->setType('idcy', PARAM_INT);
+        $mform->setDefault('idcy', $_GET["idcy"]);
+        $mform->addElement('hidden', 'idcy', null);
+        $mform->setType('idcy', PARAM_INT);
 
+        $mform->addElement('hidden', 'idsp', null);
+        $mform->setType('idsp', PARAM_INT);
+        $mform->setDefault('idsp', $_GET["idsp"]);
+     
+        $mform->addElement('hidden', 'idca', null);
+        $mform->setType('idca', PARAM_INT);
+        $mform->setDefault('idca', $_GET["idca"]);
+        
+        $mform->addElement('hidden', 'idfil', null);
+        $mform->setType('idfil', PARAM_INT);
+        $mform->setDefault('idfil', $_GET["idfil"]);
+
+        $mform->addElement('hidden', 'idsem', null);
+        $mform->setType('idsem', PARAM_INT);
+        $mform->setDefault('idsem', $_GET["idsem"]);
+
+        // var_dump($_GET["idsem"]);die;
         $choices = array();
         $choices['0'] = get_string('hide');
         $choices['1'] = get_string('show');
@@ -270,6 +292,9 @@ class course_edit_form extends moodleform {
             $calendars += $calendartypes;
             $mform->addElement('select', 'calendartype', get_string('forcecalendartype', 'calendar'), $calendars);
         }
+
+        // var_dump($_GET["idcy"]);
+        // die;
 
         $options = range(0, 10);
         $mform->addElement('select', 'newsitems', get_string('newsitemsnumber'), $options);

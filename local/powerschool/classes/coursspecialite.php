@@ -76,11 +76,11 @@ class coursspecialite extends moodleform {
         }
         // var_dump( $campus->selectcampus($sql)); 
         // die;
-        $mform->addElement('select', 'idcourses', 'courses', $selectcours ); // Add elements to your form
-        $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
-        $mform->setDefault('idcourses', '');        //Default value
-        $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
-        $mform->addHelpButton('idcourses', 'cours');
+        // $mform->addElement('select', 'idcourses', 'courses', $selectcours ); // Add elements to your form
+        // $mform->setType('idcourses', PARAM_TEXT);                   //Set type of element
+        // $mform->setDefault('idcourses', '');        //Default value
+        // $mform->addRule('idcourses', 'Choix du Cours', 'required', null, 'client');
+        // $mform->addHelpButton('idcourses', 'cours');
 
         $mform->addElement('select', 'idspecialite', 'specialite', $selectspecialte ); // Add elements to your form
         $mform->setType('idspecialite', PARAM_TEXT);                   //Set type of element
@@ -94,15 +94,19 @@ class coursspecialite extends moodleform {
         $mform->addRule('idcycle', 'Choix du cycle', 'required', null, 'client');
         $mform->addHelpButton('idcycle', 'cycle');
 
-        $mform->addElement('text', 'credit',"Credit ou Coef"); // Add elements to your form
-        $mform->setType('credit', PARAM_INT);                   //Set type of element
-        // $mform->setDefault('credit', 0);        //Default value
-        $mform->addRule('credit', 'Entrer le credit', 'required');
-        $mform->addHelpButton('credit', 'Credit');
+        // $mform->addElement('text', 'credit',"Credit ou Coef"); // Add elements to your form
+        // $mform->setType('credit', PARAM_INT);                   //Set type of element
+        // // $mform->setDefault('credit', 0);        //Default value
+        // $mform->addRule('credit', 'Entrer le credit', 'required');
+        // $mform->addHelpButton('credit', 'Credit');
 
         $mform->addElement('hidden', 'usermodified'); // Add elements to your form
         $mform->setType('usermodified', PARAM_INT);                   //Set type of element
         $mform->setDefault('usermodified', $USER->id);        //Default value
+        
+        // $mform->addElement('hidden', 'idcampus'); // Add elements to your form
+        // $mform->setType('idcampus', PARAM_INT);                   //Set type of element
+        // $mform->setDefault('idcampus', $_GET["idca"]);        //Default value
 
         $mform->addElement('hidden', 'timecreated', 'date de creation'); // Add elements to your form
         $mform->setType('timecreated', PARAM_INT);                   //Set type of element
@@ -180,10 +184,12 @@ class coursspecialite extends moodleform {
     }
 
     
-    public function verifcourspeciali($coursid,$cycle,$sp){
+    public function verifcourspeciali($cycle,$sp,$idca){
 
         global $DB;
-        $true=$DB->get_records_sql('SELECT * FROM {coursspecialite} WHERE idcourses="'.$coursid.'" AND idcycle="'.$cycle.'" AND idspecialite="'.$sp.'"');
+        $true=$DB->get_records_sql('SELECT cs.id FROM {coursspecialite} cs,{cycle} c WHERE cs.idcycle=c.id AND c.idcampus='.$idca.' AND idcycle="'.$cycle.'" AND idspecialite="'.$sp.'" AND idcourses=0');
+
+        // var_dump($cycle,$sp);die;
         if ($true) {
             return true;
     }

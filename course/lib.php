@@ -2175,7 +2175,7 @@ function course_overviewfiles_options($course) {
  * @param object $data  - all the data needed for an entry in the 'course' table
  * @return object new course instance
  */
-function create_course($data, $editoroptions = NULL) {
+function create_course($data, $editoroptions = NULL,$idcy=NULL,$idsp=NULL,$idfi=NULL,$idca=NULL,$idse=NULL) {
     global $DB, $CFG;
 
     //check the categoryid - must be given for all new courses
@@ -2235,8 +2235,28 @@ function create_course($data, $editoroptions = NULL) {
         $data->visible = $category->visible;
     }
     $data->visibleold = $data->visible;
+    
+    // var_dump($idcy);
+    // die;
+    $vercoussp=$DB->get_records_sql("SELECT cs.id FROM {coursspecialite} cs,{courssemestre} css,{filiere} f,{specialite} s,{cycle} c
+                                     WHERE cs.idcycle=c.id AND s.idfiliere=f.id AND cs.idspecialite=s.id AND css.idcoursspecialite=cs.id
+                                     AND c.id='".$idcy."' AND f.id='".$idfi."' AND s.id='".$idsp."' AND f.idcampus='".$idca."' AND css.idsemestre='".$idse."'");
+    // var_dump($idcy,$idsp,$idfi,$idca,$idse);die;
 
+    foreach($vercoussp as $key => $value)
+    {
+
+    }
     $newcourseid = $DB->insert_record('course', $data);
+
+    $courss=new stdClass();
+ if($value->id!=null || $value->id!=0)
+ {
+
+     $courss->id=$value->id;
+     $courss->idcourses=$newcourseid;
+     $DB->update_record('coursspecialite',$courss);
+ }
     $context = context_course::instance($newcourseid, MUST_EXIST);
 
     if ($editoroptions) {

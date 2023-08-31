@@ -65,13 +65,16 @@ $recordtoinsert->timemodified=time();
 $recordtoinsert->timecreated=time();
     // var_dump($recordtoinsert);
     // die;
-    if (!$mform->verificycle($_POST["libellecycle"])) {
+    if (!$mform->verificycle($_POST["libellecycle"],$_POST["idcampus"])) {
         # code...
+
+        
         $DB->insert_record('cycle', $recordtoinsert);
         redirect($CFG->wwwroot . '/local/powerschool/cycle.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
         exit;
     }else{
-        redirect($CFG->wwwroot . '/local/powerschool/cycle.php?idca='.$_POST["idcampus"].'', 'Ce cycle execite déjà');
+        \core\notification::add('Ce cycle execite déjà', \core\output\notification::NOTIFY_ERROR);
+        redirect($CFG->wwwroot . '/local/powerschool/cycle.php?idca='.$_POST["idcampus"].'');
 
     }
  
@@ -88,7 +91,7 @@ if($_GET['id']) {
 
 // var_dump($mform->selectcycle());
 // die;
-$cycle = $DB->get_records('cycle');
+$cycle = $DB->get_records('cycle',array("idcampus"=>$_GET["idca"]));
 $campus = $DB->get_records('campus');
 
 $campuss=(object)[

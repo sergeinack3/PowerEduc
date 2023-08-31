@@ -95,7 +95,7 @@ if (!$mform->veri_insc($recordtoinsert->idetudiant)) {
 
 if($_GET['id'] && $_GET['action']='affectercours') {
 
-
+// var_dump("dfh");die;
     $getid = $_GET['id'];
 
     $sql_get_inscrip = "SELECT idetudiant FROM {inscription} WHERE id = $getid " ;
@@ -118,8 +118,16 @@ if($_GET['id'] && $_GET['action']='affectercours') {
 // var_dump($sql_cours);
 
 // die;
+$tarcon=array();
 
-$recuperer_cours=array();
+        // $spc=$DB->get_records_sql('SELECT * FROM {course} WHERE id="'.$_POST["cours"].'"');
+        // $tarcon=array();
+        // $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50");
+        // foreach ($cont as $key => $value4) {
+            //     array_push($tarcon,$value4->id);
+            //    }
+            
+            $recuperer_cours=array();
 
 $recuperer_cours = $DB->get_records_sql($sql_cours);
 
@@ -127,7 +135,11 @@ $recuperer_cours = $DB->get_records_sql($sql_cours);
 // die;
 
 foreach ($recuperer_cours as $key=>$val){
-    
+    $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$val->id."'");
+    foreach ($cont as $key => $value4) {
+        // array_push($tarcon,$value4->id);
+        // var_dump($value4->id,$val->fullname);die;
+        }
     $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->enroleid."' AND userid='".$idetudiant."'";
     $verif=$DB->get_records_sql($sql_verienr);
     // var_dump($verif);die;
@@ -146,12 +158,22 @@ foreach ($recuperer_cours as $key=>$val){
         "modifierid"=>$USER->id,
         "timecreated"=>time(),
         "timemodified"=>time()];
+    $sql_roleass=[
+        "roleid"=>5,
+        "contextid"=>$value4->id,
+        "userid"=>$idetudiant,
+        "timemodified"=>time(),
+        "modifierid"=>$USER->id,
+        "itemid"=>0,
+        "sortorder"=>0,
+    ];
         // var_dump($recuperer_cours);die;
         
         // var_dump($sql_enrol);
         // die;
         
         $DB->insert_record('user_enrolments', $sql_enrol);
+        $DB->insert_record('role_assignments', $sql_roleass);
         
     
             
@@ -173,15 +195,20 @@ foreach ($recuperer_cours as $key=>$val){
             // var_dump($listenote2);
             // var_dump($listenote1);die;
             foreach ($listenote2 as $key => $value2) {
-                // var_dump($value1->id,$idetudiant);
-                
-                $notet=new stdClass();
-                $notet->idaffecterprof=$value2->id;
-                $notet->idetudiant=$idetudiant;
-                $notet->note1=0;
-                $notet->note2=0;
-                $notet->note3=0;
-                $DB->insert_record('listenote',$notet);
+                // var_dump($value2->id);
+                // var_dump($value2->id); 
+            $verliste=$DB->get_records("listenote",array("idaffecterprof"=>$value2->id,"idetudiant"=>$idetudiant));
+             if(!$verliste){
+
+                 $notet=new stdClass();
+                 $notet->idaffecterprof=$value2->id;
+                 $notet->idetudiant=$idetudiant;
+                 $notet->note1=0;
+                 $notet->note2=0;
+                 $notet->note3=0;
+                //  var_dump($notet);
+                 $DB->insert_record('listenote',$notet);
+             }
             }
         }
       }
@@ -193,14 +220,18 @@ foreach ($recuperer_cours as $key=>$val){
     // die;
     
     // die;
+    // die;
+  if($_GET["liste"]=="listeet"){
+
+      redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'', 'les cours ont été bien affectés');
+  }
     redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'les cours ont été bien affectés');
     
 }
 
+if($_GET['idins']) {
 
-if($_GET['id']) {
-
-    // $mform->supp_inscription($_GET['id']);
+    $mform->supp_inscription($_GET['idins']);
     redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'Information Bien supprimée');
         
 }
@@ -247,6 +278,7 @@ $templatecontext = (object)[
     'inscriptionedit' => new moodle_url('/local/powerschool/inscriptionedit.php'),
     'inscriptionpayer'=> new moodle_url('/local/powerschool/paiement.php'),
     'affectercours'=> new moodle_url('/local/powerschool/inscription.php'),
+    'suppins'=> new moodle_url('/local/powerschool/inscription.php'),
     // 'imprimer' => new moodle_url('/local/powerschool/imp.php'),
 ];
 
@@ -283,11 +315,13 @@ $menu = (object)[
     // 'notes' => new moodle_url('/local/powerschool/note.php'),
     'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
     'configurermini' => new moodle_url('/local/powerschool/configurationmini.php'),
+    'listeetudiant' => new moodle_url('/local/powerschool/listeetudiant.php'),
     // 'gerer' => new moodle_url('/local/powerschool/gerer.php'),
 
     //navbar
     'statistiquenavr'=>get_string('statistique', 'local_powerschool'),
     'reglagenavr'=>get_string('reglages', 'local_powerschool'),
+    'listeetudiantnavr'=>get_string('listeetudiant', 'local_powerschool'),
     'seancenavr'=>get_string('seance', 'local_powerschool'),
     'programmenavr'=>get_string('programme', 'local_powerschool'),
     'inscriptionnavr'=>get_string('inscription', 'local_powerschool'),

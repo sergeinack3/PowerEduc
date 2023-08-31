@@ -127,10 +127,10 @@ class cycle extends moodleform {
     }
 
     
-    public function verificycle( $libelle)
+    public function verificycle( $libelle,$idcampus)
     {
         global $DB;
-        $true=$DB->get_record("cycle",array("libellecycle" => $libelle));
+        $true=$DB->get_record("cycle",array("libellecycle" => $libelle,"idcampus"=>$idcampus));
         if ($true) {
             return true;
         }

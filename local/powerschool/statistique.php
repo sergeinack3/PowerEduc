@@ -176,10 +176,13 @@ foreach($etufil as $key => $etu)
 
     // Parcourez les résultats et ajoutez-les au tableau de données
     foreach ($sppsom as $result) {
+    if($result->libellespecialite)
+    {
         $data[] = array(
             'specialite' => $result->libellespecialite,
             'entrees' => $result->entrees
         );
+    }
     }
       
 }
@@ -199,10 +202,14 @@ foreach($cycleee as $key => $val){
 
     // Parcourez les résultats et ajoutez-les au tableau de données
     foreach ($cyypsom as $result) {
-        $datacy[] = array(
-            'cycle' => $result->libellecycle,
-            'entrees' => $result->entrees
-        );
+     if($result->libellecycle)
+     {
+
+         $datacy[] = array(
+             'cycle' => $result->libellecycle,
+             'entrees' => $result->entrees
+         );
+     }
     }
       
 }
@@ -244,7 +251,11 @@ foreach($cyclllle1 as $key =>$cysp)
               }
             foreach($sppsometulibefilsp as $key => $pp1)
               {
-                $tarsppsometufilsp[]=$pp1->libellecycle;
+                if($pp1->libellecycle)
+                {
+
+                    $tarsppsometufilsp[]=$pp1->libellecycle;
+                }
               }
 
             //   var_dump($tarsppsometulibefilsp,$tarsppsometufilsp);
@@ -290,7 +301,11 @@ foreach($cyclllle1 as $key =>$cysp)
         }
         foreach($cyypcyetudetcy as $key => $libcy1)
         {
-            $libellecycy[]=$libcy1->libellespecialite;
+            if($libcy1->libellespecialite)
+            {
+
+                $libellecycy[]=$libcy1->libellespecialite;
+            }
         }
         // var_dump($libellecycy, $sommecycy);
     }
@@ -348,6 +363,7 @@ $sqlcycetu="SELECT cy.id as idcy FROM {cycle} cy";
 
     // Parcourez les résultats et ajoutez-les au tableau de données
     foreach ($cyypsometu as $result) {
+     if($result->libellecycle)
         $datacyetu[] = array(
             'cycle' => $result->libellecycle,
             'entrees' => $result->entrees
@@ -832,6 +848,143 @@ else{
             //     $ab->datedebut = $dated;
             //     $ab->datefin = $datef;
             // }
+
+  // Statistique pour les notes
+      //par filiere
+ $filiere=$DB->get_records_sql("SELECT * FROM {filiere} WHERE idcampus=1");
+ foreach($filiere as $key=>$valm)
+ {
+
+      $sqlnotefil="SELECT
+      F.libellefiliere AS libellefilie,
+      S.libellespecialite AS libellespecial,
+      AVG((LN.note2 * 0.5 + LN.note3 * 0.5)) AS moyenne
+        FROM
+            {listenote} LN
+        JOIN
+            {affecterprof} AP ON LN.idaffecterprof = AP.id
+        JOIN
+            {user} U ON AP.idprof = U.id
+        JOIN
+            {courssemestre} CS ON AP.idcourssemestre = CS.id
+        JOIN
+            {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
+        JOIN
+            {specialite} S ON CSp.idspecialite = S.id
+        JOIN
+            {filiere} F ON S.idfiliere = F.id
+        WHERE F.id='".$valm->id."'
+  ";
+  $notefil=$DB->get_records_sql($sqlnotefil);
+
+//   var_dump($notefil);
+ }
+//   die;
+
+  //connaissant la filiere et la specialite
+
+  $specialitefiliere=$DB->get_records_sql("SELECT * FROM {filiere} WHERE id=5 AND idcampus=1");
+  foreach($specialitefiliere as $key=>$valn)
+  {}
+  $specialitefilierenote=$DB->get_records_sql("SELECT * FROM {specialite} WHERE idfiliere='".$valn->id."'");
+    // var_dump($specialitefilierenote);die;
+foreach($specialitefilierenote as $key =>$valspfil)
+{
+
+
+      $sqlnotespeciafil="SELECT
+      F.libellefiliere AS libellefilie,
+      S.libellespecialite AS libellespecial,
+      AVG((LN.note2 * 0.5 + LN.note3 * 0.5)) AS moyenne
+        FROM
+            {listenote} LN
+        JOIN
+            {affecterprof} AP ON LN.idaffecterprof = AP.id
+        JOIN
+            {user} U ON AP.idprof = U.id
+        JOIN
+            {courssemestre} CS ON AP.idcourssemestre = CS.id
+        JOIN
+            {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
+        JOIN
+            {specialite} S ON CSp.idspecialite = S.id
+        JOIN
+            {filiere} F ON S.idfiliere = F.id
+        WHERE S.id='".$valspfil->id."'
+  ";
+  $notespeciafil=$DB->get_records_sql($sqlnotespeciafil);
+
+//   var_dump($notespeciafil);
+}
+//   die;
+
+  //connaissant la filiere et le cycle
+  $cyclefiliere=$DB->get_records_sql("SELECT * FROM {cycle} WHERE idcampus=1");
+
+  foreach($cyclefiliere as $key => $valcy)
+  {
+    $sqlnotecyclefil="SELECT
+    F.libellefiliere AS libellefilie,
+    C.libellecycle AS libellecycle,
+    AVG((LN.note2 * 0.5 + LN.note3 * 0.5)) AS moyenne
+      FROM
+          {listenote} LN
+      JOIN
+          {affecterprof} AP ON LN.idaffecterprof = AP.id
+      JOIN
+          {user} U ON AP.idprof = U.id
+      JOIN
+          {courssemestre} CS ON AP.idcourssemestre = CS.id
+      JOIN
+          {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
+      JOIN
+          {cycle} C ON CSp.idcycle = C.id
+      JOIN
+          {specialite} S ON CSp.idspecialite = S.id
+      JOIN
+          {filiere} F ON S.idfiliere = F.id
+      WHERE C.id='".$valcy->id."' AND F.id=5
+";
+$notecyclefil=$DB->get_records_sql($sqlnotecyclefil);
+// var_dump($notecyclefil);
+  }
+//   die;
+
+  //connaissant la filiere la specilite le cycle
+$countuser=$DB->get_records("user");
+foreach($countuser as $key => $count)
+{
+
+    $sqlnotecyclefilspec="SELECT
+      F.libellefiliere AS libellefilie,
+      C.libellecycle AS libellecycle,
+      S.libellespecialite AS libellespecialite,
+      COUNT(*) AS nombre_etudiants,
+      ROUND(AVG((LN.note2 * 0.5 + LN.note3 * 0.5)),0) AS moyenne_arrondie
+        FROM
+            {listenote} LN
+        JOIN
+            {affecterprof} AP ON LN.idaffecterprof = AP.id
+        JOIN
+            {user} U ON AP.idprof = U.id
+        JOIN
+            {courssemestre} CS ON AP.idcourssemestre = CS.id
+        JOIN
+            {coursspecialite} CSp ON CS.idcoursspecialite = CSp.id
+        JOIN
+            {cycle} C ON CSp.idcycle = C.id
+        JOIN
+            {specialite} S ON CSp.idspecialite = S.id
+        JOIN
+            {filiere} F ON S.idfiliere = F.id
+        WHERE C.id=2 AND F.id=5 AND S.id=6 AND LN.idetudiant='".$count->id."'
+        
+  ";
+  $notecycspelefil=$DB->get_records_sql($sqlnotecyclefilspec);
+//   var_dump($notecycspelefil);
+
+}
+// die;
 $templatecontext = (object)[
     'anneee'=>array_values($annee),
     'roote'=>$CFG->wwwroot,
@@ -930,17 +1083,18 @@ $menu = (object)[
     // 'notes' => new moodle_url('/local/powerschool/note.php'),
     'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
     'configurermini' => new moodle_url('/local/powerschool/configurationmini.php'),
+    'listeetudiant' => new moodle_url('/local/powerschool/listeetudiant.php'),
     // 'gerer' => new moodle_url('/local/powerschool/gerer.php'),
 
     //navbar
     'statistiquenavr'=>get_string('statistique', 'local_powerschool'),
     'reglagenavr'=>get_string('reglages', 'local_powerschool'),
+    'listeetudiantnavr'=>get_string('listeetudiant', 'local_powerschool'),
     'seancenavr'=>get_string('seance', 'local_powerschool'),
     'programmenavr'=>get_string('programme', 'local_powerschool'),
     'inscriptionnavr'=>get_string('inscription', 'local_powerschool'),
     'configurationminini'=>get_string('configurationminini', 'local_powerschool'),
     'bulletinnavr'=>get_string('bulletin', 'local_powerschool'),
-
 ];
 
 echo $OUTPUT->header();

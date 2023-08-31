@@ -33,7 +33,7 @@ class primary extends view {
      * Initialise the primary navigation node
      */
     public function initialise(): void {
-        global $CFG;
+        global $CFG,$USER,$DB;
 
         if (during_initial_install() || $this->initialised) {
             return;
@@ -84,12 +84,22 @@ class primary extends view {
 
         if ($showsiteadminnode ) {
             // We don't need everything from the node just the initial link.
-            $this->add("Notes", new \moodle_url('/local/powerschool/note.php'), self::TYPE_ROOTNODE, null, 'notes');
+            $role=$DB->get_records("role_assignments",array("userid"=>$USER->id,"roleid"=>3));
+             if($role)
+             {
+    
+                 $this->add("Notes", new \moodle_url('/local/powerschool/note.php'), self::TYPE_ROOTNODE, null, 'notes');
+             }
         }
         
         if ($showsiteadminnode ) {
             // We don't need everything from the node just the initial link.
-            $this->add("Gérer Vos Choses", new \moodle_url('/local/powerschool/gerer.php'), self::TYPE_ROOTNODE, null, 'notes');
+          $role=$DB->get_records("role_assignments",array("userid"=>$USER->id,"roleid"=>5));
+           if($role)
+           {
+
+               $this->add("Profit Apprenant", new \moodle_url('/local/powerschool/gerer.php'), self::TYPE_ROOTNODE, null, 'notes');
+           }
         }
 
         // Search and set the active node.

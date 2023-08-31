@@ -92,7 +92,7 @@ $templatecontext = (object)[
 // ];
 
 $menu = (object)[
-    'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
+    'programme' => new moodle_url('/local/powerschool/programmeperso.php'),
     'paiement' => new moodle_url('/local/powerschool/paiementperso.php'),
     'note' => new moodle_url('/local/powerschool/bulletinnoteperso.php'),
 

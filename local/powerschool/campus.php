@@ -76,7 +76,23 @@ if ($mform->is_cancelled()) {
         {
 
             $DB->insert_record('campus', $recordtoinsert);
-            redirect($CFG->wwwroot . '/local/powerschool/campus.php', 'Enregistrement effectué');
+
+            // $recordcampus=new stdClass();
+
+            // $recordcampus->name=$recordtoinsert->libellecampus;
+            // $recordcampus->descriptionformat=1;
+            // $recordcampus->visible=1;
+            // $recordcampus->visibleold=1;
+            // $recordcampus->timemodified=time();
+            // $recordcampus->depth=1;
+            // $idd=$DB->insert_record('course_categories',$recordcampus);
+            
+            // $recordcampusmod=new stdClass();
+            // $recordcampusmod->id=$idd;
+            // $recordcampusmod->path="/".$idd;
+            
+            // $DB->update_record('course_categories',$recordcampusmod);
+            redirect($CFG->wwwroot . '/course/editcategory.php?parent=0&campus='.$recordtoinsert->libellecampus.'');
         }
         else{
 
@@ -92,6 +108,49 @@ if($_GET['id']) {
     redirect($CFG->wwwroot . '/local/powerschool/campus.php', 'Information Bien supprimée');
         
 }
+
+// $categorieData = [
+//     ['libelle' => 'genie informatique', 'path' => '/1'],
+//     ['libelle' => 'genie logiciel', 'path' => '/1/2'],
+//     ['libelle' => 'sous-catégorie 1', 'path' => '/1/2/3'],
+//     ['libelle' => 'autre catégorie', 'path' => '/4'],
+//     ['libelle' => 'sous-catégorie 2', 'path' => '/4/5'],
+// ];
+
+// // Tableau pour stocker les sous-catégories par catégorie
+// $sousCategoriesParCategorie = [];
+
+// foreach ($categorieData as $categorie) {
+//     $path = $categorie['path'];
+//     $niveau = substr_count($path, '/');
+
+//     if ($niveau === 0) {
+//         $categorieSuperieure = $path;
+//     } else {
+//         $elements = explode('/', $path);
+//         $categorieSuperieure = $elements[1];
+//         // var_dump($categorieSuperieure);
+//     }
+
+//     if (!isset($sousCategoriesParCategorie[$categorieSuperieure])) {
+//         $sousCategoriesParCategorie[$categorieSuperieure] = [];
+//     }
+//     $sousCategoriesParCategorie[$categorieSuperieure][] = $categorie['libelle'];
+
+//     var_dump($sousCategoriesParCategorie);
+// }
+
+// // Affichage des sous-catégories par catégorie
+// foreach ($sousCategoriesParCategorie as $categorieSuperieure => $sousCategories) {
+//     echo "Sous-catégories de $categorieSuperieure :\n";
+//     foreach ($sousCategories as $sousCategorie) {
+//         echo "$sousCategorie\n";
+//         // var_dump($sousCategorie);
+//     }
+//     echo "\n";
+// }
+// die;
+
 
 $campus = $DB->get_records_sql('SELECT c.id as camid ,libellecampus,libelletype,abrecampus,adressecampus,emailcampus,telcampus,sitecampus,payscampus,villecampus FROM {campus} c,{typecampus} t WHERE t.id=c.idtypecampus');
 
