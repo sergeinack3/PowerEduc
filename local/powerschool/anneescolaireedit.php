@@ -30,7 +30,7 @@ global $DB;
 
 require_login();
 $context = context_system::instance();
-require_capability('local/powerschool:managepages', $context);
+// require_capability('local/powerschool:managepages', $context);
 
 // $PAGE->set_url(new moodle_url('/local/powerschool/anneescolaireedit.php'));
 $PAGE->set_context(\context_system::instance());
@@ -55,7 +55,7 @@ $recordtoinsert = new anneescolaire();
     if($fromform->id) {
 
         $recordtoinsert->update_annee($fromform->id, $fromform->datedebut, $fromform->datefin);
-        redirect($CFG->wwwroot . '/local/powerschool/anneescolaire/anneescolaire.php', 'Bien modifier');
+        redirect($CFG->wwwroot . '/local/powerschool/anneescolaire.php', 'Bien modifier');
 
     // $recordtoinsert = $fromform;
     // var_dump($recordtoinsert,$_GET['id']);

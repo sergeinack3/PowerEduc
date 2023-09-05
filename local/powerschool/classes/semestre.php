@@ -47,7 +47,7 @@ class semestre extends moodleform {
 
         $mform = $this->_form; // Don't forget the underscore!
 
-        $mform->addElement('header','semestre', 'Semestre');
+        $mform->addElement('header','semestre', 'Differentes Parties');
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
 

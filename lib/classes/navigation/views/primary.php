@@ -85,12 +85,19 @@ class primary extends view {
         if ($showsiteadminnode ) {
             // We don't need everything from the node just the initial link.
             $role=$DB->get_records("role_assignments",array("userid"=>$USER->id,"roleid"=>3));
-             if($role)
+             if($role&& isloggedin())
              {
     
                  $this->add("Notes", new \moodle_url('/local/powerschool/note.php'), self::TYPE_ROOTNODE, null, 'notes');
-             }
-        }
+                 $this->add("Gérer les absences", new \moodle_url('/local/powerschool/absenceetu.php'), self::TYPE_ROOTNODE, null, 'notes');
+                 $this->add("Liste des apprenants absences", new \moodle_url('/local/powerschool/listeetuabsenprof.php'), self::TYPE_ROOTNODE, null, 'notes');
+                }
+            }
+            if(is_siteadmin())
+            {
+
+                $this->add("Liste des absences", new \moodle_url('/local/powerschool/listeetuabsenadmin.php'), self::TYPE_ROOTNODE, null, 'notes');
+            }
         
         if ($showsiteadminnode ) {
             // We don't need everything from the node just the initial link.

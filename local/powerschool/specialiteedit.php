@@ -45,7 +45,7 @@ $mform=new specialite();
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/specialite.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/specialite.php?idca='.$_POST["idcampus"].'', 'annuler');
 
 } else if ($fromform = $mform->get_data()) {
 
@@ -55,7 +55,7 @@ $recordtoinsert = new specialite();
 
 
     // var_dump($fromform->id, $fromform->libellespecialite,$fromform->abreviationspecialite,$_POST["idfiliere"]);die;
-        $recordtoinsert->update_specialite($fromform->id, $fromform->libellespecialite,$fromform->abreviationspecialite,$_POST["idfiliere"] );
+        $recordtoinsert->update_specialite($fromform->id, $fromform->libellespecialite,$fromform->abreviationspecialite,$_POST["idfiliere"],$_POST["idcatspe"]);
         redirect($CFG->wwwroot . '/local/powerschool/specialite.php?idca='.$_POST["idcampus"].'', 'Bien modifier');
         
     }

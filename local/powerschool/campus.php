@@ -49,7 +49,7 @@ $mform=new campus();
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/reglages.php', 'annuler');
 
 } else if (  $_SERVER['REQUEST_METHOD'] === 'POST' && $fromform = $mform->get_data()) {
 
@@ -73,9 +73,10 @@ if ($mform->is_cancelled()) {
         //  file_put_contents($destination_path, $file_content);
         // $recordtoinsert->logocampus=$destination_path;
         if(!$mform->veri_Campus($recordtoinsert->libellecampus))
-        {
-
+        {   
+            // var_dump($recordtoinsert);die;
             $DB->insert_record('campus', $recordtoinsert);
+            // die;
 
             // $recordcampus=new stdClass();
 

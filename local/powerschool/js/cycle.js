@@ -13,7 +13,7 @@ $(".ajou").click(function (e) {
         .get()
         .join(",");
 
-        alert("fff")
+        // alert("fff")
     // var redirectionUrl =
     //     $("#autoRedirectForm").attr("action") + "?idetu=" + idetudiants;
     // window.location.href = redirectionUrl;

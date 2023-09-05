@@ -50,37 +50,41 @@ $mform=new inscription();
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/reglages.php', 'annuler');
 
-} else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromform = $mform->get_data() ) {
+} else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST["idcycle"]) {
 
 
 $recordtoinsert = new stdClass();
 
-$recordtoinsert = $fromform;
+// $recordtoinsert = $fromform;
     
 // var_dump($recordtoinsert);
 // die;
-if (!$mform->veri_insc($recordtoinsert->idetudiant)) {
+// var_dump($_POST["idcycle"]);die;
+if (!$mform->veri_insc($_POST["idetudiant"])) {
     # code...
-    $recordtoinsert->idcycle=$fromform->idcycle;
-    $recordtoinsert->idcampus=$fromform->idcampus;
-    $recordtoinsert->idetudiant=$fromform->idetudiant;
-    $recordtoinsert->cycle=$fromform->cycle;
-    $recordtoinsert->nomsparent=$fromform->nomsparent;
-    $recordtoinsert->telparent=$fromform->telparent;
-    $recordtoinsert->emailparent=$fromform->emailparent;
-    $recordtoinsert->professionparent=$fromform->professionparent;
-    $recordtoinsert->usermodified=$fromform->usermodified;
-    $recordtoinsert->timecreated=$fromform->timecreated;
-    $recordtoinsert->timemodified=$fromform->timemodified;
+    $recordtoinsert->idanneescolaire=$_POST["idanneescolaire"];
+    $recordtoinsert->idspecialite=$_POST["idspecialite"];
+    $recordtoinsert->idcycle=$_POST["idcycle"];
+    $recordtoinsert->idcampus=$_POST["idcampus"];
+    $recordtoinsert->idetudiant=$_POST["idetudiant"];
+    // $recordtoinsert->idcycle=$fromform->cycle;
+    $recordtoinsert->nomsparent=$_POST["nomsparent"];
+    $recordtoinsert->telparent=$_POST["telparent"];
+    $recordtoinsert->emailparent=$_POST["emailparent"];
+    $recordtoinsert->professionparent=$_POST["professionparent"];
+    $recordtoinsert->usermodified=$_POST["usermodified"];
+    $recordtoinsert->timecreated=$_POST["timecreated"];
+    $recordtoinsert->timemodified=$_POST["timemodified"];
 
     // var_dump($recordtoinsert);die;
     $DB->insert_record('inscription', $recordtoinsert);
-    redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'Enregistrement effectué');
+    redirect($CFG->wwwroot . '/local/powerschool/inscription.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
     exit;
 }else{
-    redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'Cet etudiant est déjà inscript');
+    \core\notification::add('Cet etudiant est déjà inscrit', \core\output\notification::NOTIFY_ERROR);
+    redirect($CFG->wwwroot . '/local/powerschool/inscription.php');
 
 }
 
@@ -95,144 +99,168 @@ if (!$mform->veri_insc($recordtoinsert->idetudiant)) {
 
 if($_GET['id'] && $_GET['action']='affectercours') {
 
-// var_dump("dfh");die;
-    $getid = $_GET['id'];
+$veriaff=$DB->get_records_sql("SELECT * FROM {coursspecialite} cs,{course} c,{courssemestre} css,{affecterprof} af
+                               WHERE cs.idspecialite='".$_GET["idsp"]."' AND cs.idcycle='".$_GET["idcy"]."' 
+                               AND cs.idcourses=c.id AND css.idcoursspecialite=cs.id AND af.idcourssemestre=css.id");
+$veripaie=$DB->get_records("paiement",array("idinscription"=>$_GET['id']));
 
-    $sql_get_inscrip = "SELECT idetudiant FROM {inscription} WHERE id = $getid " ;
+// var_dump($veriaff);die;
+ if($veripaie)
+    {
+      if($veriaff)
+      {
+                $getid = $_GET['id'];
 
-    $req = $DB->get_records_sql($sql_get_inscrip);
-    
-    foreach ($req as $key=>$val){
-        $idetudiant = $key;
-    } 
-    
-    
-    //Affectation des cours de la specialite a l'etudiant
-    
-    $sql_cours = "SELECT c.id, c.fullname, e.id as enroleid, e.enrol,i.idspecialite,i.idcycle FROM {inscription} i, {user} u, {specialite} s, {coursspecialite} cs, {course} c, {enrol} e 
-    WHERE i.idetudiant=u.id AND i.idspecialite=s.id AND cs.idspecialite=s.id AND cs.idcourses=c.id AND e.courseid = c.id AND e.enrol='manual' AND i.idetudiant = $idetudiant";
+                $sql_get_inscrip = "SELECT idetudiant FROM {inscription} WHERE id = $getid " ;
+
+                $req = $DB->get_records_sql($sql_get_inscrip);
+                
+                foreach ($req as $key=>$val){
+                    $idetudiant = $key;
+                } 
+                
+                
+                //Affectation des cours de la specialite a l'etudiant
+                
+                $sql_cours = "SELECT c.id, c.fullname, e.id as enroleid, e.enrol,i.idspecialite,i.idcycle FROM {inscription} i, {user} u, {specialite} s, {coursspecialite} cs, {course} c, {enrol} e 
+                WHERE i.idetudiant=u.id AND i.idspecialite=s.id AND cs.idspecialite=s.id AND cs.idcourses=c.id AND e.courseid = c.id AND e.enrol='manual' AND i.idetudiant = $idetudiant";
 
 
-// var_dump($sql_get_inscrip);
-// var_dump($req);
-// var_dump($sql_cours);
+            // var_dump($sql_get_inscrip);
+            // var_dump($req);
+            // var_dump($sql_cours);
 
-// die;
-$tarcon=array();
+            // die;
+            $tarcon=array();
 
-        // $spc=$DB->get_records_sql('SELECT * FROM {course} WHERE id="'.$_POST["cours"].'"');
-        // $tarcon=array();
-        // $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50");
-        // foreach ($cont as $key => $value4) {
-            //     array_push($tarcon,$value4->id);
-            //    }
+                    // $spc=$DB->get_records_sql('SELECT * FROM {course} WHERE id="'.$_POST["cours"].'"');
+                    // $tarcon=array();
+                    // $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50");
+                    // foreach ($cont as $key => $value4) {
+                        //     array_push($tarcon,$value4->id);
+                        //    }
+                        
+                        $recuperer_cours=array();
+
+            $recuperer_cours = $DB->get_records_sql($sql_cours);
+
+            // var_dump(  $recuperer_cours );
+            // die;
+
+            foreach ($recuperer_cours as $key=>$val){
+                $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$val->id."'");
+                foreach ($cont as $key => $value4) {
+                    // array_push($tarcon,$value4->id);
+                    // var_dump($value4->id,$val->fullname);die;
+                    }
+                $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->enroleid."' AND userid='".$idetudiant."'";
+                $verif=$DB->get_records_sql($sql_verienr);
+                // var_dump($verif);die;
+            if (!$verif) {
+                # code...
             
-            $recuperer_cours=array();
-
-$recuperer_cours = $DB->get_records_sql($sql_cours);
-
-// var_dump(  $recuperer_cours );
-// die;
-
-foreach ($recuperer_cours as $key=>$val){
-    $cont=$DB->get_records_sql("SELECT * FROM {context} WHERE contextlevel=50 AND instanceid='".$val->id."'");
-    foreach ($cont as $key => $value4) {
-        // array_push($tarcon,$value4->id);
-        // var_dump($value4->id,$val->fullname);die;
-        }
-    $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->enroleid."' AND userid='".$idetudiant."'";
-    $verif=$DB->get_records_sql($sql_verienr);
-    // var_dump($verif);die;
-  if (!$verif) {
-    # code...
-  
-    $sql_enrol = "INSERT INTO {user_enrolments} (`status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) 
-                VALUES ('0',$val->enroleid,$idetudiant,'0','0',$USER->id,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
-    $sql_enrol = [
-    
-        "status"=>0,
-        "enrolid"=> $val->enroleid,
-        "userid"=>$idetudiant,
-        "timestart"=>0,
-        "timeend"=>0,
-        "modifierid"=>$USER->id,
-        "timecreated"=>time(),
-        "timemodified"=>time()];
-    $sql_roleass=[
-        "roleid"=>5,
-        "contextid"=>$value4->id,
-        "userid"=>$idetudiant,
-        "timemodified"=>time(),
-        "modifierid"=>$USER->id,
-        "itemid"=>0,
-        "sortorder"=>0,
-    ];
-        // var_dump($recuperer_cours);die;
-        
-        // var_dump($sql_enrol);
-        // die;
-        
-        $DB->insert_record('user_enrolments', $sql_enrol);
-        $DB->insert_record('role_assignments', $sql_roleass);
-        
-    
-            
-      }
+                $sql_enrol = "INSERT INTO {user_enrolments} (`status`, `enrolid`, `userid`, `timestart`, `timeend`, `modifierid`, `timecreated`, `timemodified`) 
+                            VALUES ('0',$val->enroleid,$idetudiant,'0','0',$USER->id,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)";
+                $sql_enrol = [
+                
+                    "status"=>0,
+                    "enrolid"=> $val->enroleid,
+                    "userid"=>$idetudiant,
+                    "timestart"=>0,
+                    "timeend"=>0,
+                    "modifierid"=>$USER->id,
+                    "timecreated"=>time(),
+                    "timemodified"=>time()];
+                $sql_roleass=[
+                    "roleid"=>5,
+                    "contextid"=>$value4->id,
+                    "userid"=>$idetudiant,
+                    "timemodified"=>time(),
+                    "modifierid"=>$USER->id,
+                    "itemid"=>0,
+                    "sortorder"=>0,
+                ];
+                    // var_dump($recuperer_cours);die;
+                    
+                    // var_dump($sql_enrol);
+                    // die;
+                    
+                    $DB->insert_record('user_enrolments', $sql_enrol);
+                    $DB->insert_record('role_assignments', $sql_roleass);
+                    
+                
+                        
+                }
 
 
-    }
-             
-    $sql="SELECT * FROM {coursspecialite} WHERE idspecialite='".$val->idspecialite."' AND idcycle='".$val->idcycle."'";
-    $listenote=$DB->get_records_sql($sql);
-    foreach ($listenote as $key => $value) {
-        $sql1="SELECT * FROM {courssemestre} WHERE idcoursspecialite='".$value->id."'";
-        $listenote1=$DB->get_records_sql($sql1);
-        
-        foreach ($listenote1 as $key => $value1) {
-            # code...
-            $sql2="SELECT * FROM {affecterprof} c WHERE c.idcourssemestre='".$value1->id."'";
-            $listenote2=$DB->get_records_sql($sql2);
-            // var_dump($listenote2);
-            // var_dump($listenote1);die;
-            foreach ($listenote2 as $key => $value2) {
-                // var_dump($value2->id);
-                // var_dump($value2->id); 
-            $verliste=$DB->get_records("listenote",array("idaffecterprof"=>$value2->id,"idetudiant"=>$idetudiant));
-             if(!$verliste){
-
-                 $notet=new stdClass();
-                 $notet->idaffecterprof=$value2->id;
-                 $notet->idetudiant=$idetudiant;
-                 $notet->note1=0;
-                 $notet->note2=0;
-                 $notet->note3=0;
-                //  var_dump($notet);
-                 $DB->insert_record('listenote',$notet);
-             }
             }
-        }
-      }
-     //je recuperer tout les cours lien aux professeur je l'affecte à un etudiant d'une specialite et cycle precis
+                    
+            $sql="SELECT * FROM {coursspecialite} WHERE idspecialite='".$val->idspecialite."' AND idcycle='".$val->idcycle."'";
+            $listenote=$DB->get_records_sql($sql);
+            foreach ($listenote as $key => $value) {
+                $sql1="SELECT * FROM {courssemestre} WHERE idcoursspecialite='".$value->id."'";
+                $listenote1=$DB->get_records_sql($sql1);
+                
+                foreach ($listenote1 as $key => $value1) {
+                    # code...
+                    $sql2="SELECT * FROM {affecterprof} c WHERE c.idcourssemestre='".$value1->id."'";
+                    $listenote2=$DB->get_records_sql($sql2);
+                    // var_dump($listenote2);
+                    // var_dump($listenote1);die;
+                    foreach ($listenote2 as $key => $value2) {
+                        // var_dump($value2->id);
+                        // var_dump($value2->id); 
+                    $verliste=$DB->get_records("listenote",array("idaffecterprof"=>$value2->id,"idetudiant"=>$idetudiant));
+                    if(!$verliste){
 
-    //  $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->enroleid."' AND userid='".$idetudiant."'";
-    //  $verif=$DB->get_records_sql($sql_verienr);
+                        $notet=new stdClass();
+                        $notet->idaffecterprof=$value2->id;
+                        $notet->idetudiant=$idetudiant;
+                        $notet->note1=0;
+                        $notet->note2=0;
+                        $notet->note3=0;
+                        //  var_dump($notet);
+                        $DB->insert_record('listenote',$notet);
+                    }
+                    }
+                }
+            }
+            //je recuperer tout les cours lien aux professeur je l'affecte à un etudiant d'une specialite et cycle precis
 
-    // die;
-    
-    // die;
-    // die;
-  if($_GET["liste"]=="listeet"){
+            //  $sql_verienr="SELECT * FROM {user_enrolments} WHERE enrolid='".$val->enroleid."' AND userid='".$idetudiant."'";
+            //  $verif=$DB->get_records_sql($sql_verienr);
 
-      redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'', 'les cours ont été bien affectés');
-  }
-    redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'les cours ont été bien affectés');
-    
+            // die;
+            
+            // die;
+            // die;
+                if($_GET["liste"]=="listeet"){
+
+                    redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'', 'les cours ont été bien affectés');
+                }
+                    redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'les cours ont été bien affectés');
+        }else{
+            if($_GET["liste"]=="listeet"){
+                \core\notification::add('Affecter au moins un cours à un enseignants', \core\output\notification::NOTIFY_ERROR);
+                redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'');
+            }   
+            \core\notification::add('Affecter au moins un cours à un enseignants', \core\output\notification::NOTIFY_ERROR);
+                redirect($CFG->wwwroot . '/local/powerschool/inscription.php');
+        } 
+    }else{
+        if($_GET["liste"]=="listeet"){
+            \core\notification::add("Cet apprenant n'a pas encore commercé le paiement", \core\output\notification::NOTIFY_ERROR);
+            redirect($CFG->wwwroot . '/local/powerschool/listeetudiant.php?campus='.$_GET["idca"].'&specialite='.$_GET["idsp"].'&cycle='.$_GET["idcy"].'&filiere='.$_GET["idfi"].'&annee='.$_GET["idan"].'');
+        }   
+        \core\notification::add("Cet apprenant n'a pas encore commercé le paiement", \core\output\notification::NOTIFY_ERROR);
+            redirect($CFG->wwwroot . '/local/powerschool/inscription.php');
+    }   
 }
 
 if($_GET['idins']) {
 
     $mform->supp_inscription($_GET['idins']);
-    redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'Information Bien supprimée');
+    redirect($CFG->wwwroot . '/local/powerschool/inscription.php?idca='.$_GET["idca"].'', 'Information Bien supprimée');
         
 }
 
@@ -243,7 +271,7 @@ $sql_inscrip = "SELECT i.id, u.firstname, u.lastname, a.datedebut, a.datefin, c.
                 s.libellespecialite, s.abreviationspecialite , cy.libellecycle, cy.nombreannee,s.idfiliere,idcycle,i.idcampus,idspecialite
                 FROM {inscription} i, {anneescolaire} a, {user} u, {specialite} s, {campus} c, {cycle} cy
                 WHERE i.idanneescolaire=a.id AND i.idspecialite=s.id AND i.idetudiant=u.id 
-                AND i.idcampus=c.id AND i.idcycle = cy.id" ;
+                AND i.idcampus=c.id AND i.idcycle = cy.id AND i.idcampus='".$_GET["idca"]."'" ;
 
 // $inscription = $DB->get_records('inscription', null, 'id');
 
@@ -271,7 +299,7 @@ foreach ($inscription as $key ){
 // var_dump($i);
 // var_dump($inscription);
 // die;
-
+$campus=$DB->get_records("campus");
 $templatecontext = (object)[
     'inscription' => array_values($inscription),
     // 'nb'=>array_values($tab),
@@ -279,9 +307,13 @@ $templatecontext = (object)[
     'inscriptionpayer'=> new moodle_url('/local/powerschool/paiement.php'),
     'affectercours'=> new moodle_url('/local/powerschool/inscription.php'),
     'suppins'=> new moodle_url('/local/powerschool/inscription.php'),
+    'idca'=>$_GET["idca"]
     // 'imprimer' => new moodle_url('/local/powerschool/imp.php'),
 ];
-
+$campuss=(object)[
+    'campus'=>array_values($campus),
+    'confpaie'=>new moodle_url('/local/powerschool/inscription.php'),
+];
 // $menu = (object)[
 //     'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
 //     'campus' => new moodle_url('/local/powerschool/campus.php'),
@@ -334,6 +366,9 @@ echo $OUTPUT->header();
 
 
 echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+echo '<div style="margin-top:80px";><wxcvbn</div>';
+echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
+
 $mform->display();
 
 

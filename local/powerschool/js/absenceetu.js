@@ -76,7 +76,7 @@ $(".salle1").change(function (e) {
     // alert(cycle);
     $.ajax({
         type: "post",
-        url: route+"/local/powerschool/classes/sallelefiltrereturetir1.php",
+        url: route+"/local/powerschool/classes/absenceetu.php",
         data: {cycle:cycle,specialite:specialite,salle:salle},
         success: function (respone) {
             // alert(respone)

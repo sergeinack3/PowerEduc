@@ -35,14 +35,56 @@ class programme extends moodleform {
     public function definition() {
         global $CFG;
         
-        global $USER;
+        global $USER,$DB;
         $campus = new campus();
         $cours = $specialite = $cycle =  array();
+
+        $tarspecialcat=array();
+$camp=$DB->get_records("campus",array("id"=>$_GET["idca"]));
+foreach ($camp as $key => $value) {
+    # code...
+}
+$categ=$DB->get_records("course_categories",array("name"=>$value->libellecampus));
+foreach ($categ as $key => $value1categ) {
+    # code...
+}
+// $filiere = $DB->get_records('filiere', array("idcampus"=>$_GET["idca"]));
+
+$catfill=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=2");
+$catspecia=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=3");
+foreach($catfill as $key => $valfil)
+{
+    $fff=explode("/",$valfil->path);
+    $idca=array_search($value1categ->id,$fff);
+  if($idca!==false)
+  {
+    foreach($catspecia as $key => $vallssp)
+    {
+        $sss=explode("/",$vallssp->path);
+        $idfill=array_search($valfil->id,$sss);
+        if($idfill!==false)
+        {
+
+            // var_dump($vallssp->name);
+            array_push($tarspecialcat,$vallssp->name);
+        }
+    }
+    
+  }
+}
+$stringspecialitecat=implode("','",$tarspecialcat);
+// die;
+
+$sql8 = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite IN ('$stringspecialitecat')";
+
+// $specialites = $DB->get_records_sql($sql);
         
-       
-        $sql1 = "SELECT * FROM {course} ";
+        $sql9="SELECT u.id,firstname,lastname FROM {user} u,{coursspecialite} cs,{courssemestre} css,{affecterprof} af,{specialite} s,{filiere} f
+               WHERE cs.idspecialite=s.id AND css.idcoursspecialite=cs.id AND css.id=af.idcourssemestre AND s.idfiliere=f.id AND af.idprof=u.id AND f.idcampus='".$_GET["idca"]."'";
+        $sql1 = "SELECT c.id,fullname FROM {course} c,{coursspecialite} cs,{specialite} s,{filiere} f WHERE c.id=cs.idcourses 
+                 AND cs.idspecialite=s.id AND s.idfiliere=f.id AND idcampus='".$_GET["idca"]."'";
         $sql2 = "SELECT * FROM {semestre}";
-        $sql3 = "SELECT s.id,libellespecialite FROM {specialite} s,{filiere} f WHERE f.id=s.idfiliere AND idcampus='".$_GET["idca"]."'";
+        // $sql3 = "SELECT s.id,libellespecialite FROM {specialite} s,{filiere} f WHERE f.id=s.idfiliere AND idcampus='".$_GET["idca"]."'";
         $sql4 = "SELECT * FROM {cycle} WHERE idcampus='".$_GET["idca"]."'";
         $sql5 = "SELECT * FROM {anneescolaire} ";
         
@@ -52,11 +94,12 @@ class programme extends moodleform {
 
         $cours = $campus->select($sql1);
         $semestre = $campus->select($sql2);
-        $specialite = $campus->select($sql3);
+        $specialite = $campus->select($sql8);
         $cycle = $campus->select($sql4);
         $anneescoalire = $campus->select($sql5);
         $periode = $campus->select($sql6);
         $salle = $campus->select($sql7);
+        $profession = $campus->select($sql9);
         
 
 
@@ -95,6 +138,10 @@ class programme extends moodleform {
         foreach ($salle as $key => $val)
         {
             $selectsalle[$key] = $val->numerosalle;
+        }
+        foreach ($profession as $key => $prof)
+        {
+            $selectprofession[$key] = $prof->firstname."-".$prof->lastname;
         }
         
         // var_dump( $campus->selectcampus($sql)); 
@@ -137,6 +184,12 @@ class programme extends moodleform {
         $mform->setDefault('idsalle', '');        //Default value
         $mform->addRule('idsalle', 'Choix une salle', 'required', null, 'client');
         $mform->addHelpButton('idsalle', 'Salle');
+    
+        $mform->addElement('select', 'idprof', 'Profession', $selectprofession ); // Add elements to your form
+        $mform->setType('idprof', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idprof', '');        //Default value
+        $mform->addRule('idprof', 'Choix une salle', 'required', null, 'client');
+        $mform->addHelpButton('idprof', 'Salle');
 
         $mform->addElement('date_selector', 'datecours', 'Date du Cours' ); // Add elements to your form
         // $mform->setType('datecours', PARAM_TEXT);                   //Set type of element

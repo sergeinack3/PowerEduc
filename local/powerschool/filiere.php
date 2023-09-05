@@ -49,7 +49,7 @@ $mform=new filiere();
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/reglages.php', 'annuler');
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromform = $mform->get_data()) {
 
@@ -88,7 +88,7 @@ $recordtoinsert = $fromform;
     }
     // var_dump($value1->name);die;
     $DB->insert_record('filiere', $recordtoinsert);
-    redirect($CFG->wwwroot . '/course/editcategory.php?parent='.$value1->id.'&filiere='.$recordtoinsert->libellefiliere.'', 'Enregistrement effectué');
+    redirect($CFG->wwwroot . '/course/editcategory.php?parent='.$value1->id.'&filiere='.$recordtoinsert->libellefiliere.'&idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
     exit;
 } else {
     //  redirect($CFG->wwwroot . '/local/powerschool/filiere.php', 'Cette filiere excite');
@@ -98,10 +98,10 @@ $recordtoinsert = $fromform;
  
 }
 
-if($_GET['id']) {
+if($_GET['id'] && $_GET['idca']) {
 
-    $mform->supp_filiere($_GET['id']);
-    redirect($CFG->wwwroot . '/local/powerschool/filiere.php', 'Information Bien supprimée');
+    $mform->supp_filiere($_GET['id'],$_GET['idca'],$_GET['libelle']);
+    redirect($CFG->wwwroot . '/local/powerschool/filiere.php?idca='.$_GET['idca'].'', 'Information Bien supprimée');
         
 }
 
@@ -130,20 +130,45 @@ $categ=$DB->get_records("course_categories",array("name"=>$value->libellecampus)
 foreach ($categ as $key => $value1categ) {
     # code...
 }
-
 $filiere = $DB->get_records('filiere', array("idcampus"=>$_GET["idca"]));
-// $filierecat = $DB->get_records_sql('class="btn btn-primary ajou"SELECclass="btn btn-primary ajou"T ');
-if($_GET["idca"]!=null || $_GET["idca"]!=0)
+
+
+
+// die;
+$tarfilierecat=array();
+
+
+if(!empty($_GET["idca"]))
 {
     // $_GET["idca"]
-    // var_dump("kl",$_GET["idca"]);
     // die;
-    $filierecat = $DB->get_records_sql('SELECT * FROM {filiere} WHERE idcampus='.$_GET["idca"].' AND libellefiliere NOT IN (SELECT name FROM {course_categories} WHERE depth=2)');
-    $filierecat1 = $DB->get_records_sql('SELECT * FROM {filiere} WHERE idcampus='.$_GET["idca"].' AND libellefiliere IN (SELECT name FROM {course_categories} WHERE depth=2)');
+   
+    $catfill=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=2");
+    foreach($catfill as $key => $valfil)
+    {
+        $fff=explode("/",$valfil->path);
+        $idca=array_search($value1categ->id,$fff);
+      if($idca!==false)
+      {
+
+        array_push($tarfilierecat,$valfil->name);
+    }
+    
+}
+    $stringfilierecat=implode("','",$tarfilierecat);
+    // var_dump($stringfilierecat);
+    // die;
+    $filierecat = $DB->get_records_sql("SELECT * FROM {filiere} WHERE idcampus ='".$_GET["idca"]."' AND libellefiliere NOT IN ('$stringfilierecat')");
+    // var_dump($filierecat);
+    // die;
+    
+    $filierecat1 = $DB->get_records_sql("SELECT * FROM {filiere} WHERE idcampus ='".$_GET["idca"]."' AND libellefiliere IN ('$stringfilierecat')");
 }else
 {
     $filierecat[]="";
     $filierecat1[]="";
+    // $tarfilierecat[]="";
+    // $tarfilierecat1[]="";
 }
 // var_dump($filierecat);die;
 $campus=$DB->get_records("campus");
@@ -159,8 +184,8 @@ $vericam=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} t
                     <tr>
                         <td style="font-size:17px;font-weight:700;"><input type="checkbox" name="filiere[]" class="checkboxItem" value="Economique et sociale">Economique et sociale</td>
                         <td style="font-size:17px;font-weight:700;"><input type="checkbox" name="filiere[]" class="checkboxItem" value="Scientifique">Scientifique</td>
-                        <td style="font-size:17px;font-weight:700;"><input type="checkbox" name="filiere[]" class="checkboxItem" value="Littéraire ">Littéraire </td>
-                        <td style="font-size:17px;font-weight:700;"><input type="checkbox" name="filiere[]" class="checkboxItem" value="Sciences et Technologies du Management et de la Gestion ">Sciences et Technologies du Management et de la Gestion </td>
+                        <td style="font-size:17px;font-weight:700;"><input type="checkbox" name="filiere[]" class="checkboxItem" value="Littéraire">Littéraire </td>
+                        <td style="font-size:17px;font-weight:700;"><input type="checkbox" name="filiere[]" class="checkboxItem" value="Sciences et Technologies du Management et de la Gestion">Sciences et Technologies du Management et de la Gestion </td>
                     </tr>';
                 }else if($ver->libelletype=="primaire")
                 {
@@ -172,6 +197,7 @@ $vericam=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} t
                     </tr>';
                 }
             }
+            // var_dump(urldecode($_GET["filiere"]));die;
 $templatecontext = (object)[
     'filiere' => array_values($filierecat1),
     'filierecat' => array_values($filierecat),
@@ -185,8 +211,9 @@ $templatecontext = (object)[
     'cattfiliere' => new moodle_url('/local/powerschool/filiere.php'),
     'root'=>$CFG->wwwroot,
     'idca'=>$_GET["idca"],
-    'filiereca'=>$_GET["filiere"],
+    'filiereca'=>urlencode($_GET["filiere"]),
     'category'=>$value1categ->id,
+    'categorychoi'=>"la categorie choisie est ".$_GET["filiere"]."",
 
 ];
 
@@ -237,15 +264,17 @@ $campuss=(object)[
             ]; 
 
 echo $OUTPUT->header();
-
-
-// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
-echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
-
-$mform->display();
-
-
-echo $OUTPUT->render_from_template('local_powerschool/filiere', $templatecontext);
+// if($_GET["filiere"]!=null || $_GET["filiere"]!=0)
+// {
+    // }
+    // echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
+    echo $OUTPUT->render_from_template('local_powerschool/campustou', $campuss);
+    
+    $mform->display();
+    
+    
+    echo $OUTPUT->render_from_template('local_powerschool/filiere', $templatecontext);
+    
 
 
 echo $OUTPUT->footer();

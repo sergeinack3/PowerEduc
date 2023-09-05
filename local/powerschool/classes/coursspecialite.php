@@ -35,7 +35,46 @@ class coursspecialite extends moodleform {
     public function definition() {
         global $CFG;
         
-        global $USER;
+        global $USER,$DB;
+
+        $tarspecialcat=array();
+        $camp=$DB->get_records("campus",array("id"=>$_GET["idca"]));
+        foreach ($camp as $key => $value) {
+            # code...
+        }
+        $categ=$DB->get_records("course_categories",array("name"=>$value->libellecampus));
+        foreach ($categ as $key => $value1categ) {
+            # code...
+        }
+        // $filiere = $DB->get_records('filiere', array("idcampus"=>$_GET["idca"]));
+        
+        $catfill=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=2");
+        $catspecia=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=3");
+        foreach($catfill as $key => $valfil)
+        {
+            $fff=explode("/",$valfil->path);
+            $idca=array_search($value1categ->id,$fff);
+          if($idca!==false)
+          {
+            foreach($catspecia as $key => $vallssp)
+            {
+                $sss=explode("/",$vallssp->path);
+                $idfill=array_search($valfil->id,$sss);
+                if($idfill!==false)
+                {
+        
+                    // var_dump($vallssp->name);
+                    array_push($tarspecialcat,$vallssp->name);
+                }
+            }
+            
+          }
+        }
+        $stringspecialitecat=implode("','",$tarspecialcat);
+        // die;
+        
+        $sql8 = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite IN ('$stringspecialitecat')";
+        
         $campus = new campus();
         $cours = $specialite = $cycle =  array();
         $sql1 = "SELECT * FROM {course} ";
@@ -45,8 +84,9 @@ class coursspecialite extends moodleform {
         
         
         $cours = $campus->select($sql1);
-        $specialite = $campus->select($sql2);
+        $specialite = $campus->select($sql8);
         $campuss = $campus->select($sql4);
+        $annnee=$DB->get_records("anneescolaire");
         foreach($campuss as $key => $ca)
         {}
         
@@ -74,6 +114,11 @@ class coursspecialite extends moodleform {
         {
             $selectcycle[$key] = $val->libellecycle." ( ".$val->nombreannee." ans )";
         }
+        foreach ($annnee as $key => $val)
+        {
+            $selectannee[$key] = date('Y',$val->datedebut)." - ".date('Y',$val->datefin);
+
+        }
         // var_dump( $campus->selectcampus($sql)); 
         // die;
         // $mform->addElement('select', 'idcourses', 'courses', $selectcours ); // Add elements to your form
@@ -93,6 +138,12 @@ class coursspecialite extends moodleform {
         $mform->setDefault('idcycle', '');        //Default value
         $mform->addRule('idcycle', 'Choix du cycle', 'required', null, 'client');
         $mform->addHelpButton('idcycle', 'cycle');
+        
+        $mform->addElement('select', 'idanneescolaire', 'Année Scolaire', $selectannee ); // Add elements to your form
+        $mform->setType('idanneescolaire', PARAM_TEXT);                   //Set type of element
+        $mform->setDefault('idanneescolaire', '');        //Default value
+        $mform->addRule('idanneescolaire', 'Choix du cycle', 'required', null, 'client');
+        $mform->addHelpButton('idanneescolaire', 'cycle');
 
         // $mform->addElement('text', 'credit',"Credit ou Coef"); // Add elements to your form
         // $mform->setType('credit', PARAM_INT);                   //Set type of element

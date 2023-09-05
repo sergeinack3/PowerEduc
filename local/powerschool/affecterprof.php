@@ -177,8 +177,45 @@ if($_GET['id']) {
 $sql="SELECT us.id as userid,firstname,lastname FROM {user} as us,{role_assignments} WHERE us.id=userid AND roleid=3";
 $professeur=$DB->get_records_sql($sql);
 //specialite
-$sql="SELECT sp.id,libellespecialite FROM {specialite} sp,{filiere} f WHERE sp.idfiliere=f.id AND idcampus='".$_GET["idca"]."'";
-$specialite=$DB->get_records_sql($sql);
+$tarspecialcat=array();
+        $camp=$DB->get_records("campus",array("id"=>$_GET["idca"]));
+        foreach ($camp as $key => $value) {
+            # code...
+        }
+        $categ=$DB->get_records("course_categories",array("name"=>$value->libellecampus));
+        foreach ($categ as $key => $value1categ) {
+            # code...
+        }
+        // $filiere = $DB->get_records('filiere', array("idcampus"=>$_GET["idca"]));
+        
+        $catfill=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=2");
+        $catspecia=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=3");
+        foreach($catfill as $key => $valfil)
+        {
+            $fff=explode("/",$valfil->path);
+            $idca=array_search($value1categ->id,$fff);
+          if($idca!==false)
+          {
+            foreach($catspecia as $key => $vallssp)
+            {
+                $sss=explode("/",$vallssp->path);
+                $idfill=array_search($valfil->id,$sss);
+                if($idfill!==false)
+                {
+        
+                    // var_dump($vallssp->name);
+                    array_push($tarspecialcat,$vallssp->name);
+                }
+            }
+            
+          }
+        }
+        $stringspecialitecat=implode("','",$tarspecialcat);
+        // die;
+        
+        $sql8 = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite IN ('$stringspecialitecat')";
+// $sql="SELECT sp.id,libellespecialite FROM {specialite} sp,{filiere} f WHERE sp.idfiliere=f.id AND idcampus='".$_GET["idca"]."'";
+$specialite=$DB->get_records_sql($sql8);
 
 $sql1="SELECT * FROM {salle} WHERE idcampus='".$_GET["idca"]."'";
 $salle=$DB->get_records_sql($sql1);

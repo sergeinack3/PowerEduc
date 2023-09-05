@@ -109,7 +109,7 @@ $(document).ready(function(){
             .get()
             .join(",");
 
-            alert( idetudiants)
+            // alert( idetudiants)
         var redirectionUrl =
             $("#autoRedirectForm").attr("action") + "?idetu=" + idetudiants;
         window.location.href = redirectionUrl;
