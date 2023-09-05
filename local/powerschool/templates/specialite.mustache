@@ -53,9 +53,9 @@
     <button class="btn btn-primary ajou  mt-5">ajouter</button>
   </div>
   <div class="col-6 mt-5">
-    <label>Choisir la categorie</label>
+    <label>La categorie choisie {{specialitec}}</label>
     <select name="specialitecat" onchange="if (this.value) location.href=this.value;" class="form-control col-3 filiere">
-    <option value=""></option>
+    <option value="">Choisir la categorie</option>
     {{#specialitecat}}
     <option value="{{specialitecate}}?idca={{idca}}&specialite={{libellespecialite}}&idsp={{idsp}}&idfi={{idfi}}">{{libellespecialite}}</option>
     {{/specialitecat}}
@@ -123,7 +123,7 @@
                     <td>{{libellefiliere}} ({{abreviationfiliere}})  </td>
                     <td>
                         <input type="button" class="btn btn-primary" value="modifier" onclick="location.href='{{specialiteedit}}?id={{id}}&idca={{idca}}'">
-                        <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{specialitesupp}}?id={{id}}'">
+                        <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{specialitesupp}}?id={{id}}&idca={{idca}}'">
                     </td>
                 </tr>
             </tbody>

@@ -1,9 +1,9 @@
-alert("rrr")
+// alert("rrr")
 $(".campus1").change(function (e) { 
     e.preventDefault();
     var route=$(".roote").val();
     var campus=$(this).val();
-    alert(campus);
+    // alert(campus);
     $.ajax({
         type: "post",
         url: route+"/local/powerschool/classes/statistiquefiltre1.php",
@@ -20,7 +20,7 @@ $(".filiere1").change(function (e) {
     e.preventDefault();
     var route=$(".roote").val();
     var filiere=$(this).val();
-    alert(filiere);
+    // alert(filiere);
     $.ajax({
         type: "post",
         url: route+"/local/powerschool/classes/bulletinfilitre.php",

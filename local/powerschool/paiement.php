@@ -50,7 +50,7 @@ $mform=new paiement();
 if ($mform->is_cancelled()) {
     // var_dump("fgfg");die;
 
-    redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/inscription.php', 'annuler');
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -75,34 +75,75 @@ if($cam->libelletype=="universite"){
 }
 $filiercycltr = $DB->get_records_sql($sql1);
 
-// var_dump($filiercycltr,$_POST["idfi"],$_POST["idsp"],$_POST["idtranc"]);
+// var_dump($cam->libellecampus,$filiercycltr,$_POST["idfi"],$_POST["idsp"],$_POST["idtranc"]);
 // die;
-foreach ($filiercycltr as $key => $value) {
+    if($filiercycltr)
+    {
+        foreach ($filiercycltr as $key => $value) {
 
-    $sql3="SELECT idtranche, sum(montant) as mont FROM {paiement} WHERE idinscription='".$_POST["idinscription"]."' AND idtranche='".$_POST["idtranc"]."'";
-    $paieverie = $DB->get_records_sql($sql3);
-    foreach ($paieverie as $key => $value1) {
-                    // var_dump($value1->mont==$value->somme,$value->somme);
-                    // var_dump($value->somme,$value1->mont,$fromform->idtranc);die;
-                    if ($value->somme==$value1->mont) {
-                        \core\notification::add('Cet etudiant a déjà fini cette etape de la passion', \core\output\notification::NOTIFY_ERROR);
-                        redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST['idinscription'].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'');
-                    }else{
-                        $recordtoinsert->idmodepaie=$_POST["idmodepaie"];
-                        // var_dump($_POST["idmodepaie"]);die;
-                        $recordtoinsert->idinscription=$_POST["idinscription"];
-                        $recordtoinsert->usermodified=$_POST["usermodified"];
-                        $recordtoinsert->timecreated=$_POST["timecreated"];
-                        $recordtoinsert->timemodified=$_POST["timemodified"];
-                        $recordtoinsert->montant=$_POST["montant"];
-                        $recordtoinsert->idtranche=$_POST["idtranc"];
-                        // $DB->insert_record('paiement', $recordtoinsert);
-                        $DB->execute("INSERT INTO mdl_paiement VALUES(0,'".$recordtoinsert->idmodepaie."','".$recordtoinsert->idinscription."','".$recordtoinsert->usermodified."','".$recordtoinsert->timecreated."','". $recordtoinsert->timemodified."','".$recordtoinsert->montant."','".$recordtoinsert->idtranche."')");
-                        redirect($CFG->wwwroot . '/local/powerschool/paiement.php', 'Enregistrement effectué');
-                        exit;
+            $sql3="SELECT idtranche, sum(montant) as mont FROM {paiement} WHERE idinscription='".$_POST["idinscription"]."' AND idtranche='".$_POST["idtranc"]."'";
+            $paieverie = $DB->get_records_sql($sql3);
+            foreach ($paieverie as $key => $value1) {
+                            // var_dump($value1->mont==$value->somme,$value->somme);
+                            // var_dump($value->somme,$value1->mont,$fromform->idtranc);die;
+                        $reste=$value->somme-$value1->mont;
+                        // var_dump($reste);die;
+                            if ($value->somme==$value1->mont) {
+                                \core\notification::add('Cet etudiant a déjà fini cette etape de la passion', \core\output\notification::NOTIFY_ERROR);
+                                redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST['idinscription'].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'&idsp='.$_POST["idsp"].'');
+                            }else{
+                                $idtr=$_POST["idtranc"]-1;
+                                if($cam->libelletype=="universite"){
+
+                                    $sql1="SELECT * FROM {filierecycletranc} WHERE idfiliere='".$_POST["idfi"]."' AND idcycle='".$_POST["idcy"]."' AND idtranc='".$idtr."'";
+                                }else{
+                                    $sql1="SELECT * FROM {filierecycletranc} WHERE idfiliere='".$_POST["idfi"]."' AND idspecialite='".$_POST["idsp"]."' AND idtranc='".$idtr."'";
+                                
+                                }
+                                    $verifiliercycltr = $DB->get_records_sql($sql1);
+                                    $sql3="SELECT idtranche, sum(montant) as mont FROM {paiement} WHERE idinscription='".$_POST["idinscription"]."' AND idtranche='".$idtr."'";
+                                    $verifipaieverie = $DB->get_records_sql($sql3);
+
+                                    foreach ($verifiliercycltr as $key => $valuefilpa) {
+                                        # code...
+                                    }
+                                    foreach ($verifipaieverie as $key => $valuefspppa) {
+                                        # code...
+                                    }
+                                    if ($valuefilpa->somme==$valuefspppa->mont) {
+                                        if($_POST["montant"]<=$reste)
+                                        {
+                                                $recordtoinsert->idmodepaie=$_POST["idmodepaie"];
+                                                // var_dump($_POST["idmodepaie"]);die;
+                                                $recordtoinsert->idinscription=$_POST["idinscription"];
+                                                $recordtoinsert->usermodified=$_POST["usermodified"];
+                                                $recordtoinsert->timecreated=$_POST["timecreated"];
+                                                $recordtoinsert->timemodified=$_POST["timemodified"];
+                                                $recordtoinsert->montant=$_POST["montant"];
+                                                $recordtoinsert->idtranche=$_POST["idtranc"];
+                                                // $DB->insert_record('paiement', $recordtoinsert);
+                                                $DB->execute("INSERT INTO mdl_paiement VALUES(0,'".$recordtoinsert->idmodepaie."','".$recordtoinsert->idinscription."','".$recordtoinsert->usermodified."','".$recordtoinsert->timecreated."','". $recordtoinsert->timemodified."','".$recordtoinsert->montant."','".$recordtoinsert->idtranche."')");
+                                                redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST["idinscription"].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'&idsp='.$_POST["idsp"].'', 'Enregistrement effectué');
+                                                exit;
+                                        }
+                                        else{
+
+                                            \core\notification::add("La somme que avait entré est superieur au reste que apprenant doit payer qui est ".$reste, \core\output\notification::NOTIFY_ERROR);
+                                            redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST['idinscription'].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'&idsp='.$_POST["idsp"].'');
+                                        }
+                                    }else{
+
+                                        \core\notification::add("Cet apprenant doit d'abord fini la tranche precedent avant de continue", \core\output\notification::NOTIFY_ERROR);
+                                        redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST['idinscription'].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'&idsp='.$_POST["idsp"].'');
+                                    }
+                            }
+                        }
                     }
-                }
-            }
+     }
+     else{
+        \core\notification::add("Vous avez pas éffectué des configuration de paiement de cette specialite", \core\output\notification::NOTIFY_ERROR);
+        redirect($CFG->wwwroot . '/local/powerschool/paiement.php?idins='.$_POST["idinscription"].'&idfi='.$_POST['idfi'].'&idcy='.$_POST['idcy'].'&idca='.$_POST["idca"].'&idsp='.$_POST["idsp"].'');
+     }
  
 }else{
     // var_dump($_POST["idfi"]);die;
@@ -166,14 +207,29 @@ $menu = (object)[
 ];
 
 
-echo $OUTPUT->header();
+$veritran=$DB->get_records_sql("SELECT * FROM {tranche}");
+$verimode=$DB->get_records_sql("SELECT * FROM {modepaiement}");
+if(!$veritran || !$verimode)
+{
+    \core\notification::add("Soit vous avez pas enregistré le mode de paiement ou les tranche", \core\output\notification::NOTIFY_ERROR);
+    redirect($CFG->wwwroot . '/local/powerschool/inscription.php');
+}
+else{
 
 
-// echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
-$mform->display();
+    echo $OUTPUT->header();
 
 
-echo $OUTPUT->render_from_template('local_powerschool/paiement', $templatecontext);
+    // echo $OUTPUT->render_from_template('local_powerschool/navbar', $menu);
 
 
-echo $OUTPUT->footer();
+
+        $mform->display();
+
+
+
+    echo $OUTPUT->render_from_template('local_powerschool/paiement', $templatecontext);
+
+
+    echo $OUTPUT->footer();
+}

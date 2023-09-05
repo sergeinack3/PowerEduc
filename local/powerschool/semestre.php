@@ -35,8 +35,8 @@ $context = context_system::instance();
 
 $PAGE->set_url(new moodle_url('/local/powerschool/semestre.php'));
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_title('Enregistrer un semestre');
-$PAGE->set_heading('Enregistrer un semestre');
+$PAGE->set_title('Enregistrer les differentes parties de l\'année scolaire');
+$PAGE->set_heading('Enregistrer les differentes parties de l\'année scolaire');
 
 $PAGE->navbar->add(get_string('reglages', 'local_powerschool'),  new moodle_url('/local/powerschool/reglages.php'));
 $PAGE->navbar->add(get_string('semestre', 'local_powerschool'), $managementurl);
@@ -49,7 +49,7 @@ $mform=new semestre();
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/reglages.php', 'annuler');
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromform = $mform->get_data()) {
 

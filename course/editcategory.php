@@ -130,12 +130,13 @@ if ($mform->is_cancelled()) {
         // var_dump($_POST["filiere"]);die;
         $category = core_course_category::create($data, $mform->get_description_editor_options());
     }
-    if ($data->campus!=null) {
+    if ($_POST["campus"]!=null) {
       
        redirect($campusurl);
     }
     if ($_POST["filiere"]!=null) {
       
+        $filiereurl->param('idca',$_POST["idca"]);
        redirect($filiereurl);
     }
     if ($_POST["specialite"]!=null) {

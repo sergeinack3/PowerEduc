@@ -37,6 +37,39 @@ class filiere extends moodleform {
         global $USER,$DB;
         $mform = $this->_form; // Don't forget the underscore!
 
+
+        // var_dump($_GET["libelle"]);
+        // die;
+        $sqlfilc="SELECT * FROM {filiere} WHERE id='".$_GET["id"]."'";
+        $filcat=$DB->get_records_sql($sqlfilc);
+        foreach($filcat as $key =>$vaaalca)
+        {
+
+        }
+        $sqlcampcat = "SELECT * FROM {campus} WHERE id='".$vaaalca->id."'";
+        $campcat=$DB->get_records_sql($sqlcampcat);
+        foreach($campcat as $key =>$vlca)
+        {
+
+        }
+        $categcampus=$DB->get_records("course_categories",array("name"=>$vlca->libellecampus,"depth"=>1));
+        $categfiliere=$DB->get_records("course_categories",array("name"=>$_GET["libelle"],"depth"=>2));
+        foreach($categcampus as $key =>$camps)
+        {}
+        foreach($categfiliere as $key =>$filie)
+        {
+            $fff=explode("/",$filie->path);
+            $idca=array_search($camps->id,$fff);
+
+            if($idca!==false)
+            {
+                $idficat=$filie->id;
+
+                // var_dump($idficat);die;
+            }
+        }
+
+
         $sql = "SELECT * FROM {campus} ";
         $camp = $DB->get_records_sql($sql);
 
@@ -72,7 +105,7 @@ class filiere extends moodleform {
         $mform->addElement('hidden', 'usermodified'); // Add elements to your form
         $mform->setType('usermodified', PARAM_INT);                   //Set type of element
         $mform->setDefault('usermodified', $USER->id);        //Default value
-
+       
         $mform->addElement('hidden', 'timecreated', 'date de creation'); // Add elements to your form
         $mform->setType('timecreated', PARAM_INT);                   //Set type of element
         $mform->setDefault('timecreated', time());        //Default value
@@ -80,6 +113,11 @@ class filiere extends moodleform {
         $mform->addElement('hidden', 'timemodified', 'date de modification'); // Add elements to your form
         $mform->setType('timemodified', PARAM_INT);                   //Set type of element
         $mform->setDefault('timemodified', time());        //Default value
+
+        $mform->addElement('hidden', 'idcatfil'); // Add elements to your form
+        $mform->setType('idcatfil', PARAM_INT);                   //Set type of element
+        $mform->setDefault('idcatfil', $idficat);        //Default value
+
 
 
         $this->add_action_buttons();
@@ -94,7 +132,7 @@ class filiere extends moodleform {
      * @param string $datedebut la date de debut de l'annee
      * @param string $datefin date de fin de l'annee 
      */
-    public function update_filiere(int $id, string $libellefiliere,string $abreviationfiliere,$idcampus): bool
+    public function update_filiere(int $id, string $libellefiliere,string $abreviationfiliere,$idcampus,$idficat): bool
     {
         global $DB;
         global $USER;
@@ -106,6 +144,11 @@ class filiere extends moodleform {
         $object->usermodified = $USER->id;
         $object->timemodified = time();
 
+        $objectcat=new stdClass();
+        $objectcat->id=$idficat;
+        $objectcat->name=$libellefiliere;
+        $objectcat->timemodified = time();
+        $DB->update_record('course_categories', $objectcat);
         return $DB->update_record('filiere', $object);
     }
 
@@ -133,10 +176,40 @@ class filiere extends moodleform {
     /** pour supprimer une annéee scolaire
      * @param $id c'est l'id  de l'année à supprimer
      */
-    public function supp_filiere(int $id)
+    public function supp_filiere($id,$idca,$libelle)
     {
         global $DB;
+        // var_dump($idca,$libelle);die;
+        $sqlfilc="SELECT * FROM {filiere} WHERE id='".$idca."'";
+        $filcat=$DB->get_records_sql($sqlfilc);
+        foreach($filcat as $key =>$vaaalca)
+        {
+
+        }
+        $sqlcampcat = "SELECT * FROM {campus} WHERE id='".$vaaalca->id."'";
+        $campcat=$DB->get_records_sql($sqlcampcat);
+        foreach($campcat as $key =>$vlca)
+        {
+
+        }
+        $categcampus=$DB->get_records("course_categories",array("name"=>$vlca->libellecampus,"depth"=>1));
+        $categfiliere=$DB->get_records("course_categories",array("name"=>$libelle,"depth"=>2));
+        foreach($categcampus as $key =>$camps)
+        {}
+        foreach($categfiliere as $key =>$filie)
+        {
+            $fff=explode("/",$filie->path);
+            $idca=array_search($camps->id,$fff);
+
+            if($idca!==false)
+            {
+                $idficat=$filie->id;
+
+                // var_dump($idficat);die;
+            }
+        }
         $transaction = $DB->start_delegated_transaction();
+        $suppfiliere = $DB->delete_records('course_categories', ['id'=> $idficat]);
         $suppfiliere = $DB->delete_records('filiere', ['id'=> $id]);
         if ($suppfiliere){
             $DB->commit_delegated_transaction($transaction);

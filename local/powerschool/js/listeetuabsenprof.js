@@ -25,7 +25,7 @@ $(document).ready(function(){
         // alert(cycle);
         $.ajax({
             type: "post",
-            url: route+"/local/powerschool/classes/affecterproffiltrercour.php",
+            url: route+"/local/powerschool/classes/coursabsence.php",
             data: {cycle:cycle,specialite:specialite},
             success: function (respone) {
                 // alert(respone)
@@ -39,7 +39,7 @@ $(document).ready(function(){
         var specialite=$(".specialite").val();
         var cycle=$(".cycle").val();
         var cours=$(this).val();
-        // alert(cours);
+        alert(cours);
         $.ajax({
             type: "post",
             url: route+"/local/powerschool/classes/affecterproffiltrersemes.php",
@@ -47,6 +47,24 @@ $(document).ready(function(){
             success: function (respone) {
                 // alert(respone)
                 $(".semestre").html(respone);
+            }
+        });
+    });
+    $(".semestre").change(function (e) { 
+        e.preventDefault();
+        var route=$(".roote").val();
+        var specialite=$(".specialite").val();
+        var cycle=$(".cycle").val();
+        var cours=$(".cours").val();
+        var semestre=$(this).val();
+        // alert("f");
+        $.ajax({
+            type: "post",
+            url: route+"/local/powerschool/classes/listeetuabsenadmin.php",
+            data: {cycle:cycle,specialite:specialite,cours:cours,semestre:semestre},
+            success: function (respone) {
+                // console.log(respone)
+                $(".tableabs").html(respone);
             }
         });
     });

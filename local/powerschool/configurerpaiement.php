@@ -49,7 +49,7 @@ $mform=new configurerpaiement();
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/configurationmini.php', 'annuler');
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
@@ -61,18 +61,71 @@ $recordtoinsert->idcycle=(int)$_POST["idcycle"];
 $recordtoinsert->idtranc=(int)$_POST["idtranc"];
 $recordtoinsert->somme=(int)$_POST["somme"];
 $recordtoinsert->idspecialite=(int)$_POST["idspecialite"];
+$recordtoinsert->idannee=(int)$_POST["idannee"];
 // $recordtoinsert->datelimite=$_POST["datelimite"];
 
-    // var_dump($recordtoinsert->idtranc,$recordtoinsert->somme,$recordtoinsert->idfiliere,$_POST["idfiliere"],$_POST["idtranc"]);
+    // var_dump($_POST["idannee"],$recordtoinsert->idtranc,$recordtoinsert->somme,$recordtoinsert->idfiliere,$_POST["idfiliere"],$_POST["idtranc"]);
     // die;
     $ggg=$_POST["datelimite"];
-   
     $recordtoinsert->datelimite= strtotime($ggg["day"]."-".$ggg["month"]."-".$ggg["year"]);
-    //    var_dump(strtotime($_POST["datelimite"]));die;
-       $ff=$DB->insert_record('filierecycletranc', $recordtoinsert);
+    $datelimite = date("Y-m-d", $recordtoinsert->datelimite);
 
-       redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
-       exit;
+    $veran=$DB->get_records_sql("SELECT * FROM {anneescolaire} WHERE id='".$_POST["idannee"]."' AND $recordtoinsert->datelimite BETWEEN datedebut AND datefin");
+    $sqlverifildate=$DB->get_records_sql("SELECT * FROM {filierecycletranc} WHERE DATE(FROM_UNIXTIME(datelimite))='$datelimite' AND idannee='".$_POST["idannee"]."'");
+    //    var_dump($sqlverifil);die;
+    
+
+    $vercampus=$DB->get_records_sql("SELECT * FROM {campus} c,{typecampus} t WHERE c.idtypecampus=t.id AND c.id='".$_POST["idcampus"]."'");
+    foreach($vercampus as $key =>$valllcam)
+    {}
+    if($valllcam->libelletype=="universite")
+    {
+        $sqlverifil=$DB->get_records_sql("SELECT * FROM {filierecycletranc} WHERE idcycle='".$_POST["idcycle"]."' AND idfiliere='".$_POST["idfiliere"]."' AND idtranc='".$_POST["idtranc"]."' AND idannee='".$_POST["idannee"]."'");
+    }
+    else{
+       $verspfil=$DB->get_records("specialite",array("id"=>$_POST["idspecialite"],"idfiliere"=>$_POST["idfiliere"]));
+       if($verspfil)
+       {
+
+           $sqlverifil=$DB->get_records_sql("SELECT * FROM {filierecycletranc} WHERE idspecialite='".$_POST["idspecialite"]."' AND idfiliere='".$_POST["idfiliere"]."' AND idtranc='".$_POST["idtranc"]."' AND idannee='".$_POST["idannee"]."'");
+       }else
+       {
+        \core\notification::add('Cette specialite n\'appartient pas à cette filiere', \core\output\notification::NOTIFY_ERROR);
+        redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php?idca='.$_POST["idcampus"].'');
+        
+       }
+
+    }
+    if(!$sqlverifil)
+    {
+        if(!$sqlverifildate)
+         {
+
+             if($veran)
+             {
+                 $ff=$DB->insert_record('filierecycletranc', $recordtoinsert);
+         
+                 redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php?idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
+                 exit;
+                 
+             }else
+             {
+                 \core\notification::add('Entrée une date dans année scolaire', \core\output\notification::NOTIFY_ERROR);
+                 redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php?idca='.$_POST["idcampus"].'');
+                 
+                }
+            }else
+            {
+             \core\notification::add('Cette date est déjà utilisé', \core\output\notification::NOTIFY_ERROR);
+             redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php?idca='.$_POST["idcampus"].'');
+
+           }
+    }else
+    {
+        \core\notification::add('Vous avez déjà fait déjà une configuration similaire', \core\output\notification::NOTIFY_ERROR);
+        redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php?idca='.$_POST["idcampus"].'');
+
+    }
 //     $fromform = $mform->get_data();
 //     var_dump("rien",$_POST["idfiliere"]);die;
 // var_dump("cvbn");die;
@@ -83,7 +136,7 @@ $recordtoinsert->idspecialite=(int)$_POST["idspecialite"];
 if($_GET['id']) {
 
     $mform->supp_configpaie($_GET['id']);
-    redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php', 'Information Bien supprimée');
+    redirect($CFG->wwwroot . '/local/powerschool/configurerpaiement.php?idca='.$_GET["idca"].'', 'Information Bien supprimée');
         
 }
 
@@ -104,7 +157,7 @@ if($rol->libelletype=="universite")
       conf.idfiliere=f.id AND conf.idtranc=t.id AND conf.idspecialite=sp.id AND f.idcampus='".$_GET["idca"]."'";
 }
 $configurer = $DB->get_records_sql($sql);
-// var_dump($configurer);die;
+// var_dump($_GET["idca"],$configurer);die;
 foreach($configurer as $key =>$vaconf)
 {
    $dated=date("d-m-Y",$vaconf->datelimite);
@@ -114,6 +167,7 @@ $templatecontext = (object)[
     'configurer' => array_values($configurer),
     'configedit' => new moodle_url('/local/powerschool/configurerpaiementedit.php'),
     'configsupp'=> new moodle_url('/local/powerschool/configurerpaiement.php'),
+    'idca'=>$_GET["idca"]
 ];
 
 // $menu = (object)[

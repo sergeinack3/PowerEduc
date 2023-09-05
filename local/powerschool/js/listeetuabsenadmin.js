@@ -50,4 +50,22 @@ $(document).ready(function(){
             }
         });
     });
+    $(".semestre").change(function (e) { 
+        e.preventDefault();
+        var route=$(".roote").val();
+        var specialite=$(".specialite").val();
+        var cycle=$(".cycle").val();
+        var cours=$(".cours").val();
+        var semestre=$(this).val();
+        // alert(semestre);
+        $.ajax({
+            type: "post",
+            url: route+"/local/powerschool/classes/listeetuabsenadmin.php",
+            data: {cycle:cycle,specialite:specialite,cours:cours,semestre:semestre},
+            success: function (respone) {
+                // console.log(respone)
+                $(".tableabs").html(respone);
+            }
+        });
+    });
 });

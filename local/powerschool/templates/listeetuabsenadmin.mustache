@@ -31,14 +31,14 @@
         <h1>{{affec}}</h1>
       <form location.href='{{courssemestre}}' method="post">
         <div class="d-flex justify-content-around">
-          <div class="col-2">
+          <!--<div class="col-2">
               <label>Choisir professeur</label>
               <select class="form-control professeur" name="professeur">
               {{#professeur}}
                 <option value="{{userid}}">{{firstname}}-{{lastname}}</option>
               {{/professeur}}
               </select>
-          </div>
+          </div>-->
           <div class="col-2">
               <label>Choisir Specialite</label>
               <select class="form-control specialite" name="specialite">
@@ -68,19 +68,19 @@
               <select class="form-control semestre" name="semestre">
               </select>
           </div>
-          <div class="col-2">
+         <!-- <div class="col-2">
               <label>Choisir Salle</label>
               <select class="form-control salle" name="salle">
                   {{#sallee}}
                     <option value="{{id}}">{{numerosalle}}</option>
                   {{/sallee}}
               </select>
-          </div>
+          </div>-->
         </div>
         <input type="hidden" value="{{idca}}" name="idcampus">
-          <div class="ms-4">
+         <!--<div class="ms-4">
               <button class="btn btn-primary btn-lg col-2 text-center mt-3" id="btn-recherche">Enregistrer</button>
-          </div>
+          </div>-->
       </form>
        <!--<div class="d-flex flex-wrap align-items-center mt-5">
           <div class="form-group fitem">  
@@ -92,33 +92,23 @@
                     <thead>
                       <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Professeurs</th>
-                        <th scope="col">Cours & Specialite</th>
-                        <th scope="col">Salle</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Date de cours</th>
+                        <th scope="col">Nom des professeurs</th>
+                        <th scope="col">Nom de cours</th>
+                        <th scope="col">Année academie</th>
                       </tr>
                     </thead>
-                    {{#affecterprof}}
-                    <tbody>
-                      <tr>
-                        
-                            <th scope="row">{{id}} </th>
-                            <td>{{lastname}}-{{firstname}} </td>
-                            <td>{{fullname}}-{{libellecycle}}-{{libellespecialite}}-{{libellesemestre}} </td>
-                            <td>{{numerosalle}} </td>
-                            <td>
-                               <!-- <input type="button" class="btn btn-primary" value="modifier" onclick="location.href='{{affecterprofedit}}?id={{idaffe}}&idca={{idca}}'">-->
-                                <input type="button" class="btn btn-danger local_annee_delete_button" value="supprimer" onclick="location.href='{{affecterprofsupp}}?id={{idaffe}}'">
-                            </td>
-                        </tr>
+                    <tbody class="tableabs">
+                      
                     </tbody>
                     
-                    {{/affecterprof}}
                   </table>
         </div>
           <input type="hidden" value="{{root}}" class="roote"/>
         <hr>
     <script src="{{wwwroot}}/moodle1/local/powerschool/js/jquery.js"></script>
-    <script src="{{wwwroot}}/moodle1/local/powerschool/js/affecterprofe.js"></script>
+    <script src="{{wwwroot}}/moodle1/local/powerschool/js/listeetuabsenadmin.js"></script>
     </body>
   </html>

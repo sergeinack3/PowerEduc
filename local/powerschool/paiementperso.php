@@ -214,6 +214,8 @@ $menu = (object)[
     'programme' => new moodle_url('/local/powerschool/programmeperso.php'),
     'paiement' => new moodle_url('/local/powerschool/paiementperso.php'),
     'note' => new moodle_url('/local/powerschool/bulletinnoteperso.php'),
+    'absence' => new moodle_url('/local/powerschool/listeetuabsenetu.php'),
+
 
 ];
 echo $OUTPUT->header();

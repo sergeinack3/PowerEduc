@@ -68,7 +68,12 @@ if ($mform->is_cancelled()) {
             $recordtoinsert->idcycle=$_POST["idcycle"];
             $recordtoinsert->idspecialite=$_POST["idspecialite"];
             $recordtoinsert->credit=$_POST["credit"];
+            $recordtoinsert->idanneescolaire=$_POST["idanneescolaire"];
 
+            // var_dump($recordtoinsert->idanneescolaire);die;
+            $recordtoinsert->idcourses=0;
+
+            // var_dump($_POST["idspecialite"]);die;
             $cycle=$DB->get_records("cycle",array("id"=>$_POST["idcycle"]));
             foreach ($cycle as $key => $valuecycl) {
                 # code...

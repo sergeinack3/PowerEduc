@@ -34,7 +34,58 @@ class specialite extends moodleform {
     public function definition() {
         global $CFG;
         
-        global $USER;
+        global $USER,$DB;
+
+
+        $sqlspec="SELECT * FROM {specialite} WHERE id='".$_GET["id"]."'";
+        $speccat=$DB->get_records_sql($sqlspec);
+        foreach($speccat as $key =>$vaspelca)
+        {
+
+        }
+        $sqlfilc="SELECT * FROM {filiere} WHERE id='".$vaspelca->idfiliere."'";
+        $filcat=$DB->get_records_sql($sqlfilc);
+        foreach($filcat as $key =>$vaaalca)
+        {
+
+        }
+        $sqlcampcat = "SELECT * FROM {campus} WHERE id='".$vaaalca->id."'";
+        $campcat=$DB->get_records_sql($sqlcampcat);
+        foreach($campcat as $key =>$vlca)
+        {
+
+        }
+        $categcampus=$DB->get_records("course_categories",array("name"=>$vlca->libellecampus,"depth"=>1));
+        $categfiliere=$DB->get_records("course_categories",array("name"=>$filcat->libellespecialite,"depth"=>2));
+        $categspecialite=$DB->get_records("course_categories",array("name"=>$vaspelca->libellespecialite,"depth"=>3));
+        foreach($categcampus as $key =>$camps)
+        {}
+        foreach($categfiliere as $key =>$filie)
+        {
+            $fff=explode("/",$filie->path);
+            $idca=array_search($camps->id,$fff);
+
+            if($idca!==false)
+            {
+                $idficat=$filie->id;
+
+                // var_dump($idficat);die;
+            }
+        }
+        foreach($categspecialite as $key =>$specia)
+        {
+            $fff=explode("/",$specia->path);
+            $idca=array_search($camps->id,$fff);
+            $idfil=array_search($idficat,$fff);
+
+            if($idca!==false && $idfil!==false)
+            {
+                $idspcat=$specia->id;
+
+            }
+        }
+        // var_dump($idspcat);die;
+
 
         $reqq = new campus();
         $annee = array();
@@ -75,6 +126,10 @@ class specialite extends moodleform {
         $mform->addElement('hidden', 'timemodified', 'date de modification'); // Add elements to your form
         $mform->setType('timemodified', PARAM_INT);                   //Set type of element
         $mform->setDefault('timemodified', time());        //Default value
+       
+        $mform->addElement('hidden', 'idcatspe'); // Add elements to your form
+        $mform->setType('idcatspe', PARAM_INT);                   //Set type of element
+        $mform->setDefault('idcatspe', $idspcat);        //Default value
 
         foreach ($filiere as $key => $val)
         {
@@ -100,8 +155,9 @@ class specialite extends moodleform {
      * @param string $datedebut la date de debut de l'annee
      * @param string $datefin date de fin de l'annee 
      */
-    public function update_specialite(int $id, string $libellespecialite,string $abreviationspecialite,int $idfiliere): bool
+    public function update_specialite(int $id, string $libellespecialite,string $abreviationspecialite,int $idfiliere,$idspecia): bool
     {
+        // var_dump($idspecia);die;
         global $DB;
         global $USER;
         $object = new stdClass();
@@ -112,6 +168,11 @@ class specialite extends moodleform {
         $object->usermodified = $USER->id;
         $object->timemodified = time();
 
+        $objectcat=new stdClass();
+        $objectcat->id=$idspecia;
+        $objectcat->name=$libellespecialite;
+        $objectcat->timemodified = time();
+        $DB->update_record('course_categories', $objectcat);
         return $DB->update_record('specialite', $object);
     }
 
@@ -134,7 +195,56 @@ class specialite extends moodleform {
     public function supp_specialite(int $id)
     {
         global $DB;
+
+        $sqlspec="SELECT * FROM {specialite} WHERE id='".$id."'";
+        $speccat=$DB->get_records_sql($sqlspec);
+        foreach($speccat as $key =>$vaspelca)
+        {
+
+        }
+        $sqlfilc="SELECT * FROM {filiere} WHERE id='".$vaspelca->idfiliere."'";
+        $filcat=$DB->get_records_sql($sqlfilc);
+        foreach($filcat as $key =>$vaaalca)
+        {
+
+        }
+        $sqlcampcat = "SELECT * FROM {campus} WHERE id='".$vaaalca->id."'";
+        $campcat=$DB->get_records_sql($sqlcampcat);
+        foreach($campcat as $key =>$vlca)
+        {
+
+        }
+        $categcampus=$DB->get_records("course_categories",array("name"=>$vlca->libellecampus,"depth"=>1));
+        $categfiliere=$DB->get_records("course_categories",array("name"=>$filcat->libellespecialite,"depth"=>2));
+        $categspecialite=$DB->get_records("course_categories",array("name"=>$vaspelca->libellespecialite,"depth"=>3));
+        foreach($categcampus as $key =>$camps)
+        {}
+        foreach($categfiliere as $key =>$filie)
+        {
+            $fff=explode("/",$filie->path);
+            $idca=array_search($camps->id,$fff);
+
+            if($idca!==false)
+            {
+                $idficat=$filie->id;
+
+                // var_dump($idficat);die;
+            }
+        }
+        foreach($categspecialite as $key =>$specia)
+        {
+            $fff=explode("/",$specia->path);
+            $idca=array_search($camps->id,$fff);
+            $idfil=array_search($idficat,$fff);
+
+            if($idca!==false && $idfil!==false)
+            {
+                $idspcat=$specia->id;
+
+            }
+        }
         $transaction = $DB->start_delegated_transaction();
+        $DB->delete_records('course_categories', ['id'=> $idspcat]);
         $suppspecialite = $DB->delete_records('specialite', ['id'=> $id]);
         if ($suppspecialite){
             $DB->commit_delegated_transaction($transaction);

@@ -44,9 +44,12 @@ class core_course_editcategory_form extends moodleform {
         $categoryid = $this->_customdata['categoryid'];
         $parent = $this->_customdata['parent'];
         $campus=$_GET['campus'];
-        $filiere=$_GET['filiere'];
-        $specialite=$_GET['specialite'];
+        $filiere=urldecode($_GET['filiere']);
+        $specialite=urldecode($_GET['specialite']);
         $idca=$_GET['idca'];
+        $idcapo=$_POST['campus'];
+
+        // var_dump($idcapo);die;
         $cycle=$_GET['cycle'];
         $semestre=$_GET['semestre'];
         // var_dump($campus);die;
@@ -80,15 +83,33 @@ class core_course_editcategory_form extends moodleform {
 
             $mform->addElement('hidden',"filiere");
             $mform->setDefault('filiere',$filiere);
+            if($idca!=null || $idca !=0)
+            {
+                $mform->addElement('hidden',"idca");
+                $mform->setDefault('idca',$idca);
+            }else
+            {
+                $mform->addElement('hidden',"idca");
+                $mform->setDefault('idca',$idcapo);
 
+            }
         }
         if($specialite!=null)
         {
 
             $mform->addElement('hidden',"specialite");
             $mform->setDefault('specialite',$specialite);
-            $mform->addElement('hidden',"idca");
-            $mform->setDefault('idca',$idca);
+
+            if($idca!=null || $idca !=0)
+            {
+                $mform->addElement('hidden',"idca");
+                $mform->setDefault('idca',$idca);
+            }else
+            {
+                $mform->addElement('hidden',"idca");
+                $mform->setDefault('idca',$idcapo);
+
+            }
 
         }
         if($cycle!=null)
@@ -106,7 +127,7 @@ class core_course_editcategory_form extends moodleform {
             $mform->addElement('hidden',"semestre");
             $mform->setDefault('semestre',$semestre);
             $mform->addElement('hidden',"idca");
-            $mform->setDefault('idca',$idca);
+            $mform->setDefault('idca',$idcapo);
 
         }
         // var_dump($options);die;

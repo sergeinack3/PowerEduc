@@ -38,6 +38,43 @@ class configurerpaiement extends moodleform {
         global $USER,$DB;
         $mform = $this->_form; // Don't forget the underscore!
         $campus = new campus();
+        $tarspecialcat=array();
+        $camp=$DB->get_records("campus",array("id"=>$_GET["idca"]));
+        foreach ($camp as $key => $value) {
+            # code...
+        }
+        $categ=$DB->get_records("course_categories",array("name"=>$value->libellecampus));
+        foreach ($categ as $key => $value1categ) {
+            # code...
+        }
+        // $filiere = $DB->get_records('filiere', array("idcampus"=>$_GET["idca"]));
+        
+        $catfill=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=2");
+        $catspecia=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=3");
+        foreach($catfill as $key => $valfil)
+        {
+            $fff=explode("/",$valfil->path);
+            $idca=array_search($value1categ->id,$fff);
+          if($idca!==false)
+          {
+            foreach($catspecia as $key => $vallssp)
+            {
+                $sss=explode("/",$vallssp->path);
+                $idfill=array_search($valfil->id,$sss);
+                if($idfill!==false)
+                {
+        
+                    // var_dump($vallssp->name);
+                    array_push($tarspecialcat,$vallssp->name);
+                }
+            }
+            
+          }
+        }
+        $stringspecialitecat=implode("','",$tarspecialcat);
+        // die;
+        
+        $sql8 = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite IN ('$stringspecialitecat')";
         $cours = $specialite = $cycle =  array();
         $sql1 = "SELECT id,libellefiliere FROM {filiere} WHERE idcampus='".$_GET["idca"]."'";
         $sql3 = "SELECT * FROM {tranche} WHERE idcampus='".$_GET["idca"]."'";
@@ -51,9 +88,15 @@ class configurerpaiement extends moodleform {
         $tranche = $DB->get_recordset_sql($sql3);
         $cycle = $DB->get_recordset_sql($sql4);
         // var_dump($cycle);die;
-        $specialite = $DB->get_recordset_sql($sql6);
+        $specialite = $DB->get_recordset_sql($sql8);
 
+        $annee=$DB->get_records("anneescolaire");
 
+        foreach ($annee as $key => $val)
+        {
+            $selectannee[$key] = date('Y',$val->datedebut)." - ".date('Y',$val->datefin);
+
+        }
 
         $mform->addElement('header','configuration', 'Configuration');
 
@@ -126,6 +169,12 @@ class configurerpaiement extends moodleform {
         // $mform->setDefault('dateseance', '');        //Default value
         $mform->addRule('datelimite', ' date de cours ', 'required', null, 'client');
         $mform->addHelpButton('datelimite', 'datecours');
+       
+        $mform->addElement('select', 'idannee', 'Année Academique',$selectannee); // Add elements to your form
+        // $mform->setType('dateseance', PARAM_TEXT);                   //Set type of element
+        // $mform->setDefault('dateseance', '');        //Default value
+        $mform->addRule('idannee', 'Choisir l\'année academique', 'required', null, 'client');
+        $mform->addHelpButton('idannee', 'Choisir l\'année academique');
 
 
         $this->add_action_buttons();

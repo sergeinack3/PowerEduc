@@ -58,5 +58,6 @@ $string['indexprogramme'] = 'Calendrier de programme';
 $string['paiement'] = 'paiement';
 $string['listeetudiant'] = 'Liste des etudiants';
 $string['logo'] = 'Logo';
+$string['absenceetu'] = 'Gérer les absences des Apprenants';
 
 ?>

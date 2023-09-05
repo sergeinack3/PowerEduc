@@ -113,11 +113,11 @@ class campus extends moodleform {
         // $mform->setDefault('logocampus', '');        //Default value
         // $mform->addHelpButton('logocampus', 'Campus');
 
-        $mform->addElement('filemanager', 'logocampus', "Votre logo", null, array('accepted_types' => '*'));
-        // $mform->get_file_manager("");
-        $mform->addElement('hidden', 'usermodified'); // Add elements to your form
-        $mform->setType('usermodified', PARAM_INT);                   //Set type of element
-        $mform->setDefault('usermodified', $USER->id);        //Default value
+        // $mform->addElement('filemanager', 'logocampus', "Votre logo", null, array('accepted_types' => '*'));
+        // // $mform->get_file_manager("");
+        // $mform->addElement('hidden', 'usermodified'); // Add elements to your form
+        // $mform->setType('usermodified', PARAM_INT);                   //Set type of element
+        // $mform->setDefault('usermodified', $USER->id);        //Default value
         
 
         $mform->addElement('hidden', 'timecreated', 'date de creation'); // Add elements to your form
@@ -162,7 +162,21 @@ class campus extends moodleform {
         $object->timemodified = time();
 
 
+        $sqlcampcat = "SELECT * FROM {campus} WHERE id='".$id."'";
+        $campcat=$DB->get_records_sql($sqlcampcat);
+        foreach($campcat as $key =>$vlca)
+        {
 
+        }
+        $categcampus=$DB->get_records("course_categories",array("name"=>$vlca->libellecampus,"depth"=>1));
+        foreach($categcampus as $key =>$camps)
+        {}
+
+        $objectcat=new stdClass();
+        $objectcat->id=$camps->id;
+        $objectcat->name=$libellecampus;
+        $objectcat->timemodified = time();
+        $DB->update_record('course_categories', $objectcat);
         return $DB->update_record('campus', $object);
     }
 
@@ -196,7 +210,19 @@ class campus extends moodleform {
     public function supp_campus(int $id)
     {
         global $DB;
+
+        $sqlcampcat = "SELECT * FROM {campus} WHERE id='".$id."'";
+        $campcat=$DB->get_records_sql($sqlcampcat);
+        foreach($campcat as $key =>$vlca)
+        {
+
+        }
+        $categcampus=$DB->get_records("course_categories",array("name"=>$vlca->libellecampus,"depth"=>1));
+        foreach($categcampus as $key =>$camps)
+        {}
+
         $transaction = $DB->start_delegated_transaction();
+        $DB->delete_records('course_categories', ['id'=> $camps->id]);
         $suppcampus = $DB->delete_records('campus', ['id'=> $id]);
         if ($suppcampus){
             $DB->commit_delegated_transaction($transaction);

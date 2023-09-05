@@ -85,14 +85,14 @@ foreach($annee as $key =>$vala)
 
 // $mform->get_number_ofEtudiant($table);
 //cette statistique calcule les sommes des filieres en fonction de annéé
-$sqlfilann="SELECT * FROM {filiere}";
+$sqlfilann="SELECT * FROM {filiere} WHERE idcampus='".$_GET["campus"]."'";
 $filann=$DB->get_records_sql($sqlfilann);
 
 foreach($filann as $key => $fila)
 {
 $sqlanninsc="SELECT SUM(montant) entrees FROM {inscription} i,{specialite} sp ,{paiement} pa
              WHERE i.id=pa.idinscription AND i.idspecialite=sp.id AND idfiliere='".$fila->id."'
-             AND idanneescolaire='".$_GET["annee"]."'";
+             AND idanneescolaire='".$_GET["annee"]."' AND i.idcampus='".$_GET["idca"]."'";
 
   $annnesome=$DB->get_records_sql($sqlanninsc);
   foreach($annnesome as $key=>$somne)
@@ -1004,7 +1004,7 @@ $templatecontext = (object)[
     'countetuspe'=> json_encode($dataetu),
     'countetucy'=> json_encode($datacyetu),
     'cyclesomme'=> json_encode($datacy),
-    // 'filspecia'=> json_encode($datafilsp),
+    'filspecia'=> json_encode($datafilsp),
     "sppsometufilsp"=>json_encode($tarsppsometufilsp),
 
     "sppsometulibefilsp"=>json_encode($tarsppsometulibefilsp),
@@ -1013,7 +1013,6 @@ $templatecontext = (object)[
     "sommecycy"=>json_encode($sommecycy),
     "libellecycy"=>json_encode($libellecycy),
 
-
     'filcycle'=> json_encode($datafilcy),
     'annee'=> json_encode(extractMonths($vala->datedebut,$vala->datefin)),
 
@@ -1021,7 +1020,7 @@ $templatecontext = (object)[
     'libelspe'=>json_encode($specialite),
     
     //details etudiant
-    // 'datacyetudet'=>json_encode($datacyetudet),
+    'datacyetudet'=>json_encode($datacyetudet),
     'sommecyetudet'=>json_encode($sommecy),
     'libellecydetetu'=>json_encode($libellecy),
    

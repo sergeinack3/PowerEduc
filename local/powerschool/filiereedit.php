@@ -53,8 +53,8 @@ $recordtoinsert = new filiere();
 
     if($fromform->id) {
 
-        $recordtoinsert->update_filiere($fromform->id, $fromform->libellefiliere,$fromform->abreviationfiliere,$fromform->idcampus );
-        redirect($CFG->wwwroot . '/local/powerschool/filiere.php', 'Bien modifier');
+        $recordtoinsert->update_filiere($fromform->id, $fromform->libellefiliere,$fromform->abreviationfiliere,$fromform->idcampus,$fromform->idcatfil);
+        redirect($CFG->wwwroot . '/local/powerschool/filiere.php?idca='.$fromform->idcampus.'', 'Bien modifier');
         
     }
 

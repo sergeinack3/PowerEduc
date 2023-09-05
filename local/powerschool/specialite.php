@@ -49,7 +49,7 @@ $mform=new specialite();
 
 if ($mform->is_cancelled()) {
 
-    redirect($CFG->wwwroot . '/local/powerschool/index.php', 'annuler');
+    redirect($CFG->wwwroot . '/local/powerschool/reglages.php', 'annuler');
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromform = $mform->get_data()) {
 
@@ -64,17 +64,29 @@ $recordtoinsert->idfiliere=$_POST["idfiliere"];
       if(!$mform->verispecialite($_POST["libellespecialite"],$_POST["idfiliere"],1))
       {
 
-          $camp=$DB->get_records("filiere",array("id"=>$_POST["idfiliere"]));
-          foreach ($camp as $key => $value) {
+          $filiecat=$DB->get_records("filiere",array("id"=>$_POST["idfiliere"]));
+          foreach ($filiecat as $key => $value) {
               # code...
             }
+           $campus=$DB->get_records("campus",array("id"=>$value->idcampus));
+
+             foreach($campus as $key => $valcam)
+             {}
+            $categoriecampus=$DB->get_records("course_categories",array("name"=>$valcam->libellecampus,"depth"=>1));
+
+            foreach($categoriecampus as $key=> $valcatcam)
+            {}
             $categ=$DB->get_records("course_categories",array("name"=>$value->libellefiliere,"depth"=>2));
             foreach ($categ as $key => $value1) {
-                # code...
+                $fff=explode("/",$value1->path);
+                $idca=array_search($valcatcam->id,$fff);
+                if($idca!==false){
+                    $idfill=$value1->id;
+                }
             }
             // var_dump($recordtoinsert->libellespecialite);die;
             $idsp=$DB->insert_record('specialite', $recordtoinsert);
-            redirect($CFG->wwwroot . '/course/editcategory.php?parent='.$value1->id.'&specialite='.$recordtoinsert->libellespecialite.'&idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
+            redirect($CFG->wwwroot . '/course/editcategory.php?parent='.$idfill.'&specialite='.$recordtoinsert->libellespecialite.'&idca='.$_POST["idcampus"].'', 'Enregistrement effectué');
             //   \core\notification::add('Enregistrement effectué', \core\output\notification::NOTIFY_SUCCESS);
         //   exit;
         }else{
@@ -86,16 +98,51 @@ $recordtoinsert->idfiliere=$_POST["idfiliere"];
 if($_GET['id']) {
 
     $mform->supp_specialite($_GET['id']);
-    redirect($CFG->wwwroot . '/local/powerschool/specialite.php', 'Information Bien supprimée');
+    redirect($CFG->wwwroot . '/local/powerschool/specialite.php?idca='.$_GET["idca"].'', 'Information Bien supprimée');
         
 }
 
+$tarspecialcat=array();
+$camp=$DB->get_records("campus",array("id"=>$_GET["idca"]));
+foreach ($camp as $key => $value) {
+    # code...
+}
+$categ=$DB->get_records("course_categories",array("name"=>$value->libellecampus));
+foreach ($categ as $key => $value1categ) {
+    # code...
+}
+// $filiere = $DB->get_records('filiere', array("idcampus"=>$_GET["idca"]));
 
-$sql = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite IN (SELECT name FROM {course_categories})";
+$catfill=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=2");
+$catspecia=$DB->get_records_sql("SELECT * FROM {course_categories} WHERE depth=3");
+foreach($catfill as $key => $valfil)
+{
+    $fff=explode("/",$valfil->path);
+    $idca=array_search($value1categ->id,$fff);
+  if($idca!==false)
+  {
+    foreach($catspecia as $key => $vallssp)
+    {
+        $sss=explode("/",$vallssp->path);
+        $idfill=array_search($valfil->id,$sss);
+        if($idfill!==false)
+        {
+
+            // var_dump($vallssp->name);
+            array_push($tarspecialcat,$vallssp->name);
+        }
+    }
+    
+  }
+}
+$stringspecialitecat=implode("','",$tarspecialcat);
+// die;
+
+$sql = "SELECT s.id,libellespecialite,libellefiliere,abreviationspecialite FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite IN ('$stringspecialitecat')";
 
 $specialites = $DB->get_records_sql($sql);
 
-$sqlcat = "SELECT s.id as idsp,libellefiliere,libellespecialite,f.id as idfi FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite NOT IN (SELECT name FROM {course_categories})";
+$sqlcat = "SELECT s.id as idsp,libellefiliere,libellespecialite,f.id as idfi FROM {filiere} f, {specialite} s WHERE s.idfiliere = f.id AND idcampus='".$_GET["idca"]."' AND libellespecialite NOT IN ('$stringspecialitecat')";
 
 $specialitescat = $DB->get_records_sql($sqlcat);
 
@@ -183,9 +230,10 @@ $templatecontext = (object)[
     'cycle' => new moodle_url('/local/powerschool/cycle.php'),
     'idca'=>$_GET["idca"],
     'root'=>$CFG->wwwroot,
-    'specialiteca'=>$_GET["specialite"],
+    'specialiteca'=>urlencode($_GET["specialite"]),
+    'specialitec'=>$_GET["specialite"],
     'category'=>$value1spec->id,
-    'specialiteca'=>$_GET["specialite"],
+    'specialiteca'=>urlencode($_GET["specialite"]),
 ];
 
 // $menu = (object)[
