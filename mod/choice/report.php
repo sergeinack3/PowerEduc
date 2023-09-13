@@ -9,7 +9,7 @@
     $attemptids = optional_param_array('attemptid', array(), PARAM_INT); // Get array of responses to delete or modify.
     $userids    = optional_param_array('userid', array(), PARAM_INT); // Get array of users whose choices need to be modified.
 
-    $url = new moodle_url('/mod/choice/report.php', array('id'=>$id));
+    $url = new powereduc_url('/mod/choice/report.php', array('id'=>$id));
     if ($download !== '') {
         $url->param('download', $download);
     }
@@ -19,11 +19,11 @@
     $PAGE->set_url($url);
 
     if (! $cm = get_coursemodule_from_id('choice', $id)) {
-        throw new \moodle_exception("invalidcoursemodule");
+        throw new \powereduc_exception("invalidcoursemodule");
     }
 
     if (! $course = $DB->get_record("course", array("id" => $cm->course))) {
-        throw new \moodle_exception("coursemisconf");
+        throw new \powereduc_exception("coursemisconf");
     }
 
     require_login($course, false, $cm);
@@ -33,7 +33,7 @@
     require_capability('mod/choice:readresponses', $context);
 
     if (!$choice = choice_get_choice($cm->instance)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     $strchoice = get_string("modulename", "choice");
@@ -284,15 +284,15 @@
         $options = array();
         $options["id"] = "$cm->id";
         $options["download"] = "ods";
-        $button =  $OUTPUT->single_button(new moodle_url("report.php", $options), get_string("downloadods"));
+        $button =  $OUTPUT->single_button(new powereduc_url("report.php", $options), get_string("downloadods"));
         $downloadoptions[] = html_writer::tag('li', $button, array('class' => 'reportoption list-inline-item'));
 
         $options["download"] = "xls";
-        $button = $OUTPUT->single_button(new moodle_url("report.php", $options), get_string("downloadexcel"));
+        $button = $OUTPUT->single_button(new powereduc_url("report.php", $options), get_string("downloadexcel"));
         $downloadoptions[] = html_writer::tag('li', $button, array('class' => 'reportoption list-inline-item'));
 
         $options["download"] = "txt";
-        $button = $OUTPUT->single_button(new moodle_url("report.php", $options), get_string("downloadtext"));
+        $button = $OUTPUT->single_button(new powereduc_url("report.php", $options), get_string("downloadtext"));
         $downloadoptions[] = html_writer::tag('li', $button, array('class' => 'reportoption list-inline-item'));
 
         $downloadlist = html_writer::tag('ul', implode('', $downloadoptions), array('class' => 'list-inline inline'));

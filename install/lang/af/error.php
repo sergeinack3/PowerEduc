@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Kon nie die databasis skep nie.</p>
 <p>Die gespesifiseerde databasis bestaan nie en die aangetoonde gebruiker het nie toestemming om die databasis te skep nie.</p>

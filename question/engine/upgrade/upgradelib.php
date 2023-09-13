@@ -1,31 +1,31 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the code required to upgrade all the attempt data from
- * old versions of Moodle into the tables used by the new question engine.
+ * old versions of PowerEduc into the tables used by the new question engine.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionengine
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/engine/bank.php');
@@ -138,7 +138,7 @@ class question_engine_attempt_upgrader {
         return $this->questionloader->load_dataset($questionid, $selecteditem);
     }
 
-    public function get_next_question_session($attempt, moodle_recordset $questionsessionsrs) {
+    public function get_next_question_session($attempt, powereduc_recordset $questionsessionsrs) {
         if (!$questionsessionsrs->valid()) {
             return false;
         }
@@ -154,7 +154,7 @@ class question_engine_attempt_upgrader {
         return $qsession;
     }
 
-    public function get_question_states($attempt, $question, moodle_recordset $questionsstatesrs) {
+    public function get_question_states($attempt, $question, powereduc_recordset $questionsstatesrs) {
         $qstates = array();
 
         while ($questionsstatesrs->valid()) {
@@ -448,10 +448,10 @@ class question_deleted_question_attempt_updater extends question_qtype_attempt_u
 
 /**
  * This check verifies that all quiz attempts were upgraded since following
- * the question engine upgrade in Moodle 2.1.
+ * the question engine upgrade in PowerEduc 2.1.
  *
  * Note: This custom check (and its environment.xml declaration) will be safely
- *       removed once we raise min required Moodle version to be 2.7 or newer.
+ *       removed once we raise min required PowerEduc version to be 2.7 or newer.
  *
  * @param environment_results object to update, if relevant.
  * @return environment_results updated results object, or null if this test is not relevant.

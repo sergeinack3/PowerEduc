@@ -25,7 +25,7 @@
 
 namespace tool_customlang\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**

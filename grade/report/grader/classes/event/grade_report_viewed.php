@@ -24,7 +24,7 @@
 
 namespace gradereport_grader\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Grader report viewed event class.

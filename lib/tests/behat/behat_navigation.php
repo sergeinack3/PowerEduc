@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../behat/behat_base.php');
 
@@ -521,10 +521,10 @@ class behat_navigation extends behat_base {
         }
 
         if (isloggedin() && !isguestuser($user) && !is_mnet_remote_user($user)) {
-            if (is_siteadmin($user) ||  has_capability('moodle/user:update', $systemcontext)) {
-                $url = new moodle_url('/user/editadvanced.php', array('id' => $user->id, 'course' => SITEID,
+            if (is_siteadmin($user) ||  has_capability('powereduc/user:update', $systemcontext)) {
+                $url = new powereduc_url('/user/editadvanced.php', array('id' => $user->id, 'course' => SITEID,
                     'returnto' => 'profile'));
-            } else if (has_capability('moodle/user:editownprofile', $systemcontext)) {
+            } else if (has_capability('powereduc/user:editownprofile', $systemcontext)) {
                 $userauthplugin = false;
                 if (!empty($user->auth)) {
                     $userauthplugin = get_auth_plugin($user->auth);
@@ -533,9 +533,9 @@ class behat_navigation extends behat_base {
                     $url = $userauthplugin->edit_profile_url();
                     if (empty($url)) {
                         if (empty($course)) {
-                            $url = new moodle_url('/user/edit.php', array('id' => $user->id, 'returnto' => 'profile'));
+                            $url = new powereduc_url('/user/edit.php', array('id' => $user->id, 'returnto' => 'profile'));
                         } else {
-                            $url = new moodle_url('/user/edit.php', array('id' => $user->id, 'course' => $courseid,
+                            $url = new powereduc_url('/user/edit.php', array('id' => $user->id, 'course' => $courseid,
                                 'returnto' => 'profile'));
                         }
                     }
@@ -596,9 +596,9 @@ class behat_navigation extends behat_base {
      * Helper used by i_am_on_page() and i_am_on_page_logged_in_as().
      *
      * @param string $page the type of page. E.g. 'Admin notifications' or 'core_user > Preferences'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      */
-    protected function resolve_page_helper(string $page): moodle_url {
+    protected function resolve_page_helper(string $page): powereduc_url {
         list($component, $name) = $this->parse_page_name($page);
         if ($component === 'core') {
             return $this->resolve_core_page_url($name);
@@ -691,9 +691,9 @@ class behat_navigation extends behat_base {
      *
      * @param string $identifier identifies the particular page. E.g. 'Test quiz'.
      * @param string $pagetype the component and page type. E.g. 'mod_quiz > View'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      */
-    protected function resolve_page_instance_helper(string $identifier, string $pagetype): moodle_url {
+    protected function resolve_page_instance_helper(string $identifier, string $pagetype): powereduc_url {
         list($component, $type) = $this->parse_page_name($pagetype);
         if ($component === 'core') {
             return $this->resolve_core_page_instance_url($type, $identifier);
@@ -711,19 +711,19 @@ class behat_navigation extends behat_base {
      * | Admin notifications | Admin notification screen.                                     |
      *
      * @param string $name identifies which identifies this page, e.g. 'Homepage', 'Admin notifications'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_core_page_url(string $name): moodle_url {
+    protected function resolve_core_page_url(string $name): powereduc_url {
         switch ($name) {
             case 'Homepage':
-                return new moodle_url('/');
+                return new powereduc_url('/');
 
             case 'My courses':
-                return new moodle_url('/my/courses.php');
+                return new powereduc_url('/my/courses.php');
 
             case 'Admin notifications':
-                return new moodle_url('/admin/');
+                return new powereduc_url('/admin/');
 
             default:
                 throw new Exception('Unrecognised core page type "' . $name . '."');
@@ -759,10 +759,10 @@ class behat_navigation extends behat_base {
      *
      * @param string $type identifies which type of page this is, e.g. 'Category page'.
      * @param string $identifier identifies the particular page, e.g. 'test-cat'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_core_page_instance_url(string $type, string $identifier): moodle_url {
+    protected function resolve_core_page_instance_url(string $type, string $identifier): powereduc_url {
         global $DB;
 
         $type = strtolower($type);
@@ -773,7 +773,7 @@ class behat_navigation extends behat_base {
                 if (!$categoryid) {
                     throw new Exception('The specified category with idnumber "' . $identifier . '" does not exist');
                 }
-                return new moodle_url('/course/index.php', ['categoryid' => $categoryid]);
+                return new powereduc_url('/course/index.php', ['categoryid' => $categoryid]);
 
             case 'course editing':
                 $courseid = $this->get_course_id($identifier);
@@ -781,7 +781,7 @@ class behat_navigation extends behat_base {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                         $identifier . '" does not exist');
                 }
-                return new moodle_url('/course/edit.php', ['id' => $courseid]);
+                return new powereduc_url('/course/edit.php', ['id' => $courseid]);
 
             case 'course':
                 $courseid = $this->get_course_id($identifier);
@@ -789,7 +789,7 @@ class behat_navigation extends behat_base {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                         $identifier . '" does not exist');
                 }
-                return new moodle_url('/course/view.php', ['id' => $courseid]);
+                return new powereduc_url('/course/view.php', ['id' => $courseid]);
 
             case 'activity':
                 $cm = $this->get_course_module_for_identifier($identifier);
@@ -803,7 +803,7 @@ class behat_navigation extends behat_base {
                 if (!$cm) {
                     throw new Exception('The specified activity with idnumber "' . $identifier . '" does not exist');
                 }
-                return new moodle_url('/course/modedit.php', [
+                return new powereduc_url('/course/modedit.php', [
                     'update' => $cm->id,
                 ]);
             case 'backup':
@@ -812,14 +812,14 @@ class behat_navigation extends behat_base {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                             $identifier . '" does not exist');
                 }
-                return new moodle_url('/backup/backup.php', ['id' => $courseid]);
+                return new powereduc_url('/backup/backup.php', ['id' => $courseid]);
             case 'import':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                             $identifier . '" does not exist');
                 }
-                return new moodle_url('/backup/import.php', ['id' => $courseid]);
+                return new powereduc_url('/backup/import.php', ['id' => $courseid]);
             case 'restore':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
@@ -827,28 +827,28 @@ class behat_navigation extends behat_base {
                             $identifier . '" does not exist');
                 }
                 $context = context_course::instance($courseid);
-                return new moodle_url('/backup/restorefile.php', ['contextid' => $context->id]);
+                return new powereduc_url('/backup/restorefile.php', ['contextid' => $context->id]);
             case 'reset':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                             $identifier . '" does not exist');
                 }
-                return new moodle_url('/course/reset.php', ['id' => $courseid]);
+                return new powereduc_url('/course/reset.php', ['id' => $courseid]);
             case 'course copy':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                             $identifier . '" does not exist');
                 }
-                return new moodle_url('/backup/copy.php', ['id' => $courseid]);
+                return new powereduc_url('/backup/copy.php', ['id' => $courseid]);
             case 'groups':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                             $identifier . '" does not exist');
                 }
-                return new moodle_url('/group/index.php', ['id' => $courseid]);
+                return new powereduc_url('/group/index.php', ['id' => $courseid]);
             case 'permissions':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
@@ -856,28 +856,28 @@ class behat_navigation extends behat_base {
                             $identifier . '" does not exist');
                 }
                 $context = context_course::instance($courseid);
-                return new moodle_url('/admin/roles/permissions.php', ['contextid' => $context->id]);
+                return new powereduc_url('/admin/roles/permissions.php', ['contextid' => $context->id]);
             case 'enrolment methods':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                             $identifier . '" does not exist');
                 }
-                return new moodle_url('/enrol/instances.php', ['id' => $courseid]);
+                return new powereduc_url('/enrol/instances.php', ['id' => $courseid]);
             case 'enrolled users':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                             $identifier . '" does not exist');
                 }
-                return new moodle_url('/user/index.php', ['id' => $courseid]);
+                return new powereduc_url('/user/index.php', ['id' => $courseid]);
             case 'other users':
                 $courseid = $this->get_course_id($identifier);
                 if (!$courseid) {
                     throw new Exception('The specified course with shortname, fullname, or idnumber "' .
                         $identifier . '" does not exist');
                 }
-                return new moodle_url('/enrol/otherusers.php', ['id' => $courseid]);
+                return new powereduc_url('/enrol/otherusers.php', ['id' => $courseid]);
         }
 
         $parts = explode(' ', $type);
@@ -888,22 +888,22 @@ class behat_navigation extends behat_base {
 
                 if (count($parts) == 2) {
                     // View page.
-                    return new moodle_url($cm->url);
+                    return new powereduc_url($cm->url);
                 }
 
                 if ($parts[2] === 'editing') {
                     // Edit settings page.
-                    return new moodle_url('/course/modedit.php', ['update' => $cm->id]);
+                    return new powereduc_url('/course/modedit.php', ['update' => $cm->id]);
                 }
 
                 if ($parts[2] === 'roles') {
                     // Locally assigned roles page.
-                    return new moodle_url('/admin/roles/assign.php', ['contextid' => $cm->context->id]);
+                    return new powereduc_url('/admin/roles/assign.php', ['contextid' => $cm->context->id]);
                 }
 
                 if ($parts[2] === 'permissions') {
                     // Permissions page.
-                    return new moodle_url('/admin/roles/permissions.php', ['contextid' => $cm->context->id]);
+                    return new powereduc_url('/admin/roles/permissions.php', ['contextid' => $cm->context->id]);
                 }
             }
         }
@@ -922,7 +922,7 @@ class behat_navigation extends behat_base {
     public function i_am_on_course_homepage($coursefullname) {
         global $DB;
         $course = $DB->get_record("course", array("fullname" => $coursefullname), 'id', MUST_EXIST);
-        $url = new moodle_url('/course/view.php', ['id' => $course->id]);
+        $url = new powereduc_url('/course/view.php', ['id' => $course->id]);
         $this->execute('behat_general::i_visit', [$url]);
     }
 
@@ -947,7 +947,7 @@ class behat_navigation extends behat_base {
         global $DB;
 
         $course = $DB->get_record("course", array("fullname" => $coursefullname), 'id', MUST_EXIST);
-        $url = new moodle_url('/course/view.php', ['id' => $course->id]);
+        $url = new powereduc_url('/course/view.php', ['id' => $course->id]);
 
         // Visit the course page.
         $this->execute('behat_general::i_visit', [$url]);

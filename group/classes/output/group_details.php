@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_group\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use renderable;
 use renderer_base;
@@ -69,7 +69,7 @@ class group_details implements renderable, templatable {
                                                         'description',
                                                         $this->group->id);
 
-            $descriptionformat = $this->group->descriptionformat ?? FORMAT_MOODLE;
+            $descriptionformat = $this->group->descriptionformat ?? FORMAT_POWEREDUC;
             $options = [
                 'overflowdiv' => true,
                 'context'     => $context

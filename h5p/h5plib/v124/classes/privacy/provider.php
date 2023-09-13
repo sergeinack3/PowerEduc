@@ -24,7 +24,7 @@
 
 namespace h5plib_v124\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider implementation for the version 1.24 of the H5P library.

@@ -1,20 +1,20 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/behat_question_base.php');
 
@@ -39,10 +39,10 @@ class behat_core_question extends behat_question_base {
      * | None so far!      |                                                              |
      *
      * @param string $page name of the page, with the component name removed e.g. 'Admin notification'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_url(string $page): moodle_url {
+    protected function resolve_page_url(string $page): powereduc_url {
         switch (strtolower($page)) {
             default:
                 throw new Exception('Unrecognised core_question page type "' . $page . '."');
@@ -62,35 +62,35 @@ class behat_core_question extends behat_question_base {
      *
      * @param string $type identifies which type of page this is, e.g. 'Preview'.
      * @param string $identifier identifies the particular page, e.g. 'My question'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_instance_url(string $type, string $identifier): moodle_url {
+    protected function resolve_page_instance_url(string $type, string $identifier): powereduc_url {
         switch (strtolower($type)) {
             case 'course question bank':
-                return new moodle_url('/question/edit.php',
+                return new powereduc_url('/question/edit.php',
                         ['courseid' => $this->get_course_id($identifier)]);
 
             case 'course question categories':
-                return new moodle_url('/question/bank/managecategories/category.php',
+                return new powereduc_url('/question/bank/managecategories/category.php',
                         ['courseid' => $this->get_course_id($identifier)]);
 
             case 'course question import':
-                return new moodle_url('/question/bank/importquestions/import.php',
+                return new powereduc_url('/question/bank/importquestions/import.php',
                         ['courseid' => $this->get_course_id($identifier)]);
 
             case 'course question export':
-                return new moodle_url('/question/bank/exportquestions/export.php',
+                return new powereduc_url('/question/bank/exportquestions/export.php',
                         ['courseid' => $this->get_course_id($identifier)]);
 
             case 'preview':
                 [$questionid, $otheridtype, $otherid] = $this->find_question_by_name($identifier);
-                return new moodle_url('/question/bank/previewquestion/preview.php',
+                return new powereduc_url('/question/bank/previewquestion/preview.php',
                         ['id' => $questionid, $otheridtype => $otherid]);
 
             case 'edit':
                 [$questionid, $otheridtype, $otherid] = $this->find_question_by_name($identifier);
-                return new moodle_url('/question/bank/editquestion/question.php',
+                return new powereduc_url('/question/bank/editquestion/question.php',
                         ['id' => $questionid, $otheridtype => $otherid]);
 
             default:

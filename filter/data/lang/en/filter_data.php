@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['filtername'] = 'Database auto-linking';
 $string['privacy:metadata'] = 'The Database auto-linking plugin does not store any personal data.';

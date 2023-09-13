@@ -24,7 +24,7 @@
 
 namespace tool_httpsreplace;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Tests the httpsreplace tool.

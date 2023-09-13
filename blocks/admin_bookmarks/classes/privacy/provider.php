@@ -24,7 +24,7 @@
 
 namespace block_admin_bookmarks\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_admin_bookmarks implementing null_provider.

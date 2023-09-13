@@ -20,7 +20,7 @@ use backup;
 use core_backup_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');

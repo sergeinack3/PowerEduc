@@ -25,7 +25,7 @@ namespace core\update;
 
 use html_writer, coding_exception, core_component;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Singleton class that handles checking for available updates

@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\strategies;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Raw event retrieval strategy.

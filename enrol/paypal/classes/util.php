@@ -24,7 +24,7 @@
 
 namespace enrol_paypal;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * PayPal enrolment plugin utility class.

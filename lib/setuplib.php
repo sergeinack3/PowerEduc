@@ -25,7 +25,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Debug levels - always keep the values in ascending order!
 /** No warnings and errors at all */
@@ -869,8 +869,8 @@ function initialise_fullme() {
                 (strpos($rurl['path'], $wwwroot['path']) !== 0)) {
 
             // Explain the problem and redirect them to the right URL
-            if (!defined('NO_MOODLE_COOKIES')) {
-                define('NO_MOODLE_COOKIES', true);
+            if (!defined('NO_POWEREDUC_COOKIES')) {
+                define('NO_POWEREDUC_COOKIES', true);
             }
             // The login/token.php script should call the correct url/port.
             if (defined('REQUIRE_CORRECT_ACCESS') && REQUIRE_CORRECT_ACCESS) {
@@ -1876,11 +1876,11 @@ function set_access_log_user() {
                     break;
             }
             if ($logmethod == 'apache') {
-                apache_note('MOODLEUSER', $logname);
+                apache_note('POWEREDUCUSER', $logname);
             }
 
             if ($logmethod == 'header') {
-                header("X-MOODLEUSER: $logname");
+                header("X-POWEREDUCUSER: $logname");
             }
         }
     }

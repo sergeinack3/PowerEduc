@@ -24,7 +24,7 @@ This files describes API changes in the mod_scorm code.
 === 3.0 ===
 
 * External function mod_scorm_external::get_scorms_by_courses returned parameter "name" has been changed to PARAM_RAW,
-  this is because the new external_format_string function may return raw data if the global moodlewssettingraw parameter is used.
+  this is because the new external_format_string function may return raw data if the global powereducwssettingraw parameter is used.
 * Function scorm_view_display was renamed to scorm_print_launch to avoid
   confussion with new function scorm_view.
 

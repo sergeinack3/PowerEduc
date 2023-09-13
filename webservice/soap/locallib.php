@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -32,11 +32,11 @@ use webservice_soap\wsdl;
  * @package    webservice_soap
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 class webservice_soap_server extends webservice_base_server {
 
-    /** @var moodle_url The server URL. */
+    /** @var powereduc_url The server URL. */
     protected $serverurl;
 
     /** @var  SoapServer The Soap */
@@ -89,11 +89,11 @@ class webservice_soap_server extends webservice_base_server {
                     list($this->username, $this->password) = $authdata;
                 }
             }
-            $this->serverurl = new moodle_url('/webservice/soap/simpleserver.php/' . $this->username . '/' . $this->password);
+            $this->serverurl = new powereduc_url('/webservice/soap/simpleserver.php/' . $this->username . '/' . $this->password);
         } else {
             $this->token = optional_param('wstoken', null, PARAM_RAW);
 
-            $this->serverurl = new moodle_url('/webservice/soap/server.php');
+            $this->serverurl = new powereduc_url('/webservice/soap/server.php');
             $this->serverurl->param('wstoken', $this->token);
         }
 
@@ -106,7 +106,7 @@ class webservice_soap_server extends webservice_base_server {
      * Runs the SOAP web service.
      *
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws webservice_access_exception
      */
     public function run() {
@@ -226,7 +226,7 @@ class webservice_soap_server extends webservice_base_server {
         // Fault node.
         $fault = $dom->createElement('SOAP-ENV:Fault');
         // Faultcode node.
-        $fault->appendChild($dom->createElement('faultcode', 'MOODLE:error'));
+        $fault->appendChild($dom->createElement('faultcode', 'POWEREDUC:error'));
         // Faultstring node.
         $fault->appendChild($dom->createElement('faultstring', $info));
 
@@ -270,7 +270,7 @@ class webservice_soap_server extends webservice_base_server {
      *
      * Note that the parameter order is the reverse of SoapFault's constructor parameters.
      *
-     * Moodle note: basically we return the faultactor (errorcode) and faultdetails (debuginfo).
+     * PowerEduc note: basically we return the faultactor (errorcode) and faultdetails (debuginfo).
      *
      * If an exception is passed as the first argument, its message and code
      * will be used to create the fault object.
@@ -315,7 +315,7 @@ class webservice_soap_server extends webservice_base_server {
  * @package    webservice_soap
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  */
 class webservice_soap_test_client implements webservice_test_client_interface {
 

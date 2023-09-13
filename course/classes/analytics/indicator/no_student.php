@@ -24,7 +24,7 @@
 
 namespace core_course\analytics\indicator;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * No student indicator.

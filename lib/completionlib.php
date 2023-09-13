@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@
  *
  * @package core_completion
  * @category completion
- * @copyright 1999 onwards Martin Dougiamas   {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas   {@link http://powereduc.com}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use core_completion\activity_custom_completion;
 use core_courseformat\base as course_format;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Include the required completion libraries
@@ -199,7 +199,7 @@ function completion_can_view_data($userid, $course = null) {
     // Check capabilities
     $personalcontext = context_user::instance($userid);
 
-    if (has_capability('moodle/user:viewuseractivitiesreport', $personalcontext)) {
+    if (has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext)) {
         return true;
     } elseif (has_capability('report/completion:view', $personalcontext)) {
         return true;
@@ -360,7 +360,7 @@ class completion_info {
         if (empty($completions)) {
             return false;
         } elseif (count($completions) > 1) {
-            throw new \moodle_exception('multipleselfcompletioncriteria', 'completion');
+            throw new \powereduc_exception('multipleselfcompletioncriteria', 'completion');
         }
 
         return $completions[0];
@@ -553,7 +553,7 @@ class completion_info {
      * @return bool True if the user can override, false otherwise.
      */
     public function user_can_override_completion($user) {
-        return has_capability('moodle/course:overridecompletion', context_course::instance($this->course_id), $user);
+        return has_capability('powereduc/course:overridecompletion', context_course::instance($this->course_id), $user);
     }
 
     /**
@@ -588,7 +588,7 @@ class completion_info {
      * @param bool $override Whether manually overriding the existing completion state.
      * @param bool $isbulkupdate If bulk grade update is happening.
      * @return void
-     * @throws moodle_exception if trying to override without permission.
+     * @throws powereduc_exception if trying to override without permission.
      */
     public function update_state($cm, $possibleresult=COMPLETION_UNKNOWN, $userid=0,
             $override = false, $isbulkupdate = false) {
@@ -603,7 +603,7 @@ class completion_info {
         if ($override) {
             if (!$this->user_can_override_completion($USER)) {
                 throw new required_capability_exception(context_course::instance($this->course_id),
-                                                        'moodle/course:overridecompletion', 'nopermission', '');
+                                                        'powereduc/course:overridecompletion', 'nopermission', '');
             }
         }
 
@@ -1369,7 +1369,7 @@ class completion_info {
      * @return bool
      */
     public function is_tracked_user($userid) {
-        return is_enrolled(context_course::instance($this->course->id), $userid, 'moodle/course:isincompletionreports', true);
+        return is_enrolled(context_course::instance($this->course->id), $userid, 'powereduc/course:isincompletionreports', true);
     }
 
     /**
@@ -1386,7 +1386,7 @@ class completion_info {
         global $DB;
 
         list($enrolledsql, $enrolledparams) = get_enrolled_sql(
-                context_course::instance($this->course->id), 'moodle/course:isincompletionreports', $groupid, true);
+                context_course::instance($this->course->id), 'powereduc/course:isincompletionreports', $groupid, true);
         $sql  = 'SELECT COUNT(eu.id) FROM (' . $enrolledsql . ') eu JOIN {user} u ON u.id = eu.id';
         if ($where) {
             $sql .= " WHERE $where";
@@ -1418,7 +1418,7 @@ class completion_info {
 
         list($enrolledsql, $params) = get_enrolled_sql(
                 context_course::instance($this->course->id),
-                'moodle/course:isincompletionreports', $groupid, true);
+                'powereduc/course:isincompletionreports', $groupid, true);
 
         $userfieldsapi = \core_user\fields::for_identity($extracontext)->with_name()->excluding('id', 'idnumber');
         $fieldssql = $userfieldsapi->get_sql('u', true);
@@ -1602,11 +1602,11 @@ class completion_info {
      *
      * @global type $CFG
      * @param string $error Error string (will not be displayed to user unless debugging is enabled)
-     * @throws moodle_exception Exception with the error string as debug info
+     * @throws powereduc_exception Exception with the error string as debug info
      */
     public function internal_systemerror($error) {
         global $CFG;
-        throw new moodle_exception('err_system','completion',
+        throw new powereduc_exception('err_system','completion',
             $CFG->wwwroot.'/course/view.php?id='.$this->course->id,null,$error);
     }
 

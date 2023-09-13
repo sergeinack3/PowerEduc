@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define('AJAX_SCRIPT', true);
-define('NO_MOODLE_COOKIES', true); // No need for a session here.
+define('NO_POWEREDUC_COOKIES', true); // No need for a session here.
 
 require_once(__DIR__ . '/../config.php');
 require_once($CFG->libdir . '/badgeslib.php');

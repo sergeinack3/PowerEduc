@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the definition for the renderable classes for the assignment
@@ -24,7 +24,7 @@
 
 use \mod_assign\output\assign_submission_status;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * This class wraps the submit for grading confirmation page
@@ -37,14 +37,14 @@ class assign_submit_for_grading_page implements renderable {
     public $notifications = array();
     /** @var int $coursemoduleid */
     public $coursemoduleid = 0;
-    /** @var moodleform $confirmform */
+    /** @var powereducform $confirmform */
     public $confirmform = null;
 
     /**
      * Constructor
      * @param string $notifications - Any mesages to display
      * @param int $coursemoduleid
-     * @param moodleform $confirmform
+     * @param powereducform $confirmform
      */
     public function __construct($notifications, $coursemoduleid, $confirmform) {
         $this->notifications = $notifications;
@@ -95,7 +95,7 @@ class assign_gradingmessage implements renderable {
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class assign_form implements renderable {
-    /** @var moodleform $form is the edit submission form */
+    /** @var powereducform $form is the edit submission form */
     public $form = null;
     /** @var string $classname is the name of the class to assign to the container */
     public $classname = '';
@@ -105,10 +105,10 @@ class assign_form implements renderable {
     /**
      * Constructor
      * @param string $classname This is the class name for the container div
-     * @param moodleform $form This is the moodleform
+     * @param powereducform $form This is the powereducform
      * @param string $jsinitfunction This is an optional js function to add to the page requires
      */
-    public function __construct($classname, moodleform $form, $jsinitfunction = '') {
+    public function __construct($classname, powereducform $form, $jsinitfunction = '') {
         $this->classname = $classname;
         $this->form = $form;
         $this->jsinitfunction = $jsinitfunction;
@@ -672,7 +672,7 @@ class assign_files implements renderable {
     public $context;
     /** @var string $context */
     public $dir;
-    /** @var MoodleQuickForm $portfolioform */
+    /** @var PowerEducQuickForm $portfolioform */
     public $portfolioform;
     /** @var stdClass $cm course module */
     public $cm;

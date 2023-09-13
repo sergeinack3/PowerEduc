@@ -16,7 +16,7 @@
 
 namespace tool_admin_presets\local\action;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_admin_presets\form\export_form;
 use moodle_exception;

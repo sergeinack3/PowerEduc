@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Quiz external API
  *
  * @package    mod_quiz
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
@@ -36,9 +36,9 @@ require_once($CFG->dirroot . '/mod/quiz/locallib.php');
  *
  * @package    mod_quiz
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class mod_quiz_external extends external_api {
 
@@ -46,7 +46,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_quizzes_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quizzes_by_courses_parameters() {
         return new external_function_parameters (
@@ -64,7 +64,7 @@ class mod_quiz_external extends external_api {
      *
      * @param array $courseids Array of course ids
      * @return array of quizzes details
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quizzes_by_courses($courseids = array()) {
         global $USER;
@@ -133,7 +133,7 @@ class mod_quiz_external extends external_api {
                     }
 
                     // Fields only for managers.
-                    if (has_capability('moodle/course:manageactivities', $context)) {
+                    if (has_capability('powereduc/course:manageactivities', $context)) {
                         $additionalfields = array('shuffleanswers', 'timecreated', 'timemodified', 'password', 'subnet');
                         $viewablefields = array_merge($viewablefields, $additionalfields);
                     }
@@ -155,7 +155,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_quizzes_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quizzes_by_courses_returns() {
         return new external_single_structure(
@@ -269,7 +269,7 @@ class mod_quiz_external extends external_api {
      *
      * @param int $quizid quiz instance id
      * @return array array containing the quiz, course, context and course module objects
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     protected static function validate_quiz($quizid) {
         global $DB;
@@ -288,7 +288,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for view_quiz.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_quiz_parameters() {
         return new external_function_parameters (
@@ -303,8 +303,8 @@ class mod_quiz_external extends external_api {
      *
      * @param int $quizid quiz instance id
      * @return array of warnings and status result
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function view_quiz($quizid) {
         global $DB;
@@ -327,7 +327,7 @@ class mod_quiz_external extends external_api {
      * Describes the view_quiz return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_quiz_returns() {
         return new external_single_structure(
@@ -342,7 +342,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_user_attempts.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_user_attempts_parameters() {
         return new external_function_parameters (
@@ -364,7 +364,7 @@ class mod_quiz_external extends external_api {
      * @param string $status quiz status: all, finished or unfinished
      * @param bool $includepreviews whether to include previews or not
      * @return array of warnings and the list of attempts
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      * @throws invalid_parameter_exception
      */
     public static function get_user_attempts($quizid, $userid = 0, $status = 'finished', $includepreviews = false) {
@@ -459,7 +459,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_user_attempts return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_user_attempts_returns() {
         return new external_single_structure(
@@ -474,7 +474,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_user_best_grade.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_user_best_grade_parameters() {
         return new external_function_parameters (
@@ -491,7 +491,7 @@ class mod_quiz_external extends external_api {
      * @param int $quizid quiz instance id
      * @param int $userid user id
      * @return array of warnings and the grade information
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_user_best_grade($quizid, $userid = 0) {
         global $DB, $USER, $CFG;
@@ -564,7 +564,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_user_best_grade return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_user_best_grade_returns() {
         return new external_single_structure(
@@ -581,7 +581,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_combined_review_options.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_combined_review_options_parameters() {
         return new external_function_parameters (
@@ -599,7 +599,7 @@ class mod_quiz_external extends external_api {
      * @param int $quizid quiz instance id
      * @param int $userid user id (empty for current user)
      * @return array of warnings and the review options
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_combined_review_options($quizid, $userid = 0) {
         global $DB, $USER;
@@ -652,7 +652,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_combined_review_options return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_combined_review_options_returns() {
         return new external_single_structure(
@@ -682,7 +682,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for start_attempt.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function start_attempt_parameters() {
         return new external_function_parameters (
@@ -709,8 +709,8 @@ class mod_quiz_external extends external_api {
      * @param array $preflightdata preflight required data (like passwords)
      * @param bool $forcenew Whether to force a new attempt or not.
      * @return array of warnings and the attempt basic data
-     * @since Moodle 3.1
-     * @throws moodle_quiz_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_quiz_exception
      */
     public static function start_attempt($quizid, $preflightdata = array(), $forcenew = false) {
         global $DB, $USER;
@@ -732,7 +732,7 @@ class mod_quiz_external extends external_api {
 
         // Check questions.
         if (!$quizobj->has_questions()) {
-            throw new moodle_quiz_exception($quizobj, 'noquestionsfound');
+            throw new powereduc_quiz_exception($quizobj, 'noquestionsfound');
         }
 
         // Create an object to manage all the other (non-roles) access rules.
@@ -766,7 +766,7 @@ class mod_quiz_external extends external_api {
                 $errors = $accessmanager->validate_preflight_check($provideddata, [], $currentattemptid);
 
                 if (!empty($errors)) {
-                    throw new moodle_quiz_exception($quizobj, array_shift($errors));
+                    throw new powereduc_quiz_exception($quizobj, array_shift($errors));
                 }
 
                 // Pre-flight check passed.
@@ -775,9 +775,9 @@ class mod_quiz_external extends external_api {
 
             if ($currentattemptid) {
                 if ($lastattempt->state == quiz_attempt::OVERDUE) {
-                    throw new moodle_quiz_exception($quizobj, 'stateoverdue');
+                    throw new powereduc_quiz_exception($quizobj, 'stateoverdue');
                 } else {
-                    throw new moodle_quiz_exception($quizobj, 'attemptstillinprogress');
+                    throw new powereduc_quiz_exception($quizobj, 'attemptstillinprogress');
                 }
             }
             $offlineattempt = WS_SERVER ? true : false;
@@ -794,7 +794,7 @@ class mod_quiz_external extends external_api {
      * Describes the start_attempt return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function start_attempt_returns() {
         return new external_single_structure(
@@ -812,8 +812,8 @@ class mod_quiz_external extends external_api {
      * @param  bool $checkaccessrules whether to check the quiz access rules or not
      * @param  bool $failifoverdue whether to return error if the attempt is overdue
      * @return  array containing the attempt object and access messages
-     * @throws moodle_quiz_exception
-     * @since  Moodle 3.1
+     * @throws powereduc_quiz_exception
+     * @since  PowerEduc 3.1
      */
     protected static function validate_attempt($params, $checkaccessrules = true, $failifoverdue = true) {
         global $USER;
@@ -825,7 +825,7 @@ class mod_quiz_external extends external_api {
 
         // Check that this attempt belongs to this user.
         if ($attemptobj->get_userid() != $USER->id) {
-            throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'notyourattempt');
+            throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'notyourattempt');
         }
 
         // General capabilities check.
@@ -843,15 +843,15 @@ class mod_quiz_external extends external_api {
 
             $messages = $accessmanager->prevent_access();
             if (!$ispreviewuser && $messages) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'attempterror');
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'attempterror');
             }
         }
 
         // Attempt closed?.
         if ($attemptobj->is_finished()) {
-            throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'attemptalreadyclosed');
+            throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'attemptalreadyclosed');
         } else if ($failifoverdue && $attemptobj->get_state() == quiz_attempt::OVERDUE) {
-            throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'stateoverdue');
+            throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'stateoverdue');
         }
 
         // User submitted data (like the quiz password).
@@ -863,7 +863,7 @@ class mod_quiz_external extends external_api {
 
             $errors = $accessmanager->validate_preflight_check($provideddata, [], $params['attemptid']);
             if (!empty($errors)) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), array_shift($errors));
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), array_shift($errors));
             }
             // Pre-flight check passed.
             $accessmanager->notify_preflight_check_passed($params['attemptid']);
@@ -872,19 +872,19 @@ class mod_quiz_external extends external_api {
         if (isset($params['page'])) {
             // Check if the page is out of range.
             if ($params['page'] != $attemptobj->force_page_number_into_range($params['page'])) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'Invalid page number');
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'Invalid page number');
             }
 
             // Prevent out of sequence access.
             if (!$attemptobj->check_page_access($params['page'])) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'Out of sequence access');
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'Out of sequence access');
             }
 
             // Check slots.
             $slots = $attemptobj->get_slots($params['page']);
 
             if (empty($slots)) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noquestionsfound');
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'noquestionsfound');
             }
         }
 
@@ -895,8 +895,8 @@ class mod_quiz_external extends external_api {
      * Describes a single question structure.
      *
      * @return external_single_structure the question data. Some fields may not be returned depending on the quiz display settings.
-     * @since  Moodle 3.1
-     * @since Moodle 3.2 blockedbyprevious parameter added.
+     * @since  PowerEduc 3.1
+     * @since PowerEduc 3.2 blockedbyprevious parameter added.
      */
     private static function question_structure() {
         return new external_single_structure(
@@ -1020,7 +1020,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_attempt_data.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_data_parameters() {
         return new external_function_parameters (
@@ -1046,8 +1046,8 @@ class mod_quiz_external extends external_api {
      * @param int $page page number
      * @param array $preflightdata preflight required data (like passwords)
      * @return array of warnings and the attempt data, next page, message and questions
-     * @since Moodle 3.1
-     * @throws moodle_quiz_exceptions
+     * @since PowerEduc 3.1
+     * @throws powereduc_quiz_exceptions
      */
     public static function get_attempt_data($attemptid, $page, $preflightdata = array()) {
 
@@ -1082,7 +1082,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_attempt_data return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_data_returns() {
         return new external_single_structure(
@@ -1103,7 +1103,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_attempt_summary.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_summary_parameters() {
         return new external_function_parameters (
@@ -1127,7 +1127,7 @@ class mod_quiz_external extends external_api {
      * @param int $attemptid attempt id
      * @param int $preflightdata preflight required data (like passwords)
      * @return array of warnings and the attempt summary data for each question
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_summary($attemptid, $preflightdata = array()) {
 
@@ -1152,7 +1152,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_attempt_summary return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_summary_returns() {
         return new external_single_structure(
@@ -1167,7 +1167,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for save_attempt.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function save_attempt_parameters() {
         return new external_function_parameters (
@@ -1200,7 +1200,7 @@ class mod_quiz_external extends external_api {
      * @param array $data the data to be saved
      * @param  array $preflightdata preflight required data (like passwords)
      * @return array of warnings and execution result
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function save_attempt($attemptid, $data, $preflightdata = array()) {
         global $DB, $USER;
@@ -1245,7 +1245,7 @@ class mod_quiz_external extends external_api {
      * Describes the save_attempt return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function save_attempt_returns() {
         return new external_single_structure(
@@ -1260,7 +1260,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for process_attempt.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function process_attempt_parameters() {
         return new external_function_parameters (
@@ -1299,7 +1299,7 @@ class mod_quiz_external extends external_api {
      * @param bool $timeup whether the WS was called by a timer when the time is up
      * @param array $preflightdata preflight required data (like passwords)
      * @return array of warnings and the attempt state after the processing
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function process_attempt($attemptid, $data, $finishattempt = false, $timeup = false, $preflightdata = array()) {
         global $USER;
@@ -1348,7 +1348,7 @@ class mod_quiz_external extends external_api {
      * Describes the process_attempt return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function process_attempt_returns() {
         return new external_single_structure(
@@ -1365,9 +1365,9 @@ class mod_quiz_external extends external_api {
      *
      * @param  array $params Array of parameters including the attemptid
      * @return  array containing the attempt object and display options
-     * @since  Moodle 3.1
-     * @throws  moodle_exception
-     * @throws  moodle_quiz_exception
+     * @since  PowerEduc 3.1
+     * @throws  powereduc_exception
+     * @throws  powereduc_quiz_exception
      */
     protected static function validate_attempt_review($params) {
 
@@ -1377,13 +1377,13 @@ class mod_quiz_external extends external_api {
         $displayoptions = $attemptobj->get_display_options(true);
         if ($attemptobj->is_own_attempt()) {
             if (!$attemptobj->is_finished()) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'attemptclosed');
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'attemptclosed');
             } else if (!$displayoptions->attempt) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noreview', null, '',
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'noreview', null, '',
                     $attemptobj->cannot_review_message());
             }
         } else if (!$attemptobj->is_review_allowed()) {
-            throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noreviewattempt');
+            throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'noreviewattempt');
         }
         return array($attemptobj, $displayoptions);
     }
@@ -1392,7 +1392,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_attempt_review.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_review_parameters() {
         return new external_function_parameters (
@@ -1410,9 +1410,9 @@ class mod_quiz_external extends external_api {
      * @param int $attemptid attempt id
      * @param int $page page number, empty for all the questions in all the pages
      * @return array of warnings and the attempt data, feedback and questions
-     * @since Moodle 3.1
-     * @throws  moodle_exception
-     * @throws  moodle_quiz_exception
+     * @since PowerEduc 3.1
+     * @throws  powereduc_exception
+     * @throws  powereduc_quiz_exception
      */
     public static function get_attempt_review($attemptid, $page = -1) {
         global $PAGE;
@@ -1471,7 +1471,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_attempt_review return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_review_returns() {
         return new external_single_structure(
@@ -1497,7 +1497,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for view_attempt.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_parameters() {
         return new external_function_parameters (
@@ -1523,7 +1523,7 @@ class mod_quiz_external extends external_api {
      * @param int $page page number
      * @param array $preflightdata preflight required data (like passwords)
      * @return array of warnings and status result
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt($attemptid, $page, $preflightdata = array()) {
 
@@ -1542,7 +1542,7 @@ class mod_quiz_external extends external_api {
 
         // Update attempt page, throwing an exception if $page is not valid.
         if (!$attemptobj->set_currentpage($params['page'])) {
-            throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'Out of sequence access');
+            throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'Out of sequence access');
         }
 
         $result = array();
@@ -1555,7 +1555,7 @@ class mod_quiz_external extends external_api {
      * Describes the view_attempt return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_returns() {
         return new external_single_structure(
@@ -1570,7 +1570,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for view_attempt_summary.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_summary_parameters() {
         return new external_function_parameters (
@@ -1594,7 +1594,7 @@ class mod_quiz_external extends external_api {
      * @param int $attemptid attempt id
      * @param array $preflightdata preflight required data (like passwords)
      * @return array of warnings and status result
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_summary($attemptid, $preflightdata = array()) {
 
@@ -1620,7 +1620,7 @@ class mod_quiz_external extends external_api {
      * Describes the view_attempt_summary return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_summary_returns() {
         return new external_single_structure(
@@ -1635,7 +1635,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for view_attempt_review.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_review_parameters() {
         return new external_function_parameters (
@@ -1650,7 +1650,7 @@ class mod_quiz_external extends external_api {
      *
      * @param int $attemptid attempt id
      * @return array of warnings and status result
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_review($attemptid) {
 
@@ -1675,7 +1675,7 @@ class mod_quiz_external extends external_api {
      * Describes the view_attempt_review return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_attempt_review_returns() {
         return new external_single_structure(
@@ -1690,7 +1690,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for view_quiz.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quiz_feedback_for_grade_parameters() {
         return new external_function_parameters (
@@ -1707,8 +1707,8 @@ class mod_quiz_external extends external_api {
      * @param int $quizid quiz instance id
      * @param float $grade the grade to check
      * @return array of warnings and status result
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function get_quiz_feedback_for_grade($quizid, $grade) {
         global $DB;
@@ -1724,7 +1724,7 @@ class mod_quiz_external extends external_api {
 
         $result = array();
         $result['feedbacktext'] = '';
-        $result['feedbacktextformat'] = FORMAT_MOODLE;
+        $result['feedbacktextformat'] = FORMAT_POWEREDUC;
 
         $feedback = quiz_feedback_record_for_grade($params['grade'], $quiz);
         if (!empty($feedback->feedbacktext)) {
@@ -1746,7 +1746,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_quiz_feedback_for_grade return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quiz_feedback_for_grade_returns() {
         return new external_single_structure(
@@ -1763,7 +1763,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_quiz_access_information.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quiz_access_information_parameters() {
         return new external_function_parameters (
@@ -1778,8 +1778,8 @@ class mod_quiz_external extends external_api {
      *
      * @param int $quizid quiz instance id
      * @return array of warnings and the access information
-     * @since Moodle 3.1
-     * @throws  moodle_quiz_exception
+     * @since PowerEduc 3.1
+     * @throws  powereduc_quiz_exception
      */
     public static function get_quiz_access_information($quizid) {
         global $DB, $USER;
@@ -1819,7 +1819,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_quiz_access_information return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quiz_access_information_returns() {
         return new external_single_structure(
@@ -1845,7 +1845,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_attempt_access_information.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_access_information_parameters() {
         return new external_function_parameters (
@@ -1862,8 +1862,8 @@ class mod_quiz_external extends external_api {
      * @param int $quizid quiz instance id
      * @param int $attemptid attempt id, 0 for the user last attempt if exists
      * @return array of warnings and the access information
-     * @since Moodle 3.1
-     * @throws  moodle_quiz_exception
+     * @since PowerEduc 3.1
+     * @throws  powereduc_quiz_exception
      */
     public static function get_attempt_access_information($quizid, $attemptid = 0) {
         global $DB, $USER;
@@ -1882,7 +1882,7 @@ class mod_quiz_external extends external_api {
         if (!empty($params['attemptid'])) {
             $attemptobj = quiz_attempt::create($params['attemptid']);
             if ($attemptobj->get_userid() != $USER->id) {
-                throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'notyourattempt');
+                throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'notyourattempt');
             }
             $attempttocheck = $attemptobj->get_attempt();
         }
@@ -1930,7 +1930,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_attempt_access_information return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_attempt_access_information_returns() {
         return new external_single_structure(
@@ -1952,7 +1952,7 @@ class mod_quiz_external extends external_api {
      * Describes the parameters for get_quiz_required_qtypes.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quiz_required_qtypes_parameters() {
         return new external_function_parameters (
@@ -1968,8 +1968,8 @@ class mod_quiz_external extends external_api {
      *
      * @param int $quizid quiz instance id
      * @return array of warnings and the access information
-     * @since Moodle 3.1
-     * @throws  moodle_quiz_exception
+     * @since PowerEduc 3.1
+     * @throws  powereduc_quiz_exception
      */
     public static function get_quiz_required_qtypes($quizid) {
         global $DB, $USER;
@@ -1998,7 +1998,7 @@ class mod_quiz_external extends external_api {
      * Describes the get_quiz_required_qtypes return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_quiz_required_qtypes_returns() {
         return new external_single_structure(

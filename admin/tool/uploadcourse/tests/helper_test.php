@@ -114,7 +114,7 @@ class helper_test extends \advanced_testcase {
         $c2 = $this->getDataGenerator()->create_course((object) array('shortname' => 'Yay'));
 
         // Creating backup file.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $c1->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $c1->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, 2);
         $bc->execute_plan();
         $result = $bc->get_results();
@@ -123,7 +123,7 @@ class helper_test extends \advanced_testcase {
         $bc->destroy();
 
         // Creating backup file.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $c2->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $c2->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, 2);
         $bc->execute_plan();
         $result = $bc->get_results();

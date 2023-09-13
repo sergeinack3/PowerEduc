@@ -19,7 +19,7 @@ namespace gradereport_user;
 use externallib_advanced_testcase;
 use gradereport_user\external\user as user_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

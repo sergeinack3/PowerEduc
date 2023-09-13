@@ -29,7 +29,7 @@ use renderer_base;
 use stdClass;
 use templatable;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class containing the filter options data for rendering the autocomplete element for the data requests page.

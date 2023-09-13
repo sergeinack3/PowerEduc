@@ -26,7 +26,7 @@ namespace core\task;
 
 use core_plugin_manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class that updates all of the existing calendar events for modules that implement the *_refresh_events() hook.

@@ -20,7 +20,7 @@ Feature: Inline editing H5P content
       | student1 | C1 | student        |
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/h5p:updatelibraries | Allow      | editingteacher | System       |           |
+      | powereduc/h5p:updatelibraries | Allow      | editingteacher | System       |           |
     And the following "blocks" exist:
       | blockname     | contextlevel | reference | pagetypepattern | defaultregion |
       | private_files | System       | 1         | my-index        | side-post     |

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The file defines a base class that can be used to build a report like the
@@ -24,7 +24,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/tablelib.php');
 
@@ -97,10 +97,10 @@ abstract class quiz_attempts_report extends quiz_default_report {
 
     /**
      * Get the base URL for this report.
-     * @return moodle_url the URL.
+     * @return powereduc_url the URL.
      */
     protected function get_base_url() {
-        return new moodle_url('/mod/quiz/report.php',
+        return new powereduc_url('/mod/quiz/report.php',
                 array('id' => $this->context->instanceid, 'mode' => $this->mode));
     }
 
@@ -282,7 +282,7 @@ abstract class quiz_attempts_report extends quiz_default_report {
      * @param table_sql $table the table being constructed.
      * @param array $columns the list of columns.
      * @param array $headers the columns headings.
-     * @param moodle_url $reporturl the URL of this report.
+     * @param powereduc_url $reporturl the URL of this report.
      * @param mod_quiz_attempts_report_options $options the display options.
      * @param bool $collapsible whether to allow columns in the report to be collapsed.
      */
@@ -311,7 +311,7 @@ abstract class quiz_attempts_report extends quiz_default_report {
      * @param int $currentgroup the currently selected group.
      * @param \core\dml\sql_join $groupstudentsjoins (joins, wheres, params) the students in the current group.
      * @param \core\dml\sql_join $allowedjoins (joins, wheres, params) the users whose attempt this user is allowed to modify.
-     * @param moodle_url $redirecturl where to redircet to after a successful action.
+     * @param powereduc_url $redirecturl where to redircet to after a successful action.
      */
     protected function process_actions($quiz, $cm, $currentgroup, \core\dml\sql_join $groupstudentsjoins,
             \core\dml\sql_join $allowedjoins, $redirecturl) {
@@ -376,7 +376,7 @@ abstract class quiz_attempts_report extends quiz_default_report {
      *      2 => array ids of all the students in the current group.
      *      3 => array ids of all the students to show in the report. Will be the
      *              same as either element 1 or 2.
-     * @deprecated since Moodle 3.2 Please use get_students_joins() instead.
+     * @deprecated since PowerEduc 3.2 Please use get_students_joins() instead.
      */
     protected function load_relevant_students($cm, $course = null) {
         $msg = 'The function load_relevant_students() is deprecated. Please use get_students_joins() instead.';

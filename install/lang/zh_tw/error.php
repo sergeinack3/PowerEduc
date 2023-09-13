@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>無法建立資料庫</p>
 <p>指定之資料庫並不存在。使用者並未有權限建立資料庫</p>

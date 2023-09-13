@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_bigbluebuttonbn\form;
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');
 
@@ -27,7 +27,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author    Laurent David  (laurent [at] call-learning [dt] fr)
  */
-class guest_login extends \moodleform {
+class guest_login extends \powereducform {
 
     /**
      * Form definition

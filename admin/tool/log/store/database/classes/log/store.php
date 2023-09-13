@@ -23,7 +23,7 @@
  */
 
 namespace logstore_database\log;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class store implements \tool_log\log\writer, \core\log\sql_reader {
     use \tool_log\helper\store,

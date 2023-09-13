@@ -25,7 +25,7 @@
 
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 debugging('core\\event\\role_capabilities_updated has been deprecated. Please use
         core\\event\\capability_assigned instead', DEBUG_DEVELOPER);

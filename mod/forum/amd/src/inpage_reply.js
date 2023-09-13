@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This module handles the in page replying to forum posts.
@@ -49,11 +49,11 @@ define([
     };
 
      /**
-      * Moodle formats taken from the FORMAT_* constants declared in lib/weblib.php.
+      * PowerEduc formats taken from the FORMAT_* constants declared in lib/weblib.php.
       * @type {Object}
       */
     var CONTENT_FORMATS = {
-        MOODLE: 0
+        POWEREDUC: 0
     };
     /**
      * Show the loading icon for the submit button.
@@ -96,9 +96,9 @@ define([
             var allButtons = submitButton.parent().find(Selectors.post.inpageReplyButton);
             var form = submitButton.parents(Selectors.post.inpageReplyForm).get(0);
             var message = form.elements.post.value.trim();
-            // For now, we consider the inline reply post written using the FORMAT_MOODLE (because a textarea is displayed).
+            // For now, we consider the inline reply post written using the FORMAT_POWEREDUC (because a textarea is displayed).
             // In the future, other formats should be supported, letting users to use their preferred editor and format.
-            var messageformat = CONTENT_FORMATS.MOODLE;
+            var messageformat = CONTENT_FORMATS.POWEREDUC;
             // The message post will be converted from messageformat to FORMAT_HTML.
             var topreferredformat = true;
             var postid = form.elements.reply.value;

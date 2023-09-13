@@ -24,7 +24,7 @@
 
 namespace core_competency;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 debugging('The class core_competency\\invalid_persistent_exception is deprecated. ' .
     'Please use core\\invalid_persistent_exception instead.');

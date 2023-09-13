@@ -27,7 +27,7 @@ declare(strict_types=1);
 use core_admin\local\externalpage\accesscallback;
 use core_reportbuilder\permission;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /** @var admin_root $ADMIN */
 $ADMIN->add(

@@ -23,7 +23,7 @@
  * @package course
  */
 
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 }
 

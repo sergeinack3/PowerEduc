@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -222,7 +222,7 @@ class completion_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_bigbluebuttonbn\event\course_module_viewed', $event);
         $this->assertEquals($bbactivitycontext, $event->get_context());
-        $url = new \moodle_url('/mod/bigbluebuttonbn/view.php', ['id' => $bbactivitycontext->instanceid]);
+        $url = new \powereduc_url('/mod/bigbluebuttonbn/view.php', ['id' => $bbactivitycontext->instanceid]);
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());

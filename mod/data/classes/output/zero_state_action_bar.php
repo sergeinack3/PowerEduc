@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace mod_data\output;
 
 use mod_data\manager;
-use moodle_url;
+use powereduc_url;
 use templatable;
 use renderable;
 
@@ -25,7 +25,7 @@ use renderable;
  * Renderable class for the action bar elements in the zero state (no fields created) pages in the database activity.
  *
  * @package    mod_data
- * @copyright  2022 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2022 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class zero_state_action_bar implements templatable, renderable {
@@ -57,7 +57,7 @@ class zero_state_action_bar implements templatable, renderable {
             $instance = $this->manager->get_instance();
             $params = ['id' => $cm->id, 'backto' => $PAGE->url->out(false)];
 
-            $usepresetlink = new moodle_url('/mod/data/preset.php', $params);
+            $usepresetlink = new powereduc_url('/mod/data/preset.php', $params);
             $usepresetbutton = new \single_button($usepresetlink,
                 get_string('usestandard', 'mod_data'), 'get', true);
             $data['usepresetbutton'] = $usepresetbutton->export_for_template($output);
@@ -66,7 +66,7 @@ class zero_state_action_bar implements templatable, renderable {
             $createfieldbutton = $actionbar->get_create_fields();
             $data['createfieldbutton'] = $createfieldbutton->export_for_template($output);
 
-            $importpresetlink = new moodle_url('/mod/data/preset.php', $params);
+            $importpresetlink = new powereduc_url('/mod/data/preset.php', $params);
             $importpresetbutton = new \single_button($importpresetlink,
                 get_string('importapreset', 'mod_data'), 'get', false, [
                     'data-action' => 'importpresets',

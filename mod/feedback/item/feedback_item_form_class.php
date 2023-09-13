@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ require_once($CFG->libdir.'/formslib.php');
 
 define('FEEDBACK_ITEM_NAME_TEXTBOX_SIZE', 80);
 define('FEEDBACK_ITEM_LABEL_TEXTBOX_SIZE', 20);
-abstract class feedback_item_form extends moodleform {
+abstract class feedback_item_form extends powereducform {
     public function definition() {
         $item = $this->_customdata['item']; //the item object
 

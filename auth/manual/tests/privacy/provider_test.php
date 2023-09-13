@@ -23,7 +23,7 @@
  */
 namespace auth_manual\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/auth/manual/auth.php');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ if (!$templateid) {
     redirect('edit.php?id='.$id);
 }
 
-$url = new moodle_url('/mod/feedback/use_templ.php', array('id'=>$id, 'templateid'=>$templateid));
+$url = new powereduc_url('/mod/feedback/use_templ.php', array('id'=>$id, 'templateid'=>$templateid));
 $PAGE->set_url($url);
 
 list($course, $cm) = get_course_and_cm_from_cmid($id, 'feedback');
@@ -52,13 +52,13 @@ $strfeedback  = get_string("modulename", "feedback");
 
 $params = ['id' => $id];
 $params += ($mode ? ['mode' => $mode] : []);
-$activeurl = new moodle_url('/mod/feedback/manage_templates.php', $params);
+$activeurl = new powereduc_url('/mod/feedback/manage_templates.php', $params);
 $PAGE->set_url($activeurl);
 
 if ($mode == 'manage') {
     navigation_node::override_active_url($activeurl);
 } else {
-    navigation_node::override_active_url(new moodle_url('/mod/feedback/view.php', $params));
+    navigation_node::override_active_url(new powereduc_url('/mod/feedback/view.php', $params));
 }
 
 $PAGE->set_heading($course->fullname);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  *
  * @package    mod_feedback
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.3
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $functions = array(
 
@@ -35,7 +35,7 @@ $functions = array(
                             the user can view will be returned.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'mod_feedback_get_feedback_access_information' => array(
         'classname'     => 'mod_feedback_external',
@@ -43,7 +43,7 @@ $functions = array(
         'description'   => 'Return access information for a given feedback.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'mod_feedback_view_feedback' => array(
         'classname'     => 'mod_feedback_external',
@@ -51,7 +51,7 @@ $functions = array(
         'description'   => 'Trigger the course module viewed event and update the module completion status.',
         'type'          => 'write',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_current_completed_tmp' => array(
         'classname'     => 'mod_feedback_external',
@@ -59,7 +59,7 @@ $functions = array(
         'description'   => 'Returns the temporary completion record for the current user.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_items' => array(
         'classname'     => 'mod_feedback_external',
@@ -67,7 +67,7 @@ $functions = array(
         'description'   => 'Returns the items (questions) in the given feedback.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_launch_feedback' => array(
         'classname'     => 'mod_feedback_external',
@@ -75,7 +75,7 @@ $functions = array(
         'description'   => 'Starts or continues a feedback submission.',
         'type'          => 'write',
         'capabilities'  => 'mod/feedback:complete',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_page_items' => array(
         'classname'     => 'mod_feedback_external',
@@ -83,7 +83,7 @@ $functions = array(
         'description'   => 'Get a single feedback page items.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:complete',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_process_page' => array(
         'classname'     => 'mod_feedback_external',
@@ -91,7 +91,7 @@ $functions = array(
         'description'   => 'Process a jump between pages.',
         'type'          => 'write',
         'capabilities'  => 'mod/feedback:complete',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_analysis' => array(
         'classname'     => 'mod_feedback_external',
@@ -99,7 +99,7 @@ $functions = array(
         'description'   => 'Retrieves the feedback analysis.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:viewanalysepage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_unfinished_responses' => array(
         'classname'     => 'mod_feedback_external',
@@ -107,7 +107,7 @@ $functions = array(
         'description'   => 'Retrieves responses from the current unfinished attempt.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_finished_responses' => array(
         'classname'     => 'mod_feedback_external',
@@ -115,7 +115,7 @@ $functions = array(
         'description'   => 'Retrieves responses from the last finished attempt.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_non_respondents' => array(
         'classname'     => 'mod_feedback_external',
@@ -123,7 +123,7 @@ $functions = array(
         'description'   => 'Retrieves a list of students who didn\'t submit the feedback.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:viewreports',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_responses_analysis' => array(
         'classname'     => 'mod_feedback_external',
@@ -131,7 +131,7 @@ $functions = array(
         'description'   => 'Return the feedback user responses analysis.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:viewreports',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_feedback_get_last_completed' => array(
         'classname'     => 'mod_feedback_external',
@@ -139,6 +139,6 @@ $functions = array(
         'description'   => 'Retrieves the last completion record for the current user.',
         'type'          => 'read',
         'capabilities'  => 'mod/feedback:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 );

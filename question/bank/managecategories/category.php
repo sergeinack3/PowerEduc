@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This script allows a teacher to create, edit and delete question categories.
  *
  * @package    qbank_managecategories
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @author     2021, Guillermo Gomez Arias <guillermogomez@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -52,7 +52,7 @@ $param->move = optional_param('move', 0, PARAM_INT);
 $param->moveto = optional_param('moveto', 0, PARAM_INT);
 $param->edit = optional_param('edit', null, PARAM_INT);
 
-$url = new moodle_url($thispageurl);
+$url = new powereduc_url($thispageurl);
 foreach ((array)$param as $key => $value) {
     if (($key !== 'cancel' && $key !== 'edit' && $value !== 0) ||
             ($key === 'cancel' && $value !== '') ||
@@ -64,7 +64,7 @@ $PAGE->set_url($url);
 
 $qcobject = new question_category_object($pagevars['cpage'], $thispageurl,
         $contexts->having_one_edit_tab_cap('categories'), $param->edit,
-        $pagevars['cat'], $param->delete, $contexts->having_cap('moodle/question:add'));
+        $pagevars['cat'], $param->delete, $contexts->having_cap('powereduc/question:add'));
 
 if ($param->left || $param->right || $param->moveup || $param->movedown) {
     require_sesskey();
@@ -85,7 +85,7 @@ if ($param->moveupcontext || $param->movedowncontext) {
     }
     $newtopcat = question_get_top_category($param->tocontext);
     if (!$newtopcat) {
-        throw new moodle_exception('invalidcontext');
+        throw new powereduc_exception('invalidcontext');
     }
     $oldcat = $DB->get_record('question_categories', ['id' => $catid], '*', MUST_EXIST);
     // Log the move to another context.
@@ -102,7 +102,7 @@ if ($param->moveupcontext || $param->movedowncontext) {
 
 if ($param->delete) {
     if (!$category = $DB->get_record("question_categories", ["id" => $param->delete])) {
-        throw new moodle_exception('nocate', 'question', $thispageurl->out(), $param->delete);
+        throw new powereduc_exception('nocate', 'question', $thispageurl->out(), $param->delete);
     }
 
     helper::question_remove_stale_questions_from_category($param->delete);

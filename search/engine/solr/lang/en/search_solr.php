@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'search_solr'.
@@ -29,13 +29,13 @@ $string['errorvalidatingschema'] = 'Error validating Solr schema: field {$a->fie
 $string['errorsolr'] = 'The Solr search engine reported an error: {$a}';
 $string['extensionerror'] = 'The Apache Solr PHP extension is not installed. Please check the documentation.';
 $string['fileindexing'] = 'Enable file indexing';
-$string['fileindexing_help'] = 'If your Solr install supports it, this feature allows Moodle to send files to be indexed.<br/>
+$string['fileindexing_help'] = 'If your Solr install supports it, this feature allows PowerEduc to send files to be indexed.<br/>
 You will need to reindex all site contents after enabling this option for all files to be added.';
 $string['fileindexsettings'] = 'File indexing settings';
 $string['maxindexfilekb'] = 'Maximum file size to index (kB)';
 $string['maxindexfilekb_help'] = 'Files larger than this number of kilobytes will not be included in search indexing. If set to zero, files of any size will be indexed.';
-$string['minimumsolr4'] = 'Solr 4.0 is the minimum version required for Moodle';
-$string['missingconfig'] = 'Your Apache Solr server is not yet configured in Moodle.';
+$string['minimumsolr4'] = 'Solr 4.0 is the minimum version required for PowerEduc';
+$string['missingconfig'] = 'Your Apache Solr server is not yet configured in PowerEduc.';
 $string['multivaluedfield'] = 'Field "{$a}" returned an array instead of a scalar. Please delete the current index, create a new one and run setup_schema.php before indexing data in Solr.';
 $string['nodatafromserver'] = 'No data from server';
 $string['pluginname'] = 'Solr';

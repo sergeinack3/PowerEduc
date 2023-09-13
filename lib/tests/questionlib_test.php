@@ -18,7 +18,7 @@ namespace core;
 
 use question_bank;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -241,7 +241,7 @@ class questionlib_test extends \advanced_testcase {
         $course2 = $this->getDataGenerator()->create_course();
 
         // Create backup file and save it to the backup location.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, 2);
         $bc->execute_plan();
         $results = $bc->get_results();

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,53 +58,53 @@ class player_test extends \advanced_testcase {
         $manager = core_media_manager::instance();
 
         // Format: youtube.
-        $url = new \moodle_url('http://www.youtube.com/watch?v=vyrwMmsufJc');
+        $url = new \powereduc_url('http://www.youtube.com/watch?v=vyrwMmsufJc');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
-        $url = new \moodle_url('http://www.youtube.com/v/vyrwMmsufJc');
+        $url = new \powereduc_url('http://www.youtube.com/v/vyrwMmsufJc');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
-        $url = new \moodle_url('http://m.youtube.com/watch?v=vyrwMmsufJc');
+        $url = new \powereduc_url('http://m.youtube.com/watch?v=vyrwMmsufJc');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
 
         // Format: youtube video within playlist.
-        $url = new \moodle_url('https://www.youtube.com/watch?v=dv2f_xfmbD8&index=4&list=PLxcO_MFWQBDcyn9xpbmx601YSDlDcTcr0');
+        $url = new \powereduc_url('https://www.youtube.com/watch?v=dv2f_xfmbD8&index=4&list=PLxcO_MFWQBDcyn9xpbmx601YSDlDcTcr0');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
         $this->assertStringContainsString('list=PLxcO_MFWQBDcyn9xpbmx601YSDlDcTcr0', $t);
 
         // Format: youtube video with start time.
-        $url = new \moodle_url('https://www.youtube.com/watch?v=JNJMF1l3udM&t=1h11s');
+        $url = new \powereduc_url('https://www.youtube.com/watch?v=JNJMF1l3udM&t=1h11s');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
         $this->assertStringContainsString('start=3611', $t);
 
         // Format: youtube video within playlist with start time.
-        $url = new \moodle_url('https://www.youtube.com/watch?v=dv2f_xfmbD8&index=4&list=PLxcO_MFWQBDcyn9xpbmx601YSDlDcTcr0&t=1m5s');
+        $url = new \powereduc_url('https://www.youtube.com/watch?v=dv2f_xfmbD8&index=4&list=PLxcO_MFWQBDcyn9xpbmx601YSDlDcTcr0&t=1m5s');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
         $this->assertStringContainsString('list=PLxcO_MFWQBDcyn9xpbmx601YSDlDcTcr0', $t);
         $this->assertStringContainsString('start=65', $t);
 
         // Format: youtube video with invalid parameter values (injection attempts).
-        $url = new \moodle_url('https://www.youtube.com/watch?v=dv2f_xfmbD8&index=4&list=PLxcO_">');
+        $url = new \powereduc_url('https://www.youtube.com/watch?v=dv2f_xfmbD8&index=4&list=PLxcO_">');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
         $this->assertStringNotContainsString('list=PLxcO_', $t); // We shouldn't get a list param as input was invalid.
-        $url = new \moodle_url('https://www.youtube.com/watch?v=JNJMF1l3udM&t=">');
+        $url = new \powereduc_url('https://www.youtube.com/watch?v=JNJMF1l3udM&t=">');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
         $this->assertStringNotContainsString('start=', $t); // We shouldn't get a start param as input was invalid.
 
         // Format: youtube playlist.
-        $url = new \moodle_url('http://www.youtube.com/view_play_list?p=PL6E18E2927047B662');
+        $url = new \powereduc_url('http://www.youtube.com/view_play_list?p=PL6E18E2927047B662');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
-        $url = new \moodle_url('http://www.youtube.com/playlist?list=PL6E18E2927047B662');
+        $url = new \powereduc_url('http://www.youtube.com/playlist?list=PL6E18E2927047B662');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
-        $url = new \moodle_url('http://www.youtube.com/p/PL6E18E2927047B662');
+        $url = new \powereduc_url('http://www.youtube.com/p/PL6E18E2927047B662');
         $t = $manager->embed_url($url);
         $this->assertStringContainsString('</iframe>', $t);
 
@@ -116,7 +116,7 @@ class player_test extends \advanced_testcase {
     public function test_embed_url() {
         global $CFG;
 
-        $url = new \moodle_url('http://www.youtube.com/v/vyrwMmsufJc');
+        $url = new \powereduc_url('http://www.youtube.com/v/vyrwMmsufJc');
 
         $manager = core_media_manager::instance();
         $embedoptions = array(
@@ -144,7 +144,7 @@ class player_test extends \advanced_testcase {
      */
     public function test_embed_link() {
         global $CFG;
-        $url = new \moodle_url('http://www.youtube.com/v/vyrwMmsufJc');
+        $url = new \powereduc_url('http://www.youtube.com/v/vyrwMmsufJc');
         $text = \html_writer::link($url, 'Watch this one');
         $content = format_text($text, FORMAT_HTML);
 
@@ -161,8 +161,8 @@ class player_test extends \advanced_testcase {
      */
     public function test_embed_media() {
         global $CFG;
-        $url = new \moodle_url('http://www.youtube.com/v/vyrwMmsufJc');
-        $trackurl = new \moodle_url('http://example.org/some_filename.vtt');
+        $url = new \powereduc_url('http://www.youtube.com/v/vyrwMmsufJc');
+        $trackurl = new \powereduc_url('http://example.org/some_filename.vtt');
         $text = '<video controls="true"><source src="'.$url.'"/>' .
             '<track src="'.$trackurl.'">Unsupported text</video>';
         $content = format_text($text, FORMAT_HTML);

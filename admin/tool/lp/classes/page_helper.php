@@ -23,7 +23,7 @@
  */
 
 namespace tool_lp;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
 use context;

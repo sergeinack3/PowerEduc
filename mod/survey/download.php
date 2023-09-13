@@ -1,26 +1,26 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file is responsible for producing the downloadable versions of a survey
  * module.
  *
  * @package   mod_survey
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,11 +33,11 @@ $type  = optional_param('type', 'xls', PARAM_ALPHA);
 $group = optional_param('group', 0, PARAM_INT);
 
 if (! $cm = get_coursemodule_from_id('survey', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 $context = context_module::instance($cm->id);
@@ -48,7 +48,7 @@ require_login($course, false, $cm);
 require_capability('mod/survey:download', $context) ;
 
 if (! $survey = $DB->get_record("survey", array("id"=>$cm->instance))) {
-    throw new \moodle_exception('invalidsurveyid', 'survey');
+    throw new \powereduc_exception('invalidsurveyid', 'survey');
 }
 
 $params = array(
@@ -135,7 +135,7 @@ unset($allquestions);
 
 // Get and collate all the results in one big array
 if (! $surveyanswers = $DB->get_records("survey_answers", array("survey"=>$survey->id), "time ASC")) {
-    throw new \moodle_exception('cannotfindanswer', 'survey');
+    throw new \powereduc_exception('cannotfindanswer', 'survey');
 }
 
 $results = array();
@@ -162,7 +162,7 @@ if ($type == "ods") {
 /// Calculate file name
     $downloadfilename = clean_filename(strip_tags($courseshortname.' '.format_string($survey->name, true))).'.ods';
 /// Creating a workbook
-    $workbook = new MoodleODSWorkbook("-");
+    $workbook = new PowerEducODSWorkbook("-");
 /// Sending HTTP headers
     $workbook->send($downloadfilename);
 /// Creating the first worksheet
@@ -194,7 +194,7 @@ if ($type == "ods") {
         $col = 0;
         $row++;
         if (! $u = $DB->get_record("user", array("id"=>$user))) {
-            throw new \moodle_exception('invaliduserid');
+            throw new \powereduc_exception('invaliduserid');
         }
         if ($n = $DB->get_record("survey_analysis", array("survey"=>$survey->id, "userid"=>$user))) {
             $notes = $n->notes;
@@ -237,7 +237,7 @@ if ($type == "xls") {
 /// Calculate file name
     $downloadfilename = clean_filename(strip_tags($courseshortname.' '.format_string($survey->name,true))).'.xls';
 /// Creating a workbook
-    $workbook = new MoodleExcelWorkbook("-");
+    $workbook = new PowerEducExcelWorkbook("-");
 /// Sending HTTP headers
     $workbook->send($downloadfilename);
 /// Creating the first worksheet
@@ -270,7 +270,7 @@ if ($type == "xls") {
         $col = 0;
         $row++;
         if (! $u = $DB->get_record("user", array("id"=>$user))) {
-            throw new \moodle_exception('invaliduserid');
+            throw new \powereduc_exception('invaliduserid');
         }
         if ($n = $DB->get_record("survey_analysis", array("survey"=>$survey->id, "userid"=>$user))) {
             $notes = $n->notes;
@@ -336,7 +336,7 @@ echo "\n";
 // Print all the lines of data.
 foreach ($results as $user => $rest) {
     if (! $u = $DB->get_record("user", array("id"=>$user))) {
-        throw new \moodle_exception('invaliduserid');
+        throw new \powereduc_exception('invaliduserid');
     }
     echo $survey->id."\t";
     echo strip_tags(format_string($survey->name,true))."\t";

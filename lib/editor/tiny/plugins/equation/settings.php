@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $ADMIN->add('editortiny', new admin_category('tiny_equation', new lang_string('pluginname', 'tiny_equation')));
 $settings = new admin_settingpage('tiny_equation_settings', new lang_string('settings', 'tiny_equation'));

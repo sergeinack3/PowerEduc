@@ -18,7 +18,7 @@ namespace tool_uploadcourse;
 
 use tool_uploadcourse_processor;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/csvlib.class.php');

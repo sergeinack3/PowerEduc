@@ -1,31 +1,31 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This script displays the forum summary report for the given parameters, within a user's capabilities.
  *
  * @package   forumreport_summary
- * @copyright 2019 Michael Hawkins <michaelh@moodle.com>
+ * @copyright 2019 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once("../../../../config.php");
 
 if (isguestuser()) {
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 
 $courseid = required_param('courseid', PARAM_INT);
@@ -63,7 +63,7 @@ foreach ($courseforums as $courseforumid => $courseforum) {
 
 if ($forumid) {
     if (!isset($forumsvisibletouser[$forumid])) {
-        throw new \moodle_exception('A valid forum ID is required to generate a summary report.');
+        throw new \powereduc_exception('A valid forum ID is required to generate a summary report.');
     }
 
     $filters['forums'] = [$forumid];
@@ -74,7 +74,7 @@ if ($forumid) {
     require_login($courseid, false, $forumcm);
     $context = $forumcm->context;
     $canexport = !$download && has_capability('mod/forum:exportforum', $context);
-    $redirecturl = new moodle_url('/mod/forum/view.php', ['id' => $forumid]);
+    $redirecturl = new powereduc_url('/mod/forum/view.php', ['id' => $forumid]);
     $numforums = 1;
     $pageurlparams['forumid'] = $forumid;
     $iscoursereport = false;
@@ -93,7 +93,7 @@ if ($forumid) {
     $title = $course->fullname;
     // Export currently only supports single forum exports.
     $canexport = false;
-    $redirecturl = new moodle_url('/course/view.php', ['id' => $courseid]);
+    $redirecturl = new powereduc_url('/course/view.php', ['id' => $courseid]);
     $numforums = count($forumsvisibletouser);
     $iscoursereport = true;
 
@@ -101,7 +101,7 @@ if ($forumid) {
     $accessallforums = empty(array_diff($allforumidsincourse, $filters['forums']));
 }
 
-$pageurl = new moodle_url('/mod/forum/report/summary/index.php', $pageurlparams);
+$pageurl = new powereduc_url('/mod/forum/report/summary/index.php', $pageurlparams);
 
 $PAGE->set_url($pageurl);
 $PAGE->set_pagelayout('report');
@@ -111,10 +111,10 @@ $PAGE->activityheader->disable();
 $PAGE->navbar->add(get_string('nodetitle', 'forumreport_summary'));
 
 // Activate the secondary nav tab.
-navigation_node::override_active_url(new moodle_url('/mod/forum/report/summary/index.php',
+navigation_node::override_active_url(new powereduc_url('/mod/forum/report/summary/index.php',
     ['courseid' => $courseid, 'forumid' => $forumid]));
 
-$allowbulkoperations = !$download && !empty($CFG->messaging) && has_capability('moodle/course:bulkmessaging', $context);
+$allowbulkoperations = !$download && !empty($CFG->messaging) && has_capability('powereduc/course:bulkmessaging', $context);
 $canseeprivatereplies = false;
 $hasviewall = false;
 $privatereplycapcount = 0;
@@ -178,7 +178,7 @@ if ($download) {
     }
 
     // Allow switching to course report (or other forum user has access to).
-    $reporturl = new moodle_url('/mod/forum/report/summary/index.php', ['courseid' => $courseid]);
+    $reporturl = new powereduc_url('/mod/forum/report/summary/index.php', ['courseid' => $courseid]);
     $forumselect = new single_select($reporturl, 'forumid', $forumselectoptions, $forumid, '');
     $forumselect->set_label(get_string('forumselectlabel', 'forumreport_summary'));
     echo $OUTPUT->render($forumselect);

@@ -10,10 +10,10 @@
 
 // Make certain that config.php doesn't display any errors, and that it doesn't
 // override our do-not-display-errors setting:
-// disable moodle specific debug messages and any errors in output
+// disable powereduc specific debug messages and any errors in output
 define('NO_DEBUG_DISPLAY', true);
 // cookies are not used, makes sure there is empty global $USER
-define('NO_MOODLE_COOKIES', true);
+define('NO_POWEREDUC_COOKIES', true);
 
 define('MNET_SERVER', true);
 
@@ -27,7 +27,7 @@ require_once $CFG->dirroot.'/mnet/xmlrpc/serverlib.php';
 
 
 if ($CFG->mnet_dispatcher_mode === 'off') {
-    throw new \moodle_exception('mnetdisabled', 'mnet');
+    throw new \powereduc_exception('mnetdisabled', 'mnet');
 }
 
 // Content type for output is not html:
@@ -43,7 +43,7 @@ if (!isset($_SERVER)) {
 
 
 // New global variable which ONLY gets set in this server page, so you know that
-// if you've been called by a remote Moodle, this should be set:
+// if you've been called by a remote PowerEduc, this should be set:
 $remoteclient = new mnet_remote_client();
 set_mnet_remote_client($remoteclient);
 

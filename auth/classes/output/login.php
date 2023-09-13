@@ -23,7 +23,7 @@
  */
 
 namespace core_auth\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 
@@ -149,13 +149,13 @@ class login implements renderable, templatable {
         $data->hasidentityproviders = !empty($this->identityproviders);
         $data->hasinstructions = !empty($this->instructions) || $this->cansignup;
         $data->identityproviders = $identityproviders;
-        list($data->instructions, $data->instructionsformat) = external_format_text($this->instructions, FORMAT_MOODLE,
+        list($data->instructions, $data->instructionsformat) = external_format_text($this->instructions, FORMAT_POWEREDUC,
             context_system::instance()->id);
         $data->loginurl = $this->loginurl->out(false);
         $data->signupurl = $this->signupurl->out(false);
         $data->username = $this->username;
         $data->logintoken = $this->logintoken;
-        $data->maintenance = format_text($this->maintenance, FORMAT_MOODLE);
+        $data->maintenance = format_text($this->maintenance, FORMAT_POWEREDUC);
         $data->languagemenu = $this->languagemenu;
 
         return $data;

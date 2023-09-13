@@ -18,7 +18,7 @@ namespace core;
 
 use calc_formula;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/mathslib.php');

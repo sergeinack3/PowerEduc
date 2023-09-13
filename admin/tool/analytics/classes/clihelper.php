@@ -24,7 +24,7 @@
 
 namespace tool_analytics;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helper class that contains helper functions for cli scripts.

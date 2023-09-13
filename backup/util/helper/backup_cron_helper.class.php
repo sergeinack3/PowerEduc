@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * This class is an abstract class with methods that can be called to aid the
@@ -442,7 +442,7 @@ abstract class backup_cron_automated_helper {
         $dir = $config->backup_auto_destination;
         $storage = (int)$config->backup_auto_storage;
 
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE, backup::INTERACTIVE_NO,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO,
                 backup::MODE_AUTOMATED, $userid);
 
         try {
@@ -686,7 +686,7 @@ abstract class backup_cron_automated_helper {
 
         // Calculate backup filename regex, ignoring the date/time/info parts that can be
         // variable, depending of languages, formats and automated backup settings.
-        $filename = backup::FORMAT_MOODLE . '-' . backup::TYPE_1COURSE . '-' . $course->id . '-';
+        $filename = backup::FORMAT_POWEREDUC . '-' . backup::TYPE_1COURSE . '-' . $course->id . '-';
         $regex = '#' . preg_quote($filename, '#') . '.*\.mbz$#';
 
         // Store all the matching files into filename => timemodified array.
@@ -706,7 +706,7 @@ abstract class backup_cron_automated_helper {
             }
 
             // Make sure this backup concerns the course and site we are looking for.
-            if ($bcinfo->format === backup::FORMAT_MOODLE &&
+            if ($bcinfo->format === backup::FORMAT_POWEREDUC &&
                     $bcinfo->type === backup::TYPE_1COURSE &&
                     $bcinfo->original_course_id == $course->id &&
                     backup_general_helper::backup_is_samesite($bcinfo)) {

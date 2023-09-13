@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/tablelib.php');
@@ -42,7 +42,7 @@ class mod_feedback_templates_table extends flexible_table {
      * Constructor
      * @param int $uniqueid all tables have to have a unique id, this is used
      *      as a key when storing table properties like sort order in the session.
-     * @param moodle_url $baseurl
+     * @param powereduc_url $baseurl
      * @param string $mode Indicate whether we are managing templates
      */
     public function __construct($uniqueid, $baseurl, ?string $mode = null) {
@@ -82,12 +82,12 @@ class mod_feedback_templates_table extends flexible_table {
 
         foreach ($templates as $template) {
             $data = [];
-            $url = new moodle_url($this->baseurl, array('templateid' => $template->id, 'sesskey' => sesskey()));
+            $url = new powereduc_url($this->baseurl, array('templateid' => $template->id, 'sesskey' => sesskey()));
             $data[] = $OUTPUT->action_link($url, format_string($template->name));
 
             // Only show the actions if we are managing templates.
             if ($this->mode && has_capability('mod/feedback:deletetemplate', $this->get_context())) {
-                $deleteurl = new moodle_url('/mod/feedback/manage_templates.php',
+                $deleteurl = new powereduc_url('/mod/feedback/manage_templates.php',
                     $url->params() + ['deletetemplate' => $template->id]);
                 $deleteaction = new confirm_action(get_string('confirmdeletetemplate', 'feedback'));
                 $deleteicon = $OUTPUT->action_icon($deleteurl, new pix_icon('t/delete', $strdeletefeedback), $deleteaction);

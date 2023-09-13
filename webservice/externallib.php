@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -20,11 +20,11 @@
  *
  * @package    core_webservice
  * @category   external
- * @copyright  2011 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2011 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -33,9 +33,9 @@ require_once("$CFG->libdir/externallib.php");
  *
  * @package    core_webservice
  * @category   external
- * @copyright  2011 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2011 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_webservice_external extends external_api {
 
@@ -43,7 +43,7 @@ class core_webservice_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_site_info_parameters() {
         return new external_function_parameters(
@@ -68,7 +68,7 @@ class core_webservice_external extends external_api {
      * @param array $serviceshortnames - DEPRECATED PARAMETER - values will be ignored -
      * it was an original design error, we keep for backward compatibility.
      * @return array site info
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_site_info($serviceshortnames = array()) {
         global $USER, $SITE, $CFG, $DB, $PAGE;
@@ -137,8 +137,8 @@ class core_webservice_external extends external_api {
         foreach ($functions as $function) {
             $functioninfo = array();
             $functioninfo['name'] = $function->name;
-            if ($function->component == 'moodle' || $function->component == 'core') {
-                $version = $CFG->version; // Moodle version.
+            if ($function->component == 'powereduc' || $function->component == 'core') {
+                $version = $CFG->version; // PowerEduc version.
             } else {
                 $versionpath = core_component::get_component_directory($function->component).'/version.php';
                 if (is_readable($versionpath)) {
@@ -153,8 +153,8 @@ class core_webservice_external extends external_api {
                     }
                 } else {
                     // Function component should always have a version.php,
-                    // otherwise the function should have been described with component => 'moodle'.
-                    throw new moodle_exception('missingversionfile', 'webservice', '', $function->component);
+                    // otherwise the function should have been described with component => 'powereduc'.
+                    throw new powereduc_exception('missingversionfile', 'webservice', '', $function->component);
                 }
             }
             $functioninfo['version'] = $version;
@@ -184,11 +184,11 @@ class core_webservice_external extends external_api {
         );
 
         // User can manage own files.
-        $siteinfo['usercanmanageownfiles'] = has_capability('moodle/user:manageownfiles', $context);
+        $siteinfo['usercanmanageownfiles'] = has_capability('powereduc/user:manageownfiles', $context);
 
         // User quota. 0 means user can ignore the quota.
         $siteinfo['userquota'] = 0;
-        if (!has_capability('moodle/user:ignoreuserquota', $context)) {
+        if (!has_capability('powereduc/user:ignoreuserquota', $context)) {
             $siteinfo['userquota'] = (int) $CFG->userquota; // Cast to int to ensure value is not higher than PHP_INT_MAX.
         }
 
@@ -227,7 +227,7 @@ class core_webservice_external extends external_api {
      * Returns description of method result value
      *
      * @return external_single_structure
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_site_info_returns() {
         return new external_single_structure(
@@ -242,7 +242,7 @@ class core_webservice_external extends external_api {
                 'siteurl'        => new external_value(PARAM_RAW, 'site url'),
                 'userpictureurl' => new external_value(PARAM_URL, 'the user profile picture.
                     Warning: this url is the public URL that only works when forcelogin is set to NO and guestaccess is set to YES.
-                    In order to retrieve user profile pictures independently of the Moodle config, replace "pluginfile.php" by
+                    In order to retrieve user profile pictures independently of the PowerEduc config, replace "pluginfile.php" by
                     "webservice/pluginfile.php?token=WSTOKEN&file="
                     Of course the user can only see profile picture depending
                     on his/her permissions. Moreover it is recommended to use HTTPS too.'),
@@ -258,8 +258,8 @@ class core_webservice_external extends external_api {
                                                        VALUE_OPTIONAL),
                 'uploadfiles'  => new external_value(PARAM_INT, '1 if users are allowed to upload files, 0 if not',
                                                        VALUE_OPTIONAL),
-                'release'  => new external_value(PARAM_TEXT, 'Moodle release number', VALUE_OPTIONAL),
-                'version'  => new external_value(PARAM_TEXT, 'Moodle version number', VALUE_OPTIONAL),
+                'release'  => new external_value(PARAM_TEXT, 'PowerEduc release number', VALUE_OPTIONAL),
+                'version'  => new external_value(PARAM_TEXT, 'PowerEduc version number', VALUE_OPTIONAL),
                 'mobilecssurl'  => new external_value(PARAM_URL, 'Mobile custom CSS theme', VALUE_OPTIONAL),
                 'advancedfeatures' => new external_multiple_structure(
                     new external_single_structure(

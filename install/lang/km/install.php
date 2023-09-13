@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['admindirname'] = 'ថតអ្នកគ្រប់គ្រង';
 $string['availablelangs'] = 'កញ្ចប់ភាសាដែលមាន';

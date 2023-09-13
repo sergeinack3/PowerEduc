@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy provider tests.
  *
  * @package    core_message
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_message\privacy;
@@ -30,13 +30,13 @@ use core_privacy\local\request\writer;
 use core_privacy\local\request\transform;
 use core_message\tests\helper as testhelper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider tests class.
  *
  * @package    core_message
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends \core_privacy\tests\provider_testcase {
@@ -170,12 +170,12 @@ class provider_test extends \core_privacy\tests\provider_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         // Set some message user preferences.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'airnotifier', $USER->id);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'airnotifier', $USER->id);
         set_user_preference('message_provider_mod_feedback_submission_enabled', 'popup', $USER->id);
 
         set_user_preference('message_blocknoncontacts', \core_message\api::MESSAGE_PRIVACY_ONLYCONTACTS, $USER->id);
         set_user_preference('message_entertosend', true, $USER->id);
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'inbound', $user->id);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'inbound', $user->id);
 
         // Set an unrelated preference.
         set_user_preference('some_unrelated_preference', 'courses', $USER->id);
@@ -190,13 +190,13 @@ class provider_test extends \core_privacy\tests\provider_testcase {
 
         // Check only 3 preferences exist.
         $this->assertCount(4, $prefs);
-        $this->assertArrayHasKey('message_provider_moodle_instantmessage_enabled', $prefs);
+        $this->assertArrayHasKey('message_provider_powereduc_instantmessage_enabled', $prefs);
         $this->assertArrayHasKey('message_provider_mod_feedback_submission_enabled', $prefs);
         $this->assertArrayHasKey('message_blocknoncontacts', $prefs);
         $this->assertArrayHasKey('message_entertosend', $prefs);
 
         foreach ($prefs as $key => $pref) {
-            if ($key == 'message_provider_moodle_instantmessage_enabled') {
+            if ($key == 'message_provider_powereduc_instantmessage_enabled') {
                 $this->assertEquals('airnotifier', $pref->value);
             } else if ($key == 'message_provider_mod_feedback_submission_enabled') {
                 $this->assertEquals('popup', $pref->value);
@@ -2926,7 +2926,7 @@ class provider_test extends \core_privacy\tests\provider_testcase {
      *
      * @param int $userid The user id
      * @return  void
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected static function remove_user_self_conversation(int $userid) {
         $selfconversation = \core_message\api::get_self_conversation($userid);

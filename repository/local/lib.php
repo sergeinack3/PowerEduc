@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access local files
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_local
  * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,9 +25,9 @@
 require_once($CFG->dirroot . '/repository/lib.php');
 
 /**
- * repository_local class is used to browse moodle files
+ * repository_local class is used to browse powereduc files
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_local
  * @copyright  2012 Marina Glancy
  * @copyright  2009 Dongsheng Cai {@link http://dongsheng.org}
@@ -118,11 +118,11 @@ class repository_local extends repository {
     }
 
     /**
-     * Does this repository used to browse moodle files?
+     * Does this repository used to browse powereduc files?
      *
      * @return boolean
      */
-    public function has_moodle_files() {
+    public function has_powereduc_files() {
         return true;
     }
 
@@ -176,7 +176,7 @@ class repository_local extends repository {
         } else if ($fileinfo instanceof file_info_context_coursecat) {
             // This is a course category. For non-admins we do not display categories
             return empty($CFG->navshowmycoursecategories) &&
-                            !has_capability('moodle/course:update', context_system::instance());
+                            !has_capability('powereduc/course:update', context_system::instance());
         } else {
             $params = $fileinfo->get_params();
             if (strlen($params['filearea']) &&
@@ -228,7 +228,7 @@ class repository_local extends repository {
             $node['icon'] = $OUTPUT->image_url(file_file_icon($fileinfo, 24))->out(false);
             if ($imageinfo = $fileinfo->get_imageinfo()) {
                 // what a beautiful picture, isn't it
-                $fileurl = new moodle_url($fileinfo->get_url());
+                $fileurl = new powereduc_url($fileinfo->get_url());
                 $node['realthumbnail'] = $fileurl->out(false, array('preview' => 'thumb', 'oid' => $fileinfo->get_timemodified()));
                 $node['realicon'] = $fileurl->out(false, array('preview' => 'tinyicon', 'oid' => $fileinfo->get_timemodified()));
                 $node['image_width'] = $imageinfo['width'];

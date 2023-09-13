@@ -16,7 +16,7 @@
 
 namespace block_rss_client;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once(__DIR__ . '/../../moodleblock.class.php');
 require_once(__DIR__ . '/../block_rss_client.php');
 

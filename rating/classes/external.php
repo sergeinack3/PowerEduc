@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Rating external API
@@ -21,10 +21,10 @@
  * @category   external
  * @copyright  2015 Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->dirroot/rating/lib.php");
@@ -36,7 +36,7 @@ require_once("$CFG->dirroot/rating/lib.php");
  * @category   external
  * @copyright  2015 Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 class core_rating_external extends external_api {
 
@@ -44,7 +44,7 @@ class core_rating_external extends external_api {
      * Returns description of get_item_ratings parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_item_ratings_parameters() {
         return new external_function_parameters (
@@ -71,8 +71,8 @@ class core_rating_external extends external_api {
      * @param int $scaleid the scale id
      * @param string $sort sql order (firstname, rating or timemodified)
      * @return array Result and possible warnings
-     * @throws moodle_exception
-     * @since Moodle 2.9
+     * @throws powereduc_exception
+     * @since PowerEduc 2.9
      */
     public static function get_item_ratings($contextlevel, $instanceid, $component, $ratingarea, $itemid, $scaleid, $sort) {
         global $USER, $PAGE;
@@ -101,15 +101,15 @@ class core_rating_external extends external_api {
                         'ratingarea' => $ratingarea,
                         'itemid' => $itemid,
                         'scaleid' => $scaleid);
-        if (!has_capability('moodle/rating:view', $context) ||
+        if (!has_capability('powereduc/rating:view', $context) ||
                 !component_callback($component, 'rating_can_see_item_ratings', array($callbackparams), true)) {
-            throw new moodle_exception('noviewrate', 'rating');
+            throw new powereduc_exception('noviewrate', 'rating');
         }
 
         list($context, $course, $cm) = get_context_info_array($context->id);
 
         // Can we see all ratings?
-        $canviewallratings = has_capability('moodle/rating:viewall', $context);
+        $canviewallratings = has_capability('powereduc/rating:viewall', $context);
 
         // Create the Sql sort order string.
         switch ($params['sort']) {
@@ -174,7 +174,7 @@ class core_rating_external extends external_api {
      * Returns description of get_item_ratings result values.
      *
      * @return external_single_structure
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_item_ratings_returns() {
 
@@ -201,7 +201,7 @@ class core_rating_external extends external_api {
      * Returns description of add_rating parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function add_rating_parameters() {
         return new external_function_parameters (
@@ -232,8 +232,8 @@ class core_rating_external extends external_api {
      * @param int $rateduserid the rated user id
      * @param int $aggregation the aggregation method
      * @return array result and possible warnings
-     * @throws moodle_exception
-     * @since Moodle 3.2
+     * @throws powereduc_exception
+     * @since PowerEduc 3.2
      */
     public static function add_rating($contextlevel, $instanceid, $component, $ratingarea, $itemid, $scaleid, $rating, $rateduserid,
                                         $aggregation = RATING_AGGREGATE_NONE) {
@@ -258,14 +258,14 @@ class core_rating_external extends external_api {
         self::validate_context($context);
         $cm = get_coursemodule_from_id(false, $context->instanceid, 0, false, MUST_EXIST);
 
-        require_capability('moodle/rating:rate', $context);
+        require_capability('powereduc/rating:rate', $context);
 
         $rm = new rating_manager();
         $result = $rm->add_rating($cm, $context, $params['component'], $params['ratingarea'], $params['itemid'], $params['scaleid'],
                                     $params['rating'], $params['rateduserid'], $params['aggregation']);
 
         if (!empty($result->error)) {
-            throw new moodle_exception($result->error, 'rating');
+            throw new powereduc_exception($result->error, 'rating');
         }
 
         $returndata = array(
@@ -286,7 +286,7 @@ class core_rating_external extends external_api {
      * Returns description of add_rating result values.
      *
      * @return external_single_structure
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function add_rating_returns() {
 

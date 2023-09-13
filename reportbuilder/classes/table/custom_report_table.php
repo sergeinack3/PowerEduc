@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -20,8 +20,8 @@ namespace core_reportbuilder\table;
 
 use core\output\notification;
 use html_writer;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use stdClass;
 use core_reportbuilder\manager;
 use core_reportbuilder\local\models\report;
@@ -33,7 +33,7 @@ use core_reportbuilder\output\column_heading_editable;
  * Custom report dynamic table class
  *
  * @package     core_reportbuilder
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_report_table extends base_report_table {
@@ -53,16 +53,16 @@ class custom_report_table extends base_report_table {
      *
      * @param string $uniqueid
      * @param string $download
-     * @throws moodle_exception For invalid unique ID
+     * @throws powereduc_exception For invalid unique ID
      */
     public function __construct(string $uniqueid, string $download = '') {
         if (!preg_match('/^' . self::UNIQUEID_PREFIX . '(?<id>\d+)$/', $uniqueid, $matches)) {
-            throw new moodle_exception('invalidcustomreportid', 'core_reportbuilder', '', null, $uniqueid);
+            throw new powereduc_exception('invalidcustomreportid', 'core_reportbuilder', '', null, $uniqueid);
         }
 
         parent::__construct($uniqueid);
 
-        $this->define_baseurl(new moodle_url('/reportbuilder/edit.php', ['id' => $matches['id']]));
+        $this->define_baseurl(new powereduc_url('/reportbuilder/edit.php', ['id' => $matches['id']]));
 
         // Load the report persistent, and accompanying report instance.
         $this->persistent = new report($matches['id']);

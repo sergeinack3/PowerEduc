@@ -63,10 +63,10 @@ Feature: Access to preferences page
     | Short name | Parent |
     | Custom full name | Parent |
     | contextlevel30 | 1 |
-    | moodle/user:editprofile | 1 |
-    | moodle/user:viewalldetails | 1 |
-    | moodle/user:viewuseractivitiesreport | 1 |
-    | moodle/user:viewdetails | 1 |
+    | powereduc/user:editprofile | 1 |
+    | powereduc/user:viewalldetails | 1 |
+    | powereduc/user:viewuseractivitiesreport | 1 |
+    | powereduc/user:viewdetails | 1 |
     And I click on "Create this role" "button"
     And I navigate to "Users > Accounts > Browse list of users" in site administration
     And I follow "Student 1"

@@ -28,7 +28,7 @@ use stdClass;
 use tool_usertours\helper;
 use tool_usertours\step;
 
-defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') || die('Direct access to this script is forbidden.');
 
 require_once($CFG->libdir . '/formslib.php');
 
@@ -214,7 +214,7 @@ class editstep extends \moodleform {
             if ($data->contenttype == static::CONTENTTYPE_LANGSTRING) {
                 $data->content = [
                     'text' => $data->contentlangstring,
-                    'format' => FORMAT_MOODLE,
+                    'format' => FORMAT_POWEREDUC,
                 ];
             }
         }

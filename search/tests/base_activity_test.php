@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/fixtures/testable_core_search.php');
@@ -99,7 +99,7 @@ class base_activity_test extends \advanced_testcase {
     public function tearDown(): void {
         // For unit tests before PHP 7, teardown is called even on skip. So only do our teardown if we did setup.
         if ($this->generator) {
-            // Moodle DML freaks out if we don't teardown the temp table after each run.
+            // PowerEduc DML freaks out if we don't teardown the temp table after each run.
             $this->generator->teardown();
             $this->generator = null;
         }
@@ -256,10 +256,10 @@ class base_activity_test extends \advanced_testcase {
     /**
      * Utility function to convert recordset to array for testing.
      *
-     * @param moodle_recordset $rs Recordset to convert
+     * @param powereduc_recordset $rs Recordset to convert
      * @return array Array indexed by number (0, 1, 2, ...)
      */
-    protected static function recordset_to_indexed_array(\moodle_recordset $rs) {
+    protected static function recordset_to_indexed_array(\powereduc_recordset $rs) {
         $results = [];
         foreach ($rs as $rec) {
             $results[] = $rec;
@@ -290,7 +290,7 @@ class base_activity_test extends \advanced_testcase {
         $results = self::recordset_to_indexed_array($area->get_document_recordset());
 
         for ($i = 0; $i < 4; $i++) {
-            $this->assertEquals(new \moodle_url('/mod/forum/view.php',
+            $this->assertEquals(new \powereduc_url('/mod/forum/view.php',
                     ['id' => $this->forums[$i + 1]->cmid]),
                     $area->get_doc_url($area->get_document($results[$i])));
         }

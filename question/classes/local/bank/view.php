@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class to print a view of the question bank.
  *
  * @package   core_question
- * @copyright 1999 onwards Martin Dougiamas and others {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas and others {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_question\local\bank;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/editlib.php');
 use core_plugin_manager;
@@ -64,13 +64,13 @@ class view {
     const MAX_SORTS = 3;
 
     /**
-     * @var \moodle_url base URL for the current page. Used as the
+     * @var \powereduc_url base URL for the current page. Used as the
      * basis for making URLs for actions that reload the page.
      */
     protected $baseurl;
 
     /**
-     * @var \moodle_url used as a basis for URLs that edit a question.
+     * @var \powereduc_url used as a basis for URLs that edit a question.
      */
     protected $editquestionurl;
 
@@ -168,7 +168,7 @@ class view {
      * Constructor for view.
      *
      * @param \core_question\local\bank\question_edit_contexts $contexts
-     * @param \moodle_url $pageurl
+     * @param \powereduc_url $pageurl
      * @param object $course course settings
      * @param object $cm (optional) activity settings.
      */
@@ -180,7 +180,7 @@ class view {
 
         // Create the url of the new question page to forward to.
         $this->returnurl = $pageurl->out_as_local_url(false);
-        $this->editquestionurl = new \moodle_url('/question/bank/editquestion/question.php', ['returnurl' => $this->returnurl]);
+        $this->editquestionurl = new \powereduc_url('/question/bank/editquestion/question.php', ['returnurl' => $this->returnurl]);
         if ($this->cm !== null) {
             $this->editquestionurl->param('cmid', $this->cm->id);
         } else {
@@ -266,7 +266,7 @@ class view {
                 'creator_name_column',
                 'comment_count_column'
         ];
-        if (question_get_display_preference('qbshowtext', 0, PARAM_BOOL, new \moodle_url(''))) {
+        if (question_get_display_preference('qbshowtext', 0, PARAM_BOOL, new \powereduc_url(''))) {
             $corequestionbankcolumns[] = 'question_text_row';
         }
 
@@ -462,13 +462,13 @@ class view {
             for ($i = 1; $i <= self::MAX_SORTS; $i++) {
                 $this->baseurl->remove_params('qbs' . $i);
             }
-            throw new \moodle_exception('unknownsortcolumn', '', $link = $this->baseurl->out(), $colname);
+            throw new \powereduc_exception('unknownsortcolumn', '', $link = $this->baseurl->out(), $colname);
         }
         // Validate the subsort, if present.
         if ($subsort) {
             $subsorts = $column->is_sortable();
             if (!is_array($subsorts) || !isset($subsorts[$subsort])) {
-                throw new \moodle_exception('unknownsortcolumn', '', $link = $this->baseurl->out(), $sort);
+                throw new \powereduc_exception('unknownsortcolumn', '', $link = $this->baseurl->out(), $sort);
             }
         }
         return [$colname, $subsort];
@@ -644,9 +644,9 @@ class view {
      *
      * @param int $page page to display.
      * @param int $perpage number of questions per page.
-     * @return \moodle_recordset questionid => data about each question.
+     * @return \powereduc_recordset questionid => data about each question.
      */
-    protected function load_page_questions($page, $perpage): \moodle_recordset {
+    protected function load_page_questions($page, $perpage): \powereduc_recordset {
         global $DB;
         $questions = $DB->get_recordset_sql($this->loadsql, $this->sqlparams, $page * $perpage, $perpage);
         if (empty($questions)) {
@@ -660,18 +660,18 @@ class view {
     /**
      * Returns the base url.
      */
-    public function base_url(): \moodle_url {
+    public function base_url(): \powereduc_url {
         return $this->baseurl;
     }
 
     /**
-     * Get the URL for editing a question as a moodle url.
+     * Get the URL for editing a question as a powereduc url.
      *
      * @param int $questionid the question id.
-     * @return \moodle_url the URL, HTML-escaped.
+     * @return \powereduc_url the URL, HTML-escaped.
      */
-    public function edit_question_moodle_url($questionid) {
-        return new \moodle_url($this->editquestionurl, ['id' => $questionid]);
+    public function edit_question_powereduc_url($questionid) {
+        return new \powereduc_url($this->editquestionurl, ['id' => $questionid]);
     }
 
     /**
@@ -681,17 +681,17 @@ class view {
      * @return string the URL, HTML-escaped.
      */
     public function edit_question_url($questionid) {
-        return $this->edit_question_moodle_url($questionid)->out();
+        return $this->edit_question_powereduc_url($questionid)->out();
     }
 
     /**
-     * Get the URL for duplicating a question as a moodle url.
+     * Get the URL for duplicating a question as a powereduc url.
      *
      * @param int $questionid the question id.
-     * @return \moodle_url the URL.
+     * @return \powereduc_url the URL.
      */
-    public function copy_question_moodle_url($questionid) {
-        return new \moodle_url($this->editquestionurl, ['id' => $questionid, 'makecopy' => 1]);
+    public function copy_question_powereduc_url($questionid) {
+        return new \powereduc_url($this->editquestionurl, ['id' => $questionid, 'makecopy' => 1]);
     }
 
     /**
@@ -700,7 +700,7 @@ class view {
      * @return string the URL, HTML-escaped.
      */
     public function copy_question_url($questionid) {
-        return $this->copy_question_moodle_url($questionid)->out();
+        return $this->copy_question_powereduc_url($questionid)->out();
     }
 
     /**
@@ -714,10 +714,10 @@ class view {
     /**
      * Get the URL to preview a question.
      * @param \stdClass $questiondata the data defining the question.
-     * @return \moodle_url the URL.
-     * @deprecated since Moodle 4.0
+     * @return \powereduc_url the URL.
+     * @deprecated since PowerEduc 4.0
      * @see \qbank_previewquestion\helper::question_preview_url()
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public function preview_question_url($questiondata) {
         debugging('Function preview_question_url() has been deprecated and moved to qbank_previewquestion plugin,
@@ -764,7 +764,7 @@ class view {
 
         // Continues with list of questions.
         $this->display_question_list($this->baseurl, $cat, null, $page, $perpage,
-                                        $this->contexts->having_cap('moodle/question:add'));
+                                        $this->contexts->having_cap('powereduc/question:add'));
         echo \html_writer::end_div();
 
     }
@@ -850,7 +850,7 @@ class view {
 
         // The html will be refactored in the filter feature implementation.
         echo \html_writer::start_tag('form', ['method' => 'get',
-                'action' => new \moodle_url($this->baseurl), 'id' => 'displayoptions']);
+                'action' => new \powereduc_url($this->baseurl), 'id' => 'displayoptions']);
         echo \html_writer::start_div();
 
         $excludes = ['recurse', 'showhidden', 'qbshowtext'];
@@ -883,7 +883,7 @@ class view {
         echo \html_writer::tag('noscript', \html_writer::div($go), ['class' => 'inline']);
         echo \html_writer::end_div();
         echo \html_writer::end_tag('form');
-        $PAGE->requires->yui_module('moodle-question-searchform', 'M.question.searchform.init');
+        $PAGE->requires->yui_module('powereduc-question-searchform', 'M.question.searchform.init');
     }
 
     /**
@@ -941,7 +941,7 @@ class view {
     /**
      * Prints the table of questions in a category with interactions
      *
-     * @param \moodle_url $pageurl     The URL to reload this page.
+     * @param \powereduc_url $pageurl     The URL to reload this page.
      * @param string     $categoryandcontext 'categoryID,contextID'.
      * @param int        $recurse     Whether to include subcategories.
      * @param int        $page        The number of the page to be displayed
@@ -962,7 +962,7 @@ class view {
         list($categoryid, $contextid) = explode(',', $categoryandcontext);
         $catcontext = \context::instance_by_id($contextid);
 
-        $canadd = has_capability('moodle/question:add', $catcontext);
+        $canadd = has_capability('powereduc/question:add', $catcontext);
 
         $this->create_new_question_form($category, $canadd);
 
@@ -983,7 +983,7 @@ class view {
             $column->load_additional_data($questions);
         }
 
-        $pageingurl = new \moodle_url($pageurl, $pageurl->params());
+        $pageingurl = new \powereduc_url($pageurl, $pageurl->params());
         $pagingbar = new \paging_bar($totalnumber, $page, $perpage, $pageingurl);
         $pagingbar->pagevar = 'qpage';
 
@@ -1024,7 +1024,7 @@ class view {
      * @param string $pagination
      * @param int $totalnumber
      * @param int $perpage
-     * @param \moodle_url $pageurl
+     * @param \powereduc_url $pageurl
      */
     protected function display_bottom_pagination($pagination, $totalnumber, $perpage, $pageurl): void {
         global $PAGE;
@@ -1036,7 +1036,7 @@ class view {
         if ($totalnumber > $this->pagesize) {
             $displaydata['showall'] = true;
             if ($perpage == $this->pagesize) {
-                $url = new \moodle_url($pageurl, array_merge($pageurl->params(),
+                $url = new \powereduc_url($pageurl, array_merge($pageurl->params(),
                         ['qpage' => 0, 'qperpage' => MAXIMUM_QUESTIONS_PER_PAGE]));
                 if ($totalnumber > MAXIMUM_QUESTIONS_PER_PAGE) {
                     $displaydata['totalnumber'] = MAXIMUM_QUESTIONS_PER_PAGE;
@@ -1045,7 +1045,7 @@ class view {
                     $displaydata['totalnumber'] = $totalnumber;
                 }
             } else {
-                $url = new \moodle_url($pageurl, array_merge($pageurl->params(),
+                $url = new \powereduc_url($pageurl, array_merge($pageurl->params(),
                         ['qperpage' => $this->pagesize]));
                 $displaydata['totalnumber'] = $this->pagesize;
             }
@@ -1060,9 +1060,9 @@ class view {
      * @param \context $catcontext The context of the category being displayed.
      */
     protected function display_bottom_controls(\context $catcontext): void {
-        $caneditall = has_capability('moodle/question:editall', $catcontext);
-        $canuseall = has_capability('moodle/question:useall', $catcontext);
-        $canmoveall = has_capability('moodle/question:moveall', $catcontext);
+        $caneditall = has_capability('powereduc/question:editall', $catcontext);
+        $canuseall = has_capability('powereduc/question:useall', $catcontext);
+        $canmoveall = has_capability('powereduc/question:moveall', $catcontext);
         if ($caneditall || $canmoveall || $canuseall) {
             global $PAGE;
             $bulkactiondatas = [];
@@ -1084,7 +1084,7 @@ class view {
                 $actiondata = new \stdClass();
                 $actiondata->actionname = $action['title'];
                 $actiondata->actionkey = $key;
-                $actiondata->actionurl = new \moodle_url($action['url'], $params);
+                $actiondata->actionurl = new \powereduc_url($action['url'], $params);
                 $bulkactiondata[] = $actiondata;
 
                 $bulkactiondatas ['bulkactionitems'] = $bulkactiondata;
@@ -1140,9 +1140,9 @@ class view {
     /**
      * Start of the table html.
      *
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @see print_table()
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     protected function start_table() {
         debugging('Function start_table() is deprecated, please use print_table() instead.', DEBUG_DEVELOPER);
@@ -1156,9 +1156,9 @@ class view {
     /**
      * End of the table html.
      *
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @see print_table()
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     protected function end_table() {
         debugging('Function end_table() is deprecated, please use print_table() instead.', DEBUG_DEVELOPER);
@@ -1218,8 +1218,8 @@ class view {
 
     /**
      * Process actions for the selected action.
-     * @deprecated since Moodle 4.0
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @deprecated since PowerEduc 4.0
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public function process_actions(): void {
         debugging('Function process_actions() is deprecated and its code has been completely deleted.
@@ -1231,8 +1231,8 @@ class view {
     /**
      * Process actions with ui.
      * @return bool
-     * @deprecated since Moodle 4.0
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @deprecated since PowerEduc 4.0
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public function process_actions_needing_ui(): bool {
         debugging('Function process_actions_needing_ui() is deprecated and its code has been completely deleted.

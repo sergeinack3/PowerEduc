@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of PowerEduc - https://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides the {@see \core_webservice\token_form} class.
  *
  * @package     core_webservice
  * @category    admin
- * @copyright   2020 David Mudrák <david@moodle.com>
+ * @copyright   2020 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,10 +33,10 @@ use core_user;
  * Tokens allow users call external functions provided by selected web services. They can optionally have IP restriction
  * and date validity defined.
  *
- * @copyright 2010 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright 2010 Jerome Mouneyrac <jerome@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class token_form extends \moodleform {
+class token_form extends \powereducform {
 
     /**
      * Defines the form fields.
@@ -62,7 +62,7 @@ class token_form extends \moodleform {
 
                 $user = (object)[
                     'id' => $record->id,
-                    'fullname' => fullname($record, has_capability('moodle/site:viewfullnames', $context)),
+                    'fullname' => fullname($record, has_capability('powereduc/site:viewfullnames', $context)),
                     'extrafields' => [],
                 ];
 

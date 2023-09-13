@@ -20,7 +20,7 @@ use core_enrol_external;
 use enrol_user_enrolment_form;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -465,7 +465,7 @@ class externallib_test extends externallib_advanced_testcase {
             'fullname'         => '<b>Course 1</b>',                // Adding tags here to check that external_format_string works.
             'shortname'         => '<b>Course 1</b>',               // Adding tags here to check that external_format_string works.
             'summary'          => 'Lightwork Course 1 description',
-            'summaryformat'    => FORMAT_MOODLE,
+            'summaryformat'    => FORMAT_POWEREDUC,
             'lang'             => 'en',
             'enablecompletion' => true,
             'showgrades'       => true,

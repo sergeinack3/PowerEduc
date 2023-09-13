@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the definition for the renderable assign header.
@@ -45,7 +45,7 @@ class assign_header implements \renderable {
     public $preface;
     /** @var string $postfix Optional postfix (text to show after the intro). */
     public $postfix;
-    /** @var \moodle_url|null $subpageurl link for the sub page */
+    /** @var \powereduc_url|null $subpageurl link for the sub page */
     public $subpageurl;
     /** @var bool $activity optional show activity text. */
     public $activity;
@@ -60,7 +60,7 @@ class assign_header implements \renderable {
      * @param string           $subpage         An optional sub page in the navigation.
      * @param string           $preface         An optional preface to show before the heading.
      * @param string           $postfix         An optional postfix to show after the intro.
-     * @param \moodle_url|null $subpageurl      An optional sub page URL link for the subpage.
+     * @param \powereduc_url|null $subpageurl      An optional sub page URL link for the subpage.
      * @param bool             $activity        Optional show activity text if true.
      */
     public function __construct(
@@ -71,7 +71,7 @@ class assign_header implements \renderable {
         $subpage = '',
         $preface = '',
         $postfix = '',
-        \moodle_url $subpageurl = null,
+        \powereduc_url $subpageurl = null,
         bool $activity = false
     ) {
         $this->assign = $assign;

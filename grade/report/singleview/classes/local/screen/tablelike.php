@@ -31,7 +31,7 @@ use stdClass;
 use grade_grade;
 use gradereport_singleview\local\ui\bulk_insert;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * The gradebook simple view - base class for the table

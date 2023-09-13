@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,25 +23,25 @@ $chatmessage = required_param('chat_message', PARAM_RAW);
 $PAGE->set_url('/mod/chat/gui_header_js/insert.php', array('chat_sid' => $chatsid, 'chat_message' => $chatmessage));
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
-    throw new \moodle_exception('notlogged', 'chat');
+    throw new \powereduc_exception('notlogged', 'chat');
 }
 
 if (!$chat = $DB->get_record('chat', array('id' => $chatuser->chatid))) {
-    throw new \moodle_exception('nochat', 'chat');
+    throw new \powereduc_exception('nochat', 'chat');
 }
 
 if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 require_login($course, false, $cm);
 
 if (isguestuser()) {
-    throw new \moodle_exception('noguests');
+    throw new \powereduc_exception('noguests');
 }
 
 \core\session\manager::write_close();
@@ -52,7 +52,7 @@ chat_delete_old_users();
 
 // Clean up the message.
 
-$chatmessage = clean_text($chatmessage, FORMAT_MOODLE);  // Strip bad tags.
+$chatmessage = clean_text($chatmessage, FORMAT_POWEREDUC);  // Strip bad tags.
 
 // Add the message to the database.
 

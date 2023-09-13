@@ -24,7 +24,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // See http://support.microsoft.com/kb/305144 to interprete these values.
 if (!defined('AUTH_AD_ACCOUNTDISABLE')) {
@@ -1701,7 +1701,7 @@ class auth_plugin_ldap extends auth_plugin_base {
      *
      * NOTE that this code will execute under the OS user credentials,
      * so we MUST avoid dealing with files -- such as session files.
-     * (The caller should define('NO_MOODLE_COOKIES', true) before including config.php)
+     * (The caller should define('NO_POWEREDUC_COOKIES', true) before including config.php)
      *
      */
     function ntlmsso_magic($sesskey) {

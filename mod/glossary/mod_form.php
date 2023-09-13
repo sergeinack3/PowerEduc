@@ -1,11 +1,11 @@
 <?php
-if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+if (!defined('POWEREDUC_INTERNAL')) {
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
-require_once ($CFG->dirroot.'/course/moodleform_mod.php');
+require_once ($CFG->dirroot.'/course/powereducform_mod.php');
 
-class mod_glossary_mod_form extends moodleform_mod {
+class mod_glossary_mod_form extends powereducform_mod {
 
     function definition() {
         global $CFG, $COURSE, $DB;
@@ -206,7 +206,7 @@ class mod_glossary_mod_form extends moodleform_mod {
      * Allows module to modify the data returned by form get_data().
      * This method is also called in the bulk activity completion form.
      *
-     * Only available on moodleform_mod.
+     * Only available on powereducform_mod.
      *
      * @param stdClass $data the form data to be modified.
      */

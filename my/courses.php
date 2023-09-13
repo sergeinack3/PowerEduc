@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * My Courses.
@@ -35,16 +35,16 @@ redirect_if_major_upgrade_required();
 
 require_login();
 
-$hassiteconfig = has_capability('moodle/site:config', context_system::instance());
-if ($hassiteconfig && moodle_needs_upgrading()) {
-    redirect(new moodle_url('/admin/index.php'));
+$hassiteconfig = has_capability('powereduc/site:config', context_system::instance());
+if ($hassiteconfig && powereduc_needs_upgrading()) {
+    redirect(new powereduc_url('/admin/index.php'));
 }
 
 $context = context_system::instance();
 
-// Get the My Moodle page info.  Should always return something unless the database is broken.
+// Get the My PowerEduc page info.  Should always return something unless the database is broken.
 if (!$currentpage = my_get_page(null, MY_PAGE_PUBLIC, MY_PAGE_COURSES)) {
-    throw new Exception('mymoodlesetup');
+    throw new Exception('mypowereducsetup');
 }
 
 // Start setting up the page.
@@ -73,16 +73,16 @@ $coursecat = core_course_category::user_top();
 $coursemanagemenu = [];
 if ($coursecat && ($category = core_course_category::get_nearest_editable_subcategory($coursecat, ['create']))) {
     // The user has the capability to create course.
-    $coursemanagemenu['newcourseurl'] = new moodle_url('/course/edit.php', ['category' => $category->id]);
+    $coursemanagemenu['newcourseurl'] = new powereduc_url('/course/edit.php', ['category' => $category->id]);
 }
 if ($coursecat && ($category = core_course_category::get_nearest_editable_subcategory($coursecat, ['manage']))) {
     // The user has the capability to manage the course category.
-    $coursemanagemenu['manageurl'] = new moodle_url('/course/management.php', ['categoryid' => $category->id]);
+    $coursemanagemenu['manageurl'] = new powereduc_url('/course/management.php', ['categoryid' => $category->id]);
 }
 if ($coursecat) {
-    $category = core_course_category::get_nearest_editable_subcategory($coursecat, ['moodle/course:request']);
+    $category = core_course_category::get_nearest_editable_subcategory($coursecat, ['powereduc/course:request']);
     if ($category && $category->can_request_course()) {
-        $coursemanagemenu['courserequesturl'] = new moodle_url('/course/request.php', ['categoryid' => $category->id]);
+        $coursemanagemenu['courserequesturl'] = new powereduc_url('/course/request.php', ['categoryid' => $category->id]);
 
     }
 }

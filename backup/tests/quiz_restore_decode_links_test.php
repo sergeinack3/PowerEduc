@@ -16,7 +16,7 @@
 
 namespace core_backup;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff.
 global $CFG;

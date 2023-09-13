@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * My Moodle -- a user's personal dashboard
+ * My PowerEduc -- a user's personal dashboard
  *
  * This file contains common functions for the dashboard and profile pages.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage my
  * @copyright  2010 Remote-Learner.net
  * @author     Hubert Chathi <hubert@remote-learner.net>
@@ -35,7 +35,7 @@ define('MY_PAGE_COURSES', '__courses');
 require_once("$CFG->libdir/blocklib.php");
 
 /**
- * For a given user, this returns the $page information for their My Moodle page
+ * For a given user, this returns the $page information for their My PowerEduc page
  *
  * @param int|null $userid the id of the user whose page should be retrieved
  * @param int|null $private either MY_PAGE_PRIVATE or MY_PAGE_PUBLIC
@@ -44,7 +44,7 @@ require_once("$CFG->libdir/blocklib.php");
 function my_get_page(?int $userid, int $private = MY_PAGE_PRIVATE, string $pagename = MY_PAGE_DEFAULT) {
     global $DB, $CFG;
 
-    if (empty($CFG->forcedefaultmymoodle) && $userid) {  // Ignore custom My Moodle pages if admin has forced them
+    if (empty($CFG->forcedefaultmypowereduc) && $userid) {  // Ignore custom My PowerEduc pages if admin has forced them
         // Does the user have their own page defined?  If so, return it.
         if ($customised = $DB->get_record(
             'my_pages',
@@ -147,7 +147,7 @@ function my_copy_page(
 }
 
 /**
- * For a given user, this deletes their My Moodle page and returns them to the system default.
+ * For a given user, this deletes their My PowerEduc page and returns them to the system default.
  *
  * @param int $userid the id of the user whose page should be reset
  * @param int $private either MY_PAGE_PRIVATE or MY_PAGE_PUBLIC
@@ -301,7 +301,7 @@ class my_syspage_block_manager extends block_manager {
     /**
      * Load blocks using the system context, rather than the user's context.
      *
-     * This is needed because the My Moodle pages set the page context to the
+     * This is needed because the My PowerEduc pages set the page context to the
      * user's context for access control, etc.  But the blocks for the system
      * pages are stored in the system context.
      */

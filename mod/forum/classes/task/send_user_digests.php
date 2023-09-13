@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file defines an adhoc task to send notifications.
@@ -24,13 +24,13 @@
 
 namespace mod_forum\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use html_writer;
 require_once($CFG->dirroot . '/mod/forum/lib.php');
 
 /**
- * Adhoc task to send moodle forum digests for the specified user.
+ * Adhoc task to send powereduc forum digests for the specified user.
  *
  * @package    mod_forum
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
@@ -136,7 +136,7 @@ class send_user_digests extends \core\task\adhoc_task {
 
     /**
      * Send out messages.
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function execute() {
         $starttime = time();
@@ -177,7 +177,7 @@ class send_user_digests extends \core\task\adhoc_task {
                 continue;
             }
 
-            if (!$course->visible and !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
+            if (!$course->visible and !has_capability('powereduc/course:viewhiddencourses', $coursecontext)) {
                 // The course is hidden and the user does not have access to it.
                 // Permissions may have changed since it was queued.
                 continue;
@@ -201,7 +201,7 @@ class send_user_digests extends \core\task\adhoc_task {
             }
 
             if (!isset($this->viewfullnames[$forum->id])) {
-                $this->viewfullnames[$forum->id] = has_capability('moodle/site:viewfullnames', $modcontext, $this->recipient->id);
+                $this->viewfullnames[$forum->id] = has_capability('powereduc/site:viewfullnames', $modcontext, $this->recipient->id);
             }
 
             // Set the discussion storage values.
@@ -254,7 +254,7 @@ class send_user_digests extends \core\task\adhoc_task {
                 }
             } else {
                 $this->log_finish("Issue sending digest. Skipping.");
-                throw new \moodle_exception("Issue sending digest. Skipping.");
+                throw new \powereduc_exception("Issue sending digest. Skipping.");
             }
         } else {
             $this->log_finish("No messages found to send.");
@@ -399,7 +399,7 @@ class send_user_digests extends \core\task\adhoc_task {
         // And the content of the header in body.
         $headerdata = (object) [
             'sitename' => format_string($site->fullname, true),
-            'userprefs' => (new \moodle_url('/user/forum.php', [
+            'userprefs' => (new \powereduc_url('/user/forum.php', [
                     'id' => $this->recipient->id,
                     'course' => $site->id,
                 ]))->out(false),
@@ -443,7 +443,7 @@ class send_user_digests extends \core\task\adhoc_task {
             $this->discussiontext  .= " -> " . format_string($discussion->name, true);
         }
         $this->discussiontext .= "\n";
-        $this->discussiontext .= new \moodle_url('/mod/forum/discuss.php', [
+        $this->discussiontext .= new \powereduc_url('/mod/forum/discuss.php', [
                 'd' => $discussion->id,
             ]);
         $this->discussiontext .= "\n";

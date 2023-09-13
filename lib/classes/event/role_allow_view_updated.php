@@ -25,7 +25,7 @@
 
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Role allow view updated event class.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the core_privacy\manager class.
@@ -32,10 +32,10 @@ use core_privacy\local\request\data_provider;
 use core_privacy\local\request\user_preference_provider;
 use \core_privacy\local\metadata\provider as metadata_provider;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
- * The core_privacy\manager class, providing a facade to describe, export and delete personal data across Moodle and its components.
+ * The core_privacy\manager class, providing a facade to describe, export and delete personal data across PowerEduc and its components.
  *
  * This class is responsible for communicating with and collating privacy data from all relevant components, where relevance is
  * determined through implementations of specific marker interfaces. These marker interfaces describe the responsibilities (in terms
@@ -61,7 +61,7 @@ defined('MOODLE_INTERNAL') || die();
  * - local\metadata\null_provider (indicating they don't store personal data)
  * - local\metadata\provider (indicating they do store personal data, and describing it)
  *
- * The manager requests metadata for all Moodle components implementing the local\metadata\provider interface.
+ * The manager requests metadata for all PowerEduc components implementing the local\metadata\provider interface.
  *
  * Export and deletion of personal data:
  * -------------------------------------
@@ -303,7 +303,7 @@ class manager {
      *
      * @param contextlist_collection $contextlistcollection the collection of contextlists for all components.
      * @return string the location of the exported data.
-     * @throws \moodle_exception if the contextlist_collection does not contain all approved_contextlist items or if one of the
+     * @throws \powereduc_exception if the contextlist_collection does not contain all approved_contextlist items or if one of the
      * approved_contextlists' components is not a core_data_provider.
      */
     public function export_user_data(contextlist_collection $contextlistcollection) {
@@ -321,7 +321,7 @@ class manager {
         foreach ($contextlistcollection as $approvedcontextlist) {
 
             if (!$approvedcontextlist instanceof \core_privacy\local\request\approved_contextlist) {
-                throw new \moodle_exception('Contextlist must be an approved_contextlist');
+                throw new \powereduc_exception('Contextlist must be an approved_contextlist');
             }
 
             $component = $approvedcontextlist->get_component();
@@ -382,7 +382,7 @@ class manager {
      * Note: userid and component are stored in each respective approved_contextlist.
      *
      * @param contextlist_collection $contextlistcollection the collections of approved_contextlist items on which to call deletion.
-     * @throws \moodle_exception if the contextlist_collection doesn't contain all approved_contextlist items, or if the component
+     * @throws \powereduc_exception if the contextlist_collection doesn't contain all approved_contextlist items, or if the component
      * for an approved_contextlist isn't a core provider.
      */
     public function delete_data_for_user(contextlist_collection $contextlistcollection) {
@@ -399,7 +399,7 @@ class manager {
         $progress->output(get_string('trace:deletingapproved', 'core_privacy', $a), 1);
         foreach ($contextlistcollection as $approvedcontextlist) {
             if (!$approvedcontextlist instanceof \core_privacy\local\request\approved_contextlist) {
-                throw new \moodle_exception('Contextlist must be an approved_contextlist');
+                throw new \powereduc_exception('Contextlist must be an approved_contextlist');
             }
 
             $component = $approvedcontextlist->get_component();
@@ -441,7 +441,7 @@ class manager {
         $progress->output(get_string('trace:deletingapprovedusers', 'core_privacy', $a), 1);
         foreach ($collection as $userlist) {
             if (!$userlist instanceof \core_privacy\local\request\approved_userlist) {
-                throw new \moodle_exception('The supplied userlist must be an approved_userlist');
+                throw new \powereduc_exception('The supplied userlist must be an approved_userlist');
             }
 
             $component = $userlist->get_component();

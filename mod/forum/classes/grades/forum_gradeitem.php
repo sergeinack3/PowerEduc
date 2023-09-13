@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Grade item storage for mod_forum.
@@ -250,7 +250,7 @@ class forum_gradeitem extends component_gradeitem {
         // course. In cases where the 'grade_report_showonlyactiveenrol' user preference is not set we are falling back
         // to the set value for the 'grade_report_showonlyactiveenrol' config.
         return get_user_preferences('grade_report_showonlyactiveenrol', $showonlyactiveenrolconfig) ||
-            !has_capability('moodle/course:viewsuspendedusers', \context_course::instance($this->forum->get_course_id()));
+            !has_capability('powereduc/course:viewsuspendedusers', \context_course::instance($this->forum->get_course_id()));
     }
 
     /**
@@ -259,7 +259,7 @@ class forum_gradeitem extends component_gradeitem {
      * @param stdClass $grade
      * @return bool Success
      * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws coding_exception
      */
     protected function store_grade(stdClass $grade): bool {

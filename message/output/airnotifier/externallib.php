@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  *
  * @package    message_airnotifier
  * @category   external
- * @copyright  2012 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since Moodle 2.7
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -33,7 +33,7 @@ require_once("$CFG->libdir/externallib.php");
  *
  * @package    message_airnotifier
  * @category   external
- * @copyright  2012 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since Moodle 2.7
  */
@@ -118,7 +118,7 @@ class message_airnotifier_external extends external_api {
             'users' => [],
             'warnings' => []
         );
-        $hasuserupdatecap = has_capability('moodle/user:update', context_system::instance());
+        $hasuserupdatecap = has_capability('powereduc/user:update', context_system::instance());
         foreach ($users as $user) {
 
             $currentuser = ($user->id == $USER->id);
@@ -228,7 +228,7 @@ class message_airnotifier_external extends external_api {
      * @param  string  $appid  app unique id (usually a reversed domain)
      * @param  integer $userid the user id, 0 for current user
      * @return array warnings and devices
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.2
      */
     public static function get_user_devices($appid, $userid = 0) {
@@ -252,7 +252,7 @@ class message_airnotifier_external extends external_api {
             core_user::require_active_user($user);
             // Allow only admins to retrieve other users devices.
             if ($user->id != $USER->id) {
-                require_capability('moodle/site:config', $context);
+                require_capability('powereduc/site:config', $context);
             }
         }
 
@@ -300,7 +300,7 @@ class message_airnotifier_external extends external_api {
                     new external_single_structure(
                         array (
                             'id' => new external_value(PARAM_INT, 'Device id (in the message_airnotifier table)'),
-                            'appid' => new external_value(PARAM_NOTAGS, 'The app id, something like com.moodle.moodlemobile'),
+                            'appid' => new external_value(PARAM_NOTAGS, 'The app id, something like com.powereduc.powereducmobile'),
                             'name' => new external_value(PARAM_NOTAGS, 'The device name, \'occam\' or \'iPhone\' etc.'),
                             'model' => new external_value(PARAM_NOTAGS, 'The device model \'Nexus4\' or \'iPad1,1\' etc.'),
                             'platform' => new external_value(PARAM_NOTAGS, 'The device platform \'iOS\' or \'Android\' etc.'),
@@ -339,7 +339,7 @@ class message_airnotifier_external extends external_api {
      * @param  integer $deviceid the device id
      * @param  bool $enable whether to enable the device
      * @return array warnings and success status
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.2
      */
     public static function enable_device($deviceid, $enable) {
@@ -358,7 +358,7 @@ class message_airnotifier_external extends external_api {
         require_capability('message/airnotifier:managedevice', $context);
 
         if (!message_airnotifier_manager::enable_device($params['deviceid'], $params['enable'])) {
-            throw new moodle_exception('unknowndevice', 'message_airnotifier');
+            throw new powereduc_exception('unknowndevice', 'message_airnotifier');
         }
 
         return array(

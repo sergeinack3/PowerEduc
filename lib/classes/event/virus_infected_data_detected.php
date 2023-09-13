@@ -25,7 +25,7 @@
 
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 /**
  * Data infected event
  *
@@ -51,7 +51,7 @@ class virus_infected_data_detected extends \core\event\base {
      */
     public function get_description() {
         if (isset($this->other['incidentdetails'])) {
-            return format_text($this->other['incidentdetails'], FORMAT_MOODLE);
+            return format_text($this->other['incidentdetails'], FORMAT_POWEREDUC);
         } else {
             return get_string('datainfecteddesc', 'antivirus');
         }

@@ -23,7 +23,7 @@
  * @copyright  2021 Bas Brands <bas@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 // Component library page.
 $docsdir = '/tool/componentlibrary/docs/';
 

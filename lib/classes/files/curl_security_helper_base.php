@@ -25,7 +25,7 @@
 
 namespace core\files;
 
-defined('MOODLE_INTERNAL') || exit();
+defined('POWEREDUC_INTERNAL') || exit();
 
 /**
  * Security helper for the curl class.

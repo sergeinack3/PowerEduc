@@ -24,7 +24,7 @@
 
 namespace core\analytics\analyser;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Users analyser (insights for users).

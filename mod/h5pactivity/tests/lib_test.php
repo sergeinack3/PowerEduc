@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for (some of) mod/h5pactivity/lib.php.
  *
  * @package    mod_h5pactivity
- * @copyright  2021 Ilya Tregubov <ilya@moodle.com>
+ * @copyright  2021 Ilya Tregubov <ilya@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use mod_h5pactivity\local\manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/h5pactivity/lib.php');
@@ -32,7 +32,7 @@ require_once($CFG->dirroot . '/mod/h5pactivity/lib.php');
 /**
  * Unit tests for (some of) mod/h5pactivity/lib.php.
  *
- * @copyright  2021 Ilya Tregubov <ilya@moodle.com>
+ * @copyright  2021 Ilya Tregubov <ilya@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lib_test extends advanced_testcase {
@@ -175,7 +175,7 @@ class lib_test extends advanced_testcase {
 
         $teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'));
         $cmcontext = \context_module::instance($activity->cmid);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $cmcontext, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $teacherrole->id, $cmcontext, true);
 
         $manager = manager::create_from_instance($activity);
         $cm = $manager->get_coursemodule();

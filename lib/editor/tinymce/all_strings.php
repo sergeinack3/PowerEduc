@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define('NO_MOODLE_COOKIES', true);
+define('NO_POWEREDUC_COOKIES', true);
 define('NO_UPGRADE_CHECK', true);
 
 require('../../../config.php');

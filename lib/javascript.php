@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// disable moodle specific debug messages and any errors in output,
+// disable powereduc specific debug messages and any errors in output,
 // comment out when debugging or better look into error log!
 define('NO_DEBUG_DISPLAY', true);
 
@@ -96,7 +96,7 @@ if ($rev > 0 and $rev < (time() + 60*60)) {
         // environment to process it..
         define('ABORT_AFTER_CONFIG_CANCEL', true);
 
-        define('NO_MOODLE_COOKIES', true); // Session not used here.
+        define('NO_POWEREDUC_COOKIES', true); // Session not used here.
         define('NO_UPGRADE_CHECK', true);  // Ignore upgrade check.
 
         require("$CFG->dirroot/lib/setup.php");

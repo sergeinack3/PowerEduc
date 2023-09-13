@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Handles lesson actions
@@ -25,7 +25,7 @@
  *    moveit
  *    duplicate
  * @package mod_lesson
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
@@ -42,7 +42,7 @@ $lesson = new lesson($DB->get_record('lesson', array('id' => $cm->instance), '*'
 
 require_login($course, false, $cm);
 
-$url = new moodle_url('/mod/lesson/lesson.php', array('id'=>$id,'action'=>$action));
+$url = new powereduc_url('/mod/lesson/lesson.php', array('id'=>$id,'action'=>$action));
 $PAGE->set_url($url);
 
 $context = context_module::instance($cm->id);
@@ -67,7 +67,7 @@ switch ($action) {
             echo "<p align=\"center\">\n";
             foreach ($answers as $answer) {
                 if (!$title = $DB->get_field("lesson_pages", "title", array("id" => $answer->pageid))) {
-                    throw new \moodle_exception('cannotfindpagetitle', 'lesson');
+                    throw new \powereduc_exception('cannotfindpagetitle', 'lesson');
                 }
                 echo $title."<br />\n";
             }
@@ -85,7 +85,7 @@ switch ($action) {
 
         $params = array ("lessonid" => $lesson->id, "prevpageid" => 0);
         if (!$page = $DB->get_record_select("lesson_pages", "lessonid = :lessonid AND prevpageid = :prevpageid", $params)) {
-            throw new \moodle_exception('cannotfindfirstpage', 'lesson');
+            throw new \powereduc_exception('cannotfindfirstpage', 'lesson');
         }
 
         echo html_writer::start_tag('div', array('class' => 'move-page'));
@@ -109,7 +109,7 @@ switch ($action) {
             }
             if ($page->nextpageid) {
                 if (!$page = $DB->get_record("lesson_pages", array("id" => $page->nextpageid))) {
-                    throw new \moodle_exception('cannotfindnextpage', 'lesson');
+                    throw new \powereduc_exception('cannotfindnextpage', 'lesson');
                 }
             } else {
                 // last page reached
@@ -132,10 +132,10 @@ switch ($action) {
         break;
     case 'duplicate':
             $lesson->duplicate_page($pageid);
-            redirect(new moodle_url('/mod/lesson/edit.php', array('id' => $cm->id)));
+            redirect(new powereduc_url('/mod/lesson/edit.php', array('id' => $cm->id)));
         break;
     default:
-        throw new \moodle_exception('unknowaction');
+        throw new \powereduc_exception('unknowaction');
         break;
 }
 

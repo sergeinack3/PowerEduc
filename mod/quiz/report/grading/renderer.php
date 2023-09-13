@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines the renderer for the quiz_grading module.
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The renderer for the quiz_grading module.
@@ -57,7 +57,7 @@ class quiz_grading_renderer extends plugin_renderer_base {
      * Render index display.
      *
      * @param string $linktext The text of the link.
-     * @param moodle_url $listquestionurl Url of the page that list all questions.
+     * @param powereduc_url $listquestionurl Url of the page that list all questions.
      * @return string The HTML for the display heading.
      * @throws coding_exception
      */
@@ -102,7 +102,7 @@ class quiz_grading_renderer extends plugin_renderer_base {
      * @param object $counts
      * @param string $type Type of grade.
      * @param string $gradestring Lang string.
-     * @param moodle_url $gradequestionurl Url to grade question.
+     * @param powereduc_url $gradequestionurl Url to grade question.
      * @return string The HTML for the question grade link.
      * @throws coding_exception
      */
@@ -121,16 +121,16 @@ class quiz_grading_renderer extends plugin_renderer_base {
      * Render grading page.
      *
      * @param object $questioninfo Information of a question.
-     * @param moodle_url $listquestionsurl Url of the page that list all questions.
+     * @param powereduc_url $listquestionsurl Url of the page that list all questions.
      * @param quiz_grading_settings_form $filterform Question filter form.
      * @param object $paginginfo Pagination information.
      * @param object $pagingbar Pagination bar information.
-     * @param moodle_url $formaction Form submit url.
+     * @param powereduc_url $formaction Form submit url.
      * @param array $hiddeninputs List of hidden input fields.
      * @param string $gradequestioncontent HTML string of question content.
      * @return string The HTML for the grading interface.
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_grading_interface($questioninfo, $listquestionsurl, $filterform, $paginginfo, $pagingbar, $formaction,
             $hiddeninputs, $gradequestioncontent) {
@@ -159,7 +159,7 @@ class quiz_grading_renderer extends plugin_renderer_base {
                 'id' => 'manualgradingform'
         ]);
         $output .= html_writer::start_tag('div');
-        $output .= html_writer::input_hidden_params(new moodle_url('', $hiddeninputs));
+        $output .= html_writer::input_hidden_params(new powereduc_url('', $hiddeninputs));
 
         $output .= $gradequestioncontent;
 

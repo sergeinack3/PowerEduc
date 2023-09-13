@@ -121,7 +121,7 @@ switch ($action) {
             } else {
                 $json_object->gradevalue = $finalvalue;
 
-                if ($grade_item->update_final_grade($userid, $finalgrade, 'gradebook', $feedback, FORMAT_MOODLE)) {
+                if ($grade_item->update_final_grade($userid, $finalgrade, 'gradebook', $feedback, FORMAT_POWEREDUC)) {
                     $json_object->result = 'success';
                     $json_object->message = false;
                 } else {

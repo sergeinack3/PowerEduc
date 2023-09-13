@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Core admin presets component to load some settings/plugins.
  *
  * @package          core_adminpresets
- * @copyright        2021 Sara Arjona (sara@moodle.com)
+ * @copyright        2021 Sara Arjona (sara@powereduc.com)
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ $string['markedasnonforced'] = 'not marked as forced';
 $string['markedasnonlocked'] = 'not marked as locked';
 $string['privacy:metadata:adminpresets'] = 'The list of configuration presets.';
 $string['privacy:metadata:adminpresets:comments'] = 'The description of the preset.';
-$string['privacy:metadata:adminpresets:moodlerelease'] = 'The Moodle release version that the preset is based on.';
+$string['privacy:metadata:adminpresets:powereducrelease'] = 'The Moodle release version that the preset is based on.';
 $string['privacy:metadata:adminpresets:name'] = 'The name of the preset.';
 $string['privacy:metadata:adminpresets:site'] = 'The Moodle site where this preset was created.';
 $string['privacy:metadata:adminpresets:timecreated'] = 'The time that the change was made.';

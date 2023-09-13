@@ -19,7 +19,7 @@ namespace core_block;
 use core_block_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -151,7 +151,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Create a HTML block.
         $title = 'Some course info';
         $body = 'Some course info<br /><p>Some contents</p>';
-        $bodyformat = FORMAT_MOODLE;
+        $bodyformat = FORMAT_POWEREDUC;
         $page = new \moodle_page();
         $page->set_context($coursecontext);
         $page->set_pagelayout('course');
@@ -255,7 +255,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Create a HTML block.
         $title = 'My block $$(a+b)=2$$';
         $body = 'My block contents $$(a+b)=2$$';
-        $bodyformat = FORMAT_MOODLE;
+        $bodyformat = FORMAT_POWEREDUC;
         $page = new \moodle_page();
         $page->set_context($coursecontext);
         $page->set_pagelayout('course');

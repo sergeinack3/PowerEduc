@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains a renderer for the assignment class
@@ -24,7 +24,7 @@
 
 namespace mod_assign\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/assign/locallib.php');
 
@@ -110,7 +110,7 @@ class renderer extends \plugin_renderer_base {
         if (!empty($result->page)) {
             $urlparams['page'] = $result->page;
         }
-        $url = new \moodle_url('/mod/assign/view.php', $urlparams);
+        $url = new \powereduc_url('/mod/assign/view.php', $urlparams);
         $classes = $result->gradingerror ? 'notifyproblem' : 'notifysuccess';
 
         $o = '';
@@ -131,7 +131,7 @@ class renderer extends \plugin_renderer_base {
             $this->page->requires->js_init_call($form->jsinitfunction, array());
         }
         $o .= $this->output->box_start('boxaligncenter ' . $form->classname);
-        $o .= $this->moodleform($form->form);
+        $o .= $this->powereducform($form->form);
         $o .= $this->output->box_end();
         return $o;
     }
@@ -164,7 +164,7 @@ class renderer extends \plugin_renderer_base {
             $o .= $this->output->user_picture($summary->user);
             $o .= $this->output->spacer(array('width'=>30));
             $urlparams = array('id' => $summary->user->id, 'course'=>$summary->courseid);
-            $url = new \moodle_url('/user/view.php', $urlparams);
+            $url = new \powereduc_url('/user/view.php', $urlparams);
             $fullname = fullname($summary->user, $summary->viewfullnames);
             $extrainfo = array();
             foreach ($summary->extrauserfields as $extrafield) {
@@ -194,7 +194,7 @@ class renderer extends \plugin_renderer_base {
         $o .= $this->output->container_start('submitforgrading');
         $o .= $this->output->heading(get_string('confirmsubmissionheading', 'assign'), 3);
 
-        $cancelurl = new \moodle_url('/mod/assign/view.php', array('id' => $page->coursemoduleid));
+        $cancelurl = new \powereduc_url('/mod/assign/view.php', array('id' => $page->coursemoduleid));
         if (count($page->notifications)) {
             // At least one of the submission plugins is not ready for submission.
 
@@ -207,7 +207,7 @@ class renderer extends \plugin_renderer_base {
             $o .= $this->output->continue_button($cancelurl);
         } else {
             // All submission plugins ready - show the confirmation form.
-            $o .= $this->moodleform($page->confirmform);
+            $o .= $this->powereducform($page->confirmform);
         }
         $o .= $this->output->container_end();
 
@@ -290,7 +290,7 @@ class renderer extends \plugin_renderer_base {
         $o .= $this->output->heading(get_string('gradingsummary', 'assign'), 3);
 
         if (isset($summary->cm)) {
-            $currenturl = new \moodle_url('/mod/assign/view.php', array('id' => $summary->cm->id));
+            $currenturl = new \powereduc_url('/mod/assign/view.php', array('id' => $summary->cm->id));
             $o .= groups_print_activity_menu($summary->cm, $currenturl->out(), true);
         }
 
@@ -506,7 +506,7 @@ class renderer extends \plugin_renderer_base {
                 $userslist = array();
                 foreach ($members as $member) {
                     $urlparams = array('id' => $member->id, 'course' => $status->courseid);
-                    $url = new \moodle_url('/user/view.php', $urlparams);
+                    $url = new \powereduc_url('/user/view.php', $urlparams);
                     if ($status->view == assign_submission_status::GRADER_VIEW && $status->blindmarking) {
                         $userslist[] = $member->alias;
                     } else {
@@ -712,7 +712,7 @@ class renderer extends \plugin_renderer_base {
                 $userslist = array();
                 foreach ($members as $member) {
                     $urlparams = array('id' => $member->id, 'course'=>$status->courseid);
-                    $url = new \moodle_url('/user/view.php', $urlparams);
+                    $url = new \powereduc_url('/user/view.php', $urlparams);
                     if ($status->view == assign_submission_status::GRADER_VIEW && $status->blindmarking) {
                         $userslist[] = $member->alias;
                     } else {
@@ -964,7 +964,7 @@ class renderer extends \plugin_renderer_base {
                                    'action'=>'grade',
                                    'returnaction'=>$history->returnaction,
                                    'returnparams'=>$returnparams);
-                    $url = new \moodle_url('/mod/assign/view.php', $urlparams);
+                    $url = new \powereduc_url('/mod/assign/view.php', $urlparams);
                     $icon = new \pix_icon('gradefeedback',
                                             get_string('editattemptfeedback', 'assign', $grade->attemptnumber+1),
                                             'mod_assign');
@@ -1018,7 +1018,7 @@ class renderer extends \plugin_renderer_base {
         }
         $o .= $this->box_end();
 
-        $this->page->requires->yui_module('moodle-mod_assign-history', 'Y.one("#' . $containerid . '").history');
+        $this->page->requires->yui_module('powereduc-mod_assign-history', 'Y.one("#' . $containerid . '").history');
 
         return $o;
     }
@@ -1075,7 +1075,7 @@ class renderer extends \plugin_renderer_base {
                                    'action'=>$action,
                                    'returnaction'=>$submissionplugin->returnaction,
                                    'returnparams'=>$returnparams);
-                $url = new \moodle_url('/mod/assign/view.php', $urlparams);
+                $url = new \powereduc_url('/mod/assign/view.php', $urlparams);
                 $link .= $this->output->action_link($url, $icon);
                 $link .= '</noscript>';
 
@@ -1188,7 +1188,7 @@ class renderer extends \plugin_renderer_base {
                                    'action'=>'viewplugin' . $feedbackplugin->plugin->get_subtype(),
                                    'returnaction'=>$feedbackplugin->returnaction,
                                    'returnparams'=>http_build_query($feedbackplugin->returnparams));
-                $url = new \moodle_url('/mod/assign/view.php', $urlparams);
+                $url = new \powereduc_url('/mod/assign/view.php', $urlparams);
                 $link .= '<noscript>';
                 $link .= $this->output->action_link($url, $icon);
                 $link .= '</noscript>';
@@ -1250,13 +1250,13 @@ class renderer extends \plugin_renderer_base {
         $currentsection = '';
         foreach ($indexsummary->assignments as $info) {
             $params = array('id' => $info['cmid']);
-            $link = \html_writer::link(new \moodle_url('/mod/assign/view.php', $params),
+            $link = \html_writer::link(new \powereduc_url('/mod/assign/view.php', $params),
                                       $info['cmname']);
             $due = $info['timedue'] ? userdate($info['timedue']) : '-';
 
             if ($info['cangrade']) {
                 $params['action'] = 'grading';
-                $gradeinfo = \html_writer::link(new \moodle_url('/mod/assign/view.php', $params),
+                $gradeinfo = \html_writer::link(new \powereduc_url('/mod/assign/view.php', $params),
                     get_string('numberofsubmissionsneedgradinglabel', 'assign', $info['gradeinfo']));
             } else {
                 $gradeinfo = $info['gradeinfo'];
@@ -1364,7 +1364,7 @@ class renderer extends \plugin_renderer_base {
         foreach ($dir['subdirs'] as $subdir) {
             $image = $this->output->pix_icon(file_folder_icon(),
                                              $subdir['dirname'],
-                                             'moodle',
+                                             'powereduc',
                                              array('class'=>'icon'));
             $result .= '<li yuiConfig=\'' . json_encode($yuiconfig) . '\'>' .
                        '<div>' . $image . ' ' . s($subdir['dirname']) . '</div> ' .
@@ -1385,7 +1385,7 @@ class renderer extends \plugin_renderer_base {
             }
             $image = $this->output->pix_icon(file_file_icon($file),
                                              $filename,
-                                             'moodle',
+                                             'powereduc',
                                              array('class'=>'icon'));
             $result .= '<li yuiConfig=\'' . json_encode($yuiconfig) . '\'>' .
                 '<div>' .
@@ -1425,12 +1425,12 @@ class renderer extends \plugin_renderer_base {
     }
 
     /**
-     * Helper method dealing with the fact we can not just fetch the output of moodleforms
+     * Helper method dealing with the fact we can not just fetch the output of powereducforms
      *
-     * @param \moodleform $mform
+     * @param \powereducform $mform
      * @return string HTML
      */
-    protected function moodleform(\moodleform $mform) {
+    protected function powereducform(\powereducform $mform) {
 
         $o = '';
         ob_start();

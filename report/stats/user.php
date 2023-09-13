@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Display user activity reports for a course (totals)
@@ -42,7 +42,7 @@ if ($courseid == SITEID) {
     $pageheading = $userfullname;
 }
 
-if ($USER->id != $user->id and has_capability('moodle/user:viewuseractivitiesreport', $personalcontext)
+if ($USER->id != $user->id and has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext)
         and !is_enrolled($coursecontext, $USER) and is_enrolled($coursecontext, $user)) {
     //TODO: do not require parents to be enrolled in courses - this is a hack!
     require_login();
@@ -53,7 +53,7 @@ if ($USER->id != $user->id and has_capability('moodle/user:viewuseractivitiesrep
 
 if (!report_stats_can_access_user_report($user, $course)) {
     // this should never happen
-    throw new \moodle_exception('nocapability', 'report_stats');
+    throw new \powereduc_exception('nocapability', 'report_stats');
 }
 
 $stractivityreport = get_string('activityreport');
@@ -65,7 +65,7 @@ $PAGE->navigation->set_userid_for_parent_checks($user->id); // see MDL-25805 for
 // Breadcrumb stuff.
 $navigationnode = array(
         'name' => get_string('stats'),
-        'url' => new moodle_url('/report/stats/user.php', array('id' => $user->id, 'course' => $course->id))
+        'url' => new powereduc_url('/report/stats/user.php', array('id' => $user->id, 'course' => $course->id))
     );
 $PAGE->add_report_nodes($user->id, $navigationnode);
 
@@ -73,7 +73,7 @@ $PAGE->set_title("$course->shortname: $stractivityreport");
 $PAGE->set_heading($pageheading);
 echo $OUTPUT->header();
 if ($courseid != SITEID) {
-    $backurl = new moodle_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
+    $backurl = new powereduc_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
     echo $OUTPUT->single_button($backurl, get_string('back'), 'get', ['class' => 'mb-3']);
 
     echo $OUTPUT->context_header(
@@ -82,7 +82,7 @@ if ($courseid != SITEID) {
             'user' => $user,
             'usercontext' => $personalcontext
         ), 2);
-    echo $OUTPUT->heading(get_string('statistics', 'moodle'), 2, 'main mt-4 mb-4');
+    echo $OUTPUT->heading(get_string('statistics', 'powereduc'), 2, 'main mt-4 mb-4');
 }
 
 // Trigger a user report viewed event.
@@ -90,7 +90,7 @@ $event = \report_stats\event\user_report_viewed::create(array('context' => $cour
 $event->trigger();
 
 if (empty($CFG->enablestats)) {
-    throw new \moodle_exception('statsdisable', 'error');
+    throw new \powereduc_exception('statsdisable', 'error');
 }
 
 $statsstatus = stats_check_uptodate($course->id);
@@ -119,7 +119,7 @@ $lastmonthend = stats_get_base_monthly();
 $timeoptions = stats_get_time_options($now,$lastweekend,$lastmonthend,$earliestday,$earliestweek,$earliestmonth);
 
 if (empty($timeoptions)) {
-    throw new \moodle_exception('nostatstodisplay', '',
+    throw new \powereduc_exception('nostatstodisplay', '',
         $CFG->wwwroot.'/course/user.php?id='.$course->id.'&user='.$user->id.'&mode=outline');
 }
 
@@ -160,7 +160,7 @@ $sql = "
 $stats = $DB->get_records_sql($sql, $params);
 
 if (empty($stats)) {
-    throw new \moodle_exception('nostatstodisplay', '',
+    throw new \powereduc_exception('nostatstodisplay', '',
         $CFG->wwwroot.'/course/user.php?id='.$course->id.'&user='.$user->id.'&mode=outline');
 }
 
@@ -178,7 +178,7 @@ switch ($param->table) {
     case 'monthly': $period = get_string('month', 'form'); break;
     default : $period = '';
 }
-$table->head = array(get_string('periodending','moodle',$period),$param->line1,$param->line2,$param->line3);
+$table->head = array(get_string('periodending','powereduc',$period),$param->line1,$param->line2,$param->line3);
 foreach ($stats as $stat) {
     if (!empty($stat->zerofixed)) {  // Don't know why this is necessary, see stats_fix_zeros above - MD
         continue;

@@ -24,7 +24,7 @@
  */
 namespace gradingform_guide\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

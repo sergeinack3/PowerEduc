@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Kan inte skapa databasen.</p>
 <p>Den specificerade databasen existerar inte och den givna användaren har inte rättighet att skapa databasen.</p>

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ require_once("$CFG->libdir/tablelib.php");
 
 $id = required_param('id', PARAM_INT); // Course Module ID.
 
-$url = new moodle_url('/mod/feedback/mapcourse.php', array('id'=>$id));
+$url = new powereduc_url('/mod/feedback/mapcourse.php', array('id'=>$id));
 $PAGE->set_url($url);
 
 $current_tab = 'mapcourse';
@@ -43,7 +43,7 @@ require_capability('mod/feedback:mapcourse', $context);
 $coursemap = array_keys(feedback_get_courses_from_sitecourse_map($feedback->id));
 $form = new mod_feedback_course_map_form();
 $form->set_data(array('id' => $cm->id, 'mappedcourses' => $coursemap));
-$mainurl = new moodle_url('/mod/feedback/view.php', ['id' => $id]);
+$mainurl = new powereduc_url('/mod/feedback/view.php', ['id' => $id]);
 if ($form->is_cancelled()) {
     redirect($mainurl);
 } else if ($data = $form->get_data()) {

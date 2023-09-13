@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  *   $PAGE->requires->jquery_plugin('ui');
  *   $PAGE->requires->jquery_plugin('ui-css');
  *
- * Please note that other moodle plugins can not use the same
+ * Please note that other powereduc plugins can not use the same
  * jquery plugin names, only one is loaded if collision detected.
  *
  * Any Moodle plugin may add jquery/plugins.php that defines extra

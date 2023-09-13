@@ -1,25 +1,25 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file is responsible for producing the survey reports
  *
  * @package   mod_survey
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -39,14 +39,14 @@ $qids = clean_param_array($qids, PARAM_INT);
 $qid = implode(',', $qids);
 
 if (!$cm = get_coursemodule_from_id('survey', $id)) {
-    throw new moodle_exception('invalidcoursemodule');
+    throw new powereduc_exception('invalidcoursemodule');
 }
 
 if (!$course = $DB->get_record("course", array("id" => $cm->course))) {
-    throw new moodle_exception('coursemisconf');
+    throw new powereduc_exception('coursemisconf');
 }
 
-$url = new moodle_url('/mod/survey/report.php', array('id' => $id));
+$url = new powereduc_url('/mod/survey/report.php', array('id' => $id));
 if ($action !== '') {
     $url->param('action', $action);
 }
@@ -68,11 +68,11 @@ $context = context_module::instance($cm->id);
 require_capability('mod/survey:readresponses', $context);
 
 if (!$survey = $DB->get_record("survey", array("id" => $cm->instance))) {
-    throw new moodle_exception('invalidsurveyid', 'survey');
+    throw new powereduc_exception('invalidsurveyid', 'survey');
 }
 
 if (!$template = $DB->get_record("survey", array("id" => $survey->template))) {
-    throw new moodle_exception('invalidtmptid', 'survey');
+    throw new powereduc_exception('invalidtmptid', 'survey');
 }
 
 $showscales = ($template->name != 'ciqname');
@@ -98,7 +98,7 @@ $PAGE->activityheader->set_attrs([
 ]);
 
 // Activate the secondary nav tab.
-navigation_node::override_active_url(new moodle_url('/mod/survey/report.php', ['id' => $id, 'action' => 'summary']));
+navigation_node::override_active_url(new powereduc_url('/mod/survey/report.php', ['id' => $id, 'action' => 'summary']));
 
 $actionbar = new \mod_survey\output\actionbar($id, $action, $url);
 echo $OUTPUT->header();
@@ -109,7 +109,7 @@ echo $renderer->response_actionbar($actionbar);
 if ($groupmode = groups_get_activity_groupmode($cm)) {   // Groups are being used.
     $menuaction = $action == "student" ? "students" : $action;
     $currentgroup = groups_get_activity_group($cm, true);
-    $groupsactivitymenu = groups_print_activity_menu($cm, new moodle_url('/mod/survey/report.php',
+    $groupsactivitymenu = groups_print_activity_menu($cm, new powereduc_url('/mod/survey/report.php',
             ['id' => $cm->id, 'action' => $menuaction, 'qid' => $qid]), true);
 } else {
     $currentgroup = 0;
@@ -148,7 +148,7 @@ switch ($action) {
     case "summary":
         // If survey type is Critical incidents then we don't show summary report.
         if ($survey->template == SURVEY_CIQ) {
-            throw new moodle_exception('cannotviewreport');
+            throw new powereduc_exception('cannotviewreport');
         }
         echo $OUTPUT->heading($strsummary, 3);
 
@@ -168,7 +168,7 @@ switch ($action) {
     case "scales":
         // If survey type is Critical incidents then we don't show scales report.
         if ($survey->template == SURVEY_CIQ) {
-            throw new moodle_exception('cannotviewreport');
+            throw new powereduc_exception('cannotviewreport');
         }
         echo $OUTPUT->heading($strscales, 3);
 
@@ -300,7 +300,7 @@ switch ($action) {
 
     case "question":
         if (!$question = $DB->get_record("survey_questions", array("id" => $qid))) {
-            throw new \moodle_exception('cannotfindquestion', 'survey');
+            throw new \powereduc_exception('cannotfindquestion', 'survey');
         }
         $question->text = get_string($question->text, "survey");
 
@@ -366,7 +366,7 @@ switch ($action) {
 
     case "student":
         if (!$user = $DB->get_record("user", array("id" => $student))) {
-            throw new moodle_exception('invaliduserid');
+            throw new powereduc_exception('invaliduserid');
         }
 
         echo $OUTPUT->heading(get_string("analysisof", "survey", fullname($user)), 3);
@@ -496,13 +496,13 @@ switch ($action) {
             $options["group"] = $currentgroup;
 
             $options["type"] = "ods";
-            echo $OUTPUT->single_button(new moodle_url("download.php", $options), get_string("downloadods"));
+            echo $OUTPUT->single_button(new powereduc_url("download.php", $options), get_string("downloadods"));
 
             $options["type"] = "xls";
-            echo $OUTPUT->single_button(new moodle_url("download.php", $options), get_string("downloadexcel"));
+            echo $OUTPUT->single_button(new powereduc_url("download.php", $options), get_string("downloadexcel"));
 
             $options["type"] = "txt";
-            echo $OUTPUT->single_button(new moodle_url("download.php", $options), get_string("downloadtext"));
+            echo $OUTPUT->single_button(new powereduc_url("download.php", $options), get_string("downloadtext"));
             echo $OUTPUT->container_end();
 
         } else {
@@ -512,7 +512,7 @@ switch ($action) {
         break;
 
     default:
-        throw new moodle_exception('cannotviewreport');
+        throw new powereduc_exception('cannotviewreport');
 
 }
 echo $OUTPUT->footer();

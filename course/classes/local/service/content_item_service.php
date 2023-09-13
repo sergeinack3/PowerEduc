@@ -24,7 +24,7 @@
  */
 namespace core_course\local\service;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_course\local\exporters\course_content_items_exporter;
 use core_course\local\repository\content_item_readonly_repository_interface;

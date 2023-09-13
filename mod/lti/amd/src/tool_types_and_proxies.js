@@ -1,20 +1,20 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Provides an interface for external tools in the Moodle server.
+ * Provides an interface for external tools in the PowerEduc server.
  *
  * @module     mod_lti/tool_types_and_proxies
  * @class      tool_types_and_proxies
@@ -25,7 +25,7 @@
 import ajax from 'core/ajax';
 
 /**
- * Get a list of LTI tool types and tool proxies from Moodle for the given
+ * Get a list of LTI tool types and tool proxies from PowerEduc for the given
  * search args.
  *
  * See also:
@@ -46,7 +46,7 @@ export const query = (args) => {
 };
 
 /**
- * Get a count of LTI tool types and tool proxies from Moodle for the given
+ * Get a count of LTI tool types and tool proxies from PowerEduc for the given
  * search args.
  *
  * See also:

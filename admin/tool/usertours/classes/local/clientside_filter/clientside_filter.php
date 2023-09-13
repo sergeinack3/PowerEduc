@@ -24,7 +24,7 @@
 
 namespace tool_usertours\local\clientside_filter;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use stdClass;
 use tool_usertours\local\filter\base;

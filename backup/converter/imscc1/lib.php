@@ -69,15 +69,15 @@ class imscc1_converter extends base_converter {
      * Returns the basic information about the converter
      *
      * The returned array must contain the following keys:
-     * 'from' - the supported source format, eg. backup::FORMAT_MOODLE1
-     * 'to'   - the supported target format, eg. backup::FORMAT_MOODLE
+     * 'from' - the supported source format, eg. backup::FORMAT_POWEREDUC1
+     * 'to'   - the supported target format, eg. backup::FORMAT_POWEREDUC
      * 'cost' - the cost of the conversion, non-negative non-zero integer
      */
     public static function description() {
 
         return array(
                 'from'  => backup::FORMAT_IMSCC1,
-                'to'    => backup::FORMAT_MOODLE1,
+                'to'    => backup::FORMAT_POWEREDUC1,
                 'cost'  => 10
         );
     }

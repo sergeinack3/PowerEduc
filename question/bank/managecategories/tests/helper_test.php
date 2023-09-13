@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_managecategories;
 
-use moodle_url;
+use powereduc_url;
 use core_question\local\bank\question_edit_contexts;
 
 /**
@@ -72,9 +72,9 @@ class helper_test extends \advanced_testcase {
 
         $contexts = new question_edit_contexts($this->context);
         $this->qcobject = new question_category_object(null,
-            new moodle_url('/question/bank/managecategories/category.php', ['courseid' => SITEID]),
+            new powereduc_url('/question/bank/managecategories/category.php', ['courseid' => SITEID]),
             $contexts->having_one_edit_tab_cap('categories'), 0, null, 0,
-            $contexts->having_cap('moodle/question:add'));
+            $contexts->having_cap('powereduc/question:add'));
     }
 
     /**
@@ -151,7 +151,7 @@ class helper_test extends \advanced_testcase {
 
         // Try to delete a top category.
         $categorytop = question_get_top_category($qcategory1->id, true)->id;
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('cannotdeletetopcat', 'question'));
         helper::question_can_delete_cat($categorytop);
     }
@@ -167,7 +167,7 @@ class helper_test extends \advanced_testcase {
         $qcategory1 = $this->qgenerator->create_question_category(['contextid' => $this->context->id]);
 
         // Try to delete an only child of top category having also at least one child.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('cannotdeletecate', 'question'));
         helper::question_can_delete_cat($qcategory1->id);
     }
@@ -182,7 +182,7 @@ class helper_test extends \advanced_testcase {
         $qcategory1 = $this->qgenerator->create_question_category(['contextid' => $this->context->id]);
         $qcategory2 = $this->qgenerator->create_question_category(['contextid' => $this->context->id, 'parent' => $qcategory1->id]);
 
-        // This call should not throw an exception as admin user has the capabilities moodle/question:managecategory.
+        // This call should not throw an exception as admin user has the capabilities powereduc/question:managecategory.
         helper::question_can_delete_cat($qcategory2->id);
 
         // Try to delete a category with and user without the capability.
@@ -206,7 +206,7 @@ class helper_test extends \advanced_testcase {
         $contexts = new \core_question\local\bank\question_edit_contexts($this->context);
 
         ob_start();
-        helper::question_category_select_menu($contexts->having_cap('moodle/question:add'));
+        helper::question_category_select_menu($contexts->having_cap('powereduc/question:add'));
         $output = ob_get_clean();
 
         // Test the select menu of question categories output.
@@ -232,13 +232,13 @@ class helper_test extends \advanced_testcase {
         $contexts = new \core_question\local\bank\question_edit_contexts($this->context);
 
         // Validate that we have the array with the categories tree.
-        $categorycontexts = helper::question_category_options($contexts->having_cap('moodle/question:add'));
+        $categorycontexts = helper::question_category_options($contexts->having_cap('powereduc/question:add'));
         // The quiz name 'Quiz 1' is set in setUp function.
         $categorycontext = $categorycontexts['Quiz: Quiz 1'];
         $this->assertCount(3, $categorycontext);
 
         // Validate that we have the array with the categories tree and that top category is there.
-        $newcategorycontexts = helper::question_category_options($contexts->having_cap('moodle/question:add'), true);
+        $newcategorycontexts = helper::question_category_options($contexts->having_cap('powereduc/question:add'), true);
         foreach ($newcategorycontexts as $key => $categorycontext) {
             $oldcategorycontext = $categorycontexts[$key];
             $count = count($oldcategorycontext);

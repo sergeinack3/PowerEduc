@@ -16,7 +16,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/fixtures/lib.php');
 
@@ -525,7 +525,7 @@ class grade_grade_test extends \grade_base_testcase {
         $this->add_feedback_file_to_copy();
 
         $grades['feedback'] = 'Nice feedback!';
-        $grades['feedbackformat'] = FORMAT_MOODLE;
+        $grades['feedbackformat'] = FORMAT_POWEREDUC;
         $grades['feedbackfiles'] = [
             'contextid' => 1,
             'component' => 'test',

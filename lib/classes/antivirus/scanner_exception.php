@@ -24,7 +24,7 @@
 
 namespace core\antivirus;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * An antivirus scanner exception class.

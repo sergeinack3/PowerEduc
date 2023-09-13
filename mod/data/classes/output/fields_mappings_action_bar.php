@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use renderable;
  * Renderable class for the action bar elements in the fields mapping page in the database activity.
  *
  * @package    mod_data
- * @copyright  2022 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2022 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class fields_mappings_action_bar implements templatable, renderable {
@@ -51,7 +51,7 @@ class fields_mappings_action_bar implements templatable, renderable {
             'tertiarytitle' => get_string('fieldmappings', 'mod_data'),
             'hasback' => true,
             'backtitle' => get_string('back'),
-            'backurl' => new \moodle_url('/mod/data/preset.php', ['d' => $this->id]),
+            'backurl' => new \powereduc_url('/mod/data/preset.php', ['d' => $this->id]),
         ];
     }
 }

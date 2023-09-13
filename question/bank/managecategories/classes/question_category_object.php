@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_managecategories;
 
@@ -22,8 +22,8 @@ namespace qbank_managecategories;
 define('QUESTION_PAGE_LENGTH', 25);
 
 use context;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use qbank_managecategories\form\question_category_edit_form;
 use question_bank;
 use stdClass;
@@ -32,7 +32,7 @@ use stdClass;
  * Class for performing operations on question categories.
  *
  * @package    qbank_managecategories
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class question_category_object {
@@ -58,7 +58,7 @@ class question_category_object {
     public $tabsize = 3;
 
     /**
-     * @var moodle_url Object representing url for this page
+     * @var powereduc_url Object representing url for this page
      */
     public $pageurl;
 
@@ -71,7 +71,7 @@ class question_category_object {
      * Constructor.
      *
      * @param int $page page number.
-     * @param moodle_url $pageurl base URL of the display categories page. Used for redirects.
+     * @param powereduc_url $pageurl base URL of the display categories page. Used for redirects.
      * @param context[] $contexts contexts where the current user can edit categories.
      * @param int $currentcat id of the category to be edited. 0 if none.
      * @param int|null $defaultcategory id of the current category. null if none.
@@ -214,7 +214,7 @@ class question_category_object {
             // Editing an existing category.
             $category = $DB->get_record("question_categories", ["id" => $categoryid], '*', MUST_EXIST);
             if ($category->parent == 0) {
-                throw new moodle_exception('cannotedittopcat', 'question', '', $categoryid);
+                throw new powereduc_exception('cannotedittopcat', 'question', '', $categoryid);
             }
 
             $category->parent = "{$category->parent},{$category->contextid}";
@@ -273,7 +273,7 @@ class question_category_object {
         global $CFG, $DB;
         helper::question_can_delete_cat($categoryid);
         if (!$category = $DB->get_record("question_categories", ["id" => $categoryid])) {  // Security.
-            throw new moodle_exception('unknowcategory');
+            throw new powereduc_exception('unknowcategory');
         }
         // Send the children categories to live with their grandparent.
         $DB->set_field("question_categories", "parent", $category->parent, ["parent" => $category->id]);
@@ -347,15 +347,15 @@ class question_category_object {
             $idnumber = null): int {
         global $DB;
         if (empty($newcategory)) {
-            throw new moodle_exception('categorynamecantbeblank', 'question');
+            throw new powereduc_exception('categorynamecantbeblank', 'question');
         }
         list($parentid, $contextid) = explode(',', $newparent);
-        // ...moodle_form makes sure select element output is legal no need for further cleaning.
-        require_capability('moodle/question:managecategory', context::instance_by_id($contextid));
+        // ...powereduc_form makes sure select element output is legal no need for further cleaning.
+        require_capability('powereduc/question:managecategory', context::instance_by_id($contextid));
 
         if ($parentid) {
             if (!($DB->get_field('question_categories', 'contextid', ['id' => $parentid]) == $contextid)) {
-                throw new moodle_exception('cannotinsertquestioncatecontext', 'question', '',
+                throw new powereduc_exception('cannotinsertquestioncatecontext', 'question', '',
                     ['cat' => $newcategory, 'ctx' => $contextid]);
             }
         }
@@ -413,7 +413,7 @@ class question_category_object {
             $idnumber = null, $redirect = true): void {
         global $CFG, $DB;
         if (empty($newname)) {
-            throw new moodle_exception('categorynamecantbeblank', 'question');
+            throw new powereduc_exception('categorynamecantbeblank', 'question');
         }
 
         // Get the record we are updating.
@@ -429,13 +429,13 @@ class question_category_object {
 
         // Check permissions.
         $fromcontext = context::instance_by_id($oldcat->contextid);
-        require_capability('moodle/question:managecategory', $fromcontext);
+        require_capability('powereduc/question:managecategory', $fromcontext);
 
         // If moving to another context, check permissions some more, and confirm contextid,stamp uniqueness.
         $newstamprequired = false;
         if ($oldcat->contextid != $tocontextid) {
             $tocontext = context::instance_by_id($tocontextid);
-            require_capability('moodle/question:managecategory', $tocontext);
+            require_capability('powereduc/question:managecategory', $tocontext);
 
             // Confirm stamp uniqueness in the new context. If the stamp already exists, generate a new one.
             if ($DB->record_exists('question_categories', ['contextid' => $tocontextid, 'stamp' => $oldcat->stamp])) {

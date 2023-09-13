@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -156,7 +156,7 @@ function message_format_message_text($message, $forcetexttohtml = false) {
             $messagetext = $message->fullmessagehtml;
         } else {
             $messagetext = $message->fullmessage;
-            $format = FORMAT_MOODLE;
+            $format = FORMAT_POWEREDUC;
         }
 
     } else {
@@ -171,7 +171,7 @@ function message_format_message_text($message, $forcetexttohtml = false) {
     if ($forcetexttohtml) {
         // This is a crazy hack, why not set proper format when creating the notifications?
         if ($format === FORMAT_PLAIN) {
-            $format = FORMAT_MOODLE;
+            $format = FORMAT_POWEREDUC;
         }
     }
     return format_text($messagetext, $format, $options);
@@ -355,7 +355,7 @@ function message_post_message($userfrom, $userto, $message, $format) {
 
     $eventdata = new \core\message\message();
     $eventdata->courseid         = 1;
-    $eventdata->component        = 'moodle';
+    $eventdata->component        = 'powereduc';
     $eventdata->name             = 'instantmessage';
     $eventdata->userfrom         = $userfrom;
     $eventdata->userto           = $userto;
@@ -721,17 +721,17 @@ function message_get_messages($useridto, $useridfrom = 0, $notifications = -1, $
  *
  * @param array $args
  * @return bool|string
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function message_output_fragment_processor_settings($args = []) {
     global $PAGE;
 
     if (!isset($args['type'])) {
-        throw new moodle_exception('Must provide a processor type');
+        throw new powereduc_exception('Must provide a processor type');
     }
 
     if (!isset($args['userid'])) {
-        throw new moodle_exception('Must provide a userid');
+        throw new powereduc_exception('Must provide a userid');
     }
 
     $type = $args['type'];
@@ -759,10 +759,10 @@ function message_output_fragment_processor_settings($args = []) {
 function core_message_can_edit_message_profile($user) {
     global $USER;
     if ($user->id == $USER->id) {
-        return has_capability('moodle/user:editownmessageprofile', context_system::instance());
+        return has_capability('powereduc/user:editownmessageprofile', context_system::instance());
     } else {
         $personalcontext = context_user::instance($user->id);
-        if (!has_capability('moodle/user:editmessageprofile', $personalcontext)) {
+        if (!has_capability('powereduc/user:editmessageprofile', $personalcontext)) {
             return false;
         }
         if (isguestuser($user)) {

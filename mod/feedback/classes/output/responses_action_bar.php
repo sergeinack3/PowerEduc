@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace mod_feedback\output;
 
-use moodle_url;
+use powereduc_url;
 use url_select;
 
 /**
@@ -27,16 +27,16 @@ use url_select;
  * @package mod_feedback
  */
 class responses_action_bar extends base_action_bar {
-    /** @var moodle_url $currenturl The current page url */
+    /** @var powereduc_url $currenturl The current page url */
     private $currenturl;
 
     /**
      * responses_action_bar constructor.
      *
      * @param int $cmid The cmid for the module we are operating on
-     * @param moodle_url $pageurl The current page url
+     * @param powereduc_url $pageurl The current page url
      */
-    public function __construct(int $cmid, moodle_url $pageurl) {
+    public function __construct(int $cmid, powereduc_url $pageurl) {
         parent::__construct($cmid);
         $this->currenturl = $pageurl;
         $this->urlparams['courseid'] = $this->course->id;
@@ -50,12 +50,12 @@ class responses_action_bar extends base_action_bar {
     public function get_items(): array {
         $items = [];
         if (has_capability('mod/feedback:viewreports', $this->context)) {
-            $reporturl = new moodle_url('/mod/feedback/show_entries.php', $this->urlparams);
+            $reporturl = new powereduc_url('/mod/feedback/show_entries.php', $this->urlparams);
             $options[$reporturl->out(false)] = get_string('show_entries', 'feedback');
             $selected = $this->currenturl->compare($reporturl, URL_MATCH_BASE) ? $reporturl : $this->currenturl;
 
             if ($this->feedback->anonymous == FEEDBACK_ANONYMOUS_NO && $this->course != SITEID) {
-                $nonrespondenturl = new moodle_url('/mod/feedback/show_nonrespondents.php', $this->urlparams);
+                $nonrespondenturl = new powereduc_url('/mod/feedback/show_nonrespondents.php', $this->urlparams);
                 $options[$nonrespondenturl->out(false)] = get_string('show_nonrespondents', 'feedback');
                 $selected = $this->currenturl->compare($nonrespondenturl, URL_MATCH_BASE) ? $nonrespondenturl : $this->currenturl;;
             }

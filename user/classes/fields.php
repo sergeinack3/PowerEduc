@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_user;
 
@@ -363,7 +363,7 @@ class fields {
         global $CFG;
 
         // Only users with permission get the extra fields.
-        if ($context && !has_capability('moodle/site:viewuseridentity', $context)) {
+        if ($context && !has_capability('powereduc/site:viewuseridentity', $context)) {
             return [];
         }
 
@@ -381,11 +381,11 @@ class fields {
                     switch ($fieldinfo->visible ?? -1) {
                         case PROFILE_VISIBLE_NONE:
                         case PROFILE_VISIBLE_PRIVATE:
-                            $allowed = !$context || has_capability('moodle/user:viewalldetails', $context);
+                            $allowed = !$context || has_capability('powereduc/user:viewalldetails', $context);
                             break;
                         case PROFILE_VISIBLE_TEACHERS:
                             // This is actually defined (in user/profile/lib.php) based on whether
-                            // you have moodle/site:viewuseridentity in context. We already checked
+                            // you have powereduc/site:viewuseridentity in context. We already checked
                             // that, so treat it as visible (fall through).
                         case PROFILE_VISIBLE_ALL:
                             $allowed = true;
@@ -408,10 +408,10 @@ class fields {
                 $canviewhiddenuserfields = true;
             } else if ($context->get_course_context(false)) {
                 // We are somewhere inside a course.
-                $canviewhiddenuserfields = has_capability('moodle/course:viewhiddenuserfields', $context);
+                $canviewhiddenuserfields = has_capability('powereduc/course:viewhiddenuserfields', $context);
             } else {
                 // We are not inside a course.
-                $canviewhiddenuserfields = has_capability('moodle/user:viewhiddendetails', $context);
+                $canviewhiddenuserfields = has_capability('powereduc/user:viewhiddendetails', $context);
             }
 
             if (!$canviewhiddenuserfields) {
@@ -576,7 +576,7 @@ class fields {
     }
 
     /**
-     * Similar to {@see \moodle_database::sql_fullname} except it returns all user name fields as defined by site config, in a
+     * Similar to {@see \powereduc_database::sql_fullname} except it returns all user name fields as defined by site config, in a
      * single select statement suitable for inclusion in a query/filter for a users fullname, e.g.
      *
      * [$select, $params] = fields::get_sql_fullname('u');

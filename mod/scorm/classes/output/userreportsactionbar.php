@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_scorm\output;
 
 use renderable;
 use renderer_base;
 use templatable;
-use moodle_url;
+use powereduc_url;
 use url_select;
 
 /**
  * Render HTML elements for reports page on tertiary nav.
  *
  * @package mod_scorm
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class userreportsactionbar implements renderable, templatable {
@@ -75,13 +75,13 @@ class userreportsactionbar implements renderable, templatable {
      */
     public function export_for_template(renderer_base $output): array {
         $data = [
-            'backurl' => (new moodle_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => $this->mode]))->out(false)
+            'backurl' => (new powereduc_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => $this->mode]))->out(false)
         ];
 
         if (!$this->scoid) {
-            $learnobjects = new moodle_url('/mod/scorm/report/userreport.php',
+            $learnobjects = new powereduc_url('/mod/scorm/report/userreport.php',
                     ['id' => $this->id, 'user' => $this->userid, 'attempt' => $this->attempt, 'mode' => $this->mode]);
-            $interactions = new moodle_url('/mod/scorm/report/userreportinteractions.php',
+            $interactions = new powereduc_url('/mod/scorm/report/userreportinteractions.php',
                     ['id' => $this->id, 'user' => $this->userid, 'attempt' => $this->attempt, 'mode' => $this->mode]);
 
             $reportmenu[$learnobjects->out(false)] = get_string('scoes', 'scorm');

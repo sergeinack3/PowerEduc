@@ -24,7 +24,7 @@
 
 namespace core\message\inbound;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Variable Envelope Return Path manager class.

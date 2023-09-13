@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Αδυναμία δημιουργίας βάσης δεδομένων.</p><p>Η βάση δεδομένων που προσδιορίστηκε δεν υπάρχει και ο χρήστης που δόθηκε δεν έχει δικαίωμα να δημιουργήσει την βάση δεδομένων.</p><p>Ο διαχειριστής του ιστοτόπου πρέπει να επαληθεύσει τις ρυθμίσεις της βάσης δεδομένων.</p>';
 $string['cannotcreatelangdir'] = 'Δε δημιουργήθηκε φάκελος γλώσσας.';

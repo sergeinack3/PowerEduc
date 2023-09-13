@@ -8,7 +8,7 @@
  *
  * Thanks, guys!
  *
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright Markus Baker, Harry Fuecks and Matt Mitchell
  * @license   Public Domain {@link http://sourceforge.net/projects/lamplib}
  */
@@ -28,7 +28,7 @@
      * Compounded regular expression. Any of
      * the contained patterns could match and
      * when one does it's label is returned.
-     * @package   moodlecore
+     * @package   powereduccore
      * @copyright Markus Baker, Harry Fuecks and Matt Mitchell
      * @license   Public Domain {@link http://sourceforge.net/projects/lamplib}
      */
@@ -135,7 +135,7 @@
     /**
      * States for a stack machine.
      *
-     * @package   moodlecore
+     * @package   powereduccore
      * @copyright Markus Baker, Harry Fuecks and Matt Mitchell
      * @license   Public Domain {@link http://sourceforge.net/projects/lamplib}
      */
@@ -203,7 +203,7 @@
      * parser once. Lexer modes must not start
      * with leading underscores.
      *
-     * @package   moodlecore
+     * @package   powereduccore
      * @copyright Markus Baker, Harry Fuecks and Matt Mitchell
      * @license   Public Domain {@link http://sourceforge.net/projects/lamplib}
      */

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/login/lib.php');
@@ -201,7 +201,7 @@ class login_lib_test extends \advanced_testcase {
     }
 
     public function test_core_login_process_password_reset_missing_parameters() {
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('cannotmailconfirm', 'error'));
         core_login_process_password_reset(null, null);
     }
@@ -385,7 +385,7 @@ class login_lib_test extends \advanced_testcase {
      */
     public function test_core_login_process_password_reset_email_sensitivity() {
         global $CFG;
-        require_once($CFG->libdir.'/phpmailer/moodle_phpmailer.php');
+        require_once($CFG->libdir.'/phpmailer/powereduc_phpmailer.php');
 
         $this->resetAfterTest();
         $sink = $this->redirectEmails();
@@ -396,8 +396,8 @@ class login_lib_test extends \advanced_testcase {
         // So we inject our own validation method here and revert it back once we are done. This custom validator method
         // is identical to the default 'php' validator with the only difference: it has the FILTER_FLAG_EMAIL_UNICODE
         // set so that it allows to use non-ASCII characters in email addresses.
-        $defaultvalidator = \moodle_phpmailer::$validator;
-        \moodle_phpmailer::$validator = function($address) {
+        $defaultvalidator = \powereduc_phpmailer::$validator;
+        \powereduc_phpmailer::$validator = function($address) {
             return (bool) filter_var($address, FILTER_VALIDATE_EMAIL, FILTER_FLAG_EMAIL_UNICODE);
         };
 
@@ -445,7 +445,7 @@ class login_lib_test extends \advanced_testcase {
         $sink->clear();
 
         // Restore the original email address validator.
-        \moodle_phpmailer::$validator = $defaultvalidator;
+        \powereduc_phpmailer::$validator = $defaultvalidator;
     }
 
 }

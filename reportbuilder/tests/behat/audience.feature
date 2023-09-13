@@ -123,8 +123,8 @@ Feature: Configure access to reports based on intended audience
       | manager1 | manager | System         |           |
     And the following "permission overrides" exist:
       | capability                   | permission | role    | contextlevel | reference |
-      | moodle/reportbuilder:editall | Allow      | manager | System       |           |
-      | moodle/cohort:view           | Prohibit   | manager | System       |           |
+      | powereduc/reportbuilder:editall | Allow      | manager | System       |           |
+      | powereduc/cohort:view           | Prohibit   | manager | System       |           |
     And I am on the "My report" "reportbuilder > Editor" page logged in as "manager1"
     When I click on the "Audience" dynamic tab
     Then I should not see "Member of cohort" in the "[data-region='sidebar-menu']" "css_element"
@@ -231,9 +231,9 @@ Feature: Configure access to reports based on intended audience
       | user1    | viewreportsrole  | System       |           |
     And the following "permission overrides" exist:
       | capability                    | permission  | role            | contextlevel | reference |
-      | moodle/reportbuilder:editall  | Prohibit    | viewreportsrole | System       |           |
-      | moodle/reportbuilder:edit     | Allow       | viewreportsrole | System       |           |
-      | moodle/reportbuilder:view     | Prohibit    | viewreportsrole | System       |           |
+      | powereduc/reportbuilder:editall  | Prohibit    | viewreportsrole | System       |           |
+      | powereduc/reportbuilder:edit     | Allow       | viewreportsrole | System       |           |
+      | powereduc/reportbuilder:view     | Prohibit    | viewreportsrole | System       |           |
     When I log in as "user1"
     And I follow "Reports" in the user menu
     And I should see "Nothing to display"
@@ -257,9 +257,9 @@ Feature: Configure access to reports based on intended audience
       | user1    | viewreportsrole  | System       |           |
     And the following "permission overrides" exist:
       | capability                    | permission  | role            | contextlevel | reference |
-      | moodle/reportbuilder:editall  | Allow       | viewreportsrole | System       |           |
-      | moodle/reportbuilder:edit     | Prohibit    | viewreportsrole | System       |           |
-      | moodle/reportbuilder:view     | Prohibit    | viewreportsrole | System       |           |
+      | powereduc/reportbuilder:editall  | Allow       | viewreportsrole | System       |           |
+      | powereduc/reportbuilder:edit     | Prohibit    | viewreportsrole | System       |           |
+      | powereduc/reportbuilder:view     | Prohibit    | viewreportsrole | System       |           |
     When I log in as "user1"
     And I follow "Reports" in the user menu
     Then I should see "My report" in the "reportbuilder-table" "table"

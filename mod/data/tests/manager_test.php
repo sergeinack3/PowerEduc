@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace mod_data;
 
 use context_module;
-use moodle_url;
+use powereduc_url;
 use core_component;
 use stdClass;
 
@@ -26,7 +26,7 @@ use stdClass;
  *
  * @package    mod_data
  * @category   test
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @copyright  2022 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \mod_data\manager
  */
@@ -118,8 +118,8 @@ class manager_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_data\event\course_module_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodleurl = new moodle_url('/mod/data/view.php', ['id' => $cm->id]);
-        $this->assertEquals($moodleurl, $event->get_url());
+        $powereducurl = new powereduc_url('/mod/data/view.php', ['id' => $cm->id]);
+        $this->assertEquals($powereducurl, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -158,8 +158,8 @@ class manager_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('mod_data\event\template_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodleurl = new moodle_url('/mod/data/templates.php', ['d' => $instance->id]);
-        $this->assertEquals($moodleurl, $event->get_url());
+        $powereducurl = new powereduc_url('/mod/data/templates.php', ['d' => $instance->id]);
+        $this->assertEquals($powereducurl, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
     }

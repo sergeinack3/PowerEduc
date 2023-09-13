@@ -22,7 +22,7 @@ use moodle_url;
 use renderer_base;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/grade/report/lib.php');
 

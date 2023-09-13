@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file defines the question attempt class, and a few related classes.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionengine
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -50,7 +50,7 @@ class question_attempt {
 
     /**
      * @var string Should not longer be used.
-     * @deprecated since Moodle 3.0
+     * @deprecated since PowerEduc 3.0
      */
     const PARAM_MARK = PARAM_RAW_TRIMMED;
 
@@ -594,7 +594,7 @@ class question_attempt {
      * @return string the URL of that file.
      */
     public function get_response_file_url(stored_file $file) {
-        return file_encode_url(new moodle_url('/pluginfile.php'), '/' . implode('/', array(
+        return file_encode_url(new powereduc_url('/pluginfile.php'), '/' . implode('/', array(
                 $file->get_contextid(),
                 $file->get_component(),
                 $file->get_filearea(),
@@ -892,7 +892,7 @@ class question_attempt {
      *
      * @param question_display_options $options controls how the question is rendered.
      * @param string|null $number The question number to display.
-     * @param moodle_page|null $page the page the question is being redered to.
+     * @param powereduc_page|null $page the page the question is being redered to.
      *      (Optional. Defaults to $PAGE.)
      * @return string HTML fragment representing the question.
      */

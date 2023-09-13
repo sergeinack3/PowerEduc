@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for search engines.
@@ -26,7 +26,7 @@
 
 namespace core_search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base class for search engines.
@@ -490,7 +490,7 @@ abstract class engine {
      *
      * This setting is not remembered and applies only to the current request.
      *
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      * @param bool $skip True to skip the checks, false to start checking again
      */
     public function skip_schema_check($skip = true) {
@@ -501,7 +501,7 @@ abstract class engine {
      * For use by subclasses. The engine can call this inside is_server_ready to check whether it
      * should skip time-consuming schema checks.
      *
-     * @since Moodle 3.5
+     * @since PowerEduc 3.5
      * @return bool True if schema checks should be skipped
      */
     protected function should_skip_schema_check() {
@@ -588,7 +588,7 @@ abstract class engine {
 
     /**
      * Deletes information related to a specific context id. This should be used when the context
-     * itself is deleted from Moodle.
+     * itself is deleted from PowerEduc.
      *
      * This only deletes information for the specified context - not for any child contexts.
      *
@@ -608,7 +608,7 @@ abstract class engine {
 
     /**
      * Deletes information related to a specific course id. This should be used when the course
-     * itself is deleted from Moodle.
+     * itself is deleted from PowerEduc.
      *
      * This deletes all information relating to that course from the index, including all child
      * contexts.

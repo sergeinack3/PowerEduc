@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_quiz;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/quiz_question_helper_test_trait.php');
@@ -243,8 +243,8 @@ class quiz_question_restore_test extends \advanced_testcase {
         $this->resetAfterTest();
         $backupid = 'abc';
         $backuppath = make_backup_temp_directory($backupid);
-        get_file_packer('application/vnd.moodle.backup')->extract_to_pathname(
-            __DIR__ . "/fixtures/moodle_28_quiz.mbz", $backuppath);
+        get_file_packer('application/vnd.powereduc.backup')->extract_to_pathname(
+            __DIR__ . "/fixtures/powereduc_28_quiz.mbz", $backuppath);
 
         // Do the restore to new course with default settings.
         $categoryid = $DB->get_field_sql("SELECT MIN(id) FROM {course_categories}");
@@ -286,7 +286,7 @@ class quiz_question_restore_test extends \advanced_testcase {
 
         $backupid = 'abc';
         $backuppath = make_backup_temp_directory($backupid);
-        get_file_packer('application/vnd.moodle.backup')->extract_to_pathname(
+        get_file_packer('application/vnd.powereduc.backup')->extract_to_pathname(
             __DIR__ . "/fixtures/random_by_tag_quiz.mbz", $backuppath);
 
         // Do the restore to new course with default settings.
@@ -338,8 +338,8 @@ class quiz_question_restore_test extends \advanced_testcase {
         ];
         $backupid = 'abc';
         $backuppath = make_backup_temp_directory($backupid);
-        get_file_packer('application/vnd.moodle.backup')->extract_to_pathname(
-            __DIR__ . "/fixtures/moodle_311_quiz.mbz", $backuppath);
+        get_file_packer('application/vnd.powereduc.backup')->extract_to_pathname(
+            __DIR__ . "/fixtures/powereduc_311_quiz.mbz", $backuppath);
 
         // Do the restore to new course with default settings.
         $categoryid = $DB->get_field_sql("SELECT MIN(id) FROM {course_categories}");

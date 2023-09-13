@@ -16,7 +16,7 @@
 
 namespace tool_brickfield;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/admin/tool/brickfield/tests/area_test_base.php');
@@ -41,7 +41,7 @@ class area_test extends area_test_base {
         list($course1, $cm1) = get_course_and_cm_from_instance($assign1->id, 'assign');
         $assign2 = $this->getDataGenerator()->create_module('assign', array(
             'course' => SITEID, 'name' => 'Test2!', 'intro' => 'Something',
-            'introformat' => FORMAT_MOODLE));
+            'introformat' => FORMAT_POWEREDUC));
         list($course2, $cm2) = get_course_and_cm_from_instance($assign2->id, 'assign');
 
         $c = new \tool_brickfield\local\areas\mod_assign\intro();

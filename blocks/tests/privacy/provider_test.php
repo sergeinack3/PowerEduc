@@ -25,7 +25,7 @@
  */
 namespace core_block\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 use core_privacy\tests\provider_testcase;

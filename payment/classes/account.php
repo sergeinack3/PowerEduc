@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class account
@@ -96,12 +96,12 @@ class account extends persistent {
      * Manage account url
      *
      * @param array $extraparams
-     * @return \moodle_url
+     * @return \powereduc_url
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
-    public function get_edit_url(array $extraparams = []): \moodle_url {
-        return new \moodle_url('/payment/manage_account.php',
+    public function get_edit_url(array $extraparams = []): \powereduc_url {
+        return new \powereduc_url('/payment/manage_account.php',
             ($this->get('id') ? ['id' => $this->get('id')] : []) + $extraparams);
     }
 

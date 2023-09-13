@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Manages the creation and usage of access controlled links.
@@ -28,7 +28,7 @@ use \core\oauth2\api;
 use \core\notification;
 use repository_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/webdavlib.php');
 
 /**
@@ -169,7 +169,7 @@ class access_controlled_link_manager{
      * @return String Http-status of the request
      * @throws configuration_exception
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws \repository_nextcloud\request_exception
      */
     public function transfer_file_to_path($srcpath, $dstpath, $operation, $webdavclient = null) {
@@ -345,7 +345,7 @@ class access_controlled_link_manager{
      * @param string $path
      * @param string $username
      * @return \SimpleXMLElement
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function get_shares_from_path($path, $username) {
         $ocsparams = [
@@ -458,7 +458,7 @@ class access_controlled_link_manager{
     /**
      * Download a file from the system account for the purpose of offline usage.
      * @param string $srcpath Name of a file owned by the system account
-     * @param string $targetpath Temporary filename in Moodle
+     * @param string $targetpath Temporary filename in PowerEduc
      * @throws repository_exception The download was unsuccessful, maybe the file does not exist.
      */
     public function download_for_offline_usage(string $srcpath, string $targetpath): void {

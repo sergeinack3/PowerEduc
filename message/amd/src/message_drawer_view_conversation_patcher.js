@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * module.
  *
  * @module     core_message/message_drawer_view_conversation_patcher
- * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2018 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(

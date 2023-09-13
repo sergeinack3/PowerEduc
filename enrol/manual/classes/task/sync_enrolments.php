@@ -25,7 +25,7 @@
 
 namespace enrol_manual\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Syncing enrolments task.

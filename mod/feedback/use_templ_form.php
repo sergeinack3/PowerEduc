@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @package mod_feedback
  */
 
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 }
 
@@ -33,7 +33,7 @@ require_once($CFG->libdir.'/formslib.php');
  *
  * @deprecated since 4.0. New dynamic forms have been created instead.
  */
-class mod_feedback_use_templ_form extends moodleform {
+class mod_feedback_use_templ_form extends powereducform {
     public function __construct($action = null, $customdata = null, $method = 'post', $target = '',
             $attributes = null, $editable = true, $ajaxformdata = null) {
         debugging('Class mod_feedback_use_templ_form is deprecated. Replaced with dynamic forms.', DEBUG_DEVELOPER);

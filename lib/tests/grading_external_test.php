@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core;
 
 use core_grading_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -45,7 +45,7 @@ class grading_external_test extends \externallib_advanced_testcase {
         $coursedata['idnumber'] = 'idnumbercourse';
         $coursedata['fullname'] = 'Lightwork Course';
         $coursedata['summary'] = 'Lightwork Course description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course = self::getDataGenerator()->create_course($coursedata);
 
         $assigndata['course'] = $course->id;
@@ -61,7 +61,7 @@ class grading_external_test extends \externallib_advanced_testcase {
 
         // Create a teacher and give them capabilities.
         $coursecontext = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/course:viewparticipants', $coursecontext->id, 3);
+        $roleid = $this->assignUserCapability('powereduc/course:viewparticipants', $coursecontext->id, 3);
         $modulecontext = \context_module::instance($cm->cmid);
         $this->assignUserCapability('mod/assign:grade', $modulecontext->id, $roleid);
 
@@ -189,7 +189,7 @@ class grading_external_test extends \externallib_advanced_testcase {
         $coursedata['idnumber'] = 'idnumbercourse';
         $coursedata['fullname'] = 'Lightwork Course';
         $coursedata['summary'] = 'Lightwork Course description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course = self::getDataGenerator()->create_course($coursedata);
 
         $assigndata['course'] = $course->id;
@@ -205,7 +205,7 @@ class grading_external_test extends \externallib_advanced_testcase {
 
         // Create a teacher and give them capabilities.
         $coursecontext = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/course:viewparticipants', $coursecontext->id, 3);
+        $roleid = $this->assignUserCapability('powereduc/course:viewparticipants', $coursecontext->id, 3);
         $modulecontext = \context_module::instance($assign->cmid);
         $this->assignUserCapability('mod/assign:grade', $modulecontext->id, $roleid);
 
@@ -326,7 +326,7 @@ class grading_external_test extends \externallib_advanced_testcase {
         $teacher = self::getDataGenerator()->create_user();
         $USER->id = $teacher->id;
         $teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'));
-        $this->assignUserCapability('moodle/grade:managegradingforms', $context->id, $teacherrole->id);
+        $this->assignUserCapability('powereduc/grade:managegradingforms', $context->id, $teacherrole->id);
         $this->getDataGenerator()->enrol_user($teacher->id,
                                               $course->id,
                                               $teacherrole->id);
@@ -540,7 +540,7 @@ class grading_external_test extends \externallib_advanced_testcase {
         $this->assertEquals(2, $DB->count_records('gradingform_rubric_levels', array('criterionid' => $criterion1->id)));
 
         $gradingarea['activemethod'] = 'invalid';
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $results = core_grading_external::save_definitions(array($gradingarea));
     }
 
@@ -565,7 +565,7 @@ class grading_external_test extends \externallib_advanced_testcase {
         $teacher = self::getDataGenerator()->create_user();
         $USER->id = $teacher->id;
         $teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'));
-        $this->assignUserCapability('moodle/grade:managegradingforms', $context->id, $teacherrole->id);
+        $this->assignUserCapability('powereduc/grade:managegradingforms', $context->id, $teacherrole->id);
         $this->getDataGenerator()->enrol_user($teacher->id,
                                               $course->id,
                                               $teacherrole->id);

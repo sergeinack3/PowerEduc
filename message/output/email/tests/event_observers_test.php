@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ namespace message_email;
  *
  * @package message_email
  * @category test
- * @copyright 2019 Mark Nelson <markn@moodle.com>
+ * @copyright 2019 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class event_observers_test extends \advanced_testcase {
@@ -59,7 +59,7 @@ class event_observers_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid = 1;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         $message->userfrom = $user1;
         $message->convid = $conversation->id;

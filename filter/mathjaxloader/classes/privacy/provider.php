@@ -24,7 +24,7 @@
 
 namespace filter_mathjaxloader\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_mathjaxloader implementing null_provider.

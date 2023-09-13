@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class for exporting a user summary from an stdClass.
@@ -22,11 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_user\external;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context_system;
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for exporting a user summary from an stdClass.
@@ -46,7 +46,7 @@ class user_summary_exporter extends \core\external\exporter {
         $userpicture->size = 0; // Size f2.
         $profileimageurlsmall = $userpicture->get_url($PAGE)->out(false);
 
-        $profileurl = (new moodle_url('/user/profile.php', array('id' => $this->data->id)))->out(false);
+        $profileurl = (new powereduc_url('/user/profile.php', array('id' => $this->data->id)))->out(false);
 
         // TODO Does not support custom user profile fields (MDL-70456).
         $identityfields = array_flip(\core_user\fields::get_identity_fields(null, false));

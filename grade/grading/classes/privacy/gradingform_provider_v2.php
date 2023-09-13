@@ -23,7 +23,7 @@
  */
 namespace core_grading\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 interface gradingform_provider_v2 extends
     \core_privacy\local\request\plugin\subsystem_provider,

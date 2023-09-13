@@ -25,7 +25,7 @@
  * @copyright  2019 Jake Dallimore <jrhdallimore@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\OutputFormat;

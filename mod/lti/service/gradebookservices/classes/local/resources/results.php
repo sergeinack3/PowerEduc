@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains a class definition for the LISResults container resource
@@ -28,7 +28,7 @@ namespace ltiservice_gradebookservices\local\resources;
 use ltiservice_gradebookservices\local\service\gradebookservices;
 use mod_lti\local\ltiservice\resource_base;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A resource implementing LISResult container.
@@ -188,29 +188,29 @@ class results extends resource_base {
             $limitlast = $totalcount - $limitnum + 1 >= 0 ? $totalcount - $limitnum + 1 : 0;
             $limitfrom += $limitnum;
 
-            $baseurl = new \moodle_url($this->get_endpoint());
+            $baseurl = new \powereduc_url($this->get_endpoint());
             if (is_null($typeid)) {
                 $baseurl->param('limit', $limitnum);
 
                 if (($limitfrom <= $totalcount - 1) && (!$outofrange)) {
-                    $nextpage = new \moodle_url($baseurl, ['from' => $limitfrom]);
+                    $nextpage = new \powereduc_url($baseurl, ['from' => $limitfrom]);
                 }
-                $firstpage = new \moodle_url($baseurl, ['from' => 0]);
-                $canonicalpage = new \moodle_url($baseurl, ['from' => $limitcurrent]);
-                $lastpage = new \moodle_url($baseurl, ['from' => $limitlast]);
+                $firstpage = new \powereduc_url($baseurl, ['from' => 0]);
+                $canonicalpage = new \powereduc_url($baseurl, ['from' => $limitcurrent]);
+                $lastpage = new \powereduc_url($baseurl, ['from' => $limitlast]);
                 if (($limitcurrent > 0) && (!$outofrange)) {
-                    $prevpage = new \moodle_url($baseurl, ['from' => $limitprev]);
+                    $prevpage = new \powereduc_url($baseurl, ['from' => $limitprev]);
                 }
             } else {
                 $baseurl->params(['type_id' => $typeid, 'limit' => $limitnum]);
 
                 if (($limitfrom <= $totalcount - 1) && (!$outofrange)) {
-                    $nextpage = new \moodle_url($baseurl, ['from' => $limitfrom]);
+                    $nextpage = new \powereduc_url($baseurl, ['from' => $limitfrom]);
                 }
-                $firstpage = new \moodle_url($baseurl, ['from' => 0]);
-                $canonicalpage = new \moodle_url($baseurl, ['from' => $limitcurrent]);
+                $firstpage = new \powereduc_url($baseurl, ['from' => 0]);
+                $canonicalpage = new \powereduc_url($baseurl, ['from' => $limitcurrent]);
                 if (($limitcurrent > 0) && (!$outofrange)) {
-                    $prevpage = new \moodle_url($baseurl, ['from' => $limitprev]);
+                    $prevpage = new \powereduc_url($baseurl, ['from' => $limitprev]);
                 }
             }
         }

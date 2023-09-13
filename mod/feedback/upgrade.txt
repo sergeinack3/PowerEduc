@@ -60,7 +60,7 @@ The $extradetails parameter in the constructor of the mod_feedback\output\summar
 * Base class for feedback items - feedback_item_base - has been significantly changed, all item types now
   must implement method complete_form_element() instead of print_item_preview(), print_item_complete(),
   print_item_show_value(), check_values(), clean_input_value() and value_is_array(). Rendering the items
-  on complete form, feedback preview, feedback edit and when viewing response is done using moodleform.
+  on complete form, feedback preview, feedback edit and when viewing response is done using powereducform.
 * The following functions have been deprecated:
   * feedback_print_item_preview()
   * feedback_print_item_complete()

@@ -81,10 +81,10 @@ Feature: Adding random questions to a quiz based on category and tags
     Then I should see "Questions Category 1"
     And I should see "foo"
 
-  Scenario: Teacher without moodle/question:useall should not see the add a random question menu item
+  Scenario: Teacher without powereduc/question:useall should not see the add a random question menu item
     Given the following "permission overrides" exist:
       | capability             | permission | role           | contextlevel | reference |
-      | moodle/question:useall | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/question:useall | Prevent    | editingteacher | Course       | C1        |
     And I log in as "teacher1"
     And I am on the "Quiz 1" "mod_quiz > Edit" page
     When I open the "last" add to quiz menu

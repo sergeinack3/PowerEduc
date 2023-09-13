@@ -22,7 +22,7 @@
  * @author    Neill Magill <neill.magill@nottingham.ac.uk>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Upgrade the block_rss_client database.

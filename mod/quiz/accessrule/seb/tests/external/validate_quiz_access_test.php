@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quizaccess_seb\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -66,7 +66,7 @@ class validate_quiz_access_test extends \advanced_testcase {
             ],
             'no course module id' => [
                 'cmid' => null,
-                'url' => 'https://www.example.com/moodle',
+                'url' => 'https://www.example.com/powereduc',
                 'configkey' => hash('sha256', 'configkey'),
                 '/Invalid parameter value detected \(Missing required key in single structure: cmid\)/'
             ],
@@ -78,7 +78,7 @@ class validate_quiz_access_test extends \advanced_testcase {
             ],
             'cmid is not an int' => [
                 'cmid' => 'test',
-                'url' => 'https://www.example.com/moodle',
+                'url' => 'https://www.example.com/powereduc',
                 'configkey' => null,
                 '/Invalid external api parameter: the value is "test", the server was expecting "int" type/'
             ],
@@ -128,7 +128,7 @@ class validate_quiz_access_test extends \advanced_testcase {
 
         $this->expectException(\require_login_exception::class);
         $this->expectExceptionMessage('Course or activity not accessible. (Not enrolled)');
-        validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/moodle', 'configkey');
+        validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/powereduc', 'configkey');
     }
 
     /**
@@ -137,7 +137,7 @@ class validate_quiz_access_test extends \advanced_testcase {
     public function test_no_keys_provided() {
         $this->expectException(\invalid_parameter_exception::class);
         $this->expectExceptionMessage('At least one SEB key must be provided.');
-        validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/moodle');
+        validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/powereduc');
     }
 
     /**
@@ -148,7 +148,7 @@ class validate_quiz_access_test extends \advanced_testcase {
         $forum = $this->getDataGenerator()->create_module('forum', ['course' => $this->course->id]);
         $this->expectException(\invalid_parameter_exception::class);
         $this->expectExceptionMessage('Quiz not found matching course module ID: ' . $forum->cmid);
-        validate_quiz_keys::execute($forum->cmid, 'https://www.example.com/moodle', 'configkey');
+        validate_quiz_keys::execute($forum->cmid, 'https://www.example.com/powereduc', 'configkey');
     }
 
     /**
@@ -161,7 +161,7 @@ class validate_quiz_access_test extends \advanced_testcase {
             'quizid' => $this->quiz->id,
             'cmid' => $this->quiz->cmid,
         ]);
-        $url = 'https://www.example.com/moodle';
+        $url = 'https://www.example.com/powereduc';
 
         // Create the quiz settings.
         $quizsettings = new quiz_settings(0, $settings);
@@ -191,7 +191,7 @@ class validate_quiz_access_test extends \advanced_testcase {
         $quizsettings = new quiz_settings(0, $settings);
         $quizsettings->save();
 
-        $result = validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/moodle', 'badconfigkey');
+        $result = validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/powereduc', 'badconfigkey');
         $this->assertFalse($result['configkey']);
         $this->assertTrue($result['browserexamkey']);
         $events = $sink->get_events();
@@ -207,7 +207,7 @@ class validate_quiz_access_test extends \advanced_testcase {
     public function test_browser_exam_key_valid() {
         $sink = $this->redirectEvents();
         // Test settings to populate the quiz.
-        $url = 'https://www.example.com/moodle';
+        $url = 'https://www.example.com/powereduc';
         $validbrowserexamkey = hash('sha256', 'validbrowserexamkey');
         $settings = $this->get_test_settings([
             'quizid' => $this->quiz->id,
@@ -246,7 +246,7 @@ class validate_quiz_access_test extends \advanced_testcase {
         $quizsettings = new quiz_settings(0, $settings);
         $quizsettings->save();
 
-        $result = validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/moodle', null,
+        $result = validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/powereduc', null,
                 hash('sha256', 'badbrowserexamkey'));
         $this->assertTrue($result['configkey']);
         $this->assertFalse($result['browserexamkey']);

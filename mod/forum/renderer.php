@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains a custom renderer class used by the forum module.
@@ -46,7 +46,7 @@ class mod_forum_renderer extends plugin_renderer_base {
             $html .= html_writer::start_tag('div', array('class' => 'discussion-nav clearfix'));
             $html .= html_writer::start_tag('ul');
             if ($prev) {
-                $url = new moodle_url('/mod/forum/discuss.php', array('d' => $prev->id));
+                $url = new powereduc_url('/mod/forum/discuss.php', array('d' => $prev->id));
                 $html .= html_writer::start_tag('li', array('class' => 'prev-discussion'));
                 $html .= html_writer::link($url, $this->output->larrow() . ' ' . format_string($prev->name),
                     array('aria-label' => get_string('prevdiscussiona', 'mod_forum', format_string($prev->name)),
@@ -54,7 +54,7 @@ class mod_forum_renderer extends plugin_renderer_base {
                 $html .= html_writer::end_tag('li');
             }
             if ($next) {
-                $url = new moodle_url('/mod/forum/discuss.php', array('d' => $next->id));
+                $url = new powereduc_url('/mod/forum/discuss.php', array('d' => $next->id));
                 $html .= html_writer::start_tag('li', array('class' => 'next-discussion'));
                 $html .= html_writer::link($url, format_string($next->name) . ' ' . $this->output->rarrow(),
                     array('aria-label' => get_string('nextdiscussiona', 'mod_forum', format_string($next->name)),
@@ -186,7 +186,7 @@ class mod_forum_renderer extends plugin_renderer_base {
         $dates[] = get_string($str, 'mod_forum');
 
         $tooltip = implode("\n", $dates);
-        return $this->pix_icon('i/calendar', $tooltip, 'moodle', array('class' => 'smallicon timedpost'));
+        return $this->pix_icon('i/calendar', $tooltip, 'powereduc', array('class' => 'smallicon timedpost'));
     }
 
     /**

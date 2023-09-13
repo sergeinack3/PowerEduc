@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Prints the list of all workshops in the course
@@ -51,7 +51,7 @@ $event->trigger();
 
 if (! $workshops = get_all_instances_in_course('workshop', $course)) {
     echo $OUTPUT->heading(get_string('modulenameplural', 'workshop'));
-    notice(get_string('noworkshops', 'workshop'), new moodle_url('/course/view.php', array('id' => $course->id)));
+    notice(get_string('noworkshops', 'workshop'), new powereduc_url('/course/view.php', array('id' => $course->id)));
     echo $OUTPUT->footer();
     die();
 }
@@ -73,10 +73,10 @@ if ($usesections) {
 
 foreach ($workshops as $workshop) {
     if (empty($workshop->visible)) {
-        $link = html_writer::link(new moodle_url('/mod/workshop/view.php', array('id' => $workshop->coursemodule)),
+        $link = html_writer::link(new powereduc_url('/mod/workshop/view.php', array('id' => $workshop->coursemodule)),
                                   $workshop->name, array('class' => 'dimmed'));
     } else {
-        $link = html_writer::link(new moodle_url('/mod/workshop/view.php', array('id' => $workshop->coursemodule)),
+        $link = html_writer::link(new powereduc_url('/mod/workshop/view.php', array('id' => $workshop->coursemodule)),
                                   $workshop->name);
     }
 

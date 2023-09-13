@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ use action_menu;
 use action_menu_link_secondary;
 use mod_data\manager;
 use mod_data\preset;
-use moodle_url;
+use powereduc_url;
 use templatable;
 use renderable;
 use renderer_base;
@@ -30,7 +30,7 @@ use stdClass;
  * Renderable class for the presets table in the database activity.
  *
  * @package    mod_data
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class presets implements templatable, renderable {
@@ -41,7 +41,7 @@ class presets implements templatable, renderable {
     /** @var array $presets The array containing the existing presets. */
     private $presets;
 
-    /** @var moodle_url $formactionurl The the action url for the form. */
+    /** @var powereduc_url $formactionurl The the action url for the form. */
     private $formactionurl;
 
     /** @var bool $manage Whether the manage preset options should be displayed. */
@@ -52,10 +52,10 @@ class presets implements templatable, renderable {
      *
      * @param manager $manager The database manager
      * @param array $presets The array containing the existing presets
-     * @param moodle_url $formactionurl The action url for the form
+     * @param powereduc_url $formactionurl The action url for the form
      * @param bool $manage Whether the manage preset options should be displayed
      */
-    public function __construct(manager $manager, array $presets, moodle_url $formactionurl, bool $manage = false) {
+    public function __construct(manager $manager, array $presets, powereduc_url $formactionurl, bool $manage = false) {
         $this->manager = $manager;
         $this->presets = $presets;
         $this->formactionurl = $formactionurl;
@@ -103,7 +103,7 @@ class presets implements templatable, renderable {
             $fullname = $preset->get_fullname();
             $id = $this->manager->get_instance()->id;
             $cmid = $this->manager->get_coursemodule()->id;
-            $previewurl = new moodle_url(
+            $previewurl = new powereduc_url(
                     '/mod/data/preset.php',
                     ['d' => $id, 'fullname' => $fullname, 'action' => 'preview']
             );
@@ -152,7 +152,7 @@ class presets implements templatable, renderable {
                     'd' => $id,
                     'action' => 'edit',
                 ];
-                $editactionurl = new moodle_url('/mod/data/preset.php', $params);
+                $editactionurl = new powereduc_url('/mod/data/preset.php', $params);
                 $attributes = [
                     'data-action' => 'editpreset',
                     'data-dataid' => $id,
@@ -174,7 +174,7 @@ class presets implements templatable, renderable {
                 'presetname' => $preset->name,
                 'action' => 'export',
             ];
-            $exporturl = new moodle_url('/mod/data/preset.php', $params);
+            $exporturl = new powereduc_url('/mod/data/preset.php', $params);
             $actionmenu->add(new action_menu_link_secondary(
                 $exporturl,
                 null,
@@ -187,7 +187,7 @@ class presets implements templatable, renderable {
                     'd' => $id,
                     'action' => 'delete',
                 ];
-                $deleteactionurl = new moodle_url('/mod/data/preset.php', $params);
+                $deleteactionurl = new powereduc_url('/mod/data/preset.php', $params);
                 $attributes = [
                     'data-action' => 'deletepreset',
                     'data-dataid' => $id,

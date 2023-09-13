@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -88,7 +88,7 @@ class create_template_form_test extends \advanced_testcase {
         $this->setUser($manager);
         $submitdata = create_template_form::mock_ajax_submit($data);
         if (!$accessallowed) {
-            $this->expectException(\moodle_exception::class);
+            $this->expectException(\powereduc_exception::class);
         }
         $form = new create_template_form(null, null, 'post', '', null, true,
             $submitdata, true);
@@ -163,7 +163,7 @@ class create_template_form_test extends \advanced_testcase {
 
         $submitdata = create_template_form::mock_ajax_submit($data);
         if (!$accessallowed) {
-            $this->expectException(\moodle_exception::class);
+            $this->expectException(\powereduc_exception::class);
         }
         $form = new create_template_form(null, null, 'post', '', null, true,
             $submitdata, true);

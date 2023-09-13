@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * View model insights.
@@ -77,7 +77,7 @@ if ($modelid) {
 
 // The URL in navigation only contains the contextid.
 $params = array('contextid' => $contextid);
-$navurl = new \moodle_url('/report/insights/insights.php', $params);
+$navurl = new \powereduc_url('/report/insights/insights.php', $params);
 
 // This is the real page url, we need it to include the modelid so pagination and
 // other stuff works as expected.
@@ -152,7 +152,7 @@ if ($model->get_analyser()::one_sample_per_analysable()) {
                 'Therefore, the analyser\'s one_sample_per_analysable() method should return false.');
         }
         $prediction = reset($predictions);
-        $redirecturl = new \moodle_url('/report/insights/prediction.php', ['id' => $prediction->get_prediction_data()->id]);
+        $redirecturl = new \powereduc_url('/report/insights/prediction.php', ['id' => $prediction->get_prediction_data()->id]);
         redirect($redirecturl);
     }
 }

@@ -24,7 +24,7 @@
 
 namespace tool_licensemanager\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem implementation for tool_licensemanager implementing null_provider.

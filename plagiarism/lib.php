@@ -1,38 +1,38 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * lib.php - Contains Plagiarism base class used by plugins.
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    core_plagiarism
  * @copyright  2010 Dan Marsden http://danmarsden.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+if (!defined('POWEREDUC_INTERNAL')) {
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
 
 /**
  * Plagiarism base class used by plugins.
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    core_plagiarism
  * @copyright  2010 Dan Marsden http://danmarsden.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -41,7 +41,7 @@ abstract class plagiarism_plugin {
 
     /**
      * Return the list of form element names.
-     * @deprecated Since Moodle 4.0 - this function was a placeholder and not used in core.
+     * @deprecated Since PowerEduc 4.0 - this function was a placeholder and not used in core.
      * @todo MDL-71326 Remove this method.
      * @return array contains the form element names.
      */
@@ -59,7 +59,7 @@ abstract class plagiarism_plugin {
     }
     /**
      * hook to allow plagiarism specific information to be returned unformatted
-     * @deprecated Since Moodle 4.0 - this function was a placeholder and not used in core Moodle code.
+     * @deprecated Since PowerEduc 4.0 - this function was a placeholder and not used in core PowerEduc code.
      * @todo MDL-71326 Remove this method.
      * @param int $cmid
      * @param int $userid
@@ -74,9 +74,9 @@ abstract class plagiarism_plugin {
     }
     /**
      * hook to add plagiarism specific settings to a module settings page
-     * @deprecated Since Moodle 3.9. MDL-65835 Please use {plugin name}_coursemodule_edit_post_actions() instead.
+     * @deprecated Since PowerEduc 3.9. MDL-65835 Please use {plugin name}_coursemodule_edit_post_actions() instead.
      * @todo MDL-67526 Remove this method.
-     * @param object $mform  - Moodle form
+     * @param object $mform  - PowerEduc form
      * @param object $context - current context
      * @param string $modulename - Name of the module
      */
@@ -84,7 +84,7 @@ abstract class plagiarism_plugin {
     }
     /**
      * hook to save plagiarism specific settings on a module settings page
-     * @deprecated Since Moodle 3.9. MDL-65835 Please use {plugin name}_coursemodule_standard_elements() instead.
+     * @deprecated Since PowerEduc 3.9. MDL-65835 Please use {plugin name}_coursemodule_standard_elements() instead.
      * @todo MDL-67526 Remove this method.
      * @param object $data - data from an mform submission.
      */
@@ -99,7 +99,7 @@ abstract class plagiarism_plugin {
     }
     /**
      * hook to allow status of submitted files to be updated - called on grading/report pages.
-     * @deprecated Since Moodle 4.0 - Please use {plugin name}_before_standard_top_of_body_html instead.
+     * @deprecated Since PowerEduc 4.0 - Please use {plugin name}_before_standard_top_of_body_html instead.
      * @todo MDL-71326 Remove this method.
      * @param object $course - full Course object
      * @param object $cm - full cm object

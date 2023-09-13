@@ -1,26 +1,26 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions and constants for module glossary
  * (replace glossary with the name of your module and delete this line)
  *
  * @package   mod_glossary
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once($CFG->libdir . '/completionlib.php');
@@ -83,7 +83,7 @@ function glossary_add_instance($glossary) {
     //Check displayformat is a valid one
     $formats = get_list_of_plugins('mod/glossary/formats','TEMPLATE');
     if (!in_array($glossary->displayformat, $formats)) {
-        throw new \moodle_exception('unknowformat', '', '', $glossary->displayformat);
+        throw new \powereduc_exception('unknowformat', '', '', $glossary->displayformat);
     }
 
     $returnid = $DB->insert_record("glossary", $glossary);
@@ -130,7 +130,7 @@ function glossary_update_instance($glossary) {
     //Check displayformat is a valid one
     $formats = get_list_of_plugins('mod/glossary/formats','TEMPLATE');
     if (!in_array($glossary->displayformat, $formats)) {
-        throw new \moodle_exception('unknowformat', '', '', $glossary->displayformat);
+        throw new \powereduc_exception('unknowformat', '', '', $glossary->displayformat);
     }
 
     $DB->update_record("glossary", $glossary);
@@ -264,7 +264,7 @@ function glossary_user_outline($course, $user, $mod, $glossary) {
         $result->time = $lastentry->timemodified;
 
         if ($grade) {
-            if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+            if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
                 $result->info .= ', ' . get_string('gradenoun') . ': ' . $grade->str_long_grade;
             } else {
                 $result->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -275,7 +275,7 @@ function glossary_user_outline($course, $user, $mod, $glossary) {
         $result = (object) [
             'time' => grade_get_date_for_user_grade($grade, $user),
         ];
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $result->info = get_string('gradenoun') . ': ' . $grade->str_long_grade;
         } else {
             $result->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -322,7 +322,7 @@ function glossary_user_complete($course, $user, $mod, $glossary) {
     $grades = grade_get_grades($course->id, 'mod', 'glossary', $glossary->id, $user->id);
     if (!empty($grades->items[0]->grades)) {
         $grade = reset($grades->items[0]->grades);
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             echo $OUTPUT->container(get_string('gradenoun') . ': ' . $grade->str_long_grade);
             if ($grade->str_feedback) {
                 echo $OUTPUT->container(get_string('feedback').': '.$grade->str_feedback);
@@ -372,10 +372,10 @@ function glossary_get_recent_mod_activity(&$activities, &$index, $timestart, $co
         return;
     }
 
-    $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+    $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
     // Groups are not yet supported for glossary. See MDL-10728 .
     /*
-    $accessallgroups = has_capability('moodle/site:accessallgroups', $context);
+    $accessallgroups = has_capability('powereduc/site:accessallgroups', $context);
     $groupmode = groups_get_activity_groupmode($cm, $course);
      */
 
@@ -495,11 +495,11 @@ function glossary_print_recent_mod_activity($activity, $courseid, $detail, $modn
         $urlparams = array('g' => $activity->glossaryid, 'mode' => 'entry', 'hook' => $activity->content->entryid);
         $class = array();
     }
-    echo html_writer::link(new moodle_url('/mod/glossary/view.php', $urlparams),
+    echo html_writer::link(new powereduc_url('/mod/glossary/view.php', $urlparams),
             strip_tags($activity->content->concept), $class);
     echo html_writer::end_tag('div');
 
-    $url = new moodle_url('/user/view.php', array('course'=>$courseid, 'id'=>$activity->user->id));
+    $url = new powereduc_url('/user/view.php', array('course'=>$courseid, 'id'=>$activity->user->id));
     $name = $activity->user->fullname;
     $link = html_writer::link($url, $name, $class);
 
@@ -604,7 +604,7 @@ function glossary_print_recent_activity($course, $viewfullnames, $timestart) {
                 $dimmed = ' dimmed_text';
                 $urlparams = array('id' => $ids[$entry->glossaryid], 'mode' => 'approval', 'hook' => format_text($entry->concept, true));
             }
-            $link = new moodle_url($CFG->wwwroot.'/mod/glossary/view.php' , $urlparams);
+            $link = new powereduc_url($CFG->wwwroot.'/mod/glossary/view.php' , $urlparams);
             echo '<div class="head'.$dimmed.'">';
             echo '<div class="date">'.userdate($entry->timemodified, $strftimerecent).'</div>';
             echo '<div class="name">'.fullname($entry, $viewfullnames).'</div>';
@@ -634,7 +634,7 @@ function glossary_log_info($log) {
 }
 
 /**
- * Function to be run periodically according to the moodle cron
+ * Function to be run periodically according to the powereduc cron
  * This function searches for things that need to be done, such
  * as sending out mail, toggling flags etc ...
  * @return bool
@@ -863,7 +863,7 @@ function glossary_grade_item_delete($glossary) {
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function glossary_scale_used() {
     throw new coding_exception('glossary_scale_used() can not be used anymore. Plugins can implement ' .
@@ -1018,7 +1018,7 @@ function glossary_get_entries_search($concept, $courseid) {
 
     //Check if the user is an admin
     $bypassadmin = 1; //This means NO (by default)
-    if (has_capability('moodle/course:viewhiddenactivities', context_system::instance())) {
+    if (has_capability('powereduc/course:viewhiddenactivities', context_system::instance())) {
         $bypassadmin = 0; //This means YES
     }
 
@@ -1143,7 +1143,7 @@ function  glossary_print_entry_concept($entry, $return=false) {
 
 /**
  *
- * @global moodle_database DB
+ * @global powereduc_database DB
  * @param object $entry
  * @param object $glossary
  * @param object $cm
@@ -1242,7 +1242,7 @@ function glossary_print_entry_icons($course, $cm, $glossary, $entry, $mode='',$h
     if ($entry->approved || has_capability('mod/glossary:approve', $context)) {
         $output = true;
         $return .= \html_writer::link(
-            new \moodle_url('/mod/glossary/showentry.php', ['eid' => $entry->id]),
+            new \powereduc_url('/mod/glossary/showentry.php', ['eid' => $entry->id]),
             $OUTPUT->pix_icon('fp/link', get_string('entrylink', 'glossary', $altsuffix), 'theme'),
             ['title' => get_string('entrylink', 'glossary', $altsuffix), 'class' => 'icon']
         );
@@ -1271,7 +1271,7 @@ function glossary_print_entry_icons($course, $cm, $glossary, $entry, $mode='',$h
         }
 
         $icon = 't/delete';
-        $iconcomponent = 'moodle';
+        $iconcomponent = 'powereduc';
         if ( $entry->sourceglossaryid ) {
             $icon = 'minus';   // graphical metaphor (minus) for deleting an imported entry
             $iconcomponent = 'glossary';
@@ -1431,7 +1431,7 @@ function  glossary_print_entry_approval($cm, $entry, $mode, $align="right", $ins
             echo '<table class="glossaryapproval" align="'.$align.'"><tr><td align="'.$align.'">';
         }
         echo $OUTPUT->action_icon(
-            new moodle_url('approve.php', array('eid' => $entry->id, 'mode' => $mode, 'sesskey' => sesskey())),
+            new powereduc_url('approve.php', array('eid' => $entry->id, 'mode' => $mode, 'sesskey' => sesskey())),
             new pix_icon('t/approve', get_string('approve','glossary'), '',
                 array('class' => 'iconsmall', 'align' => $align))
         );
@@ -1598,7 +1598,7 @@ function glossary_print_attachments($entry, $cm, $type=NULL, $unused = null) {
         foreach ($files as $file) {
             $filename = $file->get_filename();
             $mimetype = $file->get_mimetype();
-            $iconimage = $OUTPUT->pix_icon(file_file_icon($file), get_mimetype_description($file), 'moodle', array('class' => 'icon'));
+            $iconimage = $OUTPUT->pix_icon(file_file_icon($file), get_mimetype_description($file), 'powereduc', array('class' => 'icon'));
             $path = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'.$context->id.'/mod_glossary/attachment/'.$entry->id.'/'.$filename);
 
             if ($type == 'html') {
@@ -1714,7 +1714,7 @@ function glossary_get_file_info($browser, $areas, $course, $cm, $context, $filea
 
     // Checks to see if the user can manage files or is the owner.
     // TODO MDL-33805 - Do not use userid here and move the capability check above.
-    if (!has_capability('moodle/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
+    if (!has_capability('powereduc/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
         return null;
     }
 
@@ -1922,7 +1922,7 @@ function glossary_print_categories_menu($cm, $glossary, $hook, $category) {
              $options['id'] = $cm->id;
              $options['mode'] = 'cat';
              $options['hook'] = $hook;
-             echo $OUTPUT->single_button(new moodle_url("editcategories.php", $options), get_string("editcategories","glossary"), "get");
+             echo $OUTPUT->single_button(new powereduc_url("editcategories.php", $options), get_string("editcategories","glossary"), "get");
      }
      echo '</td>';
 
@@ -1968,7 +1968,7 @@ function glossary_print_categories_menu($cm, $glossary, $hook, $category) {
      echo '</b></td>';
      echo '<td align="center" style="width:20%">';
 
-     $select = new single_select(new moodle_url("/mod/glossary/view.php", array('id'=>$cm->id, 'mode'=>'cat')), 'hook', $menu, $selected, null, "catmenu");
+     $select = new single_select(new powereduc_url("/mod/glossary/view.php", array('id'=>$cm->id, 'mode'=>'cat')), 'hook', $menu, $selected, null, "catmenu");
      $select->set_label(get_string('categories', 'glossary'), array('class' => 'accesshide'));
      echo $OUTPUT->render($select);
 
@@ -2194,13 +2194,13 @@ function glossary_print_dynaentry($courseid, $entries, $displayformat = -1) {
     if ( $entries ) {
         foreach ( $entries as $entry ) {
             if (! $glossary = $DB->get_record('glossary', array('id'=>$entry->glossaryid))) {
-                throw new \moodle_exception('invalidid', 'glossary');
+                throw new \powereduc_exception('invalidid', 'glossary');
             }
             if (! $course = $DB->get_record('course', array('id'=>$glossary->course))) {
-                throw new \moodle_exception('coursemisconf');
+                throw new \powereduc_exception('coursemisconf');
             }
             if (!$cm = get_coursemodule_from_instance('glossary', $entry->glossaryid, $glossary->course) ) {
-                throw new \moodle_exception('invalidid', 'glossary');
+                throw new \powereduc_exception('invalidid', 'glossary');
             }
 
             //If displayformat is present, override glossary->displayformat
@@ -2565,7 +2565,7 @@ function glossary_xml_import_files($xmlparent, $tag, $contextid, $filearea, $ite
 /**
  * How many unrated entries are in the given glossary for a given user?
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param int $glossaryid
  * @param int $userid
  * @return int
@@ -2624,7 +2624,7 @@ function glossary_count_unrated_entries($glossaryid, $userid) {
  * Returns the html code to represent any pagging bar. Paramenters are:
  *
  * The function dinamically show the first and last pages, and "scroll" over pages.
- * Fully compatible with Moodle's print_paging_bar() function. Perhaps some day this
+ * Fully compatible with PowerEduc's print_paging_bar() function. Perhaps some day this
  * could replace the general one. ;-)
  *
  * @param int $totalcount total number of records to be displayed
@@ -3078,8 +3078,8 @@ function glossary_reset_userdata($data) {
  * @return array
  */
 function glossary_get_extra_capabilities() {
-    return ['moodle/rating:view', 'moodle/rating:viewany', 'moodle/rating:viewall', 'moodle/rating:rate',
-            'moodle/comment:view', 'moodle/comment:post', 'moodle/comment:delete'];
+    return ['powereduc/rating:view', 'powereduc/rating:viewany', 'powereduc/rating:viewall', 'powereduc/rating:rate',
+            'powereduc/comment:view', 'powereduc/comment:post', 'powereduc/comment:delete'];
 }
 
 /**
@@ -3096,7 +3096,7 @@ function glossary_supports($feature) {
         case FEATURE_GRADE_HAS_GRADE:         return true;
         case FEATURE_GRADE_OUTCOMES:          return true;
         case FEATURE_RATE:                    return true;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_COMMENT:                 return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_COLLABORATION;
@@ -3116,19 +3116,19 @@ function glossary_extend_navigation($navigation, $course, $module, $cm) {
 
         switch($showtabvalue) {
             case GLOSSARY_STANDARD :
-                $navigation->add(get_string('standardview', 'glossary'), new moodle_url('/mod/glossary/view.php',
+                $navigation->add(get_string('standardview', 'glossary'), new powereduc_url('/mod/glossary/view.php',
                         array('id' => $cm->id, 'mode' => 'letter')));
                 break;
             case GLOSSARY_CATEGORY :
-                $navigation->add(get_string('categoryview', 'glossary'), new moodle_url('/mod/glossary/view.php',
+                $navigation->add(get_string('categoryview', 'glossary'), new powereduc_url('/mod/glossary/view.php',
                         array('id' => $cm->id, 'mode' => 'cat')));
                 break;
             case GLOSSARY_DATE :
-                $navigation->add(get_string('dateview', 'glossary'), new moodle_url('/mod/glossary/view.php',
+                $navigation->add(get_string('dateview', 'glossary'), new powereduc_url('/mod/glossary/view.php',
                         array('id' => $cm->id, 'mode' => 'date')));
                 break;
             case GLOSSARY_AUTHOR :
-                $navigation->add(get_string('authorview', 'glossary'), new moodle_url('/mod/glossary/view.php',
+                $navigation->add(get_string('authorview', 'glossary'), new powereduc_url('/mod/glossary/view.php',
                         array('id' => $cm->id, 'mode' => 'author')));
                 break;
         }
@@ -3149,13 +3149,13 @@ function glossary_extend_settings_navigation(settings_navigation $settings, navi
 
     if (has_capability('mod/glossary:import', $settings->get_page()->cm->context)) {
         $node = $glossarynode->add(get_string('importentries', 'glossary'),
-            new moodle_url('/mod/glossary/import.php', ['id' => $settings->get_page()->cm->id]));
+            new powereduc_url('/mod/glossary/import.php', ['id' => $settings->get_page()->cm->id]));
         $node->set_show_in_secondary_navigation(false);
     }
 
     if (has_capability('mod/glossary:export', $settings->get_page()->cm->context)) {
         $node = $glossarynode->add(get_string('exportentries', 'glossary'),
-            new moodle_url('/mod/glossary/export.php', ['id' => $settings->get_page()->cm->id, 'mode' => $mode,
+            new powereduc_url('/mod/glossary/export.php', ['id' => $settings->get_page()->cm->id, 'mode' => $mode,
             'hook' => $hook]));
         $node->set_show_in_secondary_navigation(false);
     }
@@ -3168,13 +3168,13 @@ function glossary_extend_settings_navigation(settings_navigation $settings, navi
     if (has_capability('mod/glossary:approve', $settings->get_page()->cm->context) &&
             (!$glossary->defaultapproval || $hiddenentries)) {
         $glossarynode->add(get_string('pendingapproval', 'glossary'),
-            new moodle_url('/mod/glossary/view.php', ['id' => $settings->get_page()->cm->id, 'mode' => 'approval']),
+            new powereduc_url('/mod/glossary/view.php', ['id' => $settings->get_page()->cm->id, 'mode' => 'approval']),
             navigation_node::TYPE_CUSTOM, null, 'pendingapproval');
     }
 
     if (has_capability('mod/glossary:write', $settings->get_page()->cm->context)) {
         $node = $glossarynode->add(get_string('addentry', 'glossary'),
-            new moodle_url('/mod/glossary/edit.php', ['cmid' => $settings->get_page()->cm->id]));
+            new powereduc_url('/mod/glossary/edit.php', ['cmid' => $settings->get_page()->cm->id]));
         $node->set_show_in_secondary_navigation(false);
     }
 
@@ -3184,7 +3184,7 @@ function glossary_extend_settings_navigation(settings_navigation $settings, navi
 
         $string = get_string('rsstype', 'glossary');
 
-        $url = new moodle_url(rss_get_url($settings->get_page()->cm->context->id, $USER->id, 'mod_glossary',
+        $url = new powereduc_url(rss_get_url($settings->get_page()->cm->context->id, $USER->id, 'mod_glossary',
             $glossary->id));
         $node = $glossarynode->add($string, $url, settings_navigation::TYPE_SETTING, null, null, new pix_icon('i/rss', ''));
         $node->set_show_in_secondary_navigation(false);
@@ -3368,7 +3368,7 @@ function glossary_get_visible_tabs($displayformat) {
  * @param stdClass $cm       The course module object.
  * @param stdClass $context  The context object.
  * @param string   $mode     The mode in which the glossary was viewed.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_view($glossary, $course, $cm, $context, $mode) {
 
@@ -3395,7 +3395,7 @@ function glossary_view($glossary, $course, $cm, $context, $mode) {
  *
  * @param stdClass $entry    The entry object.
  * @param stdClass $context  The context object.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_entry_view($entry, $context) {
 
@@ -3421,7 +3421,7 @@ function glossary_entry_view($entry, $context) {
  *                        - (bool) includenotapproved. When false, includes the non-approved entries created by
  *                          the current user. When true, also includes the ones that the user has the permission to approve.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_by_letter($glossary, $context, $letter, $from, $limit, $options = array()) {
 
@@ -3466,7 +3466,7 @@ function glossary_get_entries_by_letter($glossary, $context, $letter, $from, $li
  *                        - (bool) includenotapproved. When false, includes the non-approved entries created by
  *                          the current user. When true, also includes the ones that the user has the permission to approve.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_by_date($glossary, $context, $order, $sort, $from, $limit, $options = array()) {
 
@@ -3508,7 +3508,7 @@ function glossary_get_entries_by_date($glossary, $context, $order, $sort, $from,
  *                        - (bool) includenotapproved. When false, includes the non-approved entries created by
  *                          the current user. When true, also includes the ones that the user has the permission to approve.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_by_category($glossary, $context, $categoryid, $from, $limit, $options = array()) {
 
@@ -3565,7 +3565,7 @@ function glossary_get_entries_by_category($glossary, $context, $categoryid, $fro
  *                        - (bool) includenotapproved. When false, includes the non-approved entries created by
  *                          the current user. When true, also includes the ones that the user has the permission to approve.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_by_author($glossary, $context, $letter, $field, $sort, $from, $limit, $options = array()) {
 
@@ -3613,7 +3613,7 @@ function glossary_get_entries_by_author($glossary, $context, $letter, $field, $s
  *                        - (bool) includenotapproved. When false, includes the non-approved entries created by
  *                          the current user. When true, also includes the ones that the user has the permission to approve.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_by_author_id($glossary, $context, $authorid, $order, $sort, $from, $limit, $options = array()) {
 
@@ -3658,7 +3658,7 @@ function glossary_get_entries_by_author_id($glossary, $context, $authorid, $orde
  *                        - (bool) includenotapproved. When false, includes self even if all of their entries require approval.
  *                          When true, also includes authors only having entries pending approval.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_authors($glossary, $context, $limit, $from, $options = array()) {
     global $DB, $USER;
@@ -3698,7 +3698,7 @@ function glossary_get_authors($glossary, $context, $limit, $from, $options = arr
  * @param  int $from Fetch records from.
  * @param  int $limit Number of records to fetch.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_categories($glossary, $from, $limit) {
     global $DB;
@@ -3718,7 +3718,7 @@ function glossary_get_categories($glossary, $from, $limit) {
  * @param bool    $fullsearch Whether or not full search should be enabled.
  * @param int     $glossaryid The ID of a glossary to reduce the search results.
  * @return array The first element being the where clause, the second array of parameters.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_search_terms_sql(array $terms, $fullsearch = true, $glossaryid = null) {
     global $DB;
@@ -3802,7 +3802,7 @@ function glossary_get_search_terms_sql(array $terms, $fullsearch = true, $glossa
  *                        - (bool) includenotapproved. When false, includes the non-approved entries created by
  *                          the current user. When true, also includes the ones that the user has the permission to approve.
  * @return array The first element being the array of results, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_by_search($glossary, $context, $query, $fullsearch, $order, $sort, $from, $limit,
                                         $options = array()) {
@@ -3870,7 +3870,7 @@ function glossary_get_entries_by_search($glossary, $context, $query, $fullsearch
  *                        - (bool) includenotapproved. When false, includes the non-approved entries created by
  *                          the current user. When true, also includes the ones that the user has the permission to approve.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_by_term($glossary, $context, $term, $from, $limit, $options = array()) {
 
@@ -3910,7 +3910,7 @@ function glossary_get_entries_by_term($glossary, $context, $term, $from, $limit,
  * @param  int $from Fetch records from.
  * @param  int $limit Number of records to fetch.
  * @return array The first element being the recordset, the second the number of entries.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entries_to_approve($glossary, $context, $letter, $order, $sort, $from, $limit) {
 
@@ -3948,7 +3948,7 @@ function glossary_get_entries_to_approve($glossary, $context, $letter, $order, $
  *
  * @param  int $id The entry ID.
  * @return object|false The entry, or false when not found.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function glossary_get_entry_by_id($id) {
 
@@ -3970,7 +3970,7 @@ function glossary_get_entry_by_id($id) {
 /**
  * Checks if the current user can see the glossary entry.
  *
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  * @param stdClass $entry
  * @param cm_info  $cminfo
  * @return bool
@@ -4000,7 +4000,7 @@ function glossary_can_view_entry($entry, $cminfo) {
  * @param  stdClass $glossary glossary object
  * @param  string $concept the concept to check
  * @return bool true if exists
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function glossary_concept_exists($glossary, $concept) {
     global $DB;
@@ -4020,7 +4020,7 @@ function glossary_concept_exists($glossary, $concept) {
  * @param  stdClass $context context object
  * @param  stdClass $entry   entry object
  * @return array array containing the editor and attachment options
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function glossary_get_editor_and_attachment_options($course, $context, $entry) {
     $maxfiles = 99;                // TODO: add some setting.
@@ -4041,7 +4041,7 @@ function glossary_get_editor_and_attachment_options($course, $context, $entry) {
  * @param  stdClass $glossary glossary object
  * @param  stdClass $context context object
  * @return stdClass the complete new or updated entry
- * @since  Moodle 3.2
+ * @since  PowerEduc 3.2
  */
 function glossary_edit_entry($entry, $course, $cm, $glossary, $context) {
     global $DB, $USER;
@@ -4172,7 +4172,7 @@ function glossary_edit_entry($entry, $course, $cm, $glossary, $context) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function glossary_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB;
@@ -4244,7 +4244,7 @@ function mod_glossary_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/glossary/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/glossary/view.php', ['id' => $cm->id]),
         1,
         true
     );
@@ -4317,13 +4317,13 @@ function mod_glossary_get_completion_active_rule_descriptions($cm) {
 /**
  * Checks if the current user can delete the given glossary entry.
  *
- * @since Moodle 3.10
+ * @since PowerEduc 3.10
  * @param stdClass $entry the entry database object
  * @param stdClass $glossary the glossary database object
  * @param stdClass $context the glossary context
  * @param bool $return Whether to return a boolean value or stop the execution (exception)
  * @return bool if the user can delete the entry
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function mod_glossary_can_delete_entry($entry, $glossary, $context, $return = true) {
     global $USER, $CFG;
@@ -4338,7 +4338,7 @@ function mod_glossary_can_delete_entry($entry, $glossary, $context, $return = tr
         if ($return) {
             return false;
         }
-        throw new moodle_exception('nopermissiontodelentry');
+        throw new powereduc_exception('nopermissiontodelentry');
     }
 
     $ineditperiod = ((time() - $entry->timecreated < $CFG->maxeditingtime) || $glossary->editalways);
@@ -4347,7 +4347,7 @@ function mod_glossary_can_delete_entry($entry, $glossary, $context, $return = tr
         if ($return) {
             return false;
         }
-        throw new moodle_exception('errdeltimeexpired', 'glossary');
+        throw new powereduc_exception('errdeltimeexpired', 'glossary');
     }
 
     return true;
@@ -4356,7 +4356,7 @@ function mod_glossary_can_delete_entry($entry, $glossary, $context, $return = tr
 /**
  * Deletes the given entry, this function does not perform capabilities/permission checks.
  *
- * @since Moodle 3.10
+ * @since PowerEduc 3.10
  * @param stdClass $entry the entry database object
  * @param stdClass $glossary the glossary database object
  * @param stdClass $cm the glossary course moduule object
@@ -4364,7 +4364,7 @@ function mod_glossary_can_delete_entry($entry, $glossary, $context, $return = tr
  * @param stdClass $course the glossary course
  * @param string $hook the hook, usually type of filtering, value
  * @param string $prevmode the previsualisation mode
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function mod_glossary_delete_entry($entry, $glossary, $cm, $context, $course, $hook = '', $prevmode = '') {
     global $CFG, $DB;
@@ -4374,7 +4374,7 @@ function mod_glossary_delete_entry($entry, $glossary, $cm, $context, $course, $h
     // If it is an imported entry, just delete the relation.
     if ($entry->sourceglossaryid) {
         if (!$newcm = get_coursemodule_from_instance('glossary', $entry->sourceglossaryid)) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
         $newcontext = context_module::instance($newcm->id);
 
@@ -4454,14 +4454,14 @@ function mod_glossary_delete_entry($entry, $glossary, $cm, $context, $course, $h
 /**
  * Checks if the current user can update the given glossary entry.
  *
- * @since Moodle 3.10
+ * @since PowerEduc 3.10
  * @param stdClass $entry the entry database object
  * @param stdClass $glossary the glossary database object
  * @param stdClass $context the glossary context
  * @param object $cm the course module object (cm record or cm_info instance)
  * @param bool $return Whether to return a boolean value or stop the execution (exception)
  * @return bool if the user can update the entry
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function mod_glossary_can_update_entry(stdClass $entry, stdClass $glossary, stdClass $context, object $cm,
         bool $return = true): bool {
@@ -4476,12 +4476,12 @@ function mod_glossary_can_update_entry(stdClass $entry, stdClass $glossary, stdC
             if ($return) {
                 return false;
             }
-            throw new moodle_exception('errcannoteditothers', 'glossary', "view.php?id=$cm->id&amp;mode=entry&amp;hook=$entry->id");
+            throw new powereduc_exception('errcannoteditothers', 'glossary', "view.php?id=$cm->id&amp;mode=entry&amp;hook=$entry->id");
         } else if (!$ineditperiod) {
             if ($return) {
                 return false;
             }
-            throw new moodle_exception('erredittimeexpired', 'glossary', "view.php?id=$cm->id&amp;mode=entry&amp;hook=$entry->id");
+            throw new powereduc_exception('erredittimeexpired', 'glossary', "view.php?id=$cm->id&amp;mode=entry&amp;hook=$entry->id");
         }
     }
 

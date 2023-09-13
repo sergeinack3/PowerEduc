@@ -19,7 +19,7 @@ namespace enrol_lti\local\ltiadvantage\task;
 use enrol_lti\helper;
 use Packback\Lti1p3\LtiAssignmentsGradesService;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../lti_advantage_testcase.php');
 

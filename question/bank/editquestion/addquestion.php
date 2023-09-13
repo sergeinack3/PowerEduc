@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Shows a screen where the user can choose a question type, before being redirected to question.php
@@ -42,7 +42,7 @@ $hiddenparams = array('category' => $categoryid);
 
 // Validate params.
 if (!$category = $DB->get_record('question_categories', array('id' => $categoryid))) {
-    throw new moodle_exception('categorydoesnotexist', 'question', $returnurl);
+    throw new powereduc_exception('categorydoesnotexist', 'question', $returnurl);
 }
 
 if ($cmid) {
@@ -57,12 +57,12 @@ if ($cmid) {
     $cm = null;
     $hiddenparams['courseid'] = $courseid;
 } else {
-    throw new moodle_exception('missingcourseorcmid', 'question');
+    throw new powereduc_exception('missingcourseorcmid', 'question');
 }
 
 // Check permissions.
 $categorycontext = context::instance_by_id($category->contextid);
-require_capability('moodle/question:add', $categorycontext);
+require_capability('powereduc/question:add', $categorycontext);
 
 // Ensure other optional params get passed on to question.php.
 if (!empty($returnurl)) {
@@ -74,9 +74,9 @@ if (!empty($appendqnumstring)) {
 
 $PAGE->set_url('/question/bank/editquestion/addquestion.php', $hiddenparams);
 if ($cmid) {
-    $questionbankurl = new moodle_url('/question/edit.php', array('cmid' => $cmid));
+    $questionbankurl = new powereduc_url('/question/edit.php', array('cmid' => $cmid));
 } else {
-    $questionbankurl = new moodle_url('/question/edit.php', array('courseid' => $courseid));
+    $questionbankurl = new powereduc_url('/question/edit.php', array('courseid' => $courseid));
 }
 navigation_node::override_active_url($questionbankurl);
 

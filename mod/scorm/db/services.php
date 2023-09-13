@@ -1,27 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * SCORM external functions and service definitions.
  *
  * @package    mod_scorm
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 
 $functions = array(
@@ -32,7 +32,7 @@ $functions = array(
         'description'   => 'Trigger the course module viewed event.',
         'type'          => 'write',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_get_scorm_attempt_count' => array(
@@ -41,7 +41,7 @@ $functions = array(
         'description'   => 'Return the number of attempts done by a user in the given SCORM.',
         'type'          => 'read',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_get_scorm_scoes' => array(
@@ -50,7 +50,7 @@ $functions = array(
         'description' => 'Returns a list containing all the scoes data related to the given scorm id',
         'type' => 'read',
         'capabilities' => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_get_scorm_user_data' => array(
@@ -59,7 +59,7 @@ $functions = array(
         'description' => 'Retrieves user tracking and SCO data and default SCORM values',
         'type' => 'read',
         'capabilities' => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_insert_scorm_tracks' => array(
@@ -71,7 +71,7 @@ $functions = array(
                           attempt data.',
         'type' => 'write',
         'capabilities' => 'mod/scorm:savetrack',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_get_scorm_sco_tracks' => array(
@@ -80,7 +80,7 @@ $functions = array(
         'description' => 'Retrieves SCO tracking data for the given user id and attempt number',
         'type' => 'read',
         'capabilities' => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_get_scorms_by_courses' => array(
@@ -90,7 +90,7 @@ $functions = array(
                             no courses are provided then all the scorm instances the user has access to will be returned.',
         'type'          => 'read',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_launch_sco' => array(
@@ -99,7 +99,7 @@ $functions = array(
         'description'   => 'Trigger the SCO launched event.',
         'type'          => 'write',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_scorm_get_scorm_access_information' => array(
@@ -107,6 +107,6 @@ $functions = array(
         'methodname'    => 'get_scorm_access_information',
         'description'   => 'Return capabilities information for a given scorm.',
         'type'          => 'read',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 );

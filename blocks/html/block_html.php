@@ -93,7 +93,7 @@ class block_html extends block_base {
         $bc = new stdClass;
         $bc->title = null;
         $bc->content = '';
-        $bc->contenformat = FORMAT_MOODLE;
+        $bc->contenformat = FORMAT_POWEREDUC;
         $bc->footer = '';
         $bc->files = [];
 

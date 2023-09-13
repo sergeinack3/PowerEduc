@@ -1,27 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Workshop module external functions tests
  *
  * @package    mod_workshop
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.4
+ * @since      PowerEduc 3.4
  */
 
 namespace mod_workshop\external;
@@ -32,7 +32,7 @@ use mod_workshop_external;
 use mod_workshop\external\workshop_summary_exporter;
 use mod_workshop\external\submission_exporter;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -44,9 +44,9 @@ require_once($CFG->dirroot . '/mod/workshop/lib.php');
  *
  * @package    mod_workshop
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.4
+ * @since      PowerEduc 3.4
  */
 class external_test extends externallib_advanced_testcase {
 
@@ -95,7 +95,7 @@ class external_test extends externallib_advanced_testcase {
         $data = array();
         for ($i = 0; $i < 4; $i++) {
             $data['dimensionid__idx_'.$i] = 0;
-            $data['description__idx_'.$i.'_editor'] = array('text' => "Content $i", 'format' => FORMAT_MOODLE);
+            $data['description__idx_'.$i.'_editor'] = array('text' => "Content $i", 'format' => FORMAT_POWEREDUC);
             $data['grade__idx_'.$i] = 25;
             $data['weight__idx_'.$i] = 25;
         }
@@ -137,7 +137,7 @@ class external_test extends externallib_advanced_testcase {
         $record->course = $course2->id;
         $workshop2 = self::getDataGenerator()->create_module('workshop', $record);
 
-        // Execute real Moodle enrolment as we'll call unenrol() method on the instance later.
+        // Execute real PowerEduc enrolment as we'll call unenrol() method on the instance later.
         $enrol = enrol_get_plugin('manual');
         $enrolinstances = enrol_get_instances($course2->id, true);
         foreach ($enrolinstances as $courseenrolinstance) {
@@ -403,7 +403,7 @@ class external_test extends externallib_advanced_testcase {
      * Test test_view_workshop invalid id.
      */
     public function test_view_workshop_invalid_id() {
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::view_workshop(0);
     }
 
@@ -414,7 +414,7 @@ class external_test extends externallib_advanced_testcase {
         // Test not-enrolled user.
         $usernotenrolled = self::getDataGenerator()->create_user();
         $this->setUser($usernotenrolled);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::view_workshop($this->workshop->id);
     }
 
@@ -439,8 +439,8 @@ class external_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_workshop\event\course_module_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $moodleworkshop = new \moodle_url('/mod/workshop/view.php', array('id' => $this->cm->id));
-        $this->assertEquals($moodleworkshop, $event->get_url());
+        $powereducworkshop = new \powereduc_url('/mod/workshop/view.php', array('id' => $this->cm->id));
+        $this->assertEquals($powereducworkshop, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
     }
@@ -457,7 +457,7 @@ class external_test extends externallib_advanced_testcase {
         \course_modinfo::clear_instance_cache();
 
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::view_workshop($this->workshop->id);
     }
 
@@ -499,7 +499,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop = new workshop($this->workshop, $this->cm, $this->course);
         $workshop->switch_phase(workshop::PHASE_SUBMISSION);
 
-        $result = mod_workshop_external::add_submission($this->workshop->id, $title, $content, FORMAT_MOODLE, $draftidinlineattach,
+        $result = mod_workshop_external::add_submission($this->workshop->id, $title, $content, FORMAT_POWEREDUC, $draftidinlineattach,
             $draftidattach);
         $result = \external_api::clean_returnvalue(mod_workshop_external::add_submission_returns(), $result);
         $this->assertEmpty($result['warnings']);
@@ -538,7 +538,7 @@ class external_test extends externallib_advanced_testcase {
     public function test_add_submission_invalid_phase() {
         $this->setUser($this->student);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::add_submission($this->workshop->id, 'Test');
     }
 
@@ -552,7 +552,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop = new workshop($this->workshop, $this->cm, $this->course);
         $workshop->switch_phase(workshop::PHASE_SUBMISSION);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::add_submission($this->workshop->id, '');
     }
 
@@ -580,11 +580,11 @@ class external_test extends externallib_advanced_testcase {
         $workshop->switch_phase(workshop::PHASE_SUBMISSION);
 
         // Create the submission.
-        $result = mod_workshop_external::add_submission($this->workshop->id, 'My submission', '', FORMAT_MOODLE, 0, $draftidattach);
+        $result = mod_workshop_external::add_submission($this->workshop->id, 'My submission', '', FORMAT_POWEREDUC, 0, $draftidattach);
         $result = \external_api::clean_returnvalue(mod_workshop_external::add_submission_returns(), $result);
 
         // Try to create it again.
-        $result = mod_workshop_external::add_submission($this->workshop->id, 'My submission', '', FORMAT_MOODLE, 0, $draftidattach);
+        $result = mod_workshop_external::add_submission($this->workshop->id, 'My submission', '', FORMAT_POWEREDUC, 0, $draftidattach);
         $result = \external_api::clean_returnvalue(mod_workshop_external::add_submission_returns(), $result);
         $this->assertFalse($result['status']);
         $this->assertArrayNotHasKey('submissionid', $result);
@@ -633,7 +633,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop = new workshop($this->workshop, $this->cm, $this->course);
         $workshop->switch_phase(workshop::PHASE_SUBMISSION);
 
-        $result = mod_workshop_external::add_submission($this->workshop->id, $title, $content, FORMAT_MOODLE, $draftidinlineattach,
+        $result = mod_workshop_external::add_submission($this->workshop->id, $title, $content, FORMAT_POWEREDUC, $draftidinlineattach,
             $draftidattach);
         return $result['submissionid'];
     }
@@ -675,7 +675,7 @@ class external_test extends externallib_advanced_testcase {
         $filerecordattach['itemid'] = $draftidattach;
         $fs->create_file_from_string($filerecordattach, 'simple text attachment');
 
-        $result = mod_workshop_external::update_submission($submissionid, $title, $content, FORMAT_MOODLE, $draftidinlineattach,
+        $result = mod_workshop_external::update_submission($submissionid, $title, $content, FORMAT_POWEREDUC, $draftidinlineattach,
             $draftidattach);
         $result = \external_api::clean_returnvalue(mod_workshop_external::update_submission_returns(), $result);
         $this->assertEmpty($result['warnings']);
@@ -717,7 +717,7 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->teacher);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::update_submission($submissionid, 'Test');
     }
 
@@ -734,7 +734,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop = new workshop($this->workshop, $this->cm, $this->course);
         $workshop->switch_phase(workshop::PHASE_ASSESSMENT);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::update_submission($submissionid, 'Test');
     }
 
@@ -747,7 +747,7 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::update_submission($submissionid, '');
     }
 
@@ -796,7 +796,7 @@ class external_test extends externallib_advanced_testcase {
         ));
 
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::delete_submission($submissionid);
     }
 
@@ -813,7 +813,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop->switch_phase(workshop::PHASE_ASSESSMENT);
 
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::delete_submission($submissionid);
     }
 
@@ -843,7 +843,7 @@ class external_test extends externallib_advanced_testcase {
         $submissionid = $this->create_test_submission($this->student);
 
         $this->setUser($anotheruser);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::delete_submission($submissionid);
     }
 
@@ -920,7 +920,7 @@ class external_test extends externallib_advanced_testcase {
         $record->gradeover = 9;
         $record->gradeoverby = $this->teacher->id;
         $record->feedbackauthor = 'Hey';
-        $record->feedbackauthorformat = FORMAT_MOODLE;
+        $record->feedbackauthorformat = FORMAT_POWEREDUC;
         $record->published = 1;
         $DB->update_record('workshop_submissions', $record);
 
@@ -1043,7 +1043,7 @@ class external_test extends externallib_advanced_testcase {
         $firstsubmissionid = $this->create_test_submission($this->student);  // Create submission with files.
         // Expect failure.
         $this->setUser($this->anotherstudentg1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = mod_workshop_external::get_submission($firstsubmissionid);
     }
 
@@ -1074,7 +1074,7 @@ class external_test extends externallib_advanced_testcase {
 
         // Check with group restrictions.
         $this->setUser($this->anotherstudentg2);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_submission($submissionid);
     }
 
@@ -1095,7 +1095,7 @@ class external_test extends externallib_advanced_testcase {
         $record->gradeover = 9;
         $record->gradeoverby = $this->teacher->id;
         $record->feedbackauthor = 'Hey';
-        $record->feedbackauthorformat = FORMAT_MOODLE;
+        $record->feedbackauthorformat = FORMAT_POWEREDUC;
         $record->published = 1;
         $record->timegraded = time();
         $DB->update_record('workshop_submissions', $record);
@@ -1125,7 +1125,7 @@ class external_test extends externallib_advanced_testcase {
         // Empty all the caches that may be affected  by this change.
         accesslib_clear_all_caches_for_unit_testing();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_submission($submissionid);
     }
 
@@ -1199,7 +1199,7 @@ class external_test extends externallib_advanced_testcase {
             'grade' => 95,
         ));
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_submission_assessments($submissionid);
     }
 
@@ -1318,7 +1318,7 @@ class external_test extends externallib_advanced_testcase {
         // Switch to closed phase.
         $this->setUser($this->anotherstudentg1);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_assessment($assessmentid);
     }
 
@@ -1341,7 +1341,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop->switch_phase(workshop::PHASE_CLOSED);
         $this->setUser($this->anotherstudentg2);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_assessment($assessmentid);
     }
 
@@ -1414,7 +1414,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop->switch_phase(workshop::PHASE_EVALUATION);
         $this->setUser($this->student);
         // Since we are not reviewers we can't see the assessment until the workshop is closed.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_assessment_form_definition($assessmentid);
     }
 
@@ -1470,7 +1470,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop->switch_phase(workshop::PHASE_ASSESSMENT);
         // Try to get other user assessments.
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_reviewer_assessments($this->workshop->id, $this->anotherstudentg1->id);
     }
 
@@ -1483,7 +1483,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop->switch_phase(workshop::PHASE_SUBMISSION);
         // Try to get other user assessments.
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_reviewer_assessments($this->workshop->id, $this->anotherstudentg1->id);
     }
 
@@ -1529,7 +1529,7 @@ class external_test extends externallib_advanced_testcase {
         );
         $data[] = array(
             'name' => 'feedbackauthorformat',
-            'value' => FORMAT_MOODLE,
+            'value' => FORMAT_POWEREDUC,
         );
 
         // Create a file in a draft area for inline attachments.
@@ -1652,7 +1652,7 @@ class external_test extends externallib_advanced_testcase {
         $workshop = new workshop($this->workshop, $this->cm, $this->course);
         $workshop->switch_phase(workshop::PHASE_CLOSED);
         $this->setUser($this->anotherstudentg1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::get_grades($this->workshop->id, $this->student->id);
     }
 
@@ -1671,7 +1671,7 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->teacher);
         $feedbacktext = 'The feedback';
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $weight = 10;
         $gradinggradeover = 10;
         $result = mod_workshop_external::evaluate_assessment($assessmentid, $feedbacktext, $feedbackformat, $weight,
@@ -1717,7 +1717,7 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->teacher);
         $feedbacktext = 'The feedback';
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $weight = 10;
         $gradinggradeover = 19;
         $result = mod_workshop_external::evaluate_assessment($assessmentid, $feedbacktext, $feedbackformat, $weight,
@@ -1743,10 +1743,10 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student);
         $feedbacktext = 'The feedback';
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $weight = 10;
         $gradinggradeover = 50;
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::evaluate_assessment($assessmentid, $feedbacktext, $feedbackformat, $weight, $gradinggradeover);
     }
 
@@ -1805,7 +1805,7 @@ class external_test extends externallib_advanced_testcase {
      */
     public function test_get_grades_report_invalid_phase() {
         $this->setUser($this->teacher);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('nothingfound', 'workshop'));
         mod_workshop_external::get_grades_report($this->workshop->id);
     }
@@ -1841,9 +1841,9 @@ class external_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_workshop\event\submission_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $moodleworkshop = new \moodle_url('/mod/workshop/submission.php', array('id' => $firstsubmissionid,
+        $powereducworkshop = new \powereduc_url('/mod/workshop/submission.php', array('id' => $firstsubmissionid,
             'cmid' => $this->cm->id));
-        $this->assertEquals($moodleworkshop, $event->get_url());
+        $this->assertEquals($powereducworkshop, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -1863,7 +1863,7 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->teacher);
         $feedbacktext = 'The feedback';
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $published = 1;
         $gradeover = 10;
         $result = mod_workshop_external::evaluate_submission($submissionid, $feedbacktext, $feedbackformat, $published,
@@ -1888,7 +1888,7 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->teacher);
         $feedbacktext = 'The feedback';
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $published = 1;
         $gradeover = 10;
         $result = mod_workshop_external::evaluate_submission($submissionid, $feedbacktext, $feedbackformat, $published,
@@ -1914,10 +1914,10 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student);
         $feedbacktext = 'The feedback';
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $published = 1;
         $gradeover = 50;
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_workshop_external::evaluate_submission($submissionid, $feedbacktext, $feedbackformat, $published, $gradeover);
     }
 
@@ -1933,7 +1933,7 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->teacher);
         $feedbacktext = 'The feedback';
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $published = 1;
         $gradeover = 150;
         $result = mod_workshop_external::evaluate_submission($submissionid, $feedbacktext, $feedbackformat, $published, $gradeover);

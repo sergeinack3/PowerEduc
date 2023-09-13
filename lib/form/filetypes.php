@@ -24,7 +24,7 @@
 
 use core_form\filetypes_util;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 require_once($CFG->dirroot.'/lib/form/group.php');

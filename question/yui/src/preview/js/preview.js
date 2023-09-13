@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /*
  * @copyright 2014 The Open University
@@ -21,13 +21,13 @@
 /**
  * JavaScript required by the question preview pop-up.
  *
- * @deprecated since Moodle 4.0
- * @todo Final deprecation on Moodle 4.4 MDL-72438
- * @module moodle-question-preview
+ * @deprecated since PowerEduc 4.0
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
+ * @module powereduc-question-preview
  */
 
-Y.log("The moodle-question-preview module has been deprecated. " +
-    "Please use moodle-qbank_previewquestion-preview instead.", 'moodle-core-notification', 'warn');
+Y.log("The powereduc-question-preview module has been deprecated. " +
+    "Please use powereduc-qbank_previewquestion-preview instead.", 'powereduc-core-notification', 'warn');
 
 M.question = M.question || {};
 M.question.preview = M.question.preview || {};

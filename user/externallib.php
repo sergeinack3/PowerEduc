@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External user API
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -34,7 +34,7 @@ require_once("$CFG->libdir/externallib.php");
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_user_external extends external_api {
 
@@ -42,7 +42,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_users_parameters() {
         global $CFG;
@@ -51,7 +51,7 @@ class core_user_external extends external_api {
                 VALUE_OPTIONAL),
             // General.
             'username' => new external_value(core_user::get_property_type('username'),
-                'Username policy is defined in Moodle security config.'),
+                'Username policy is defined in PowerEduc security config.'),
             'auth' => new external_value(core_user::get_property_type('auth'), 'Auth plugins include manual, ldap, etc',
                 VALUE_DEFAULT, 'manual', core_user::get_property_null('auth')),
             'password' => new external_value(core_user::get_property_type('password'),
@@ -127,7 +127,7 @@ class core_user_external extends external_api {
      * @throws invalid_parameter_exception
      * @param array $users An array of users to create.
      * @return array An array of arrays
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_users($users) {
         global $CFG, $DB;
@@ -139,7 +139,7 @@ class core_user_external extends external_api {
         // Ensure the current user is allowed to run this function.
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/user:create', $context);
+        require_capability('powereduc/user:create', $context);
 
         // Do basic automatic PARAM checks on incoming data, using params description.
         // If any problems are found then exceptions are thrown with helpful error messages.
@@ -280,7 +280,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_users_returns() {
         return new external_multiple_structure(
@@ -298,7 +298,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function delete_users_parameters() {
         return new external_function_parameters(
@@ -311,10 +311,10 @@ class core_user_external extends external_api {
     /**
      * Delete users
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @param array $userids
      * @return null
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function delete_users($userids) {
         global $CFG, $DB, $USER;
@@ -322,7 +322,7 @@ class core_user_external extends external_api {
 
         // Ensure the current user is allowed to run this function.
         $context = context_system::instance();
-        require_capability('moodle/user:delete', $context);
+        require_capability('powereduc/user:delete', $context);
         self::validate_context($context);
 
         $params = self::validate_parameters(self::delete_users_parameters(), array('userids' => $userids));
@@ -333,10 +333,10 @@ class core_user_external extends external_api {
             $user = $DB->get_record('user', array('id' => $userid, 'deleted' => 0), '*', MUST_EXIST);
             // Must not allow deleting of admins or self!!!
             if (is_siteadmin($user)) {
-                throw new moodle_exception('useradminodelete', 'error');
+                throw new powereduc_exception('useradminodelete', 'error');
             }
             if ($USER->id == $user->id) {
-                throw new moodle_exception('usernotdeletederror', 'error');
+                throw new powereduc_exception('usernotdeletederror', 'error');
             }
             user_delete_user($user);
         }
@@ -350,7 +350,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return null
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function delete_users_returns() {
         return null;
@@ -360,7 +360,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function update_user_preferences_parameters() {
         return new external_function_parameters(
@@ -388,7 +388,7 @@ class core_user_external extends external_api {
      * @param bool|null $emailstop
      * @param array $preferences
      * @return null
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function update_user_preferences($userid = 0, $emailstop = null, $preferences = array()) {
         global $USER, $CFG;
@@ -456,7 +456,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return null
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function update_user_preferences_returns() {
         return null;
@@ -466,14 +466,14 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function update_users_parameters() {
         $userfields = [
             'id' => new external_value(core_user::get_property_type('id'), 'ID of the user'),
             // General.
             'username' => new external_value(core_user::get_property_type('username'),
-                'Username policy is defined in Moodle security config.', VALUE_OPTIONAL, '', NULL_NOT_ALLOWED),
+                'Username policy is defined in PowerEduc security config.', VALUE_OPTIONAL, '', NULL_NOT_ALLOWED),
             'auth' => new external_value(core_user::get_property_type('auth'), 'Auth plugins include manual, ldap, etc',
                 VALUE_OPTIONAL, '', NULL_NOT_ALLOWED),
             'suspended' => new external_value(core_user::get_property_type('suspended'),
@@ -556,7 +556,7 @@ class core_user_external extends external_api {
      *
      * @param array $users
      * @return null
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function update_users($users) {
         global $CFG, $DB, $USER;
@@ -566,7 +566,7 @@ class core_user_external extends external_api {
 
         // Ensure the current user is allowed to run this function.
         $context = context_system::instance();
-        require_capability('moodle/user:update', $context);
+        require_capability('powereduc/user:update', $context);
         self::validate_context($context);
 
         $params = self::validate_parameters(self::update_users_parameters(), array('users' => $users));
@@ -584,31 +584,31 @@ class core_user_external extends external_api {
 
                 // First check the user exists.
                 if (!$existinguser = core_user::get_user($user['id'])) {
-                    throw new moodle_exception('invaliduserid', '', '', null,
+                    throw new powereduc_exception('invaliduserid', '', '', null,
                             'Invalid user ID');
                 }
                 // Check if we are trying to update an admin.
                 if ($existinguser->id != $USER->id and is_siteadmin($existinguser) and !is_siteadmin($USER)) {
-                    throw new moodle_exception('usernotupdatedadmin', '', '', null,
+                    throw new powereduc_exception('usernotupdatedadmin', '', '', null,
                             'Cannot update admin accounts');
                 }
                 // Other checks (deleted, remote or guest users).
                 if ($existinguser->deleted) {
-                    throw new moodle_exception('usernotupdateddeleted', '', '', null,
+                    throw new powereduc_exception('usernotupdateddeleted', '', '', null,
                             'User is a deleted user');
                 }
                 if (is_mnet_remote_user($existinguser)) {
-                    throw new moodle_exception('usernotupdatedremote', '', '', null,
+                    throw new powereduc_exception('usernotupdatedremote', '', '', null,
                             'User is a remote user');
                 }
                 if (isguestuser($existinguser->id)) {
-                    throw new moodle_exception('usernotupdatedguest', '', '', null,
+                    throw new powereduc_exception('usernotupdatedguest', '', '', null,
                             'Cannot update guest account');
                 }
                 // Check duplicated emails.
                 if (isset($user['email']) && $user['email'] !== $existinguser->email) {
                     if (!validate_email($user['email'])) {
-                        throw new moodle_exception('useremailinvalid', '', '', null,
+                        throw new powereduc_exception('useremailinvalid', '', '', null,
                                 'Invalid email address');
                     } else if (empty($CFG->allowaccountssameemail)) {
                         // Make a case-insensitive query for the given email address
@@ -621,7 +621,7 @@ class core_user_external extends external_api {
                         );
                         // Skip if there are other user(s) that already have the same email.
                         if ($DB->record_exists_select('user', $select, $params)) {
-                            throw new moodle_exception('useremailduplicate', '', '', null,
+                            throw new powereduc_exception('useremailduplicate', '', '', null,
                                     'Duplicate email address');
                         }
                     }
@@ -687,7 +687,7 @@ class core_user_external extends external_api {
                     $warning = [];
                     $warning['item'] = 'user';
                     $warning['itemid'] = $user['id'];
-                    if ($e instanceof moodle_exception) {
+                    if ($e instanceof powereduc_exception) {
                         $warning['warningcode'] = $e->errorcode;
                     } else {
                         $warning['warningcode'] = $e->getCode();
@@ -705,7 +705,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function update_users_returns() {
         return new external_single_structure(
@@ -719,7 +719,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function get_users_by_field_parameters() {
         return new external_function_parameters(
@@ -740,7 +740,7 @@ class core_user_external extends external_api {
      * @param string $field
      * @param array $values
      * @return array An array of arrays containg user profiles.
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function get_users_by_field($field, $values) {
         global $CFG, $USER, $DB;
@@ -806,7 +806,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_multiple_structure
-     * @since Moodle 2.4
+     * @since PowerEduc 2.4
      */
     public static function get_users_by_field_returns() {
         return new external_multiple_structure(self::user_description());
@@ -817,7 +817,7 @@ class core_user_external extends external_api {
      * Returns description of get_users() parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_users_parameters() {
         return new external_function_parameters(
@@ -850,10 +850,10 @@ class core_user_external extends external_api {
     /**
      * Retrieve matching user.
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @param array $criteria the allowed array keys are id/lastname/firstname/idnumber/username/email/auth.
      * @return array An array of arrays containing user profiles.
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_users($criteria = array()) {
         global $CFG, $USER, $DB;
@@ -876,7 +876,7 @@ class core_user_external extends external_api {
 
             // Check that the criteria has never been used.
             if (array_key_exists($criteria['key'], $usedkeys)) {
-                throw new moodle_exception('keyalreadyset', '', '', null, 'The key ' . $criteria['key'] . ' can only be sent once');
+                throw new powereduc_exception('keyalreadyset', '', '', null, 'The key ' . $criteria['key'] . ' can only be sent once');
             } else {
                 $usedkeys[$criteria['key']] = true;
             }
@@ -977,7 +977,7 @@ class core_user_external extends external_api {
      * Returns description of get_users result value.
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_users_returns() {
         return new external_single_structure(
@@ -993,7 +993,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_course_user_profiles_parameters() {
         return new external_function_parameters(
@@ -1015,7 +1015,7 @@ class core_user_external extends external_api {
      *
      * @param array $userlist  array of user ids and according course ids
      * @return array An array of arrays describing course participants
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_course_user_profiles($userlist) {
         global $CFG, $USER, $DB;
@@ -1078,7 +1078,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function get_course_user_profiles_returns() {
         $additionalfields = array(
@@ -1177,7 +1177,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function add_user_private_files_parameters() {
         return new external_function_parameters(
@@ -1193,7 +1193,7 @@ class core_user_external extends external_api {
      * @throws invalid_parameter_exception
      * @param int $draftid Id of a draft area containing files.
      * @return array An array of warnings
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function add_user_private_files($draftid) {
         global $CFG, $USER;
@@ -1206,11 +1206,11 @@ class core_user_external extends external_api {
         }
 
         $context = context_user::instance($USER->id);
-        require_capability('moodle/user:manageownfiles', $context);
+        require_capability('powereduc/user:manageownfiles', $context);
 
         $maxbytes = $CFG->userquota;
         $maxareabytes = $CFG->userquota;
-        if (has_capability('moodle/user:ignoreuserquota', $context)) {
+        if (has_capability('powereduc/user:ignoreuserquota', $context)) {
             $maxbytes = USER_CAN_IGNORE_FILE_SIZE_LIMITS;
             $maxareabytes = FILE_AREA_MAX_BYTES_UNLIMITED;
         }
@@ -1229,7 +1229,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function add_user_private_files_returns() {
         return null;
@@ -1239,12 +1239,12 @@ class core_user_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function add_user_device_parameters() {
         return new external_function_parameters(
             array(
-                'appid'     => new external_value(PARAM_NOTAGS, 'the app id, usually something like com.moodle.moodlemobile'),
+                'appid'     => new external_value(PARAM_NOTAGS, 'the app id, usually something like com.powereduc.powereducmobile'),
                 'name'      => new external_value(PARAM_NOTAGS, 'the device name, \'occam\' or \'iPhone\' etc.'),
                 'model'     => new external_value(PARAM_NOTAGS, 'the device model \'Nexus4\' or \'iPad1,1\' etc.'),
                 'platform'  => new external_value(PARAM_NOTAGS, 'the device platform \'iOS\' or \'Android\' etc.'),
@@ -1256,10 +1256,10 @@ class core_user_external extends external_api {
     }
 
     /**
-     * Add a user device in Moodle database (for PUSH notifications usually).
+     * Add a user device in PowerEduc database (for PUSH notifications usually).
      *
-     * @throws moodle_exception
-     * @param string $appid The app id, usually something like com.moodle.moodlemobile.
+     * @throws powereduc_exception
+     * @param string $appid The app id, usually something like com.powereduc.powereducmobile.
      * @param string $name The device name, occam or iPhone etc.
      * @param string $model The device model Nexus4 or iPad1.1 etc.
      * @param string $platform The device platform iOs or Android etc.
@@ -1267,7 +1267,7 @@ class core_user_external extends external_api {
      * @param string $pushid The device PUSH token/key/identifier/registration id.
      * @param string $uuid The device UUID.
      * @return array List of possible warnings.
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function add_user_device($appid, $name, $model, $platform, $version, $pushid, $uuid) {
         global $CFG, $USER, $DB;
@@ -1321,7 +1321,7 @@ class core_user_external extends external_api {
             $userdevice->timemodified = $userdevice->timecreated;
 
             if (!$DB->insert_record('user_devices', $userdevice)) {
-                throw new moodle_exception("There was a problem saving in the database the device with key: " . $params['pushid']);
+                throw new powereduc_exception("There was a problem saving in the database the device with key: " . $params['pushid']);
             }
         }
 
@@ -1332,7 +1332,7 @@ class core_user_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_multiple_structure
-     * @since Moodle 2.6
+     * @since PowerEduc 2.6
      */
     public static function add_user_device_returns() {
         return new external_multiple_structure(
@@ -1344,7 +1344,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function remove_user_device_parameters() {
         return new external_function_parameters(
@@ -1358,12 +1358,12 @@ class core_user_external extends external_api {
     }
 
     /**
-     * Remove a user device from the Moodle database (for PUSH notifications usually).
+     * Remove a user device from the PowerEduc database (for PUSH notifications usually).
      *
      * @param string $uuid The device UUID.
      * @param string $appid The app id, opitonal parameter. If empty all the devices fmatching the UUID or the user will be removed.
      * @return array List of possible warnings and removal status.
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function remove_user_device($uuid, $appid = "") {
         global $CFG;
@@ -1399,7 +1399,7 @@ class core_user_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_multiple_structure
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function remove_user_device_returns() {
         return new external_single_structure(
@@ -1414,7 +1414,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_user_list_parameters() {
         return new external_function_parameters(
@@ -1429,8 +1429,8 @@ class core_user_external extends external_api {
      *
      * @param int $courseid id of course
      * @return array of warnings and status result
-     * @since Moodle 2.9
-     * @throws moodle_exception
+     * @since PowerEduc 2.9
+     * @throws powereduc_exception
      */
     public static function view_user_list($courseid) {
         global $CFG;
@@ -1471,7 +1471,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_user_list_returns() {
         return new external_single_structure(
@@ -1486,7 +1486,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_user_profile_parameters() {
         return new external_function_parameters(
@@ -1503,8 +1503,8 @@ class core_user_external extends external_api {
      * @param int $userid id of user
      * @param int $courseid id of course
      * @return array of warnings and status result
-     * @since Moodle 2.9
-     * @throws moodle_exception
+     * @since PowerEduc 2.9
+     * @throws powereduc_exception
      */
     public static function view_user_profile($userid, $courseid = 0) {
         global $CFG, $USER;
@@ -1541,9 +1541,9 @@ class core_user_external extends external_api {
         $usercontext = context_user::instance($user->id);
 
         if (!$currentuser and
-                !has_capability('moodle/user:viewdetails', $coursecontext) and
-                !has_capability('moodle/user:viewdetails', $usercontext)) {
-            throw new moodle_exception('cannotviewprofile');
+                !has_capability('powereduc/user:viewdetails', $coursecontext) and
+                !has_capability('powereduc/user:viewdetails', $usercontext)) {
+            throw new powereduc_exception('cannotviewprofile');
         }
 
         // Case like user/profile.php.
@@ -1552,7 +1552,7 @@ class core_user_external extends external_api {
         } else {
             // Case like user/view.php.
             if (!$currentuser and !can_access_course($course, $user, '', true)) {
-                throw new moodle_exception('notenrolledprofile');
+                throw new powereduc_exception('notenrolledprofile');
             }
 
             profile_view($user, $coursecontext, $course);
@@ -1568,7 +1568,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_user_profile_returns() {
         return new external_single_structure(
@@ -1583,7 +1583,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_preferences_parameters() {
         return new external_function_parameters(
@@ -1600,8 +1600,8 @@ class core_user_external extends external_api {
      * @param string $name preference name, empty for all
      * @param int $userid id of the user, 0 for current user
      * @return array of warnings and preferences
-     * @since Moodle 3.2
-     * @throws moodle_exception
+     * @since PowerEduc 3.2
+     * @throws powereduc_exception
      */
     public static function get_user_preferences($name = '', $userid = 0) {
         global $USER;
@@ -1627,7 +1627,7 @@ class core_user_external extends external_api {
             core_user::require_active_user($user);
             if ($user->id != $USER->id) {
                 // Only admins can retrieve other users preferences.
-                require_capability('moodle/site:config', $context);
+                require_capability('powereduc/site:config', $context);
             }
         }
 
@@ -1654,7 +1654,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_user_preferences_returns() {
         return new external_single_structure(
@@ -1677,7 +1677,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function update_picture_parameters() {
         return new external_function_parameters(
@@ -1696,8 +1696,8 @@ class core_user_external extends external_api {
      * @param  bool $delete      if we should delete the user picture
      * @param  int $userid       id of the user, 0 for current user
      * @return array warnings and success status
-     * @since Moodle 3.2
-     * @throws moodle_exception
+     * @since PowerEduc 3.2
+     * @throws powereduc_exception
      */
     public static function update_picture($draftitemid, $delete = false, $userid = 0) {
         global $CFG, $USER, $PAGE;
@@ -1715,27 +1715,27 @@ class core_user_external extends external_api {
         self::validate_context($context);
 
         if (!empty($CFG->disableuserimages)) {
-            throw new moodle_exception('userimagesdisabled', 'admin');
+            throw new powereduc_exception('userimagesdisabled', 'admin');
         }
 
         if (empty($params['userid']) or $params['userid'] == $USER->id) {
             $user = $USER;
-            require_capability('moodle/user:editownprofile', $context);
+            require_capability('powereduc/user:editownprofile', $context);
         } else {
             $user = core_user::get_user($params['userid'], '*', MUST_EXIST);
             core_user::require_active_user($user);
             $personalcontext = context_user::instance($user->id);
 
-            require_capability('moodle/user:editprofile', $personalcontext);
+            require_capability('powereduc/user:editprofile', $personalcontext);
             if (is_siteadmin($user) and !is_siteadmin($USER)) {  // Only admins may edit other admins.
-                throw new moodle_exception('useradmineditadmin');
+                throw new powereduc_exception('useradmineditadmin');
             }
         }
 
         // Load the appropriate auth plugin.
         $userauth = get_auth_plugin($user->auth);
         if (is_mnet_remote_user($user) or !$userauth->can_edit_profile() or $userauth->edit_profile_url()) {
-            throw new moodle_exception('noprofileedit', 'auth');
+            throw new powereduc_exception('noprofileedit', 'auth');
         }
 
         $filemanageroptions = array(
@@ -1764,7 +1764,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function update_picture_returns() {
         return new external_single_structure(
@@ -1780,7 +1780,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function set_user_preferences_parameters() {
         return new external_function_parameters(
@@ -1803,8 +1803,8 @@ class core_user_external extends external_api {
      *
      * @param array $preferences list of preferences including name, value and userid
      * @return array of warnings and preferences saved
-     * @since Moodle 3.2
-     * @throws moodle_exception
+     * @since PowerEduc 3.2
+     * @throws powereduc_exception
      */
     public static function set_user_preferences($preferences) {
         global $USER;
@@ -1873,7 +1873,7 @@ class core_user_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function set_user_preferences_returns() {
         return new external_single_structure(
@@ -1895,7 +1895,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function agree_site_policy_parameters() {
         return new external_function_parameters(array());
@@ -1905,8 +1905,8 @@ class core_user_external extends external_api {
      * Agree the site policy for the current user.
      *
      * @return array of warnings and status result
-     * @since Moodle 3.2
-     * @throws moodle_exception
+     * @since PowerEduc 3.2
+     * @throws powereduc_exception
      */
     public static function agree_site_policy() {
         global $CFG, $DB, $USER;
@@ -1919,7 +1919,7 @@ class core_user_external extends external_api {
             self::validate_context($context);
         } catch (Exception $e) {
             // We are expecting only a sitepolicynotagreed exception.
-            if (!($e instanceof moodle_exception) or $e->errorcode != 'sitepolicynotagreed') {
+            if (!($e instanceof powereduc_exception) or $e->errorcode != 'sitepolicynotagreed') {
                 // In case we receive a different exception, throw it.
                 throw $e;
             }
@@ -1956,7 +1956,7 @@ class core_user_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function agree_site_policy_returns() {
         return new external_single_structure(
@@ -1971,7 +1971,7 @@ class core_user_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_private_files_info_parameters() {
         return new external_function_parameters(
@@ -1986,8 +1986,8 @@ class core_user_external extends external_api {
      *
      * @param int $userid Id of the user, default to current user.
      * @return array of warnings and file area information
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_private_files_info($userid = 0) {
         global $CFG, $USER;
@@ -2001,12 +2001,12 @@ class core_user_external extends external_api {
 
         if (empty($params['userid']) || $params['userid'] == $USER->id) {
             $usercontext = context_user::instance($USER->id);
-            require_capability('moodle/user:manageownfiles', $usercontext);
+            require_capability('powereduc/user:manageownfiles', $usercontext);
         } else {
             $user = core_user::get_user($params['userid'], '*', MUST_EXIST);
             core_user::require_active_user($user);
             // Only admins can retrieve other users information.
-            require_capability('moodle/site:config', $context);
+            require_capability('powereduc/site:config', $context);
             $usercontext = context_user::instance($user->id);
         }
 
@@ -2025,7 +2025,7 @@ class core_user_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_private_files_info_returns() {
         return new external_single_structure(

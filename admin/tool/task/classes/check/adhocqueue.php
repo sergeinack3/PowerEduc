@@ -24,7 +24,7 @@
 
 namespace tool_task\check;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\check\check;
 use core\check\result;

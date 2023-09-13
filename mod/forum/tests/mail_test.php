@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum;
 
 use mod_forum_tests_generator_trait;
 use mod_forum_tests_cron_trait;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/forum/lib.php');
@@ -96,7 +96,7 @@ class mail_test extends \advanced_testcase {
         $CFG->messageinbound_enabled = true;
 
         // Must be no longer than 15 characters.
-        $CFG->messageinbound_mailbox = 'moodlemoodle123';
+        $CFG->messageinbound_mailbox = 'powereducpowereduc123';
 
         $record = $DB->get_record('messageinbound_handlers', array('classname' => '\mod_forum\message\inbound\reply_handler'));
         $record->enabled = true;
@@ -245,7 +245,7 @@ class mail_test extends \advanced_testcase {
 
         // A user with the manageactivities capability within the course can subscribe.
         $roleids = $DB->get_records_menu('role', null, '', 'shortname, id');
-        assign_capability('moodle/course:manageactivities', CAP_ALLOW, $roleids['student'], \context_course::instance($course->id));
+        assign_capability('powereduc/course:manageactivities', CAP_ALLOW, $roleids['student'], \context_course::instance($course->id));
 
         // Suscribe the recipient only.
         \mod_forum\subscriptions::subscribe_user($recipient->id, $forum);
@@ -294,7 +294,7 @@ class mail_test extends \advanced_testcase {
 
         // A user with the manageactivities capability within the course can subscribe.
         $roleids = $DB->get_records_menu('role', null, '', 'shortname, id');
-        assign_capability('moodle/course:manageactivities', CAP_ALLOW, $roleids['student'], \context_course::instance($course->id));
+        assign_capability('powereduc/course:manageactivities', CAP_ALLOW, $roleids['student'], \context_course::instance($course->id));
 
         // Run cron and check that the expected number of users received the notification.
         list($discussion, $post) = $this->helper_post_to_forum($forum, $author);
@@ -892,7 +892,7 @@ class mail_test extends \advanced_testcase {
         $this->assertEquals(2, count($messages));
 
         foreach ($messages as $message) {
-            $this->assertMatchesRegularExpression('/Reply-To: moodlemoodle123\+[^@]*@example.com/', $message->header);
+            $this->assertMatchesRegularExpression('/Reply-To: powereducpowereduc123\+[^@]*@example.com/', $message->header);
         }
     }
 
@@ -994,16 +994,16 @@ class mail_test extends \advanced_testcase {
     public function forum_post_email_templates_provider() {
         // Base information, we'll build variations based on it.
         $base = array(
-            'user' => array('firstname' => 'Love', 'lastname' => 'Moodle', 'mailformat' => 0, 'maildigest' => 0),
-            'course' => array('shortname' => '101', 'fullname' => 'Moodle 101'),
+            'user' => array('firstname' => 'Love', 'lastname' => 'PowerEduc', 'mailformat' => 0, 'maildigest' => 0),
+            'course' => array('shortname' => '101', 'fullname' => 'PowerEduc 101'),
             'forums' => array(
                 array(
-                    'name' => 'Moodle Forum',
+                    'name' => 'PowerEduc Forum',
                     'forumposts' => array(
                         array(
-                            'name' => 'Hello Moodle',
-                            'message' => 'Welcome to Moodle',
-                            'messageformat' => FORMAT_MOODLE,
+                            'name' => 'Hello PowerEduc',
+                            'message' => 'Welcome to PowerEduc',
+                            'messageformat' => FORMAT_POWEREDUC,
                             'attachments' => array(
                                 array(
                                     'filename' => 'example.txt',
@@ -1021,8 +1021,8 @@ class mail_test extends \advanced_testcase {
                         '~{$a',
                         '~&(amp|lt|gt|quot|\#039);(?!course)',
                         'Attachment example.txt:' . '\r*\n' .
-                            'https://www.example.com/moodle/pluginfile.php/\d*/mod_forum/attachment/\d*/example.txt' . '\r*\n',
-                        'Hello Moodle', 'Moodle Forum', 'Welcome.*Moodle', 'Love Moodle', '1\d1'
+                            'https://www.example.com/powereduc/pluginfile.php/\d*/mod_forum/attachment/\d*/example.txt' . '\r*\n',
+                        'Hello PowerEduc', 'PowerEduc Forum', 'Welcome.*PowerEduc', 'Love PowerEduc', '1\d1'
                     ),
                 ),
             ),
@@ -1033,59 +1033,59 @@ class mail_test extends \advanced_testcase {
 
         // Single and double quotes everywhere.
         $newcase = $base;
-        $newcase['user']['lastname'] = 'Moodle\'"';
+        $newcase['user']['lastname'] = 'PowerEduc\'"';
         $newcase['course']['shortname'] = '101\'"';
-        $newcase['forums'][0]['name'] = 'Moodle Forum\'"';
-        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello Moodle\'"';
-        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to Moodle\'"';
+        $newcase['forums'][0]['name'] = 'PowerEduc Forum\'"';
+        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello PowerEduc\'"';
+        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to PowerEduc\'"';
         $newcase['expectations'][0]['contents'] = array(
-            'Attachment example.txt:', '~{\$a', '~&amp;(quot|\#039);', 'Love Moodle\'', '101\'', 'Moodle Forum\'"',
-            'Hello Moodle\'"', 'Welcome to Moodle\'"');
+            'Attachment example.txt:', '~{\$a', '~&amp;(quot|\#039);', 'Love PowerEduc\'', '101\'', 'PowerEduc Forum\'"',
+            'Hello PowerEduc\'"', 'Welcome to PowerEduc\'"');
         $textcases['Text mail with quotes everywhere'] = array('data' => $newcase);
 
         // Lt and gt everywhere. This case is completely borked because format_string()
         // strips tags with $CFG->formatstringstriptags and also escapes < and > (correct
         // for web presentation but not for text email). See MDL-19829.
         $newcase = $base;
-        $newcase['user']['lastname'] = 'Moodle>';
+        $newcase['user']['lastname'] = 'PowerEduc>';
         $newcase['course']['shortname'] = '101>';
-        $newcase['forums'][0]['name'] = 'Moodle Forum>';
-        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello Moodle>';
-        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to Moodle>';
+        $newcase['forums'][0]['name'] = 'PowerEduc Forum>';
+        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello PowerEduc>';
+        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to PowerEduc>';
         $newcase['expectations'][0]['contents'] = array(
-            'Attachment example.txt:', '~{\$a', '~&amp;gt;', 'Love Moodle>', '101>', 'Moodle Forum>',
-            'Hello Moodle>', 'Welcome to Moodle>');
+            'Attachment example.txt:', '~{\$a', '~&amp;gt;', 'Love PowerEduc>', '101>', 'PowerEduc Forum>',
+            'Hello PowerEduc>', 'Welcome to PowerEduc>');
         $textcases['Text mail with gt and lt everywhere'] = array('data' => $newcase);
 
         // Ampersands everywhere. This case is completely borked because format_string()
         // escapes ampersands (correct for web presentation but not for text email). See MDL-19829.
         $newcase = $base;
-        $newcase['user']['lastname'] = 'Moodle&';
+        $newcase['user']['lastname'] = 'PowerEduc&';
         $newcase['course']['shortname'] = '101&';
-        $newcase['forums'][0]['name'] = 'Moodle Forum&';
-        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello Moodle&';
-        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to Moodle&';
+        $newcase['forums'][0]['name'] = 'PowerEduc Forum&';
+        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello PowerEduc&';
+        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to PowerEduc&';
         $newcase['expectations'][0]['contents'] = array(
-            'Attachment example.txt:', '~{\$a', '~&amp;amp;', 'Love Moodle&', '101&', 'Moodle Forum&',
-            'Hello Moodle&', 'Welcome to Moodle&');
+            'Attachment example.txt:', '~{\$a', '~&amp;amp;', 'Love PowerEduc&', '101&', 'PowerEduc Forum&',
+            'Hello PowerEduc&', 'Welcome to PowerEduc&');
         $textcases['Text mail with ampersands everywhere'] = array('data' => $newcase);
 
         // Text+image message i.e. @@PLUGINFILE@@ token handling.
         $newcase = $base;
         $newcase['forums'][0]['forumposts'][0]['name'] = 'Text and image';
-        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to Moodle, '
+        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to PowerEduc, '
             .'@@PLUGINFILE@@/Screen%20Shot%202016-03-22%20at%205.54.36%20AM%20%281%29.png !';
         $newcase['expectations'][0]['subject'] = '.*101.*Text and image';
         $newcase['expectations'][0]['contents'] = array(
             '~{$a',
             '~&(amp|lt|gt|quot|\#039);(?!course)',
             'Attachment example.txt:' . '\r*\n' .
-            'https://www.example.com/moodle/pluginfile.php/\d*/mod_forum/attachment/\d*/example.txt' .  '\r*\n' ,
-            'Text and image', 'Moodle Forum',
-            'Welcome to Moodle, *' . '\r*\n' . '.*'
-                .'https://www.example.com/moodle/pluginfile.php/\d+/mod_forum/post/\d+/'
+            'https://www.example.com/powereduc/pluginfile.php/\d*/mod_forum/attachment/\d*/example.txt' .  '\r*\n' ,
+            'Text and image', 'PowerEduc Forum',
+            'Welcome to PowerEduc, *' . '\r*\n' . '.*'
+                .'https://www.example.com/powereduc/pluginfile.php/\d+/mod_forum/post/\d+/'
                 .'Screen%20Shot%202016-03-22%20at%205\.54\.36%20AM%20%281%29\.png *' . '\r*\n' . '.*!',
-            'Love Moodle', '1\d1');
+            'Love PowerEduc', '1\d1');
         $textcases['Text mail with text+image message i.e. @@PLUGINFILE@@ token handling'] = array('data' => $newcase);
 
         // Now the html cases.
@@ -1098,28 +1098,28 @@ class mail_test extends \advanced_testcase {
             '~{\$a',
             '~&(amp|lt|gt|quot|\#039);(?!course|lang|version|iosappid|androidappid)',
             '<div class="attachments">( *\n *)?<a href',
-            '<div class="subject">\n.*Hello Moodle', '>Moodle Forum', '>Welcome.*Moodle', '>Love Moodle', '>1\d1');
+            '<div class="subject">\n.*Hello PowerEduc', '>PowerEduc Forum', '>Welcome.*PowerEduc', '>Love PowerEduc', '>1\d1');
         $htmlcases['HTML mail without ampersands, quotes or lt/gt'] = array('data' => $htmlbase);
 
         // Single and double quotes, lt and gt, ampersands everywhere.
         $newcase = $htmlbase;
-        $newcase['user']['lastname'] = 'Moodle\'">&';
+        $newcase['user']['lastname'] = 'PowerEduc\'">&';
         $newcase['course']['shortname'] = '101\'">&';
-        $newcase['forums'][0]['name'] = 'Moodle Forum\'">&';
-        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello Moodle\'">&';
-        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to Moodle\'">&';
+        $newcase['forums'][0]['name'] = 'PowerEduc Forum\'">&';
+        $newcase['forums'][0]['forumposts'][0]['name'] = 'Hello PowerEduc\'">&';
+        $newcase['forums'][0]['forumposts'][0]['message'] = 'Welcome to PowerEduc\'">&';
         $newcase['expectations'][0]['contents'] = array(
             '~{\$a',
             '~&amp;(amp|lt|gt|quot|\#039);',
             '<div class="attachments">( *\n *)?<a href',
-            '<div class="subject">\n.*Hello Moodle\'"&gt;&amp;', '>Moodle Forum\'"&gt;&amp;',
-            '>Welcome.*Moodle\'"&gt;&amp;', '>Love Moodle&\#039;&quot;&gt;&amp;', '>101\'"&gt;&amp');
+            '<div class="subject">\n.*Hello PowerEduc\'"&gt;&amp;', '>PowerEduc Forum\'"&gt;&amp;',
+            '>Welcome.*PowerEduc\'"&gt;&amp;', '>Love PowerEduc&\#039;&quot;&gt;&amp;', '>101\'"&gt;&amp');
         $htmlcases['HTML mail with quotes, gt, lt and ampersand  everywhere'] = array('data' => $newcase);
 
         // Text+image message i.e. @@PLUGINFILE@@ token handling.
         $newcase = $htmlbase;
         $newcase['forums'][0]['forumposts'][0]['name'] = 'HTML text and image';
-        $newcase['forums'][0]['forumposts'][0]['message'] = '<p>Welcome to Moodle, '
+        $newcase['forums'][0]['forumposts'][0]['message'] = '<p>Welcome to PowerEduc, '
             .'<img src="@@PLUGINFILE@@/Screen%20Shot%202016-03-22%20at%205.54.36%20AM%20%281%29.png"'
             .' alt="" width="200" height="393" class="img-fluid" />!</p>';
         $newcase['expectations'][0]['subject'] = '.*101.*HTML text and image';
@@ -1127,12 +1127,12 @@ class mail_test extends \advanced_testcase {
             '~{\$a',
             '~&(amp|lt|gt|quot|\#039);(?!course|lang|version|iosappid|androidappid)',
             '<div class="attachments">( *\n *)?<a href',
-            '<div class="subject">\n.*HTML text and image', '>Moodle Forum',
-            '<p>Welcome to Moodle, '
-            .'<img src="https://www.example.com/moodle/tokenpluginfile.php/[^/]*/\d+/mod_forum/post/\d+/'
+            '<div class="subject">\n.*HTML text and image', '>PowerEduc Forum',
+            '<p>Welcome to PowerEduc, '
+            .'<img src="https://www.example.com/powereduc/tokenpluginfile.php/[^/]*/\d+/mod_forum/post/\d+/'
                 .'Screen%20Shot%202016-03-22%20at%205\.54\.36%20AM%20%281%29\.png"'
                 .' alt="" width="200" height="393" class="img-fluid" />!</p>',
-            '>Love Moodle', '>1\d1');
+            '>Love PowerEduc', '>1\d1');
         $htmlcases['HTML mail with text+image message i.e. @@PLUGINFILE@@ token handling'] = array('data' => $newcase);
 
         return $textcases + $htmlcases;

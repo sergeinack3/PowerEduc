@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Subscribe to or unsubscribe from a forum or manage forum subscription mode
@@ -27,7 +27,7 @@
  * sesskey.
  *
  * @package   mod_forum
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -42,7 +42,7 @@ $sesskey        = optional_param('sesskey', null, PARAM_RAW);
 $returnurl      = optional_param('returnurl', null, PARAM_LOCALURL);
 $edit           = optional_param('edit', 'off', PARAM_ALPHANUM);
 
-$url = new moodle_url('/mod/forum/subscribe.php', array('id'=>$id));
+$url = new powereduc_url('/mod/forum/subscribe.php', array('id'=>$id));
 if (!is_null($mode)) {
     $url->param('mode', $mode);
 }
@@ -55,7 +55,7 @@ if (!is_null($sesskey)) {
 if (!is_null($discussionid)) {
     $url->param('d', $discussionid);
     if (!$discussion = $DB->get_record('forum_discussions', array('id' => $discussionid, 'forum' => $id))) {
-        throw new \moodle_exception('invaliddiscussionid', 'forum');
+        throw new \powereduc_exception('invaliddiscussionid', 'forum');
     }
 }
 $PAGE->set_url($url);
@@ -68,7 +68,7 @@ $context = context_module::instance($cm->id);
 if ($user) {
     require_sesskey();
     if (!has_capability('mod/forum:managesubscriptions', $context)) {
-        throw new \moodle_exception('nopermissiontosubscribe', 'forum');
+        throw new \powereduc_exception('nopermissiontosubscribe', 'forum');
     }
     $user = $DB->get_record('user', array('id' => $user), '*', MUST_EXIST);
 } else {
@@ -84,9 +84,9 @@ if (isset($cm->groupmode) && empty($course->groupmodeforce)) {
 $issubscribed = \mod_forum\subscriptions::is_subscribed($user->id, $forum, $discussionid, $cm);
 
 // For a user to subscribe when a groupmode is set, they must have access to at least one group.
-if ($groupmode && !$issubscribed && !has_capability('moodle/site:accessallgroups', $context)) {
+if ($groupmode && !$issubscribed && !has_capability('powereduc/site:accessallgroups', $context)) {
     if (!groups_get_all_groups($course->id, $USER->id)) {
-        throw new \moodle_exception('cannotsubscribe', 'forum');
+        throw new \powereduc_exception('cannotsubscribe', 'forum');
     }
 }
 
@@ -98,13 +98,13 @@ if (is_null($mode) and !is_enrolled($context, $USER, '', true)) {   // Guests an
     if (isguestuser()) {
         echo $OUTPUT->header();
         echo $OUTPUT->confirm(get_string('subscribeenrolledonly', 'forum').'<br /><br />'.get_string('liketologin'),
-                     get_login_url(), new moodle_url('/mod/forum/view.php', array('f'=>$id)));
+                     get_login_url(), new powereduc_url('/mod/forum/view.php', array('f'=>$id)));
         echo $OUTPUT->footer();
         exit;
     } else {
         // There should not be any links leading to this place, just redirect.
         redirect(
-                new moodle_url('/mod/forum/view.php', array('f'=>$id)),
+                new powereduc_url('/mod/forum/view.php', array('f'=>$id)),
                 get_string('subscribeenrolledonly', 'forum'),
                 null,
                 \core\output\notification::NOTIFY_ERROR
@@ -120,7 +120,7 @@ if ($returnurl) {
     $returnto = $returnurl;
 }
 
-$subscribersurl = new moodle_url('/mod/forum/subscribers.php', ['id' => $id, 'edit' => $edit]);
+$subscribersurl = new powereduc_url('/mod/forum/subscribers.php', ['id' => $id, 'edit' => $edit]);
 
 if (!is_null($mode) and has_capability('mod/forum:managesubscriptions', $context)) {
     require_sesskey();
@@ -170,7 +170,7 @@ if (!is_null($mode) and has_capability('mod/forum:managesubscriptions', $context
             );
             break;
         default:
-            throw new \moodle_exception(get_string('invalidforcesubscribe', 'forum'));
+            throw new \powereduc_exception(get_string('invalidforcesubscribe', 'forum'));
     }
 }
 
@@ -190,7 +190,7 @@ if ($issubscribed) {
         $PAGE->set_heading($course->fullname);
         echo $OUTPUT->header();
 
-        $viewurl = new moodle_url('/mod/forum/view.php', array('f' => $id));
+        $viewurl = new powereduc_url('/mod/forum/view.php', array('f' => $id));
         if ($discussionid) {
             $a = new stdClass();
             $a->forum = format_string($forum->name);
@@ -214,7 +214,7 @@ if ($issubscribed) {
                 \core\output\notification::NOTIFY_SUCCESS
             );
         } else {
-            throw new \moodle_exception('cannotunsubscribe', 'forum', get_local_referer(false));
+            throw new \powereduc_exception('cannotunsubscribe', 'forum', get_local_referer(false));
         }
     } else {
         if (\mod_forum\subscriptions::unsubscribe_user_from_discussion($user->id, $discussion, $context)) {
@@ -226,16 +226,16 @@ if ($issubscribed) {
                 \core\output\notification::NOTIFY_SUCCESS
             );
         } else {
-            throw new \moodle_exception('cannotunsubscribe', 'forum', get_local_referer(false));
+            throw new \powereduc_exception('cannotunsubscribe', 'forum', get_local_referer(false));
         }
     }
 
 } else {  // subscribe
     if (\mod_forum\subscriptions::subscription_disabled($forum) && !has_capability('mod/forum:managesubscriptions', $context)) {
-        throw new \moodle_exception('disallowsubscribe', 'forum', get_local_referer(false));
+        throw new \powereduc_exception('disallowsubscribe', 'forum', get_local_referer(false));
     }
     if (!has_capability('mod/forum:viewdiscussion', $context)) {
-        throw new \moodle_exception('noviewdiscussionspermission', 'forum', get_local_referer(false));
+        throw new \powereduc_exception('noviewdiscussionspermission', 'forum', get_local_referer(false));
     }
     if (is_null($sesskey)) {
         // We came here via link in email.
@@ -243,7 +243,7 @@ if ($issubscribed) {
         $PAGE->set_heading($course->fullname);
         echo $OUTPUT->header();
 
-        $viewurl = new moodle_url('/mod/forum/view.php', array('f' => $id));
+        $viewurl = new powereduc_url('/mod/forum/view.php', array('f' => $id));
         if ($discussionid) {
             $a = new stdClass();
             $a->forum = format_string($forum->name);

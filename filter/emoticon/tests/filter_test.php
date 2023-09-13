@@ -27,7 +27,7 @@ namespace filter_emoticon;
 
 use filter_emoticon;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/filter/emoticon/filter.php'); // Include the code to test.
@@ -100,9 +100,9 @@ class filter_test extends \advanced_testcase {
     public function filter_emoticon_provider() {
         $grr = '(grr)';
         return [
-            'FORMAT_MOODLE is not filtered' => [
+            'FORMAT_POWEREDUC is not filtered' => [
                 'input' => $grr,
-                'format' => FORMAT_MOODLE,
+                'format' => FORMAT_POWEREDUC,
                 'expected' => $grr,
             ],
             'FORMAT_MARKDOWN is not filtered' => [

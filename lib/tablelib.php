@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**#@+
  * These constants relate to the table's handling of URL parameters.
@@ -892,7 +892,7 @@ class flexible_table {
      * are the same as format_text function in weblib.php but some default
      * options are changed.
      */
-    function format_text($text, $format=FORMAT_MOODLE, $options=NULL, $courseid=NULL) {
+    function format_text($text, $format=FORMAT_POWEREDUC, $options=NULL, $courseid=NULL) {
         if (!$this->is_downloading()) {
             if (is_null($options)) {
                 $options = new stdClass;
@@ -2201,7 +2201,7 @@ class table_default_export_format_parent {
      * the text as safe HTML or as plain text dependent on what is appropriate
      * for the download format. The default removes all tags.
      */
-    function format_text($text, $format=FORMAT_MOODLE, $options=NULL, $courseid=NULL) {
+    function format_text($text, $format=FORMAT_POWEREDUC, $options=NULL, $courseid=NULL) {
         //use some whitespace to indicate where there was some line spacing.
         $text = str_replace(array('</p>', "\n", "\r"), '   ', $text);
         return html_entity_decode(strip_tags($text), ENT_COMPAT);

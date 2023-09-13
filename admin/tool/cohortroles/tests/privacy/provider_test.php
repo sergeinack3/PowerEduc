@@ -24,7 +24,7 @@
  */
 namespace tool_cohortroles\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 use core_privacy\local\request\writer;

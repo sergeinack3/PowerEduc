@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace mod_feedback\form;
 
 use core_form\dynamic_form;
-use moodle_url;
+use powereduc_url;
 use context;
 use context_module;
 
@@ -61,11 +61,11 @@ class use_template_form extends dynamic_form {
     /**
      * Checks if current user has access to this form, otherwise throws exception
      *
-     * @throws \moodle_exception User does not have capability to access the form
+     * @throws \powereduc_exception User does not have capability to access the form
      */
     protected function check_access_for_dynamic_submission(): void {
         if (!has_capability('mod/feedback:edititems', $this->get_context_for_dynamic_submission())) {
-            throw new \moodle_exception('nocapabilitytousethisservice');
+            throw new \powereduc_exception('nocapabilitytousethisservice');
         }
     }
 
@@ -82,7 +82,7 @@ class use_template_form extends dynamic_form {
         $templateid = $this->optional_param('templateid', null, PARAM_INT);
         $id = $this->optional_param('id', null, PARAM_INT);
         $response = feedback_items_from_template($PAGE->activityrecord, $templateid, $formdata->deleteolditems);
-        $url = new moodle_url('/mod/feedback/edit.php', ['id' => $id]);
+        $url = new powereduc_url('/mod/feedback/edit.php', ['id' => $id]);
 
         if ($response !== false) {
             // Provide a notification on success as the user will be redirected.
@@ -108,13 +108,13 @@ class use_template_form extends dynamic_form {
     /**
      * Returns url to set in $PAGE->set_url() when form is being rendered or submitted via AJAX
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
         $params = [
             'id' => $this->optional_param('id', null, PARAM_INT),
             'templateid' => $this->optional_param('templateid', null, PARAM_INT)
         ];
-        return new moodle_url('/mod/feedback/use_templ.php', $params);
+        return new powereduc_url('/mod/feedback/use_templ.php', $params);
     }
 }

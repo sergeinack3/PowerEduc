@@ -25,7 +25,7 @@
 
 namespace tool_brickfield;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/admin/tool/brickfield/tests/generator/mock_brickfieldconnect.php');

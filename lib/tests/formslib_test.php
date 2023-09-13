@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,13 +26,13 @@
 namespace core;
 
 use HTML_QuickForm_Rule_Range;
-use moodleform;
+use powereducform;
 use MoodleQuickForm_radio;
 use MoodleQuickForm_Rule_Required;
 use MoodleQuickForm_select;
 use MoodleQuickForm_text;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');
@@ -665,7 +665,7 @@ class formslib_test extends \advanced_testcase {
 /**
  * Test form to be used by {@link formslib_test::test_rendering()}.
  */
-class formslib_test_form extends moodleform {
+class formslib_test_form extends powereducform {
     public function definition() {
         $this->_form->addElement('select', 'choose_one', 'Choose one',
             array(1 => 'One', '2' => 'Two'));
@@ -696,7 +696,7 @@ class formslib_test_form extends moodleform {
 /**
  * Used to test debugging is called when text added without setType.
  */
-class formslib_settype_debugging_text extends moodleform {
+class formslib_settype_debugging_text extends powereducform {
     public function definition() {
         $mform = $this->_form;
 
@@ -707,7 +707,7 @@ class formslib_settype_debugging_text extends moodleform {
 /**
  * Used to test debugging is called when hidden added without setType.
  */
-class formslib_settype_debugging_hidden extends moodleform {
+class formslib_settype_debugging_hidden extends powereducform {
     public function definition() {
         $mform = $this->_form;
 
@@ -718,7 +718,7 @@ class formslib_settype_debugging_hidden extends moodleform {
 /**
  * Used to test debugging is called when hidden added without setType.
  */
-class formslib_settype_debugging_url extends moodleform {
+class formslib_settype_debugging_url extends powereducform {
     public function definition() {
         $mform = $this->_form;
 
@@ -729,7 +729,7 @@ class formslib_settype_debugging_url extends moodleform {
 /**
  * Used to test debugging is called when repeated text added without setType.
  */
-class formslib_settype_debugging_repeat extends moodleform {
+class formslib_settype_debugging_repeat extends powereducform {
     public function definition() {
         $mform = $this->_form;
 
@@ -744,7 +744,7 @@ class formslib_settype_debugging_repeat extends moodleform {
 /**
  * Used to no debugging is called when correctly test.
  */
-class formslib_settype_debugging_repeat_ok extends moodleform {
+class formslib_settype_debugging_repeat_ok extends powereducform {
     public function definition() {
         $mform = $this->_form;
 
@@ -759,7 +759,7 @@ class formslib_settype_debugging_repeat_ok extends moodleform {
 /**
  * Used to test if debugging is called when a group contains elements without type.
  */
-class formslib_settype_debugging_group extends moodleform {
+class formslib_settype_debugging_group extends powereducform {
     public function definition() {
         $mform = $this->_form;
         $group = array(
@@ -774,7 +774,7 @@ class formslib_settype_debugging_group extends moodleform {
 /**
  * Used to test if debugging is called when a named group contains elements without type.
  */
-class formslib_settype_debugging_namedgroup extends moodleform {
+class formslib_settype_debugging_namedgroup extends powereducform {
     public function definition() {
         $mform = $this->_form;
         $group = array(
@@ -789,7 +789,7 @@ class formslib_settype_debugging_namedgroup extends moodleform {
 /**
  * Used to test if debugging is called when has a funky name.
  */
-class formslib_settype_debugging_funky_name extends moodleform {
+class formslib_settype_debugging_funky_name extends powereducform {
     public function definition() {
         $mform = $this->_form;
         $mform->addElement('text', 'blah[foo][bar][0]', 'test', 'test');
@@ -801,7 +801,7 @@ class formslib_settype_debugging_funky_name extends moodleform {
 /**
  * Used to test that debugging is not called with type inheritance.
  */
-class formslib_settype_debugging_type_inheritance extends moodleform {
+class formslib_settype_debugging_type_inheritance extends powereducform {
     public function definition() {
         $mform = $this->_form;
         $mform->addElement('text', 'blah[foo][bar][0]', 'test1', 'test');
@@ -816,7 +816,7 @@ class formslib_settype_debugging_type_inheritance extends moodleform {
 /**
  * Used to test the debugging when using groups in repeated elements.
  */
-class formslib_settype_debugging_type_group_in_repeat extends moodleform {
+class formslib_settype_debugging_type_group_in_repeat extends powereducform {
     public function definition() {
         $mform = $this->_form;
         $groupelements = array(
@@ -831,7 +831,7 @@ class formslib_settype_debugging_type_group_in_repeat extends moodleform {
 /**
  * Used to test the debugging when using named groups in repeated elements.
  */
-class formslib_settype_debugging_type_namedgroup_in_repeat extends moodleform {
+class formslib_settype_debugging_type_namedgroup_in_repeat extends powereducform {
     public function definition() {
         $mform = $this->_form;
         $groupelements = array(
@@ -846,7 +846,7 @@ class formslib_settype_debugging_type_namedgroup_in_repeat extends moodleform {
 /**
  * Used to check value cleaning.
  */
-class formslib_clean_value extends moodleform {
+class formslib_clean_value extends powereducform {
     public function get_form() {
         return $this->_form;
     }
@@ -935,7 +935,7 @@ class formslib_clean_value extends moodleform {
 /**
  * Used to test that modgrade fields get unique id attributes.
  */
-class formslib_multiple_modgrade_form extends moodleform {
+class formslib_multiple_modgrade_form extends powereducform {
     public function definition() {
         $mform = $this->_form;
         $mform->addElement('modgrade', 'grade1', 'Grade 1');
@@ -947,7 +947,7 @@ class formslib_multiple_modgrade_form extends moodleform {
 /**
  * Used to test frozen elements get unique id attributes.
  */
-class formslib_persistantrreeze_element extends moodleform {
+class formslib_persistantrreeze_element extends powereducform {
     public function definition() {
         $mform = $this->_form;
 
@@ -990,7 +990,7 @@ class formslib_persistantrreeze_element extends moodleform {
  * @copyright  2016 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class formslib_multiple_validation_form extends moodleform {
+class formslib_multiple_validation_form extends powereducform {
     /**
      * Simple definition, one text field which can have a number.
      */

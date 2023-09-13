@@ -1,7 +1,7 @@
 {
-  "name": "moodle-assignfeedback_editpdf-editor",
+  "name": "powereduc-assignfeedback_editpdf-editor",
   "builds": {
-    "moodle-assignfeedback_editpdf-editor": {
+    "powereduc-assignfeedback_editpdf-editor": {
       "jsfiles": [
         "globals.js",
         "point.js",

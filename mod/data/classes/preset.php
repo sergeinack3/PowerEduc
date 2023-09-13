@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace mod_data;
 use core_component;
 use invalid_parameter_exception;
 use data_field_base;
-use moodle_exception;
+use powereduc_exception;
 use SimpleXMLElement;
 use stdClass;
 use stored_file;
@@ -28,7 +28,7 @@ use stored_file;
  * Class preset for database activity.
  *
  * @package    mod_data
- * @copyright  2022 Sara Arjona <sara@moodle.com>
+ * @copyright  2022 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class preset {
@@ -186,7 +186,7 @@ class preset {
         $file = static::get_file($path, '.');
         $result = static::create_from_storedfile($manager, $file);
         if ($result->get_userid() != $userid) {
-            throw new moodle_exception('invalidpreset', manager::PLUGINNAME);
+            throw new powereduc_exception('invalidpreset', manager::PLUGINNAME);
         }
         return $result;
     }
@@ -316,7 +316,7 @@ class preset {
 
         // Check if all files have been generated.
         if (! static::is_directory_a_preset($exportdir)) {
-            throw new \moodle_exception('generateerror', 'data');
+            throw new \powereduc_exception('generateerror', 'data');
         }
 
         $presetfilenames = array_merge(array_values(manager::TEMPLATES_LIST), ['preset.xml']);

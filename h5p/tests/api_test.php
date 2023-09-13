@@ -29,7 +29,7 @@ namespace core_h5p;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Test class covering the H5P API.

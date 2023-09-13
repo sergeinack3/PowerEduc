@@ -1,26 +1,26 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Unit tests for export/import description (info) for question category in the Moodle XML format.
+ * Unit tests for export/import description (info) for question category in the PowerEduc XML format.
  *
  * @package    qformat_xml
  * @copyright  2014 Nikita Nikitsky, Volgograd State Technical University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 require_once($CFG->libdir . '/questionlib.php');
 require_once($CFG->dirroot . '/question/format/xml/format.php');
@@ -154,7 +154,7 @@ class qformat_xml_import_export_test extends advanced_testcase {
         $imported = $qformat->importprocess();
         $this->assertTrue($imported);
         $this->assert_category_imported('Alpha',
-                'This is Alpha category for test', FORMAT_MOODLE, 'alpha-idnumber');
+                'This is Alpha category for test', FORMAT_POWEREDUC, 'alpha-idnumber');
         $this->assert_category_has_parent('Alpha', 'top');
     }
 
@@ -170,7 +170,7 @@ class qformat_xml_import_export_test extends advanced_testcase {
         $this->assertTrue($imported);
         $this->assert_category_imported('Delta', 'This is Delta category for test', FORMAT_PLAIN);
         $this->assert_category_imported('Epsilon', 'This is Epsilon category for test', FORMAT_MARKDOWN);
-        $this->assert_category_imported('Zeta', 'This is Zeta category for test', FORMAT_MOODLE);
+        $this->assert_category_imported('Zeta', 'This is Zeta category for test', FORMAT_POWEREDUC);
         $this->assert_category_has_parent('Delta', 'top');
         $this->assert_category_has_parent('Epsilon', 'Delta');
         $this->assert_category_has_parent('Zeta', 'Epsilon');
@@ -188,8 +188,8 @@ class qformat_xml_import_export_test extends advanced_testcase {
         $this->assertTrue($imported);
         $this->assert_category_imported('Iota', 'This is Iota category for test', FORMAT_PLAIN);
         $this->assert_category_imported('Kappa', 'This is Kappa category for test', FORMAT_MARKDOWN);
-        $this->assert_category_imported('Lambda', 'This is Lambda category for test', FORMAT_MOODLE);
-        $this->assert_category_imported('Mu', 'This is Mu category for test', FORMAT_MOODLE);
+        $this->assert_category_imported('Lambda', 'This is Lambda category for test', FORMAT_POWEREDUC);
+        $this->assert_category_imported('Mu', 'This is Mu category for test', FORMAT_POWEREDUC);
         $this->assert_question_in_category('Iota Question', 'Iota');
         $this->assert_question_in_category('Kappa Question', 'Kappa');
         $this->assert_question_in_category('Lambda Question', 'Lambda');
@@ -210,8 +210,8 @@ class qformat_xml_import_export_test extends advanced_testcase {
         $qformat = $this->create_qformat('old_format_file.xml', $course);
         $imported = $qformat->importprocess();
         $this->assertTrue($imported);
-        $this->assert_category_imported('Pi', '', FORMAT_MOODLE);
-        $this->assert_category_imported('Rho', '', FORMAT_MOODLE);
+        $this->assert_category_imported('Pi', '', FORMAT_POWEREDUC);
+        $this->assert_category_imported('Rho', '', FORMAT_POWEREDUC);
         $this->assert_question_in_category('Pi Question', 'Pi');
         $this->assert_question_in_category('Rho Question', 'Rho');
         $this->assert_category_has_parent('Pi', 'top');

@@ -39,7 +39,7 @@ use core\output\named_templatable;
 use core_completion\cm_completion_details;
 use core_course\output\activity_information;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Simple base class for Moodle renderers.

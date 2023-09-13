@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ $id = required_param('id', PARAM_INT);
 $choosefile = optional_param('choosefile', false, PARAM_PATH);
 $action = optional_param('action', false, PARAM_ALPHA);
 
-$url = new moodle_url('/mod/feedback/import.php', array('id'=>$id));
+$url = new powereduc_url('/mod/feedback/import.php', array('id'=>$id));
 if ($choosefile !== false) {
     $url->param('choosefile', $choosefile);
 }
@@ -41,15 +41,15 @@ if ($action !== false) {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('feedback', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 $context = context_module::instance($cm->id);
@@ -77,7 +77,7 @@ if ($choosefile) {
     $xmlcontent = $mform->get_file_content('choosefile');
 
     if (!$xmldata = feedback_load_xml_data($xmlcontent)) {
-        throw new \moodle_exception('cannotloadxml', 'feedback', 'edit.php?id='.$id);
+        throw new \powereduc_exception('cannotloadxml', 'feedback', 'edit.php?id='.$id);
     }
 
     $importerror = feedback_import_loaded_data($xmldata, $feedback->id);

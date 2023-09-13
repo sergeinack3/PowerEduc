@@ -25,7 +25,7 @@
 
 namespace auth_none\check;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\check\result;
 

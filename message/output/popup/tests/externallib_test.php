@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace message_popup;
 use message_popup_external;
 use message_popup_test_helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/message/output/popup/tests/base.php');
  * Class for external message popup functions unit tests.
  *
  * @package    message_popup
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class externallib_test extends \advanced_testcase {
@@ -55,7 +55,7 @@ class externallib_test extends \advanced_testcase {
     public function test_get_popup_notifications_no_user_exception() {
         $this->resetAfterTest(true);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = message_popup_external::get_popup_notifications(-2132131, false, 0, 0);
     }
 
@@ -70,7 +70,7 @@ class externallib_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $this->setUser($user);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = message_popup_external::get_popup_notifications($sender->id, false, 0, 0);
     }
 
@@ -148,7 +148,7 @@ class externallib_test extends \advanced_testcase {
     public function test_get_unread_popup_notification_count_invalid_user_exception() {
         $this->resetAfterTest(true);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = message_popup_external::get_unread_popup_notification_count(-2132131, 0);
     }
 
@@ -163,7 +163,7 @@ class externallib_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $this->setUser($user);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = message_popup_external::get_unread_popup_notification_count($sender->id, 0);
     }
 

@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/backup/converter/convertlib.php');
 
@@ -45,7 +45,7 @@ class imscc11_export_converter extends base_converter {
     public static function description() {
 
         return array(
-                'from'  => backup::FORMAT_MOODLE,
+                'from'  => backup::FORMAT_POWEREDUC,
                 'to'    => backup::FORMAT_IMSCC11,
                 'cost'  => 10
         );

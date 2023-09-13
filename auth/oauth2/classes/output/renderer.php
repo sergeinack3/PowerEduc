@@ -31,7 +31,7 @@ use html_writer;
 use auth_oauth2\linked_login;
 use moodle_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Implements the plugin renderer

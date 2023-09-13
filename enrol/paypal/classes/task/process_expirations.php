@@ -25,7 +25,7 @@
 
 namespace enrol_paypal\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Process expirations task.

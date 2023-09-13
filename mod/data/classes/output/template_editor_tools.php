@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use mod_data\manager;
  * Renderable class for template editor tools.
  *
  * @package    mod_data
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @copyright  2022 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class template_editor_tools implements templatable, renderable {

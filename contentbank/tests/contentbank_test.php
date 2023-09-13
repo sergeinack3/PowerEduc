@@ -25,7 +25,7 @@
 
 namespace core_contentbank;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use advanced_testcase;
 use context_course;

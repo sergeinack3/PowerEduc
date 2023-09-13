@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * A Handler to process replies to forum posts.
@@ -25,7 +25,7 @@
 
 namespace mod_forum\message\inbound;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/forum/lib.php');
 require_once($CFG->dirroot . '/repository/lib.php');
@@ -101,7 +101,7 @@ class reply_handler extends \core\message\inbound\handler {
         } else {
             $groupmode = $course->groupmode;
         }
-        if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $modcontext)) {
+        if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $modcontext)) {
             if ($discussion->groupid == -1) {
                 $canpost = false;
             } else {
@@ -233,7 +233,7 @@ class reply_handler extends \core\message\inbound\handler {
                 $this->process_attachment('*', $usercontext, $addpost->itemid, $attachment);
 
                 // Convert the contentid link in the message.
-                $draftfile = \moodle_url::make_draftfile_url($addpost->itemid, '/', $attachment->filename);
+                $draftfile = \powereduc_url::make_draftfile_url($addpost->itemid, '/', $attachment->filename);
                 $addpost->message = preg_replace('/cid:' . $attachment->contentid . '/', $draftfile, $addpost->message);
             }
         }
@@ -315,7 +315,7 @@ class reply_handler extends \core\message\inbound\handler {
     public function get_success_message(\stdClass $messagedata, $handlerresult) {
         $a = new \stdClass();
         $a->subject = $handlerresult->subject;
-        $discussionurl = new \moodle_url('/mod/forum/discuss.php', array('d' => $handlerresult->discussion));
+        $discussionurl = new \powereduc_url('/mod/forum/discuss.php', array('d' => $handlerresult->discussion));
         $discussionurl->set_anchor('p' . $handlerresult->id);
         $a->discussionurl = $discussionurl->out();
 

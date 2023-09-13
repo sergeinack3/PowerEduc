@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@ namespace mod_data;
 
 use mod_data\external\record_exporter;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/data/locallib.php');
@@ -26,7 +26,7 @@ require_once($CFG->dirroot . '/mod/data/locallib.php');
  * Unit tests for locallib.php
  *
  * @package    mod_data
- * @copyright  2022 Laurent David <laurent.david@moodle.com>
+ * @copyright  2022 Laurent David <laurent.david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class locallib_test extends \advanced_testcase {

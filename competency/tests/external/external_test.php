@@ -37,7 +37,7 @@ use core_competency\user_competency;
 use core_competency\user_competency_plan;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');

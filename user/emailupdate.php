@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Change a users email address
@@ -34,7 +34,7 @@ $PAGE->set_url('/user/emailupdate.php', array('id' => $id, 'key' => $key));
 $PAGE->set_context(context_system::instance());
 
 if (!$user = $DB->get_record('user', array('id' => $id))) {
-    throw new \moodle_exception('invaliduserid');
+    throw new \powereduc_exception('invaliduserid');
 }
 
 $preferences = get_user_preferences(null, null, $user->id);
@@ -70,7 +70,7 @@ if (empty($preferences['newemailattemptsleft'])) {
         );
         // If there are other user(s) that already have the same email, cancel and redirect.
         if ($DB->record_exists_select('user', $select, $params)) {
-            redirect(new moodle_url('/user/view.php', ['id' => $user->id]), get_string('emailnowexists', 'auth'));
+            redirect(new powereduc_url('/user/view.php', ['id' => $user->id]), get_string('emailnowexists', 'auth'));
         }
     }
 
@@ -80,7 +80,7 @@ if (empty($preferences['newemailattemptsleft'])) {
     user_update_user($user, false);
     $a->email = $user->email;
     redirect(
-        new moodle_url('/user/view.php', ['id' => $user->id]),
+        new powereduc_url('/user/view.php', ['id' => $user->id]),
         get_string('emailupdatesuccess', 'auth', $a),
         null,
         \core\output\notification::NOTIFY_SUCCESS

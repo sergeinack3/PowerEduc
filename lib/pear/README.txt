@@ -66,7 +66,7 @@ Eloy Lafuente, 2005-12-17 :-)
 
 
 ----------------------------------------------------------------
-A NOTE ON THE PHP LICENSE AND MOODLE
+A NOTE ON THE PHP LICENSE AND POWEREDUC
 ================================================================
 
 Everything in Moodle in pure GPL.  This pear directory is the only

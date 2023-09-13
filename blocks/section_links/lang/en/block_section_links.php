@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'block_section_links', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'block_section_links', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package    block_section_links
  * @copyright  Jason Hardin

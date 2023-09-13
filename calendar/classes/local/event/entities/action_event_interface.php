@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\entities;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface for an action event class.

@@ -22,8 +22,8 @@ Feature: Use the qbank plugin manager page for exporttoxml
     And I should see "Export to XML"
     And I click on "Disable" "link" in the "Export to XML" "table_row"
     And I am on the "Test quiz" "mod_quiz > question bank" page
-    Then the "Export as Moodle XML" action should not exist for the "First question" question in the question bank
+    Then the "Export as PowerEduc XML" action should not exist for the "First question" question in the question bank
     And I navigate to "Plugins > Question bank plugins > Manage question bank plugins" in site administration
     And I click on "Enable" "link" in the "Export to XML" "table_row"
     And I am on the "Test quiz" "mod_quiz > question bank" page
-    And the "Export as Moodle XML" action should exist for the "First question" question in the question bank
+    And the "Export as PowerEduc XML" action should exist for the "First question" question in the question bank

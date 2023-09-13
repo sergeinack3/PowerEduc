@@ -24,7 +24,7 @@
 
 namespace core_completion;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class containing completion API.

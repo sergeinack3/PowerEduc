@@ -23,7 +23,7 @@
  */
 namespace core_files;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use stored_file;
 

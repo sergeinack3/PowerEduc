@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Redirect the user to registration with token and openid config url as query params.
@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/mod/lti/locallib.php');
 
 require_login();
 $context = context_system::instance();
-require_capability('moodle/site:config', $context);
+require_capability('powereduc/site:config', $context);
 
 $starturl = required_param('url', PARAM_URL);
 $typeid = optional_param('type', -1, PARAM_INT);
@@ -43,7 +43,7 @@ $types = lti_get_tools_by_url($starturl, null);
 
 if (!empty($types) && $typeid == -1) {
     // There are matching types for the registration domain, let's prompt the user to upgrade.
-    $pageurl = new moodle_url('/mod/lti/startltiadvregistration.php');
+    $pageurl = new powereduc_url('/mod/lti/startltiadvregistration.php');
     $PAGE->set_context($context);
     $PAGE->set_url($pageurl);
     $PAGE->set_pagelayout('maintenance');
@@ -72,8 +72,8 @@ if (!empty($types) && $typeid == -1) {
     ];
     $privatekey = jwks_helper::get_private_key();
     $regtoken = JWT::encode($token, $privatekey['key'], 'RS256', $privatekey['kid']);
-    $confurl = new moodle_url('/mod/lti/openid-configuration.php');
-    $url = new moodle_url($starturl);
+    $confurl = new powereduc_url('/mod/lti/openid-configuration.php');
+    $url = new powereduc_url($starturl);
     $url->param('openid_configuration', $confurl->out(false));
     $url->param('registration_token', $regtoken);
     header("Location: ".$url->out(false));

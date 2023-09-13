@@ -87,14 +87,14 @@ Feature: Custom profile fields should be visible and editable by those with the 
     And I should see "teachervisible_field"
 
   @javascript
-  Scenario: User with moodle/user:update but without moodle/user:viewalldetails or moodle/site:viewuseridentity can only update visible profile fields.
+  Scenario: User with powereduc/user:update but without powereduc/user:viewalldetails or powereduc/site:viewuseridentity can only update visible profile fields.
     Given the following "roles" exist:
       | name         | shortname   | description | archetype |
       | Update Users | updateusers | updateusers |           |
     And the following "permission overrides" exist:
       | capability                   | permission | role        | contextlevel | reference |
-      | moodle/user:update           | Allow      | updateusers | System       |           |
-      | moodle/site:viewuseridentity | Prohibit   | updateusers | System       |           |
+      | powereduc/user:update           | Allow      | updateusers | System       |           |
+      | powereduc/site:viewuseridentity | Prohibit   | updateusers | System       |           |
     And the following "users" exist:
       | username         | firstname   | lastname | email                   |
       | user_updateusers | updateusers | 1        | updateusers@example.com |
@@ -125,13 +125,13 @@ Feature: Custom profile fields should be visible and editable by those with the 
     And I should not see "teachervisible_field"
 
   @javascript
-  Scenario: User with moodle/user:viewalldetails and moodle/site:viewuseridentity but without moodle/user:update can view all profile fields.
+  Scenario: User with powereduc/user:viewalldetails and powereduc/site:viewuseridentity but without powereduc/user:update can view all profile fields.
     Given the following "roles" exist:
       | name             | shortname      | description    | archetype |
       | View All Details | viewalldetails | viewalldetails |           |
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/user:viewalldetails | Allow      | viewalldetails | System       |           |
+      | powereduc/user:viewalldetails | Allow      | viewalldetails | System       |           |
     And the following "users" exist:
       | username            | firstname      | lastname | email                      |
       | user_viewalldetails | viewalldetails | 1        | viewalldetails@example.com |
@@ -157,14 +157,14 @@ Feature: Custom profile fields should be visible and editable by those with the 
     And I should not see "Edit profile"
 
   @javascript
-  Scenario: User with moodle/user:viewalldetails and moodle/user:update and moodle/site:viewuseridentity capabilities can view and edit all profile fields.
+  Scenario: User with powereduc/user:viewalldetails and powereduc/user:update and powereduc/site:viewuseridentity capabilities can view and edit all profile fields.
     Given the following "roles" exist:
       | name                              | shortname                    | description                  | archetype |
       | View All Details and Update Users | viewalldetailsandupdateusers | viewalldetailsandupdateusers |           |
     And the following "permission overrides" exist:
       | capability                 | permission | role                         | contextlevel | reference |
-      | moodle/user:viewalldetails | Allow      | viewalldetailsandupdateusers | System       |           |
-      | moodle/user:update         | Allow      | viewalldetailsandupdateusers | System       |           |
+      | powereduc/user:viewalldetails | Allow      | viewalldetailsandupdateusers | System       |           |
+      | powereduc/user:update         | Allow      | viewalldetailsandupdateusers | System       |           |
     And the following "users" exist:
       | username                          | firstname                    | lastname | email                                    |
       | user_viewalldetailsandupdateusers | viewalldetailsandupdateusers | 1        | viewalldetailsandupdateusers@example.com |
@@ -223,7 +223,7 @@ Feature: Custom profile fields should be visible and editable by those with the 
 
     And the following "permission overrides" exist:
       | capability                 | permission | role               | contextlevel | reference |
-      | moodle/user:editownprofile | Prohibit   | denyeditownprofile | System       |           |
+      | powereduc/user:editownprofile | Prohibit   | denyeditownprofile | System       |           |
     And the following "role assigns" exist:
       | user                | role               | contextlevel | reference |
       | userwithinformation | denyeditownprofile | System       |           |
@@ -255,9 +255,9 @@ Feature: Custom profile fields should be visible and editable by those with the 
       | parent | parent | User         | userwithinformation  |
     And the following "permission overrides" exist:
       | capability                  | permission | role   | contextlevel | reference           |
-      | moodle/user:viewalldetails  | Allow      | parent | User         | userwithinformation |
-      | moodle/user:viewdetails     | Allow      | parent | User         | userwithinformation |
-      | moodle/user:editprofile     | Allow      | parent | User         | userwithinformation |
+      | powereduc/user:viewalldetails  | Allow      | parent | User         | userwithinformation |
+      | powereduc/user:viewdetails     | Allow      | parent | User         | userwithinformation |
+      | powereduc/user:editprofile     | Allow      | parent | User         | userwithinformation |
     Given I log in as "admin"
     And I am on site homepage
     And I turn editing mode on

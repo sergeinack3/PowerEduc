@@ -24,7 +24,7 @@
 
 namespace core\lock;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Defines abstract factory class for generating locks.

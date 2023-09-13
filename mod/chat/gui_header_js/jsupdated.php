@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
  **/
 
 define('CHAT_MAX_CLIENT_UPDATES', 1000);
-define('NO_MOODLE_COOKIES', true); // Session not used here.
+define('NO_POWEREDUC_COOKIES', true); // Session not used here.
 define('NO_OUTPUT_BUFFERING', true);
 
 require('../../../config.php');
@@ -45,7 +45,7 @@ $chatlasttime = optional_param('chat_lasttime',  0, PARAM_INT);
 $chatlastrow  = optional_param('chat_lastrow',   1, PARAM_INT);
 $chatlastid   = optional_param('chat_lastid',    0, PARAM_INT);
 
-$url = new moodle_url('/mod/chat/gui_header_js/jsupdated.php', array('chat_sid' => $chatsid));
+$url = new powereduc_url('/mod/chat/gui_header_js/jsupdated.php', array('chat_sid' => $chatsid));
 if ($chatlasttime !== 0) {
     $url->param('chat_lasttime', $chatlasttime);
 }
@@ -58,19 +58,19 @@ if ($chatlastid !== 1) {
 $PAGE->set_url($url);
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
-    throw new \moodle_exception('notlogged', 'chat');
+    throw new \powereduc_exception('notlogged', 'chat');
 }
 
 // Get the minimal course.
 if (!$course = $DB->get_record('course', array('id' => $chatuser->course))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 // Get the user theme and enough info to be used in chat_format_message() which passes it along to
 // chat_format_message_manually() -- and only id and timezone are used.
 // No optimisation here, it would break again in future!
 if (!$user = $DB->get_record('user', array('id' => $chatuser->userid, 'deleted' => 0, 'suspended' => 0))) {
-    throw new \moodle_exception('invaliduser');
+    throw new \powereduc_exception('invaliduser');
 }
 \core\session\manager::set_user($user);
 

@@ -1,36 +1,36 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access equella repositories.
  *
- * @since Moodle 2.3
+ * @since PowerEduc 2.3
  * @package    repository_equella
  * @copyright  2012 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/repository/lib.php');
 
 /**
  * repository_equella class implements equella_client
  *
- * @since Moodle 2.3
+ * @since PowerEduc 2.3
  * @package    repository_equella
  * @copyright  2012 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -66,7 +66,7 @@ class repository_equella extends repository {
      */
     public function get_listing($path = null, $page = null) {
         global $COURSE;
-        $callbackurl = new moodle_url('/repository/equella/callback.php', array('repo_id'=>$this->id));
+        $callbackurl = new powereduc_url('/repository/equella/callback.php', array('repo_id'=>$this->id));
 
         $mimetypesstr = '';
         $restrict = '';
@@ -189,7 +189,7 @@ class repository_equella extends repository {
             unlink($cookiepathname);
         }
         if ($result !== true) {
-            throw new moodle_exception('errorwhiledownload', 'repository', '', $result);
+            throw new powereduc_exception('errorwhiledownload', 'repository', '', $result);
         }
         return array('path'=>$path, 'url'=>$url);
     }
@@ -258,9 +258,9 @@ class repository_equella extends repository {
     }
 
     /**
-     * Add Instance settings input to Moodle form
+     * Add Instance settings input to PowerEduc form
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      */
     public static function instance_config_form($mform) {
         $mform->addElement('text', 'equella_url', get_string('equellaurl', 'repository_equella'));
@@ -386,11 +386,11 @@ class repository_equella extends repository {
     }
 
     private static function get_all_editing_roles() {
-        return get_roles_with_capability('moodle/course:manageactivities', CAP_ALLOW);
+        return get_roles_with_capability('powereduc/course:manageactivities', CAP_ALLOW);
     }
 
     /**
-     * Convert moodle mimetypes list to equella format
+     * Convert powereduc mimetypes list to equella format
      *
      * @param string $value
      * @return string

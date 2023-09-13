@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the definition for the class assignment
@@ -24,7 +24,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Assignment submission statuses.
 define('ASSIGN_SUBMISSION_STATUS_NEW', 'new');
@@ -243,9 +243,9 @@ class assign {
         $params['action'] = $action;
         $cm = $this->get_course_module();
         if ($cm) {
-            $currenturl = new moodle_url('/mod/assign/view.php', array('id' => $cm->id));
+            $currenturl = new powereduc_url('/mod/assign/view.php', array('id' => $cm->id));
         } else {
-            $currenturl = new moodle_url('/mod/assign/index.php', array('id' => $this->get_course()->id));
+            $currenturl = new powereduc_url('/mod/assign/index.php', array('id' => $this->get_course()->id));
         }
 
         $currenturl->params($params);
@@ -632,7 +632,7 @@ class assign {
         }
         // Now show the right view page.
         if ($action == 'redirect') {
-            $nextpageurl = new moodle_url('/mod/assign/view.php', $nextpageparams);
+            $nextpageurl = new powereduc_url('/mod/assign/view.php', $nextpageparams);
             $messages = '';
             $messagetype = \core\output\notification::NOTIFY_INFO;
             $errors = $this->get_error_messages();
@@ -780,13 +780,13 @@ class assign {
             // Call save_settings hook for submission plugins.
             foreach ($this->submissionplugins as $plugin) {
                 if (!$this->update_plugin_instance($plugin, $formdata)) {
-                    throw new \moodle_exception($plugin->get_error());
+                    throw new \powereduc_exception($plugin->get_error());
                     return false;
                 }
             }
             foreach ($this->feedbackplugins as $plugin) {
                 if (!$this->update_plugin_instance($plugin, $formdata)) {
-                    throw new \moodle_exception($plugin->get_error());
+                    throw new \powereduc_exception($plugin->get_error());
                     return false;
                 }
             }
@@ -840,13 +840,13 @@ class assign {
 
         foreach ($this->submissionplugins as $plugin) {
             if (!$plugin->delete_instance()) {
-                throw new \moodle_exception($plugin->get_error());
+                throw new \powereduc_exception($plugin->get_error());
                 $result = false;
             }
         }
         foreach ($this->feedbackplugins as $plugin) {
             if (!$plugin->delete_instance()) {
-                throw new \moodle_exception($plugin->get_error());
+                throw new \powereduc_exception($plugin->get_error());
                 $result = false;
             }
         }
@@ -1304,7 +1304,7 @@ class assign {
             if (!empty($formdata->$enabledname)) {
                 $plugin->enable();
                 if (!$plugin->save_settings($formdata)) {
-                    throw new \moodle_exception($plugin->get_error());
+                    throw new \powereduc_exception($plugin->get_error());
                     return false;
                 }
             } else {
@@ -1546,13 +1546,13 @@ class assign {
         // Call save_settings hook for submission plugins.
         foreach ($this->submissionplugins as $plugin) {
             if (!$this->update_plugin_instance($plugin, $formdata)) {
-                throw new \moodle_exception($plugin->get_error());
+                throw new \powereduc_exception($plugin->get_error());
                 return false;
             }
         }
         foreach ($this->feedbackplugins as $plugin) {
             if (!$this->update_plugin_instance($plugin, $formdata)) {
-                throw new \moodle_exception($plugin->get_error());
+                throw new \powereduc_exception($plugin->get_error());
                 return false;
             }
         }
@@ -1606,12 +1606,12 @@ class assign {
      * Add elements in grading plugin form.
      *
      * @param mixed $grade stdClass|null
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $data
      * @param int $userid - The userid we are grading
      * @return void
      */
-    protected function add_plugin_grade_elements($grade, MoodleQuickForm $mform, stdClass $data, $userid) {
+    protected function add_plugin_grade_elements($grade, PowerEducQuickForm $mform, stdClass $data, $userid) {
         foreach ($this->feedbackplugins as $plugin) {
             if ($plugin->is_enabled() && $plugin->is_visible()) {
                 $plugin->get_form_elements_for_user($grade, $mform, $data, $userid);
@@ -1625,13 +1625,13 @@ class assign {
      * Add one plugins settings to edit plugin form.
      *
      * @param assign_plugin $plugin The plugin to add the settings from
-     * @param MoodleQuickForm $mform The form to add the configuration settings to.
+     * @param PowerEducQuickForm $mform The form to add the configuration settings to.
      *                               This form is modified directly (not returned).
      * @param array $pluginsenabled A list of form elements to be added to a group.
      *                              The new element is added to this array by this function.
      * @return void
      */
-    protected function add_plugin_settings(assign_plugin $plugin, MoodleQuickForm $mform, & $pluginsenabled) {
+    protected function add_plugin_settings(assign_plugin $plugin, PowerEducQuickForm $mform, & $pluginsenabled) {
         global $CFG;
         if ($plugin->is_visible() && !$plugin->is_configurable() && $plugin->is_enabled()) {
             $name = $plugin->get_subtype() . '_' . $plugin->get_type() . '_enabled';
@@ -1659,11 +1659,11 @@ class assign {
     /**
      * Add settings to edit plugin form.
      *
-     * @param MoodleQuickForm $mform The form to add the configuration settings to.
+     * @param PowerEducQuickForm $mform The form to add the configuration settings to.
      *                               This form is modified directly (not returned).
      * @return void
      */
-    public function add_all_plugin_settings(MoodleQuickForm $mform) {
+    public function add_all_plugin_settings(PowerEducQuickForm $mform) {
         $mform->addElement('header', 'submissiontypes', get_string('submissiontypes', 'assign'));
 
         $submissionpluginsenabled = array();
@@ -1923,7 +1923,7 @@ class assign {
         $instance = $this->get_instance($userid);
 
         // Check if user has permission to view attachments regardless of assignment settings.
-        if (has_capability('moodle/course:manageactivities', $this->get_context())) {
+        if (has_capability('powereduc/course:manageactivities', $this->get_context())) {
             return true;
         }
 
@@ -2655,7 +2655,7 @@ class assign {
     /**
      * Finds all assignment notifications that have yet to be mailed out, and mails them.
      *
-     * Cron function to be run periodically according to the moodle cron.
+     * Cron function to be run periodically according to the powereduc cron.
      *
      * @return bool
      */
@@ -2969,7 +2969,7 @@ class assign {
      * Uses url parameters 'userid'
      * or from parameter 'selectedusers'
      *
-     * @param moodleform $mform - Used for validation of the submitted data
+     * @param powereducform $mform - Used for validation of the submitted data
      * @return string
      */
     protected function view_grant_extension($mform) {
@@ -3059,7 +3059,7 @@ class assign {
             }
         }
         // Exclude suspended users, if user can't see them.
-        if ($excludesuspended || !has_capability('moodle/course:viewsuspendedusers', $this->context)) {
+        if ($excludesuspended || !has_capability('powereduc/course:viewsuspendedusers', $this->context)) {
             foreach ($members as $key => $member) {
                 if (!$this->is_active_user($member->id)) {
                     unset($members[$key]);
@@ -3199,8 +3199,8 @@ class assign {
         $strplural = get_string('modulenameplural', 'assign');
 
         if (!$cms = get_coursemodules_in_course('assign', $course->id, 'm.duedate')) {
-            $o .= $this->get_renderer()->notification(get_string('thereareno', 'moodle', $strplural));
-            $o .= $this->get_renderer()->continue_button(new moodle_url('/course/view.php', array('id' => $course->id)));
+            $o .= $this->get_renderer()->notification(get_string('thereareno', 'powereduc', $strplural));
+            $o .= $this->get_renderer()->continue_button(new powereduc_url('/course/view.php', array('id' => $course->id)));
             return $o;
         }
 
@@ -3239,7 +3239,7 @@ class assign {
             $timedue = $assignment->get_instance()->duedate;
 
             if (has_capability('mod/assign:submit', $context) &&
-                !has_capability('moodle/site:config', $context)) {
+                !has_capability('powereduc/site:config', $context)) {
                 $cangrade = false;
                 if ($assignment->get_instance()->teamsubmission) {
                     $usersubmission = $assignment->get_group_submission($USER->id, 0, false);
@@ -3294,7 +3294,7 @@ class assign {
 
         $plugin = $this->get_plugin_by_type($pluginsubtype, $plugintype);
         if (!$plugin) {
-            throw new \moodle_exception('invalidformdata', '');
+            throw new \powereduc_exception('invalidformdata', '');
             return;
         }
 
@@ -3640,7 +3640,7 @@ class assign {
             if ($groupid === null) {
                 $groupid = groups_get_activity_allowed_groups($this->get_course_module());
             }
-            $groupflag = has_capability('moodle/site:accessallgroups', $this->get_context());
+            $groupflag = has_capability('powereduc/site:accessallgroups', $this->get_context());
             $groupflag = $groupflag || !empty($groupid);
             return (bool)$groupflag;
         }
@@ -3685,7 +3685,7 @@ class assign {
         );
         $result = $renderer->render($header);
         $result .= $renderer->notification(get_string('nosubmission', 'mod_assign'));
-        $url = new moodle_url('/mod/assign/view.php', ['id' => $cm->id, 'action' => 'grading']);
+        $url = new powereduc_url('/mod/assign/view.php', ['id' => $cm->id, 'action' => 'grading']);
         $result .= $renderer->continue_button($url);
         $result .= $this->view_footer();
         return $result;
@@ -3695,7 +3695,7 @@ class assign {
      * Util function to add a message to the log.
      *
      * @deprecated since 2.7 - Use new events system instead.
-     *             (see http://docs.moodle.org/dev/Migrating_logging_calls_in_plugins).
+     *             (see http://docs.powereduc.org/dev/Migrating_logging_calls_in_plugins).
      *
      * @param string $action The current action
      * @param string $info A detailed description of the change. But no more than 255 characters.
@@ -4022,7 +4022,7 @@ class assign {
                 $extensionduedate = $flags->extensionduedate;
             }
             $showedit = $this->submissions_open($userid) && ($this->is_any_submission_plugin_enabled());
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->get_context());
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->get_context());
             $usergroups = $this->get_all_groups($user->id);
 
             $submissionstatus = new assign_submission_status_compact($instance->allowsubmissionsfromdate,
@@ -4130,7 +4130,7 @@ class assign {
     /**
      * Print the grading page for a single user submission.
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      * @return string
      */
     protected function view_single_grade_page($mform) {
@@ -4182,7 +4182,7 @@ class assign {
         $user = $DB->get_record('user', array('id' => $userid));
         if ($user) {
             $this->update_effective_access($userid);
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->get_context());
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->get_context());
             $usersummary = new assign_user_summary($user,
                                                    $this->get_course()->id,
                                                    $viewfullnames,
@@ -4218,7 +4218,7 @@ class assign {
                 $extensionduedate = $flags->extensionduedate;
             }
             $showedit = $this->submissions_open($userid) && ($this->is_any_submission_plugin_enabled());
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->get_context());
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->get_context());
             $usergroups = $this->get_all_groups($user->id);
             $submissionstatus = new assign_submission_status($instance->allowsubmissionsfromdate,
                                                              $instance->alwaysshowdescription,
@@ -4331,7 +4331,7 @@ class assign {
         $userid = optional_param('userid', $USER->id, PARAM_INT);
 
         if (!$this->can_edit_submission($userid, $USER->id)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
         $user = core_user::get_user($userid, '*', MUST_EXIST);
 
@@ -4346,11 +4346,11 @@ class assign {
                            'action' => 'removesubmission',
                            'userid' => $userid,
                            'sesskey' => sesskey());
-        $confirmurl = new moodle_url('/mod/assign/view.php', $urlparams);
+        $confirmurl = new powereduc_url('/mod/assign/view.php', $urlparams);
 
         $urlparams = array('id' => $this->get_course_module()->id,
                            'action' => 'view');
-        $cancelurl = new moodle_url('/mod/assign/view.php', $urlparams);
+        $cancelurl = new powereduc_url('/mod/assign/view.php', $urlparams);
 
         if ($userid == $USER->id) {
             if ($this->is_time_limit_enabled($userid)) {
@@ -4394,11 +4394,11 @@ class assign {
         $urlparams = array('id'=>$this->get_course_module()->id,
                            'action'=>'revealidentitiesconfirm',
                            'sesskey'=>sesskey());
-        $confirmurl = new moodle_url('/mod/assign/view.php', $urlparams);
+        $confirmurl = new powereduc_url('/mod/assign/view.php', $urlparams);
 
         $urlparams = array('id'=>$this->get_course_module()->id,
                            'action'=>'grading');
-        $cancelurl = new moodle_url('/mod/assign/view.php', $urlparams);
+        $cancelurl = new powereduc_url('/mod/assign/view.php', $urlparams);
 
         $o .= $this->get_renderer()->confirm(get_string('revealidentitiesconfirm', 'assign'),
                                              $confirmurl,
@@ -4425,7 +4425,7 @@ class assign {
         $newparams = array('id' => $this->get_course_module()->id, 'action' => $returnaction);
         $params = array_merge($newparams, $params);
 
-        $url = new moodle_url('/mod/assign/view.php', $params);
+        $url = new powereduc_url('/mod/assign/view.php', $params);
         return $this->get_renderer()->single_button($url, get_string('back'), 'get');
     }
 
@@ -4446,7 +4446,7 @@ class assign {
 
         $links = array();
         if (has_capability('gradereport/grader:view', $this->get_course_context()) &&
-                has_capability('moodle/grade:viewall', $this->get_course_context())) {
+                has_capability('powereduc/grade:viewall', $this->get_course_context())) {
             $gradebookurl = '/grade/report/grader/index.php?id=' . $this->get_course()->id;
             $links[$gradebookurl] = get_string('viewgradebook', 'assign');
         }
@@ -4484,7 +4484,7 @@ class assign {
         $controller = $gradingmanager->get_active_controller();
         $showquickgrading = empty($controller) && $this->can_grade();
         $quickgrading = get_user_preferences('assign_quickgrading', false);
-        $showonlyactiveenrolopt = has_capability('moodle/course:viewsuspendedusers', $this->context);
+        $showonlyactiveenrolopt = has_capability('powereduc/course:viewsuspendedusers', $this->context);
         $downloadasfolders = get_user_preferences('assign_downloadasfolders', 1);
 
         $markingallocation = $this->get_instance()->markingworkflow &&
@@ -4498,7 +4498,7 @@ class assign {
             $markers = get_enrolled_users($this->context, 'mod/assign:grade', 0, 'u.*', $sort);
             $markingallocationoptions[''] = get_string('filternone', 'assign');
             $markingallocationoptions[ASSIGN_MARKER_FILTER_NO_MARKER] = get_string('markerfilternomarker', 'assign');
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->context);
             foreach ($markers as $marker) {
                 $markingallocationoptions[$marker->id] = fullname($marker, $viewfullnames);
             }
@@ -4556,7 +4556,7 @@ class assign {
         $actionformtext = $this->get_renderer()->render($buttons);
         $PAGE->activityheader->set_attrs(['hidecompletion' => true]);
 
-        $currenturl = new moodle_url('/mod/assign/view.php', ['id' => $this->get_course_module()->id, 'action' => 'grading']);
+        $currenturl = new powereduc_url('/mod/assign/view.php', ['id' => $this->get_course_module()->id, 'action' => 'grading']);
 
         $header = new assign_header($this->get_instance(),
                                     $this->get_context(),
@@ -4740,7 +4740,7 @@ class assign {
             $o .= $this->get_renderer()->notification($notice);
         }
 
-        $url = new moodle_url('/mod/assign/view.php', array('id'=>$this->get_course_module()->id, 'action'=>'view'));
+        $url = new powereduc_url('/mod/assign/view.php', array('id'=>$this->get_course_module()->id, 'action'=>'view'));
         $o .= $this->get_renderer()->continue_button($url);
 
         $o .= $this->view_footer();
@@ -4764,19 +4764,19 @@ class assign {
             }
             if ($hasviewblind) {
                 return get_string('participant', 'assign') . ' ' . $uniqueid . ' (' .
-                        fullname($user, has_capability('moodle/site:viewfullnames', $this->get_context())) . ')';
+                        fullname($user, has_capability('powereduc/site:viewfullnames', $this->get_context())) . ')';
             } else {
                 return get_string('participant', 'assign') . ' ' . $uniqueid;
             }
         } else {
-            return fullname($user, has_capability('moodle/site:viewfullnames', $this->get_context()));
+            return fullname($user, has_capability('powereduc/site:viewfullnames', $this->get_context()));
         }
     }
 
     /**
      * View edit submissions page.
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      * @param array $notices A list of notices to display at the top of the
      *                       edit submission form (e.g. from plugins).
      * @return string The page output.
@@ -4798,7 +4798,7 @@ class assign {
 
         if ($userid == $USER->id) {
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                throw new \moodle_exception('nopermission');
+                throw new \powereduc_exception('nopermission');
             }
             // User is editing their own submission.
             require_capability('mod/assign:submit', $this->context);
@@ -4806,7 +4806,7 @@ class assign {
         } else {
             // User is editing another user's submission.
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                throw new \moodle_exception('nopermission');
+                throw new \powereduc_exception('nopermission');
             }
 
             $name = $this->fullname($user);
@@ -4951,7 +4951,7 @@ class assign {
     public function can_view_submission($userid) {
         global $USER;
 
-        if (!$this->is_active_user($userid) && !has_capability('moodle/course:viewsuspendedusers', $this->context)) {
+        if (!$this->is_active_user($userid) && !has_capability('powereduc/course:viewsuspendedusers', $this->context)) {
             return false;
         }
         if (!is_enrolled($this->get_course_context(), $userid)) {
@@ -4969,7 +4969,7 @@ class assign {
     /**
      * Allows the plugin to show a batch grading operation page.
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      * @return none
      */
     protected function view_plugin_grading_batch_operation($mform) {
@@ -4988,13 +4988,13 @@ class assign {
                 return;
             }
         }
-        throw new \moodle_exception('invalidformdata', '');
+        throw new \powereduc_exception('invalidformdata', '');
     }
 
     /**
      * Ask the user to confirm they want to perform this batch operation
      *
-     * @param moodleform $mform Set to a grading batch operations form
+     * @param powereducform $mform Set to a grading batch operations form
      * @return string - the page to view after processing these actions
      */
     protected function process_grading_batch_operation(& $mform) {
@@ -5077,7 +5077,7 @@ class assign {
     /**
      * Shows a form that allows the workflow state for selected submissions to be changed.
      *
-     * @param moodleform $mform Set to a grading batch operations form
+     * @param powereducform $mform Set to a grading batch operations form
      * @return string - the page to view after processing these actions
      */
     protected function view_batch_set_workflow_state($mform) {
@@ -5099,7 +5099,7 @@ class assign {
         $usercount = 0;
         // TODO Does not support custom user profile fields (MDL-70456).
         $extrauserfields = \core_user\fields::get_identity_fields($this->get_context(), false);
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $this->get_context());
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->get_context());
         foreach ($userlist as $userid) {
             if ($usercount >= 5) {
                 $usershtml .= get_string('moreusers', 'assign', count($userlist) - 5);
@@ -5142,7 +5142,7 @@ class assign {
     /**
      * Shows a form that allows the allocated marker for selected submissions to be changed.
      *
-     * @param moodleform $mform Set to a grading batch operations form
+     * @param powereducform $mform Set to a grading batch operations form
      * @return string - the page to view after processing these actions
      */
     public function view_batch_markingallocation($mform) {
@@ -5164,7 +5164,7 @@ class assign {
         $usercount = 0;
         // TODO Does not support custom user profile fields (MDL-70456).
         $extrauserfields = \core_user\fields::get_identity_fields($this->get_context(), false);
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $this->get_context());
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->get_context());
         foreach ($userlist as $userid) {
             if ($usercount >= 5) {
                 $usershtml .= get_string('moreusers', 'assign', count($userlist) - 5);
@@ -5216,7 +5216,7 @@ class assign {
     /**
      * Ask the user to confirm they want to submit their work for grading.
      *
-     * @param moodleform $mform - null unless form validation has failed
+     * @param powereducform $mform - null unless form validation has failed
      * @return string
      */
     protected function check_submit_for_grading($mform) {
@@ -5340,7 +5340,7 @@ class assign {
         if ($flags) {
             $extensionduedate = $flags->extensionduedate;
         }
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $this->get_context());
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->get_context());
 
         $gradingstatus = $this->get_grading_status($user->id);
         $usergroups = $this->get_all_groups($user->id);
@@ -5467,7 +5467,7 @@ class assign {
                 }
             }
 
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->get_context());
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->get_context());
 
             if ($grade) {
                 \mod_assign\event\feedback_viewed::create_from_grade($this, $grade)->trigger();
@@ -6741,7 +6741,7 @@ class assign {
             require_capability('mod/assign:submit', $this->context);
         } else {
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                throw new \moodle_exception('nopermission');
+                throw new \powereduc_exception('nopermission');
             }
         }
 
@@ -6821,7 +6821,7 @@ class assign {
     /**
      * Assignment submission is processed before grading.
      *
-     * @param moodleform|null $mform If validation failed when submitting this form - this is the moodleform.
+     * @param powereducform|null $mform If validation failed when submitting this form - this is the powereducform.
      *               It can be null.
      * @return bool Return false if the validation fails. This affects which page is displayed next.
      */
@@ -6913,7 +6913,7 @@ class assign {
     /**
      * Save extension date.
      *
-     * @param moodleform $mform The submitted form
+     * @param powereducform $mform The submitted form
      * @return boolean
      */
     protected function process_save_extension(& $mform) {
@@ -7300,7 +7300,7 @@ class assign {
         $controller = $gradingmanager->get_active_controller();
         $showquickgrading = empty($controller);
         if (!is_null($this->context)) {
-            $showonlyactiveenrolopt = has_capability('moodle/course:viewsuspendedusers', $this->context);
+            $showonlyactiveenrolopt = has_capability('powereduc/course:viewsuspendedusers', $this->context);
         } else {
             $showonlyactiveenrolopt = false;
         }
@@ -7587,7 +7587,7 @@ class assign {
         } else {
             $user = $DB->get_record('user', array('id'=>$userid), '*', MUST_EXIST);
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                throw new \moodle_exception('nopermission');
+                throw new \powereduc_exception('nopermission');
             }
         }
         $instance = $this->get_instance();
@@ -7623,7 +7623,7 @@ class assign {
 
         // Get the flags to check if it is locked.
         if ($flags && $flags->locked) {
-            throw new \moodle_exception('submissionslocked', 'assign');
+            throw new \powereduc_exception('submissionslocked', 'assign');
             return true;
         }
 
@@ -7688,7 +7688,7 @@ class assign {
     /**
      * Save assignment submission.
      *
-     * @param  moodleform $mform
+     * @param  powereducform $mform
      * @param  array $notices Any error messages that should be shown
      *                        to the user at the top of the edit submission form.
      * @return bool
@@ -7805,12 +7805,12 @@ class assign {
     /**
      * Add elements to grade form.
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $data
      * @param array $params
      * @return void
      */
-    public function add_grade_form_elements(MoodleQuickForm $mform, stdClass $data, $params) {
+    public function add_grade_form_elements(PowerEducQuickForm $mform, stdClass $data, $params) {
         global $USER, $CFG, $SESSION;
         $settings = $this->get_instance();
 
@@ -7916,11 +7916,11 @@ class assign {
             }
         }
 
-        $capabilitylist = array('gradereport/grader:view', 'moodle/grade:viewall');
+        $capabilitylist = array('gradereport/grader:view', 'powereduc/grade:viewall');
         $usergrade = get_string('notgraded', 'assign');
         if (has_all_capabilities($capabilitylist, $this->get_course_context())) {
             $urlparams = array('id'=>$this->get_course()->id);
-            $url = new moodle_url('/grade/report/grader/index.php', $urlparams);
+            $url = new powereduc_url('/grade/report/grader/index.php', $urlparams);
             if (isset($gradinginfo->items[0]->grades[$userid]->grade)) {
                 $usergrade = $gradinginfo->items[0]->grades[$userid]->str_grade;
             }
@@ -7958,7 +7958,7 @@ class assign {
             // Only enrolled users could be assigned as potential markers.
             $markers = get_enrolled_users($this->context, 'mod/assign:grade', 0, 'u.*', $sort);
             $markerlist = array('' =>  get_string('choosemarker', 'assign'));
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->context);
             foreach ($markers as $marker) {
                 $markerlist[$marker->id] = fullname($marker, $viewfullnames);
             }
@@ -8094,13 +8094,13 @@ class assign {
      * Add elements in submission plugin form.
      *
      * @param mixed $submission stdClass|null
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $data
      * @param int $userid The current userid (same as $USER->id)
      * @return void
      */
     protected function add_plugin_submission_elements($submission,
-                                                    MoodleQuickForm $mform,
+                                                    PowerEducQuickForm $mform,
                                                     stdClass $data,
                                                     $userid) {
         foreach ($this->submissionplugins as $plugin) {
@@ -8152,11 +8152,11 @@ class assign {
 
     /**
      * Add elements to submission form.
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $data
      * @return void
      */
-    public function add_submission_form_elements(MoodleQuickForm $mform, stdClass $data) {
+    public function add_submission_form_elements(PowerEducQuickForm $mform, stdClass $data) {
         global $USER;
 
         $userid = $data->userid;
@@ -8608,7 +8608,7 @@ class assign {
                 if ($gradingmodified) {
                     if (!$plugin->save($grade, $formdata)) {
                         $result = false;
-                        throw new \moodle_exception($plugin->get_error());
+                        throw new \powereduc_exception($plugin->get_error());
                     }
                     // If $feedbackmodified is true, keep it true.
                     $feedbackmodified = $feedbackmodified || $gradingmodified;
@@ -8784,7 +8784,7 @@ class assign {
     /**
      * Save grade.
      *
-     * @param  moodleform $mform
+     * @param  powereducform $mform
      * @return bool - was the grade saved
      */
     protected function process_save_grade(&$mform) {
@@ -8803,8 +8803,8 @@ class assign {
             if (empty($SESSION->mod_assign_useridlist[$this->get_useridlist_key($useridlistid)])) {
                 // If the userid list is not stored we must not save, as it is possible that the user in a
                 // given row position may not be the same now as when the grading page was generated.
-                $url = new moodle_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id));
-                throw new moodle_exception('useridlistnotcached', 'mod_assign', $url);
+                $url = new powereduc_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id));
+                throw new powereduc_exception('useridlistnotcached', 'mod_assign', $url);
             }
             $useridlist = $SESSION->mod_assign_useridlist[$this->get_useridlist_key($useridlistid)];
         } else {
@@ -9255,7 +9255,7 @@ class assign {
 
             if (!is_null($this->context)) {
                 $this->showonlyactiveenrol = $this->showonlyactiveenrol ||
-                            !has_capability('moodle/course:viewsuspendedusers', $this->context);
+                            !has_capability('powereduc/course:viewsuspendedusers', $this->context);
             }
         }
         return $this->showonlyactiveenrol;
@@ -9382,7 +9382,7 @@ class assign {
     /**
      * Update the module completion status (set it viewed) and trigger module viewed event.
      *
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function set_module_viewed() {
         $completion = new completion_info($this->get_course());
@@ -9411,7 +9411,7 @@ class assign {
      */
     protected function add_grade_notices() {
         if (has_capability('mod/assign:grade', $this->get_context()) && get_config('assign', 'has_rescaled_null_grades_' . $this->get_instance()->id)) {
-            $link = new \moodle_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id, 'action' => 'fixrescalednullgrades'));
+            $link = new \powereduc_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id, 'action' => 'fixrescalednullgrades'));
             \core\notification::warning(get_string('fixrescalednullgrades', 'mod_assign', ['link' => $link->out()]));
         }
     }
@@ -9470,7 +9470,7 @@ class assign {
 
             // Display the notice.
             $o .= $this->get_renderer()->notification(get_string('fixrescalednullgradesdone', 'assign'), 'notifysuccess');
-            $url = new moodle_url(
+            $url = new powereduc_url(
                 '/mod/assign/view.php',
                 array(
                     'id' => $this->get_course_module()->id,
@@ -9480,8 +9480,8 @@ class assign {
             $o .= $this->get_renderer()->continue_button($url);
         } else {
             // Ask for confirmation.
-            $continue = new \moodle_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id, 'action' => 'fixrescalednullgrades', 'confirm' => true, 'sesskey' => sesskey()));
-            $cancel = new \moodle_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id));
+            $continue = new \powereduc_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id, 'action' => 'fixrescalednullgrades', 'confirm' => true, 'sesskey' => sesskey()));
+            $cancel = new \powereduc_url('/mod/assign/view.php', array('id' => $this->get_course_module()->id));
             $o .= $OUTPUT->confirm(get_string('fixrescalednullgradesconfirm', 'mod_assign'), $continue, $cancel);
         }
 
@@ -9495,7 +9495,7 @@ class assign {
      * The most recent team submission is used to determine if another attempt should be created when allowing another
      * attempt on a group assignment, and whether the gradebook should be updated.
      *
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      * @param stdClass $submission The most recent submission of the group.
      */
     public function set_most_recent_team_submission($submission) {
@@ -9520,7 +9520,7 @@ class assign {
             $markers = get_enrolled_users($this->context, 'mod/assign:grade', 0, 'u.*', $sort);
             $markingallocationoptions[''] = get_string('filternone', 'assign');
             $markingallocationoptions[ASSIGN_MARKER_FILTER_NO_MARKER] = get_string('markerfilternomarker', 'assign');
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->context);
             foreach ($markers as $marker) {
                 $markingallocationoptions[$marker->id] = fullname($marker, $viewfullnames);
             }
@@ -9632,7 +9632,7 @@ class assign {
                     'context' => $context,
                     'para'    => false
                 );
-                $submissionstatement = format_text($adminconfig->submissionstatement, FORMAT_MOODLE, $options);
+                $submissionstatement = format_text($adminconfig->submissionstatement, FORMAT_POWEREDUC, $options);
             }
         } else { // Team submission.
             // One user can submit for the whole team.
@@ -9644,7 +9644,7 @@ class assign {
                     'para'    => false
                 );
                 $submissionstatement = format_text($adminconfig->submissionstatementteamsubmission,
-                    FORMAT_MOODLE, $options);
+                    FORMAT_POWEREDUC, $options);
             } else if (!empty($adminconfig->submissionstatementteamsubmissionallsubmit) &&
                 $instance->requireallteammemberssubmit) {
                 // All team members must submit.
@@ -9655,7 +9655,7 @@ class assign {
                     'para'    => false
                 );
                 $submissionstatement = format_text($adminconfig->submissionstatementteamsubmissionallsubmit,
-                    FORMAT_MOODLE, $options);
+                    FORMAT_POWEREDUC, $options);
             }
         }
 

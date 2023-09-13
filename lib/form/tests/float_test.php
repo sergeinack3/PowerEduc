@@ -18,7 +18,7 @@ namespace core_form;
 
 use MoodleQuickForm_float;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/form/float.php');

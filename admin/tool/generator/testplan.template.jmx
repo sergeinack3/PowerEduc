@@ -14,7 +14,7 @@
           </elementProp>
           <elementProp name="moodleversion" elementType="Argument">
             <stringProp name="Argument.name">moodleversion</stringProp>
-            <stringProp name="Argument.value">{{MOODLEVERSION_PLACEHOLDER}}</stringProp>
+            <stringProp name="Argument.value">{{POWEREDUCVERSION_PLACEHOLDER}}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="size" elementType="Argument">

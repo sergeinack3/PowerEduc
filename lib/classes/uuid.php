@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * V4 UUID generator.
  *
  * @package    core
- * @copyright  2019 Matteo Scaramuccia <moodle@matteoscaramuccia.com>
+ * @copyright  2019 Matteo Scaramuccia <powereduc@matteoscaramuccia.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,13 +26,13 @@ namespace core;
 
 use Exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * V4 UUID generator class.
  *
  * @package    core
- * @copyright  2019 Matteo Scaramuccia <moodle@matteoscaramuccia.com>
+ * @copyright  2019 Matteo Scaramuccia <powereduc@matteoscaramuccia.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class uuid {

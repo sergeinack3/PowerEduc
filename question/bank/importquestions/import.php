@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines the import questions form.
  *
  * @package    qbank_importquestions
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -43,7 +43,7 @@ $txt->importquestions = get_string('importquestions', 'question');
 
 list($catid, $catcontext) = explode(',', $pagevars['cat']);
 if (!$category = $DB->get_record("question_categories", ['id' => $catid])) {
-    throw new moodle_exception('nocategory', 'question');
+    throw new powereduc_exception('nocategory', 'question');
 }
 
 $categorycontext = context::instance_by_id($category->contextid);
@@ -94,12 +94,12 @@ if ($form = $importform->get_data()) {
     $realfilename = $importform->get_new_filename('newfile');
     $importfile = make_request_directory() . "/{$realfilename}";
     if (!$result = $importform->save_file('newfile', $importfile, true)) {
-        throw new moodle_exception('uploadproblem');
+        throw new powereduc_exception('uploadproblem');
     }
 
     $formatfile = $CFG->dirroot . '/question/format/' . $form->format . '/format.php';
     if (!is_readable($formatfile)) {
-        throw new moodle_exception('formatnotfound', 'question', '', $form->format);
+        throw new powereduc_exception('formatnotfound', 'question', '', $form->format);
     }
 
     require_once($formatfile);
@@ -120,17 +120,17 @@ if ($form = $importform->get_data()) {
 
     // Do anything before that we need to.
     if (!$qformat->importpreprocess()) {
-        throw new moodle_exception('cannotimport', '', $thispageurl->out());
+        throw new powereduc_exception('cannotimport', '', $thispageurl->out());
     }
 
     // Process the uploaded file.
     if (!$qformat->importprocess()) {
-        throw new moodle_exception('cannotimport', '', $thispageurl->out());
+        throw new powereduc_exception('cannotimport', '', $thispageurl->out());
     }
 
     // In case anything needs to be done after.
     if (!$qformat->importpostprocess()) {
-        throw new moodle_exception('cannotimport', '', $thispageurl->out());
+        throw new powereduc_exception('cannotimport', '', $thispageurl->out());
     }
 
     // Log the import into this category.
@@ -142,7 +142,7 @@ if ($form = $importform->get_data()) {
     $event->trigger();
 
     $params = $thispageurl->params() + ['category' => $qformat->category->id . ',' . $qformat->category->contextid];
-    echo $OUTPUT->continue_button(new moodle_url('/question/edit.php', $params));
+    echo $OUTPUT->continue_button(new powereduc_url('/question/edit.php', $params));
     echo $OUTPUT->footer();
     exit;
 }

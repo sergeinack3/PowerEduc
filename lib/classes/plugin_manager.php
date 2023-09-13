@@ -26,7 +26,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Singleton class providing general plugins management functionality.
@@ -1722,7 +1722,7 @@ class core_plugin_manager {
      */
     public static function is_deleted_standard_plugin($type, $name) {
         // Do not include plugins that were removed during upgrades to versions that are
-        // not supported as source versions for upgrade any more. For example, at MOODLE_23_STABLE
+        // not supported as source versions for upgrade any more. For example, at POWEREDUC_23_STABLE
         // branch, listed should be no plugins that were removed at 1.9.x - 2.1.x versions as
         // Moodle 2.3 supports upgrades from 2.2.x only.
         $plugins = array(

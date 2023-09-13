@@ -37,7 +37,7 @@ Feature: Content bank link in the activity settings form
   Scenario: Content bank is not displayed if the user don't have access to the content bank
     Given the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/contentbank:access  | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/contentbank:access  | Prevent    | editingteacher | Course       | C1        |
     When I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
     And I add a "H5P" to section "1"

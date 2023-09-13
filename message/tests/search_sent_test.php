@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core_message;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/search/tests/fixtures/testable_core_search.php');
@@ -76,7 +76,7 @@ class search_sent_test extends \advanced_testcase {
         $message->fullmessageformat = 0;
         $message->fullmessagehtml = null;
         $message->notification = 0;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = "instantmessage";
 
         message_send($message);
@@ -132,7 +132,7 @@ class search_sent_test extends \advanced_testcase {
         $message->fullmessageformat = 0;
         $message->fullmessagehtml = null;
         $message->notification = 0;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         message_send($message);
 
@@ -150,7 +150,7 @@ class search_sent_test extends \advanced_testcase {
         $message->fullmessageformat = 0;
         $message->fullmessagehtml = null;
         $message->notification = 0;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'instantmessage';
         message_send($message);
 
@@ -174,10 +174,10 @@ class search_sent_test extends \advanced_testcase {
     /**
      * Utility function to convert recordset to array of message subjects for testing.
      *
-     * @param moodle_recordset $rs Recordset to convert (and close)
+     * @param powereduc_recordset $rs Recordset to convert (and close)
      * @return array Array of IDs from records indexed by number (0, 1, 2, ...)
      */
-    public static function recordset_to_subjects(\moodle_recordset $rs) {
+    public static function recordset_to_subjects(\powereduc_recordset $rs) {
         $results = [];
         foreach ($rs as $rec) {
             $results[] = $rec->subject;
@@ -213,7 +213,7 @@ class search_sent_test extends \advanced_testcase {
         $message->fullmessageformat = 0;
         $message->fullmessagehtml = null;
         $message->notification = 0;
-        $message->component = "moodle";
+        $message->component = "powereduc";
         $message->name = "instantmessage";
 
         message_send($message);
@@ -260,7 +260,7 @@ class search_sent_test extends \advanced_testcase {
         $message->fullmessageformat = 0;
         $message->fullmessagehtml = null;
         $message->notification = 0;
-        $message->component = "moodle";
+        $message->component = "powereduc";
         $message->name = "instantmessage";
 
         $messageid = message_send($message);
@@ -329,7 +329,7 @@ class search_sent_test extends \advanced_testcase {
         $message->fullmessageformat = 0;
         $message->fullmessagehtml = null;
         $message->notification = 0;
-        $message->component = "moodle";
+        $message->component = "powereduc";
         $message->name = "instantmessage";
 
         message_send($message);
@@ -359,7 +359,7 @@ class search_sent_test extends \advanced_testcase {
         $result = $searcharea->get_doc_icon($document);
 
         $this->assertEquals('t/message', $result->get_name());
-        $this->assertEquals('moodle', $result->get_component());
+        $this->assertEquals('powereduc', $result->get_component());
     }
 
     /**

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 require_once("../../config.php");
 require_once($CFG->dirroot.'/mod/scorm/lib.php');
@@ -27,29 +27,29 @@ $preventskip = optional_param('preventskip', '', PARAM_INT); // Prevent Skip vie
 
 if (!empty($id)) {
     if (! $cm = get_coursemodule_from_id('scorm', $id, 0, true)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record("course", array("id" => $cm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $scorm = $DB->get_record("scorm", array("id" => $cm->instance))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 } else if (!empty($a)) {
     if (! $scorm = $DB->get_record("scorm", array("id" => $a))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record("course", array("id" => $scorm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $cm = get_coursemodule_from_instance("scorm", $scorm->id, $course->id, true)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 } else {
-    throw new \moodle_exception('missingparameter');
+    throw new \powereduc_exception('missingparameter');
 }
 
-$url = new moodle_url('/mod/scorm/view.php', array('id' => $cm->id));
+$url = new powereduc_url('/mod/scorm/view.php', array('id' => $cm->id));
 if ($organization !== '') {
     $url->param('organization', $organization);
 }
@@ -146,7 +146,7 @@ if (!empty($action) && $action == 'delete' && confirm_sesskey() && has_capabilit
 echo $OUTPUT->header();
 if (!empty($action) && confirm_sesskey() && has_capability('mod/scorm:deleteownresponses', $contextmodule)) {
     if ($action == 'delete') {
-        $confirmurl = new moodle_url($PAGE->url, array('action' => 'deleteconfirm'));
+        $confirmurl = new powereduc_url($PAGE->url, array('action' => 'deleteconfirm'));
         echo $OUTPUT->confirm(get_string('deleteuserattemptcheck', 'scorm'), $confirmurl, $PAGE->url);
         echo $OUTPUT->footer();
         exit;

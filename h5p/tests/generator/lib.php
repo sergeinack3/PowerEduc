@@ -28,7 +28,7 @@ use core_h5p\core;
 use core_h5p\player;
 use core_h5p\factory;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Generator for the core_h5p subsystem.

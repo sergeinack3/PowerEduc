@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Event developer detail.
  *
  * @package   report_eventlist
- * @copyright 2014 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2014 Adrian Greeve <adrian@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(__DIR__ . '/../../config.php');
@@ -34,7 +34,7 @@ $completelist = report_eventlist_list_generator::get_all_events_list(false);
 
 // Check that $eventname is a valid event.
 if (!array_key_exists($eventname, $completelist)) {
-    throw new \moodle_exception('errorinvalidevent', 'report_eventlist');
+    throw new \powereduc_exception('errorinvalidevent', 'report_eventlist');
 }
 
 // Break up the full event name to usable parts.
@@ -45,7 +45,7 @@ $directory = core_component::get_component_directory($component[1]);
 $directory = $directory . '/classes/event';
 // Verify that the directory is valid.
 if (!is_dir($directory)) {
-    throw new \moodle_exception('errorinvaliddirectory', 'report_eventlist');
+    throw new \powereduc_exception('errorinvaliddirectory', 'report_eventlist');
 }
 $filename = end($component);
 $eventfiles = $directory . '/' . $filename . '.php';

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace mod_data;
 use externallib_advanced_testcase;
 use mod_data_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  *
  * @package    mod_data
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 2.9
  */
@@ -279,7 +279,7 @@ class externallib_test extends externallib_advanced_testcase {
     public function test_view_database_invalid_id() {
 
         // Test invalid instance id.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::view_database(0);
     }
 
@@ -291,7 +291,7 @@ class externallib_test extends externallib_advanced_testcase {
         $usernotenrolled = self::getDataGenerator()->create_user();
         $this->setUser($usernotenrolled);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::view_database(0);
     }
 
@@ -304,7 +304,7 @@ class externallib_test extends externallib_advanced_testcase {
         assign_capability('mod/data:view', CAP_PROHIBIT, $this->studentrole->id, $this->context->id);
         accesslib_clear_all_caches_for_unit_testing();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::view_database(0);
     }
 
@@ -329,8 +329,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_data\event\course_module_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $moodledata = new \moodle_url('/mod/data/view.php', array('id' => $this->cm->id));
-        $this->assertEquals($moodledata, $event->get_url());
+        $powereducdata = new \powereduc_url('/mod/data/view.php', array('id' => $this->cm->id));
+        $this->assertEquals($powereducdata, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
     }
@@ -729,7 +729,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Now, try to get a pending approval.
         $this->setUser($this->student1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = mod_data_external::get_entry($entry13);
     }
 
@@ -741,7 +741,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // We should not be able to view other gropu entries (in separated groups).
         $this->setUser($this->student1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = mod_data_external::get_entry($entry21);
     }
 
@@ -923,7 +923,7 @@ class externallib_test extends externallib_advanced_testcase {
         list($entry11, $entry12, $entry13, $entry14, $entry21) = self::populate_database_with_entries();
 
         $this->setUser($this->student1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::approve_entry($entry13);
     }
 
@@ -970,7 +970,7 @@ class externallib_test extends externallib_advanced_testcase {
         $DB->update_record('data', $this->database);
 
         $this->setUser($this->student1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::delete_entry($entry11);
     }
 
@@ -982,7 +982,7 @@ class externallib_test extends externallib_advanced_testcase {
         list($entry11, $entry12, $entry13, $entry14, $entry21) = self::populate_database_with_entries();
 
         $this->setUser($this->student1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::delete_entry($entry21);
     }
 
@@ -1039,7 +1039,7 @@ class externallib_test extends externallib_advanced_testcase {
                     $newentrydata[] = [
                         'fieldid' => $field->id,
                         'subfield' => 'content1',
-                        'value' => json_encode(FORMAT_MOODLE)
+                        'value' => json_encode(FORMAT_POWEREDUC)
                     ];
                     $newentrydata[] = [
                         'fieldid' => $field->id,
@@ -1049,7 +1049,7 @@ class externallib_test extends externallib_advanced_testcase {
                     $value = 'more text';
                     break;
                 case 'url':
-                    $value = 'https://moodle.org';
+                    $value = 'https://powereduc.org';
                     $subfield = 0;
                     break;
             }
@@ -1105,11 +1105,11 @@ class externallib_test extends externallib_advanced_testcase {
             }
             if ($field->type == 'textarea') {
                 $this->assertEquals('more text', $content['content']);
-                $this->assertEquals(FORMAT_MOODLE, $content['content1']);
+                $this->assertEquals(FORMAT_POWEREDUC, $content['content1']);
                 continue;
             }
             if ($field->type == 'url') {
-                $this->assertEquals('https://moodle.org', $content['content']);
+                $this->assertEquals('https://powereduc.org', $content['content']);
                 continue;
             }
             $this->assertEquals('multimenu1##multimenu4', $content['content']);
@@ -1155,7 +1155,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student1);
         $this->expectExceptionMessage(get_string('noaccess', 'data'));
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::add_entry($this->database->id, 0, []);
     }
 
@@ -1171,7 +1171,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student1);
         $this->expectExceptionMessage(get_string('noaccess', 'data'));
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::add_entry($this->database->id, 0, []);
     }
 
@@ -1185,7 +1185,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student1);
         $this->expectExceptionMessage(get_string('noaccess', 'data'));
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::add_entry($this->database->id, $this->group2->id, []);
     }
 
@@ -1195,7 +1195,7 @@ class externallib_test extends externallib_advanced_testcase {
      * @covers \mod_data\mod_data_external::add_entry
      */
     public function test_add_entry_empty_database() {
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::add_entry($this->database->id, 0, []);
     }
 
@@ -1252,7 +1252,7 @@ class externallib_test extends externallib_advanced_testcase {
                     $newentrydata[] = [
                         'fieldid' => $field->id,
                         'subfield' => 'content1',
-                        'value' => json_encode(FORMAT_MOODLE)
+                        'value' => json_encode(FORMAT_POWEREDUC)
                     ];
                     $newentrydata[] = [
                         'fieldid' => $field->id,
@@ -1262,7 +1262,7 @@ class externallib_test extends externallib_advanced_testcase {
                     $value = 'more text';
                     break;
                 case 'url':
-                    $value = 'https://moodle.org';
+                    $value = 'https://powereduc.org';
                     $subfield = 0;
                     break;
             }
@@ -1320,11 +1320,11 @@ class externallib_test extends externallib_advanced_testcase {
             }
             if ($field->type == 'textarea') {
                 $this->assertEquals('more text', $content['content']);
-                $this->assertEquals(FORMAT_MOODLE, $content['content1']);
+                $this->assertEquals(FORMAT_POWEREDUC, $content['content1']);
                 continue;
             }
             if ($field->type == 'url') {
-                $this->assertEquals('https://moodle.org', $content['content']);
+                $this->assertEquals('https://powereduc.org', $content['content']);
                 continue;
             }
             $this->assertEquals('multimenu1##multimenu4', $content['content']);
@@ -1369,7 +1369,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student1);
         $this->expectExceptionMessage(get_string('noaccess', 'data'));
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::update_entry($entry11, []);
     }
 
@@ -1381,7 +1381,7 @@ class externallib_test extends externallib_advanced_testcase {
         list($entry11, $entry12, $entry13, $entry14, $entry21) = self::populate_database_with_entries();
         $this->setUser($this->student2);
         $this->expectExceptionMessage(get_string('noaccess', 'data'));
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_data_external::update_entry($entry11, []);
     }
 

@@ -18,7 +18,7 @@ namespace block_recentlyaccesseditems;
 
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Render a page containing a simple form which reposts to self via JS.
  *
- * The purpose of this form is to resend a cross-site request to self, which allows the browsers to include the Moodle
+ * The purpose of this form is to resend a cross-site request to self, which allows the browsers to include the PowerEduc
  * session cookie alongside the original POST data, allowing LTI flows to function despite browsers blocking
  * cross-site cookies.
  *
@@ -27,7 +27,7 @@
  */
 namespace mod_lti\output;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot.'/mod/lti/locallib.php');
 
@@ -39,7 +39,7 @@ use stdClass;
 /**
  * Render a page containing a simple form which reposts to self via JS.
  *
- * The purpose of this form is to resend a cross-site request to self, which allows the browsers to include the Moodle
+ * The purpose of this form is to resend a cross-site request to self, which allows the browsers to include the PowerEduc
  * session cookie alongside the original POST data, allowing LTI flows to function despite browsers blocking
  * cross-site cookies.
  *
@@ -51,7 +51,7 @@ class repost_crosssite_page implements renderable, templatable {
     /**
      * Constructor
      *
-     * @param string $url moodle URL to repost to
+     * @param string $url powereduc URL to repost to
      * @param array $post the POST params to be re-posted
      */
     public function __construct(string $url, array $post) {

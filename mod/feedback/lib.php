@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include forms lib.
 require_once($CFG->libdir.'/formslib.php');
@@ -63,7 +63,7 @@ function feedback_supports($feature) {
         case FEATURE_COMPLETION_HAS_RULES:    return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_COMMUNICATION;
 
@@ -429,8 +429,8 @@ function feedback_get_recent_mod_activity(&$activities, &$index,
         return;
     }
 
-    $accessallgroups = has_capability('moodle/site:accessallgroups', $cm_context);
-    $viewfullnames   = has_capability('moodle/site:viewfullnames', $cm_context);
+    $accessallgroups = has_capability('powereduc/site:accessallgroups', $cm_context);
+    $viewfullnames   = has_capability('powereduc/site:viewfullnames', $cm_context);
     $groupmode       = groups_get_activity_groupmode($cm, $course);
 
     $aname = format_string($cm->name, true);
@@ -536,7 +536,7 @@ function feedback_user_complete($course, $user, $mod, $feedback) {
     if ($completed = $DB->get_record('feedback_completed', $params)) {
         // User has completed feedback.
         if (has_capability('mod/feedback:viewreports', $context)) {
-            $url = new moodle_url('/mod/feedback/show_entries.php',
+            $url = new powereduc_url('/mod/feedback/show_entries.php',
                 ['id' => $mod->id, 'userid' => $user->id,
                     'showcompleted' => $completed->id]);
         }
@@ -611,7 +611,7 @@ function feedback_get_post_actions() {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  * This function will remove all responses from the specified feedback
  * and clean up any related data.
  *
@@ -2800,47 +2800,47 @@ function feedback_encode_target_url($url) {
 function feedback_extend_settings_navigation(settings_navigation $settings, navigation_node $feedbacknode) {
     $hassecondary = $settings->get_page()->has_secondary_navigation();
     if (!$context = context_module::instance($settings->get_page()->cm->id, IGNORE_MISSING)) {
-        throw new \moodle_exception('badcontext');
+        throw new \powereduc_exception('badcontext');
     }
 
     if (has_capability('mod/feedback:edititems', $context)) {
         $questionnode = $feedbacknode->add(get_string('questions', 'feedback'), null,
             navigation_node::TYPE_CUSTOM, null, 'questionnode');
         $questionnode->add(get_string('edit_items', 'feedback'),
-            new moodle_url('/mod/feedback/edit.php', ['id' => $settings->get_page()->cm->id]));
+            new powereduc_url('/mod/feedback/edit.php', ['id' => $settings->get_page()->cm->id]));
 
         $questionnode->add(get_string('export_questions', 'feedback'),
-            new moodle_url('/mod/feedback/export.php', ['id' => $settings->get_page()->cm->id, 'action' => 'exportfile']));
+            new powereduc_url('/mod/feedback/export.php', ['id' => $settings->get_page()->cm->id, 'action' => 'exportfile']));
 
         $questionnode->add(get_string('import_questions', 'feedback'),
-            new moodle_url('/mod/feedback/import.php', ['id' => $settings->get_page()->cm->id]));
+            new powereduc_url('/mod/feedback/import.php', ['id' => $settings->get_page()->cm->id]));
 
         $feedbacknode->add(get_string('templates', 'feedback'),
-            new moodle_url('/mod/feedback/manage_templates.php', ['id' => $settings->get_page()->cm->id, 'mode' => 'manage']),
+            new powereduc_url('/mod/feedback/manage_templates.php', ['id' => $settings->get_page()->cm->id, 'mode' => 'manage']),
             navigation_node::TYPE_CUSTOM, null, 'templatenode');
     }
 
     if (has_capability('mod/feedback:mapcourse', $context) && $settings->get_page()->course->id == SITEID) {
         $feedbacknode->add(get_string('mappedcourses', 'feedback'),
-            new moodle_url('/mod/feedback/mapcourse.php', ['id' => $settings->get_page()->cm->id]),
+            new powereduc_url('/mod/feedback/mapcourse.php', ['id' => $settings->get_page()->cm->id]),
             navigation_node::TYPE_CUSTOM, null, 'mapcourse');
     }
 
     $feedback = $settings->get_page()->activityrecord;
     if ($feedback->course == SITEID) {
         $analysisnode = navigation_node::create(get_string('analysis', 'feedback'),
-            new moodle_url('/mod/feedback/analysis_course.php', ['id' => $settings->get_page()->cm->id]),
+            new powereduc_url('/mod/feedback/analysis_course.php', ['id' => $settings->get_page()->cm->id]),
             navigation_node::TYPE_CUSTOM, null, 'feedbackanalysis');
     } else {
         $analysisnode = navigation_node::create(get_string('analysis', 'feedback'),
-            new moodle_url('/mod/feedback/analysis.php', ['id' => $settings->get_page()->cm->id]),
+            new powereduc_url('/mod/feedback/analysis.php', ['id' => $settings->get_page()->cm->id]),
             navigation_node::TYPE_CUSTOM, null, 'feedbackanalysis');
     }
 
     if (has_capability('mod/feedback:viewreports', $context)) {
         $feedbacknode->add_node($analysisnode);
         $feedbacknode->add(get_string(($hassecondary ? 'responses' : 'show_entries'), 'feedback'),
-            new moodle_url('/mod/feedback/show_entries.php', ['id' => $settings->get_page()->cm->id]),
+            new powereduc_url('/mod/feedback/show_entries.php', ['id' => $settings->get_page()->cm->id]),
             navigation_node::TYPE_CUSTOM, null, 'responses');
     } else {
         $feedbackcompletion = new mod_feedback_completion($feedback, $context, $settings->get_page()->course->id);
@@ -3050,7 +3050,7 @@ function mod_feedback_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('answerquestions', 'feedback'),
-        new \moodle_url('/mod/feedback/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/feedback/view.php', ['id' => $cm->id]),
         1,
         $actionable
     );
@@ -3185,7 +3185,7 @@ function mod_feedback_core_calendar_get_valid_event_timestart_range(\calendar_ev
  * It will set the timeopen or timeclose value of the feedback instance
  * according to the type of event provided.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event
  * @param stdClass $feedback The module instance to get the range from
  */
@@ -3213,7 +3213,7 @@ function mod_feedback_core_calendar_event_timestart_updated(\calendar_event $eve
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 

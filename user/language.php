@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Allows you to edit a users profile
@@ -39,7 +39,7 @@ list($user, $course) = useredit_setup_preference_page($userid, $courseid);
 $languageform = new user_edit_language_form(null, array('userid' => $user->id));
 $languageform->set_data($user);
 
-$redirect = new moodle_url("/user/preferences.php", array('userid' => $user->id));
+$redirect = new powereduc_url("/user/preferences.php", array('userid' => $user->id));
 if ($languageform->is_cancelled()) {
     redirect($redirect);
 } else if ($data = $languageform->get_data()) {

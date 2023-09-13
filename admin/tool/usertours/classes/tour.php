@@ -26,7 +26,7 @@ namespace tool_usertours;
 
 use tool_usertours\local\clientside_filter\clientside_filter;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Tour class.

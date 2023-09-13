@@ -1,5 +1,5 @@
 @mod @mod_lti @core_backup @javascript
-Feature: Restoring Moodle 2 backup restores LTI configuration
+Feature: Restoring PowerEduc 2 backup restores LTI configuration
 
   Background:
     Given the following "users" exist:
@@ -21,7 +21,7 @@ Feature: Restoring Moodle 2 backup restores LTI configuration
     And I follow "Add preconfigured tool"
     And I set the following fields to these values:
       | Tool name | My site tool |
-      | Tool URL | https://www.moodle.org |
+      | Tool URL | https://www.powereduc.org |
       | lti_coursevisible | 1 |
     And I press "Save changes"
     And I navigate to "Plugins > Activity modules > External tool > Manage tools" in site administration

@@ -25,7 +25,7 @@ use enrol_lti\local\ltiadvantage\repository\user_repository;
 use enrol_lti\local\ltiadvantage\repository\deployment_repository;
 use enrol_lti\local\ltiadvantage\repository\resource_link_repository;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../lti_advantage_testcase.php');
 

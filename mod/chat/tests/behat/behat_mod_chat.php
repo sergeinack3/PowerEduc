@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,14 +39,14 @@ class behat_mod_chat extends behat_base {
      *
      * @param string $type identifies which type of page this is, e.g. 'View'.
      * @param string $name chat instance name
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_instance_url(string $type, string $name): moodle_url {
+    protected function resolve_page_instance_url(string $type, string $name): powereduc_url {
         switch (strtolower($type)) {
             case 'view':
                 $cm = $this->get_cm_by_chat_name($name);
-                return new moodle_url('/mod/chat/view.php', ['id' => $cm->id]);
+                return new powereduc_url('/mod/chat/view.php', ['id' => $cm->id]);
             default:
                 throw new Exception('Unrecognised chat page type "' . $type . '."');
         }

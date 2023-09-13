@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access Google Drive.
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_googledocs
  * @copyright  2009 Dan Poltawski <talktodan@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/repository/lib.php');
 require_once($CFG->libdir . '/filebrowser/file_browser.php');
@@ -34,7 +34,7 @@ use repository_googledocs\googledocs_content_search;
 /**
  * Google Docs Plugin
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_googledocs
  * @copyright  2009 Dan Poltawski <talktodan@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -96,7 +96,7 @@ class repository_googledocs extends repository {
     /**
      * Get a cached user authenticated oauth client.
      *
-     * @param moodle_url $overrideurl - Use this url instead of the repo callback.
+     * @param powereduc_url $overrideurl - Use this url instead of the repo callback.
      * @return \core\oauth2\client
      */
     protected function get_user_oauth_client($overrideurl = false) {
@@ -106,7 +106,7 @@ class repository_googledocs extends repository {
         if ($overrideurl) {
             $returnurl = $overrideurl;
         } else {
-            $returnurl = new moodle_url('/repository/repository_callback.php');
+            $returnurl = new powereduc_url('/repository/repository_callback.php');
             $returnurl->param('callback', 'yes');
             $returnurl->param('repo_id', $this->id);
             $returnurl->param('sesskey', sesskey());
@@ -155,7 +155,7 @@ class repository_googledocs extends repository {
         global $OUTPUT, $PAGE;
 
         $client = $this->get_user_oauth_client(false);
-        $url = new moodle_url($client->get_login_url());
+        $url = new powereduc_url($client->get_login_url());
         $state = $url->get_param('state') . '&reloadparent=true';
         $url->param('state', $state);
 
@@ -176,7 +176,7 @@ class repository_googledocs extends repository {
     /**
      * Build the breadcrumb from a path.
      *
-     * @deprecated since Moodle 3.11.
+     * @deprecated since PowerEduc 3.11.
      * @param string $path to create a breadcrumb from.
      * @return array containing name and path of each crumb.
      */
@@ -204,7 +204,7 @@ class repository_googledocs extends repository {
      *
      * Typically, a node will be id|Name of the node.
      *
-     * @deprecated since Moodle 3.11.
+     * @deprecated since PowerEduc 3.11.
      * @param string $id of the node.
      * @param string $name of the node, will be URL encoded.
      * @param string $root to append the node on, must be a result of this function.
@@ -227,7 +227,7 @@ class repository_googledocs extends repository {
     /**
      * Returns information about a node in a path.
      *
-     * @deprecated since Moodle 3.11.
+     * @deprecated since PowerEduc 3.11.
      * @see self::build_node_path()
      * @param string $node to extrat information from.
      * @return array about the node.
@@ -343,7 +343,7 @@ class repository_googledocs extends repository {
      * This returns a list of files and folders with their details as they should be
      * formatted and returned by functions such as get_listing() or search().
      *
-     * @deprecated since Moodle 3.11.
+     * @deprecated since PowerEduc 3.11.
      * @param string $q search query as expected by the Google API.
      * @param string $path parent path of the current files, will not be used for the query.
      * @param int $page page.
@@ -417,7 +417,7 @@ class repository_googledocs extends repository {
                             $ext = $config->documentformat;
                             $title = $gfile->name . '.gdoc';
                             if ($ext === 'rtf') {
-                                // Moodle user 'text/rtf' as the MIME type for RTF files.
+                                // PowerEduc user 'text/rtf' as the MIME type for RTF files.
                                 // Google uses 'application/rtf' for the same type of file.
                                 // See https://developers.google.com/drive/v3/web/manage-downloads.
                                 $exporttype = 'application/rtf';
@@ -518,11 +518,11 @@ class repository_googledocs extends repository {
         $newfilename = false;
         if ($source->exportformat == 'download') {
             $params = ['alt' => 'media'];
-            $sourceurl = new moodle_url($base . '/files/' . $source->id, $params);
+            $sourceurl = new powereduc_url($base . '/files/' . $source->id, $params);
             $source = $sourceurl->out(false);
         } else {
             $params = ['mimeType' => $source->exportformat];
-            $sourceurl = new moodle_url($base . '/files/' . $source->id . '/export', $params);
+            $sourceurl = new powereduc_url($base . '/files/' . $source->id . '/export', $params);
             $types = get_mimetypes_array();
             $checktype = $source->exportformat;
             if ($checktype == 'application/rtf') {
@@ -695,7 +695,7 @@ class repository_googledocs extends repository {
             $systemservice = new repository_googledocs\rest($systemauth);
 
             // Get the user oauth so we can get the account to add.
-            $url = moodle_url::make_pluginfile_url($storedfile->get_contextid(),
+            $url = powereduc_url::make_pluginfile_url($storedfile->get_contextid(),
                                                    $storedfile->get_component(),
                                                    $storedfile->get_filearea(),
                                                    $storedfile->get_itemid(),
@@ -911,7 +911,7 @@ class repository_googledocs extends repository {
      * @return boolean
      */
     protected function prevent_writers_from_sharing_file(\repository_googledocs\rest $client, $fileid) {
-        // We don't want anyone but Moodle to change the sharing settings.
+        // We don't want anyone but PowerEduc to change the sharing settings.
         $params = [
             'fileid' => $fileid
         ];
@@ -950,7 +950,7 @@ class repository_googledocs extends repository {
 
     /**
      * Called when a file is selected as a "link".
-     * Invoked at MOODLE/repository/repository_ajax.php
+     * Invoked at POWEREDUC/repository/repository_ajax.php
      *
      * This is called at the point the reference files are being copied from the draft area to the real area
      * (when the file has really really been selected.
@@ -1003,7 +1003,7 @@ class repository_googledocs extends repository {
         $userservice = new repository_googledocs\rest($userauth);
         $systemservice = new repository_googledocs\rest($systemauth);
 
-        // Add Moodle as writer.
+        // Add PowerEduc as writer.
         $this->add_writer_to_file($userservice, $source->id, $systemuseremail);
 
         // Now move it to a sensible folder.
@@ -1058,7 +1058,7 @@ class repository_googledocs extends repository {
             }
         }
 
-        // Copy the file so we get a snapshot file owned by Moodle.
+        // Copy the file so we get a snapshot file owned by PowerEduc.
         $newsource = $this->copy_file($systemservice, $source->id, $source->name);
         // Move the copied file to the correct folder.
         $this->move_file_from_root_to_folder($systemservice, $newsource->id, $parentid);
@@ -1067,7 +1067,7 @@ class repository_googledocs extends repository {
         $this->set_file_sharing_anyone_with_link_can_read($systemservice, $newsource->id);
         $this->prevent_writers_from_sharing_file($systemservice, $newsource->id);
 
-        // Update the returned reference so that the stored_file in moodle points to the newly copied file.
+        // Update the returned reference so that the stored_file in powereduc points to the newly copied file.
         $source->id = $newsource->id;
         $source->link = isset($newsource->webViewLink) ? $newsource->webViewLink : '';
         $source->usesystem = true;
@@ -1116,13 +1116,13 @@ class repository_googledocs extends repository {
     }
 
     /**
-     * Edit/Create Admin Settings Moodle form.
+     * Edit/Create Admin Settings PowerEduc form.
      *
-     * @param moodleform $mform Moodle form (passed by reference).
+     * @param powereducform $mform PowerEduc form (passed by reference).
      * @param string $classname repository class name.
      */
     public static function type_config_form($mform, $classname = 'repository') {
-        $url = new moodle_url('/admin/tool/oauth2/issuers.php');
+        $url = new powereduc_url('/admin/tool/oauth2/issuers.php');
         $url = $url->out();
 
         $mform->addElement('static', null, '', get_string('oauth2serviceslink', 'repository_googledocs', $url));

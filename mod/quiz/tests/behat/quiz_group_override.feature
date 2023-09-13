@@ -50,7 +50,7 @@ Feature: Quiz group override
   Scenario: Override Group 1 as teacher of Group 1
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     When I am on the "Test quiz" "mod_quiz > Group overrides" page logged in as "teacher1"
     And I press "Add group override"
     Then the "Override group" select box should contain "Group 1"
@@ -59,7 +59,7 @@ Feature: Quiz group override
   Scenario: Add button disabled if there are no groups
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     When I am on the "Test quiz" "mod_quiz > Group overrides" page logged in as "teacher3"
     Then I should see "No groups you can access."
     And the "Add group override" "button" should be disabled
@@ -94,7 +94,7 @@ Feature: Quiz group override
   Scenario: A teacher without accessallgroups permission should only see the group overrides within his/her groups, when the activity's group mode is "separate groups"
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "mod_quiz > group overrides" exist:
       | quiz      | group | attempts |
       | Test quiz | G1    | 2        |

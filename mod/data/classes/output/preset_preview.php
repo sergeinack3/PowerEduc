@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,14 +21,14 @@ use renderable;
 use mod_data\manager;
 use mod_data\preset;
 use mod_data\template;
-use moodle_page;
-use moodle_url;
+use powereduc_page;
+use powereduc_url;
 
 /**
  * Preset preview output class.
  *
  * @package    mod_data
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @copyright  2022 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class preset_preview implements templatable, renderable {
@@ -58,20 +58,20 @@ class preset_preview implements templatable, renderable {
     /**
      * Add the preset CSS and JS to the page.
      *
-     * @param moodle_page $page the current page instance
+     * @param powereduc_page $page the current page instance
      */
-    public function prepare_page(moodle_page $page) {
+    public function prepare_page(powereduc_page $page) {
         $instance = $this->manager->get_instance();
         $preset = $this->preset;
         // Add CSS and JS.
         $csscontent = $preset->get_template_content('csstemplate');
         if (!empty($csscontent)) {
-            $url = new moodle_url('/mod/data/css.php', ['d' => $instance->id, 'preset' => $preset->get_fullname()]);
+            $url = new powereduc_url('/mod/data/css.php', ['d' => $instance->id, 'preset' => $preset->get_fullname()]);
             $page->requires->css($url);
         }
         $jscontent = $preset->get_template_content('jstemplate');
         if (!empty($jscontent)) {
-            $url = new moodle_url('/mod/data/js.php', ['d' => $instance->id, 'preset' => $preset->get_fullname()]);
+            $url = new powereduc_url('/mod/data/js.php', ['d' => $instance->id, 'preset' => $preset->get_fullname()]);
             $page->requires->js($url);
         }
     }
@@ -91,7 +91,7 @@ class preset_preview implements templatable, renderable {
         $fields = $preset->get_fields(true);
         $entries = $preset->get_sample_entries($count);
         $templatecontent = $preset->get_template_content($this->templatename);
-        $useurl = new moodle_url('/mod/data/field.php');
+        $useurl = new powereduc_url('/mod/data/field.php');
 
         // Generate preview content.
         $options = ['templatename' => $this->templatename];

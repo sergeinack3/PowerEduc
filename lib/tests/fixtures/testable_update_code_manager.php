@@ -25,7 +25,7 @@
 
 namespace core\update;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Testable variant of \core\update\code_manager class.

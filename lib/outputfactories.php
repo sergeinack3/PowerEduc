@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Interface and classes for creating appropriate renderers for various parts of Moodle.
  *
- * Please see http://docs.moodle.org/en/Developement:How_Moodle_outputs_HTML
+ * Please see http://docs.powereduc.org/en/Developement:How_Moodle_outputs_HTML
  * for an overview.
  *
  * @copyright 2009 Tim Hunt
@@ -26,7 +26,7 @@
  * @category output
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** General rendering target, usually normal browser page */
 define('RENDERER_TARGET_GENERAL', 'general');
@@ -86,13 +86,13 @@ interface renderer_factory {
      * $subtype parameter. For example workshop_renderer,
      * workshop_allocation_manual_renderer etc.
      *
-     * @param moodle_page $page the page the renderer is outputting content for.
+     * @param powereduc_page $page the page the renderer is outputting content for.
      * @param string $component name such as 'core', 'mod_forum' or 'qtype_multichoice'.
      * @param string $subtype optional subtype such as 'news' resulting to 'mod_forum_news'
      * @param string $target one of rendering target constants
      * @return renderer_base an object implementing the requested renderer interface.
      */
-    public function get_renderer(moodle_page $page, $component, $subtype=null, $target=null);
+    public function get_renderer(powereduc_page $page, $component, $subtype=null, $target=null);
 }
 
 
@@ -294,13 +294,13 @@ class standard_renderer_factory extends renderer_factory_base {
     /**
      * Implement the subclass method
      *
-     * @param moodle_page $page the page the renderer is outputting content for.
+     * @param powereduc_page $page the page the renderer is outputting content for.
      * @param string $component name such as 'core', 'mod_forum' or 'qtype_multichoice'.
      * @param string $subtype optional subtype such as 'news' resulting to 'mod_forum_news'
      * @param string $target one of rendering target constants
      * @return renderer_base an object implementing the requested renderer interface.
      */
-    public function get_renderer(moodle_page $page, $component, $subtype = null, $target = null) {
+    public function get_renderer(powereduc_page $page, $component, $subtype = null, $target = null) {
         $classnames = $this->standard_renderer_classnames($component, $subtype);
         $classname = '';
 
@@ -379,13 +379,13 @@ class theme_overridden_renderer_factory extends renderer_factory_base {
     /**
      * Implement the subclass method
      *
-     * @param moodle_page $page the page the renderer is outputting content for.
+     * @param powereduc_page $page the page the renderer is outputting content for.
      * @param string $component name such as 'core', 'mod_forum' or 'qtype_multichoice'.
      * @param string $subtype optional subtype such as 'news' resulting to 'mod_forum_news'
      * @param string $target one of rendering target constants
      * @return renderer_base an object implementing the requested renderer interface.
      */
-    public function get_renderer(moodle_page $page, $component, $subtype = null, $target = null) {
+    public function get_renderer(powereduc_page $page, $component, $subtype = null, $target = null) {
         $classnames = $this->standard_renderer_classnames($component, $subtype);
 
         list($target, $suffix) = $this->get_target_suffix($target);

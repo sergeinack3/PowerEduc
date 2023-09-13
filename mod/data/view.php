@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -179,7 +179,7 @@ if ($page) {
 if ($filter) {
     $urlparams['filter'] = $filter;
 }
-$pageurl = new moodle_url('/mod/data/view.php', $urlparams);
+$pageurl = new powereduc_url('/mod/data/view.php', $urlparams);
 
 // Initialize $PAGE, compute blocks.
 $PAGE->set_url($pageurl);
@@ -217,7 +217,7 @@ if ($PAGE->user_allowed_editing() && !$PAGE->theme->haseditswitch) {
         $urlediting = 'on';
         $strediting = get_string('blocksediton');
     }
-    $editurl = new moodle_url($CFG->wwwroot.'/mod/data/view.php', ['id' => $cm->id, 'edit' => $urlediting]);
+    $editurl = new powereduc_url($CFG->wwwroot.'/mod/data/view.php', ['id' => $cm->id, 'edit' => $urlediting]);
     $PAGE->set_button($OUTPUT->single_button($editurl, $strediting));
 }
 
@@ -251,7 +251,7 @@ if (!$manager->has_fields()) {
 
 // Detect entries not approved yet and show hint instead of not found error.
 if ($record and !data_can_view_record($data, $record, $currentgroup, $canmanageentries)) {
-    throw new \moodle_exception('notapprovederror', 'data');
+    throw new \powereduc_exception('notapprovederror', 'data');
 }
 
 // Do we need to show a link to the RSS feed for the records?
@@ -285,7 +285,7 @@ if ($delete && confirm_sesskey() && (data_user_can_manage_entry($delete, $data, 
                                                   WHERE dr.id = ?", $dbparams, MUST_EXIST)) { // Need to check this is valid.
             if ($deleterecord->dataid == $data->id) {                       // Must be from this database
                 echo $OUTPUT->heading(get_string('deleteentry', 'mod_data'), 2, 'mb-4');
-                $deletebutton = new single_button(new moodle_url('/mod/data/view.php?d='.$data->id.'&delete='.$delete.'&confirm=1'), get_string('delete'), 'post');
+                $deletebutton = new single_button(new powereduc_url('/mod/data/view.php?d='.$data->id.'&delete='.$delete.'&confirm=1'), get_string('delete'), 'post');
                 echo $OUTPUT->confirm(get_string('confirmdeleterecord','data'),
                         $deletebutton, 'view.php?d='.$data->id);
 
@@ -330,8 +330,8 @@ if ($multidelete && confirm_sesskey() && $canmanageentries) {
         }
         $serialiseddata = json_encode($recordids);
         $submitactions = array('d' => $data->id, 'sesskey' => sesskey(), 'confirm' => '1', 'serialdelete' => $serialiseddata);
-        $action = new moodle_url('/mod/data/view.php', $submitactions);
-        $cancelurl = new moodle_url('/mod/data/view.php', array('d' => $data->id));
+        $action = new powereduc_url('/mod/data/view.php', $submitactions);
+        $cancelurl = new powereduc_url('/mod/data/view.php', array('d' => $data->id));
         $deletebutton = new single_button($action, get_string('delete'));
         echo $OUTPUT->confirm(get_string('confirmdeleterecords', 'data'), $deletebutton, $cancelurl);
         $parser = $manager->get_template('listtemplate');
@@ -399,7 +399,7 @@ if ($showactivity) {
         echo $actionbar->get_view_action_bar($hasrecords, $mode);
 
         if ($groupmode) {
-            $returnurl = new moodle_url('/mod/data/view.php', ['d' => $data->id, 'mode' => $mode, 'search' => s($search),
+            $returnurl = new powereduc_url('/mod/data/view.php', ['d' => $data->id, 'mode' => $mode, 'search' => s($search),
                 'sort' => s($sort), 'order' => s($order)]);
             echo html_writer::div(groups_print_activity_menu($cm, $returnurl, true), 'mb-3');
         }
@@ -425,7 +425,7 @@ if ($showactivity) {
 
         } else {
             //  We have some records to print.
-            $formurl = new moodle_url('/mod/data/view.php', ['d' => $data->id, 'sesskey' => sesskey()]);
+            $formurl = new powereduc_url('/mod/data/view.php', ['d' => $data->id, 'sesskey' => sesskey()]);
             echo html_writer::start_tag('form', ['action' => $formurl, 'method' => 'post']);
 
             if ($maxcount != $totalcount) {
@@ -447,7 +447,7 @@ if ($showactivity) {
                 if (!empty($page)) {
                     $baseurlparams['page'] = $page;
                 }
-                $baseurl = new moodle_url($baseurl, $baseurlparams);
+                $baseurl = new powereduc_url($baseurl, $baseurlparams);
 
                 echo $OUTPUT->box_start('', 'data-singleview-content');
                 require_once($CFG->dirroot.'/rating/lib.php');
@@ -483,7 +483,7 @@ if ($showactivity) {
                 if (!empty($search)) {
                     $baseurlparams['filter'] = 1;
                 }
-                $baseurl = new moodle_url($baseurl, $baseurlparams);
+                $baseurl = new powereduc_url($baseurl, $baseurlparams);
 
                 echo $OUTPUT->box_start('', 'data-listview-content');
                 echo $data->listtemplateheader;

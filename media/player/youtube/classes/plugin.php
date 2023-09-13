@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Player that creates youtube embedding.
@@ -61,7 +61,7 @@ class media_youtube_plugin extends core_media_player_external {
         return array();
     }
 
-    protected function embed_external(moodle_url $url, $name, $width, $height, $options) {
+    protected function embed_external(powereduc_url $url, $name, $width, $height, $options) {
 
         $info = trim($name);
         if (empty($info) or strpos($info, 'http') === 0) {
@@ -110,7 +110,7 @@ OET;
     /**
      * Check for start time parameter.  Note that it's in hours/mins/secs in the URL,
      * but the embedded player takes only a number of seconds as the "start" parameter.
-     * @param moodle_url $url URL of video to be embedded.
+     * @param powereduc_url $url URL of video to be embedded.
      * @return int Number of seconds video should start at.
      */
     protected static function get_start_time($url) {

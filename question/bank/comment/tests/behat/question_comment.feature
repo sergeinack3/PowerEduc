@@ -77,8 +77,8 @@ Feature: A Teacher can comment in a question
     Given I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability                  | permission |
-      | moodle/question:commentmine | Allow      |
-      | moodle/question:commentall  | Prevent    |
+      | powereduc/question:commentmine | Allow      |
+      | powereduc/question:commentall  | Prevent    |
     And I log out
     Given I am on the "Test quiz" "mod_quiz > question bank" page logged in as "teacher1"
     And I set the field "Select a category" to "Test questions"

@@ -21,7 +21,7 @@ use backup_controller;
 use restore_controller;
 use restore_dbops;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -80,7 +80,7 @@ class async_restore_test extends \advanced_testcase {
                 'course' => $course->id, 'section' => 1));
 
         // Backup the course.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_YES, backup::MODE_GENERAL, $USER->id);
         $bc->finish_ui();
         $backupid = $bc->get_backupid();
@@ -182,7 +182,7 @@ class async_restore_test extends \advanced_testcase {
                 'course' => $course->id, 'section' => 1));
 
         // Backup the course.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_YES, backup::MODE_GENERAL, $USER->id);
         $bc->finish_ui();
         $bc->execute_plan();

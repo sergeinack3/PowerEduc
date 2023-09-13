@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'webservice', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'webservice', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   core_webservice
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -201,7 +201,7 @@ $string['shortnametaken'] = 'Short name is already used for another service ({$a
 $string['simpleauthlog'] = 'Simple authentication login';
 $string['step'] = 'Step';
 $string['supplyinfo'] = 'More details';
-$string['testauserwithtestclientdescription'] = 'Simulate external access to the service using the web service test client. Before doing so, log in as a user with the moodle/webservice:createtoken capability and obtain the security key (token) via the user\'s preferences page. You will use this token in the test client. In the test client, also choose an enabled protocol with the token authentication. <strong>WARNING: The functions that you test WILL BE EXECUTED for this user, so be careful what you choose to test!</strong>';
+$string['testauserwithtestclientdescription'] = 'Simulate external access to the service using the web service test client. Before doing so, log in as a user with the powereduc/webservice:createtoken capability and obtain the security key (token) via the user\'s preferences page. You will use this token in the test client. In the test client, also choose an enabled protocol with the token authentication. <strong>WARNING: The functions that you test WILL BE EXECUTED for this user, so be careful what you choose to test!</strong>';
 $string['testclient'] = 'Web service test client';
 $string['testclientdescription'] = '* The web service test client <strong>executes</strong> the functions for <strong>REAL</strong>. Do not test functions that you don\'t know. <br/>* All existing web service functions are not yet implemented into the test client. <br/>* In order to check that a user cannot access some functions, you can test some functions that you didn\'t allow.<br/>* To see clearer error messages set the debugging to <strong>{$a->mode}</strong> into {$a->atag}.';
 $string['testwithtestclient'] = 'Test the service';

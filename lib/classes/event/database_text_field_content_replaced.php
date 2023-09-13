@@ -24,7 +24,7 @@
 
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The database text field content replaced event class.

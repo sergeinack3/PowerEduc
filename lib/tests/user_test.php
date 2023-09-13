@@ -710,7 +710,7 @@ class user_test extends \advanced_testcase {
         // Create a new fake language 'xx' with the 'noreplyname'.
         $langfolder = $CFG->dataroot . '/lang/xx';
         check_dir_exists($langfolder);
-        $langconfig = "<?php\n\defined('MOODLE_INTERNAL') || die();";
+        $langconfig = "<?php\n\defined('POWEREDUC_INTERNAL') || die();";
         file_put_contents($langfolder . '/langconfig.php', $langconfig);
         $langconfig = "<?php\n\$string['noreplyname'] = 'XXX';";
         file_put_contents($langfolder . '/moodle.php', $langconfig);

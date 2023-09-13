@@ -1,34 +1,34 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions used by the quiz module.
  *
  * This contains functions that are called from within the quiz module only
- * Functions that are also called by core Moodle are in {@link lib.php}
+ * Functions that are also called by core PowerEduc are in {@link lib.php}
  * This script also loads the code in {@link questionlib.php} which holds
  * the module-indpendent code for handling questions and which in turn
  * initialises all the questiontype classes.
  *
  * @package    mod_quiz
- * @copyright  1999 onwards Martin Dougiamas and others {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas and others {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/lib.php');
 require_once($CFG->dirroot . '/mod/quiz/accessmanager.php');
@@ -98,8 +98,8 @@ function quiz_create_attempt(quiz $quizobj, $attemptnumber, $lastattempt, $timen
 
     $quiz = $quizobj->get_quiz();
     if ($quiz->sumgrades < 0.000005 && $quiz->grade > 0.000005) {
-        throw new moodle_exception('cannotstartgradesmismatch', 'quiz',
-                new moodle_url('/mod/quiz/view.php', array('q' => $quiz->id)),
+        throw new powereduc_exception('cannotstartgradesmismatch', 'quiz',
+                new powereduc_url('/mod/quiz/view.php', array('q' => $quiz->id)),
                     array('grade' => quiz_format_grade($quiz, $quiz->grade)));
     }
 
@@ -113,7 +113,7 @@ function quiz_create_attempt(quiz $quizobj, $attemptnumber, $lastattempt, $timen
     } else {
         // Build on last attempt.
         if (empty($lastattempt)) {
-            throw new \moodle_exception('cannotfindprevattempt', 'quiz');
+            throw new \powereduc_exception('cannotfindprevattempt', 'quiz');
         }
         $attempt = $lastattempt;
     }
@@ -155,7 +155,7 @@ function quiz_create_attempt(quiz $quizobj, $attemptnumber, $lastattempt, $timen
  * @param array     $forcedvariantsbyslot slot number => variant. Used for questions with variants,
  *                                          to force the choice of a particular variant. Intended for testing
  *                                          purposes only.
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @return object   modified attempt object
  */
 function quiz_start_new_attempt($quizobj, $quba, $attempt, $attemptnumber, $timenow,
@@ -226,7 +226,7 @@ function quiz_start_new_attempt($quizobj, $quba, $attempt, $attemptnumber, $time
             $questionid = $randomloader->get_next_question_id($questiondata->category,
                     $questiondata->randomrecurse, $tagids);
             if ($questionid === null) {
-                throw new moodle_exception('notenoughrandomquestions', 'quiz',
+                throw new powereduc_exception('notenoughrandomquestions', 'quiz',
                                            $quizobj->view_url(), $questiondata);
             }
 
@@ -565,7 +565,7 @@ function quiz_rescale_grade($rawgrade, $quiz, $format = true) {
  * @param float $grade a grade on this quiz.
  * @param object $quiz the quiz settings.
  * @return false|stdClass the record object or false if there is not feedback for the given grade
- * @since  Moodle 3.1
+ * @since  PowerEduc 3.1
  */
 function quiz_feedback_record_for_grade($grade, $quiz) {
     global $DB;
@@ -1026,7 +1026,7 @@ function quiz_override_summary(stdClass $quiz, stdClass $cm, int $currentgroup =
 
     $quizgroupmode = groups_get_activity_groupmode($cm);
     $accessallgroups = ($quizgroupmode == NOGROUPS) ||
-            has_capability('moodle/site:accessallgroups', context_module::instance($cm->id));
+            has_capability('powereduc/site:accessallgroups', context_module::instance($cm->id));
 
     if ($accessallgroups) {
         // User can see all groups.
@@ -1311,7 +1311,7 @@ function quiz_get_user_timeclose($courseid) {
     global $DB, $USER;
 
     // For teacher and manager/admins return timeclose.
-    if (has_capability('moodle/course:update', context_course::instance($courseid))) {
+    if (has_capability('powereduc/course:update', context_course::instance($courseid))) {
         $sql = "SELECT quiz.id, quiz.timeclose AS usertimeclose
                   FROM {quiz} quiz
                  WHERE quiz.course = :courseid";
@@ -1427,11 +1427,11 @@ function quiz_question_edit_button($cmid, $question, $returnurl, $contentafteric
 
     // Build the icon.
     if ($action) {
-        if ($returnurl instanceof moodle_url) {
+        if ($returnurl instanceof powereduc_url) {
             $returnurl = $returnurl->out_as_local_url(false);
         }
         $questionparams = array('returnurl' => $returnurl, 'cmid' => $cmid, 'id' => $question->id);
-        $questionurl = new moodle_url("$CFG->wwwroot/question/bank/editquestion/question.php", $questionparams);
+        $questionurl = new powereduc_url("$CFG->wwwroot/question/bank/editquestion/question.php", $questionparams);
         return '<a title="' . $action . '" href="' . $questionurl->out() . '" class="questioneditbutton">' .
                 $OUTPUT->pix_icon($icon, $action) . $contentaftericon .
                 '</a>';
@@ -1446,7 +1446,7 @@ function quiz_question_edit_button($cmid, $question, $returnurl, $contentafteric
  * @param object $quiz the quiz settings
  * @param object $question the question
  * @param int $variant which question variant to preview (optional).
- * @return moodle_url to preview this question with the options from this quiz.
+ * @return powereduc_url to preview this question with the options from this quiz.
  */
 function quiz_question_preview_url($quiz, $question, $variant = null) {
     // Get the appropriate display options.
@@ -1486,7 +1486,7 @@ function quiz_question_preview_button($quiz, $question, $label = false, $variant
  */
 function quiz_get_flag_option($attempt, $context) {
     global $USER;
-    if (!has_capability('moodle/question:flag', $context)) {
+    if (!has_capability('powereduc/question:flag', $context)) {
         return question_display_options::HIDDEN;
     } else if ($attempt->userid == $USER->id) {
         return question_display_options::EDITABLE;
@@ -1531,7 +1531,7 @@ function quiz_get_review_options($quiz, $attempt, $context) {
     $options->readonly = true;
     $options->flags = quiz_get_flag_option($attempt, $context);
     if (!empty($attempt->id)) {
-        $options->questionreviewlink = new moodle_url('/mod/quiz/reviewquestion.php',
+        $options->questionreviewlink = new powereduc_url('/mod/quiz/reviewquestion.php',
                 array('attempt' => $attempt->id));
     }
 
@@ -1539,13 +1539,13 @@ function quiz_get_review_options($quiz, $attempt, $context) {
     if (!empty($attempt->id) && $attempt->state == quiz_attempt::FINISHED && !$attempt->preview &&
             !is_null($context) && has_capability('mod/quiz:grade', $context)) {
         $options->manualcomment = question_display_options::VISIBLE;
-        $options->manualcommentlink = new moodle_url('/mod/quiz/comment.php',
+        $options->manualcommentlink = new powereduc_url('/mod/quiz/comment.php',
                 array('attempt' => $attempt->id));
     }
 
     if (!is_null($context) && !$attempt->preview &&
             has_capability('mod/quiz:viewreports', $context) &&
-            has_capability('moodle/grade:viewhidden', $context)) {
+            has_capability('powereduc/grade:viewhidden', $context)) {
         // People who can see reports and hidden grades should be shown everything,
         // except during preview when teachers want to see what students see.
         $options->attempt = question_display_options::VISIBLE;
@@ -1614,7 +1614,7 @@ function quiz_get_combined_reviewoptions($quiz, $attempts) {
  *
  * @param object $a lots of useful information that can be used in the message
  *      subject and body.
- * @param bool $studentisonline is the student currently interacting with Moodle?
+ * @param bool $studentisonline is the student currently interacting with PowerEduc?
  *
  * @return int|false as for {@link message_send()}.
  */
@@ -1713,7 +1713,7 @@ function quiz_send_notification($recipient, $submitter, $a) {
  * @param object $attempt this attempt just finished
  * @param object $context the quiz context
  * @param object $cm the coursemodule for this quiz
- * @param bool $studentisonline is the student currently interacting with Moodle?
+ * @param bool $studentisonline is the student currently interacting with PowerEduc?
  *
  * @return bool true if all necessary messages were sent successfully, else false.
  */
@@ -1746,7 +1746,7 @@ function quiz_send_notification_messages($course, $quiz, $attempt, $context, $cm
     } else if (groups_get_activity_groupmode($cm, $course) != NOGROUPS) {
         // If the user is not in a group, and the quiz is set to group mode,
         // then set $groups to a non-existant id so that only users with
-        // 'moodle/site:accessallgroups' get notified.
+        // 'powereduc/site:accessallgroups' get notified.
         $groups = -1;
     } else {
         $groups = '';
@@ -2056,7 +2056,7 @@ function quiz_get_js_module() {
         'requires' => array('base', 'dom', 'event-delegate', 'event-key',
                 'core_question_engine'),
         'strings' => array(
-            array('cancel', 'moodle'),
+            array('cancel', 'powereduc'),
             array('flagged', 'question'),
             array('functiondisabledbysecuremode', 'quiz'),
             array('startattempt', 'quiz'),
@@ -2499,11 +2499,11 @@ function quiz_add_random_questions($quiz, $addonpage, $categoryid, $number,
 
     $category = $DB->get_record('question_categories', ['id' => $categoryid]);
     if (!$category) {
-        new moodle_exception('invalidcategoryid');
+        new powereduc_exception('invalidcategoryid');
     }
 
     $catcontext = context::instance_by_id($category->contextid);
-    require_capability('moodle/question:useall', $catcontext);
+    require_capability('powereduc/question:useall', $catcontext);
 
     // Tags for filter condition.
     $tags = \core_tag_tag::get_bulk($tagids, 'id, name');
@@ -2547,7 +2547,7 @@ function quiz_add_random_questions($quiz, $addonpage, $categoryid, $number,
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function quiz_view($quiz, $course, $cm, $context) {
 
@@ -2574,8 +2574,8 @@ function quiz_view($quiz, $course, $cm, $context) {
  * @param  int $page page to jump to in the attempt
  * @param  bool $redirect whether to redirect or throw exceptions (for web or ws usage)
  * @return array an array containing the attempt information, access error messages and the page to jump to in the attempt
- * @throws moodle_quiz_exception
- * @since Moodle 3.1
+ * @throws powereduc_quiz_exception
+ * @since PowerEduc 3.1
  */
 function quiz_validate_new_attempt(quiz $quizobj, quiz_access_manager $accessmanager, $forcenew, $page, $redirect) {
     global $DB, $USER;
@@ -2617,7 +2617,7 @@ function quiz_validate_new_attempt(quiz $quizobj, quiz_access_manager $accessman
             if ($redirect) {
                 redirect($quizobj->review_url($lastattempt->id));
             } else {
-                throw new moodle_quiz_exception($quizobj, 'attemptalreadyclosed');
+                throw new powereduc_quiz_exception($quizobj, 'attemptalreadyclosed');
             }
         }
 
@@ -2663,7 +2663,7 @@ function quiz_validate_new_attempt(quiz $quizobj, quiz_access_manager $accessman
  *      to force the choice of a particular variant. Intended for testing purposes only.
  * @param int $userid Specific user id to create an attempt for that user, null for current logged in user
  * @return object the new attempt
- * @since  Moodle 3.1
+ * @since  PowerEduc 3.1
  */
 function quiz_prepare_and_start_new_attempt(quiz $quizobj, $attemptnumber, $lastattempt,
         $offlineattempt = false, $forcedrandomquestions = [], $forcedvariants = [], $userid = null) {
@@ -2764,8 +2764,8 @@ function quiz_is_overriden_calendar_event(\calendar_event $event) {
  *
  * @param int[] $slotids The list of id for the quiz slots.
  * @return array[] List of quiz_slot_tags records indexed by slot id.
- * @deprecated since Moodle 4.0
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @deprecated since PowerEduc 4.0
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function quiz_retrieve_tags_for_slot_ids($slotids) {
     debugging('Method quiz_retrieve_tags_for_slot_ids() is deprecated, ' .
@@ -2827,27 +2827,27 @@ function quiz_retrieve_tags_for_slot_ids($slotids) {
  * @param int $attemptid the id of the current attempt.
  * @param int|null $cmid the course_module id for this quiz.
  * @return quiz_attempt $attemptobj all the data about the quiz attempt.
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function quiz_create_attempt_handling_errors($attemptid, $cmid = null) {
     try {
         $attempobj = quiz_attempt::create($attemptid);
-    } catch (moodle_exception $e) {
+    } catch (powereduc_exception $e) {
         if (!empty($cmid)) {
             list($course, $cm) = get_course_and_cm_from_cmid($cmid, 'quiz');
-            $continuelink = new moodle_url('/mod/quiz/view.php', array('id' => $cmid));
+            $continuelink = new powereduc_url('/mod/quiz/view.php', array('id' => $cmid));
             $context = context_module::instance($cm->id);
             if (has_capability('mod/quiz:preview', $context)) {
-                throw new moodle_exception('attempterrorcontentchange', 'quiz', $continuelink);
+                throw new powereduc_exception('attempterrorcontentchange', 'quiz', $continuelink);
             } else {
-                throw new moodle_exception('attempterrorcontentchangeforuser', 'quiz', $continuelink);
+                throw new powereduc_exception('attempterrorcontentchangeforuser', 'quiz', $continuelink);
             }
         } else {
-            throw new moodle_exception('attempterrorinvalid', 'quiz');
+            throw new powereduc_exception('attempterrorinvalid', 'quiz');
         }
     }
     if (!empty($cmid) && $attempobj->get_cmid() != $cmid) {
-        throw new moodle_exception('invalidcoursemodule');
+        throw new powereduc_exception('invalidcoursemodule');
     } else {
         return $attempobj;
     }

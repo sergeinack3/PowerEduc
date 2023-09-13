@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'grades', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'grades', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   core_grades
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}

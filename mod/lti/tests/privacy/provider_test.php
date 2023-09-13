@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Privacy provider tests.
  *
  * @package    mod_lti
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_lti\privacy;
@@ -28,13 +28,13 @@ use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\approved_userlist;
 use mod_lti\privacy\provider;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider tests class.
  *
  * @package    mod_lti
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends \core_privacy\tests\provider_testcase {
@@ -202,17 +202,17 @@ class provider_test extends \core_privacy\tests\provider_testcase {
         $this->getDataGenerator()->create_user();
 
         $type = new \stdClass();
-        $type->baseurl = 'http://moodle.org';
+        $type->baseurl = 'http://powereduc.org';
         $type->course = $course1->id;
         lti_add_type($type, new \stdClass());
 
         $type = new \stdClass();
-        $type->baseurl = 'http://moodle.org';
+        $type->baseurl = 'http://powereduc.org';
         $type->course = $course1->id;
         lti_add_type($type, new \stdClass());
 
         $type = new \stdClass();
-        $type->baseurl = 'http://moodle.org';
+        $type->baseurl = 'http://powereduc.org';
         $type->course = $course2->id;
         lti_add_type($type, new \stdClass());
 

@@ -27,7 +27,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Cache configuration writer.
@@ -85,7 +85,7 @@ class cache_config_writer extends cache_config {
         $configuration = $this->generate_configuration_array();
 
         // Prepare the file content.
-        $content = "<?php defined('MOODLE_INTERNAL') || die();\n \$configuration = ".var_export($configuration, true).";";
+        $content = "<?php defined('POWEREDUC_INTERNAL') || die();\n \$configuration = ".var_export($configuration, true).";";
 
         // Do both file content and hash based detection because this might be called
         // many times within a single request.

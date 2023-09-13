@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quizaccess_seb;
 
@@ -42,7 +42,7 @@ class link_generator_test extends \advanced_testcase {
         $quiz = $this->getDataGenerator()->create_module('quiz', ['course' => $course->id]);
 
         $this->assertEquals(
-            "http://www.example.com/moodle/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
+            "http://www.example.com/powereduc/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
             link_generator::get_link($quiz->cmid, false, false));
     }
 
@@ -54,7 +54,7 @@ class link_generator_test extends \advanced_testcase {
         $quiz = $this->getDataGenerator()->create_module('quiz', ['course' => $course->id]);
 
         $this->assertEquals(
-            "https://www.example.com/moodle/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
+            "https://www.example.com/powereduc/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
             link_generator::get_link($quiz->cmid, false));
     }
 
@@ -66,7 +66,7 @@ class link_generator_test extends \advanced_testcase {
         $quiz = $this->getDataGenerator()->create_module('quiz', ['course' => $course->id]);
 
         $this->assertEquals(
-            "seb://www.example.com/moodle/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
+            "seb://www.example.com/powereduc/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
             link_generator::get_link($quiz->cmid, true, false));
     }
 
@@ -78,7 +78,7 @@ class link_generator_test extends \advanced_testcase {
         $quiz = $this->getDataGenerator()->create_module('quiz', ['course' => $course->id]);
 
         $this->assertEquals(
-            "sebs://www.example.com/moodle/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
+            "sebs://www.example.com/powereduc/mod/quiz/accessrule/seb/config.php?cmid=$quiz->cmid",
             link_generator::get_link($quiz->cmid, true));
     }
 

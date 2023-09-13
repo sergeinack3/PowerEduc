@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * List of deprecated mod_quiz functions.
  *
  * @package   mod_quiz
- * @copyright 2021 Shamim Rezaie <shamim@moodle.com>
+ * @copyright 2021 Shamim Rezaie <shamim@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Internal function used in quiz_get_completion_state. Check passing grade (or no attempts left) requirement for completion.
  *
- * @deprecated since Moodle 3.11
- * @todo MDL-71196 Final deprecation in Moodle 4.3
+ * @deprecated since PowerEduc 3.11
+ * @todo MDL-71196 Final deprecation in PowerEduc 4.3
  * @see \mod_quiz\completion\custom_completion
  * @param stdClass $course
  * @param cm_info|stdClass $cm
@@ -78,8 +78,8 @@ function quiz_completion_check_passing_grade_or_all_attempts($course, $cm, $user
 /**
  * Internal function used in quiz_get_completion_state. Check minimum attempts requirement for completion.
  *
- * @deprecated since Moodle 3.11
- * @todo MDL-71196 Final deprecation in Moodle 4.3
+ * @deprecated since PowerEduc 3.11
+ * @todo MDL-71196 Final deprecation in PowerEduc 4.3
  * @see \mod_quiz\completion\custom_completion
  * @param int $userid
  * @param stdClass $quiz
@@ -102,8 +102,8 @@ function quiz_completion_check_min_attempts($userid, $quiz) {
  * Obtains the automatic completion state for this quiz on any conditions
  * in quiz settings, such as if all attempts are used or a certain grade is achieved.
  *
- * @deprecated since Moodle 3.11
- * @todo MDL-71196 Final deprecation in Moodle 4.3
+ * @deprecated since PowerEduc 3.11
+ * @todo MDL-71196 Final deprecation in PowerEduc 4.3
  * @see \mod_quiz\completion\custom_completion
  * @param stdClass $course Course
  * @param cm_info|stdClass $cm Course-module

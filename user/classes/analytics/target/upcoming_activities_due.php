@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Upcoming activities due target.
@@ -24,7 +24,7 @@
 
 namespace core_user\analytics\target;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/lib/enrollib.php');
 
@@ -187,7 +187,7 @@ class upcoming_activities_due extends \core_analytics\local\target\binary {
             array &$actions) {
         global $OUTPUT;
 
-        $fullmessageplaintext = get_string('youhaveupcomingactivitiesdueinfo', 'moodle', $user->firstname);
+        $fullmessageplaintext = get_string('youhaveupcomingactivitiesdueinfo', 'powereduc', $user->firstname);
 
         $sampledata = $prediction->get_sample_data();
         $activitiesdue = $sampledata['core_course\analytics\indicator\activities_due:extradata'];
@@ -205,7 +205,7 @@ class upcoming_activities_due extends \core_analytics\local\target\binary {
             $activitiesdue[$key]->formattedtime = userdate($activitydue->time);
 
             // We provide the URL to the activity through a script that records the user click.
-            $activityurl = new \moodle_url($activitydue->url);
+            $activityurl = new \powereduc_url($activitydue->url);
             $actionurl = \core_analytics\prediction_action::transform_to_forward_url($activityurl, 'viewupcoming',
                 $prediction->get_prediction_data()->id);
             $activitiesdue[$key]->url = $actionurl->out(false);
@@ -264,7 +264,7 @@ class upcoming_activities_due extends \core_analytics\local\target\binary {
         }
 
         // We force a lookahead of 30 days so we are sure that the upcoming activities due are shown.
-        $url = new \moodle_url('/calendar/view.php', ['view' => 'upcoming', 'lookahead' => '30']);
+        $url = new \powereduc_url('/calendar/view.php', ['view' => 'upcoming', 'lookahead' => '30']);
         $pix = new \pix_icon('i/calendar', get_string('viewupcomingactivitiesdue', 'calendar'));
         $action = new \core_analytics\prediction_action('viewupcoming', $prediction,
             $url, $pix, get_string('viewupcomingactivitiesdue', 'calendar'));

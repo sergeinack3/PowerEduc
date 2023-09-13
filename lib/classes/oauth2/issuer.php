@@ -23,7 +23,7 @@
  */
 namespace core\oauth2;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\persistent;
 use lang_string;

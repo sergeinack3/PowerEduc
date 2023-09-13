@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -33,12 +33,12 @@ $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
 require_login();
 
 if (empty($CFG->usetags)) {
-    throw new \moodle_exception('tagsaredisabled', 'tag');
+    throw new \powereduc_exception('tagsaredisabled', 'tag');
 }
 
-//Editing a tag requires moodle/tag:edit capability
+//Editing a tag requires powereduc/tag:edit capability
 $systemcontext   = context_system::instance();
-require_capability('moodle/tag:edit', $systemcontext);
+require_capability('powereduc/tag:edit', $systemcontext);
 
 if ($tagname) {
     $tagcollid = optional_param('tc', 0, PARAM_INT);
@@ -47,13 +47,13 @@ if ($tagname) {
         $tags = core_tag_tag::guess_by_name($tagname, '*');
         if (count($tags) > 1) {
             // This tag was found in more than one collection, redirect to search.
-            redirect(new moodle_url('/tag/search.php', array('tag' => $tagname)));
+            redirect(new powereduc_url('/tag/search.php', array('tag' => $tagname)));
         } else if (count($tags) == 1) {
             $tag = reset($tags);
         }
     } else {
         if (!$tag = core_tag_tag::get_by_name($tagcollid, $tagname, '*')) {
-            redirect(new moodle_url('/tag/search.php', array('tagcollid' => $tagcollid)));
+            redirect(new powereduc_url('/tag/search.php', array('tagcollid' => $tagcollid)));
         }
     }
 } else if ($tagid) {
@@ -61,13 +61,13 @@ if ($tagname) {
 }
 
 if (empty($tag)) {
-    redirect(new moodle_url('/tag/search.php'));
+    redirect(new powereduc_url('/tag/search.php'));
 }
 
 $PAGE->set_url($tag->get_view_url());
 $PAGE->set_subpage($tag->id);
 $PAGE->set_context($systemcontext);
-$PAGE->set_blocks_editing_capability('moodle/tag:editblocks');
+$PAGE->set_blocks_editing_capability('powereduc/tag:editblocks');
 $PAGE->set_pagelayout('standard');
 
 $tagname = $tag->get_display_name();
@@ -102,12 +102,12 @@ $data->returnurl = $returnurl;
 $tagform->set_data($data);
 
 if ($tagform->is_cancelled()) {
-    redirect($returnurl ? new moodle_url($returnurl) : $tag->get_view_url());
+    redirect($returnurl ? new powereduc_url($returnurl) : $tag->get_view_url());
 } else if ($tagnew = $tagform->get_data()) {
     // If new data has been sent, update the tag record.
     $updatedata = array();
 
-    if (has_capability('moodle/tag:manage', $systemcontext)) {
+    if (has_capability('powereduc/tag:manage', $systemcontext)) {
         $updatedata['isstandard'] = empty($tagnew->isstandard) ? 0 : 1;
         $updatedata['rawname'] = $tagnew->rawname;
     }
@@ -123,10 +123,10 @@ if ($tagform->is_cancelled()) {
     // Updated related tags.
     $tag->set_related_tags($tagnew->relatedtags);
 
-    redirect($returnurl ? new moodle_url($returnurl) : $tag->get_view_url());
+    redirect($returnurl ? new powereduc_url($returnurl) : $tag->get_view_url());
 }
 
-navigation_node::override_active_url(new moodle_url('/tag/search.php'));
+navigation_node::override_active_url(new powereduc_url('/tag/search.php'));
 $PAGE->navbar->add($tagname);
 $PAGE->navbar->add(get_string('edit'));
 $PAGE->set_title(get_string('tag', 'tag') . ' - '. $tagname);

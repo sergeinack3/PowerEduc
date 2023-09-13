@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,19 +18,19 @@
  * Adhoc task handling migrating data to the new messaging table schema.
  *
  * @package    core_message
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_message\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class handling migrating data to the new messaging table schema.
  *
  * @package    core_message
- * @copyright  2018 Mark Nelson <markn@moodle.com>
+ * @copyright  2018 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class migrate_message_data extends \core\task\adhoc_task {
@@ -107,7 +107,7 @@ class migrate_message_data extends \core\task\adhoc_task {
                 set_user_preference('core_message_migrate_data', true, $userid);
             } else {
                 // Throwing an exception in the task will mean that it isn't removed from the queue and is tried again.
-                throw new \moodle_exception('Task failed.');
+                throw new \powereduc_exception('Task failed.');
             }
         }
     }
@@ -190,7 +190,7 @@ class migrate_message_data extends \core\task\adhoc_task {
         $tabledata->useridto = $notification->useridto;
         $tabledata->subject = $notification->subject;
         $tabledata->fullmessage = $notification->fullmessage;
-        $tabledata->fullmessageformat = $notification->fullmessageformat ?? FORMAT_MOODLE;
+        $tabledata->fullmessageformat = $notification->fullmessageformat ?? FORMAT_POWEREDUC;
         $tabledata->fullmessagehtml = $notification->fullmessagehtml;
         $tabledata->smallmessage = $notification->smallmessage;
         $tabledata->component = $notification->component;
@@ -228,7 +228,7 @@ class migrate_message_data extends \core\task\adhoc_task {
         $tabledata->conversationid = $conversationid;
         $tabledata->subject = $message->subject;
         $tabledata->fullmessage = $message->fullmessage;
-        $tabledata->fullmessageformat = $message->fullmessageformat ?? FORMAT_MOODLE;
+        $tabledata->fullmessageformat = $message->fullmessageformat ?? FORMAT_POWEREDUC;
         $tabledata->fullmessagehtml = $message->fullmessagehtml;
         $tabledata->smallmessage = $message->smallmessage;
         $tabledata->timecreated = $message->timecreated;

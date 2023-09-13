@@ -26,7 +26,7 @@ use theme_config;
 use url_select;
 use user_picture;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/outputcomponents.php');

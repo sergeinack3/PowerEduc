@@ -22,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 //EXPORT STAGE CONSTANTS
 
@@ -205,4 +205,4 @@ define('PORTFOLIO_ADD_FAKE_URL', 5);
  * PORTFOLIO_ADD_MOODULE_URL - hacky way to turn the button class into a moodle_url to redirect to
  *                             this replaces the old portfolio_fake_add_url function
  */
-define('PORTFOLIO_ADD_MOODLE_URL', 6);
+define('PORTFOLIO_ADD_POWEREDUC_URL', 6);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 require_once("../../config.php");
 
 // This file is no longer used, however it will remain here to redirect existing links to show_entries.php.
-$url = new moodle_url('/mod/feedback/show_entries.php');
+$url = new powereduc_url('/mod/feedback/show_entries.php');
 foreach ($_GET as $key => $value) {
     $url->param($key, $value);
 }

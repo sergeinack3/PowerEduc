@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
  * @author    Darko Miletic  (darko.miletic@gmail.com)
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $capabilities = [
 
@@ -38,7 +38,7 @@ $capabilities = [
             'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
         ],
-        'clonepermissionsfrom' => 'moodle/course:manageactivities',
+        'clonepermissionsfrom' => 'powereduc/course:manageactivities',
     ],
 
     // Ability to create instances with live meeting capabilities.
@@ -49,7 +49,7 @@ $capabilities = [
             'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
         ],
-        'clonepermissionsfrom' => 'moodle/course:manageactivities',
+        'clonepermissionsfrom' => 'powereduc/course:manageactivities',
     ],
 
     // Ability to create instances with recording capabilities.
@@ -60,7 +60,7 @@ $capabilities = [
             'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
         ],
-        'clonepermissionsfrom' => 'moodle/course:manageactivities',
+        'clonepermissionsfrom' => 'powereduc/course:manageactivities',
     ],
 
     // Ability to join a meeting.

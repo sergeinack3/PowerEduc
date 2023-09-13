@@ -31,7 +31,7 @@ use core_xapi\event\xapi_test_statement_post;
 use context_system;
 use core\event\base;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class xapi_handler testing dummie class.

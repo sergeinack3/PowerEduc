@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@
  * @author    Darko Miletic  (darko.miletic [at] gmail [dt] com)
  */
 
-// We should not have any require login or MOODLE_INTERNAL Check in this file.
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalGlobalState,moodle.Files.RequireLogin.Missing
+// We should not have any require login or POWEREDUC_INTERNAL Check in this file.
+// phpcs:disable powereduc.Files.MoodleInternal.MoodleInternalGlobalState,powereduc.Files.RequireLogin.Missing
 require(__DIR__ . '/../../config.php');
 
 use Firebase\JWT\Key;

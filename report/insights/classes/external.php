@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external API for this component.
@@ -24,7 +24,7 @@
 
 namespace report_insights;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -47,7 +47,7 @@ class external extends external_api {
      * set_notuseful_prediction parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function set_notuseful_prediction_parameters() {
         return new external_function_parameters(
@@ -62,7 +62,7 @@ class external extends external_api {
      *
      * @param int $predictionid
      * @return array an array of warnings and a boolean
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function set_notuseful_prediction($predictionid) {
 
@@ -80,7 +80,7 @@ class external extends external_api {
      * set_notuseful_prediction return
      *
      * @return external_description
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function set_notuseful_prediction_returns() {
         return new external_single_structure(
@@ -102,7 +102,7 @@ class external extends external_api {
      * set_fixed_prediction parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function set_fixed_prediction_parameters() {
         return new external_function_parameters(
@@ -117,7 +117,7 @@ class external extends external_api {
      *
      * @param int $predictionid
      * @return array an array of warnings and a boolean
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function set_fixed_prediction($predictionid) {
 
@@ -135,7 +135,7 @@ class external extends external_api {
      * set_fixed_prediction return
      *
      * @return external_description
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     public static function set_fixed_prediction_returns() {
         return new external_single_structure(
@@ -157,7 +157,7 @@ class external extends external_api {
      * action_executed parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.8
+     * @since  PowerEduc 3.8
      */
     public static function action_executed_parameters() {
         return new external_function_parameters (
@@ -177,7 +177,7 @@ class external extends external_api {
      * @param  string   $actionname
      * @param  array    $predictionids
      * @return array an array of warnings and a boolean
-     * @since  Moodle 3.8
+     * @since  PowerEduc 3.8
      */
     public static function action_executed(string $actionname, array $predictionids) {
 
@@ -198,7 +198,7 @@ class external extends external_api {
      * action_executed return
      *
      * @return external_description
-     * @since  Moodle 3.8
+     * @since  PowerEduc 3.8
      */
     public static function action_executed_returns() {
         return new external_single_structure(

@@ -16,7 +16,7 @@
 
 namespace core_course;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -59,7 +59,7 @@ class customfield_test extends \advanced_testcase {
 
         $now = time();
         $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN',
-            'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE,
+            'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC,
             'customfield_f1' => 'some text', 'customfield_f2' => 1,
             'customfield_f3' => $now, 'customfield_f4' => 2,
             'customfield_f5_editor' => ['text' => 'test', 'format' => FORMAT_HTML]]);
@@ -90,7 +90,7 @@ class customfield_test extends \advanced_testcase {
         $backuptempdir = make_backup_temp_directory('');
         $packer = get_file_packer('application/vnd.moodle.backup');
 
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $courseid, \backup::FORMAT_MOODLE, \backup::INTERACTIVE_NO,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $courseid, \backup::FORMAT_POWEREDUC, \backup::INTERACTIVE_NO,
             \backup::MODE_GENERAL, $userid);
         $bc->execute_plan();
 
@@ -140,7 +140,7 @@ class customfield_test extends \advanced_testcase {
         $dg = $this->getDataGenerator();
 
         $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN',
-            'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE,
+            'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC,
             'customfield_f1' => 'some text', 'customfield_f2' => 1]);
         $backupid = $this->backup_course($c1->id);
 
@@ -161,7 +161,7 @@ class customfield_test extends \advanced_testcase {
 
         $now = time();
         $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN',
-            'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE,
+            'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC,
             'customfield_f1' => 'some text', 'customfield_f2' => 1,
             'customfield_f3' => $now, 'customfield_f4' => 2,
             'customfield_f5_editor' => ['text' => 'test', 'format' => FORMAT_HTML]]);

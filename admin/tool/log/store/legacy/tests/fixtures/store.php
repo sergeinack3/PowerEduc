@@ -24,7 +24,7 @@
 
 namespace logstore_legacy\test;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class unittest_logstore_legacy extends \logstore_legacy\log\store {
 

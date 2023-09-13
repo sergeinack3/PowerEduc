@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Rest endpoint for ajax editing for paging operations on the quiz structure.
@@ -36,8 +36,8 @@ require_capability('mod/quiz:manage', $quizobj->get_context());
 if (quiz_has_attempts($quizid)) {
     $reportlink = quiz_attempt_summary_link_to_reports($quizobj->get_quiz(),
                     $quizobj->get_cm(), $quizobj->get_context());
-    throw new \moodle_exception('cannoteditafterattempts', 'quiz',
-            new moodle_url('/mod/quiz/edit.php', array('cmid' => $quizobj->get_cmid())), $reportlink);
+    throw new \powereduc_exception('cannoteditafterattempts', 'quiz',
+            new powereduc_url('/mod/quiz/edit.php', array('cmid' => $quizobj->get_cmid())), $reportlink);
 }
 
 $slotnumber++;
@@ -47,4 +47,4 @@ $repage->repaginate_slots($slotnumber, $repagtype);
 $structure = $quizobj->get_structure();
 $slots = $structure->refresh_page_numbers_and_update_db();
 
-redirect(new moodle_url('edit.php', array('cmid' => $quizobj->get_cmid())));
+redirect(new powereduc_url('edit.php', array('cmid' => $quizobj->get_cmid())));

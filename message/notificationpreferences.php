@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Edit user notification preferences
  *
  * @package    core_message
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/message/lib.php');
 require_once($CFG->dirroot . '/user/lib.php');
 
 $userid = optional_param('userid', $USER->id, PARAM_INT);    // User id.
-$url = new moodle_url('/message/notificationpreferences.php');
+$url = new powereduc_url('/message/notificationpreferences.php');
 $url->param('userid', $userid);
 
 $PAGE->set_url($url);
@@ -35,7 +35,7 @@ $PAGE->set_url($url);
 require_login();
 
 if (isguestuser()) {
-    throw new \moodle_exception('guestnoeditmessage', 'message');
+    throw new \powereduc_exception('guestnoeditmessage', 'message');
 }
 
 $user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
@@ -49,17 +49,17 @@ $PAGE->set_pagelayout('admin');
 // Check access control.
 if ($user->id == $USER->id) {
     // Editing own message profile.
-    require_capability('moodle/user:editownmessageprofile', $systemcontext);
+    require_capability('powereduc/user:editownmessageprofile', $systemcontext);
 } else {
     // Teachers, parents, etc.
-    require_capability('moodle/user:editmessageprofile', $personalcontext);
+    require_capability('powereduc/user:editmessageprofile', $personalcontext);
     // No editing of guest user account.
     if (isguestuser($user->id)) {
-        throw new \moodle_exception('guestnoeditmessageother', 'message');
+        throw new \powereduc_exception('guestnoeditmessageother', 'message');
     }
     // No editing of admins by non admins!
     if (is_siteadmin($user) and !is_siteadmin($USER)) {
-        throw new \moodle_exception('useradmineditadmin');
+        throw new \powereduc_exception('useradmineditadmin');
     }
     $PAGE->navbar->includesettingsbase = true;
     $PAGE->navigation->extend_for_user($user);

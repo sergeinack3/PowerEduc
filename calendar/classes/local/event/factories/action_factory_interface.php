@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\factories;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 interface action_factory_interface {
     /**

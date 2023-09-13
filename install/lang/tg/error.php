@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatelangdir'] = 'Феҳристи забонро бунёд кардан муасар нашуда истодааст';
 $string['cannotcreatetempdir'] = 'Феҳристи муваққатӣ бунёд кардан нашуда истодааст';

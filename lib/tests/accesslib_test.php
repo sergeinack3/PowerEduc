@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Functional test for accesslib.php
@@ -68,10 +68,10 @@ class accesslib_test extends advanced_testcase {
      * Check modifying capability record is not exposed to other code.
      */
     public function test_capabilities_mutation() {
-        $oldcap = get_capability_info('moodle/site:config');
-        $cap = get_capability_info('moodle/site:config');
+        $oldcap = get_capability_info('powereduc/site:config');
+        $cap = get_capability_info('powereduc/site:config');
         unset($cap->name);
-        $newcap = get_capability_info('moodle/site:config');
+        $newcap = get_capability_info('powereduc/site:config');
 
         $this->assertFalse(isset($cap->name));
         $this->assertTrue(isset($newcap->name));
@@ -266,7 +266,7 @@ class accesslib_test extends advanced_testcase {
     public function test_is_safe_capability() {
         global $DB;
         // Note: there is not much to test, just make sure no notices are throw for the most dangerous cap.
-        $capability = $DB->get_record('capabilities', array('name'=>'moodle/site:config'), '*', MUST_EXIST);
+        $capability = $DB->get_record('capabilities', array('name'=>'powereduc/site:config'), '*', MUST_EXIST);
         $this->assertFalse(is_safe_capability($capability));
     }
 
@@ -399,41 +399,41 @@ class accesslib_test extends advanced_testcase {
         $syscontext = context_system::instance();
         $frontcontext = context_course::instance(SITEID);
         $student = $DB->get_record('role', array('shortname'=>'student'), '*', MUST_EXIST);
-        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'moodle/backup:backupcourse'))); // Any capability assigned to student by default.
-        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$student->id, 'capability'=>'moodle/backup:backupcourse')));
-        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'moodle/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'powereduc/backup:backupcourse'))); // Any capability assigned to student by default.
+        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$student->id, 'capability'=>'powereduc/backup:backupcourse')));
+        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'powereduc/backup:backupcourse')));
 
         $this->setUser($user);
-        $result = assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $student->id, $frontcontext->id);
+        $result = assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $student->id, $frontcontext->id);
         $this->assertTrue($result);
-        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'moodle/backup:backupcourse'));
+        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'powereduc/backup:backupcourse'));
         $this->assertNotEmpty($permission);
         $this->assertEquals(CAP_ALLOW, $permission->permission);
         $this->assertEquals($user->id, $permission->modifierid);
 
         $this->setUser(0);
-        $result = assign_capability('moodle/backup:backupcourse', CAP_PROHIBIT, $student->id, $frontcontext->id, false);
+        $result = assign_capability('powereduc/backup:backupcourse', CAP_PROHIBIT, $student->id, $frontcontext->id, false);
         $this->assertTrue($result);
-        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'moodle/backup:backupcourse'));
+        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'powereduc/backup:backupcourse'));
         $this->assertNotEmpty($permission);
         $this->assertEquals(CAP_ALLOW, $permission->permission);
         $this->assertEquals($user->id, $permission->modifierid);
 
-        $result = assign_capability('moodle/backup:backupcourse', CAP_PROHIBIT, $student->id, $frontcontext->id, true);
+        $result = assign_capability('powereduc/backup:backupcourse', CAP_PROHIBIT, $student->id, $frontcontext->id, true);
         $this->assertTrue($result);
-        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'moodle/backup:backupcourse'));
+        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'powereduc/backup:backupcourse'));
         $this->assertNotEmpty($permission);
         $this->assertEquals(CAP_PROHIBIT, $permission->permission);
         $this->assertEquals(0, $permission->modifierid);
 
-        $result = assign_capability('moodle/backup:backupcourse', CAP_INHERIT, $student->id, $frontcontext->id);
+        $result = assign_capability('powereduc/backup:backupcourse', CAP_INHERIT, $student->id, $frontcontext->id);
         $this->assertTrue($result);
-        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'moodle/backup:backupcourse'));
+        $permission = $DB->get_record('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$student->id, 'capability'=>'powereduc/backup:backupcourse'));
         $this->assertEmpty($permission);
 
         // Test event triggered.
         $sink = $this->redirectEvents();
-        $capability = 'moodle/backup:backupcourse';
+        $capability = 'powereduc/backup:backupcourse';
         assign_capability($capability, CAP_ALLOW, $student->id, $syscontext);
         $events = $sink->get_events();
         $sink->close();
@@ -473,31 +473,31 @@ class accesslib_test extends advanced_testcase {
         $syscontext = context_system::instance();
         $frontcontext = context_course::instance(SITEID);
         $manager = $DB->get_record('role', array('shortname'=>'manager'), '*', MUST_EXIST);
-        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'moodle/backup:backupcourse'))); // Any capability assigned to manager by default.
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $manager->id, $frontcontext->id);
+        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'powereduc/backup:backupcourse'))); // Any capability assigned to manager by default.
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $manager->id, $frontcontext->id);
 
-        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
-        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
 
-        $result = unassign_capability('moodle/backup:backupcourse', $manager->id, $syscontext->id);
+        $result = unassign_capability('powereduc/backup:backupcourse', $manager->id, $syscontext->id);
         $this->assertTrue($result);
-        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
-        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
-        unassign_capability('moodle/backup:backupcourse', $manager->id, $frontcontext);
-        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
+        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
+        unassign_capability('powereduc/backup:backupcourse', $manager->id, $frontcontext);
+        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
 
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $manager->id, $syscontext->id);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $manager->id, $frontcontext->id);
-        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $manager->id, $syscontext->id);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $manager->id, $frontcontext->id);
+        $this->assertTrue($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
 
-        $result = unassign_capability('moodle/backup:backupcourse', $manager->id);
+        $result = unassign_capability('powereduc/backup:backupcourse', $manager->id);
         $this->assertTrue($result);
-        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
-        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'moodle/backup:backupcourse')));
+        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$syscontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
+        $this->assertFalse($DB->record_exists('role_capabilities', array('contextid'=>$frontcontext->id, 'roleid'=>$manager->id, 'capability'=>'powereduc/backup:backupcourse')));
 
         // Test event triggered.
         $sink = $this->redirectEvents();
-        $capability = 'moodle/backup:backupcourse';
+        $capability = 'powereduc/backup:backupcourse';
         unassign_capability($capability, CAP_ALLOW, $manager->id);
         $events = $sink->get_events();
         $sink->close();
@@ -566,7 +566,7 @@ class accesslib_test extends advanced_testcase {
         $this->assertEquals($raid, $event->other['id']);
         $this->assertSame('', $event->other['component']);
         $this->assertEquals(0, $event->other['itemid']);
-        $this->assertInstanceOf('moodle_url', $event->get_url());
+        $this->assertInstanceOf('powereduc_url', $event->get_url());
         $this->assertSame('role_assigned', $event::get_legacy_eventname());
         $roles = get_all_roles();
         $rolenames = role_fix_names($roles, $context, ROLENAME_ORIGINAL, true);
@@ -618,7 +618,7 @@ class accesslib_test extends advanced_testcase {
         $this->assertCount(3, $event->other);
         $this->assertSame('', $event->other['component']);
         $this->assertEquals(0, $event->other['itemid']);
-        $this->assertInstanceOf('moodle_url', $event->get_url());
+        $this->assertInstanceOf('powereduc_url', $event->get_url());
         $roles = get_all_roles();
         $rolenames = role_fix_names($roles, $context, ROLENAME_ORIGINAL, true);
         $expectedlegacylog = array($course->id, 'role', 'unassign',
@@ -698,23 +698,23 @@ class accesslib_test extends advanced_testcase {
         $manager = $DB->get_record('role', array('shortname'=>'manager'), '*', MUST_EXIST);
         $teacher = $DB->get_record('role', array('shortname'=>'teacher'), '*', MUST_EXIST);
 
-        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'moodle/backup:backupcourse'))); // Any capability is ok.
-        $DB->delete_records('role_capabilities', array('capability'=>'moodle/backup:backupcourse'));
+        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'powereduc/backup:backupcourse'))); // Any capability is ok.
+        $DB->delete_records('role_capabilities', array('capability'=>'powereduc/backup:backupcourse'));
 
-        $roles = get_roles_with_capability('moodle/backup:backupcourse');
+        $roles = get_roles_with_capability('powereduc/backup:backupcourse');
         $this->assertEquals(array(), $roles);
 
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $manager->id, $syscontext->id);
-        assign_capability('moodle/backup:backupcourse', CAP_PROHIBIT, $manager->id, $frontcontext->id);
-        assign_capability('moodle/backup:backupcourse', CAP_PREVENT, $teacher->id, $frontcontext->id);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $manager->id, $syscontext->id);
+        assign_capability('powereduc/backup:backupcourse', CAP_PROHIBIT, $manager->id, $frontcontext->id);
+        assign_capability('powereduc/backup:backupcourse', CAP_PREVENT, $teacher->id, $frontcontext->id);
 
-        $roles = get_roles_with_capability('moodle/backup:backupcourse');
+        $roles = get_roles_with_capability('powereduc/backup:backupcourse');
         $this->assertEqualsCanonicalizing(array($teacher->id, $manager->id), array_keys($roles), true);
 
-        $roles = get_roles_with_capability('moodle/backup:backupcourse', CAP_ALLOW);
+        $roles = get_roles_with_capability('powereduc/backup:backupcourse', CAP_ALLOW);
         $this->assertEqualsCanonicalizing(array($manager->id), array_keys($roles), true);
 
-        $roles = get_roles_with_capability('moodle/backup:backupcourse', null, $syscontext);
+        $roles = get_roles_with_capability('powereduc/backup:backupcourse', null, $syscontext);
         $this->assertEqualsCanonicalizing(array($manager->id), array_keys($roles), true);
     }
 
@@ -1061,7 +1061,7 @@ class accesslib_test extends advanced_testcase {
         $event = array_pop($events);
         $this->assertInstanceOf('\core\event\role_allow_assign_updated', $event);
         $mode = 'assign';
-        $baseurl = new moodle_url('/admin/roles/allow.php', array('mode' => $mode));
+        $baseurl = new powereduc_url('/admin/roles/allow.php', array('mode' => $mode));
         $expectedlegacylog = array(SITEID, 'role', 'edit allow ' . $mode, str_replace($CFG->wwwroot . '/', '', $baseurl));
         $this->assertEventLegacyLogData($expectedlegacylog, $event);
     }
@@ -1096,7 +1096,7 @@ class accesslib_test extends advanced_testcase {
         $event = array_pop($events);
         $this->assertInstanceOf('\core\event\role_allow_override_updated', $event);
         $mode = 'override';
-        $baseurl = new moodle_url('/admin/roles/allow.php', array('mode' => $mode));
+        $baseurl = new powereduc_url('/admin/roles/allow.php', array('mode' => $mode));
         $expectedlegacylog = array(SITEID, 'role', 'edit allow ' . $mode, str_replace($CFG->wwwroot . '/', '', $baseurl));
         $this->assertEventLegacyLogData($expectedlegacylog, $event);
     }
@@ -1131,7 +1131,7 @@ class accesslib_test extends advanced_testcase {
         $event = array_pop($events);
         $this->assertInstanceOf('\core\event\role_allow_switch_updated', $event);
         $mode = 'switch';
-        $baseurl = new moodle_url('/admin/roles/allow.php', array('mode' => $mode));
+        $baseurl = new powereduc_url('/admin/roles/allow.php', array('mode' => $mode));
         $expectedlegacylog = array(SITEID, 'role', 'edit allow ' . $mode, str_replace($CFG->wwwroot . '/', '', $baseurl));
         $this->assertEventLegacyLogData($expectedlegacylog, $event);
     }
@@ -1166,7 +1166,7 @@ class accesslib_test extends advanced_testcase {
         $event = array_pop($events);
         $this->assertInstanceOf('\core\event\role_allow_view_updated', $event);
         $mode = 'view';
-        $baseurl = new moodle_url('/admin/roles/allow.php', array('mode' => $mode));
+        $baseurl = new powereduc_url('/admin/roles/allow.php', array('mode' => $mode));
         $expectedlegacylog = array(SITEID, 'role', 'edit allow ' . $mode, str_replace($CFG->wwwroot . '/', '', $baseurl));
         $this->assertEventLegacyLogData($expectedlegacylog, $event);
     }
@@ -1393,8 +1393,8 @@ class accesslib_test extends advanced_testcase {
         role_assign($teacherrole->id, $teacher->id, $coursecontext);
         $teacherename = (object)array('roleid'=>$teacherrole->id, 'name'=>'Učitel', 'contextid'=>$coursecontext->id);
         $DB->insert_record('role_names', $teacherename);
-        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'moodle/backup:backupcourse'))); // Any capability is ok.
-        assign_capability('moodle/backup:backupcourse', CAP_PROHIBIT, $teacherrole->id, $coursecontext->id);
+        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'powereduc/backup:backupcourse'))); // Any capability is ok.
+        assign_capability('powereduc/backup:backupcourse', CAP_PROHIBIT, $teacherrole->id, $coursecontext->id);
 
         $studentrole = $DB->get_record('role', array('shortname'=>'student'), '*', MUST_EXIST);
         $student = $this->getDataGenerator()->create_user();
@@ -1411,7 +1411,7 @@ class accesslib_test extends advanced_testcase {
                 $context = context_helper::instance_by_id($contextid);
                 $roles = get_overridable_roles($context, ROLENAME_SHORT);
                 foreach ($allroles as $roleid => $role) {
-                    $hascap = has_any_capability(array('moodle/role:safeoverride', 'moodle/role:override'), $context);
+                    $hascap = has_any_capability(array('powereduc/role:safeoverride', 'powereduc/role:override'), $context);
                     if (is_siteadmin()) {
                         $this->assertTrue(isset($roles[$roleid]));
                     } else {
@@ -1912,60 +1912,60 @@ class accesslib_test extends advanced_testcase {
         // Note: Here are used default capabilities, the full test is in permission evaluation bellow,
         // use two capabilities that teacher has and one does not, none of them should be allowed for not-logged-in user.
 
-        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'moodle/backup:backupsection')));
-        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'moodle/backup:backupcourse')));
-        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'moodle/site:approvecourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'powereduc/backup:backupsection')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'powereduc/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name'=>'powereduc/site:approvecourse')));
 
-        $sca = array('moodle/backup:backupsection', 'moodle/backup:backupcourse', 'moodle/site:approvecourse');
-        $sc = array('moodle/backup:backupsection', 'moodle/backup:backupcourse');
+        $sca = array('powereduc/backup:backupsection', 'powereduc/backup:backupcourse', 'powereduc/site:approvecourse');
+        $sc = array('powereduc/backup:backupsection', 'powereduc/backup:backupcourse');
 
         $this->setUser(0);
-        $this->assertFalse(has_capability('moodle/backup:backupsection', $coursecontext));
-        $this->assertFalse(has_capability('moodle/backup:backupcourse', $coursecontext));
-        $this->assertFalse(has_capability('moodle/site:approvecourse', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/backup:backupsection', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/backup:backupcourse', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/site:approvecourse', $coursecontext));
         $this->assertFalse(has_any_capability($sca, $coursecontext));
         $this->assertFalse(has_all_capabilities($sca, $coursecontext));
 
-        $this->assertTrue(has_capability('moodle/backup:backupsection', $coursecontext, $teacher));
-        $this->assertTrue(has_capability('moodle/backup:backupcourse', $coursecontext, $teacher));
-        $this->assertFalse(has_capability('moodle/site:approvecourse', $coursecontext, $teacher));
+        $this->assertTrue(has_capability('powereduc/backup:backupsection', $coursecontext, $teacher));
+        $this->assertTrue(has_capability('powereduc/backup:backupcourse', $coursecontext, $teacher));
+        $this->assertFalse(has_capability('powereduc/site:approvecourse', $coursecontext, $teacher));
         $this->assertTrue(has_any_capability($sca, $coursecontext, $teacher));
         $this->assertTrue(has_all_capabilities($sc, $coursecontext, $teacher));
         $this->assertFalse(has_all_capabilities($sca, $coursecontext, $teacher));
 
-        $this->assertTrue(has_capability('moodle/backup:backupsection', $coursecontext, $admin));
-        $this->assertTrue(has_capability('moodle/backup:backupcourse', $coursecontext, $admin));
-        $this->assertTrue(has_capability('moodle/site:approvecourse', $coursecontext, $admin));
+        $this->assertTrue(has_capability('powereduc/backup:backupsection', $coursecontext, $admin));
+        $this->assertTrue(has_capability('powereduc/backup:backupcourse', $coursecontext, $admin));
+        $this->assertTrue(has_capability('powereduc/site:approvecourse', $coursecontext, $admin));
         $this->assertTrue(has_any_capability($sca, $coursecontext, $admin));
         $this->assertTrue(has_all_capabilities($sc, $coursecontext, $admin));
         $this->assertTrue(has_all_capabilities($sca, $coursecontext, $admin));
 
-        $this->assertFalse(has_capability('moodle/backup:backupsection', $coursecontext, $admin, false));
-        $this->assertFalse(has_capability('moodle/backup:backupcourse', $coursecontext, $admin, false));
-        $this->assertFalse(has_capability('moodle/site:approvecourse', $coursecontext, $admin, false));
+        $this->assertFalse(has_capability('powereduc/backup:backupsection', $coursecontext, $admin, false));
+        $this->assertFalse(has_capability('powereduc/backup:backupcourse', $coursecontext, $admin, false));
+        $this->assertFalse(has_capability('powereduc/site:approvecourse', $coursecontext, $admin, false));
         $this->assertFalse(has_any_capability($sca, $coursecontext, $admin, false));
         $this->assertFalse(has_all_capabilities($sc, $coursecontext, $admin, false));
         $this->assertFalse(has_all_capabilities($sca, $coursecontext, $admin, false));
 
         $this->setUser($teacher);
-        $this->assertTrue(has_capability('moodle/backup:backupsection', $coursecontext));
-        $this->assertTrue(has_capability('moodle/backup:backupcourse', $coursecontext));
-        $this->assertFalse(has_capability('moodle/site:approvecourse', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/backup:backupsection', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/backup:backupcourse', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/site:approvecourse', $coursecontext));
         $this->assertTrue(has_any_capability($sca, $coursecontext));
         $this->assertTrue(has_all_capabilities($sc, $coursecontext));
         $this->assertFalse(has_all_capabilities($sca, $coursecontext));
 
         $this->setAdminUser();
-        $this->assertTrue(has_capability('moodle/backup:backupsection', $coursecontext));
-        $this->assertTrue(has_capability('moodle/backup:backupcourse', $coursecontext));
-        $this->assertTrue(has_capability('moodle/site:approvecourse', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/backup:backupsection', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/backup:backupcourse', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/site:approvecourse', $coursecontext));
         $this->assertTrue(has_any_capability($sca, $coursecontext));
         $this->assertTrue(has_all_capabilities($sc, $coursecontext));
         $this->assertTrue(has_all_capabilities($sca, $coursecontext));
 
-        $this->assertFalse(has_capability('moodle/backup:backupsection', $coursecontext, 0));
-        $this->assertFalse(has_capability('moodle/backup:backupcourse', $coursecontext, 0));
-        $this->assertFalse(has_capability('moodle/site:approvecourse', $coursecontext, 0));
+        $this->assertFalse(has_capability('powereduc/backup:backupsection', $coursecontext, 0));
+        $this->assertFalse(has_capability('powereduc/backup:backupcourse', $coursecontext, 0));
+        $this->assertFalse(has_capability('powereduc/site:approvecourse', $coursecontext, 0));
         $this->assertFalse(has_any_capability($sca, $coursecontext, 0));
         $this->assertFalse(has_all_capabilities($sca, $coursecontext, 0));
     }
@@ -2139,7 +2139,7 @@ class accesslib_test extends advanced_testcase {
         $teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'), '*', MUST_EXIST);
         $teacher = $this->getDataGenerator()->create_user();
 
-        $fakecapname = 'moodle/fake:capability';
+        $fakecapname = 'powereduc/fake:capability';
 
         role_assign($teacherrole->id, $teacher->id, $coursecontext);
         $admin = $DB->get_record('user', array('username' => 'admin'));
@@ -2190,7 +2190,7 @@ class accesslib_test extends advanced_testcase {
         $teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'), '*', MUST_EXIST);
         $teacher = $this->getDataGenerator()->create_user();
 
-        $capability = 'moodle/fake:capability';
+        $capability = 'powereduc/fake:capability';
 
         role_assign($teacherrole->id, $teacher->id, $coursecontext);
         $admin = $DB->get_record('user', array('username' => 'admin'));
@@ -2215,7 +2215,7 @@ class accesslib_test extends advanced_testcase {
         $teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'), '*', MUST_EXIST);
         $teacher = $this->getDataGenerator()->create_user();
 
-        $capability = 'moodle/fake:capability';
+        $capability = 'powereduc/fake:capability';
 
         role_assign($teacherrole->id, $teacher->id, $coursecontext);
         $admin = $DB->get_record('user', array('username' => 'admin'));
@@ -2277,7 +2277,7 @@ class accesslib_test extends advanced_testcase {
         $this->assertEquals(0 * $readsperquery, $DB->perf_get_reads() - $startdbreads);
 
         // Alter a role.
-        role_change_permission($studentrole->id, $coursecontext, 'moodle/course:tag', CAP_ALLOW);
+        role_change_permission($studentrole->id, $coursecontext, 'powereduc/course:tag', CAP_ALLOW);
 
         // Should now know to do one query.
         $startdbreads = $DB->perf_get_reads();
@@ -2307,11 +2307,11 @@ class accesslib_test extends advanced_testcase {
         $this->resetAfterTest();
 
         $generator = $this->getDataGenerator();
-        $cap = 'moodle/course:view';
+        $cap = 'powereduc/course:view';
 
         // The structure being created here is this:
         //
-        // All tests work with the single capability 'moodle/course:view'.
+        // All tests work with the single capability 'powereduc/course:view'.
         //
         //             ROLE DEF/OVERRIDE                        ROLE ASSIGNS
         //    Role:  Allow    Prohib    Empty   Def user      u1  u2  u3  u4   u5  u6  u7  u8
@@ -2490,12 +2490,12 @@ class accesslib_test extends advanced_testcase {
         $this->resetAfterTest();
 
         $generator = $this->getDataGenerator();
-        $cap = 'moodle/contentbank:access';
+        $cap = 'powereduc/contentbank:access';
         $defaultcategoryid = 1;
 
 //         The structure being created here is this:
 //
-//         All tests work with the single capability 'moodle/contentbank:access'.
+//         All tests work with the single capability 'powereduc/contentbank:access'.
 //         ROLE DEF/OVERRIDE                                                    .
 //         Role:                Allow       Prohibit        Empty               .
 //                  System      ALLOW       PROHIBIT                            .
@@ -2606,102 +2606,102 @@ class accesslib_test extends advanced_testcase {
         $manager = $this->getDataGenerator()->create_user();
         role_assign($managerrole->id, $manager->id, $categorycontext);
 
-        $this->assertFalse(has_capability('moodle/course:view', $categorycontext, $creator));
-        $this->assertFalse(has_capability('moodle/role:assign', $categorycontext, $creator));
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext, $creator));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext, $creator));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, $creator));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, $creator));
+        $this->assertFalse(has_capability('powereduc/course:view', $categorycontext, $creator));
+        $this->assertFalse(has_capability('powereduc/role:assign', $categorycontext, $creator));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext, $creator));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext, $creator));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, $creator));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, $creator));
 
-        $this->assertTrue(has_capability('moodle/role:assign', $categorycontext, $manager));
-        $this->assertTrue(has_capability('moodle/course:visibility', $categorycontext, $manager));
-        $this->assertTrue(has_capability('moodle/course:visibility', $coursecontext, $manager));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, $manager->id));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, $manager->id));
+        $this->assertTrue(has_capability('powereduc/role:assign', $categorycontext, $manager));
+        $this->assertTrue(has_capability('powereduc/course:visibility', $categorycontext, $manager));
+        $this->assertTrue(has_capability('powereduc/course:visibility', $coursecontext, $manager));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, $manager->id));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, $manager->id));
 
         $this->assertEquals(0, $USER->id);
-        $this->assertFalse(has_capability('moodle/course:view', $categorycontext));
-        $this->assertFalse(has_capability('moodle/role:assign', $categorycontext));
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/course:view', $categorycontext));
+        $this->assertFalse(has_capability('powereduc/role:assign', $categorycontext));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext));
 
         $this->setUser($manager);
-        $this->assertTrue(has_capability('moodle/role:assign', $categorycontext));
-        $this->assertTrue(has_capability('moodle/course:visibility', $categorycontext));
-        $this->assertTrue(has_capability('moodle/course:visibility', $coursecontext));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/role:assign', $categorycontext));
+        $this->assertTrue(has_capability('powereduc/course:visibility', $categorycontext));
+        $this->assertTrue(has_capability('powereduc/course:visibility', $coursecontext));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext));
 
         $this->setAdminUser();
-        $this->assertTrue(has_capability('moodle/role:assign', $categorycontext));
-        $this->assertTrue(has_capability('moodle/course:visibility', $categorycontext));
-        $this->assertTrue(has_capability('moodle/course:visibility', $coursecontext));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/role:assign', $categorycontext));
+        $this->assertTrue(has_capability('powereduc/course:visibility', $categorycontext));
+        $this->assertTrue(has_capability('powereduc/course:visibility', $coursecontext));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext));
         $this->setUser(0);
 
         role_assign($creatorrole->id, $creator->id, $categorycontext);
 
-        $this->assertFalse(has_capability('moodle/role:assign', $categorycontext, $creator));
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext, $creator));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext, $creator));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, $creator));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, $creator));
+        $this->assertFalse(has_capability('powereduc/role:assign', $categorycontext, $creator));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext, $creator));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext, $creator));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, $creator));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, $creator));
 
         $this->setUser($creator);
-        $this->assertFalse(has_capability('moodle/role:assign', $categorycontext, null));
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext, null));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext, null));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, null));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, null));
+        $this->assertFalse(has_capability('powereduc/role:assign', $categorycontext, null));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext, null));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext, null));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, null));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, null));
         $this->setUser(0);
 
         set_config('creatornewroleid', $studentrole->id);
 
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext, $creator));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext, $creator));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, $creator));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, $creator));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext, $creator));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext, $creator));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, $creator));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, $creator));
 
         set_config('creatornewroleid', $teacherrole->id);
 
-        role_change_permission($managerrole->id, $categorycontext, 'moodle/course:visibility', CAP_PREVENT);
+        role_change_permission($managerrole->id, $categorycontext, 'powereduc/course:visibility', CAP_PREVENT);
         role_assign($creatorrole->id, $manager->id, $categorycontext);
 
-        $this->assertTrue(has_capability('moodle/course:view', $categorycontext, $manager));
-        $this->assertTrue(has_capability('moodle/course:view', $coursecontext, $manager));
-        $this->assertTrue(has_capability('moodle/role:assign', $categorycontext, $manager));
-        $this->assertTrue(has_capability('moodle/role:assign', $coursecontext, $manager));
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext, $manager));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext, $manager));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, $manager));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, $manager));
+        $this->assertTrue(has_capability('powereduc/course:view', $categorycontext, $manager));
+        $this->assertTrue(has_capability('powereduc/course:view', $coursecontext, $manager));
+        $this->assertTrue(has_capability('powereduc/role:assign', $categorycontext, $manager));
+        $this->assertTrue(has_capability('powereduc/role:assign', $coursecontext, $manager));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext, $manager));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext, $manager));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, $manager));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, $manager));
 
-        role_change_permission($managerrole->id, $categorycontext, 'moodle/course:view', CAP_PREVENT);
-        $this->assertTrue(has_capability('moodle/role:assign', $categorycontext, $manager));
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext, $manager));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext, $manager));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, $manager));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, $manager));
+        role_change_permission($managerrole->id, $categorycontext, 'powereduc/course:view', CAP_PREVENT);
+        $this->assertTrue(has_capability('powereduc/role:assign', $categorycontext, $manager));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext, $manager));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext, $manager));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, $manager));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, $manager));
 
         $this->getDataGenerator()->enrol_user($manager->id, $course->id, 0);
 
-        $this->assertTrue(has_capability('moodle/role:assign', $categorycontext, $manager));
-        $this->assertTrue(has_capability('moodle/role:assign', $coursecontext, $manager));
+        $this->assertTrue(has_capability('powereduc/role:assign', $categorycontext, $manager));
+        $this->assertTrue(has_capability('powereduc/role:assign', $coursecontext, $manager));
         $this->assertTrue(is_enrolled($coursecontext, $manager));
-        $this->assertFalse(has_capability('moodle/course:visibility', $categorycontext, $manager));
-        $this->assertFalse(has_capability('moodle/course:visibility', $coursecontext, $manager));
-        $this->assertTrue(guess_if_creator_will_have_course_capability('moodle/course:visibility', $categorycontext, $manager));
-        $this->assertFalse(guess_if_creator_will_have_course_capability('moodle/course:visibility', $coursecontext, $manager));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $categorycontext, $manager));
+        $this->assertFalse(has_capability('powereduc/course:visibility', $coursecontext, $manager));
+        $this->assertTrue(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $categorycontext, $manager));
+        $this->assertFalse(guess_if_creator_will_have_course_capability('powereduc/course:visibility', $coursecontext, $manager));
 
         // Test problems.
 
         try {
-            guess_if_creator_will_have_course_capability('moodle/course:visibility', $syscontext, $creator);
+            guess_if_creator_will_have_course_capability('powereduc/course:visibility', $syscontext, $creator);
             $this->fail('Exception expected when non course/category context passed to guess_if_creator_will_have_course_capability()');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }
@@ -2717,26 +2717,26 @@ class accesslib_test extends advanced_testcase {
         $syscontext = context_system::instance();
 
         $this->setUser(0);
-        $this->assertFalse(has_capability('moodle/site:config', $syscontext));
+        $this->assertFalse(has_capability('powereduc/site:config', $syscontext));
         try {
-            require_capability('moodle/site:config', $syscontext);
+            require_capability('powereduc/site:config', $syscontext);
             $this->fail('Exception expected from require_capability()');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('required_capability_exception', $e);
         }
         $this->setAdminUser();
-        $this->assertFalse(has_capability('moodle/site:config', $syscontext, 0));
+        $this->assertFalse(has_capability('powereduc/site:config', $syscontext, 0));
         try {
-            require_capability('moodle/site:config', $syscontext, 0);
+            require_capability('powereduc/site:config', $syscontext, 0);
             $this->fail('Exception expected from require_capability()');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('required_capability_exception', $e);
         }
-        $this->assertFalse(has_capability('moodle/site:config', $syscontext, null, false));
+        $this->assertFalse(has_capability('powereduc/site:config', $syscontext, null, false));
         try {
-            require_capability('moodle/site:config', $syscontext, null, false);
+            require_capability('powereduc/site:config', $syscontext, null, false);
             $this->fail('Exception expected from require_capability()');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('required_capability_exception', $e);
         }
     }
@@ -3195,7 +3195,7 @@ class accesslib_test extends advanced_testcase {
         try {
             context::instance_by_id(-1);
             $this->fail('exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertTrue(true);
         }
         $this->assertInstanceOf('context_system', context_system::instance());
@@ -3211,25 +3211,25 @@ class accesslib_test extends advanced_testcase {
         try {
             context_coursecat::instance(-1);
             $this->fail('exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertTrue(true);
         }
         try {
             context_course::instance(-1);
             $this->fail('exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertTrue(true);
         }
         try {
             context_module::instance(-1);
             $this->fail('exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertTrue(true);
         }
         try {
             context_block::instance(-1);
             $this->fail('exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertTrue(true);
         }
 
@@ -3247,7 +3247,7 @@ class accesslib_test extends advanced_testcase {
             $name = $context->get_context_name(true, true);
             $this->assertNotEmpty($name);
 
-            $this->assertInstanceOf('moodle_url', $context->get_url());
+            $this->assertInstanceOf('powereduc_url', $context->get_url());
 
             $caps = $context->get_capabilities();
             $this->assertTrue(is_array($caps));
@@ -3264,7 +3264,7 @@ class accesslib_test extends advanced_testcase {
         try {
             $systemcontext->get_course_context();
             $this->fail('exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
         $context = context_coursecat::instance($testcategories[0]);
@@ -3272,7 +3272,7 @@ class accesslib_test extends advanced_testcase {
         try {
             $context->get_course_context();
             $this->fail('exception expected');
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
         $this->assertEquals($frontpagecontext, $frontpagecontext->get_course_context(true));
@@ -3396,26 +3396,26 @@ class accesslib_test extends advanced_testcase {
 
         // Test assign_capability(), unassign_capability() functions.
 
-        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'moodle/site:accessallgroups'));
+        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'powereduc/site:accessallgroups'));
         $this->assertFalse($rc);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $allroles['teacher'], $frontpagecontext->id);
-        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'moodle/site:accessallgroups'));
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $allroles['teacher'], $frontpagecontext->id);
+        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'powereduc/site:accessallgroups'));
         $this->assertEquals(CAP_ALLOW, $rc->permission);
-        assign_capability('moodle/site:accessallgroups', CAP_PREVENT, $allroles['teacher'], $frontpagecontext->id);
-        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'moodle/site:accessallgroups'));
+        assign_capability('powereduc/site:accessallgroups', CAP_PREVENT, $allroles['teacher'], $frontpagecontext->id);
+        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'powereduc/site:accessallgroups'));
         $this->assertEquals(CAP_ALLOW, $rc->permission);
-        assign_capability('moodle/site:accessallgroups', CAP_PREVENT, $allroles['teacher'], $frontpagecontext, true);
-        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'moodle/site:accessallgroups'));
+        assign_capability('powereduc/site:accessallgroups', CAP_PREVENT, $allroles['teacher'], $frontpagecontext, true);
+        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'powereduc/site:accessallgroups'));
         $this->assertEquals(CAP_PREVENT, $rc->permission);
 
-        assign_capability('moodle/site:accessallgroups', CAP_INHERIT, $allroles['teacher'], $frontpagecontext);
-        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'moodle/site:accessallgroups'));
+        assign_capability('powereduc/site:accessallgroups', CAP_INHERIT, $allroles['teacher'], $frontpagecontext);
+        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'powereduc/site:accessallgroups'));
         $this->assertFalse($rc);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $allroles['teacher'], $frontpagecontext);
-        unassign_capability('moodle/site:accessallgroups', $allroles['teacher'], $frontpagecontext, true);
-        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'moodle/site:accessallgroups'));
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $allroles['teacher'], $frontpagecontext);
+        unassign_capability('powereduc/site:accessallgroups', $allroles['teacher'], $frontpagecontext, true);
+        $rc = $DB->get_record('role_capabilities', array('contextid'=>$frontpagecontext->id, 'roleid'=>$allroles['teacher'], 'capability'=>'powereduc/site:accessallgroups'));
         $this->assertFalse($rc);
-        unassign_capability('moodle/site:accessallgroups', $allroles['teacher'], $frontpagecontext->id, true);
+        unassign_capability('powereduc/site:accessallgroups', $allroles['teacher'], $frontpagecontext->id, true);
         unset($rc);
 
         accesslib_clear_all_caches_for_unit_testing(); // Must be done after assign_capability().
@@ -3477,20 +3477,20 @@ class accesslib_test extends advanced_testcase {
         role_assign($allroles['editingteacher'], $adminid, context_block::instance($block1->id));
 
         // Add tons of overrides - the more the better.
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $CFG->defaultuserroleid, $frontpageblockcontext, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $CFG->defaultfrontpageroleid, $frontpageblockcontext, true);
-        assign_capability('moodle/block:view', CAP_PROHIBIT, $allroles['guest'], $frontpageblockcontext, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $CFG->defaultuserroleid, $frontpageblockcontext, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $CFG->defaultfrontpageroleid, $frontpageblockcontext, true);
+        assign_capability('powereduc/block:view', CAP_PROHIBIT, $allroles['guest'], $frontpageblockcontext, true);
         assign_capability('block/online_users:viewlist', CAP_PREVENT, $allroles['user'], $frontpageblockcontext, true);
         assign_capability('block/online_users:viewlist', CAP_PREVENT, $allroles['student'], $frontpageblockcontext, true);
 
-        assign_capability('moodle/site:accessallgroups', CAP_PREVENT, $CFG->defaultuserroleid, $frontpagepagecontext, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $CFG->defaultfrontpageroleid, $frontpagepagecontext, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_PREVENT, $CFG->defaultuserroleid, $frontpagepagecontext, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $CFG->defaultfrontpageroleid, $frontpagepagecontext, true);
         assign_capability('mod/page:view', CAP_PREVENT, $allroles['guest'], $frontpagepagecontext, true);
         assign_capability('mod/page:view', CAP_ALLOW, $allroles['user'], $frontpagepagecontext, true);
         assign_capability('mod/page:view', CAP_ALLOW, $allroles['student'], $frontpagepagecontext, true);
 
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $CFG->defaultuserroleid, $frontpagecontext, true);
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $CFG->defaultfrontpageroleid, $frontpagecontext, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $CFG->defaultuserroleid, $frontpagecontext, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $CFG->defaultfrontpageroleid, $frontpagecontext, true);
         assign_capability('mod/page:view', CAP_ALLOW, $allroles['guest'], $frontpagecontext, true);
         assign_capability('mod/page:view', CAP_PROHIBIT, $allroles['user'], $frontpagecontext, true);
 
@@ -3500,37 +3500,37 @@ class accesslib_test extends advanced_testcase {
         role_assign($allroles['editingteacher'], $testusers[19], context_system::instance());
         role_assign($allroles['teacher'], $testusers[19], context_course::instance($testcourses[17]));
         role_assign($allroles['editingteacher'], $testusers[19], context_course::instance($testcourses[17]));
-        assign_capability('moodle/course:update', CAP_PROHIBIT, $allroles['teacher'], context_course::instance($testcourses[17]), true);
+        assign_capability('powereduc/course:update', CAP_PROHIBIT, $allroles['teacher'], context_course::instance($testcourses[17]), true);
 
         accesslib_clear_all_caches_for_unit_testing(); /// Must be done after assign_capability().
 
         // Extra tests for guests and not-logged-in users because they can not be verified by cross checking
         // with get_users_by_capability() where they are ignored.
-        $this->assertFalse(has_capability('moodle/block:view', $frontpageblockcontext, $guestid));
+        $this->assertFalse(has_capability('powereduc/block:view', $frontpageblockcontext, $guestid));
         $this->assertFalse(has_capability('mod/page:view', $frontpagepagecontext, $guestid));
         $this->assertTrue(has_capability('mod/page:view', $frontpagecontext, $guestid));
         $this->assertFalse(has_capability('mod/page:view', $systemcontext, $guestid));
 
-        $this->assertFalse(has_capability('moodle/block:view', $frontpageblockcontext, 0));
+        $this->assertFalse(has_capability('powereduc/block:view', $frontpageblockcontext, 0));
         $this->assertFalse(has_capability('mod/page:view', $frontpagepagecontext, 0));
         $this->assertTrue(has_capability('mod/page:view', $frontpagecontext, 0));
         $this->assertFalse(has_capability('mod/page:view', $systemcontext, 0));
 
-        $this->assertFalse(has_capability('moodle/course:create', $systemcontext, $testusers[11]));
-        $this->assertTrue(has_capability('moodle/course:create', context_coursecat::instance($testcategories[2]), $testusers[11]));
-        $this->assertFalse(has_capability('moodle/course:create', context_course::instance($testcourses[1]), $testusers[11]));
-        $this->assertTrue(has_capability('moodle/course:create', context_course::instance($testcourses[19]), $testusers[11]));
+        $this->assertFalse(has_capability('powereduc/course:create', $systemcontext, $testusers[11]));
+        $this->assertTrue(has_capability('powereduc/course:create', context_coursecat::instance($testcategories[2]), $testusers[11]));
+        $this->assertFalse(has_capability('powereduc/course:create', context_course::instance($testcourses[1]), $testusers[11]));
+        $this->assertTrue(has_capability('powereduc/course:create', context_course::instance($testcourses[19]), $testusers[11]));
 
-        $this->assertFalse(has_capability('moodle/course:update', context_course::instance($testcourses[1]), $testusers[9]));
-        $this->assertFalse(has_capability('moodle/course:update', context_course::instance($testcourses[19]), $testusers[9]));
-        $this->assertFalse(has_capability('moodle/course:update', $systemcontext, $testusers[9]));
+        $this->assertFalse(has_capability('powereduc/course:update', context_course::instance($testcourses[1]), $testusers[9]));
+        $this->assertFalse(has_capability('powereduc/course:update', context_course::instance($testcourses[19]), $testusers[9]));
+        $this->assertFalse(has_capability('powereduc/course:update', $systemcontext, $testusers[9]));
 
         // Test prohibits.
-        $this->assertTrue(has_capability('moodle/course:update', context_system::instance(), $testusers[19]));
-        $ids = get_users_by_capability(context_system::instance(), 'moodle/course:update', 'u.id');
+        $this->assertTrue(has_capability('powereduc/course:update', context_system::instance(), $testusers[19]));
+        $ids = get_users_by_capability(context_system::instance(), 'powereduc/course:update', 'u.id');
         $this->assertArrayHasKey($testusers[19], $ids);
-        $this->assertFalse(has_capability('moodle/course:update', context_course::instance($testcourses[17]), $testusers[19]));
-        $ids = get_users_by_capability(context_course::instance($testcourses[17]), 'moodle/course:update', 'u.id');
+        $this->assertFalse(has_capability('powereduc/course:update', context_course::instance($testcourses[17]), $testusers[19]));
+        $ids = get_users_by_capability(context_course::instance($testcourses[17]), 'powereduc/course:update', 'u.id');
         $this->assertArrayNotHasKey($testusers[19], $ids);
 
         // Test the list of enrolled users.
@@ -3540,7 +3540,7 @@ class accesslib_test extends advanced_testcase {
         for ($i=0; $i<10; $i++) {
             $this->assertTrue(isset($enrolled[$testusers[$i]]));
         }
-        $enrolled = get_enrolled_users($coursecontext, 'moodle/course:update');
+        $enrolled = get_enrolled_users($coursecontext, 'powereduc/course:update');
         $this->assertCount(1, $enrolled);
         $this->assertTrue(isset($enrolled[$testusers[9]]));
         unset($enrolled);
@@ -3550,29 +3550,29 @@ class accesslib_test extends advanced_testcase {
         $USER = $DB->get_record('user', array('id'=>$userid));
         load_all_capabilities();
         $coursecontext = context_course::instance($course1->id);
-        $this->assertTrue(has_capability('moodle/course:update', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/course:update', $coursecontext));
         $this->assertFalse(is_role_switched($course1->id));
         role_switch($allroles['student'], $coursecontext);
         $this->assertTrue(is_role_switched($course1->id));
         $this->assertEquals($allroles['student'], $USER->access['rsw'][$coursecontext->path]);
-        $this->assertFalse(has_capability('moodle/course:update', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/course:update', $coursecontext));
         reload_all_capabilities();
-        $this->assertFalse(has_capability('moodle/course:update', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/course:update', $coursecontext));
         role_switch(0, $coursecontext);
-        $this->assertTrue(has_capability('moodle/course:update', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/course:update', $coursecontext));
         $userid = $adminid;
         $USER = $DB->get_record('user', array('id'=>$userid));
         load_all_capabilities();
         $coursecontext = context_course::instance($course1->id);
         $blockcontext = context_block::instance($block1->id);
-        $this->assertTrue(has_capability('moodle/course:update', $blockcontext));
+        $this->assertTrue(has_capability('powereduc/course:update', $blockcontext));
         role_switch($allroles['student'], $coursecontext);
         $this->assertEquals($allroles['student'], $USER->access['rsw'][$coursecontext->path]);
-        $this->assertFalse(has_capability('moodle/course:update', $blockcontext));
+        $this->assertFalse(has_capability('powereduc/course:update', $blockcontext));
         reload_all_capabilities();
-        $this->assertFalse(has_capability('moodle/course:update', $blockcontext));
+        $this->assertFalse(has_capability('powereduc/course:update', $blockcontext));
         load_all_capabilities();
-        $this->assertTrue(has_capability('moodle/course:update', $blockcontext));
+        $this->assertTrue(has_capability('powereduc/course:update', $blockcontext));
 
         // Temp course role for enrol.
         $DB->delete_records('cache_flags', array()); // This prevents problem with dirty contexts immediately resetting the temp role - this is a known problem...
@@ -3581,16 +3581,16 @@ class accesslib_test extends advanced_testcase {
         $USER = $DB->get_record('user', array('id'=>$userid));
         load_all_capabilities();
         $coursecontext = context_course::instance($course1->id);
-        $this->assertFalse(has_capability('moodle/course:update', $coursecontext));
+        $this->assertFalse(has_capability('powereduc/course:update', $coursecontext));
         $this->assertFalse(isset($USER->access['ra'][$coursecontext->path][$roleid]));
         load_temp_course_role($coursecontext, $roleid);
         $this->assertEquals($USER->access['ra'][$coursecontext->path][$roleid], $roleid);
-        $this->assertTrue(has_capability('moodle/course:update', $coursecontext));
+        $this->assertTrue(has_capability('powereduc/course:update', $coursecontext));
         remove_temp_course_roles($coursecontext);
-        $this->assertFalse(has_capability('moodle/course:update', $coursecontext, $userid));
+        $this->assertFalse(has_capability('powereduc/course:update', $coursecontext, $userid));
         load_temp_course_role($coursecontext, $roleid);
         reload_all_capabilities();
-        $this->assertFalse(has_capability('moodle/course:update', $coursecontext, $userid));
+        $this->assertFalse(has_capability('powereduc/course:update', $coursecontext, $userid));
         $USER = new stdClass();
         $USER->id = 0;
 
@@ -3941,7 +3941,7 @@ class accesslib_test extends advanced_testcase {
         $actual = context_system::instance()->get_capabilities();
 
         // Just test a few representative capabilities.
-        $expectedcapabilities = ['moodle/site:accessallgroups', 'moodle/site:viewfullnames',
+        $expectedcapabilities = ['powereduc/site:accessallgroups', 'powereduc/site:viewfullnames',
                 'repository/upload:view', 'atto/recordrtc:recordaudio'];
 
         $this->assert_capability_list_contains($expectedcapabilities, $actual);
@@ -3960,7 +3960,7 @@ class accesslib_test extends advanced_testcase {
         $actual = context_coursecat::instance($cat->id)->get_capabilities();
 
         // Just test a few representative capabilities.
-        $expectedcapabilities = ['moodle/site:accessallgroups', 'moodle/site:viewfullnames',
+        $expectedcapabilities = ['powereduc/site:accessallgroups', 'powereduc/site:viewfullnames',
                 'repository/upload:view', 'atto/recordrtc:recordaudio'];
 
         $this->assert_capability_list_contains($expectedcapabilities, $actual);
@@ -3980,7 +3980,7 @@ class accesslib_test extends advanced_testcase {
         $actual = context_course::instance($course->id)->get_capabilities();
 
         // Just test a few representative capabilities.
-        $expectedcapabilities = ['moodle/site:accessallgroups', 'moodle/site:viewfullnames',
+        $expectedcapabilities = ['powereduc/site:accessallgroups', 'powereduc/site:viewfullnames',
                 'repository/upload:view', 'atto/recordrtc:recordaudio'];
 
         $this->assert_capability_list_contains($expectedcapabilities, $actual);
@@ -4001,7 +4001,7 @@ class accesslib_test extends advanced_testcase {
         $actual = context_module::instance($page->cmid)->get_capabilities();
 
         // Just test a few representative capabilities.
-        $expectedcapabilities = ['moodle/site:accessallgroups', 'moodle/site:viewfullnames',
+        $expectedcapabilities = ['powereduc/site:accessallgroups', 'powereduc/site:viewfullnames',
                 'repository/upload:view', 'atto/recordrtc:recordaudio'];
 
         $this->assert_capability_list_contains($expectedcapabilities, $actual);
@@ -4023,7 +4023,7 @@ class accesslib_test extends advanced_testcase {
         $capabilities = context_block::instance($block->id)->get_capabilities();
 
         // Just test a few representative capabilities.
-        $expected = ['block/online_users:addinstance', 'moodle/block:edit', 'moodle/block:view'];
+        $expected = ['block/online_users:addinstance', 'powereduc/block:edit', 'powereduc/block:view'];
         $this->assert_capability_list_contains($expected, $capabilities);
 
         // Now test with different sorting.
@@ -4049,7 +4049,7 @@ class accesslib_test extends advanced_testcase {
         $capabilities = context_user::instance($user->id)->get_capabilities();
 
         // Just test a few representative capabilities.
-        $expected = ['moodle/user:editmessageprofile', 'moodle/user:editprofile', 'moodle/user:viewalldetails'];
+        $expected = ['powereduc/user:editmessageprofile', 'powereduc/user:editprofile', 'powereduc/user:viewalldetails'];
         $this->assert_capability_list_contains($expected, $capabilities);
 
         // Now test with different sorting.
@@ -4080,62 +4080,62 @@ class accesslib_test extends advanced_testcase {
 
         $existingcaps = $DB->get_records('capabilities', array(), 'id', 'name, captype, contextlevel, component, riskbitmask');
 
-        $this->assertFalse(isset($existingcaps['moodle/site:restore']));         // Moved to new 'moodle/restore:restorecourse'.
-        $this->assertTrue(isset($existingcaps['moodle/restore:restorecourse'])); // New cap from 'moodle/site:restore'.
-        $this->assertTrue(isset($existingcaps['moodle/site:sendmessage']));      // New capability.
-        $this->assertTrue(isset($existingcaps['moodle/backup:backupcourse']));
-        $this->assertTrue(isset($existingcaps['moodle/backup:backupsection']));  // Cloned from 'moodle/backup:backupcourse'.
-        $this->assertTrue(isset($existingcaps['moodle/site:approvecourse']));    // Updated bitmask.
-        $this->assertTrue(isset($existingcaps['moodle/course:manageactivities']));
-        $this->assertTrue(isset($existingcaps['mod/page:addinstance']));         // Cloned from core 'moodle/course:manageactivities'.
+        $this->assertFalse(isset($existingcaps['powereduc/site:restore']));         // Moved to new 'powereduc/restore:restorecourse'.
+        $this->assertTrue(isset($existingcaps['powereduc/restore:restorecourse'])); // New cap from 'powereduc/site:restore'.
+        $this->assertTrue(isset($existingcaps['powereduc/site:sendmessage']));      // New capability.
+        $this->assertTrue(isset($existingcaps['powereduc/backup:backupcourse']));
+        $this->assertTrue(isset($existingcaps['powereduc/backup:backupsection']));  // Cloned from 'powereduc/backup:backupcourse'.
+        $this->assertTrue(isset($existingcaps['powereduc/site:approvecourse']));    // Updated bitmask.
+        $this->assertTrue(isset($existingcaps['powereduc/course:manageactivities']));
+        $this->assertTrue(isset($existingcaps['mod/page:addinstance']));         // Cloned from core 'powereduc/course:manageactivities'.
 
         // Fake state before upgrade.
-        $DB->set_field('capabilities', 'name', 'moodle/site:restore', array('name'=>'moodle/restore:restorecourse'));
-        $DB->set_field('role_capabilities', 'capability', 'moodle/site:restore', array('capability'=>'moodle/restore:restorecourse'));
-        assign_capability('moodle/site:restore', CAP_PROHIBIT, $teacher->id, $froncontext->id, true);
-        $perms1 = array_values($DB->get_records('role_capabilities', array('capability'=>'moodle/site:restore', 'roleid'=>$teacher->id), 'contextid, permission', 'contextid, permission'));
+        $DB->set_field('capabilities', 'name', 'powereduc/site:restore', array('name'=>'powereduc/restore:restorecourse'));
+        $DB->set_field('role_capabilities', 'capability', 'powereduc/site:restore', array('capability'=>'powereduc/restore:restorecourse'));
+        assign_capability('powereduc/site:restore', CAP_PROHIBIT, $teacher->id, $froncontext->id, true);
+        $perms1 = array_values($DB->get_records('role_capabilities', array('capability'=>'powereduc/site:restore', 'roleid'=>$teacher->id), 'contextid, permission', 'contextid, permission'));
 
-        $DB->delete_records('role_capabilities', array('capability'=>'moodle/site:sendmessage'));
-        $DB->delete_records('capabilities', array('name'=>'moodle/site:sendmessage'));
+        $DB->delete_records('role_capabilities', array('capability'=>'powereduc/site:sendmessage'));
+        $DB->delete_records('capabilities', array('name'=>'powereduc/site:sendmessage'));
 
-        $DB->delete_records('role_capabilities', array('capability'=>'moodle/backup:backupsection'));
-        $DB->delete_records('capabilities', array('name'=>'moodle/backup:backupsection'));
-        assign_capability('moodle/backup:backupcourse', CAP_PROHIBIT, $student->id, $froncontext->id, true);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $teacher->id, $froncontext->id, true);
+        $DB->delete_records('role_capabilities', array('capability'=>'powereduc/backup:backupsection'));
+        $DB->delete_records('capabilities', array('name'=>'powereduc/backup:backupsection'));
+        assign_capability('powereduc/backup:backupcourse', CAP_PROHIBIT, $student->id, $froncontext->id, true);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $teacher->id, $froncontext->id, true);
 
-        $DB->set_field('capabilities', 'riskbitmask', 0, array('name'=>'moodle/site:approvecourse'));
+        $DB->set_field('capabilities', 'riskbitmask', 0, array('name'=>'powereduc/site:approvecourse'));
 
         $DB->delete_records('role_capabilities', array('capability'=>'mod/page:addinstance'));
         $DB->delete_records('capabilities', array('name'=>'mod/page:addinstance'));
-        assign_capability('moodle/course:manageactivities', CAP_PROHIBIT, $student->id, $froncontext->id, true);
-        assign_capability('moodle/course:manageactivities', CAP_ALLOW, $teacher->id, $froncontext->id, true);
+        assign_capability('powereduc/course:manageactivities', CAP_PROHIBIT, $student->id, $froncontext->id, true);
+        assign_capability('powereduc/course:manageactivities', CAP_ALLOW, $teacher->id, $froncontext->id, true);
 
         // Execute core.
-        update_capabilities('moodle');
+        update_capabilities('powereduc');
 
         // Only core should be upgraded.
         $caps = $DB->get_records('capabilities', array(), 'id', 'name, captype, contextlevel, component, riskbitmask');
 
-        $this->assertFalse(isset($existingcaps['moodle/site:restore']));
-        $this->assertTrue(isset($caps['moodle/restore:restorecourse']));
-        $this->assertEquals($existingcaps['moodle/restore:restorecourse'], $caps['moodle/restore:restorecourse']);
-        $perms2 = array_values($DB->get_records('role_capabilities', array('capability'=>'moodle/restore:restorecourse', 'roleid'=>$teacher->id), 'contextid, permission', 'contextid, permission'));
+        $this->assertFalse(isset($existingcaps['powereduc/site:restore']));
+        $this->assertTrue(isset($caps['powereduc/restore:restorecourse']));
+        $this->assertEquals($existingcaps['powereduc/restore:restorecourse'], $caps['powereduc/restore:restorecourse']);
+        $perms2 = array_values($DB->get_records('role_capabilities', array('capability'=>'powereduc/restore:restorecourse', 'roleid'=>$teacher->id), 'contextid, permission', 'contextid, permission'));
         $this->assertEquals($perms1, $perms2);
 
-        $this->assertTrue(isset($caps['moodle/site:sendmessage']));
-        $this->assertEquals($existingcaps['moodle/site:sendmessage'], $caps['moodle/site:sendmessage']);
+        $this->assertTrue(isset($caps['powereduc/site:sendmessage']));
+        $this->assertEquals($existingcaps['powereduc/site:sendmessage'], $caps['powereduc/site:sendmessage']);
 
-        $this->assertTrue(isset($caps['moodle/backup:backupsection']));
-        $this->assertEquals($existingcaps['moodle/backup:backupsection'], $caps['moodle/backup:backupsection']);
-        $roles = $DB->get_records_sql('SELECT DISTINCT roleid AS id FROM {role_capabilities} WHERE capability=? OR capability=?', array('moodle/backup:backupcourse', 'moodle/backup:backupsection'));
+        $this->assertTrue(isset($caps['powereduc/backup:backupsection']));
+        $this->assertEquals($existingcaps['powereduc/backup:backupsection'], $caps['powereduc/backup:backupsection']);
+        $roles = $DB->get_records_sql('SELECT DISTINCT roleid AS id FROM {role_capabilities} WHERE capability=? OR capability=?', array('powereduc/backup:backupcourse', 'powereduc/backup:backupsection'));
         foreach ($roles as $role) {
-            $perms1 = array_values($DB->get_records('role_capabilities', array('capability'=>'moodle/backup:backupcourse', 'roleid'=>$role->id), 'contextid, permission', 'contextid, permission'));
-            $perms2 = array_values($DB->get_records('role_capabilities', array('capability'=>'moodle/backup:backupsection', 'roleid'=>$role->id), 'contextid, permission', 'contextid, permission'));
+            $perms1 = array_values($DB->get_records('role_capabilities', array('capability'=>'powereduc/backup:backupcourse', 'roleid'=>$role->id), 'contextid, permission', 'contextid, permission'));
+            $perms2 = array_values($DB->get_records('role_capabilities', array('capability'=>'powereduc/backup:backupsection', 'roleid'=>$role->id), 'contextid, permission', 'contextid, permission'));
             $this->assertEquals($perms1, $perms2);
         }
 
-        $this->assertTrue(isset($caps['moodle/site:approvecourse']));
-        $this->assertEquals($existingcaps['moodle/site:approvecourse'], $caps['moodle/site:approvecourse']);
+        $this->assertTrue(isset($caps['powereduc/site:approvecourse']));
+        $this->assertEquals($existingcaps['powereduc/site:approvecourse'], $caps['powereduc/site:approvecourse']);
 
         $this->assertFalse(isset($caps['mod/page:addinstance']));
 
@@ -4143,9 +4143,9 @@ class accesslib_test extends advanced_testcase {
         update_capabilities('mod_page');
         $caps = $DB->get_records('capabilities', array(), 'id', 'name, captype, contextlevel, component, riskbitmask');
         $this->assertTrue(isset($caps['mod/page:addinstance']));
-        $roles = $DB->get_records_sql('SELECT DISTINCT roleid AS id FROM {role_capabilities} WHERE capability=? OR capability=?', array('moodle/course:manageactivities', 'mod/page:addinstance'));
+        $roles = $DB->get_records_sql('SELECT DISTINCT roleid AS id FROM {role_capabilities} WHERE capability=? OR capability=?', array('powereduc/course:manageactivities', 'mod/page:addinstance'));
         foreach ($roles as $role) {
-            $perms1 = array_values($DB->get_records('role_capabilities', array('capability'=>'moodle/course:manageactivities', 'roleid'=>$role->id), 'contextid, permission', 'contextid, permission'));
+            $perms1 = array_values($DB->get_records('role_capabilities', array('capability'=>'powereduc/course:manageactivities', 'roleid'=>$role->id), 'contextid, permission', 'contextid, permission'));
             $perms2 = array_values($DB->get_records('role_capabilities', array('capability'=>'mod/page:addinstance', 'roleid'=>$role->id), 'contextid, permission', 'contextid, permission'));
         }
         $this->assertEquals($perms1, $perms2);
@@ -4252,17 +4252,17 @@ class accesslib_test extends advanced_testcase {
 
         // Note: Here are used default capabilities, the full test is in permission evaluation below,
         // use two capabilities that teacher has and one does not, none of them should be allowed for not-logged-in user.
-        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'moodle/backup:backupcourse')));
-        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'moodle/site:approvecourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'powereduc/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'powereduc/site:approvecourse')));
 
-        $users = get_users_by_capability($coursecontext, 'moodle/backup:backupcourse');
+        $users = get_users_by_capability($coursecontext, 'powereduc/backup:backupcourse');
 
         $this->assertTrue(array_key_exists($teacher->id, $users));
         $this->assertFalse(array_key_exists($admin->id, $users));
         $this->assertFalse(array_key_exists($student->id, $users));
         $this->assertFalse(array_key_exists($guest->id, $users));
 
-        $users = get_users_by_capability($coursecontext, 'moodle/site:approvecourse');
+        $users = get_users_by_capability($coursecontext, 'powereduc/site:approvecourse');
 
         $this->assertFalse(array_key_exists($teacher->id, $users));
         $this->assertFalse(array_key_exists($admin->id, $users));
@@ -4270,10 +4270,10 @@ class accesslib_test extends advanced_testcase {
         $this->assertFalse(array_key_exists($guest->id, $users));
 
         // Test role override.
-        assign_capability('moodle/backup:backupcourse', CAP_PROHIBIT, $teacherrole->id, $coursecontext, true);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $studentrole->id, $coursecontext, true);
+        assign_capability('powereduc/backup:backupcourse', CAP_PROHIBIT, $teacherrole->id, $coursecontext, true);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $studentrole->id, $coursecontext, true);
 
-        $users = get_users_by_capability($coursecontext, 'moodle/backup:backupcourse');
+        $users = get_users_by_capability($coursecontext, 'powereduc/backup:backupcourse');
 
         $this->assertFalse(array_key_exists($teacher->id, $users));
         $this->assertFalse(array_key_exists($admin->id, $users));
@@ -4304,10 +4304,10 @@ class accesslib_test extends advanced_testcase {
 
         // Note: Here are used default capabilities, the full test is in permission evaluation below,
         // use two capabilities that teacher has and one does not, none of them should be allowed for not-logged-in user.
-        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'moodle/backup:backupcourse')));
-        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'moodle/site:approvecourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'powereduc/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'powereduc/site:approvecourse')));
 
-        list($sql, $params) = get_with_capability_sql($coursecontext, 'moodle/backup:backupcourse');
+        list($sql, $params) = get_with_capability_sql($coursecontext, 'powereduc/backup:backupcourse');
         $users = $DB->get_records_sql($sql, $params);
 
         $this->assertTrue(array_key_exists($teacher->id, $users));
@@ -4315,7 +4315,7 @@ class accesslib_test extends advanced_testcase {
         $this->assertFalse(array_key_exists($student->id, $users));
         $this->assertFalse(array_key_exists($guest->id, $users));
 
-        list($sql, $params) = get_with_capability_sql($coursecontext, 'moodle/site:approvecourse');
+        list($sql, $params) = get_with_capability_sql($coursecontext, 'powereduc/site:approvecourse');
         $users = $DB->get_records_sql($sql, $params);
 
         $this->assertFalse(array_key_exists($teacher->id, $users));
@@ -4324,10 +4324,10 @@ class accesslib_test extends advanced_testcase {
         $this->assertFalse(array_key_exists($guest->id, $users));
 
         // Test role override.
-        assign_capability('moodle/backup:backupcourse', CAP_PROHIBIT, $teacherrole->id, $coursecontext, true);
-        assign_capability('moodle/backup:backupcourse', CAP_ALLOW, $studentrole->id, $coursecontext, true);
+        assign_capability('powereduc/backup:backupcourse', CAP_PROHIBIT, $teacherrole->id, $coursecontext, true);
+        assign_capability('powereduc/backup:backupcourse', CAP_ALLOW, $studentrole->id, $coursecontext, true);
 
-        list($sql, $params) = get_with_capability_sql($coursecontext, 'moodle/backup:backupcourse');
+        list($sql, $params) = get_with_capability_sql($coursecontext, 'powereduc/backup:backupcourse');
         $users = $DB->get_records_sql($sql, $params);
 
         $this->assertFalse(array_key_exists($teacher->id, $users));
@@ -4349,8 +4349,8 @@ class accesslib_test extends advanced_testcase {
     public function get_get_with_capability_join_override_cases() {
         return [
                 'no overrides' => [true, []],
-                'one override' => [true, ['moodle/course:viewscales']],
-                'both overrides' => [false, ['moodle/course:viewscales', 'moodle/question:flag']],
+                'one override' => [true, ['powereduc/course:viewscales']],
+                'both overrides' => [false, ['powereduc/course:viewscales', 'powereduc/question:flag']],
         ];
     }
 
@@ -4381,8 +4381,8 @@ class accesslib_test extends advanced_testcase {
         // This test assumes that by default the student roles has the two
         // capabilities. Check this now in case the role definitions are every changed.
         $coursecontext = context_course::instance($course->id);
-        $this->assertTrue(has_capability('moodle/course:viewscales', $coursecontext, $student));
-        $this->assertTrue(has_capability('moodle/question:flag', $coursecontext, $student));
+        $this->assertTrue(has_capability('powereduc/course:viewscales', $coursecontext, $student));
+        $this->assertTrue(has_capability('powereduc/question:flag', $coursecontext, $student));
 
         // We test cases where there are a varying number of prevent overrides.
         foreach ($capabilitiestoprevent as $capability) {
@@ -4391,7 +4391,7 @@ class accesslib_test extends advanced_testcase {
 
         // So now, assemble our query using the method under test, and verify that it returns the student.
         $sqljoin = get_with_capability_join($coursecontext,
-                ['moodle/course:viewscales', 'moodle/question:flag'], 'u.id');
+                ['powereduc/course:viewscales', 'powereduc/question:flag'], 'u.id');
 
         $users = $DB->get_records_sql("SELECT u.*
                   FROM {user} u
@@ -4985,10 +4985,10 @@ class accesslib_test extends advanced_testcase {
 
         // Note: Here are used default capabilities, the full test is in permission evaluation bellow,
         // use two capabilities that teacher has and one does not, none of them should be allowed for not-logged-in user.
-        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'moodle/backup:backupsection')));
-        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'moodle/backup:backupcourse')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'powereduc/backup:backupsection')));
+        $this->assertTrue($DB->record_exists('capabilities', array('name' => 'powereduc/backup:backupcourse')));
 
-        $sca = array('moodle/backup:backupsection', 'moodle/backup:backupcourse');
+        $sca = array('powereduc/backup:backupsection', 'powereduc/backup:backupcourse');
 
         $this->setUser($teacher);
         require_all_capabilities($sca, $coursecontext);

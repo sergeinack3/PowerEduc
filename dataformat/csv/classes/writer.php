@@ -24,7 +24,7 @@
 
 namespace dataformat_csv;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * CSV data format writer

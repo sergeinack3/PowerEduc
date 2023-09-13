@@ -27,7 +27,7 @@ namespace gradereport_singleview\local\screen;
 use gradereport_singleview;
 use moodle_url;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * The gradebook simple view - initial view to select your search options

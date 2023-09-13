@@ -23,7 +23,7 @@
  */
 
 namespace core\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/badgeslib.php');
 /**
  * Event triggered after a badge is viewed.

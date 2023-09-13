@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the profile_define_base class.
@@ -32,7 +32,7 @@ class profile_define_base {
 
     /**
      * Prints out the form snippet for creating or editing a profile field
-     * @param MoodleQuickForm $form instance of the moodleform class
+     * @param PowerEducQuickForm $form instance of the powereducform class
      */
     public function define_form(&$form) {
         $form->addElement('header', '_commonsettings', get_string('profilecommonsettings', 'admin'));
@@ -45,7 +45,7 @@ class profile_define_base {
     /**
      * Prints out the form snippet for the part of creating or editing a profile field common to all data types.
      *
-     * @param MoodleQuickForm $form instance of the moodleform class
+     * @param PowerEducQuickForm $form instance of the powereducform class
      */
     public function define_form_common(&$form) {
 
@@ -88,7 +88,7 @@ class profile_define_base {
 
     /**
      * Prints out the form snippet for the part of creating or editing a profile field specific to the current data type.
-     * @param MoodleQuickForm $form instance of the moodleform class
+     * @param PowerEducQuickForm $form instance of the powereducform class
      */
     public function define_form_specific($form) {
         // Do nothing - overwrite if necessary.
@@ -166,7 +166,7 @@ class profile_define_base {
 
     /**
      * Alter form based on submitted or existing data
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      */
     public function define_after_data(&$mform) {
         // Do nothing - overwrite if necessary.
@@ -284,11 +284,11 @@ function profile_delete_category($id) {
 
     // Retrieve the category.
     if (!$category = $DB->get_record('user_info_category', array('id' => $id))) {
-        throw new \moodle_exception('invalidcategoryid');
+        throw new \powereduc_exception('invalidcategoryid');
     }
 
     if (!$categories = $DB->get_records('user_info_category', null, 'sortorder ASC')) {
-        throw new \moodle_exception('nocate', 'debug');
+        throw new \powereduc_exception('nocate', 'debug');
     }
 
     unset($categories[$category->id]);
@@ -343,7 +343,7 @@ function profile_delete_field($id) {
 
     // Remove any user data associated with this field.
     if (!$DB->delete_records('user_info_data', array('fieldid' => $id))) {
-        throw new \moodle_exception('cannotdeletecustomfield');
+        throw new \powereduc_exception('cannotdeletecustomfield');
     }
 
     // Note: Any availability conditions that depend on this field will remain,
@@ -512,8 +512,8 @@ function profile_save_category(stdClass $data): void {
 /**
  * Edit a category
  *
- * @deprecated since Moodle 3.11 MDL-71051 - please do not use this function any more.
- * @todo MDL-71413 This will be deleted in Moodle 4.3.
+ * @deprecated since PowerEduc 3.11 MDL-71051 - please do not use this function any more.
+ * @todo MDL-71413 This will be deleted in PowerEduc 4.3.
  * @see profile_save_category()
  *
  * @param int $id
@@ -599,8 +599,8 @@ function profile_save_field(stdClass $data, array $editors): void {
 /**
  * Edit a profile field.
  *
- * @deprecated since Moodle 3.11 MDL-71051 - please do not use this function any more.
- * @todo MDL-71413 This will be deleted in Moodle 4.3.
+ * @deprecated since PowerEduc 3.11 MDL-71051 - please do not use this function any more.
+ * @todo MDL-71413 This will be deleted in PowerEduc 4.3.
  * @see profile_save_field()
  *
  * @param int $id

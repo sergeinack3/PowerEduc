@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/backup/util/includes/convert_includes.php');
 
@@ -317,7 +317,7 @@ abstract class convert_helper {
                 break;
             }
 
-            if ($closest === backup::FORMAT_MOODLE) {
+            if ($closest === backup::FORMAT_POWEREDUC) {
                 // bingo we can break now
                 break;
             }
@@ -350,14 +350,14 @@ abstract class convert_helper {
             }
         }
 
-        if (is_null($dist[backup::FORMAT_MOODLE])) {
+        if (is_null($dist[backup::FORMAT_POWEREDUC])) {
             // unable to find a conversion path, the target format not reachable
             return array();
         }
 
         // reconstruct the optimal path from the source format to the target one
         $conversionpath = array();
-        $target         = backup::FORMAT_MOODLE;
+        $target         = backup::FORMAT_POWEREDUC;
         while (isset($prev[$target])) {
             array_unshift($conversionpath, $paths[$prev[$target]][$target]);
             $target = $prev[$target];

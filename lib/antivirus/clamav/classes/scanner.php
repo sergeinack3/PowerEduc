@@ -24,7 +24,7 @@
 
 namespace antivirus_clamav;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** Default socket timeout */
 define('ANTIVIRUS_CLAMAV_SOCKET_TIMEOUT', 10);

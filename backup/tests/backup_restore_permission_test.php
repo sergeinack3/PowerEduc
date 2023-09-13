@@ -18,7 +18,7 @@ namespace core_backup;
 
 use core_backup_backup_restore_base_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once('backup_restore_base_testcase.php');

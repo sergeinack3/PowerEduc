@@ -16,7 +16,7 @@
 
 namespace core\progress;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base class for handling progress information.

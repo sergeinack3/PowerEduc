@@ -1,31 +1,31 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Output the override actionbar for this activity.
  *
  * @package   mod_assign
- * @copyright 2021 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2021 Adrian Greeve <adrian@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_assign\output;
 
 use core_availability\info_module;
-use moodle_url;
+use powereduc_url;
 use templatable;
 use renderable;
 use url_select;
@@ -35,12 +35,12 @@ use single_button;
  * Output the override actionbar for this activity.
  *
  * @package   mod_assign
- * @copyright 2021 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2021 Adrian Greeve <adrian@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class override_actionmenu implements templatable, renderable {
 
-    /** @var moodle_url The current url for this page. */
+    /** @var powereduc_url The current url for this page. */
     protected $currenturl;
     /** @var \cm_info course module information */
     protected $cm;
@@ -52,15 +52,15 @@ class override_actionmenu implements templatable, renderable {
     /**
      * Constructor for this action menu.
      *
-     * @param moodle_url $currenturl The current url for this page.
+     * @param powereduc_url $currenturl The current url for this page.
      * @param \cm_info $cm course module information.
      */
-    public function __construct(moodle_url $currenturl, \cm_info $cm) {
+    public function __construct(powereduc_url $currenturl, \cm_info $cm) {
         $this->currenturl = $currenturl;
         $this->cm = $cm;
         $groupmode = groups_get_activity_groupmode($this->cm);
         $this->canaccessallgroups = ($groupmode === NOGROUPS) ||
-                has_capability('moodle/site:accessallgroups', $this->cm->context);
+                has_capability('powereduc/site:accessallgroups', $this->cm->context);
         $this->groups = $this->canaccessallgroups ? groups_get_all_groups($this->cm->course) :
                 groups_get_activity_allowed_groups($this->cm);
     }
@@ -71,8 +71,8 @@ class override_actionmenu implements templatable, renderable {
      * @return url_select A url select object.
      */
     protected function get_select_menu(): url_select {
-        $userlink = new moodle_url('/mod/assign/overrides.php', ['cmid' => $this->cm->id, 'mode' => 'user']);
-        $grouplink = new moodle_url('/mod/assign/overrides.php', ['cmid' => $this->cm->id, 'mode' => 'group']);
+        $userlink = new powereduc_url('/mod/assign/overrides.php', ['cmid' => $this->cm->id, 'mode' => 'user']);
+        $grouplink = new powereduc_url('/mod/assign/overrides.php', ['cmid' => $this->cm->id, 'mode' => 'group']);
         $menu = [
             $userlink->out(false) => get_string('useroverrides', 'mod_assign'),
             $grouplink->out(false) => get_string('groupoverrides', 'mod_assign'),
@@ -142,7 +142,7 @@ class override_actionmenu implements templatable, renderable {
         $action = ($type == 'user') ? 'adduser' : 'addgroup';
 
         $params = ['cmid' => $this->currenturl->get_param('cmid'), 'action' => $action];
-        $url = new moodle_url('/mod/assign/overrideedit.php', $params);
+        $url = new powereduc_url('/mod/assign/overrideedit.php', $params);
 
         $options = [];
         if ($action == 'addgroup' && !$this->show_groups()) {

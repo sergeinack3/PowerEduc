@@ -26,7 +26,7 @@ namespace core_contentbank\form;
 
 use moodleform;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/formslib.php');
 

@@ -19,7 +19,7 @@ Feature: Test importing True/False questions
   Scenario: import a True/False question.
     When I am on the "Course 1" "core_question > course question import" page logged in as teacher
     And I set the field "id_format_xml" to "1"
-    And I upload "question/type/truefalse/tests/fixtures/testquestion.moodle.xml" file to "Import" filemanager
+    And I upload "question/type/truefalse/tests/fixtures/testquestion.powereduc.xml" file to "Import" filemanager
     And I press "id_submitbutton"
     Then I should see "Parsing questions from import file."
     And I should see "Importing 1 questions from file"

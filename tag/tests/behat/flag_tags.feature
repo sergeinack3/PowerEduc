@@ -20,8 +20,8 @@ Feature: Users can flag tags and manager can reset flags
     And I log in as "admin"
     And I set the following system permissions of "Authenticated user" role:
       | capability                   | permission |
-      | moodle/site:viewparticipants | Allow      |
-      | moodle/user:viewdetails      | Allow      |
+      | powereduc/site:viewparticipants | Allow      |
+      | powereduc/user:viewdetails      | Allow      |
     And I log out
     And I log in as "user2"
     And I turn editing mode on

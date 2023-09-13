@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ class secondary extends core_secondary {
         $nodes = $this->get_default_module_mapping();
 
         if ($mainnode) {
-            $url = new \moodle_url('/mod/' . $this->page->activityname . '/view.php', ['id' => $this->page->cm->id]);
+            $url = new \powereduc_url('/mod/' . $this->page->activityname . '/view.php', ['id' => $this->page->cm->id]);
             $setactive = $url->compare($this->page->url, URL_MATCH_BASE);
             $node = $rootnode->add(get_string('modulename', 'feedback'), $url, null, null, 'modulepage');
             if ($setactive) {

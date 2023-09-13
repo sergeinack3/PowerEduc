@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Cluster
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
  /** Start of Cluster page */
 define("LESSON_PAGE_CLUSTER",   "30");
@@ -71,7 +71,7 @@ class lesson_page_type_cluster extends lesson_page {
     }
     public function add_page_link($previd) {
         global $PAGE, $CFG;
-        $addurl = new moodle_url('/mod/lesson/editpage.php', array('id'=>$PAGE->cm->id, 'pageid'=>$previd, 'sesskey'=>sesskey(), 'qtype'=>LESSON_PAGE_CLUSTER));
+        $addurl = new powereduc_url('/mod/lesson/editpage.php', array('id'=>$PAGE->cm->id, 'pageid'=>$previd, 'sesskey'=>sesskey(), 'qtype'=>LESSON_PAGE_CLUSTER));
         return array('addurl'=>$addurl, 'type'=>LESSON_PAGE_CLUSTER, 'name'=>get_string('addcluster', 'lesson'));
     }
     public function valid_page_and_view(&$validpages, &$pageviews) {
@@ -132,7 +132,7 @@ class lesson_add_page_form_cluster extends lesson_add_page_form_base {
         if ($pageid == 0) {
             if ($lesson->has_pages()) {
                 if (!$page = $DB->get_record("lesson_pages", array("prevpageid" => 0, "lessonid" => $lesson->id))) {
-                    throw new \moodle_exception('cannotfindpagerecord', 'lesson');
+                    throw new \powereduc_exception('cannotfindpagerecord', 'lesson');
                 }
             } else {
                 // This is the ONLY page
@@ -141,7 +141,7 @@ class lesson_add_page_form_cluster extends lesson_add_page_form_base {
             }
         } else {
             if (!$page = $DB->get_record("lesson_pages", array("id" => $pageid))) {
-                throw new \moodle_exception('cannotfindpagerecord', 'lesson');
+                throw new \powereduc_exception('cannotfindpagerecord', 'lesson');
             }
         }
         $newpage = new stdClass;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Manager for media files.
@@ -98,7 +98,7 @@ final class core_media_manager {
     /** @var core_media_manager caches a singleton instance */
     static private $instance;
 
-    /** @var moodle_page page this instance was initialised for */
+    /** @var powereduc_page page this instance was initialised for */
     private $page;
 
     /**
@@ -123,7 +123,7 @@ final class core_media_manager {
     /**
      * Construct a new core_media_manager instance
      *
-     * @param moodle_page $page The page we are going to add requirements to.
+     * @param powereduc_page $page The page we are going to add requirements to.
      * @see core_media_manager::instance()
      */
     private function __construct($page) {
@@ -187,14 +187,14 @@ final class core_media_manager {
      * URL by including ?d=100x100 at the end. If specified in the URL, this
      * will override the $width and $height parameters.
      *
-     * @param moodle_url $url Full URL of media file
+     * @param powereduc_url $url Full URL of media file
      * @param string $name Optional user-readable name to display in download link
      * @param int $width Width in pixels (optional)
      * @param int $height Height in pixels (optional)
      * @param array $options Array of key/value pairs
      * @return string HTML content of embed
      */
-    public function embed_url(moodle_url $url, $name = '', $width = 0, $height = 0,
+    public function embed_url(powereduc_url $url, $name = '', $width = 0, $height = 0,
                               $options = array()) {
 
         // Get width and height from URL if specified (overrides parameters in
@@ -203,7 +203,7 @@ final class core_media_manager {
         if (preg_match('/[?#]d=([\d]{1,4}%?)x([\d]{1,4}%?)/', $rawurl, $matches)) {
             $width = $matches[1];
             $height = $matches[2];
-            $url = new moodle_url(str_replace($matches[0], '', $rawurl));
+            $url = new powereduc_url(str_replace($matches[0], '', $rawurl));
         }
 
         // Defer to array version of function.
@@ -233,7 +233,7 @@ final class core_media_manager {
      * that render the object tag. The keys can contain values from
      * core_media::OPTION_xx.
      *
-     * @param array $alternatives Array of moodle_url to media files
+     * @param array $alternatives Array of powereduc_url to media files
      * @param string $name Optional user-readable name to display in download link
      * @param int $width Width in pixels (optional)
      * @param int $height Height in pixels (optional)
@@ -322,11 +322,11 @@ final class core_media_manager {
      *
      * This is a wrapper for can_embed_urls.
      *
-     * @param moodle_url $url URL of media file
+     * @param powereduc_url $url URL of media file
      * @param array $options Options (same as when embedding)
      * @return bool True if file can be embedded
      */
-    public function can_embed_url(moodle_url $url, $options = array()) {
+    public function can_embed_url(powereduc_url $url, $options = array()) {
         return $this->can_embed_urls(array($url), $options);
     }
 
@@ -335,7 +335,7 @@ final class core_media_manager {
      * an embedded player; if this returns false, you will just get a download
      * link.
      *
-     * @param array $urls URL of media file and any alternatives (moodle_url)
+     * @param array $urls URL of media file and any alternatives (powereduc_url)
      * @param array $options Options (same as when embedding)
      * @return bool True if file can be embedded
      */
@@ -379,7 +379,7 @@ final class core_media_manager {
 
     /**
      * Given a string containing multiple URLs separated by #, this will split
-     * it into an array of moodle_url objects suitable for using when calling
+     * it into an array of powereduc_url objects suitable for using when calling
      * embed_alternatives.
      *
      * Note that the input string should NOT be html-escaped (i.e. if it comes
@@ -388,7 +388,7 @@ final class core_media_manager {
      * @param string $combinedurl String of 1 or more alternatives separated by #
      * @param int $width Output variable: width (will be set to 0 if not specified)
      * @param int $height Output variable: height (0 if not specified)
-     * @return array Array of 1 or more moodle_url objects
+     * @return array Array of 1 or more powereduc_url objects
      */
     public function split_alternatives($combinedurl, &$width, &$height) {
         global $CFG;
@@ -425,8 +425,8 @@ final class core_media_manager {
                 continue;
             }
 
-            // Turn it into moodle_url object.
-            $returnurls[] = new moodle_url($url);
+            // Turn it into powereduc_url object.
+            $returnurls[] = new powereduc_url($url);
         }
 
         return $returnurls;
@@ -434,9 +434,9 @@ final class core_media_manager {
 
     /**
      * Returns the file extension for a URL.
-     * @param moodle_url $url URL
+     * @param powereduc_url $url URL
      */
-    public function get_extension(moodle_url $url) {
+    public function get_extension(powereduc_url $url) {
         // Note: Does not use core_text (. is UTF8-safe).
         $filename = self::get_filename($url);
         $dot = strrpos($filename, '.');
@@ -448,11 +448,11 @@ final class core_media_manager {
     }
 
     /**
-     * Obtains the filename from the moodle_url.
-     * @param moodle_url $url URL
+     * Obtains the filename from the powereduc_url.
+     * @param powereduc_url $url URL
      * @return string Filename only (not escaped)
      */
-    public function get_filename(moodle_url $url) {
+    public function get_filename(powereduc_url $url) {
         // Use the 'file' parameter if provided (for links created when
         // slasharguments was off). If not present, just use URL path.
         $path = $url->get_param('file');
@@ -469,11 +469,11 @@ final class core_media_manager {
     }
 
     /**
-     * Guesses MIME type for a moodle_url based on file extension.
-     * @param moodle_url $url URL
+     * Guesses MIME type for a powereduc_url based on file extension.
+     * @param powereduc_url $url URL
      * @return string MIME type
      */
-    public function get_mimetype(moodle_url $url) {
+    public function get_mimetype(powereduc_url $url) {
         return mimeinfo('type', $this->get_filename($url));
     }
 

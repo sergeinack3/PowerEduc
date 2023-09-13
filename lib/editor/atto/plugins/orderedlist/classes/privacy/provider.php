@@ -24,7 +24,7 @@
 
 namespace atto_orderedlist\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_orderedlist implementing null_provider.

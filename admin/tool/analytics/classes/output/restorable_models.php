@@ -25,7 +25,7 @@
 
 namespace tool_analytics\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Represents the list of default models that can be eventually restored.

@@ -24,7 +24,7 @@
 
 namespace tool_monitor\output\managerules;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Renderer class for manage rules page.

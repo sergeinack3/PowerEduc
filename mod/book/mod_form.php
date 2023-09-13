@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,12 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once(__DIR__.'/locallib.php');
-require_once($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot.'/course/powereducform_mod.php');
 
-class mod_book_mod_form extends moodleform_mod {
+class mod_book_mod_form extends powereducform_mod {
 
     function definition() {
         global $CFG;

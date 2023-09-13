@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
  * Moodle modifications:
  * * Moodle 3.4: Add support for OAuth 2 bearer token-based authentication
  *
- * @package moodlecore
+ * @package powereduccore
  * @author Christian Juerges <christian.juerges@xwave.ch>, Xwave GmbH, Josefstr. 92, 8005 Zuerich - Switzerland
  * @copyright (C) 2003/2004, Christian Juerges
  * @license http://opensource.org/licenses/lgpl-license.php GNU Lesser General Public License

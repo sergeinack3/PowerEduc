@@ -24,7 +24,7 @@
 
 namespace atto_subscript\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_subscript implementing null_provider.

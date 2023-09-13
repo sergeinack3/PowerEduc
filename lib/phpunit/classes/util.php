@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -46,13 +46,13 @@ class phpunit_util extends testing_util {
     /** @var array list of debugging messages triggered during the last test execution */
     protected static $debuggings = array();
 
-    /** @var phpunit_message_sink alternative target for moodle messaging */
+    /** @var phpunit_message_sink alternative target for powereduc messaging */
     protected static $messagesink = null;
 
     /** @var phpunit_phpmailer_sink alternative target for phpmailer messaging */
     protected static $phpmailersink = null;
 
-    /** @var phpunit_message_sink alternative target for moodle messaging */
+    /** @var phpunit_message_sink alternative target for powereduc messaging */
     protected static $eventsink = null;
 
     /**
@@ -198,7 +198,7 @@ class phpunit_util extends testing_util {
 
         // reinitialise following globals
         $OUTPUT = new bootstrap_renderer();
-        $PAGE = new moodle_page();
+        $PAGE = new powereduc_page();
         $FULLME = null;
         $ME = null;
         $SCRIPT = null;
@@ -347,7 +347,7 @@ class phpunit_util extends testing_util {
      * @static
      * @return void
      */
-    public static function bootstrap_moodle_info() {
+    public static function bootstrap_powereduc_info() {
         echo self::get_site_info();
     }
 
@@ -807,7 +807,7 @@ class phpunit_util extends testing_util {
     /**
      * Are messages for phpmailer redirected to some sink?
      *
-     * Note: to be called from moodle_phpmailer.php only!
+     * Note: to be called from powereduc_phpmailer.php only!
      *
      * @return bool
      */

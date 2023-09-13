@@ -23,10 +23,10 @@
     <const name="PHPUNIT_SEQUENCE_START" value=""/>
 
     <!--Following constants instruct tests to fetch external test files from alternative location
-        or skip tests if empty, clone https://github.com/moodlehq/moodle-exttests to local web server-->
-    <!--<const name="TEST_EXTERNAL_FILES_HTTP_URL" value="http://download.moodle.org/unittest"/>
+        or skip tests if empty, clone https://github.com/powereduchq/powereduc-exttests to local web server-->
+    <!--<const name="TEST_EXTERNAL_FILES_HTTP_URL" value="http://download.powereduc.org/unittest"/>
         uncomment and alter to fetch external test files from alternative location-->
-    <!--<const name="TEST_EXTERNAL_FILES_HTTPS_URL" value="https://download.moodle.org/unittest"/>
+    <!--<const name="TEST_EXTERNAL_FILES_HTTPS_URL" value="https://download.powereduc.org/unittest"/>
         uncomment and alter to fetch external test files from alternative location-->
   </php>
 
@@ -83,8 +83,8 @@
     </testsuite>
     <testsuite name="core_backup_testsuite">
       <directory suffix="_test.php">backup/controller/tests</directory>
-      <directory suffix="_test.php">backup/converter/moodle1/tests</directory>
-      <directory suffix="_test.php">backup/moodle2/tests</directory>
+      <directory suffix="_test.php">backup/converter/powereduc1/tests</directory>
+      <directory suffix="_test.php">backup/powereduc2/tests</directory>
       <directory suffix="_test.php">backup/tests</directory>
       <directory suffix="_test.php">backup/util</directory>
     </testsuite>

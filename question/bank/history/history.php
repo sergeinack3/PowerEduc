@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Question history preview.
@@ -35,7 +35,7 @@ $returnurl = required_param('returnurl', PARAM_RAW);
 list($thispageurl, $contexts, $cmid, $cm, $module, $pagevars) =
         question_edit_setup('questions', '/question/bank/history/history.php');
 
-$url = new moodle_url($thispageurl, ['entryid' => $entryid, 'returnurl' => $returnurl]);
+$url = new powereduc_url($thispageurl, ['entryid' => $entryid, 'returnurl' => $returnurl]);
 $PAGE->set_url($url);
 $questionbank = new \qbank_history\question_history_view($contexts, $url, $COURSE, $entryid, $returnurl, $cm);
 
@@ -44,7 +44,7 @@ $PAGE->set_title($streditingquestions);
 $PAGE->set_heading($streditingquestions);
 $context = $contexts->lowest();
 $PAGE->set_context($context);
-$PAGE->navbar->add(get_string('question'), new moodle_url($returnurl));
+$PAGE->navbar->add(get_string('question'), new powereduc_url($returnurl));
 $PAGE->navbar->add($streditingquestions, $url);
 
 echo $OUTPUT->header();

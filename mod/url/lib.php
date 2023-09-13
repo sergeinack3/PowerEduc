@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Mandatory public API of url module
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * List of features supported in URL module
@@ -39,7 +39,7 @@ function url_supports($feature) {
         case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_CONTENT;
 
@@ -48,7 +48,7 @@ function url_supports($feature) {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  * @param $data the data submitted from the reset course.
  * @return array status array
  */
@@ -340,7 +340,7 @@ function url_dndupload_handle($uploadinfo) {
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function url_view($url, $course, $cm, $context) {
 
@@ -368,7 +368,7 @@ function url_view($url, $course, $cm, $context) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function url_check_updates_since(cm_info $cm, $from, $filter = array()) {
     $updates = course_check_module_updates_since($cm, $from, array('content'), $filter);
@@ -406,7 +406,7 @@ function mod_url_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/url/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/url/view.php', ['id' => $cm->id]),
         1,
         true
     );

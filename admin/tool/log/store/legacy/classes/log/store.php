@@ -26,7 +26,7 @@
 
 namespace logstore_legacy\log;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class store implements \tool_log\log\store, \core\log\sql_reader {
     use \tool_log\helper\store,

@@ -31,7 +31,7 @@ use cm_info;
 use tabobject;
 use lang_string;
 use moodle_url;
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Bulk activity completion manager class

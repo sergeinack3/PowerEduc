@@ -15,10 +15,10 @@
     <name>
       <text>Tau Question</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Testing Tau Question</text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="powereduc_auto_format">
       <text></text>
     </generalfeedback>
     <defaultgrade>1.0000000</defaultgrade>
@@ -52,29 +52,29 @@
     <name>
       <text>Sigma Question</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Testing Sigma Question</text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="powereduc_auto_format">
       <text></text>
     </generalfeedback>
     <defaultgrade>1.0000000</defaultgrade>
     <penalty>0.3333333</penalty>
     <hidden>0</hidden>
     <usecase>0</usecase>
-    <answer fraction="100" format="moodle_auto_format">
+    <answer fraction="100" format="powereduc_auto_format">
       <text>yes</text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="0" format="moodle_auto_format">
+    <answer fraction="0" format="powereduc_auto_format">
       <text>no</text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="0" format="moodle_auto_format">
+    <answer fraction="0" format="powereduc_auto_format">
       <text>may be</text>
       <feedback format="html">
         <text></text>

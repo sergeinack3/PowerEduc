@@ -24,7 +24,7 @@
 
 namespace customfield_text;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use core_customfield\api;
 

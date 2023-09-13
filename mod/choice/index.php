@@ -8,7 +8,7 @@
     $PAGE->set_url('/mod/choice/index.php', array('id'=>$id));
 
     if (!$course = $DB->get_record('course', array('id'=>$id))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
 
     require_course_login($course);
@@ -27,7 +27,7 @@
     echo $OUTPUT->header();
 
     if (! $choices = get_all_instances_in_course("choice", $course)) {
-        notice(get_string('thereareno', 'moodle', $strchoices), "../../course/view.php?id=$course->id");
+        notice(get_string('thereareno', 'powereduc', $strchoices), "../../course/view.php?id=$course->id");
     }
 
     $usesections = course_format_uses_sections($course->format);

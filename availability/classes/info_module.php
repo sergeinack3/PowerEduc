@@ -24,7 +24,7 @@
 
 namespace core_availability;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class handles conditional availability information for an activity.

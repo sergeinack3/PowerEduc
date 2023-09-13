@@ -25,7 +25,7 @@ namespace core\plugininfo;
 
 use part_of_admin_tree, admin_settingpage;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for calendar type plugins.

@@ -27,7 +27,7 @@ namespace customfield_checkbox;
 use core_customfield\api;
 use core_customfield\output\field_data;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class data

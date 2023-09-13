@@ -1,21 +1,21 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Encapsules the behavior for creating a tool type and tool proxy from a
- * registration url in Moodle.
+ * registration url in PowerEduc.
  *
  * Manages the UI while operations are occuring, including rendering external
  * registration page within the iframe.
@@ -23,7 +23,7 @@
  * See template: mod_lti/external_registration
  *
  * @module     mod_lti/external_registration
- * @copyright  2015 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2015 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      3.1
  */
@@ -229,7 +229,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'mod_lti/e
 
     /**
      * Checks if this process has created a tool proxy within
-     * Moodle yet.
+     * PowerEduc yet.
      *
      * @method hasCreatedToolProxy
      * @private
@@ -356,12 +356,12 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'mod_lti/e
     };
 
     /**
-     * Send a request to Moodle server to set the state of the tool type to configured (active).
+     * Send a request to PowerEduc server to set the state of the tool type to configured (active).
      *
      * @method setTypeStatusActive
      * @private
      * @param {Object} typeData A set of data representing a type, as returned by a request to get a type
-     *               from the Moodle server.
+     *               from the PowerEduc server.
      * @return {Promise} jQuery Deferred object
      */
     var setTypeStatusActive = function(typeData) {
@@ -375,12 +375,12 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'mod_lti/e
      * Render and display an agreement page for the user to acknowledge the list of capabilities
      * (groups of data) that the external tool requires in order to work. If the user agrees then
      * we will activate the tool so that it is immediately available. If they don't agree then
-     * the tool remains in a pending state within Moodle until agreement is given.
+     * the tool remains in a pending state within PowerEduc until agreement is given.
      *
      * @method promptForToolTypeCapabilitiesAgreement
      * @private
      * @param {Object} typeData A set of data representing a type, as returned by a request to get a type
-     *               from the Moodle server.
+     *               from the PowerEduc server.
      * @return {Promise} jQuery Deferred object
      */
     var promptForToolTypeCapabilitiesAgreement = function(typeData) {
@@ -424,7 +424,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'mod_lti/e
     };
 
     /**
-     * Send a request to the Moodle server to create a tool proxy using the registration URL the user
+     * Send a request to the PowerEduc server to create a tool proxy using the registration URL the user
      * has provided. The proxy is required for the external registration page to work correctly.
      *
      * After the proxy is created the external registration page is rendered within an iframe for the user
@@ -446,7 +446,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'mod_lti/e
             promise.resolve();
         } else {
             // A tool proxy needs to exist before the external page is rendered because
-            // the external page sends requests back to Moodle for information that is stored
+            // the external page sends requests back to PowerEduc for information that is stored
             // in the proxy.
             toolProxy.create({regurl: url})
                 .done(function(result) {
@@ -555,7 +555,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'mod_lti/e
         // This is gross but necessary due to isolated jQuery scopes between
         // child iframe and parent windows. There is no other way to communicate.
         //
-        // This function gets called by the moodle page that received the redirect
+        // This function gets called by the powereduc page that received the redirect
         // from the external registration page and handles the external page's returned
         // parameters.
         //
@@ -590,10 +590,10 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'mod_lti/e
                             // There should only be one result.
                             var typeData = types[0];
 
-                            // Check if the external tool required access to any Moodle data (users, courses etc).
+                            // Check if the external tool required access to any PowerEduc data (users, courses etc).
                             if (typeData.hascapabilitygroups) {
                                 // If it did then we ask the user to agree to those groups before the type is
-                                // activated (i.e. can be used in Moodle).
+                                // activated (i.e. can be used in PowerEduc).
                                 promptForToolTypeCapabilitiesAgreement(typeData).always(function() {
                                     promise.resolve();
                                 });

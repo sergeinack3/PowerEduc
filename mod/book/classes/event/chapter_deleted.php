@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 
 namespace mod_book\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The mod_book chapter deleted event class.
@@ -88,10 +88,10 @@ class chapter_deleted extends \core\event\base {
     /**
      * Get URL related to the action.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
-        return new \moodle_url('/mod/book/view.php', array('id' => $this->contextinstanceid));
+        return new \powereduc_url('/mod/book/view.php', array('id' => $this->contextinstanceid));
     }
 
     /**

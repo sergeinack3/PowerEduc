@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Validate Safe Exam Browser access keys.
@@ -34,7 +34,7 @@ window.SafeExamBrowser = window.SafeExamBrowser || null;
  * Once the keys are fetched, action checking access.
  *
  * @param {init} cmid Value of course module id of the quiz.
- * @param {boolean} autoreconfigure Value of Moodle setting: quizaccess_seb/autoreconfigureseb.
+ * @param {boolean} autoreconfigure Value of PowerEduc setting: quizaccess_seb/autoreconfigureseb.
  */
 const safeExamBrowserKeysUpdated = (cmid, autoreconfigure = false) => {
     // Action opening up the quiz.
@@ -59,7 +59,7 @@ const safeExamBrowserKeysUpdated = (cmid, autoreconfigure = false) => {
 };
 
 /**
- * Validate keys in Moodle backend.
+ * Validate keys in PowerEduc backend.
  *
  * @param {init} cmid Value of course module id of the quiz.
  * @return {Promise}
@@ -104,7 +104,7 @@ const reconfigureSafeExamBrowser = (cmid) => {
  * Initialize the process of fetching the keys.
  *
  * @param {init} cmid Value of course module id of the quiz.
- * @param {boolean} autoreconfigure Value of Moodle setting: quizaccess_seb/autoreconfigureseb.
+ * @param {boolean} autoreconfigure Value of PowerEduc setting: quizaccess_seb/autoreconfigureseb.
  */
 export const init = async(cmid, autoreconfigure = false) => {
     // If the SafeExamBrowser object is instantiated, try and use it to fetch the access keys.

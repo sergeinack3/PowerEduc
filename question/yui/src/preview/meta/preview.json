@@ -1,5 +1,5 @@
 {
-  "moodle-question-preview": {
+  "powereduc-question-preview": {
     "requires": [
         "base",
         "dom",

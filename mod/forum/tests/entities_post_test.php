@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum;
 
@@ -22,7 +22,7 @@ use mod_forum\local\entities\post as post_entity;
  * The post entity tests.
  *
  * @package    mod_forum
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class entities_post_test extends \advanced_testcase {
@@ -45,7 +45,7 @@ class entities_post_test extends \advanced_testcase {
             true,
             'post subject',
             'post message',
-            FORMAT_MOODLE,
+            FORMAT_POWEREDUC,
             true,
             false,
             0,
@@ -66,7 +66,7 @@ class entities_post_test extends \advanced_testcase {
         $this->assertEquals(true, $post->has_been_mailed());
         $this->assertEquals('post subject', $post->get_subject());
         $this->assertEquals('post message', $post->get_message());
-        $this->assertEquals(FORMAT_MOODLE, $post->get_message_format());
+        $this->assertEquals(FORMAT_POWEREDUC, $post->get_message_format());
         $this->assertEquals(true, $post->is_message_trusted());
         $this->assertEquals(false, $post->has_attachments());
         $this->assertEquals(0, $post->get_total_score());

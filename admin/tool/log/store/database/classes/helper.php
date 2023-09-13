@@ -23,7 +23,7 @@
  */
 
 namespace logstore_database;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**

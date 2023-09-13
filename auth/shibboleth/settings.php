@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
     // We use a couple of custom admin settings since we need to massage the data before it is inserted into the DB.

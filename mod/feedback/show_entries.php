@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,8 +40,8 @@ $courseid = optional_param('courseid', null, PARAM_INT);
 
 list($course, $cm) = get_course_and_cm_from_cmid($id, 'feedback');
 
-$baseurl = new moodle_url('/mod/feedback/show_entries.php', array('id' => $cm->id));
-$PAGE->set_url(new moodle_url($baseurl, array('userid' => $userid, 'showcompleted' => $showcompleted,
+$baseurl = new powereduc_url('/mod/feedback/show_entries.php', array('id' => $cm->id));
+$PAGE->set_url(new powereduc_url($baseurl, array('userid' => $userid, 'showcompleted' => $showcompleted,
         'delete' => $deleteid)));
 $context = context_module::instance($cm->id);
 
@@ -80,7 +80,7 @@ if ($anonresponsestable->is_downloading()) {
 // Process course select form.
 $courseselectform = new mod_feedback_course_select_form($baseurl, $feedbackstructure, $feedback->course == SITEID);
 if ($data = $courseselectform->get_data()) {
-    redirect(new moodle_url($baseurl, ['courseid' => $data->courseid]));
+    redirect(new powereduc_url($baseurl, ['courseid' => $data->courseid]));
 }
 // Print the page header.
 navigation_node::override_active_url($baseurl);

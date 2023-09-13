@@ -1,7 +1,7 @@
 /**
- * The quizbase class to provide shared functionality to Modules within Moodle.
+ * The quizbase class to provide shared functionality to Modules within PowerEduc.
  *
- * @module moodle-mod_quiz-quizbase
+ * @module powereduc-mod_quiz-quizbase
  */
 var QUIZBASENAME = 'mod_quiz-quizbase';
 
@@ -11,7 +11,7 @@ var QUIZBASE = function() {
 
 /**
  * The coursebase class to provide shared functionality to Modules within
- * Moodle.
+ * PowerEduc.
  *
  * @class M.course.coursebase
  * @constructor

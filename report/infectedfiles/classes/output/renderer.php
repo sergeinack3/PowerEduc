@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Infected file report renderer
@@ -25,7 +25,7 @@
 namespace report_infectedfiles\output;
 use report_infectedfiles\table\infectedfiles_table;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Infected file report renderer
@@ -43,7 +43,7 @@ class renderer extends \plugin_renderer_base {
      * @param infectedfiles_table $table table of infected files
      * @return false|string return html code of the table
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function render_infectedfiles_table(infectedfiles_table $table) {
         ob_start();

@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains the class used for the displaying the tokens table.
  *
  * @package    core_webservice
- * @copyright  2017 John Okely <john@moodle.com>
+ * @copyright  2017 John Okely <john@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_webservice;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/tablelib.php');
 require_once($CFG->dirroot . '/webservice/lib.php');
@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/user/lib.php');
  * Class for the displaying the participants table.
  *
  * @package    core_webservice
- * @copyright  2017 John Okely <john@moodle.com>
+ * @copyright  2017 John Okely <john@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class token_table extends \table_sql {
@@ -66,8 +66,8 @@ class token_table extends \table_sql {
         $context = \context_system::instance();
 
         // Can we see tokens created by all users?
-        $this->showalltokens = has_capability('moodle/webservice:managealltokens', $context);
-        $this->hasviewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $this->showalltokens = has_capability('powereduc/webservice:managealltokens', $context);
+        $this->hasviewfullnames = has_capability('powereduc/site:viewfullnames', $context);
 
         // List of user identity fields.
         $this->userextrafields = \core_user\fields::get_identity_fields(\context_system::instance(), false);
@@ -114,7 +114,7 @@ class token_table extends \table_sql {
      * @return string Content for the column
      */
     public function col_operation($data) {
-        $tokenpageurl = new \moodle_url(
+        $tokenpageurl = new \powereduc_url(
             "/admin/webservice/tokens.php",
             [
                 "action" => "delete",
@@ -153,7 +153,7 @@ class token_table extends \table_sql {
             $identity[] = s($data->$userextrafield);
         }
 
-        $userprofilurl = new \moodle_url('/user/profile.php', ['id' => $data->userid]);
+        $userprofilurl = new \powereduc_url('/user/profile.php', ['id' => $data->userid]);
         $content = \html_writer::link($userprofilurl, fullname($data, $this->hasviewfullnames));
 
         if ($identity) {
@@ -164,7 +164,7 @@ class token_table extends \table_sql {
         $webservicemanager = new \webservice();
         $usermissingcaps = $webservicemanager->get_missing_capabilities_by_users([['id' => $data->userid]], $data->serviceid);
 
-        if ($data->serviceshortname <> MOODLE_OFFICIAL_MOBILE_SERVICE && !is_siteadmin($data->userid)
+        if ($data->serviceshortname <> POWEREDUC_OFFICIAL_MOBILE_SERVICE && !is_siteadmin($data->userid)
                 && array_key_exists($data->userid, $usermissingcaps)) {
             $count = \html_writer::span(count($usermissingcaps[$data->userid]), 'badge badge-danger');
             $links = array_map(function($capname) {
@@ -212,7 +212,7 @@ class token_table extends \table_sql {
             }
         }
 
-        $creatorprofileurl = new \moodle_url('/user/profile.php', ['id' => $data->creatorid]);
+        $creatorprofileurl = new \powereduc_url('/user/profile.php', ['id' => $data->creatorid]);
         return \html_writer::link($creatorprofileurl, fullname((object)$user, $this->hasviewfullnames));
     }
 

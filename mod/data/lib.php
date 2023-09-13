@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
 
 /**
  * @package   mod_data
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use mod_data\manager;
 use mod_data\preset;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Some constants
 define ('DATA_MAX_ENTRIES', 50);
@@ -52,7 +52,7 @@ require_once(__DIR__ . '/deprecatedlib.php');
 
 /**
  * @package   mod_data
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class data_field_base {     // Base class for Database Field Types (see field/*/field.class.php)
@@ -100,18 +100,18 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         global $DB;
 
         if (empty($field) && empty($data)) {
-            throw new \moodle_exception('missingfield', 'data');
+            throw new \powereduc_exception('missingfield', 'data');
         }
 
         if (!empty($field)) {
             if (is_object($field)) {
                 $this->field = $field;  // Programmer knows what they are doing, we hope
             } else if (!$this->field = $DB->get_record('data_fields', array('id'=>$field))) {
-                throw new \moodle_exception('invalidfieldid', 'data');
+                throw new \powereduc_exception('invalidfieldid', 'data');
             }
             if (empty($data)) {
                 if (!$this->data = $DB->get_record('data', array('id'=>$this->field->dataid))) {
-                    throw new \moodle_exception('invalidid', 'data');
+                    throw new \powereduc_exception('invalidid', 'data');
                 }
             }
         }
@@ -121,10 +121,10 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
                 if (is_object($data)) {
                     $this->data = $data;  // Programmer knows what they are doing, we hope
                 } else if (!$this->data = $DB->get_record('data', array('id'=>$data))) {
-                    throw new \moodle_exception('invalidid', 'data');
+                    throw new \powereduc_exception('invalidid', 'data');
                 }
             } else {                      // No way to define it!
-                throw new \moodle_exception('missingdata', 'data');
+                throw new \powereduc_exception('missingdata', 'data');
             }
         }
 
@@ -403,7 +403,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
 
         // Throw an exception if field type doen't exist. Anyway user should never access to edit a field with an unknown fieldtype.
         if ($this->type === 'unknown') {
-            throw new \moodle_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
+            throw new \powereduc_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
         }
 
         echo $OUTPUT->box_start('generalbox boxaligncenter boxwidthwide');
@@ -424,7 +424,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         $filepath = $CFG->dirroot.'/mod/data/field/'.$this->type.'/mod.html';
 
         if (!file_exists($filepath)) {
-            throw new \moodle_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
+            throw new \powereduc_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
         } else {
             require_once($filepath);
         }
@@ -776,8 +776,8 @@ function data_generate_tag_form($recordid = false, $selected = []) {
     }
     $str .= '</select>';
 
-    if (has_capability('moodle/tag:manage', context_system::instance()) && $showstandard) {
-        $url = new moodle_url('/tag/manage.php', array('tc' => core_tag_area::get_collection('mod_data',
+    if (has_capability('powereduc/tag:manage', context_system::instance()) && $showstandard) {
+        $url = new powereduc_url('/tag/manage.php', array('tc' => core_tag_area::get_collection('mod_data',
             'data_records')));
         $str .= ' ' . $OUTPUT->action_link($url, get_string('managestandardtags', 'tag'));
     }
@@ -934,7 +934,7 @@ function data_get_field_new($type, $data) {
     $filepath = $CFG->dirroot.'/mod/data/field/'.$type.'/field.class.php';
     // It should never access this method if the subfield class doesn't exist.
     if (!file_exists($filepath)) {
-        throw new \moodle_exception('invalidfieldtype', 'data');
+        throw new \powereduc_exception('invalidfieldtype', 'data');
     }
     require_once($filepath);
     $newfield = 'data_field_'.$type;
@@ -1256,7 +1256,7 @@ function data_user_outline($course, $user, $mod, $data) {
                                            ORDER BY timemodified DESC', array($data->id, $user->id), true);
         $result->time = $lastrecord->timemodified;
         if ($grade) {
-            if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+            if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
                 $result->info .= ', ' . get_string('gradenoun') . ': ' . $grade->str_long_grade;
             } else {
                 $result->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -1267,7 +1267,7 @@ function data_user_outline($course, $user, $mod, $data) {
         $result = (object) [
             'time' => grade_get_date_for_user_grade($grade, $user),
         ];
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $result->info = get_string('gradenoun') . ': ' . $grade->str_long_grade;
         } else {
             $result->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -1294,7 +1294,7 @@ function data_user_complete($course, $user, $mod, $data) {
     $grades = grade_get_grades($course->id, 'mod', 'data', $data->id, $user->id);
     if (!empty($grades->items[0]->grades)) {
         $grade = reset($grades->items[0]->grades);
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             echo $OUTPUT->container(get_string('gradenoun') . ': ' . $grade->str_long_grade);
             if ($grade->str_feedback) {
                 echo $OUTPUT->container(get_string('feedback').': '.$grade->str_feedback);
@@ -1435,10 +1435,10 @@ function data_grade_item_delete($data) {
  * @param string $search the current search term
  * @param int $page page number for pagination
  * @param bool $return if the result should be returned (true) or printed (false)
- * @param moodle_url|null $jumpurl a moodle_url by which to jump back to the record list (can be null)
+ * @param powereduc_url|null $jumpurl a powereduc_url by which to jump back to the record list (can be null)
  * @return mixed string with all parsed entries or nothing if $return is false
  */
-function data_print_template($templatename, $records, $data, $search='', $page=0, $return=false, moodle_url $jumpurl=null) {
+function data_print_template($templatename, $records, $data, $search='', $page=0, $return=false, powereduc_url $jumpurl=null) {
     debugging(
         'data_print_template is deprecated. Use mod_data\\manager::get_template and mod_data\\template::parse_entries instead',
         DEBUG_DEVELOPER
@@ -1577,7 +1577,7 @@ function data_rating_validate($params) {
             throw new rating_exception('cannotfindgroup');//something is wrong
         }
 
-        if (!groups_is_member($groupid) and !has_capability('moodle/site:accessallgroups', $context)) {
+        if (!groups_is_member($groupid) and !has_capability('powereduc/site:accessallgroups', $context)) {
             // do not allow rating of posts from other groups when in SEPARATEGROUPS or VISIBLEGROUPS
             throw new rating_exception('notmemberofgroup');
         }
@@ -2058,18 +2058,18 @@ function data_convert_to_roles($data, $teacherroles=array(), $studentroles=array
             break;
         case SEPARATEGROUPS:
             foreach ($studentroles as $studentrole) {
-                assign_capability('moodle/site:accessallgroups', CAP_PREVENT, $studentrole->id, $context->id);
+                assign_capability('powereduc/site:accessallgroups', CAP_PREVENT, $studentrole->id, $context->id);
             }
             foreach ($teacherroles as $teacherrole) {
-                assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $teacherrole->id, $context->id);
+                assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $teacherrole->id, $context->id);
             }
             break;
         case VISIBLEGROUPS:
             foreach ($studentroles as $studentrole) {
-                assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $studentrole->id, $context->id);
+                assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $studentrole->id, $context->id);
             }
             foreach ($teacherroles as $teacherrole) {
-                assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $teacherrole->id, $context->id);
+                assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $teacherrole->id, $context->id);
             }
             break;
     }
@@ -2220,7 +2220,7 @@ function data_user_can_add_entry($data, $currentgroup, $groupmode, $context = nu
         return false;
     }
 
-    if (!$groupmode or has_capability('moodle/site:accessallgroups', $context)) {
+    if (!$groupmode or has_capability('powereduc/site:accessallgroups', $context)) {
         return true;
     }
 
@@ -2376,7 +2376,7 @@ abstract class data_preset_importer {
     }
     /**
      * Gets the preset settings
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @return stdClass
      */
     public function get_preset_settings() {
@@ -2407,7 +2407,7 @@ abstract class data_preset_importer {
             }
 
             if (empty($fileobj)) {
-                throw new \moodle_exception('invalidpreset', 'data', '', $this->directory);
+                throw new \powereduc_exception('invalidpreset', 'data', '', $this->directory);
             }
         }
 
@@ -2501,7 +2501,7 @@ abstract class data_preset_importer {
                     continue;
                 }
                 if (array_key_exists($cid, $preservedfields)){
-                    throw new \moodle_exception('notinjectivemap', 'data');
+                    throw new \powereduc_exception('notinjectivemap', 'data');
                 }
                 else $preservedfields[$cid] = true;
             }
@@ -2910,8 +2910,8 @@ function data_reset_userdata($data) {
  * @return array
  */
 function data_get_extra_capabilities() {
-    return ['moodle/rating:view', 'moodle/rating:viewany', 'moodle/rating:viewall', 'moodle/rating:rate',
-            'moodle/comment:view', 'moodle/comment:post', 'moodle/comment:delete'];
+    return ['powereduc/rating:view', 'powereduc/rating:viewany', 'powereduc/rating:viewall', 'powereduc/rating:rate',
+            'powereduc/comment:view', 'powereduc/comment:post', 'powereduc/comment:delete'];
 }
 
 /**
@@ -2928,7 +2928,7 @@ function data_supports($feature) {
         case FEATURE_GRADE_HAS_GRADE:         return true;
         case FEATURE_GRADE_OUTCOMES:          return true;
         case FEATURE_RATE:                    return true;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_COMMENT:                 return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_COLLABORATION;
@@ -2963,10 +2963,10 @@ function data_import_csv($cm, $data, &$csvdata, $encoding, $fielddelimiter) {
     $readcount = $cir->load_csv_content($csvdata, $encoding, $fielddelimiter);
     $csvdata = null; // Free memory.
     if (empty($readcount)) {
-        throw new \moodle_exception('csvfailed', 'data', "{$CFG->wwwroot}/mod/data/edit.php?d={$data->id}");
+        throw new \powereduc_exception('csvfailed', 'data', "{$CFG->wwwroot}/mod/data/edit.php?d={$data->id}");
     } else {
         if (!$fieldnames = $cir->get_columns()) {
-            throw new \moodle_exception('cannotreadtmpfile', 'error');
+            throw new \powereduc_exception('cannotreadtmpfile', 'error');
         }
 
         // Check the fieldnames are valid.
@@ -3008,7 +3008,7 @@ function data_import_csv($cm, $data, &$csvdata, $encoding, $fielddelimiter) {
         }
 
         if (!empty($errorfield)) {
-            throw new \moodle_exception('fieldnotmatched', 'data',
+            throw new \powereduc_exception('fieldnotmatched', 'data',
                 "{$CFG->wwwroot}/mod/data/edit.php?d={$data->id}", $errorfield);
         }
 
@@ -3060,7 +3060,7 @@ function data_import_csv($cm, $data, &$csvdata, $encoding, $fielddelimiter) {
                 }
 
                 $recordsadded++;
-                print get_string('added', 'moodle', $recordsadded) . ". " . get_string('entry', 'data') . " (ID $recordid)<br />\n";
+                print get_string('added', 'powereduc', $recordsadded) . ". " . get_string('entry', 'data') . " (ID $recordid)<br />\n";
             }
         }
         $cir->close();
@@ -3331,7 +3331,7 @@ function data_get_file_info($browser, $areas, $course, $cm, $context, $filearea,
     // group access
     if ($record->groupid) {
         $groupmode = groups_get_activity_groupmode($cm, $course);
-        if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             if (!groups_is_member($record->groupid)) {
                 return null;
             }
@@ -3353,7 +3353,7 @@ function data_get_file_info($browser, $areas, $course, $cm, $context, $filearea,
 
     // Checks to see if the user can manage files or is the owner.
     // TODO MDL-33805 - Do not use userid here and move the capability check above.
-    if (!has_capability('moodle/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
+    if (!has_capability('powereduc/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
         return null;
     }
 
@@ -3417,7 +3417,7 @@ function data_pluginfile($course, $cm, $context, $filearea, $args, $forcedownloa
         // group access
         if ($record->groupid) {
             $groupmode = groups_get_activity_groupmode($cm, $course);
-            if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+            if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
                 if (!groups_is_member($record->groupid)) {
                     return false;
                 }
@@ -3464,13 +3464,13 @@ function data_extend_navigation($navigation, $course, $module, $cm) {
         $entriesnode->add_class('note');
     }
 
-    $navigation->add(get_string('list', 'data'), new moodle_url('/mod/data/view.php', array('d'=>$cm->instance)));
+    $navigation->add(get_string('list', 'data'), new powereduc_url('/mod/data/view.php', array('d'=>$cm->instance)));
     if (!empty($rid)) {
-        $navigation->add(get_string('single', 'data'), new moodle_url('/mod/data/view.php', array('d'=>$cm->instance, 'rid'=>$rid)));
+        $navigation->add(get_string('single', 'data'), new powereduc_url('/mod/data/view.php', array('d'=>$cm->instance, 'rid'=>$rid)));
     } else {
-        $navigation->add(get_string('single', 'data'), new moodle_url('/mod/data/view.php', array('d'=>$cm->instance, 'mode'=>'single')));
+        $navigation->add(get_string('single', 'data'), new powereduc_url('/mod/data/view.php', array('d'=>$cm->instance, 'mode'=>'single')));
     }
-    $navigation->add(get_string('search', 'data'), new moodle_url('/mod/data/view.php', array('d'=>$cm->instance, 'mode'=>'asearch')));
+    $navigation->add(get_string('search', 'data'), new powereduc_url('/mod/data/view.php', array('d'=>$cm->instance, 'mode'=>'asearch')));
 }
 
 /**
@@ -3495,7 +3495,7 @@ function data_extend_settings_navigation(settings_navigation $settings, navigati
             $addstring = get_string('editentry', 'data');
         }
         $addentrynode = $datanode->add($addstring,
-            new moodle_url('/mod/data/edit.php', array('d' => $settings->get_page()->cm->instance)));
+            new powereduc_url('/mod/data/edit.php', array('d' => $settings->get_page()->cm->instance)));
         $addentrynode->set_show_in_secondary_navigation(false);
     }
 
@@ -3503,12 +3503,12 @@ function data_extend_settings_navigation(settings_navigation $settings, navigati
         // The capability required to Export database records is centrally defined in 'lib.php'
         // and should be weaker than those required to edit Templates, Fields and Presets.
         $exportentriesnode = $datanode->add(get_string('exportentries', 'data'),
-            new moodle_url('/mod/data/export.php', array('d' => $data->id)));
+            new powereduc_url('/mod/data/export.php', array('d' => $data->id)));
         $exportentriesnode->set_show_in_secondary_navigation(false);
     }
     if (has_capability('mod/data:manageentries', $settings->get_page()->cm->context)) {
         $importentriesnode = $datanode->add(get_string('importentries', 'data'),
-            new moodle_url('/mod/data/import.php', array('d' => $data->id)));
+            new powereduc_url('/mod/data/import.php', array('d' => $data->id)));
         $importentriesnode->set_show_in_secondary_navigation(false);
     }
 
@@ -3524,11 +3524,11 @@ function data_extend_settings_navigation(settings_navigation $settings, navigati
             $defaultemplate = 'singletemplate';
         }
 
-        $datanode->add(get_string('presets', 'data'), new moodle_url('/mod/data/preset.php', array('d' => $data->id)));
+        $datanode->add(get_string('presets', 'data'), new powereduc_url('/mod/data/preset.php', array('d' => $data->id)));
         $datanode->add(get_string('fields', 'data'),
-            new moodle_url('/mod/data/field.php', array('d' => $data->id)));
+            new powereduc_url('/mod/data/field.php', array('d' => $data->id)));
         $datanode->add(get_string('templates', 'data'),
-            new moodle_url('/mod/data/templates.php', array('d' => $data->id)));
+            new powereduc_url('/mod/data/templates.php', array('d' => $data->id)));
     }
 
     if (!empty($CFG->enablerssfeeds) && !empty($CFG->data_enablerssfeeds) && $data->rssarticles > 0) {
@@ -3536,7 +3536,7 @@ function data_extend_settings_navigation(settings_navigation $settings, navigati
 
         $string = get_string('rsstype', 'data');
 
-        $url = new moodle_url(rss_get_url($settings->get_page()->cm->context->id, $USER->id, 'mod_data', $data->id));
+        $url = new powereduc_url(rss_get_url($settings->get_page()->cm->context->id, $USER->id, 'mod_data', $data->id));
         $datanode->add($string, $url, settings_navigation::TYPE_SETTING, null, null, new pix_icon('i/rss', ''));
     }
 }
@@ -3564,7 +3564,7 @@ function data_presets_save($course, $cm, $data, $path) {
 /**
  * Generates the XML for the database module provided
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param stdClass $course The course the database module belongs to.
  * @param stdClass $cm The course module record
  * @param stdClass $data The database record
@@ -3689,7 +3689,7 @@ function data_comment_validate($comment_param) {
     // group access
     if ($record->groupid) {
         $groupmode = groups_get_activity_groupmode($cm, $course);
-        if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             if (!groups_is_member($record->groupid)) {
                 throw new comment_exception('notmemberofgroup');
             }
@@ -4372,7 +4372,7 @@ function mod_data_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('add', 'data'),
-        new \moodle_url('/mod/data/view.php', array('id' => $cm->id)),
+        new \powereduc_url('/mod/data/view.php', array('id' => $cm->id)),
         1,
         $actionable
     );
@@ -4504,7 +4504,7 @@ function mod_data_core_calendar_get_valid_event_timestart_range(\calendar_event 
  * It will set the timeopen or timeclose value of the data instance
  * according to the type of event provided.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event
  * @param stdClass $data The module instance to get the range from
  */
@@ -4532,7 +4532,7 @@ function mod_data_core_calendar_event_timestart_updated(\calendar_event $event, 
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 

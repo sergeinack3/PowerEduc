@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Javascript helper function for IMS Content Package module.
@@ -233,8 +233,8 @@ M.mod_imscp.init = function(Y) {
         };
 
         // Layout.
-        Y.YUI2.widget.LayoutUnit.prototype.STR_COLLAPSE = M.util.get_string('hide', 'moodle');
-        Y.YUI2.widget.LayoutUnit.prototype.STR_EXPAND = M.util.get_string('show', 'moodle');
+        Y.YUI2.widget.LayoutUnit.prototype.STR_COLLAPSE = M.util.get_string('hide', 'powereduc');
+        Y.YUI2.widget.LayoutUnit.prototype.STR_EXPAND = M.util.get_string('show', 'powereduc');
 
         imscp_layout_widget = new Y.YUI2.widget.Layout('imscp_layout', {
             minWidth: 600,

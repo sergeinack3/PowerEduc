@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cliincorrectvalueerror'] = 'பிழை இருக்கிறது. இந்த "{$a->option}"-க்கு இந்த "{$a->value}" தவறான மதிப்பு.';
 $string['cliincorrectvalueretry'] = 'தவறான மதிப்பு. தயவு செய்து மீண்டும் முயற்சிக்கவும்';

@@ -99,7 +99,7 @@ class behat_tool_policy extends behat_base {
                         $data->audience = \tool_policy\policy_version::AUDIENCE_LOGGEDIN;
                     }
                 } else if (($key === 'summary' || $key === 'content') && !empty($value)) {
-                    $data->{$key.'_editor'} = ['text' => $value, 'format' => FORMAT_MOODLE];
+                    $data->{$key.'_editor'} = ['text' => $value, 'format' => FORMAT_POWEREDUC];
                 } else if (in_array($key, $fields) && $value !== '') {
                     $data->$key = $value;
                 }

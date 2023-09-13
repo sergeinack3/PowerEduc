@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @copyright 2009 Petr Skoda  {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class mod_folder_renderer extends plugin_renderer_base {
 
@@ -57,9 +57,9 @@ class mod_folder_renderer extends plugin_renderer_base {
         // Do not display it on the course page for the teachers because there
         // is an "Edit settings" button right next to it with the same functionality.
         $canmanagefolderfiles = has_capability('mod/folder:managefiles', $context);
-        $canmanagecourseactivities = has_capability('moodle/course:manageactivities', $context);
+        $canmanagecourseactivities = has_capability('powereduc/course:manageactivities', $context);
         if ($canmanagefolderfiles && ($folder->display != FOLDER_DISPLAY_INLINE || !$canmanagecourseactivities)) {
-            $editbutton = new single_button(new moodle_url('/mod/folder/edit.php', ['id' => $cm->id]),
+            $editbutton = new single_button(new powereduc_url('/mod/folder/edit.php', ['id' => $cm->id]),
                 get_string('edit'), 'post', true);
             $editbutton->class = 'navitem';
             $buttons .= $this->render($editbutton);
@@ -68,7 +68,7 @@ class mod_folder_renderer extends plugin_renderer_base {
         // Do not append the edit button on the course page.
         $downloadable = folder_archive_available($folder, $cm);
         if ($downloadable) {
-            $downloadbutton = new single_button(new moodle_url('/mod/folder/download_folder.php', ['id' => $cm->id]),
+            $downloadbutton = new single_button(new powereduc_url('/mod/folder/download_folder.php', ['id' => $cm->id]),
                 get_string('downloadfolder', 'folder'), 'get');
             $downloadbutton->class = 'navitem ml-auto';
             $buttons .= $this->render($downloadbutton);
@@ -121,7 +121,7 @@ class mod_folder_renderer extends plugin_renderer_base {
         }
         $result = '<ul>';
         foreach ($dir['subdirs'] as $subdir) {
-            $image = $this->output->pix_icon(file_folder_icon(24), $subdir['dirname'], 'moodle');
+            $image = $this->output->pix_icon(file_folder_icon(24), $subdir['dirname'], 'powereduc');
             $filename = html_writer::tag('span', $image, array('class' => 'fp-icon')).
                     html_writer::tag('span', s($subdir['dirname']), array('class' => 'fp-filename'));
             $filename = html_writer::tag('div', $filename, array('class' => 'fp-filename-icon'));
@@ -129,14 +129,14 @@ class mod_folder_renderer extends plugin_renderer_base {
         }
         foreach ($dir['files'] as $file) {
             $filename = $file->get_filename();
-            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
+            $url = powereduc_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                     $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $filename, false);
             $filenamedisplay = clean_filename($filename);
             if (file_extension_in_typegroup($filename, 'web_image')) {
                 $image = $url->out(false, array('preview' => 'tinyicon', 'oid' => $file->get_timemodified()));
                 $image = html_writer::empty_tag('img', array('src' => $image));
             } else {
-                $image = $this->output->pix_icon(file_file_icon($file, 24), $filenamedisplay, 'moodle');
+                $image = $this->output->pix_icon(file_file_icon($file, 24), $filenamedisplay, 'powereduc');
             }
             $filename = html_writer::tag('span', $image, array('class' => 'fp-icon')).
                     html_writer::tag('span', $filenamedisplay, array('class' => 'fp-filename'));

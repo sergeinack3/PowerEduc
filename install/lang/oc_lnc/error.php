@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Impossible de crear la basa de donadas.</p>
 <p>La basa de donadas indicada existís pas e l\'utilizaire especificat a pas las autorizacions que permeton de crear una basa de donadas.</p>.

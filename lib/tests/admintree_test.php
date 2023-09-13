@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use admin_setting_configmixedhostiplist;
 use admin_setting_configpasswordunmask;
 use admin_setting_configtext;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir.'/adminlib.php');
@@ -38,7 +38,7 @@ require_once($CFG->libdir.'/adminlib.php');
  *
  * @package     core
  * @category    test
- * @copyright   2013 David Mudrak <david@moodle.com>
+ * @copyright   2013 David Mudrak <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admintree_test extends \advanced_testcase {
@@ -107,7 +107,7 @@ class admintree_test extends \advanced_testcase {
     public function test_add_nodes_before_invalid1() {
         $tree = new admin_root(true);
         $this->expectException(\coding_exception::class);
-        $tree->add('root', new admin_externalpage('foo', 'Foo', 'http://foo.bar'), array('moodle:site/config'));
+        $tree->add('root', new admin_externalpage('foo', 'Foo', 'http://foo.bar'), array('powereduc:site/config'));
     }
 
     public function test_add_nodes_before_invalid2() {
@@ -172,7 +172,7 @@ class admintree_test extends \advanced_testcase {
         $this->assertMatchesRegularExpression('/class="text-danger"/', $result);
 
         // Check for a file which is not executable.
-        $result = $executable->output_html($CFG->dirroot . '/filter/tex/readme_moodle.txt');
+        $result = $executable->output_html($CFG->dirroot . '/filter/tex/readme_powereduc.txt');
         $this->assertMatchesRegularExpression('/class="text-danger"/', $result);
 
         // Check for an executable file.

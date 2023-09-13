@@ -24,7 +24,7 @@
 
 namespace block_activity_results\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_activity_results implementing null_provider.

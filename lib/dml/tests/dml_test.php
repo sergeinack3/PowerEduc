@@ -33,7 +33,7 @@ use moodle_transaction;
 use xmldb_key;
 use xmldb_table;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * DML layer tests.

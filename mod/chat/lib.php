@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * Library of functions and constants for module chat
  *
  * @package   mod_chat
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/calendar/lib.php');
 
@@ -304,7 +304,7 @@ function chat_print_recent_activity($course, $viewfullnames, $timestart) {
         }
 
         if (groups_get_activity_groupmode($cm) != SEPARATEGROUPS
-         or has_capability('moodle/site:accessallgroups', context_module::instance($cm->id))) {
+         or has_capability('powereduc/site:accessallgroups', context_module::instance($cm->id))) {
             if ($timeout > time() - $mcm->lasttime) {
                 $current[] = $cm;
             } else {
@@ -877,7 +877,7 @@ function chat_format_message_manually($message, $courseid, $sender, $currentuser
             case 'me':
                 $outinfo = $message->strtime;
                 $text = '*** <b>'.$sender->firstname.' '.substr($rawtext, 4).'</b>';
-                $outmain = format_text($text, FORMAT_MOODLE, $options, $courseid);
+                $outmain = format_text($text, FORMAT_POWEREDUC, $options, $courseid);
                 break;
             default:
                 // Error, we set special back to false to use the classic message output.
@@ -889,7 +889,7 @@ function chat_format_message_manually($message, $courseid, $sender, $currentuser
         $matches = array();
         preg_match($patternto, $rawtext, $matches);
         if (isset($matches[1]) && isset($matches[2])) {
-            $text = format_text($matches[2], FORMAT_MOODLE, $options, $courseid);
+            $text = format_text($matches[2], FORMAT_POWEREDUC, $options, $courseid);
             $outinfo = $message->strtime;
             $outmain = $sender->firstname.' '.get_string('saidto', 'chat').' <i>'.$matches[1].'</i>: '.$text;
         } else {
@@ -899,7 +899,7 @@ function chat_format_message_manually($message, $courseid, $sender, $currentuser
     }
 
     if (!$special) {
-        $text = format_text($rawtext, FORMAT_MOODLE, $options, $courseid);
+        $text = format_text($rawtext, FORMAT_POWEREDUC, $options, $courseid);
         $outinfo = $message->strtime.' '.$sender->firstname;
         $outmain = $text;
     }
@@ -1064,7 +1064,7 @@ function chat_format_message_theme ($message, $chatuser, $currentuser, $grouping
         switch ($command) {
             case 'me':
                 $text = '*** <b>'.$sender->firstname.' '.substr($rawtext, 4).'</b>';
-                $outmain = format_text($text, FORMAT_MOODLE, $options, $courseid);
+                $outmain = format_text($text, FORMAT_POWEREDUC, $options, $courseid);
                 break;
             default:
                 // Error, we set special back to false to use the classic message output.
@@ -1077,7 +1077,7 @@ function chat_format_message_theme ($message, $chatuser, $currentuser, $grouping
         $matches = array();
         preg_match($patternto, $rawtext, $matches);
         if (isset($matches[1]) && isset($matches[2])) {
-            $text = format_text($matches[2], FORMAT_MOODLE, $options, $courseid);
+            $text = format_text($matches[2], FORMAT_POWEREDUC, $options, $courseid);
             $outmain = $sender->firstname.' <b>'.get_string('saidto', 'chat').'</b> <i>'.$matches[1].'</i>: '.$text;
         } else {
             // Error, we set special back to false to use the classic message output.
@@ -1086,7 +1086,7 @@ function chat_format_message_theme ($message, $chatuser, $currentuser, $grouping
     }
 
     if (!$special) {
-        $text = format_text($rawtext, FORMAT_MOODLE, $options, $courseid);
+        $text = format_text($rawtext, FORMAT_POWEREDUC, $options, $courseid);
         $outmain = $text;
     }
 
@@ -1258,7 +1258,7 @@ function chat_supports($feature) {
             return true;
         case FEATURE_MOD_INTRO:
             return true;
-        case FEATURE_BACKUP_MOODLE2:
+        case FEATURE_BACKUP_POWEREDUC2:
             return true;
         case FEATURE_COMPLETION_TRACKS_VIEWS:
             return true;
@@ -1292,12 +1292,12 @@ function chat_extend_navigation($navigation, $course, $module, $cm) {
 
         $links = array();
 
-        $url = new moodle_url($target.'gui_'.$CFG->chat_method.'/index.php', $params);
+        $url = new powereduc_url($target.'gui_'.$CFG->chat_method.'/index.php', $params);
         $action = new popup_action('click', $url, 'chat'.$course->id.$cm->instance.$currentgroup,
                                    array('height' => 500, 'width' => 700));
         $links[] = new action_link($url, $strenterchat, $action);
 
-        $url = new moodle_url($target.'gui_basic/index.php', $params);
+        $url = new powereduc_url($target.'gui_basic/index.php', $params);
         $action = new popup_action('click', $url, 'chat'.$course->id.$cm->instance.$currentgroup,
                                    array('height' => 500, 'width' => 700));
         $links[] = new action_link($url, get_string('noframesjs', 'message'), $action);
@@ -1311,7 +1311,7 @@ function chat_extend_navigation($navigation, $course, $module, $cm) {
     if (is_array($chatusers) && count($chatusers) > 0) {
         $users = $navigation->add(get_string('currentusers', 'chat'));
         foreach ($chatusers as $chatuser) {
-            $userlink = new moodle_url('/user/view.php', array('id' => $chatuser->id, 'course' => $course->id));
+            $userlink = new powereduc_url('/user/view.php', array('id' => $chatuser->id, 'course' => $course->id));
             $users->add(fullname($chatuser).' '.format_time(time() - $chatuser->lastmessageping),
                         $userlink, navigation_node::TYPE_USER, null, null, new pix_icon('i/user', ''));
         }
@@ -1338,7 +1338,7 @@ function chat_extend_settings_navigation(settings_navigation $settings, navigati
     if ($chat->studentlogs || has_capability('mod/chat:readlog', $settings->get_page()->cm->context)) {
         if ($DB->get_records_select('chat_messages', "chatid = ? $groupselect", array($chat->id))) {
             $chatnode->add(get_string('pastsessions', 'chat'),
-                new moodle_url('/mod/chat/report.php', array('id' => $settings->get_page()->cm->id)),
+                new powereduc_url('/mod/chat/report.php', array('id' => $settings->get_page()->cm->id)),
                 navigation_node::TYPE_SETTING, null, 'pastsessions');
         }
     }
@@ -1464,7 +1464,7 @@ function mod_chat_core_calendar_provide_event_action(calendar_event $event,
 
         return $factory->create_instance(
             get_string('enterchat', 'chat'),
-            new \moodle_url('/mod/chat/view.php', array('id' => $cm->id)),
+            new \powereduc_url('/mod/chat/view.php', array('id' => $cm->id)),
             1,
             $actionable
         );

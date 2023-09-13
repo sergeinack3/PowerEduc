@@ -20,7 +20,7 @@ use core_files_external;
 use core_files\external\delete\draft;
 use core_files\external\get\unused_draft;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

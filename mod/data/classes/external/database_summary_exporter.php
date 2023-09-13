@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * Class for exporting partial database data.
  *
  * @package    mod_data
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_data\external;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\external\exporter;
 use renderer_base;
@@ -32,7 +32,7 @@ use external_util;
 /**
  * Class for exporting partial database data (some fields are only viewable by admins).
  *
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class database_summary_exporter extends exporter {
@@ -54,9 +54,9 @@ class database_summary_exporter extends exporter {
                 'description' => 'The Database intro',
             ),
             'introformat' => array(
-                'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                'choices' => array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN),
                 'type' => PARAM_INT,
-                'default' => FORMAT_MOODLE
+                'default' => FORMAT_POWEREDUC
             ),
             'lang' => array(
                 'type' => PARAM_LANG,

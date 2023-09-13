@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for report library functions.
@@ -23,7 +23,7 @@
  */
 namespace report_loglive;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class report_loglive_lib_testcase
@@ -75,7 +75,7 @@ class lib_test extends \advanced_testcase {
         $DB->delete_records('logstore_standard_log');
 
         // Build the report.
-        $url = new \moodle_url("/report/loglive/index.php");
+        $url = new \powereduc_url("/report/loglive/index.php");
         $renderable = new \report_loglive_renderable('logstore_standard', 0, $url);
         $table = $renderable->get_table();
         $table->query_db(100);

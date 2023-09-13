@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Forum post renderable.
@@ -24,7 +24,7 @@
 
 namespace mod_forum\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Forum post renderable.
@@ -278,7 +278,7 @@ class forum_post implements \renderable, \templatable {
      * @return string
      */
     public function get_courselink() {
-        $link = new \moodle_url(
+        $link = new \powereduc_url(
             // Posts are viewed on the topic.
             '/course/view.php', array(
                 'id'    => $this->course->id,
@@ -294,7 +294,7 @@ class forum_post implements \renderable, \templatable {
      * @return string
      */
     public function get_forumindexlink() {
-        $link = new \moodle_url(
+        $link = new \powereduc_url(
             // Posts are viewed on the topic.
             '/mod/forum/index.php', array(
                 'id'    => $this->course->id,
@@ -310,7 +310,7 @@ class forum_post implements \renderable, \templatable {
      * @return string
      */
     public function get_forumviewlink() {
-        $link = new \moodle_url(
+        $link = new \powereduc_url(
             // Posts are viewed on the topic.
             '/mod/forum/view.php', array(
                 'f' => $this->forum->id,
@@ -326,7 +326,7 @@ class forum_post implements \renderable, \templatable {
      * @return string
      */
     protected function _get_discussionlink() {
-        return new \moodle_url(
+        return new \powereduc_url(
             // Posts are viewed on the topic.
             '/mod/forum/discuss.php', array(
                 // Within a discussion.
@@ -376,7 +376,7 @@ class forum_post implements \renderable, \templatable {
      * @return string
      */
     public function get_authorlink() {
-        $link = new \moodle_url(
+        $link = new \powereduc_url(
             '/user/view.php', array(
                 'id' => $this->post->userid,
                 'course' => $this->course->id,
@@ -395,7 +395,7 @@ class forum_post implements \renderable, \templatable {
         if (!\mod_forum\subscriptions::is_subscribable($this->forum)) {
             return null;
         }
-        $link = new \moodle_url(
+        $link = new \powereduc_url(
             '/mod/forum/subscribe.php', array(
                 'id' => $this->forum->id,
             )
@@ -413,7 +413,7 @@ class forum_post implements \renderable, \templatable {
         if (!\mod_forum\subscriptions::is_subscribable($this->forum)) {
             return null;
         }
-        $link = new \moodle_url(
+        $link = new \powereduc_url(
             '/mod/forum/subscribe.php', array(
                 'id'  => $this->forum->id,
                 'd'   => $this->discussion->id,
@@ -429,7 +429,7 @@ class forum_post implements \renderable, \templatable {
      * @return string
      */
     public function get_replylink() {
-        return new \moodle_url(
+        return new \powereduc_url(
             '/mod/forum/post.php', array(
                 'reply' => $this->post->id,
             )

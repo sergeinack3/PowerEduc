@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -235,11 +235,11 @@ class course_modinfo {
      * Obtains a single course-module object (for a course-module that is on this course).
      * @param int $cmid Course-module ID
      * @return cm_info Information about that course-module
-     * @throws moodle_exception If the course-module does not exist
+     * @throws powereduc_exception If the course-module does not exist
      */
     public function get_cm($cmid) {
         if (empty($this->cms[$cmid])) {
-            throw new moodle_exception('invalidcoursemoduleid', 'error', '', $cmid);
+            throw new powereduc_exception('invalidcoursemoduleid', 'error', '', $cmid);
         }
         return $this->cms[$cmid];
     }
@@ -323,7 +323,7 @@ class course_modinfo {
     public function get_section_info($sectionnumber, $strictness = IGNORE_MISSING) {
         if (!array_key_exists($sectionnumber, $this->sectioninfo)) {
             if ($strictness === MUST_EXIST) {
-                throw new moodle_exception('sectionnotexist');
+                throw new powereduc_exception('sectionnotexist');
             } else {
                 return null;
             }
@@ -341,7 +341,7 @@ class course_modinfo {
 
         if (!isset($this->sectionids[$sectionid])) {
             if ($strictness === MUST_EXIST) {
-                throw new moodle_exception('sectionnotexist');
+                throw new powereduc_exception('sectionnotexist');
             } else {
                 return null;
             }
@@ -456,7 +456,7 @@ class course_modinfo {
      * Use get_fast_modinfo($course) instead as this maintains a cache.
      * @param stdClass $course course object, only property id is required.
      * @param int $userid User ID
-     * @throws moodle_exception if course is not found
+     * @throws powereduc_exception if course is not found
      */
     public function __construct($course, $userid) {
         global $CFG, $COURSE, $SITE, $DB;
@@ -630,7 +630,7 @@ class course_modinfo {
      * @param boolean $partialrebuild Indicate if it's partial course cache rebuild or not
      * @return stdClass object with all cached keys of the course plus fields modinfo and sectioncache.
      *     The same object is stored in MUC
-     * @throws moodle_exception if course is not found (if $course object misses some of the
+     * @throws powereduc_exception if course is not found (if $course object misses some of the
      *     necessary fields it is re-requested from database)
      */
     public static function build_course_cache(\stdClass $course, bool $partialrebuild = false): \stdClass {
@@ -765,7 +765,7 @@ class course_modinfo {
         global $CFG, $DB;
 
         if (empty($course)) {
-            throw new moodle_exception('courseidnotfound');
+            throw new powereduc_exception('courseidnotfound');
         }
 
         $rawmods = get_course_mods($course->id);
@@ -878,7 +878,7 @@ class course_modinfo {
                                         // Convert URL to string as it's easier to store.
                                         // Also serialized object contains \0 byte,
                                         // ... and can not be written to Postgres DB.
-                                        $url = new moodle_url($info->iconurl);
+                                        $url = new powereduc_url($info->iconurl);
                                         $mods[$cmid]->iconurl = $url->out(false);
                                     }
                                     if (!empty($info->onclick)) {
@@ -1082,7 +1082,7 @@ class course_modinfo {
  * @property-read string $modfullname Returns a localised human-readable name of the module type - calculated on request
  * @property-read string $modplural Returns a localised human-readable name of the module type in plural form - calculated on request
  * @property-read string $content Content to display on main (view) page - calculated on request
- * @property-read moodle_url $url URL to link to for this module, or null if it doesn't have a view page - calculated on request
+ * @property-read powereduc_url $url URL to link to for this module, or null if it doesn't have a view page - calculated on request
  * @property-read string $extraclasses Extra CSS classes to add to html output for this activity on main page - calculated on request
  * @property-read string $onclick Content of HTML on-click attribute already escaped - calculated on request
  * @property-read mixed $customdata Optional custom data stored in modinfo cache for this activity, or null if none
@@ -1355,7 +1355,7 @@ class cm_info implements IteratorAggregate {
     private $uservisibleoncoursepage;
 
     /**
-     * @var moodle_url
+     * @var powereduc_url
      */
     private $url;
 
@@ -1380,7 +1380,7 @@ class cm_info implements IteratorAggregate {
     private $extraclasses;
 
     /**
-     * @var moodle_url full external url pointing to icon image for activity
+     * @var powereduc_url full external url pointing to icon image for activity
      */
     private $iconurl;
 
@@ -1618,7 +1618,7 @@ class cm_info implements IteratorAggregate {
      * there is a case when it might be called recursively (you can't call property values
      * recursively).
      *
-     * @return moodle_url URL to link to for this module, or null if it doesn't have a view page
+     * @return powereduc_url URL to link to for this module, or null if it doesn't have a view page
      */
     public function get_url() {
         $this->obtain_dynamic_data();
@@ -1763,8 +1763,8 @@ class cm_info implements IteratorAggregate {
     }
 
     /**
-     * @param moodle_core_renderer $output Output render to use, or null for default (global)
-     * @return moodle_url Icon URL for a suitable icon to put beside this cm
+     * @param powereduc_core_renderer $output Output render to use, or null for default (global)
+     * @return powereduc_url Icon URL for a suitable icon to put beside this cm
      */
     public function get_icon_url($output = null) {
         global $OUTPUT;
@@ -1803,7 +1803,7 @@ class cm_info implements IteratorAggregate {
     public function get_grouping_label($textclasses = '') {
         $groupinglabel = '';
         if ($this->effectivegroupmode != NOGROUPS && !empty($this->groupingid) &&
-                has_capability('moodle/course:managegroups', context_course::instance($this->course))) {
+                has_capability('powereduc/course:managegroups', context_course::instance($this->course))) {
             $groupings = groups_get_all_groupings($this->course);
             $groupinglabel = html_writer::tag('span', '('.format_string($groupings[$this->groupingid]->name).')',
                 array('class' => 'groupinglabel '.$textclasses));
@@ -1980,10 +1980,10 @@ class cm_info implements IteratorAggregate {
      * by the activity. Useful for external-tool modules (lti...)
      * If set, takes precedence over $icon and $iconcomponent
      *
-     * @param moodle_url $iconurl full external url pointing to icon image for activity
+     * @param powereduc_url $iconurl full external url pointing to icon image for activity
      * @return void
      */
-    public function set_icon_url(moodle_url $iconurl) {
+    public function set_icon_url(powereduc_url $iconurl) {
         $this->iconurl = $iconurl;
     }
 
@@ -2145,8 +2145,8 @@ class cm_info implements IteratorAggregate {
         $this->indent           = isset($mod->indent) ? $mod->indent : 0;
         $this->extra            = isset($mod->extra) ? $mod->extra : '';
         $this->extraclasses     = isset($mod->extraclasses) ? $mod->extraclasses : '';
-        // iconurl may be stored as either string or instance of moodle_url.
-        $this->iconurl          = isset($mod->iconurl) ? new moodle_url($mod->iconurl) : '';
+        // iconurl may be stored as either string or instance of powereduc_url.
+        $this->iconurl          = isset($mod->iconurl) ? new powereduc_url($mod->iconurl) : '';
         $this->onclick          = isset($mod->onclick) ? $mod->onclick : '';
         $this->content          = isset($mod->content) ? $mod->content : '';
         $this->icon             = isset($mod->icon) ? $mod->icon : '';
@@ -2189,7 +2189,7 @@ class cm_info implements IteratorAggregate {
                     FEATURE_NO_VIEW_LINK);
         }
         $this->url = $modviews[$this->modname]
-                ? new moodle_url('/mod/' . $this->modname . '/view.php', array('id'=>$this->id))
+                ? new powereduc_url('/mod/' . $this->modname . '/view.php', array('id'=>$this->id))
                 : null;
     }
 
@@ -2367,9 +2367,9 @@ class cm_info implements IteratorAggregate {
 
         // If the user cannot access the activity set the uservisible flag to false.
         // Additional checks are required to determine whether the activity is entirely hidden or just greyed out.
-        if ((!$this->visible && !has_capability('moodle/course:viewhiddenactivities', $this->get_context(), $userid)) ||
+        if ((!$this->visible && !has_capability('powereduc/course:viewhiddenactivities', $this->get_context(), $userid)) ||
                 (!$this->get_available() &&
-                !has_capability('moodle/course:ignoreavailabilityrestrictions', $this->get_context(), $userid))) {
+                !has_capability('powereduc/course:ignoreavailabilityrestrictions', $this->get_context(), $userid))) {
 
             $this->uservisible = false;
         }
@@ -2384,8 +2384,8 @@ class cm_info implements IteratorAggregate {
 
         $this->uservisibleoncoursepage = $this->uservisible &&
             ($this->visibleoncoursepage ||
-                has_capability('moodle/course:manageactivities', $this->get_context(), $userid) ||
-                has_capability('moodle/course:activityvisibility', $this->get_context(), $userid));
+                has_capability('powereduc/course:manageactivities', $this->get_context(), $userid) ||
+                has_capability('powereduc/course:activityvisibility', $this->get_context(), $userid));
         // Activity that is not available, not hidden from course page and has availability
         // info is actually visible on the course page (with availability info and without a link).
         if (!$this->uservisible && $this->visibleoncoursepage && $this->availableinfo) {
@@ -2507,7 +2507,7 @@ class cm_info implements IteratorAggregate {
  *     Set to 0 for current user (default). Set to -1 to avoid calculation of dynamic user-depended data.
  * @param bool $resetonly whether we want to get modinfo or just reset the cache
  * @return course_modinfo|null Module information for course, or null if resetting
- * @throws moodle_exception when course is not found (nothing is thrown if resetting)
+ * @throws powereduc_exception when course is not found (nothing is thrown if resetting)
  */
 function get_fast_modinfo($courseorid, $userid = 0, $resetonly = false) {
     // compartibility with syntax prior to 2.4:
@@ -2559,7 +2559,7 @@ function get_fast_modinfo($courseorid, $userid = 0, $resetonly = false) {
  * @param stdClass|int $courseorid Optional course object if already loaded
  * @param int $userid Optional userid (default = current)
  * @return array Array with 2 elements $course and $cm
- * @throws moodle_exception If the item doesn't exist or is of wrong module name
+ * @throws powereduc_exception If the item doesn't exist or is of wrong module name
  */
 function get_course_and_cm_from_cmid($cmorid, $modulename = '', $courseorid = 0, $userid = 0) {
     global $DB;
@@ -2606,7 +2606,7 @@ function get_course_and_cm_from_cmid($cmorid, $modulename = '', $courseorid = 0,
     $modinfo = get_fast_modinfo($course, $userid);
     $cm = $modinfo->get_cm($cmid);
     if ($modulename && $cm->modname !== $modulename) {
-        throw new moodle_exception('invalidcoursemoduleid', 'error', '', $cmid);
+        throw new powereduc_exception('invalidcoursemoduleid', 'error', '', $cmid);
     }
     return array($course, $cm);
 }
@@ -2635,7 +2635,7 @@ function get_course_and_cm_from_cmid($cmorid, $modulename = '', $courseorid = 0,
  * @param stdClass|int $courseorid Optional course object if already loaded
  * @param int $userid Optional userid (default = current)
  * @return array Array with 2 elements $course and $cm
- * @throws moodle_exception If the item doesn't exist or is of wrong module name
+ * @throws powereduc_exception If the item doesn't exist or is of wrong module name
  */
 function get_course_and_cm_from_instance($instanceorid, $modulename, $courseorid = 0, $userid = 0) {
     global $DB;
@@ -2685,7 +2685,7 @@ function get_course_and_cm_from_instance($instanceorid, $modulename, $courseorid
     $modinfo = get_fast_modinfo($course, $userid);
     $instances = $modinfo->get_instances_of($modulename);
     if (!array_key_exists($instanceid, $instances)) {
-        throw new moodle_exception('invalidmoduleid', 'error', $instanceid);
+        throw new powereduc_exception('invalidmoduleid', 'error', $instanceid);
     }
     return array($course, $instances[$instanceid]);
 }
@@ -2705,7 +2705,7 @@ function get_course_and_cm_from_instance($instanceorid, $modulename, $courseorid
  * Cached course information is stored in MUC core/coursemodinfo and is
  * validated with the DB field {course}.cacherev
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param int $courseid id of course to rebuild, empty means all
  * @param boolean $clearonly only clear the cache, gets rebuild automatically on the fly.
  *     Recommended to set to true to avoid unnecessary multiple rebuilding.
@@ -2823,7 +2823,7 @@ class cached_cm_info {
     public $icon;
 
     /**
-     * Component for icon for this activity, as per image_url; leave blank to use default 'moodle'
+     * Component for icon for this activity, as per image_url; leave blank to use default 'powereduc'
      * component
      * @see renderer_base::image_url()
      * @var string
@@ -2854,7 +2854,7 @@ class cached_cm_info {
     /**
      * External URL image to be used by activity as icon, useful for some external-tool modules
      * like lti. If set, takes precedence over $icon and $iconcomponent
-     * @var $moodle_url
+     * @var $powereduc_url
      */
     public $iconurl;
 
@@ -3218,9 +3218,9 @@ class section_info implements IteratorAggregate {
         $this->_uservisible = true;
         if (!$this->_visible || !$this->get_available()) {
             $coursecontext = context_course::instance($this->get_course());
-            if (!$this->_visible && !has_capability('moodle/course:viewhiddensections', $coursecontext, $userid) ||
+            if (!$this->_visible && !has_capability('powereduc/course:viewhiddensections', $coursecontext, $userid) ||
                     (!$this->get_available() &&
-                    !has_capability('moodle/course:ignoreavailabilityrestrictions', $coursecontext, $userid))) {
+                    !has_capability('powereduc/course:ignoreavailabilityrestrictions', $coursecontext, $userid))) {
 
                 $this->_uservisible = false;
             }

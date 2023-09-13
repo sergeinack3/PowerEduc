@@ -24,7 +24,7 @@
 
 namespace core_analytics;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Default list of bulk actions to reuse across different targets as presets.

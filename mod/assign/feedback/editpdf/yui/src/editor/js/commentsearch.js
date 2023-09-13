@@ -5,7 +5,7 @@ var COMMENTSEARCHNAME = "commentsearch",
 /**
  * Provides an in browser PDF editor.
  *
- * @module moodle-assignfeedback_editpdf-editor
+ * @module powereduc-assignfeedback_editpdf-editor
  */
 
 /**
@@ -160,7 +160,7 @@ Y.Base.modifyAttrs(COMMENTSEARCH, {
     /**
      * Whether the widget should be modal or not.
      *
-     * Moodle override: We override this for commentsearch to force it always true.
+     * PowerEduc override: We override this for commentsearch to force it always true.
      *
      * @attribute Modal
      * @type Boolean

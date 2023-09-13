@@ -25,7 +25,7 @@
 
 namespace tool_messageinbound\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A scheduled task to handle Inbound Message e-mail pickup.

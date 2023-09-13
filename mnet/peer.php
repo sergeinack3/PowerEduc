@@ -68,7 +68,7 @@ class mnet_peer {
 
         // Couldn't find the IP address?
         if ($ip_address === $hostname && !preg_match('/^\d+\.\d+\.\d+.\d+$/',$hostname)) {
-            throw new moodle_exception('noaddressforhost', 'mnet', '', $hostname);
+            throw new powereduc_exception('noaddressforhost', 'mnet', '', $hostname);
         }
 
         $this->name = $wwwroot;
@@ -89,7 +89,7 @@ class mnet_peer {
 
         $this->application = $DB->get_record('mnet_application', array('name'=>$application));
         if (empty($this->application)) {
-            $this->application = $DB->get_record('mnet_application', array('name'=>'moodle'));
+            $this->application = $DB->get_record('mnet_application', array('name'=>'powereduc'));
         }
 
         $this->applicationid = $this->application->id;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,19 +19,19 @@
  *
  * @package mod_chat
  * @category test
- * @copyright 2017 Mark Nelson <markn@moodle.com>
+ * @copyright 2017 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_chat;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class containing unit tests for mod/chat/lib.php.
  *
  * @package mod_chat
  * @category test
- * @copyright 2017 Mark Nelson <markn@moodle.com>
+ * @copyright 2017 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lib_test extends \advanced_testcase {
@@ -187,7 +187,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -223,7 +223,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -250,7 +250,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -286,7 +286,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -313,7 +313,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -349,7 +349,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -417,21 +417,21 @@ class lib_test extends \advanced_testcase {
         // Confirm event1 was decorated for student2 and it is actionable.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent12);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent12->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent12->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent12->get_url());
         $this->assertEquals(1, $actionevent12->get_item_count());
         $this->assertTrue($actionevent12->is_actionable());
 
         // Confirm event2 was decorated for student1 and it is actionable.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent21);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent21->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent21->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent21->get_url());
         $this->assertEquals(1, $actionevent21->get_item_count());
         $this->assertTrue($actionevent21->is_actionable());
 
         // Confirm event2 was decorated for student2 and it is not actionable.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent22);
         $this->assertEquals(get_string('enterchat', 'chat'), $actionevent22->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent22->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent22->get_url());
         $this->assertEquals(1, $actionevent22->get_item_count());
         $this->assertFalse($actionevent22->is_actionable());
     }
@@ -730,7 +730,7 @@ class lib_test extends \advanced_testcase {
         $user = self::getDataGenerator()->create_and_enrol($course, 'editingteacher');
         $roleid = self::getDataGenerator()->create_role();
         self::getDataGenerator()->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
         $generator = self::getDataGenerator()->get_plugin_generator('mod_chat');
         // Create an instance as a user without the calendar capabilities.
         $this->setUser($user);

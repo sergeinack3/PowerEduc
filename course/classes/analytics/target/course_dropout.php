@@ -24,7 +24,7 @@
 
 namespace core_course\analytics\target;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->dirroot . '/lib/gradelib.php');

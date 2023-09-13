@@ -24,7 +24,7 @@
  */
 namespace core_course\local\entity;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The lang_string_title class of value object, providing access to the value of a lang string.

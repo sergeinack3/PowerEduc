@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag\output\tagflag
@@ -42,7 +42,7 @@ class tagflag extends \core\output\inplace_editable {
      * @param \stdClass|core_tag_tag $tag
      */
     public function __construct($tag) {
-        $editable = has_capability('moodle/tag:manage', context_system::instance());
+        $editable = has_capability('powereduc/tag:manage', context_system::instance());
         $value = (int)$tag->flag;
 
         parent::__construct('core_tag', 'tagflag', $tag->id, $editable, $value, $value);
@@ -76,7 +76,7 @@ class tagflag extends \core\output\inplace_editable {
      * @return \self
      */
     public static function update($itemid, $newvalue) {
-        require_capability('moodle/tag:manage', context_system::instance());
+        require_capability('powereduc/tag:manage', context_system::instance());
         $tag = core_tag_tag::get($itemid, '*', MUST_EXIST);
         $newvalue = (int)clean_param($newvalue, PARAM_BOOL);
         if ($newvalue) {

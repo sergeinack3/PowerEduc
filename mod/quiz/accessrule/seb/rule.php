@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Implementation of the quizaccess_seb plugin.
@@ -29,7 +29,7 @@ use quizaccess_seb\quiz_settings;
 use quizaccess_seb\settings_provider;
 use \quizaccess_seb\event\access_prevented;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/quiz/accessrule/accessrulebase.php');
@@ -83,9 +83,9 @@ class quizaccess_seb extends quiz_access_rule_base {
      * security section is being built.
      *
      * @param mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    public static function add_settings_form_fields(mod_quiz_mod_form $quizform, MoodleQuickForm $mform) {
+    public static function add_settings_form_fields(mod_quiz_mod_form $quizform, PowerEducQuickForm $mform) {
         settings_provider::add_seb_settings_fields($quizform, $mform);
     }
 
@@ -322,7 +322,7 @@ class quizaccess_seb extends quiz_access_rule_base {
             return $this->get_invalid_key_error_message();
         }
 
-        // Set the state of the access for this Moodle session.
+        // Set the state of the access for this PowerEduc session.
         $this->accessmanager->set_session_access(true);
 
         return false;
@@ -463,7 +463,7 @@ class quizaccess_seb extends quiz_access_rule_base {
      * Sets up the attempt (review or summary) page with any special extra
      * properties required by this rule.
      *
-     * @param moodle_page $page the page object to initialise.
+     * @param powereduc_page $page the page object to initialise.
      */
     public function setup_attempt_page($page) {
         $page->set_title($this->quizobj->get_course()->shortname . ': ' . $page->title);

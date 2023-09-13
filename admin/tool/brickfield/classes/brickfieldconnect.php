@@ -16,7 +16,7 @@
 
 namespace tool_brickfield;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 // The curl class is in filelib.
 global $CFG;

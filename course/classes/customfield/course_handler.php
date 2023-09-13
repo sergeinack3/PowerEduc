@@ -24,7 +24,7 @@
 
 namespace core_course\customfield;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use core_customfield\api;
 use core_customfield\field_controller;

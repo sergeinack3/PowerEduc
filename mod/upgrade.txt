@@ -8,7 +8,7 @@ information provided here is intended especially for developers.
 === 4.0 ===
 * A new API function introduced to handle custom completion logic. Refer to completion/upgrade.txt for additional information.
 * Modules that extend the settings navigation via '_extend_settings_navigation()' should use the get_page() method from
-  the settings_navigation class in order to obtain the correct moodle_page information associated to the given settings
+  the settings_navigation class in order to obtain the correct powereduc_page information associated to the given settings
   navigation. After the recent changes to the navigation in single activity courses, using the global $PAGE may result
   in returning inaccurate data in this course format, therefore it is advisable to use $settingsnavigation->get_page().
 * A new style of icons has been created for activities. When creating an icon in the new style it should be named
@@ -66,7 +66,7 @@ information provided here is intended especially for developers.
 
 * There is a new privacy API that every subsystem and plugin has to implement so that the site can become GDPR
   compliant. Activity modules use this API to report what information they store or process regarding users, and provide
-  ability to export and delete personal data. See https://docs.moodle.org/dev/Privacy_API for guidelines on how to
+  ability to export and delete personal data. See https://docs.powereduc.org/dev/Privacy_API for guidelines on how to
   implement the privacy API in your activity module.
 * Backup directory now can be outside of temp directory. Use make_backup_temp_directory($name) instead of
   make_temp_directory('/backup/'.$name)
@@ -97,11 +97,11 @@ information provided here is intended especially for developers.
 *_print_overview functions have been deprecated.
 * The block_myoverview has replaced block_course_overview to provide better information to students. To support this,
   actions can now be attached to calendar events. Documentation for the following new API callbacks introduced in
-  MDL-55611 can be found at https://docs.moodle.org/dev/Calendar_API. The 3 new callbacks are:
+  MDL-55611 can be found at https://docs.powereduc.org/dev/Calendar_API. The 3 new callbacks are:
   - mod_<modname>_core_calendar_is_event_visible
   - mod_<modname>_core_calendar_provide_event_action
   - mod_<modname>_core_calendar_event_action_shows_item_count
-* Changes to the moodleform_mod class and its usage (MDL-58138):
+* Changes to the powereducform_mod class and its usage (MDL-58138):
   - the get_data() method has been overriden. The implementation calls parent::get_data() and a new data_postprocessing() method
   - new data_postprocessing() method added. Mods can override this in their mod_form subclass to modify the submit data. Previously
     mods could only modify submitted data by overriding get_data() in the mod_form subclass. data_postprocessing() is now the way to
@@ -130,16 +130,16 @@ information provided here is intended especially for developers.
 
 * Dropped support for the $module in mod/xxx/version.php files (deprecated
   since 2.7). All activity modules must use the $plugin syntax now. See
-  https://docs.moodle.org/dev/version.php for details (MDL-43896).
+  https://docs.powereduc.org/dev/version.php for details (MDL-43896).
 * Modules using rating component must implement a callback mod_x_rating_can_see_item_ratings(). Refer
   to mod_forum_rating_can_see_item_ratings() for example.
 
 === 2.9 ===
 
 * Added Grade to pass field to mod_form for activities that support grading.
-* The method moodleform_mod::add_intro_editor() used in mod_form.php form
+* The method powereducform_mod::add_intro_editor() used in mod_form.php form
   definitions has been deprecated. Replace it with the new
-  moodleform_mod::standard_intro_elements() method that takes the new site
+  powereducform_mod::standard_intro_elements() method that takes the new site
   configuration requiremodintro into account (MDL-49101).
 
 === 2.8 ===
@@ -152,7 +152,7 @@ information provided here is intended especially for developers.
 
 * modgrade form element has been redesigned and allows setting the maximum grade point higher than 100.
 * The usage of $module in mod/xxx/version.php files is now deprecated. Please use
-  $plugin instead. The support for the legacy notation will be dropped in Moodle 2.10.
+  $plugin instead. The support for the legacy notation will be dropped in PowerEduc 2.10.
 * xxx_get_view_actions() and xxx_get_post_actions() will be ignored by new logging system for
   participation report. view_action and post_action will be detected by event's crud and edulevel.
 * The functions xxx_user_outline() and xxx_user_complete() have been removed from the majority of core modules (see MDL-41286),
@@ -205,7 +205,7 @@ optional - no changes needed:
 
 * add support for handling course drag and drop types - functions
   xxx_dndupload_register() and xxx_dndupload_handle($uploadinfo) see:
-  http://docs.moodle.org/dev/Implementing_Course_drag_and_drop_upload_support_in_a_module
+  http://docs.powereduc.org/dev/Implementing_Course_drag_and_drop_upload_support_in_a_module
 
 === 2.2 ===
 
@@ -226,9 +226,9 @@ required changes in code:
 
 required changes in code:
 * use new DML syntax everywhere
-  (http://docs.moodle.org/dev/DML_functions)
+  (http://docs.powereduc.org/dev/DML_functions)
 * use new DDL syntax in db/upgrade.php
-  (http://docs.moodle.org/dev/DDL_functions)
+  (http://docs.powereduc.org/dev/DDL_functions)
 * replace defaults.php by settings.php and db/install.php
 * replace STATEMENTS section in db/install.xml with PHP code db/install.php or db/log.php
 * move post installation code from lib.php into db/install.php
@@ -236,7 +236,7 @@ required changes in code:
 * new mandatory naming of intro and introformat table fields in module tables,
   the presence of these fields is indicated in xxx_plugin_supports()
 * completely rewrite file handling
-  (http://docs.moodle.org/dev/File_API)
+  (http://docs.powereduc.org/dev/File_API)
 * rewrite backup/restore
   (not finished yet)
 * rewrite trusttext support - new db table columns needed
@@ -250,9 +250,9 @@ required changes in code:
                  move module icon to mod/xxx/pix/icon.gif
                  old global $THEME is fully replaced by $OUTPUT
                  create plugin renderers
-  (http://docs.moodle.org/dev/Theme_changes_in_2.0)
+  (http://docs.powereduc.org/dev/Theme_changes_in_2.0)
 * migrate all javascript new coding style using YUI3+YUI2
-  (http://docs.moodle.org/dev/JavaScript_usage_guide)
+  (http://docs.powereduc.org/dev/JavaScript_usage_guide)
 * remove '_utf8' from lang pack names, use new {a} syntax
 * replace helps with new 'xxx_hlp' strings
 * please note the $plugin->requires in version.php has to be bigger than 2010000000,
@@ -263,11 +263,11 @@ optional - no changes needed in older code:
 * support for new mforms editor element and embedded files
   (not finished yet)
 * portfolio support
-  (http://docs.moodle.org/dev/Portfolio_API)
+  (http://docs.powereduc.org/dev/Portfolio_API)
 * course completion tracking support
 * new navigation features
 * new comments API
-  (http://docs.moodle.org/dev/Comments_2.0)
+  (http://docs.powereduc.org/dev/Comments_2.0)
 * new ratings API
-  (http://docs.moodle.org/dev/Ratings_2.0)
+  (http://docs.powereduc.org/dev/Ratings_2.0)
 

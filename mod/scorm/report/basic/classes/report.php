@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Core Report class of basic reporting plugin
  * @package    scormreport
@@ -23,7 +23,7 @@
 
 namespace scormreport_basic;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/csvlib.class.php');
 
 class report extends \mod_scorm\report {
@@ -41,7 +41,7 @@ class report extends \mod_scorm\report {
         $action = optional_param('action', '', PARAM_ALPHA);
         $attemptids = optional_param_array('attemptid', array(), PARAM_RAW);
         $attemptsmode = optional_param('attemptsmode', SCORM_REPORT_ATTEMPTS_ALL_STUDENTS, PARAM_INT);
-        $PAGE->set_url(new \moodle_url($PAGE->url, array('attemptsmode' => $attemptsmode)));
+        $PAGE->set_url(new \powereduc_url($PAGE->url, array('attemptsmode' => $attemptsmode)));
 
         // Scorm action bar for report.
         if ($download === '') {
@@ -78,7 +78,7 @@ class report extends \mod_scorm\report {
         $displayoptions['attemptsmode'] = $attemptsmode;
         if ($groupmode = groups_get_activity_groupmode($cm)) { // Groups are being used.
             if (!$download) {
-                groups_print_activity_menu($cm, new \moodle_url($PAGE->url, $displayoptions));
+                groups_print_activity_menu($cm, new \powereduc_url($PAGE->url, $displayoptions));
             }
         }
 
@@ -196,7 +196,7 @@ class report extends \mod_scorm\report {
 
                 $filename .= ".ods";
                 // Creating a workbook.
-                $workbook = new \MoodleODSWorkbook("-");
+                $workbook = new \PowerEducODSWorkbook("-");
                 // Sending HTTP headers.
                 $workbook->send($filename);
                 // Creating the first worksheet.
@@ -235,7 +235,7 @@ class report extends \mod_scorm\report {
 
                 $filename .= ".xls";
                 // Creating a workbook.
-                $workbook = new \MoodleExcelWorkbook("-");
+                $workbook = new \PowerEducExcelWorkbook("-");
                 // Sending HTTP headers.
                 $workbook->send($filename);
                 // Creating the first worksheet.
@@ -392,7 +392,7 @@ class report extends \mod_scorm\report {
                         $row[] = $OUTPUT->user_picture($user, array('courseid' => $course->id));
                     }
                     if (!$download) {
-                        $url = new \moodle_url('/user/view.php', array('id' => $scouser->userid, 'course' => $course->id));
+                        $url = new \powereduc_url('/user/view.php', array('id' => $scouser->userid, 'course' => $course->id));
                         $row[] = \html_writer::link($url, fullname($scouser));
                     } else {
                         $row[] = fullname($scouser);
@@ -407,7 +407,7 @@ class report extends \mod_scorm\report {
                         $row[] = '-';
                     } else {
                         if (!$download) {
-                            $url = new \moodle_url('/mod/scorm/report/userreport.php', array('id' => $cm->id,
+                            $url = new \powereduc_url('/mod/scorm/report/userreport.php', array('id' => $cm->id,
                                 'user' => $scouser->userid, 'attempt' => $scouser->attempt, 'mode' => 'basic'));
                             $row[] = \html_writer::link($url, $scouser->attempt);
                         } else {
@@ -451,7 +451,7 @@ class report extends \mod_scorm\report {
                                         $score = $strstatus;
                                     }
                                     if (!$download) {
-                                        $url = new \moodle_url('/mod/scorm/report/userreporttracks.php', array('id' => $cm->id,
+                                        $url = new \powereduc_url('/mod/scorm/report/userreporttracks.php', array('id' => $cm->id,
                                             'scoid' => $sco->id, 'user' => $scouser->userid, 'attempt' => $scouser->attempt,
                                             'mode' => 'basic'));
                                         $row[] = $OUTPUT->pix_icon($trackdata->status, $strstatus, 'scorm') . '<br>' .

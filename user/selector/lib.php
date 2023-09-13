@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Code for ajax user selectors.
@@ -72,11 +72,11 @@ abstract class user_selector_base {
     protected static $jsmodule = array(
                 'name' => 'user_selector',
                 'fullpath' => '/user/selector/module.js',
-                'requires'  => array('node', 'event-custom', 'datasource', 'json', 'moodle-core-notification'),
+                'requires'  => array('node', 'event-custom', 'datasource', 'json', 'powereduc-core-notification'),
                 'strings' => array(
-                    array('previouslyselectedusers', 'moodle', '%%SEARCHTERM%%'),
-                    array('nomatchingusers', 'moodle', '%%SEARCHTERM%%'),
-                    array('none', 'moodle')
+                    array('previouslyselectedusers', 'powereduc', '%%SEARCHTERM%%'),
+                    array('nomatchingusers', 'powereduc', '%%SEARCHTERM%%'),
+                    array('none', 'powereduc')
                 ));
 
     /** @var int this is used to define maximum number of users visible in list */
@@ -116,7 +116,7 @@ abstract class user_selector_base {
             $this->accesscontext = context_system::instance();
         }
 
-        $this->viewfullnames = has_capability('moodle/site:viewfullnames', $this->accesscontext);
+        $this->viewfullnames = has_capability('powereduc/site:viewfullnames', $this->accesscontext);
 
         // Check if some legacy code tries to override $CFG->showuseridentity.
         if (isset($options['extrafields'])) {
@@ -209,12 +209,12 @@ abstract class user_selector_base {
     /**
      * Convenience method for when multiselect is false (throws an exception if not).
      *
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @return object the selected user object, or null if none.
      */
     public function get_selected_user() {
         if ($this->multiselect) {
-            throw new moodle_exception('cannotcallusgetselecteduser');
+            throw new powereduc_exception('cannotcallusgetselecteduser');
         }
         $users = $this->get_selected_users();
         if (count($users) == 1) {
@@ -222,7 +222,7 @@ abstract class user_selector_base {
         } else if (count($users) == 0) {
             return null;
         } else {
-            throw new moodle_exception('userselectortoomany');
+            throw new powereduc_exception('userselectortoomany');
         }
     }
 
@@ -850,7 +850,7 @@ class group_non_members_selector extends groups_user_selector_base {
      *
      * Used by /group/clientlib.js
      *
-     * @global moodle_page $PAGE
+     * @global powereduc_page $PAGE
      * @param int $courseid
      */
     public function print_user_summaries($courseid) {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Microsoft Live Skydrive Repository Plugin
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Microsoft onedrive repository plugin.
@@ -77,7 +77,7 @@ class repository_onedrive extends repository {
     /**
      * Get a cached user authenticated oauth client.
      *
-     * @param moodle_url $overrideurl - Use this url instead of the repo callback.
+     * @param powereduc_url $overrideurl - Use this url instead of the repo callback.
      * @return \core\oauth2\client
      */
     protected function get_user_oauth_client($overrideurl = false) {
@@ -87,7 +87,7 @@ class repository_onedrive extends repository {
         if ($overrideurl) {
             $returnurl = $overrideurl;
         } else {
-            $returnurl = new moodle_url('/repository/repository_callback.php');
+            $returnurl = new powereduc_url('/repository/repository_callback.php');
             $returnurl->param('callback', 'yes');
             $returnurl->param('repo_id', $this->id);
             $returnurl->param('sesskey', sesskey());
@@ -136,7 +136,7 @@ class repository_onedrive extends repository {
         global $OUTPUT, $PAGE;
 
         $client = $this->get_user_oauth_client(false);
-        $url = new moodle_url($client->get_login_url());
+        $url = new powereduc_url($client->get_login_url());
         $state = $url->get_param('state') . '&reloadparent=true';
         $url->param('state', $state);
 
@@ -448,7 +448,7 @@ class repository_onedrive extends repository {
 
         $base = 'https://graph.microsoft.com/v1.0/';
 
-        $sourceurl = new moodle_url($base . 'me/drive/items/' . $sourceinfo->id . '/content');
+        $sourceurl = new powereduc_url($base . 'me/drive/items/' . $sourceinfo->id . '/content');
         $source = $sourceurl->out(false);
 
         // We use download_one and not the rest API because it has special timeouts etc.
@@ -583,7 +583,7 @@ class repository_onedrive extends repository {
             $systemservice = new repository_onedrive\rest($systemauth);
 
             // Get the user oauth so we can get the account to add.
-            $url = moodle_url::make_pluginfile_url($storedfile->get_contextid(),
+            $url = powereduc_url::make_pluginfile_url($storedfile->get_contextid(),
                                                    $storedfile->get_component(),
                                                    $storedfile->get_filearea(),
                                                    $storedfile->get_itemid(),
@@ -832,9 +832,9 @@ class repository_onedrive extends repository {
 
     /**
      * Called when a file is selected as a "link".
-     * Invoked at MOODLE/repository/repository_ajax.php
+     * Invoked at POWEREDUC/repository/repository_ajax.php
      *
-     * What should happen here is that the file should be copied to a new file owned by the moodle system user.
+     * What should happen here is that the file should be copied to a new file owned by the powereduc system user.
      * It should be organised in a folder based on the file context.
      * It's sharing permissions should allow read access with the link.
      * The returned reference should point to the newly copied file - not the original.
@@ -882,7 +882,7 @@ class repository_onedrive extends repository {
 
         $options = ['filepath' => $temppath, 'timeout' => 60, 'followlocation' => true, 'maxredirs' => 5];
         $base = 'https://graph.microsoft.com/v1.0/';
-        $sourceurl = new moodle_url($base . 'me/drive/items/' . $source->id . '/content');
+        $sourceurl = new powereduc_url($base . 'me/drive/items/' . $source->id . '/content');
         $sourceurl = $sourceurl->out(false);
 
         $result = $userauth->download_one($sourceurl, null, $options);
@@ -1008,8 +1008,8 @@ class repository_onedrive extends repository {
      * Return true if any instances of the skydrive repo exist - and we can import them.
      *
      * @return bool
-     * @deprecated since Moodle 4.0
-     * @todo MDL-72620 This will be deleted in Moodle 4.4.
+     * @deprecated since PowerEduc 4.0
+     * @todo MDL-72620 This will be deleted in PowerEduc 4.4.
      */
     public static function can_import_skydrive_files() {
         global $DB;
@@ -1048,8 +1048,8 @@ class repository_onedrive extends repository {
      * Import all the files that were created with the skydrive repo to this repo.
      *
      * @return bool
-     * @deprecated since Moodle 4.0
-     * @todo MDL-72620 This will be deleted in Moodle 4.4.
+     * @deprecated since PowerEduc 4.0
+     * @todo MDL-72620 This will be deleted in PowerEduc 4.4.
      */
     public static function import_skydrive_files() {
         global $DB;
@@ -1083,15 +1083,15 @@ class repository_onedrive extends repository {
     }
 
     /**
-     * Edit/Create Admin Settings Moodle form.
+     * Edit/Create Admin Settings PowerEduc form.
      *
-     * @param moodleform $mform Moodle form (passed by reference).
+     * @param powereducform $mform PowerEduc form (passed by reference).
      * @param string $classname repository class name.
      */
     public static function type_config_form($mform, $classname = 'repository') {
         global $OUTPUT;
 
-        $url = new moodle_url('/admin/tool/oauth2/issuers.php');
+        $url = new powereduc_url('/admin/tool/oauth2/issuers.php');
         $url = $url->out();
 
         $mform->addElement('static', null, '', get_string('oauth2serviceslink', 'repository_onedrive', $url));
@@ -1101,7 +1101,7 @@ class repository_onedrive extends repository {
             'repository_onedrive before it will be completely removed.', DEBUG_DEVELOPER);
 
             $notice = get_string('skydrivefilesexist', 'repository_onedrive');
-            $url = new moodle_url('/repository/onedrive/importskydrive.php');
+            $url = new powereduc_url('/repository/onedrive/importskydrive.php');
             $attrs = ['class' => 'btn btn-primary'];
             $button = $OUTPUT->action_link($url, get_string('importskydrivefiles', 'repository_onedrive'), null, $attrs);
             $mform->addElement('static', null, '', $OUTPUT->notification($notice) . $button);

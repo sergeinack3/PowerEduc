@@ -24,7 +24,7 @@
 
 namespace block_settings\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_settings implementing null_provider.

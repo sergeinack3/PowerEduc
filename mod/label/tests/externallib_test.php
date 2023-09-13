@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_label;
 
 use externallib_advanced_testcase;
 use mod_label_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -30,9 +30,9 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  *
  * @package    mod_label
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 class externallib_test extends externallib_advanced_testcase {
 
@@ -61,7 +61,7 @@ class externallib_test extends externallib_advanced_testcase {
         $record->course = $course2->id;
         $label2 = self::getDataGenerator()->create_module('label', $record);
 
-        // Execute real Moodle enrolment as we'll call unenrol() method on the instance later.
+        // Execute real PowerEduc enrolment as we'll call unenrol() method on the instance later.
         $enrol = enrol_get_plugin('manual');
         $enrolinstances = enrol_get_instances($course2->id, true);
         foreach ($enrolinstances as $courseenrolinstance) {

@@ -1,6 +1,6 @@
 @core @core_user
 Feature: Deleting users
-  In order to manage a Moodle site
+  In order to manage a PowerEduc site
   As an admin
   I need to be able to delete users
 

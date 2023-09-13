@@ -24,7 +24,7 @@
 
 namespace core\upgrade;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Core upgrade utility class.

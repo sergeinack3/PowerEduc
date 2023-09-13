@@ -24,7 +24,7 @@
 
 namespace core_analytics\local\target;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Linear values target.

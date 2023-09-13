@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Displays the list of discussions in a forum.
@@ -45,18 +45,18 @@ $pagesize = optional_param('s', 0, PARAM_INT);
 $sortorder = optional_param('o', null, PARAM_INT);
 
 if (!$cmid && !$forumid) {
-    throw new \moodle_exception('missingparameter');
+    throw new \powereduc_exception('missingparameter');
 }
 
 if ($cmid) {
     $forum = $forumvault->get_from_course_module_id($cmid);
     if (empty($forum)) {
-        throw new \moodle_exception('Unable to find forum with cmid ' . $cmid);
+        throw new \powereduc_exception('Unable to find forum with cmid ' . $cmid);
     }
 } else {
     $forum = $forumvault->get_from_id($forumid);
     if (empty($forum)) {
-        throw new \moodle_exception('Unable to find forum with id ' . $forumid);
+        throw new \powereduc_exception('Unable to find forum with id ' . $forumid);
     }
 }
 
@@ -113,7 +113,7 @@ if ($istypesingle && $displaymode == FORUM_MODE_NESTED_V2) {
     $PAGE->add_header_action($settingstrigger);
 }
 
-if (empty($cm->visible) && !has_capability('moodle/course:viewhiddenactivities', $forum->get_context())) {
+if (empty($cm->visible) && !has_capability('powereduc/course:viewhiddenactivities', $forum->get_context())) {
     redirect(
         $urlfactory->get_course_url_from_forum($forum),
         get_string('activityiscurrentlyhidden'),

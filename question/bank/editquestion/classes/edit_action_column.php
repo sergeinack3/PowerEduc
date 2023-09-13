@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class for question bank edit question column.
@@ -25,7 +25,7 @@
 namespace qbank_editquestion;
 
 use core_question\local\bank\menu_action_column_base;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class for question bank edit question column.
@@ -50,7 +50,7 @@ class edit_action_column extends menu_action_column_base {
 
     /**
      * Contains the url of the edit question page.
-     * @var moodle_url|string
+     * @var powereduc_url|string
      */
     public $editquestionurl;
 
@@ -58,7 +58,7 @@ class edit_action_column extends menu_action_column_base {
         parent::init();
         $this->stredit = get_string('editquestion', 'question');
         $this->strview = get_string('view');
-        $this->editquestionurl = new \moodle_url('/question/bank/editquestion/question.php',
+        $this->editquestionurl = new \powereduc_url('/question/bank/editquestion/question.php',
                 array('returnurl' => $this->qbank->returnurl));
         if ($this->qbank->cm !== null) {
             $this->editquestionurl->param('cmid', $this->qbank->cm->id);
@@ -75,10 +75,10 @@ class edit_action_column extends menu_action_column_base {
      * Get the URL for editing a question as a link.
      *
      * @param int $questionid the question id.
-     * @return moodle_url the URL, HTML-escaped.
+     * @return powereduc_url the URL, HTML-escaped.
      */
-    public function edit_question_moodle_url($questionid): moodle_url {
-        return new moodle_url($this->editquestionurl, ['id' => $questionid]);
+    public function edit_question_powereduc_url($questionid): powereduc_url {
+        return new powereduc_url($this->editquestionurl, ['id' => $questionid]);
     }
 
     protected function get_url_icon_and_label(\stdClass $question): array {
@@ -90,9 +90,9 @@ class edit_action_column extends menu_action_column_base {
         }
 
         if (question_has_capability_on($question, 'edit')) {
-            return [$this->edit_question_moodle_url($question->id), 't/edit', $this->stredit];
+            return [$this->edit_question_powereduc_url($question->id), 't/edit', $this->stredit];
         } else if (question_has_capability_on($question, 'view')) {
-            return [$this->edit_question_moodle_url($question->id), 'i/info', $this->strview];
+            return [$this->edit_question_powereduc_url($question->id), 'i/info', $this->strview];
         } else {
             return [null, null, null];
         }

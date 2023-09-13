@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['clialreadyconfigured'] = 'File config.php already exists, please use admin/cli/install_database.php if ye want to install this site.';
 $string['clialreadyinstalled'] = 'File config.php already exists, please use admin/cli/upgrade.php if ye want to upgrade this site.';

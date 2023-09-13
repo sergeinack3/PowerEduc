@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -20,7 +20,7 @@ namespace core_reportbuilder\local\report;
 
 use action_menu_link;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use popup_action;
 use stdClass;
@@ -29,12 +29,12 @@ use stdClass;
  * Class to represent a report action
  *
  * @package     core_reportbuilder
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class action {
 
-    /** @var moodle_url $url */
+    /** @var powereduc_url $url */
     protected $url;
 
     /** @var pix_icon $icon */
@@ -56,18 +56,18 @@ final class action {
      * Create an instance of an action to be added to a report. Both the parameters of the URL, and the attributes parameter
      * support placeholders which will be replaced with appropriate row values, e.g.:
      *
-     * new action(new moodle_url('/', ['id' => ':id']), new pix_icon(...), ['data-id' => ':id'])
+     * new action(new powereduc_url('/', ['id' => ':id']), new pix_icon(...), ['data-id' => ':id'])
      *
      * Note that all expected placeholders should be added as base fields to the report
      *
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param pix_icon $icon
      * @param string[] $attributes Array of attributes to include in action, each will be cast to string prior to use
      * @param bool $popup
      * @param ?lang_string $title
      */
     public function __construct(
-        moodle_url $url,
+        powereduc_url $url,
         pix_icon $icon,
         array $attributes = [],
         bool $popup = false,
@@ -110,8 +110,8 @@ final class action {
             }
         }
 
-        // Create a new moodle_url instance with our filled in placeholders for this row.
-        $url = new moodle_url(
+        // Create a new powereduc_url instance with our filled in placeholders for this row.
+        $url = new powereduc_url(
             $this->url->out_omit_querystring(true),
             self::replace_placeholders($this->url->params(), $row)
         );

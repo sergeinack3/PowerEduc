@@ -25,7 +25,7 @@
 use Packback\Lti1p3\JwksEndpoint;
 
 define('NO_DEBUG_DISPLAY', true);
-define('NO_MOODLE_COOKIES', true);
+define('NO_POWEREDUC_COOKIES', true);
 
 require_once(__DIR__ . '/../../config.php');
 

@@ -26,7 +26,7 @@
 
 namespace core\lock;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class representing a lock

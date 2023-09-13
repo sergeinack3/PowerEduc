@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ echo $OUTPUT->header();
 
 // Get all the appropriate data
 if (!$books = get_all_instances_in_course('book', $course)) {
-    notice(get_string('thereareno', 'moodle', $strbooks), "$CFG->wwwroot/course/view.php?id=$course->id");
+    notice(get_string('thereareno', 'powereduc', $strbooks), "$CFG->wwwroot/course/view.php?id=$course->id");
     die;
 }
 
@@ -92,7 +92,7 @@ foreach ($books as $book) {
 
     $table->data[] = array (
         $printsection,
-        html_writer::link(new moodle_url('view.php', array('id' => $cm->id)), format_string($book->name), $class),
+        html_writer::link(new powereduc_url('view.php', array('id' => $cm->id)), format_string($book->name), $class),
         format_module_intro('book', $book, $cm->id));
 }
 

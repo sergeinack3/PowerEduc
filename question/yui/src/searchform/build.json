@@ -1,7 +1,7 @@
 {
-  "name": "moodle-question-searchform",
+  "name": "powereduc-question-searchform",
   "builds": {
-    "moodle-question-searchform": {
+    "powereduc-question-searchform": {
       "jsfiles": [
         "searchform.js"
       ]

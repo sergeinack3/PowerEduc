@@ -19,7 +19,7 @@ namespace core_grades;
 use grade_plugin_return;
 use gradereport_user\report\user as user_report;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/grade/lib.php');

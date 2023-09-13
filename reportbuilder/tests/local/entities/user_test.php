@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
 namespace core_reportbuilder\local\entities;
 
 use advanced_testcase;
-use moodle_url;
+use powereduc_url;
 use core_reportbuilder\manager;
 use core_reportbuilder\testable_system_report_table;
 use core_reportbuilder\user_entity_report;
@@ -39,7 +39,7 @@ use core_reportbuilder\local\helpers\user_filter_manager;
  * @covers      \core_reportbuilder\local\helpers\user_profile_fields
  * @covers      \core_reportbuilder\local\report\base
  * @covers      \core_reportbuilder\system_report
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user_test extends advanced_testcase {
@@ -106,7 +106,7 @@ class user_test extends advanced_testcase {
         $userrow = reset($userrows);
 
         $userfullname = fullname($user);
-        $userprofile = (new moodle_url('/user/profile.php', ['id' => $user->id]))->out();
+        $userprofile = (new powereduc_url('/user/profile.php', ['id' => $user->id]))->out();
         $userpicture = $OUTPUT->user_picture($user, ['link' => false, 'alttext' => false]);
 
         $this->assertEquals($userfullname, $userrow['fullname']);

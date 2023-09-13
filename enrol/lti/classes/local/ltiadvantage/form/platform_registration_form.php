@@ -17,7 +17,7 @@
 namespace enrol_lti\local\ltiadvantage\form;
 use enrol_lti\local\ltiadvantage\repository\application_registration_repository;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 

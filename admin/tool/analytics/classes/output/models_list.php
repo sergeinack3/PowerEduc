@@ -24,7 +24,7 @@
 
 namespace tool_analytics\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Shows tool_analytics models list.

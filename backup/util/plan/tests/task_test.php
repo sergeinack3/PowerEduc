@@ -24,7 +24,7 @@ use backup_plan;
 use backup_task;
 use backup_task_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/fixtures/plan_fixtures.php');
 
@@ -85,7 +85,7 @@ class task_test extends \advanced_testcase {
     function test_backup_task() {
 
         // We need one (non interactive) controller for instatiating plan
-        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         // We need one plan
         $bp = new backup_plan($bc);

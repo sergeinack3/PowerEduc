@@ -25,7 +25,7 @@
 
 namespace core_blog\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/blog/locallib.php');
@@ -157,7 +157,7 @@ class events_test extends \advanced_testcase {
         // Edit a blog entry as Admin.
         $blog = new \blog_entry($this->postid);
         $sink = $this->redirectEvents();
-        $blog->summary_editor = array('text' => 'Something', 'format' => FORMAT_MOODLE);
+        $blog->summary_editor = array('text' => 'Something', 'format' => FORMAT_POWEREDUC);
         $blog->edit(array(), null, array(), array());
         $events = $sink->get_events();
         $event = array_pop($events);

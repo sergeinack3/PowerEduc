@@ -17,7 +17,7 @@
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/gradelib.php');
 
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden.');    // It must be included from a Moodle page.
 }
 

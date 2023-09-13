@@ -24,7 +24,7 @@
 
 namespace gradereport_singleview\local\ui;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class used to render a feedback input box.
@@ -130,7 +130,7 @@ class feedback extends grade_attribute_format implements unique_value, be_disabl
 
         $this->grade->grade_item->update_final_grade(
             $this->grade->userid, $finalgrade, 'singleview',
-            $feedback, FORMAT_MOODLE
+            $feedback, FORMAT_POWEREDUC
         );
     }
 }

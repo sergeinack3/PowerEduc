@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param standard_action_bar $actionmenu
      * @return bool|string
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function main_action_bar(standard_action_bar $actionmenu) {
         $context = $actionmenu->export_for_template($this);

@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quizaccess_seb;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/test_helper_trait.php');
 
@@ -156,7 +156,7 @@ class access_manager_test extends \advanced_testcase {
         $configkey = quiz_settings::get_record(['quizid' => $this->quiz->id])->get_config_key();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $configkey);
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
 
@@ -168,7 +168,7 @@ class access_manager_test extends \advanced_testcase {
      */
     public function test_access_keys_validate_with_provided_config_key() {
         $this->quiz = $this->create_test_quiz($this->course, settings_provider::USE_SEB_CONFIG_MANUALLY);
-        $url = 'https://www.example.com/moodle';
+        $url = 'https://www.example.com/powereduc';
         $accessmanager = $this->get_access_manager();
 
         $configkey = quiz_settings::get_record(['quizid' => $this->quiz->id])->get_config_key();
@@ -251,7 +251,7 @@ class access_manager_test extends \advanced_testcase {
         $accessmanager = $this->get_access_manager();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $browserexamkey);
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_REQUESTHASH'] = $expectedhash;
         $this->assertTrue($accessmanager->validate_browser_exam_key());
@@ -262,7 +262,7 @@ class access_manager_test extends \advanced_testcase {
      */
     public function test_browser_exam_keys_match_provided_browser_exam_key() {
         $this->quiz = $this->create_test_quiz($this->course, settings_provider::USE_SEB_CLIENT_CONFIG);
-        $url = 'https://www.example.com/moodle';
+        $url = 'https://www.example.com/powereduc';
         $settings = quiz_settings::get_record(['quizid' => $this->quiz->id]);
         $browserexamkey = hash('sha256', 'browserexamkey');
         $fullbrowserexamkey = hash('sha256', $url . $browserexamkey);
@@ -450,7 +450,7 @@ class access_manager_test extends \advanced_testcase {
         $configkey = $accessmanager->get_valid_config_key();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $configkey);
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
 
@@ -505,7 +505,7 @@ class access_manager_test extends \advanced_testcase {
     }
 
     /**
-     * Test that access is set correctly in Moodle session.
+     * Test that access is set correctly in PowerEduc session.
      */
     public function test_set_session_access() {
         global $SESSION;
@@ -521,7 +521,7 @@ class access_manager_test extends \advanced_testcase {
     }
 
     /**
-     * Test that access is set in Moodle session for only course module associated with access manager.
+     * Test that access is set in PowerEduc session for only course module associated with access manager.
      */
     public function test_session_access_set_for_specific_course_module() {
         global $SESSION;
@@ -538,7 +538,7 @@ class access_manager_test extends \advanced_testcase {
     }
 
     /**
-     * Test that access state can be retrieved from Moodle session.
+     * Test that access state can be retrieved from PowerEduc session.
      */
     public function test_validate_session_access() {
         global $SESSION;
@@ -554,7 +554,7 @@ class access_manager_test extends \advanced_testcase {
     }
 
     /**
-     * Test that access can be cleared from Moodle session.
+     * Test that access can be cleared from PowerEduc session.
      */
     public function test_clear_session_access() {
         global $SESSION;

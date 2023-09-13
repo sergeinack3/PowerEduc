@@ -1,36 +1,36 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_managecategories;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir. '/listlib.php');
 
 use stdClass;
-use moodle_list;
+use powereduc_list;
 
 /**
  * Class representing a list of question categories.
  *
  * @package    qbank_managecategories
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class question_category_list extends moodle_list {
+class question_category_list extends powereduc_list {
 
     /**
      * Table name.
@@ -74,7 +74,7 @@ class question_category_list extends moodle_list {
      * @param string $type
      * @param string $attributes
      * @param boolean $editable
-     * @param \moodle_url $pageurl url for this page
+     * @param \powereduc_url $pageurl url for this page
      * @param integer $page if 0 no pagination. (These three params only used in top level list.)
      * @param string $pageparamname name of url param that is used for passing page no
      * @param integer $itemsperpage no of top level items.

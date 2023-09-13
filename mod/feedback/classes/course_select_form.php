@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  * @copyright 2016 Marina Glancy
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Form for mapping courses to the feedback
@@ -30,8 +30,8 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2016 Marina Glancy
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_feedback_course_select_form extends moodleform {
-    /** @var moodle_url */
+class mod_feedback_course_select_form extends powereducform {
+    /** @var powereduc_url */
     protected $action;
     /** @var mod_feedback_structure $feedbackstructure */
     protected $feedbackstructure;
@@ -39,12 +39,12 @@ class mod_feedback_course_select_form extends moodleform {
     /**
      * Constructor
      *
-     * @param string|moodle_url $action the action attribute for the form
+     * @param string|powereduc_url $action the action attribute for the form
      * @param mod_feedback_structure $feedbackstructure
      * @param bool $editable
      */
     public function __construct($action, mod_feedback_structure $feedbackstructure, $editable = true) {
-        $this->action = new moodle_url($action, ['courseid' => null]);
+        $this->action = new powereduc_url($action, ['courseid' => null]);
         $this->feedbackstructure = $feedbackstructure;
         parent::__construct($action, null, 'post', '', ['id' => 'feedback_course_filter'], $editable);
     }

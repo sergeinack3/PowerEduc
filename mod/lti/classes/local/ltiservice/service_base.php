@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains an abstract definition of an LTI service
@@ -26,14 +26,14 @@
 
 namespace mod_lti\local\ltiservice;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
 require_once($CFG->dirroot . '/mod/lti/OAuthBody.php');
 
 // TODO: Switch to core oauthlib once implemented - MDL-30149.
-use moodle\mod\lti as lti;
+use powereduc\mod\lti as lti;
 use stdClass;
 
 
@@ -41,7 +41,7 @@ use stdClass;
  * The mod_lti\local\ltiservice\service_base class.
  *
  * @package    mod_lti
- * @since      Moodle 2.8
+ * @since      PowerEduc 2.8
  * @copyright  2014 Vital Source Technologies http://vitalsource.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -231,7 +231,7 @@ abstract class service_base {
     /**
      * Returns the configuration options for this service.
      *
-     * @param \MoodleQuickForm $mform Moodle quickform object definition
+     * @param \PowerEducQuickForm $mform PowerEduc quickform object definition
      */
     public function get_configuration_options(&$mform) {
 
@@ -294,7 +294,7 @@ abstract class service_base {
      * Return an array with the names of the parameters that the service will be saving in the configuration
      *
      * @return array  Names list of the parameters that the service will be saving in the configuration
-     * @deprecated since Moodle 3.7 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.7 - please do not use this function any more.
      */
     public function get_configuration_parameter_names() {
         debugging('get_configuration_parameter_names() has been deprecated.', DEBUG_DEVELOPER);
@@ -360,7 +360,7 @@ abstract class service_base {
      */
     public static function get_service_path() {
 
-        $url = new \moodle_url('/mod/lti/services.php');
+        $url = new \powereduc_url('/mod/lti/services.php');
 
         return $url->out(false);
 
@@ -448,7 +448,7 @@ abstract class service_base {
      * @param string $body           Request body (null if none)
      *
      * @return boolean
-     * @deprecated since Moodle 3.7 MDL-62599 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.7 MDL-62599 - please do not use this function any more.
      * @see service_base::check_tool()
      */
     public function check_tool_proxy($toolproxyguid, $body = null) {
@@ -488,7 +488,7 @@ abstract class service_base {
      * @param string $body Request body (null if none)
      *
      * @return bool
-     * @deprecated since Moodle 3.7 MDL-62599 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.7 MDL-62599 - please do not use this function any more.
      * @see service_base::check_tool()
      */
     public function check_type($typeid, $courseid, $body = null) {

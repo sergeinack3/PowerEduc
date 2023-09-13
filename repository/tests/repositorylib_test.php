@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_repository;
 
@@ -20,7 +20,7 @@ use repository;
 use repository_exception;
 use repository_type;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once("$CFG->dirroot/repository/lib.php");
@@ -229,18 +229,18 @@ class repositorylib_test extends \advanced_testcase {
         $systemrepo = repository::get_repository_by_id($repoid, $syscontext);
 
         role_assign($roleid, $user->id, $syscontext->id);
-        assign_capability('moodle/site:config', CAP_ALLOW, $roleid, $syscontext, true);
+        assign_capability('powereduc/site:config', CAP_ALLOW, $roleid, $syscontext, true);
         assign_capability('repository/flickr_public:view', CAP_ALLOW, $roleid, $syscontext, true);
         accesslib_clear_all_caches_for_unit_testing();
         $this->assertTrue($systemrepo->can_be_edited_by_user());
 
         assign_capability('repository/flickr_public:view', CAP_PROHIBIT, $roleid, $syscontext, true);
-        assign_capability('moodle/site:config', CAP_PROHIBIT, $roleid, $syscontext, true);
+        assign_capability('powereduc/site:config', CAP_PROHIBIT, $roleid, $syscontext, true);
         accesslib_clear_all_caches_for_unit_testing();
         $this->assertFalse($systemrepo->can_be_edited_by_user());
 
         assign_capability('repository/flickr_public:view', CAP_ALLOW, $roleid, $syscontext, true);
-        assign_capability('moodle/site:config', CAP_PROHIBIT, $roleid, $syscontext, true);
+        assign_capability('powereduc/site:config', CAP_PROHIBIT, $roleid, $syscontext, true);
         accesslib_clear_all_caches_for_unit_testing();
         $this->assertFalse($systemrepo->can_be_edited_by_user());
 
@@ -254,7 +254,7 @@ class repositorylib_test extends \advanced_testcase {
         $repoid = $this->getDataGenerator()->create_repository('flickr_public', $params)->id;
         $courserepo = repository::get_repository_by_id($repoid, $coursecontext);
 
-        assign_capability('moodle/course:update', CAP_ALLOW, $roleid, $coursecontext, true);
+        assign_capability('powereduc/course:update', CAP_ALLOW, $roleid, $coursecontext, true);
         assign_capability('repository/flickr_public:view', CAP_ALLOW, $roleid, $coursecontext, true);
         accesslib_clear_all_caches_for_unit_testing();
         $this->assertTrue($courserepo->can_be_edited_by_user());
@@ -263,7 +263,7 @@ class repositorylib_test extends \advanced_testcase {
         accesslib_clear_all_caches_for_unit_testing();
         $this->assertFalse($courserepo->can_be_edited_by_user());
 
-        assign_capability('moodle/course:update', CAP_ALLOW, $roleid, $coursecontext, true);
+        assign_capability('powereduc/course:update', CAP_ALLOW, $roleid, $coursecontext, true);
         assign_capability('repository/flickr_public:view', CAP_PROHIBIT, $roleid, $coursecontext, true);
         accesslib_clear_all_caches_for_unit_testing();
         $this->assertFalse($courserepo->can_be_edited_by_user());

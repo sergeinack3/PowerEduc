@@ -1,7 +1,7 @@
 /**
  * A tool for displaying and filtering system events.
  *
- * @module moodle-report_eventlist-eventfilter
+ * @module powereduc-report_eventlist-eventfilter
  */
 
 /**

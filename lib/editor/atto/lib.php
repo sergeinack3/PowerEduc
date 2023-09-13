@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * This is the texteditor implementation.
@@ -46,7 +46,7 @@ class atto_texteditor extends texteditor {
      * @return array
      */
     public function get_supported_formats() {
-        // FORMAT_MOODLE is not supported here, sorry.
+        // FORMAT_POWEREDUC is not supported here, sorry.
         return array(FORMAT_HTML => FORMAT_HTML);
     }
 

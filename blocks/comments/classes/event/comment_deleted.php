@@ -23,7 +23,7 @@
  */
 
 namespace block_comments\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * block_comments comment deleted event.

@@ -52,7 +52,7 @@ class api {
     /** @var int seconds an auto-login key will expire. */
     const LOGIN_KEY_TTL = 60;
     /** @var string URL of the Moodle Apps Portal */
-    const MOODLE_APPS_PORTAL_URL = 'https://apps.moodle.com';
+    const POWEREDUC_APPS_PORTAL_URL = 'https://apps.moodle.com';
     /** @var int default value in seconds a QR login key will expire. */
     const LOGIN_QR_KEY_TTL = 600;
     /** @var int QR code disabled value */
@@ -170,8 +170,8 @@ class api {
         // Check if contacting site support is available to all visitors.
         $sitesupportavailable = (isset($CFG->supportavailability) && $CFG->supportavailability == CONTACT_SUPPORT_ANYONE);
 
-        list($authinstructions, $notusedformat) = external_format_text($CFG->auth_instructions, FORMAT_MOODLE, $context->id);
-        list($maintenancemessage, $notusedformat) = external_format_text($CFG->maintenance_message, FORMAT_MOODLE, $context->id);
+        list($authinstructions, $notusedformat) = external_format_text($CFG->auth_instructions, FORMAT_POWEREDUC, $context->id);
+        list($maintenancemessage, $notusedformat) = external_format_text($CFG->maintenance_message, FORMAT_POWEREDUC, $context->id);
         $settings = array(
             'wwwroot' => $CFG->wwwroot,
             'httpswwwroot' => $CFG->wwwroot,
@@ -786,7 +786,7 @@ class api {
         $curl = new curl();
         $curl->setopt(array('CURLOPT_TIMEOUT' => 10, 'CURLOPT_CONNECTTIMEOUT' => 10));
 
-        $serverurl = static::MOODLE_APPS_PORTAL_URL . "/lib/ajax/service-nologin.php";
+        $serverurl = static::POWEREDUC_APPS_PORTAL_URL . "/lib/ajax/service-nologin.php";
         $query = 'args=' . urlencode(json_encode($args));
         $wsresponse = @json_decode($curl->post($serverurl, $query), true);
 

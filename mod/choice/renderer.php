@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ class mod_choice_renderer extends plugin_renderer_base {
         if ($vertical) {
             $layoutclass = 'vertical';
         }
-        $target = new moodle_url('/mod/choice/view.php');
+        $target = new powereduc_url('/mod/choice/view.php');
         $attributes = array('method'=>'POST', 'action'=>$target, 'class'=> $layoutclass);
         $disabled = empty($options['previewonly']) ? array() : array('disabled' => 'disabled');
 
@@ -95,7 +95,7 @@ class mod_choice_renderer extends plugin_renderer_base {
                 }
 
                 if (!empty($options['allowupdate']) && ($options['allowupdate'])) {
-                    $url = new moodle_url('view.php',
+                    $url = new powereduc_url('view.php',
                             array('id' => $coursemoduleid, 'action' => 'delchoice', 'sesskey' => sesskey()));
                     $html .= html_writer::link($url, get_string('removemychoice', 'choice'), array('class' => 'ml-1'));
                 }
@@ -139,7 +139,7 @@ class mod_choice_renderer extends plugin_renderer_base {
         $html ='';
 
         $attributes = array('method'=>'POST');
-        $attributes['action'] = new moodle_url($this->page->url);
+        $attributes['action'] = new powereduc_url($this->page->url);
         $attributes['id'] = 'attemptsform';
 
         if ($choices->viewresponsecapability) {
@@ -279,7 +279,7 @@ class mod_choice_renderer extends plugin_renderer_base {
                             $checkbox = $this->output->render($slavecheckbox);
                         }
                         $userimage = $this->output->user_picture($user, array('courseid' => $choices->courseid, 'link' => false));
-                        $profileurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $choices->courseid));
+                        $profileurl = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $choices->courseid));
                         $profilelink = html_writer::link($profileurl, $userimage . $userfullname);
                         $data .= html_writer::div($checkbox . $profilelink, 'mb-1');
 
@@ -310,7 +310,7 @@ class mod_choice_renderer extends plugin_renderer_base {
             ], true);
             $actiondata .= $this->output->render($selectallcheckbox);
 
-            $actionurl = new moodle_url($this->page->url,
+            $actionurl = new powereduc_url($this->page->url,
                     ['sesskey' => sesskey(), 'action' => 'delete_confirmation()']);
             $actionoptions = array('delete' => get_string('delete'));
             foreach ($choices->options as $optionid => $option) {

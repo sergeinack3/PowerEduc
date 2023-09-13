@@ -28,7 +28,7 @@
  * @deprecated
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /* === Functions that needs to be kept longer in deprecated lib than normal time period === */
 

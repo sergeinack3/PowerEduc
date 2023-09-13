@@ -25,7 +25,7 @@ namespace core\plugininfo;
 
 use admin_settingpage;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for availability plugins.

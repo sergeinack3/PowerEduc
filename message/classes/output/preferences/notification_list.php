@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
  * Contains notification_list class for displaying on message preferences page.
  *
  * @package   core_message
- * @copyright 2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2016 Ryan Wyllie <ryan@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_message\output\preferences;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use renderable;
 use templatable;
@@ -34,7 +34,7 @@ use context_user;
  * Class to create context for the list of notifications on the message preferences page.
  *
  * @package   core_message
- * @copyright 2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2016 Ryan Wyllie <ryan@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class notification_list implements templatable, renderable {
@@ -100,7 +100,7 @@ class notification_list implements templatable, renderable {
         // Order the components so that the activities appear first, followed
         // by the system and then anything else.
         foreach ($providers as $provider) {
-            if ($provider->component != 'moodle') {
+            if ($provider->component != 'powereduc') {
                 if (substr($provider->component, 0, 4) == 'mod_') {
                     // Activities.
                     $activitycomponents[] = $provider->component;
@@ -115,7 +115,7 @@ class notification_list implements templatable, renderable {
         asort($activitycomponents);
         $othercomponents = array_unique($othercomponents);
         asort($othercomponents);
-        $components = array_merge($activitycomponents, ['moodle'], $othercomponents);
+        $components = array_merge($activitycomponents, ['powereduc'], $othercomponents);
         asort($providers);
 
         $context = [

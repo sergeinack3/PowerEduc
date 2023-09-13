@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quiz_overview;
 
@@ -26,7 +26,7 @@ use quiz_overview_options;
 use quiz_overview_report;
 use quiz_overview_table;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
@@ -188,7 +188,7 @@ class report_test extends \advanced_testcase {
         $table->download = $isdownloading; // Cannot call the is_downloading API, because it gives errors.
         $table->define_columns(array('fullname'));
         $table->sortable(true, 'uniqueid');
-        $table->define_baseurl(new \moodle_url('/mod/quiz/report.php'));
+        $table->define_baseurl(new \powereduc_url('/mod/quiz/report.php'));
         $table->setup();
 
         // Run the query.

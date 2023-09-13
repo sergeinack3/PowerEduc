@@ -1,7 +1,7 @@
 {
-    "moodle-question-chooser": {
+    "powereduc-question-chooser": {
         "requires": [
-            "moodle-core-chooserdialogue"
+            "powereduc-core-chooserdialogue"
         ]
     }
 }

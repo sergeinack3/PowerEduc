@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Blackboard V5 and V6 question importer.
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/xmlize.php');
 
@@ -64,9 +64,9 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
         foreach ($rawquestions as $quest) {
             // Second step : parse each question data into the intermediate
             // rawquestion structure array.
-            // Warning : rawquestions are not Moodle questions.
+            // Warning : rawquestions are not PowerEduc questions.
             $question = $this->create_raw_question($quest);
-            // Third step : convert a rawquestion into a Moodle question.
+            // Third step : convert a rawquestion into a PowerEduc question.
             switch($question->qtype) {
                 case "Matching":
                     $this->process_matching($question, $questions);
@@ -98,8 +98,8 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
     }
 
     /**
-     * Creates a cleaner object to deal with for processing into Moodle.
-     * The object returned is NOT a moodle question object.
+     * Creates a cleaner object to deal with for processing into PowerEduc.
+     * The object returned is NOT a powereduc question object.
      * @param array $quest XML <item> question  data
      * @return object rawquestion
      */
@@ -504,7 +504,7 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
     /**
      * Create common parts of question
      * @param object $quest rawquestion
-     * @return object Moodle question.
+     * @return object PowerEduc question.
      */
     public function process_common($quest) {
         $question = $this->defaultquestion();
@@ -529,7 +529,7 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
      * Parse a truefalse rawquestion and add the result
      * to the array of questions already parsed.
      * @param object $quest rawquestion
-     * @param array $questions array of Moodle questions already done
+     * @param array $questions array of PowerEduc questions already done
      */
     protected function process_tf($quest, &$questions) {
         $question = $this->process_common($quest);
@@ -570,7 +570,7 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
      * Parse a fillintheblank rawquestion and add the result
      * to the array of questions already parsed.
      * @param object $quest rawquestion
-     * @param array $questions array of Moodle questions already done.
+     * @param array $questions array of PowerEduc questions already done.
      */
     protected function process_fblank($quest, &$questions) {
         $question = $this->process_common($quest);
@@ -636,7 +636,7 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
      * Parse a multichoice single answer rawquestion and add the result
      * to the array of questions already parsed.
      * @param object $quest rawquestion
-     * @param array $questions array of Moodle questions already done.
+     * @param array $questions array of PowerEduc questions already done.
      */
     protected function process_mc($quest, &$questions) {
         $question = $this->process_common($quest);
@@ -707,7 +707,7 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
      * Parse a multichoice multianswer rawquestion and add the result
      * to the array of questions already parsed.
      * @param object $quest rawquestion
-     * @param array $questions array of Moodle questions already done.
+     * @param array $questions array of PowerEduc questions already done.
      */
     public function process_ma($quest, &$questions) {
         $question = $this->process_common($quest);
@@ -757,7 +757,7 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
      * Parse an essay rawquestion and add the result
      * to the array of questions already parsed.
      * @param object $quest rawquestion
-     * @param array $questions array of Moodle questions already done.
+     * @param array $questions array of PowerEduc questions already done.
      */
     public function process_essay($quest, &$questions) {
 
@@ -768,7 +768,7 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
         // Not sure where to get the correct answer from?
         foreach ($quest->feedback as $feedback) {
             // Added this code to put the possible solution that the
-            // instructor gives as the Moodle answer for an essay question.
+            // instructor gives as the PowerEduc answer for an essay question.
             if ($feedback->ident == 'solution') {
                 $question->graderinfo = $this->cleaned_text_field($feedback->text);
             }
@@ -792,11 +792,11 @@ class qformat_blackboard_six_qti extends qformat_blackboard_six_base {
      * Parse a matching rawquestion and add the result
      * to the array of questions already parsed.
      * @param object $quest rawquestion
-     * @param array $questions array of Moodle questions already done.
+     * @param array $questions array of PowerEduc questions already done.
      */
     public function process_matching($quest, &$questions) {
 
-        // Blackboard matching questions can't be imported in core Moodle without a loss in data,
+        // Blackboard matching questions can't be imported in core PowerEduc without a loss in data,
         // as core match question don't allow HTML in subanswers. The contributed ddmatch
         // question type support HTML in subanswers.
         // The ddmatch question type is not part of core, so we need to check if it is defined.

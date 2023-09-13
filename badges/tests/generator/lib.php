@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 use core_badges\badge;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once("{$CFG->libdir}/badgeslib.php");

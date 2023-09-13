@@ -25,7 +25,7 @@
 
 use core_contentbank\content;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/contentbank/tests/fixtures/testable_contenttype.php');

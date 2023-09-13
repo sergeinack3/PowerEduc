@@ -32,7 +32,7 @@ use moodle_exception;
 use stdClass;
 use gradereport_user\report\user as user_report;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir.'/externallib.php');
 require_once($CFG->dirroot.'/grade/lib.php');

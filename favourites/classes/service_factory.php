@@ -24,7 +24,7 @@
  */
 namespace core_favourites;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class service_factory, providing functions for location of service objects for the favourites subsystem.

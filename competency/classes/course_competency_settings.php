@@ -26,7 +26,7 @@ namespace core_competency;
 use lang_string;
 use context_course;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for course_competency_settings persistence.

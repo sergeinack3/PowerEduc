@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Manage files in wiki
  *
  * @package   mod_wiki
- * @copyright 2011 Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright 2011 Dongsheng Cai <dongsheng@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,17 +34,17 @@ $pageid    = optional_param('pageid', 0, PARAM_INT);
 $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
 
 if (!$subwiki = wiki_get_subwiki($subwikiid)) {
-    throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+    throw new \powereduc_exception('incorrectsubwikiid', 'wiki');
 }
 
 // Checking wiki instance of that subwiki
 if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
-    throw new \moodle_exception('incorrectwikiid', 'wiki');
+    throw new \powereduc_exception('incorrectwikiid', 'wiki');
 }
 
 // Checking course module instance
 if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 // Checking course instance
@@ -55,7 +55,7 @@ $context = context_module::instance($cm->id);
 require_login($course, true, $cm);
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
-    throw new \moodle_exception('cannotviewpage', 'wiki');
+    throw new \powereduc_exception('cannotviewpage', 'wiki');
 }
 require_capability('mod/wiki:managefiles', $context);
 
@@ -64,14 +64,14 @@ if (empty($returnurl)) {
     if (!empty($referer)) {
         $returnurl = $referer;
     } else {
-        $returnurl = new moodle_url('/mod/wiki/files.php', array('subwiki' => $subwiki->id, 'pageid' => $pageid));
+        $returnurl = new powereduc_url('/mod/wiki/files.php', array('subwiki' => $subwiki->id, 'pageid' => $pageid));
     }
 }
 
 $title = get_string('editfiles', 'wiki');
 
 $struser = get_string('user');
-$url = new moodle_url('/mod/wiki/filesedit.php', array('subwiki'=>$subwiki->id, 'pageid'=>$pageid));
+$url = new powereduc_url('/mod/wiki/filesedit.php', array('subwiki'=>$subwiki->id, 'pageid'=>$pageid));
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 $PAGE->set_title($title);

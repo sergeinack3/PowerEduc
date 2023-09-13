@@ -24,7 +24,7 @@
 
 use enrol_lti\local\ltiadvantage\admin\admin_setting_registeredplatforms;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 // The 'Publish as LTI tool' node is a category.
 $ADMIN->add('enrolments', new admin_category('enrolltifolder', new lang_string('pluginname', 'enrol_lti'),
     $this->is_enabled() === false));

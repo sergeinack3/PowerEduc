@@ -85,7 +85,7 @@ if (PHP_INT_SIZE > 4) {
 @ini_set('memory_limit', $minrequiredmemory);
 
 /** Used by library scripts to check they are being called by Moodle */
-define('MOODLE_INTERNAL', true);
+define('POWEREDUC_INTERNAL', true);
 
 require_once(__DIR__.'/lib/classes/component.php');
 require_once(__DIR__.'/lib/installlib.php');

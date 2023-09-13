@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Quiz statistics report class.
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_question\statistics\questions\all_calculated_for_qubaid_condition;
 
@@ -84,7 +84,7 @@ class quiz_statistics_report extends quiz_default_report {
         $pageoptions['id'] = $cm->id;
         $pageoptions['mode'] = 'statistics';
 
-        $reporturl = new moodle_url('/mod/quiz/report.php', $pageoptions);
+        $reporturl = new powereduc_url('/mod/quiz/report.php', $pageoptions);
 
         $mform = new quiz_statistics_settings_form($reporturl, compact('quiz'));
 
@@ -207,7 +207,7 @@ class quiz_statistics_report extends quiz_default_report {
         } else if ($qid) {
             // Report on an individual sub-question indexed questionid.
             if (!$questionstats->has_subq($qid, $variantno)) {
-                throw new \moodle_exception('questiondoesnotexist', 'question');
+                throw new \powereduc_exception('questiondoesnotexist', 'question');
             }
 
             $this->output_individual_question_data($quiz, $questionstats->for_subq($qid, $variantno));
@@ -224,7 +224,7 @@ class quiz_statistics_report extends quiz_default_report {
         } else if ($slot) {
             // Report on an individual question indexed by position.
             if (!isset($questions[$slot])) {
-                throw new \moodle_exception('questiondoesnotexist', 'question');
+                throw new \powereduc_exception('questiondoesnotexist', 'question');
             }
 
             if ($variantno === null &&
@@ -234,7 +234,7 @@ class quiz_statistics_report extends quiz_default_report {
                     $number = $questionstats->for_slot($slot)->question->number;
                     echo $OUTPUT->heading(get_string('slotstructureanalysis', 'quiz_statistics', $number), 3);
                 }
-                $this->table->define_baseurl(new moodle_url($reporturl, array('slot' => $slot)));
+                $this->table->define_baseurl(new powereduc_url($reporturl, array('slot' => $slot)));
                 $this->table->format_and_add_array_of_rows($questionstats->structure_analysis_for_one_slot($slot));
             } else {
                 $this->output_individual_question_data($quiz, $questionstats->for_slot($slot, $variantno));
@@ -374,7 +374,7 @@ class quiz_statistics_report extends quiz_default_report {
      * @param object           $question  the question to report on.
      * @param int|null         $variantno the variant
      * @param int              $s
-     * @param moodle_url       $reporturl the URL to redisplay this report.
+     * @param powereduc_url       $reporturl the URL to redisplay this report.
      * @param qubaid_condition $qubaids
      * @param string           $whichtries
      */
@@ -754,10 +754,10 @@ class quiz_statistics_report extends quiz_default_report {
      * Return a little form for the user to request to download the full report, including quiz stats and response analysis for
      * all questions and sub-questions.
      *
-     * @param moodle_url $reporturl the base URL of the report.
+     * @param powereduc_url $reporturl the base URL of the report.
      * @return string HTML.
      */
-    protected function everything_download_options(moodle_url $reporturl) {
+    protected function everything_download_options(powereduc_url $reporturl) {
         global $OUTPUT;
         return $OUTPUT->download_dataformat_selector(get_string('downloadeverything', 'quiz_statistics'),
             $reporturl->out_omit_querystring(), 'download', $reporturl->params() + array('everything' => 1));
@@ -773,7 +773,7 @@ class quiz_statistics_report extends quiz_default_report {
      *                                   $quiz->grademethod ie.
      *                                   QUIZ_GRADEAVERAGE, QUIZ_GRADEHIGHEST, QUIZ_ATTEMPTLAST or QUIZ_ATTEMPTFIRST
      *                                   we calculate stats based on which attempts would affect the grade for each student.
-     * @param moodle_url $reporturl url for this report
+     * @param powereduc_url $reporturl url for this report
      * @return string HTML.
      */
     protected function output_caching_info($lastcachetime, $quizid, $groupstudentsjoins, $whichattempts, $reporturl) {
@@ -800,7 +800,7 @@ class quiz_statistics_report extends quiz_default_report {
         $a->lastcalculated = format_time(time() - $lastcachetime);
         $a->count = $count;
 
-        $recalcualteurl = new moodle_url($reporturl,
+        $recalcualteurl = new powereduc_url($reporturl,
                 array('recalculate' => 1, 'sesskey' => sesskey()));
         $output = '';
         $output .= $OUTPUT->box_start(

@@ -24,7 +24,7 @@
 
 namespace core\access;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helper functions to implement the complex get_user_capability_course function.

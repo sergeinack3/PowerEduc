@@ -25,7 +25,7 @@ namespace core\plugininfo;
 
 use moodle_url, part_of_admin_tree, admin_externalpage;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for plagiarism plugins

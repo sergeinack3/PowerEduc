@@ -1,7 +1,7 @@
 @core @core_message @javascript
-Feature: Capability test for 'moodle/site:messageanyuser'
-  In order to test that the 'moodle/site:messageanyuser' works as expected
-  As a user with or without the capability 'moodle/site:messageanyuser'
+Feature: Capability test for 'powereduc/site:messageanyuser'
+  In order to test that the 'powereduc/site:messageanyuser' works as expected
+  As a user with or without the capability 'powereduc/site:messageanyuser'
   I should either be able to message anyone regardless of their messaging preferences, or not
 
   Background:

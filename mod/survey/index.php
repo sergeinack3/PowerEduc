@@ -8,7 +8,7 @@
     $PAGE->set_url('/mod/survey/index.php', array('id'=>$id));
 
     if (!$course = $DB->get_record('course', array('id'=>$id))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
 
     require_course_login($course);
@@ -36,7 +36,7 @@
     }
 
     if (! $surveys = get_all_instances_in_course("survey", $course)) {
-        notice(get_string('thereareno', 'moodle', $strsurveys), "../../course/view.php?id=$course->id");
+        notice(get_string('thereareno', 'powereduc', $strsurveys), "../../course/view.php?id=$course->id");
     }
 
     $usesections = course_format_uses_sections($course->format);

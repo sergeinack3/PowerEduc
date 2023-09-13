@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Renderer factory.
  *
  * @package    mod_forum
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_forum\local\factories;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_forum\grades\forum_gradeitem;
 use mod_forum\local\entities\discussion as discussion_entity;
@@ -39,7 +39,7 @@ use mod_forum\local\factories\url as url_factory;
 use mod_forum\local\renderers\discussion as discussion_renderer;
 use mod_forum\local\renderers\discussion_list as discussion_list_renderer;
 use mod_forum\local\renderers\posts as posts_renderer;
-use moodle_page;
+use powereduc_page;
 use core\output\notification;
 
 /**
@@ -48,7 +48,7 @@ use core\output\notification;
  * See:
  * https://designpatternsphp.readthedocs.io/en/latest/Creational/SimpleFactory/README.html
  *
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer {
@@ -68,7 +68,7 @@ class renderer {
     private $urlfactory;
     /** @var renderer_base $rendererbase Renderer base */
     private $rendererbase;
-    /** @var moodle_page $page Moodle page */
+    /** @var powereduc_page $page PowerEduc page */
     private $page;
 
     /**
@@ -81,7 +81,7 @@ class renderer {
      * @param entity_factory $entityfactory Entity factory
      * @param builder_factory $builderfactory Builder factory
      * @param url_factory $urlfactory URL factory
-     * @param moodle_page $page Moodle page
+     * @param powereduc_page $page PowerEduc page
      */
     public function __construct(
         legacy_data_mapper_factory $legacydatamapperfactory,
@@ -91,7 +91,7 @@ class renderer {
         entity_factory $entityfactory,
         builder_factory $builderfactory,
         url_factory $urlfactory,
-        moodle_page $page
+        powereduc_page $page
     ) {
         $this->legacydatamapperfactory = $legacydatamapperfactory;
         $this->exporterfactory = $exporterfactory;

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the definition for the library class for file feedback plugin
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use \mod_assign\output\assign_header;
 
@@ -53,11 +53,11 @@ class assign_feedback_offline extends assign_feedback_plugin {
      * Get form elements for grading form
      *
      * @param stdClass $grade
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $data
      * @return bool true if elements were added to the form
      */
-    public function get_form_elements($grade, MoodleQuickForm $mform, stdClass $data) {
+    public function get_form_elements($grade, PowerEducQuickForm $mform, stdClass $data) {
         return false;
     }
 
@@ -101,7 +101,7 @@ class assign_feedback_offline extends assign_feedback_plugin {
         $context = context_user::instance($USER->id);
         $fs = get_file_storage();
         if (!$files = $fs->get_area_files($context->id, 'user', 'draft', $draftid, 'id DESC', false)) {
-            redirect(new moodle_url('view.php',
+            redirect(new powereduc_url('view.php',
                                 array('id'=>$this->assignment->get_course_module()->id,
                                       'action'=>'grading')));
             return;
@@ -114,12 +114,12 @@ class assign_feedback_offline extends assign_feedback_plugin {
             $gradeimporter->parsecsv($csvdata);
         }
         if (!$gradeimporter->init()) {
-            $thisurl = new moodle_url('/mod/assign/view.php', array('action'=>'viewpluginpage',
+            $thisurl = new powereduc_url('/mod/assign/view.php', array('action'=>'viewpluginpage',
                                                                      'pluginsubtype'=>'assignfeedback',
                                                                      'plugin'=>'offline',
                                                                      'pluginaction'=>'uploadgrades',
                                                                      'id' => $this->assignment->get_course_module()->id));
-            throw new \moodle_exception('invalidgradeimport', 'assignfeedback_offline', $thisurl);
+            throw new \powereduc_exception('invalidgradeimport', 'assignfeedback_offline', $thisurl);
             return;
         }
         // Does this assignment use a scale?
@@ -230,7 +230,7 @@ class assign_feedback_offline extends assign_feedback_plugin {
             'feedbackupdatescount' => $updatefeedbackcount,
         ];
         $o .= $renderer->box(get_string('updatedgrades', 'assignfeedback_offline', $strparams));
-        $url = new moodle_url('view.php',
+        $url = new powereduc_url('view.php',
                               array('id'=>$this->assignment->get_course_module()->id,
                                     'action'=>'grading'));
         $o .= $renderer->continue_button($url);
@@ -262,7 +262,7 @@ class assign_feedback_offline extends assign_feedback_plugin {
         $renderer = $this->assignment->get_renderer();
 
         if ($mform->is_cancelled()) {
-            redirect(new moodle_url('view.php',
+            redirect(new powereduc_url('view.php',
                                     array('id'=>$this->assignment->get_course_module()->id,
                                           'action'=>'grading')));
             return;
@@ -305,7 +305,7 @@ class assign_feedback_offline extends assign_feedback_plugin {
                                                                        'gradeimporter'=>$gradeimporter,
                                                                        'draftid'=>$draftid));
             if ($mform->is_cancelled()) {
-                redirect(new moodle_url('view.php',
+                redirect(new powereduc_url('view.php',
                                         array('id'=>$this->assignment->get_course_module()->id,
                                               'action'=>'grading')));
                 return;
@@ -417,7 +417,7 @@ class assign_feedback_offline extends assign_feedback_plugin {
      * Return the plugin configs for external functions.
      *
      * @return array the list of settings
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_config_for_external() {
         return (array) $this->get_config();

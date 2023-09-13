@@ -21,7 +21,7 @@
  * @copyright 2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Comment is helper class to add/delete comments anywhere in moodle
@@ -693,7 +693,7 @@ class comment {
      * @param int $format
      * @return stdClass
      */
-    public function add($content, $format = FORMAT_MOODLE) {
+    public function add($content, $format = FORMAT_POWEREDUC) {
         global $CFG, $DB, $USER, $OUTPUT;
         if (!$this->can_post()) {
             throw new comment_exception('nopermissiontocomment');

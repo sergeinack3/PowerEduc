@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Forwards the user to the action they selected.
@@ -43,11 +43,11 @@ if ($context->contextlevel < CONTEXT_COURSE) {
 
 if (empty($forwardurl)) {
     $params = array('modelid' => $model->get_id(), 'contextid' => $context->id);
-    $forwardurl = new \moodle_url('/report/insights/insights.php', $params);
+    $forwardurl = new \powereduc_url('/report/insights/insights.php', $params);
 }
 
 $params = array('predictionid' => $prediction->get_prediction_data()->id, 'action' => $actionname, 'forwardurl' => $forwardurl);
-$url = new \moodle_url('/report/insights/action.php', $params);
+$url = new \powereduc_url('/report/insights/action.php', $params);
 $PAGE->set_url($url);
 
 $modelready = $model->is_enabled() && $model->is_trained() && $model->predictions_exist($context);

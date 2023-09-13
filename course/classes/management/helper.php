@@ -24,7 +24,7 @@
 
 namespace core_course\management;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Course and category management interface helper class.

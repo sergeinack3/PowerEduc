@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains function used when editing a users profile and preferences.
@@ -48,11 +48,11 @@ function useredit_setup_preference_page($userid, $courseid) {
 
     // Guest can not edit.
     if (isguestuser()) {
-        throw new \moodle_exception('guestnoeditprofile');
+        throw new \powereduc_exception('guestnoeditprofile');
     }
 
     if (!$course = $DB->get_record('course', array('id' => $courseid))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
 
     if ($course->id != SITEID) {
@@ -68,19 +68,19 @@ function useredit_setup_preference_page($userid, $courseid) {
 
     // The user profile we are editing.
     if (!$user = $DB->get_record('user', array('id' => $userid))) {
-        throw new \moodle_exception('invaliduserid');
+        throw new \powereduc_exception('invaliduserid');
     }
 
     // Guest can not be edited.
     if (isguestuser($user)) {
-        throw new \moodle_exception('guestnoeditprofile');
+        throw new \powereduc_exception('guestnoeditprofile');
     }
 
     // Remote users cannot be edited.
     if (is_mnet_remote_user($user)) {
         if (user_not_fully_set_up($user, false)) {
             $hostwwwroot = $DB->get_field('mnet_host', 'wwwroot', array('id' => $user->mnethostid));
-            throw new \moodle_exception('usernotfullysetup', 'mnet', '', $hostwwwroot);
+            throw new \powereduc_exception('usernotfullysetup', 'mnet', '', $hostwwwroot);
         }
         redirect($CFG->wwwroot . "/user/view.php?course={$course->id}");
     }
@@ -91,17 +91,17 @@ function useredit_setup_preference_page($userid, $courseid) {
     // Check access control.
     if ($user->id == $USER->id) {
         // Editing own profile - require_login() MUST NOT be used here, it would result in infinite loop!
-        if (!has_capability('moodle/user:editownprofile', $systemcontext)) {
-            throw new \moodle_exception('cannotedityourprofile');
+        if (!has_capability('powereduc/user:editownprofile', $systemcontext)) {
+            throw new \powereduc_exception('cannotedityourprofile');
         }
 
     } else {
         // Teachers, parents, etc.
-        require_capability('moodle/user:editprofile', $personalcontext);
+        require_capability('powereduc/user:editprofile', $personalcontext);
 
         // No editing of primary admin!
         if (is_siteadmin($user) and !is_siteadmin($USER)) {  // Only admins may edit other admins.
-            throw new \moodle_exception('useradmineditadmin');
+            throw new \powereduc_exception('useradmineditadmin');
         }
     }
 
@@ -187,7 +187,7 @@ function useredit_update_user_preference($usernew) {
 }
 
 /**
- * @deprecated since Moodle 3.2
+ * @deprecated since PowerEduc 3.2
  * @see core_user::update_picture()
  */
 function useredit_update_picture() {
@@ -244,7 +244,7 @@ function useredit_update_interests($user, $interests) {
 /**
  * Powerful function that is used by edit and editadvanced to add common form elements/rules/etc.
  *
- * @param moodleform $mform
+ * @param powereducform $mform
  * @param array $editoroptions
  * @param array $filemanageroptions
  * @param stdClass $user
@@ -301,10 +301,10 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
     $mform->setDefault('maildisplay', core_user::get_property_default('maildisplay'));
     $mform->addHelpButton('maildisplay', 'emaildisplay');
 
-    if (get_config('tool_moodlenet', 'enablemoodlenet')) {
-        $mform->addElement('text', 'moodlenetprofile', get_string('moodlenetprofile', 'user'), 'maxlength="255" size="30"');
-        $mform->setType('moodlenetprofile', PARAM_NOTAGS);
-        $mform->addHelpButton('moodlenetprofile', 'moodlenetprofile', 'user');
+    if (get_config('tool_powereducnet', 'enablepowereducnet')) {
+        $mform->addElement('text', 'powereducnetprofile', get_string('powereducnetprofile', 'user'), 'maxlength="255" size="30"');
+        $mform->setType('powereducnetprofile', PARAM_NOTAGS);
+        $mform->addHelpButton('powereducnetprofile', 'powereducnetprofile', 'user');
     }
 
     $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="21"');
@@ -356,8 +356,8 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
     $mform->addHelpButton('description_editor', 'userdescription');
 
     if (empty($USER->newadminuser)) {
-        $mform->addElement('header', 'moodle_picture', get_string('pictureofuser'));
-        $mform->setExpanded('moodle_picture', true);
+        $mform->addElement('header', 'powereduc_picture', get_string('pictureofuser'));
+        $mform->setExpanded('powereduc_picture', true);
 
         if (!empty($CFG->enablegravatar)) {
             $mform->addElement('html', html_writer::tag('p', get_string('gravatarenabled')));
@@ -379,7 +379,7 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
     // Display user name fields that are not currenlty enabled here if there are any.
     $disabledusernamefields = useredit_get_disabled_name_fields($enabledusernamefields);
     if (count($disabledusernamefields) > 0) {
-        $mform->addElement('header', 'moodle_additional_names', get_string('additionalnames'));
+        $mform->addElement('header', 'powereduc_additional_names', get_string('additionalnames'));
         foreach ($disabledusernamefields as $allname) {
             $purpose = user_edit_map_field_purpose($user->id, $allname);
             $mform->addElement('text', $allname, get_string($allname), 'maxlength="100" size="30"' . $purpose);
@@ -388,14 +388,14 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
     }
 
     if (core_tag_tag::is_enabled('core', 'user') and empty($USER->newadminuser)) {
-        $mform->addElement('header', 'moodle_interests', get_string('interests'));
+        $mform->addElement('header', 'powereduc_interests', get_string('interests'));
         $mform->addElement('tags', 'interests', get_string('interestslist'),
             array('itemtype' => 'user', 'component' => 'core'));
         $mform->addHelpButton('interests', 'interestslist');
     }
 
-    // Moodle optional fields.
-    $mform->addElement('header', 'moodle_optional', get_string('optional', 'form'));
+    // PowerEduc optional fields.
+    $mform->addElement('header', 'powereduc_optional', get_string('optional', 'form'));
 
     $mform->addElement('text', 'idnumber', get_string('idnumber'), 'maxlength="255" size="25"');
     $mform->setType('idnumber', core_user::get_property_type('idnumber'));

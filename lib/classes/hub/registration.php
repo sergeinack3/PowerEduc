@@ -23,7 +23,7 @@
  */
 
 namespace core\hub;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use moodle_exception;
 use moodle_url;
@@ -84,7 +84,7 @@ class registration {
         global $DB;
 
         if (self::$registration === null) {
-            self::$registration = $DB->get_record('registration_hubs', ['huburl' => HUB_MOODLEORGHUBURL]) ?: null;
+            self::$registration = $DB->get_record('registration_hubs', ['huburl' => HUB_POWEREDUCORGHUBURL]) ?: null;
         }
 
         if (self::$registration && (bool)self::$registration->confirmed == (bool)$confirmed) {
@@ -409,7 +409,7 @@ class registration {
             $hub = new stdClass();
             $hub->token = get_site_identifier();
             $hub->secret = $hub->token;
-            $hub->huburl = HUB_MOODLEORGHUBURL;
+            $hub->huburl = HUB_POWEREDUCORGHUBURL;
             $hub->hubname = 'moodle';
             $hub->confirmed = 0;
             $hub->timemodified = time();
@@ -422,7 +422,7 @@ class registration {
         // The most conservative limit for the redirect URL length is 2000 characters. Only pass parameters before
         // we reach this limit. The next registration update will update all fields.
         // We will also update registration after we receive confirmation from moodle.net.
-        $url = new moodle_url(HUB_MOODLEORGHUBURL . '/local/hub/siteregistration.php',
+        $url = new moodle_url(HUB_POWEREDUCORGHUBURL . '/local/hub/siteregistration.php',
             ['token' => $hub->token, 'url' => $params['url']]);
         foreach ($params as $key => $value) {
             if (strlen($url->out(false, [$key => $value])) > 2000) {

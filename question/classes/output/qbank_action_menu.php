@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_question\output;
 
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use templatable;
 use renderable;
@@ -32,19 +32,19 @@ use url_select;
  * The "Add category" would take the user to separate page, add category page.
  *
  * @package   core_question
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qbank_action_menu implements templatable, renderable {
-    /** @var moodle_url */
+    /** @var powereduc_url */
     private $currenturl;
 
     /**
      * qbank_actionbar constructor.
      *
-     * @param moodle_url $currenturl The current URL.
+     * @param powereduc_url $currenturl The current URL.
      */
-    public function __construct(moodle_url $currenturl) {
+    public function __construct(powereduc_url $currenturl) {
         $this->currenturl = $currenturl;
     }
 
@@ -55,12 +55,12 @@ class qbank_action_menu implements templatable, renderable {
      * @return array data for the template
      */
     public function export_for_template(renderer_base $output): array {
-        $questionslink = new moodle_url('/question/edit.php', $this->currenturl->params());
+        $questionslink = new powereduc_url('/question/edit.php', $this->currenturl->params());
         if (\core\plugininfo\qbank::is_plugin_enabled("qbank_managecategories")) {
-            $categorylink = new moodle_url('/question/bank/managecategories/category.php', $this->currenturl->params());
+            $categorylink = new powereduc_url('/question/bank/managecategories/category.php', $this->currenturl->params());
         }
-        $importlink = new moodle_url('/question/bank/importquestions/import.php', $this->currenturl->params());
-        $exportlink = new moodle_url('/question/bank/exportquestions/export.php', $this->currenturl->params());
+        $importlink = new powereduc_url('/question/bank/importquestions/import.php', $this->currenturl->params());
+        $exportlink = new powereduc_url('/question/bank/exportquestions/export.php', $this->currenturl->params());
 
         $menu = [
             $questionslink->out(false) => get_string('questions', 'question'),

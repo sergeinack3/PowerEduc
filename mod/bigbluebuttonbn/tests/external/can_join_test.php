@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,9 +19,9 @@ namespace mod_bigbluebuttonbn\external;
 use external_api;
 use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\test\testcase_helper_trait;
-use moodle_exception;
+use powereduc_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');
@@ -78,7 +78,7 @@ class can_join_test extends \externallib_advanced_testcase {
         $record = $this->getDataGenerator()->create_module('bigbluebuttonbn', ['course' => $course->id]);
         $instance = instance::get_from_instanceid($record->id);
 
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $this->can_join($instance->get_cm_id());
     }
 
@@ -96,7 +96,7 @@ class can_join_test extends \externallib_advanced_testcase {
         $user = $generator->create_user();
         $this->setUser($user);
 
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $this->can_join($instance->get_cm_id());
     }
 

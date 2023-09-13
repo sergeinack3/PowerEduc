@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace mod_choice;
 use externallib_advanced_testcase;
 use mod_choice_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -309,7 +309,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_choice_external::view_choice(0);
             $this->fail('Exception expected due to invalid mod_choice instance id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invalidcoursemodule', $e->errorcode);
         }
 
@@ -319,7 +319,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_choice_external::view_choice($choice->id);
             $this->fail('Exception expected due to not enrolled user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -340,8 +340,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_choice\event\course_module_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodlechoice = new \moodle_url('/mod/choice/view.php', array('id' => $cm->id));
-        $this->assertEquals($moodlechoice, $event->get_url());
+        $powereducchoice = new \powereduc_url('/mod/choice/view.php', array('id' => $cm->id));
+        $this->assertEquals($powereducchoice, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -460,7 +460,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_choice_external::delete_choice_responses($choice->id, array($myresponses[0], $myresponses[1]));
             $this->fail('Exception expected due to expired choice.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('expired', $e->errorcode);
         }
 

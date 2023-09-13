@@ -1,28 +1,28 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access the content bank files.
  *
  * @package    repository_contentbank
- * @copyright  2020 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2020 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/repository/lib.php');
 
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/repository/lib.php');
  * repository_contentbank class is used to browse the content bank files
  *
  * @package   repository_contentbank
- * @copyright 2020 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2020 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class repository_contentbank extends repository {
@@ -79,8 +79,8 @@ class repository_contentbank extends repository {
 
         // Get the content bank browser for the specified context.
         if ($browser = \repository_contentbank\helper::get_contentbank_browser($context)) {
-            $manageurl = new moodle_url('/contentbank/index.php', ['contextid' => $context->id]);
-            $canaccesscontent = has_capability('moodle/contentbank:access', $context);
+            $manageurl = new powereduc_url('/contentbank/index.php', ['contextid' => $context->id]);
+            $canaccesscontent = has_capability('powereduc/contentbank:access', $context);
             $ret['manage'] = $canaccesscontent ? $manageurl->out() : '';
             $ret['list'] = $browser->get_content();
             $ret['path'] = $browser->get_navigation();
@@ -90,11 +90,11 @@ class repository_contentbank extends repository {
     }
 
     /**
-     * Is this repository used to browse moodle files?
+     * Is this repository used to browse powereduc files?
      *
      * @return boolean
      */
-    public function has_moodle_files() {
+    public function has_powereduc_files() {
         return true;
     }
 

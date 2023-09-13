@@ -24,7 +24,7 @@
 
 namespace availability_grouping;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Condition main class.

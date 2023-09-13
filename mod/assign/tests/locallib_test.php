@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for (some of) mod/assign/locallib.php.
  *
  * @package    mod_assign
  * @category   phpunit
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_assign;
@@ -28,7 +28,7 @@ use mod_assign_grade_form;
 use mod_assign_test_generator;
 use mod_assign_testable_assign;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/assign/locallib.php');
@@ -38,7 +38,7 @@ require_once($CFG->dirroot . '/mod/assign/tests/generator.php');
 /**
  * Unit tests for (some of) mod/assign/locallib.php.
  *
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class locallib_test extends \advanced_testcase {
@@ -53,7 +53,7 @@ class locallib_test extends \advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
 
         $assign = $this->create_instance($course);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         $assign->register_return_link('RETURNACTION', ['param' => 1]);
         $this->assertEquals('RETURNACTION', $assign->get_return_action());
@@ -121,7 +121,7 @@ class locallib_test extends \advanced_testcase {
 
         // Test sesskey is required.
         $this->setUser($teacher);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $assign->reveal_identities();
 
         // Test editingteacher can reveal identities if sesskey is ignored.
@@ -213,7 +213,7 @@ class locallib_test extends \advanced_testcase {
                 'grade' => GRADE_TYPE_NONE
             ]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', array(
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', array(
             'id' => $assign->get_course_module()->id,
             'action' => 'grading',
         )));
@@ -245,7 +245,7 @@ class locallib_test extends \advanced_testcase {
                 'assignsubmission_onlinetext_enabled' => 1,
                 'duedate' => time() - (4 * DAYSECS),
             ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', array(
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', array(
             'id' => $assign->get_course_module()->id,
             'action' => 'grading',
         )));
@@ -273,7 +273,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = [
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE,
+            'format' => FORMAT_POWEREDUC,
         ];
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
@@ -304,7 +304,7 @@ class locallib_test extends \advanced_testcase {
                 'assignsubmission_onlinetext_enabled' => 1,
                 'duedate' => time() - (4 * DAYSECS),
             ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', array(
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', array(
             'id' => $assign->get_course_module()->id,
             'action' => 'grading',
         )));
@@ -334,7 +334,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = [
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE,
+            'format' => FORMAT_POWEREDUC,
         ];
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
@@ -367,7 +367,7 @@ class locallib_test extends \advanced_testcase {
             'assignsubmission_onlinetext_enabled' => 1,
             'duedate' => $time - (4 * DAYSECS),
          ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', array(
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', array(
             'id' => $assign->get_course_module()->id,
             'action' => 'grading',
         )));
@@ -439,7 +439,7 @@ class locallib_test extends \advanced_testcase {
             'submissiondrafts' => 1,
             'requireallteammemberssubmit' => 0,
         ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', array(
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', array(
             'id' => $assign->get_course_module()->id,
             'action' => 'grading',
         )));
@@ -450,7 +450,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = [
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE,
+            'format' => FORMAT_POWEREDUC,
         ];
         $notices = array();
         $assign->save_submission($data, $notices);
@@ -546,7 +546,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -630,7 +630,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -812,7 +812,7 @@ class locallib_test extends \advanced_testcase {
 
         $assign = $this->create_instance($course, ['submissiondrafts' => 1]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Test you cannot see the submit button for an offline assignment regardless.
         $this->setUser($student);
@@ -834,7 +834,7 @@ class locallib_test extends \advanced_testcase {
             'assignsubmission_onlinetext_enabled' => 1,
         ]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Test you cannot see the submit button for an online text assignment with no submission.
         $this->setUser($student);
@@ -856,7 +856,7 @@ class locallib_test extends \advanced_testcase {
             'assignsubmission_onlinetext_enabled' => 1,
         ]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Add a draft.
         $this->add_submission($student, $assign);
@@ -1478,7 +1478,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -1491,7 +1491,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -1504,7 +1504,7 @@ class locallib_test extends \advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -1987,7 +1987,7 @@ class locallib_test extends \advanced_testcase {
 
         // Now verify group assignments.
         $this->setUser($teacher);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Add a submission.
         $this->add_submission($student, $assign);
@@ -2042,7 +2042,7 @@ class locallib_test extends \advanced_testcase {
             'requireallteammemberssubmit' => 0,
             'duedate' => $time - (2 * DAYSECS),
         ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Add a submission.
         $this->add_submission($student, $assign);
@@ -2368,7 +2368,7 @@ class locallib_test extends \advanced_testcase {
         $student = $this->getDataGenerator()->create_and_enrol($course, 'student');
         $this->setUser($teacher);
         $assign = $this->create_instance($course);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // No feedback should be available because this student has not been graded.
         $this->setUser($student);
@@ -2434,7 +2434,7 @@ class locallib_test extends \advanced_testcase {
         $assign = $this->create_instance($course, [
             'assignfeedback_comments_enabled' => 1
         ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // No feedback should be available because this student has not been graded.
         $this->setUser($student);
@@ -2447,7 +2447,7 @@ class locallib_test extends \advanced_testcase {
         $this->mark_submission($teacher, $assign, $student, null, [
             'assignfeedbackcomments_editor' => [
                 'text' => 'Tomato sauce',
-                'format' => FORMAT_MOODLE,
+                'format' => FORMAT_POWEREDUC,
             ],
         ]);
 
@@ -2463,7 +2463,7 @@ class locallib_test extends \advanced_testcase {
         $this->mark_submission($teacher, $assign, $student, 50.0, [
             'assignfeedbackcomments_editor' => [
                 'text' => 'Bechamel sauce',
-                'format' => FORMAT_MOODLE,
+                'format' => FORMAT_POWEREDUC,
             ],
         ]);
 
@@ -2509,7 +2509,7 @@ class locallib_test extends \advanced_testcase {
             'submissiondrafts' => 1,
             'assignsubmission_onlinetext_enabled' => 1,
         ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Student should be able to see an add submission button.
         $this->setUser($student);
@@ -2607,7 +2607,7 @@ class locallib_test extends \advanced_testcase {
             'submissiondrafts' => 1,
             'assignsubmission_onlinetext_enabled' => 1,
         ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Set grade to pass to 80.
         $gradeitem = $assign->get_grade_item();
@@ -2681,7 +2681,7 @@ class locallib_test extends \advanced_testcase {
             'submissiondrafts' => 1,
             'assignsubmission_onlinetext_enabled' => 1,
         ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Set grade to pass to 80.
         $gradeitem = $assign->get_grade_item();
@@ -2724,7 +2724,7 @@ class locallib_test extends \advanced_testcase {
             'submissiondrafts' => 1,
             'assignsubmission_onlinetext_enabled' => 1,
         ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Set grade to pass to 0, so that no attempts should reopen.
         $gradeitem = $assign->get_grade_item();
@@ -2768,7 +2768,7 @@ class locallib_test extends \advanced_testcase {
             'markingworkflow' => 1,
         ]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Mark the submission and set to notmarked.
         $this->mark_submission($teacher, $assign, $student, 50.0,  [
@@ -2872,7 +2872,7 @@ class locallib_test extends \advanced_testcase {
             'markingallocation' => 1
         ]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Allocate marker to submission.
         $this->mark_submission($teacher, $assign, $student, null, [
@@ -2911,7 +2911,7 @@ class locallib_test extends \advanced_testcase {
             'submissiondrafts' => 1,
         ]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Add a submission but do not submit.
         $this->add_submission($student, $assign, 'Student submission text');
@@ -2922,7 +2922,7 @@ class locallib_test extends \advanced_testcase {
 
         // Check that a teacher can not edit the submission as they do not have the capability.
         $this->setUser($teacher);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage('error/nopermission');
         $this->add_submission($student, $assign, 'Teacher edited submission text', false);
     }
@@ -2950,7 +2950,7 @@ class locallib_test extends \advanced_testcase {
         role_assign($roleid, $teacher->id, $assign->get_context()->id);
         accesslib_clear_all_caches_for_unit_testing();
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Add a submission but do not submit.
         $this->add_submission($student, $assign, 'Student submission text');
@@ -3016,7 +3016,7 @@ class locallib_test extends \advanced_testcase {
             'assignsubmission_onlinetext_enabled' => 1,
         ]);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Student should be able to see an add submission button.
         $this->setUser($student);
@@ -3118,15 +3118,15 @@ class locallib_test extends \advanced_testcase {
 
         $sourcetext = "Hello!
 
-I'm writing to you from the Moodle Majlis in Muscat, Oman, where we just had several days of Moodle community goodness.
+I'm writing to you from the PowerEduc Majlis in Muscat, Oman, where we just had several days of PowerEduc community goodness.
 
-URL outside a tag: https://moodle.org/logo/logo-240x60.gif
+URL outside a tag: https://powereduc.org/logo/logo-240x60.gif
 Plugin url outside a tag: @@PLUGINFILE@@/logo-240x60.gif
 
-External link 1:<img src='https://moodle.org/logo/logo-240x60.gif' alt='Moodle'/>
-External link 2:<img alt=\"Moodle\" src=\"https://moodle.org/logo/logo-240x60.gif\"/>
-Internal link 1:<img src='@@PLUGINFILE@@/logo-240x60.gif' alt='Moodle'/>
-Internal link 2:<img alt=\"Moodle\" src=\"@@PLUGINFILE@@logo-240x60.gif\"/>
+External link 1:<img src='https://powereduc.org/logo/logo-240x60.gif' alt='PowerEduc'/>
+External link 2:<img alt=\"PowerEduc\" src=\"https://powereduc.org/logo/logo-240x60.gif\"/>
+Internal link 1:<img src='@@PLUGINFILE@@/logo-240x60.gif' alt='PowerEduc'/>
+Internal link 2:<img alt=\"PowerEduc\" src=\"@@PLUGINFILE@@logo-240x60.gif\"/>
 Anchor link 1:<a href=\"@@PLUGINFILE@@logo-240x60.gif\" alt=\"bananas\">Link text</a>
 Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
 ";
@@ -3165,15 +3165,15 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
         // Note the internal images have been stripped and the html is purified (quotes fixed in this case).
         $filteredtext = "Hello!
 
-I'm writing to you from the Moodle Majlis in Muscat, Oman, where we just had several days of Moodle community goodness.
+I'm writing to you from the PowerEduc Majlis in Muscat, Oman, where we just had several days of PowerEduc community goodness.
 
-URL outside a tag: https://moodle.org/logo/logo-240x60.gif
+URL outside a tag: https://powereduc.org/logo/logo-240x60.gif
 Plugin url outside a tag: $url/logo-240x60.gif
 
-External link 1:<img src=\"https://moodle.org/logo/logo-240x60.gif\" alt=\"Moodle\" />
-External link 2:<img alt=\"Moodle\" src=\"https://moodle.org/logo/logo-240x60.gif\" />
-Internal link 1:<img src=\"$url/logo-240x60.gif\" alt=\"Moodle\" />
-Internal link 2:<img alt=\"Moodle\" src=\"@@PLUGINFILE@@logo-240x60.gif\" />
+External link 1:<img src=\"https://powereduc.org/logo/logo-240x60.gif\" alt=\"PowerEduc\" />
+External link 2:<img alt=\"PowerEduc\" src=\"https://powereduc.org/logo/logo-240x60.gif\" />
+Internal link 1:<img src=\"$url/logo-240x60.gif\" alt=\"PowerEduc\" />
+Internal link 2:<img alt=\"PowerEduc\" src=\"@@PLUGINFILE@@logo-240x60.gif\" />
 Anchor link 1:<a href=\"@@PLUGINFILE@@logo-240x60.gif\">Link text</a>
 Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
 ";
@@ -3529,7 +3529,7 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
 
         // Add the capability to access allgroups for one of the students.
         $roleid = create_role('Access all groups role', 'accessallgroupsrole', '');
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $roleid, $assign->get_context()->id);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $roleid, $assign->get_context()->id);
         role_assign($roleid, $student1->id, $assign->get_context()->id);
         accesslib_clear_all_caches_for_unit_testing();
 
@@ -4060,7 +4060,7 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
         $this->setUser($student);
         $submission = $assign->get_user_submission($student->id, true);
 
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', ['id' => $assign->get_course_module()->id]));
 
         // Set override grade grade, and check that grade submission has been overridden.
         $gradegrade->set_overridden(true);
@@ -4307,7 +4307,7 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
         $assign = $this->create_instance($course, [
                 'assignsubmission_onlinetext_enabled' => 1,
             ]);
-        $PAGE->set_url(new \moodle_url('/mod/assign/view.php', [
+        $PAGE->set_url(new \powereduc_url('/mod/assign/view.php', [
             'id' => $assign->get_course_module()->id,
             'action' => 'grading',
         ]));
@@ -4328,7 +4328,7 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
         $data->onlinetext_editor = [
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE,
+            'format' => FORMAT_POWEREDUC,
         ];
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
@@ -4517,7 +4517,7 @@ Anchor link 2:<a title=\"bananas\" href=\"../logo-240x60.gif\">Link text</a>
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text with a <a href="@@PLUGINFILE@@/intro.txt">link</a>',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
 
         $draftidfile = file_get_unused_draft_itemid();
         $usercontext = \context_user::instance($student->id);

@@ -24,7 +24,7 @@
 
 namespace tool_filetypes\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tool_filetypes implementing null_provider.

@@ -23,7 +23,7 @@
  */
 
 namespace tool_cohortroles\form;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use moodleform;
 use context_system;

@@ -125,14 +125,14 @@ $functions = array(
         'description'   => 'Returns the list of badges awarded to a user.',
         'type'          => 'read',
         'capabilities'  => 'moodle/badges:viewotherbadges',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_blog_get_entries' => array(
         'classname'   => 'core_blog\external',
         'methodname'  => 'get_entries',
         'description' => 'Returns blog entries.',
         'type'        => 'read',
-        'services'    => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'    => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax'          => true,
         'loginrequired' => false,
     ),
@@ -141,7 +141,7 @@ $functions = array(
         'methodname'  => 'view_entries',
         'description' => 'Trigger the blog_entries_viewed event.',
         'type'        => 'read',
-        'services'    => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'    => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax'          => true,
         'loginrequired' => false,
     ),
@@ -153,7 +153,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => '',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_calendar_day_view' => array(
         'classname' => 'core_calendar_external',
@@ -163,7 +163,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => '',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_calendar_upcoming_view' => array(
         'classname' => 'core_calendar_external',
@@ -173,7 +173,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => '',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_update_event_start_day' => array(
         'classname' => 'core_calendar_external',
@@ -183,7 +183,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_create_calendar_events' => array(
         'classname' => 'core_calendar_external',
@@ -192,7 +192,7 @@ $functions = array(
         'classpath' => 'calendar/externallib.php',
         'type' => 'write',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_delete_calendar_events' => array(
         'classname' => 'core_calendar_external',
@@ -202,7 +202,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_calendar_events' => array(
         'classname' => 'core_calendar_external',
@@ -211,7 +211,7 @@ $functions = array(
         'classpath' => 'calendar/externallib.php',
         'type' => 'read',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_action_events_by_timesort' => array(
         'classname' => 'core_calendar_external',
@@ -221,7 +221,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_action_events_by_course' => array(
         'classname' => 'core_calendar_external',
@@ -231,7 +231,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_action_events_by_courses' => array(
         'classname' => 'core_calendar_external',
@@ -241,7 +241,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_calendar_event_by_id' => array(
         'classname' => 'core_calendar_external',
@@ -251,7 +251,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_submit_create_update_form' => array(
         'classname' => 'core_calendar_external',
@@ -261,7 +261,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/calendar:manageentries, moodle/calendar:manageownentries, moodle/calendar:managegroupentries',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_calendar_access_information' => array(
         'classname' => 'core_calendar_external',
@@ -269,7 +269,7 @@ $functions = array(
         'description' => 'Convenience function to retrieve some permissions/access information for the given course calendar.',
         'classpath' => 'calendar/externallib.php',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_allowed_event_types' => array(
         'classname' => 'core_calendar_external',
@@ -277,7 +277,7 @@ $functions = array(
         'description' => 'Get the type of events a user can create in the given course.',
         'classpath' => 'calendar/externallib.php',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_calendar_get_timestamps' => [
         'classname'     => 'core_calendar_external',
@@ -291,7 +291,7 @@ $functions = array(
         'classname'     => 'core_calendar\external\export\token',
         'description'   => 'Return the auth token required for exporting a calendar.',
         'type'          => 'read',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ],
     'core_calendar_delete_subscription' => [
         'classname' => 'core_calendar\external\subscription\delete',
@@ -370,28 +370,28 @@ $functions = array(
         'description' => 'Returns comments.',
         'type' => 'read',
         'capabilities' => 'moodle/comment:view',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_comment_add_comments' => array(
         'classname' => 'core_comment_external',
         'methodname' => 'add_comments',
         'description' => 'Adds a comment or comments.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_comment_delete_comments' => array(
         'classname' => 'core_comment_external',
         'methodname' => 'delete_comments',
         'description' => 'Deletes a comment or comments.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_completion_get_activities_completion_status' => array(
         'classname' => 'core_completion_external',
         'methodname' => 'get_activities_completion_status',
         'description' => 'Return the activities completion status for a user in a course.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_completion_get_course_completion_status' => array(
         'classname' => 'core_completion_external',
@@ -399,21 +399,21 @@ $functions = array(
         'description' => 'Returns course completion status.',
         'type' => 'read',
         'capabilities' => 'report/completion:view',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_completion_mark_course_self_completed' => array(
         'classname' => 'core_completion_external',
         'methodname' => 'mark_course_self_completed',
         'description' => 'Update the course completion status for the current user (if course self-completion is enabled).',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_completion_update_activity_completion_status_manually' => array(
         'classname' => 'core_completion_external',
         'methodname' => 'update_activity_completion_status_manually',
         'description' => 'Update completion status for the current user in an activity, only for activities with manual tracking.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_completion_override_activity_completion_status' => array(
@@ -479,7 +479,7 @@ $functions = array(
         'description' => 'Return category details',
         'type' => 'read',
         'capabilities' => 'moodle/category:viewhiddencategories',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_contents' => array(
         'classname' => 'core_course_external',
@@ -488,7 +488,7 @@ $functions = array(
         'description' => 'Get course contents',
         'type' => 'read',
         'capabilities' => 'moodle/course:update, moodle/course:viewhiddencourses',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_course_module' => array(
         'classname' => 'core_course_external',
@@ -496,7 +496,7 @@ $functions = array(
         'classpath' => 'course/externallib.php',
         'description' => 'Return information about a course module',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_course_module_by_instance' => array(
         'classname' => 'core_course_external',
@@ -504,7 +504,7 @@ $functions = array(
         'classpath' => 'course/externallib.php',
         'description' => 'Return information about a given module name and instance id',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_module' => array(
         'classname'   => 'core_course_external',
@@ -552,7 +552,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/course:view, moodle/course:update, moodle/course:viewhiddencourses',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_import_course' => array(
         'classname' => 'core_course_external',
@@ -569,7 +569,7 @@ $functions = array(
         'description' => 'Search courses by (name, module, block, tag)',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_update_categories' => array(
         'classname' => 'core_course_external',
@@ -594,7 +594,7 @@ $functions = array(
         'classpath' => 'course/externallib.php',
         'description' => 'Log that the course was viewed',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_user_navigation_options' => array(
         'classname' => 'core_course_external',
@@ -602,7 +602,7 @@ $functions = array(
         'classpath' => 'course/externallib.php',
         'description' => 'Return a list of navigation options in a set of courses that are avaialable or not for the current user.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_user_administration_options' => array(
         'classname' => 'core_course_external',
@@ -611,7 +611,7 @@ $functions = array(
         'description' => 'Return a list of administration options in a set of courses that are avaialable or not for the current
                             user.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_courses_by_field' => array(
         'classname' => 'core_course_external',
@@ -619,7 +619,7 @@ $functions = array(
         'classpath' => 'course/externallib.php',
         'description' => 'Get courses matching a specific field (id/s, shortname, idnumber, category)',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_check_updates' => array(
         'classname' => 'core_course_external',
@@ -628,7 +628,7 @@ $functions = array(
         'description' => 'Check if there is updates affecting the user for the given course and contexts.',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_updates_since' => array(
         'classname' => 'core_course_external',
@@ -637,7 +637,7 @@ $functions = array(
         'description' => 'Check if there are updates affecting the user for the given course since the given time stamp.',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_enrolled_courses_by_timeline_classification' => array(
         'classname' => 'core_course_external',
@@ -646,7 +646,7 @@ $functions = array(
         'description' => 'List of enrolled courses for the given timeline classification (past, inprogress, or future).',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_enrolled_courses_with_action_events_by_timeline_classification' => array(
         'classname' => '\core_course\external\get_enrolled_courses_with_action_events_by_timeline_classification',
@@ -655,7 +655,7 @@ $functions = array(
         'description' => 'List of enrolled courses with action events in a given timeframe, for the given timeline classification.',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_recent_courses' => array(
         'classname' => 'core_course_external',
@@ -664,7 +664,7 @@ $functions = array(
         'description' => 'List of courses a user has accessed most recently.',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_set_favourite_courses' => array(
         'classname' => 'core_course_external',
@@ -673,7 +673,7 @@ $functions = array(
         'description' => 'Add a list of courses to the list of favourite courses.',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_course_get_enrolled_users_by_cmid' => array(
         'classname' => 'core_course_external',
@@ -729,7 +729,7 @@ $functions = array(
         'classpath' => 'enrol/externallib.php',
         'description' => 'Get the list of course enrolment methods',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_enrol_get_enrolled_users' => array(
         'classname' => 'core_enrol_external',
@@ -739,7 +739,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/user:viewdetails, moodle/user:viewhiddendetails, moodle/course:useremail, moodle/user:update, '
             . 'moodle/site:accessallgroups',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_enrol_get_enrolled_users_with_capability' => array(
         'classname' => 'core_enrol_external',
@@ -766,7 +766,7 @@ $functions = array(
         'ajax' => true,
         'type' => 'read',
         'capabilities' => 'moodle/course:viewparticipants',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ],
     'core_enrol_get_users_courses' => array(
         'classname' => 'core_enrol_external',
@@ -775,7 +775,7 @@ $functions = array(
         'description' => 'Get the list of courses where a user is enrolled in',
         'type' => 'read',
         'capabilities' => 'moodle/course:viewparticipants',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_enrol_submit_user_enrolment_form' => array(
         'classname' => 'core_enrol_external',
@@ -825,7 +825,7 @@ $functions = array(
         'description' => 'browse moodle files',
         'type' => 'read',
         'classpath' => 'files/externallib.php',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_files_upload' => array(
         'classname' => 'core_files_external',
@@ -838,13 +838,13 @@ $functions = array(
         'classname' => 'core_files\external\delete\draft',
         'description' => 'Delete the indicated files (or directories) from a user draft file area.',
         'type'        => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_files_get_unused_draft_itemid' => array(
         'classname' => 'core_files\external\get\unused_draft',
         'description' => 'Generate a new draft itemid for the current user.',
         'type'        => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_form_get_filetypes_browser_data' => array(
         'classname' => 'core_form\external',
@@ -870,7 +870,7 @@ $functions = array(
         'type' => 'read',
         'loginrequired' => false,
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_get_fragment' => array(
         'classname' => 'core_external',
@@ -918,14 +918,14 @@ $functions = array(
             'creating the grade item if required',
         'type' => 'write',
         'ajax' => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_grades_grader_gradingpanel_point_store' => [
         'classname' => 'core_grades\\grades\\grader\\gradingpanel\\point\\external\\store',
         'description' => 'Store the data required to display the grader grading panel for simple grading',
         'type' => 'write',
         'ajax' => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_grades_grader_gradingpanel_scale_fetch' => [
         'classname' => 'core_grades\\grades\\grader\\gradingpanel\\scale\\external\\fetch',
@@ -933,14 +933,14 @@ $functions = array(
             'creating the grade item if required',
         'type' => 'write',
         'ajax' => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_grades_grader_gradingpanel_scale_store' => [
         'classname' => 'core_grades\\grades\\grader\\gradingpanel\\scale\\external\\store',
         'description' => 'Store the data required to display the grader grading panel for scale-based grading',
         'type' => 'write',
         'ajax' => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_grades_create_gradecategory' => array (
         'classname' => 'core_grades_external',
@@ -961,14 +961,14 @@ $functions = array(
         'description' => 'Returns the enrolled users within and map some fields to the returned array of user objects.',
         'type' => 'read',
         'ajax' => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ),
     'core_grades_get_groups_for_search_widget' => [
         'classname' =>  'core_grades\external\get_groups_for_search_widget',
         'description' => 'Get the group/(s) for a course',
         'type' => 'read',
         'ajax' => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_grading_get_definitions' => array(
         'classname' => 'core_grading_external',
@@ -1047,7 +1047,7 @@ $functions = array(
         'classpath' => 'group/externallib.php',
         'description' => 'Gets a list of groups that the user is allowed to access within the specified activity.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_group_get_activity_groupmode' => array(
         'classname' => 'core_group_external',
@@ -1055,7 +1055,7 @@ $functions = array(
         'classpath' => 'group/externallib.php',
         'description' => 'Returns effective groupmode used in a given activity.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_group_get_course_groupings' => array(
         'classname' => 'core_group_external',
@@ -1063,7 +1063,7 @@ $functions = array(
         'classpath' => 'group/externallib.php',
         'description' => 'Returns all groupings in specified course.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_group_get_course_groups' => array(
         'classname' => 'core_group_external',
@@ -1073,7 +1073,7 @@ $functions = array(
         'type' => 'read',
         'ajax' => true,
         'capabilities' => 'moodle/course:managegroups',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_group_get_course_user_groups' => array(
         'classname' => 'core_group_external',
@@ -1082,7 +1082,7 @@ $functions = array(
         'description' => 'Returns all groups in specified course for the specified user.',
         'type' => 'read',
         'capabilities' => 'moodle/course:managegroups',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_group_get_group_members' => array(
         'classname' => 'core_group_external',
@@ -1136,7 +1136,7 @@ $functions = array(
         'description' => 'Mutes a list of conversations',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_unmute_conversations' => array(
         'classname' => 'core_message_external',
@@ -1145,7 +1145,7 @@ $functions = array(
         'description' => 'Unmutes a list of conversations',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_block_user' => array(
         'classname' => 'core_message_external',
@@ -1154,7 +1154,7 @@ $functions = array(
         'description' => 'Blocks a user',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_contact_requests' => array(
         'classname' => 'core_message_external',
@@ -1163,7 +1163,7 @@ $functions = array(
         'description' => 'Returns contact requests for a user',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_create_contact_request' => array(
         'classname' => 'core_message_external',
@@ -1172,7 +1172,7 @@ $functions = array(
         'description' => 'Creates a contact request',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_confirm_contact_request' => array(
         'classname' => 'core_message_external',
@@ -1181,7 +1181,7 @@ $functions = array(
         'description' => 'Confirms a contact request',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_decline_contact_request' => array(
         'classname' => 'core_message_external',
@@ -1190,7 +1190,7 @@ $functions = array(
         'description' => 'Declines a contact request',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_received_contact_requests_count' => array(
         'classname' => 'core_message_external',
@@ -1199,7 +1199,7 @@ $functions = array(
         'description' => 'Gets the number of received contact requests',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_delete_contacts' => array(
         'classname' => 'core_message_external',
@@ -1208,7 +1208,7 @@ $functions = array(
         'description' => 'Remove contacts from the contact list',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_delete_conversations_by_id' => array(
         'classname' => 'core_message_external',
@@ -1218,7 +1218,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/site:deleteownmessage',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_delete_message' => array(
         'classname' => 'core_message_external',
@@ -1228,7 +1228,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/site:deleteownmessage',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_blocked_users' => array(
         'classname' => 'core_message_external',
@@ -1236,7 +1236,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a list of users blocked',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_data_for_messagearea_search_messages' => array(
         'classname' => 'core_message_external',
@@ -1245,7 +1245,7 @@ $functions = array(
         'description' => 'Retrieve the template data for searching for messages',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_message_search_users' => array(
         'classname' => 'core_message_external',
@@ -1254,7 +1254,7 @@ $functions = array(
         'description' => 'Retrieve the data for searching for people',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_user_contacts' => array(
         'classname' => 'core_message_external',
@@ -1263,7 +1263,7 @@ $functions = array(
         'description' => 'Retrieve the contact list',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_conversations' => array(
         'classname' => 'core_message_external',
@@ -1271,7 +1271,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a list of conversations for a user',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true
     ),
     'core_message_get_conversation' => array(
@@ -1280,7 +1280,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a conversation for a user',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true
     ),
     'core_message_get_conversation_between_users' => array(
@@ -1289,7 +1289,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a conversation for a user between another user',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true
     ),
     'core_message_get_self_conversation' => array(
@@ -1298,7 +1298,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a self-conversation for a user',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true
     ),
     'core_message_get_messages' => array(
@@ -1307,7 +1307,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a list of messages sent and received by a user (conversations, notifications or both)',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_message_get_conversation_counts' => array(
@@ -1316,7 +1316,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a list of conversation counts, indexed by type.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_message_get_unread_conversation_counts' => array(
@@ -1325,7 +1325,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a list of unread conversation counts, indexed by type.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_message_get_conversation_members' => array(
@@ -1334,7 +1334,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a list of members in a conversation',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_message_get_member_info' => array(
@@ -1343,7 +1343,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Retrieve a user message profiles',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_message_get_unread_conversations_count' => array(
@@ -1353,7 +1353,7 @@ $functions = array(
         'description' => 'Retrieve the count of unread conversations for a given user',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'readonlysession' => true, // We don't modify the session.
     ),
     'core_message_mark_all_notifications_as_read' => array(
@@ -1363,7 +1363,7 @@ $functions = array(
         'description' => 'Mark all notifications as read for a given user',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_mark_all_conversation_messages_as_read' => array(
         'classname' => 'core_message_external',
@@ -1372,7 +1372,7 @@ $functions = array(
         'description' => 'Mark all conversation messages as read for a given user',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_mark_message_read' => array(
         'classname' => 'core_message_external',
@@ -1380,7 +1380,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Mark a single message as read, trigger message_viewed event.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_message_mark_notification_read' => array(
@@ -1389,7 +1389,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Mark a single notification as read, trigger notification_viewed event.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true,
     ),
     'core_message_message_processor_config_form' => array(
@@ -1399,7 +1399,7 @@ $functions = array(
         'description' => 'Process the message processor config form',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_message_processor' => array(
         'classname' => 'core_message_external',
@@ -1415,7 +1415,7 @@ $functions = array(
         'classpath' => 'message/externallib.php',
         'description' => 'Search for contacts',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_send_instant_messages' => array(
         'classname' => 'core_message_external',
@@ -1425,7 +1425,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/site:sendmessage',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_send_messages_to_conversation' => array(
         'classname' => 'core_message_external',
@@ -1435,7 +1435,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/site:sendmessage',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_conversation_messages' => array(
         'classname' => 'core_message_external',
@@ -1444,7 +1444,7 @@ $functions = array(
         'description' => 'Retrieve the conversation messages and relevant member information',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_unblock_user' => array(
         'classname' => 'core_message_external',
@@ -1453,7 +1453,7 @@ $functions = array(
         'description' => 'Unblocks a user',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_user_notification_preferences' => array(
         'classname' => 'core_message_external',
@@ -1462,7 +1462,7 @@ $functions = array(
         'description' => 'Get the notification preferences for a given user.',
         'type' => 'read',
         'capabilities' => 'moodle/user:editownmessageprofile',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_user_message_preferences' => array(
         'classname' => 'core_message_external',
@@ -1471,7 +1471,7 @@ $functions = array(
         'description' => 'Get the message preferences for a given user.',
         'type' => 'read',
         'capabilities' => 'moodle/user:editownmessageprofile',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'ajax' => true
     ),
     'core_message_set_favourite_conversations' => array(
@@ -1481,7 +1481,7 @@ $functions = array(
         'description' => 'Mark a conversation or group of conversations as favourites/starred conversations.',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_unset_favourite_conversations' => array(
         'classname' => 'core_message_external',
@@ -1490,7 +1490,7 @@ $functions = array(
         'description' => 'Unset a conversation or group of conversations as favourites/starred conversations.',
         'type' => 'write',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_delete_message_for_all_users' => array(
         'classname' => 'core_message_external',
@@ -1500,13 +1500,13 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/site:deleteanymessage',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_message_get_unread_notification_count' => [
         'classname'     => '\core_message\external\get_unread_notification_count',
         'description'   => 'Get number of unread notifications.',
         'type'          => 'read',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_notes_create_notes' => array(
         'classname' => 'core_notes_external',
@@ -1516,7 +1516,7 @@ $functions = array(
         'type' => 'write',
         'ajax' => true,
         'capabilities' => 'moodle/notes:manage',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_notes_delete_notes' => array(
         'classname' => 'core_notes_external',
@@ -1525,7 +1525,7 @@ $functions = array(
         'description' => 'Delete notes',
         'type' => 'write',
         'capabilities' => 'moodle/notes:manage',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_notes_get_course_notes' => array(
         'classname' => 'core_notes_external',
@@ -1534,7 +1534,7 @@ $functions = array(
         'description' => 'Returns all notes in specified course (or site), for the specified user.',
         'type' => 'read',
         'capabilities' => 'moodle/notes:view',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_notes_get_notes' => array(
         'classname' => 'core_notes_external',
@@ -1559,7 +1559,7 @@ $functions = array(
         'description' => 'Simulates the web interface view of notes/index.php: trigger events.',
         'type' => 'write',
         'capabilities' => 'moodle/notes:view',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_output_load_template' => array(
         'classname' => 'core\output\external',
@@ -1599,7 +1599,7 @@ $functions = array(
         'description'   => 'Update the flag state of a question attempt.',
         'type'          => 'write',
         'capabilities'  => 'moodle/question:flag',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_question_submit_tags_form' => array(
         'classname'     => 'core_question_external',
@@ -1621,7 +1621,7 @@ $functions = array(
         'description' => 'Retrieve all the ratings for an item.',
         'type' => 'read',
         'capabilities' => 'moodle/rating:view',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_rating_add_rating' => array(
         'classname' => 'core_rating_external',
@@ -1629,7 +1629,7 @@ $functions = array(
         'description' => 'Rates an item.',
         'type' => 'write',
         'capabilities' => 'moodle/rating:rate',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_role_assign_roles' => array(
         'classname' => 'core_role_external',
@@ -1660,7 +1660,7 @@ $functions = array(
         'description' => 'Gets tag index page for one tag and one tag area',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_tag_get_tags' => array(
         'classname' => 'core_tag_external',
@@ -1681,28 +1681,28 @@ $functions = array(
         'methodname' => 'get_tagindex_per_area',
         'description' => 'Gets tag index page per different areas.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_tag_get_tag_areas' => array(
         'classname' => 'core_tag_external',
         'methodname' => 'get_tag_areas',
         'description' => 'Retrieves existing tag areas.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_tag_get_tag_collections' => array(
         'classname' => 'core_tag_external',
         'methodname' => 'get_tag_collections',
         'description' => 'Retrieves existing tag collections.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_tag_get_tag_cloud' => array(
         'classname' => 'core_tag_external',
         'methodname' => 'get_tag_cloud',
         'description' => 'Retrieves a tag cloud for the given collection and/or query search.',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_update_inplace_editable' => array(
         'classname' => 'core_external',
@@ -1719,7 +1719,7 @@ $functions = array(
         'classpath' => 'user/externallib.php',
         'description' => 'Store mobile user devices information for PUSH Notifications.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_add_user_private_files' => array(
         'classname' => 'core_user_external',
@@ -1728,7 +1728,7 @@ $functions = array(
         'description' => 'Copy files from a draft area to users private files area.',
         'type' => 'write',
         'capabilities' => 'moodle/user:manageownfiles',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_create_users' => array(
         'classname' => 'core_user_external',
@@ -1754,7 +1754,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/user:viewdetails, moodle/user:viewhiddendetails, moodle/course:useremail, moodle/user:update, '
             . 'moodle/site:accessallgroups',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_get_users' => array(
         'classname' => 'core_user_external',
@@ -1773,7 +1773,7 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'moodle/user:viewdetails, moodle/user:viewhiddendetails, moodle/course:useremail, moodle/user:update',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_search_identity' => array(
         'classname' => '\core_user\external\search_identity',
@@ -1789,7 +1789,7 @@ $functions = array(
         'classpath' => 'user/externallib.php',
         'description' => 'Remove a user device from the Moodle database.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_update_users' => array(
         'classname' => 'core_user_external',
@@ -1808,7 +1808,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/user:editownmessageprofile, moodle/user:editmessageprofile',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_view_user_list' => array(
         'classname' => 'core_user_external',
@@ -1817,7 +1817,7 @@ $functions = array(
         'description' => 'Simulates the web-interface view of user/index.php (triggering events),.',
         'type' => 'write',
         'capabilities' => 'moodle/course:viewparticipants',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_view_user_profile' => array(
         'classname' => 'core_user_external',
@@ -1826,7 +1826,7 @@ $functions = array(
         'description' => 'Simulates the web-interface view of user/view.php and user/profile.php (triggering events),.',
         'type' => 'write',
         'capabilities' => 'moodle/user:viewdetails',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_get_user_preferences' => array(
         'classname' => 'core_user_external',
@@ -1835,7 +1835,7 @@ $functions = array(
         'description' => 'Return user preferences.',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_update_picture' => array(
         'classname' => 'core_user_external',
@@ -1844,7 +1844,7 @@ $functions = array(
         'description' => 'Update or delete the user picture in the site',
         'type' => 'write',
         'capabilities' => 'moodle/user:editownprofile, moodle/user:editprofile',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_set_user_preferences' => array(
         'classname' => 'core_user_external',
@@ -1854,7 +1854,7 @@ $functions = array(
         'type' => 'write',
         'capabilities' => 'moodle/site:config',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_agree_site_policy' => array(
         'classname' => 'core_user_external',
@@ -1862,7 +1862,7 @@ $functions = array(
         'classpath' => 'user/externallib.php',
         'description' => 'Agree the site policy for the current user.',
         'type' => 'write',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_user_get_private_files_info' => array(
         'classname' => 'core_user_external',
@@ -1871,7 +1871,7 @@ $functions = array(
         'description' => 'Returns general information about files in the user private files area.',
         'type' => 'read',
         'capabilities' => 'moodle/user:manageownfiles',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 
     // Competencies functions.
@@ -1973,7 +1973,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:competencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_delete_competency' => array(
         'classname'    => 'core_competency\external',
@@ -2091,7 +2091,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:coursecompetencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_count_competencies_in_course' => array(
         'classname'    => 'core_competency\external',
@@ -2425,7 +2425,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:competencymanage',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_add_related_competency' => array(
         'classname'    => 'core_competency\external',
@@ -2525,7 +2525,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:usercompetencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_user_competency_viewed_in_plan' => array(
         'classname'    => 'core_competency\external',
@@ -2535,7 +2535,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:usercompetencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_user_competency_viewed_in_course' => array(
         'classname'    => 'core_competency\external',
@@ -2545,7 +2545,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:usercompetencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_user_competency_plan_viewed' => array(
         'classname'    => 'core_competency\external',
@@ -2555,7 +2555,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:usercompetencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_grade_competency' => array(
         'classname'    => 'core_competency\external',
@@ -2583,7 +2583,7 @@ $functions = array(
         'type'         => 'write',
         'capabilities' => 'moodle/competency:competencygrade',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_competency_unlink_plan_from_template' => array(
         'classname'    => 'core_competency\external',
@@ -2629,7 +2629,7 @@ $functions = array(
         'type'          => 'write',
         'capabilities'  => 'moodle/competency:evidencedelete',
         'ajax'          => true,
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 
     'core_webservice_get_site_info' => array(
@@ -2638,7 +2638,7 @@ $functions = array(
         'classpath' => 'webservice/externallib.php',
         'description' => 'Return some site info / user info / list web service functions',
         'type' => 'read',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 
     // Blocks functions.
@@ -2648,7 +2648,7 @@ $functions = array(
         'description'   => 'Returns blocks information for a course.',
         'type'          => 'read',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 
     'core_block_get_dashboard_blocks' => array(
@@ -2657,7 +2657,7 @@ $functions = array(
         'description'   => 'Returns blocks information for the given user dashboard.',
         'type'          => 'read',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 
     'core_block_fetch_addable_blocks' => array(
@@ -2666,7 +2666,7 @@ $functions = array(
         'type'          => 'read',
         'capabilities'  => 'moodle/site:manageblocks',
         'ajax'          => true,
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 
     // Filters functions.
@@ -2675,7 +2675,7 @@ $functions = array(
         'methodname'  => 'get_available_in_context',
         'description' => 'Returns the filters available in the given contexts.',
         'type'        => 'read',
-        'services'    => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'    => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'core_customfield_delete_field' => array(
         'classname'   => 'core_customfield_external',
@@ -2733,14 +2733,14 @@ $functions = array(
         'type'          => 'read',
         'ajax'          => true,
         'capabilities'  => '',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_table_get_dynamic_table_content' => [
         'classname' => 'core_table\external\dynamic\get',
         'description' => 'Get the dynamic table content raw html',
         'type' => 'read',
         'ajax' => true,
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_xapi_statement_post' => [
         'classname'     => 'core_xapi\external\post_statement',
@@ -2749,7 +2749,7 @@ $functions = array(
         'type'          => 'write',
         'ajax'          => true,
         'capabilities'  => '',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_contentbank_delete_content' => [
         'classname'     => 'core_contentbank\external\delete_content',
@@ -2830,19 +2830,19 @@ $functions = array(
         'classname'   => 'core_reportbuilder\external\reports\listing',
         'description' => 'List custom reports for current user',
         'type'        => 'read',
-        'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'    => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_reportbuilder_retrieve_report' => [
         'classname'   => 'core_reportbuilder\external\reports\retrieve',
         'description' => 'Retrieve custom report content',
         'type'        => 'read',
-        'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'    => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_reportbuilder_view_report' => [
         'classname'   => 'core_reportbuilder\external\reports\view',
         'description' => 'Trigger custom report viewed',
         'type'        => 'write',
-        'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'    => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'core_reportbuilder_columns_add' => [
         'classname'   => 'core_reportbuilder\external\columns\add',
@@ -2953,7 +2953,7 @@ $services = array(
         'functions' => array(), // Unused as we add the service in each function definition, third party services would use this.
         'enabled' => 0,
         'restrictedusers' => 0,
-        'shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE,
+        'shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE,
         'downloadfiles' => 1,
         'uploadfiles' => 1
     ),

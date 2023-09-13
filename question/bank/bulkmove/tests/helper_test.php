@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_bulkmove;
 
 use core_question\local\bank\question_edit_contexts;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/editlib.php');
@@ -128,7 +128,7 @@ class helper_test extends \advanced_testcase {
     public function test_bulk_move_questions() {
         $this->helper_setup();
         // Verify that the questions are available in the current view.
-        $view = new \core_question\local\bank\view($this->contexts, new \moodle_url('/'), $this->course);
+        $view = new \core_question\local\bank\view($this->contexts, new \powereduc_url('/'), $this->course);
         ob_start();
         $pagevars = [
             'qpage' => 0,
@@ -149,7 +149,7 @@ class helper_test extends \advanced_testcase {
         helper::bulk_move_questions($questionlist, $this->secondcategory);
 
         // Verify the questions are not in the current category.
-        $view = new \core_question\local\bank\view($this->contexts, new \moodle_url('/'), $this->course);
+        $view = new \core_question\local\bank\view($this->contexts, new \powereduc_url('/'), $this->course);
         ob_start();
         $pagevars = [
             'qpage' => 0,
@@ -165,7 +165,7 @@ class helper_test extends \advanced_testcase {
         $this->assertStringNotContainsString('Example question second', $html);
 
         // Verify the questions are in the new category.
-        $view = new \core_question\local\bank\view($this->contexts, new \moodle_url('/'), $this->course);
+        $view = new \core_question\local\bank\view($this->contexts, new \powereduc_url('/'), $this->course);
         ob_start();
         $pagevars = [
             'qpage' => 0,
@@ -205,8 +205,8 @@ class helper_test extends \advanced_testcase {
         $this->helper_setup();
         $coursecontext = \context_course::instance($this->course->id);
         $contexts = new question_edit_contexts($coursecontext);
-        $addcontexts = $contexts->having_cap('moodle/question:add');
-        $url = new \moodle_url('/question/bank/bulkmove/move.php');
+        $addcontexts = $contexts->having_cap('powereduc/question:add');
+        $url = new \powereduc_url('/question/bank/bulkmove/move.php');
         $displaydata = \qbank_bulkmove\helper::get_displaydata($addcontexts, $url, $url);
         $this->assertStringContainsString('Test question category 1', $displaydata['categorydropdown']);
         $this->assertStringContainsString('Default for Category 1', $displaydata['categorydropdown']);

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quizaccess_seb;
 
 use quizaccess_seb;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/test_helper_trait.php');
 
@@ -70,7 +70,7 @@ class rule_test extends \advanced_testcase {
      * @return string
      */
     private function get_seb_launch_link() {
-        return 'sebs://www.example.com/moodle/mod/quiz/accessrule/seb/config.php';
+        return 'sebs://www.example.com/powereduc/mod/quiz/accessrule/seb/config.php';
     }
 
     /**
@@ -79,7 +79,7 @@ class rule_test extends \advanced_testcase {
      * @return string
      */
     private function get_seb_config_download_link() {
-        return 'https://www.example.com/moodle/mod/quiz/accessrule/seb/config.php';
+        return 'https://www.example.com/powereduc/mod/quiz/accessrule/seb/config.php';
     }
 
     /**
@@ -369,7 +369,7 @@ class rule_test extends \advanced_testcase {
         $this->quiz = $this->create_test_quiz($this->course, settings_provider::USE_SEB_CONFIG_MANUALLY);
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = 'Broken config key';
 
         $user = $this->getDataGenerator()->create_user();
@@ -395,7 +395,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = 'Broken config key';
 
         $user = $this->getDataGenerator()->create_user();
@@ -420,7 +420,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = 'Broken config key';
 
         $user = $this->getDataGenerator()->create_user();
@@ -445,7 +445,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings = quiz_settings::get_record(['quizid' => $this->quiz->id]);
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $quizsettings->get_config_key());
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
 
@@ -472,7 +472,7 @@ class rule_test extends \advanced_testcase {
         $this->setUser($user);
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $quizsettings->get_config_key());
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
 
@@ -500,7 +500,7 @@ class rule_test extends \advanced_testcase {
         $this->setUser($user);
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $quizsettings->get_config_key());
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
 
@@ -528,7 +528,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $browserexamkey);
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_REQUESTHASH'] = $expectedhash;
         $_SERVER['HTTP_USER_AGENT'] = 'SEB';
@@ -556,7 +556,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedbrowserkey = hash('sha256', $FULLME . $browserexamkey);
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_REQUESTHASH'] = $expectedbrowserkey;
         $expectedconfigkey = hash('sha256', $FULLME . $quizsettings->get_config_key());
@@ -674,7 +674,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $quizsettings->get_config_key());
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
 
@@ -705,7 +705,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $quizsettings->get_config_key());
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
 
@@ -802,7 +802,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $quizsettings->get_config_key());
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
         $_SERVER['HTTP_USER_AGENT'] = 'WRONG_TEST_SITE';
@@ -830,7 +830,7 @@ class rule_test extends \advanced_testcase {
         $quizsettings->save();
 
         // Set up dummy request.
-        $FULLME = 'https://example.com/moodle/mod/quiz/attempt.php?attemptid=123&page=4';
+        $FULLME = 'https://example.com/powereduc/mod/quiz/attempt.php?attemptid=123&page=4';
         $expectedhash = hash('sha256', $FULLME . $quizsettings->get_config_key());
         $_SERVER['HTTP_X_SAFEEXAMBROWSER_CONFIGKEYHASH'] = $expectedhash;
         $_SERVER['HTTP_USER_AGENT'] = 'WRONG_TEST_SITE';
@@ -1270,7 +1270,7 @@ class rule_test extends \advanced_testcase {
         $this->quiz = $this->create_test_quiz($this->course, settings_provider::USE_SEB_CONFIG_MANUALLY);
         $quizsettings = quiz_settings::get_record(['quizid' => $this->quiz->id]);
         $quizsettings->save();
-        // Set access for Moodle session.
+        // Set access for PowerEduc session.
         $SESSION->quizaccess_seb_access = [$this->quiz->cmid => true];
         $this->make_rule()->current_attempt_finished();
 

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 // Prevent Caching Headers.
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -35,7 +35,7 @@ $aiccdata = optional_param('aicc_data', '', PARAM_RAW);
 
 $cfgscorm = get_config('scorm');
 
-$url = new moodle_url('/mod/scorm/aicc.php', array('command' => $command, 'session_id' => $sessionid));
+$url = new powereduc_url('/mod/scorm/aicc.php', array('command' => $command, 'session_id' => $sessionid));
 if ($aiccdata !== 0) {
     $url->param('aicc_data', $aiccdata);
 }
@@ -44,14 +44,14 @@ $PAGE->set_url($url);
 if (empty($cfgscorm->allowaicchacp)) {
     require_login();
     if (!confirm_sesskey($sessionid)) {
-        throw new \moodle_exception('invalidsesskey');
+        throw new \powereduc_exception('invalidsesskey');
     }
     $aiccuser = $USER;
     $scormsession = $SESSION->scorm;
 } else {
     $scormsession = scorm_aicc_confirm_hacp_session($sessionid);
     if (empty($scormsession)) {
-        throw new \moodle_exception('invalidhacpsession', 'scorm');
+        throw new \powereduc_exception('invalidhacpsession', 'scorm');
     }
     $aiccuser = $DB->get_record('user', array('id' => $scormsession->userid), 'id,username,lastname,firstname', MUST_EXIST);
 }
@@ -62,7 +62,7 @@ if (!empty($command)) {
     if (isset($scormsession->scoid)) {
         $scoid = $scormsession->scoid;
     } else {
-        throw new \moodle_exception('cannotcallscript');
+        throw new \powereduc_exception('cannotcallscript');
     }
     $mode = 'normal';
     if (isset($scormsession->scormmode)) {
@@ -80,15 +80,15 @@ if (!empty($command)) {
 
     if ($sco = scorm_get_sco($scoid, SCO_ONLY)) {
         if (!$scorm = $DB->get_record('scorm', array('id' => $sco->scorm))) {
-            throw new \moodle_exception('cannotcallscript');
+            throw new \powereduc_exception('cannotcallscript');
         }
     } else {
-        throw new \moodle_exception('cannotcallscript');
+        throw new \powereduc_exception('cannotcallscript');
     }
-    $aiccrequest = "MOODLE scoid: $scoid"
-                 . "\r\nMOODLE mode: $mode"
-                 . "\r\nMOODLE status: $status"
-                 . "\r\nMOODLE attempt: $attempt"
+    $aiccrequest = "POWEREDUC scoid: $scoid"
+                 . "\r\nPOWEREDUC mode: $mode"
+                 . "\r\nPOWEREDUC status: $status"
+                 . "\r\nPOWEREDUC attempt: $attempt"
                  . "\r\nAICC sessionid: $sessionid"
                  . "\r\nAICC command: $command"
                  . "\r\nAICC aiccdata:\r\n$aiccdata";
@@ -192,7 +192,7 @@ if (!empty($command)) {
                         echo 'Max_Time_Allowed='.$userdata->max_time_allowed."\r\n";
                         echo 'Time_Limit_Action='.$userdata->time_limit_action."\r\n";
                     } else {
-                        throw new \moodle_exception('cannotfindsco', 'scorm');
+                        throw new \powereduc_exception('cannotfindsco', 'scorm');
                     }
                 }
             break;

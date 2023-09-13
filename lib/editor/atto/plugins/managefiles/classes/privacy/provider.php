@@ -24,7 +24,7 @@
 
 namespace atto_managefiles\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_managefiles implementing null_provider.

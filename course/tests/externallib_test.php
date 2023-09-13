@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -181,7 +181,7 @@ class externallib_test extends externallib_advanced_testcase {
         $category1data['idnumber'] = 'idnumbercat1';
         $category1data['name'] = 'Category 1 for PHPunit test';
         $category1data['description'] = 'Category 1 description';
-        $category1data['descriptionformat'] = FORMAT_MOODLE;
+        $category1data['descriptionformat'] = FORMAT_POWEREDUC;
         $category1  = self::getDataGenerator()->create_category($category1data);
         $generatedcats[$category1->id] = $category1;
         $category2  = self::getDataGenerator()->create_category(
@@ -221,7 +221,7 @@ class externallib_test extends externallib_advanced_testcase {
             $this->assertEquals($category['idnumber'], $generatedcat->idnumber);
             $this->assertEquals($category['name'], $generatedcat->name);
             // Description was converted to the HTML format.
-            $this->assertEquals($category['description'], format_text($generatedcat->description, FORMAT_MOODLE, array('para' => false)));
+            $this->assertEquals($category['description'], format_text($generatedcat->description, FORMAT_POWEREDUC, array('para' => false)));
             $this->assertEquals($category['descriptionformat'], FORMAT_HTML);
         }
 
@@ -316,7 +316,7 @@ class externallib_test extends externallib_advanced_testcase {
         $category1data['idnumber'] = 'idnumbercat1';
         $category1data['name'] = 'Category 1 for PHPunit test';
         $category1data['description'] = 'Category 1 description';
-        $category1data['descriptionformat'] = FORMAT_MOODLE;
+        $category1data['descriptionformat'] = FORMAT_POWEREDUC;
         $category1  = self::getDataGenerator()->create_category($category1data);
         $category2  = self::getDataGenerator()->create_category(
                 array('parent' => $category1->id));
@@ -435,7 +435,7 @@ class externallib_test extends externallib_advanced_testcase {
         $course2['categoryid'] = $category->id;
         $course2['idnumber'] = 'testcourse2idnumber';
         $course2['summary'] = 'Description for course 2';
-        $course2['summaryformat'] = FORMAT_MOODLE;
+        $course2['summaryformat'] = FORMAT_POWEREDUC;
         $course2['format'] = 'weeks';
         $course2['showgrades'] = 1;
         $course2['newsitems'] = 3;
@@ -700,7 +700,7 @@ class externallib_test extends externallib_advanced_testcase {
         $coursedata['fullname'] = '<b>Course 1 for PHPunit test</b>';
         $coursedata['shortname'] = '<b>Course 1 for PHPunit test</b>';
         $coursedata['summary'] = 'Course 1 description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course1  = self::getDataGenerator()->create_course($coursedata);
 
         $fieldcategory = self::getDataGenerator()->create_custom_field_category(
@@ -749,7 +749,7 @@ class externallib_test extends externallib_advanced_testcase {
             $this->assertEquals($course['displayname'], external_format_string(get_course_display_name_for_list($dbcourse),
                 $coursecontext->id));
             // Summary was converted to the HTML format.
-            $this->assertEquals($course['summary'], format_text($dbcourse->summary, FORMAT_MOODLE, array('para' => false)));
+            $this->assertEquals($course['summary'], format_text($dbcourse->summary, FORMAT_POWEREDUC, array('para' => false)));
             $this->assertEquals($course['summaryformat'], FORMAT_HTML);
             $this->assertEquals($course['shortname'], external_format_string($dbcourse->shortname, $coursecontext->id));
             $this->assertEquals($course['categoryid'], $dbcourse->category);
@@ -1880,11 +1880,11 @@ class externallib_test extends externallib_advanced_testcase {
                 $this->assertEquals($course1['fullname'], $courseinfo->fullname);
                 $this->assertEquals($course1['shortname'], $courseinfo->shortname);
                 $this->assertEquals($course1['categoryid'], $courseinfo->category);
-                $this->assertEquals(FORMAT_MOODLE, $courseinfo->summaryformat);
+                $this->assertEquals(FORMAT_POWEREDUC, $courseinfo->summaryformat);
                 $this->assertEquals('topics', $courseinfo->format);
                 $this->assertEquals(5, course_get_format($course['id'])->get_last_section_number());
                 $this->assertEquals(0, $courseinfo->newsitems);
-                $this->assertEquals(FORMAT_MOODLE, $courseinfo->summaryformat);
+                $this->assertEquals(FORMAT_POWEREDUC, $courseinfo->summaryformat);
                 $this->assertEquals(['test' => null], (array)$customfields);
             } else if ($course['id'] == $course3['id']) {
                 $this->assertEquals(['test' => $updatedcustomfieldvalue['value']], (array)$customfields);
@@ -2006,7 +2006,7 @@ class externallib_test extends externallib_advanced_testcase {
         $user = self::getDataGenerator()->create_user();
         $this->setUser($user);
         self::getDataGenerator()->enrol_user($user->id, $course1['id'], $roleid);
-        $course1['summaryformat'] = FORMAT_MOODLE;
+        $course1['summaryformat'] = FORMAT_POWEREDUC;
         $courses = array($course1);
         $updatedcoursewarnings = core_course_external::update_courses($courses);
         $updatedcoursewarnings = external_api::clean_returnvalue(core_course_external::update_courses_returns(),

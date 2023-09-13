@@ -24,7 +24,7 @@
 
 namespace tool_log\log;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class manager implements \core\log\manager {
     /** @var \core\log\reader[] $readers list of initialised log readers */

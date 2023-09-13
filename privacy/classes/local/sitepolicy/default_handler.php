@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Default (core) handler for site policies.
@@ -24,9 +24,9 @@
 
 namespace core_privacy\local\sitepolicy;
 
-use moodle_url;
+use powereduc_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Default (core) handler for site policies.
@@ -60,14 +60,14 @@ class default_handler extends handler {
     /**
      * Returns URL to redirect user to when user needs to agree to site policy
      *
-     * This is a regular interactive page for web users. It should have normal Moodle header/footers, it should
+     * This is a regular interactive page for web users. It should have normal PowerEduc header/footers, it should
      * allow user to view policies and accept them.
      *
      * @param bool $forguests
-     * @return moodle_url|null (returns null if site policy is not defined)
+     * @return powereduc_url|null (returns null if site policy is not defined)
      */
     public static function get_redirect_url($forguests = false) {
-        return static::is_defined($forguests) ? new moodle_url('/user/policy.php') : null;
+        return static::is_defined($forguests) ? new powereduc_url('/user/policy.php') : null;
     }
 
     /**
@@ -77,7 +77,7 @@ class default_handler extends handler {
      * the "Accept" button and call {@link self::accept()} on completion.
      *
      * @param bool $forguests
-     * @return moodle_url|null
+     * @return powereduc_url|null
      */
     public static function get_embed_url($forguests = false) {
         global $CFG;
@@ -87,9 +87,9 @@ class default_handler extends handler {
             return null;
         }
         if ($forguests && !empty($CFG->sitepolicyguest)) {
-            return new moodle_url($CFG->sitepolicyguest);
+            return new powereduc_url($CFG->sitepolicyguest);
         } else if (!$forguests && !empty($CFG->sitepolicy)) {
-            return new moodle_url($CFG->sitepolicy);
+            return new powereduc_url($CFG->sitepolicy);
         }
         return null;
     }

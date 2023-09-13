@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Helper functions for the quiz reports.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/lib.php');
 require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
@@ -293,7 +293,7 @@ function quiz_report_feedback_for_grade($grade, $quizid, $context) {
     $feedbacks = $feedbackcache[$quizid];
     $feedbackid = 0;
     $feedbacktext = '';
-    $feedbacktextformat = FORMAT_MOODLE;
+    $feedbacktextformat = FORMAT_POWEREDUC;
     foreach ($feedbacks as $feedback) {
         if ($feedback->mingrade <= $grade && $grade < $feedback->maxgrade) {
             $feedbackid = $feedback->id;
@@ -332,7 +332,7 @@ function quiz_report_scale_summarks_as_percentage($rawmark, $quiz, $round = true
         $mark = quiz_format_grade($quiz, $mark);
     }
 
-    return get_string('percents', 'moodle', $mark);
+    return get_string('percents', 'powereduc', $mark);
 }
 
 /**
@@ -411,7 +411,7 @@ function quiz_no_questions_message($quiz, $cm, $context) {
     $output = '';
     $output .= $OUTPUT->notification(get_string('noquestions', 'quiz'));
     if (has_capability('mod/quiz:manage', $context)) {
-        $output .= $OUTPUT->single_button(new moodle_url('/mod/quiz/edit.php',
+        $output .= $OUTPUT->single_button(new powereduc_url('/mod/quiz/edit.php',
         array('cmid' => $cm->id)), get_string('editquiz', 'quiz'), 'get');
     }
 
@@ -435,5 +435,5 @@ function quiz_report_should_show_grades($quiz, context $context) {
 
     return quiz_has_grades($quiz) &&
             ($reviewoptions->marks >= question_display_options::MARK_AND_MAX ||
-            has_capability('moodle/grade:viewhidden', $context));
+            has_capability('powereduc/grade:viewhidden', $context));
 }

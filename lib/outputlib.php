@@ -26,7 +26,7 @@
  * @category output
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/outputcomponents.php');
 require_once($CFG->libdir.'/outputactions.php');

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
  * The mod_choice answer updated event.
  *
  * @package    mod_choice
- * @copyright  2013 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2013 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_choice\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The mod_choice answer updated event class.
@@ -47,7 +47,7 @@ defined('MOODLE_INTERNAL') || die();
  * @deprecated since 3.2
  * @package    mod_choice
  * @since      Moodle 2.6
- * @copyright  2013 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2013 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class answer_updated extends \core\event\base {
@@ -90,10 +90,10 @@ class answer_updated extends \core\event\base {
     /**
      * Get URL related to the action
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
-        return new \moodle_url('/mod/choice/view.php', array('id' => $this->contextinstanceid));
+        return new \powereduc_url('/mod/choice/view.php', array('id' => $this->contextinstanceid));
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace mod_bigbluebuttonbn\task;
 use core\message\message;
 use core\task\adhoc_task;
 use mod_bigbluebuttonbn\instance;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 
 /**
@@ -184,7 +184,7 @@ abstract class send_notification extends adhoc_task {
             try {
                 \core_user::require_active_user($recipient, true, true);
                 cron_setup_user($recipient);
-            } catch (moodle_exception $e) {
+            } catch (powereduc_exception $e) {
                 // Skip sending.
                 continue;
             }

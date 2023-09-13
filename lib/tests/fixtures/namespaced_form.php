@@ -27,7 +27,7 @@
 
 namespace local_unittests\namespaced_form;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * exampleform class.

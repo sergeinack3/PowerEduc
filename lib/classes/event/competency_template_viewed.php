@@ -26,7 +26,7 @@ namespace core\event;
 use core\event\base;
 use core_competency\template;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Template viewed event class.

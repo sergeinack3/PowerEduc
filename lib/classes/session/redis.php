@@ -26,7 +26,7 @@ namespace core\session;
 
 use RedisException;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Redis based session handler.

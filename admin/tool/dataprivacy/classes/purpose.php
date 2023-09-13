@@ -25,7 +25,7 @@ namespace tool_dataprivacy;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/' . $CFG->admin . '/tool/dataprivacy/lib.php');
 
@@ -98,7 +98,7 @@ class purpose extends \core\persistent {
                 'default' => '',
             ),
             'descriptionformat' => array(
-                'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                'choices' => array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN),
                 'type' => PARAM_INT,
                 'default' => FORMAT_HTML
             ),

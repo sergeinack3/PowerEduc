@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -26,7 +26,7 @@ use context_system;
  *
  * @package     core_reportbuilder
  * @covers      \core_reportbuilder\external\custom_report_audience_cards_exporter
- * @copyright   2022 Paul Holden <paulh@moodle.com>
+ * @copyright   2022 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_report_audience_cards_exporter_test extends advanced_testcase {
@@ -80,7 +80,7 @@ class custom_report_audience_cards_exporter_test extends advanced_testcase {
 
         // This capability controls access to the all/manual users audiences.
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        assign_capability('moodle/user:viewalldetails', CAP_ALLOW, $userrole, context_system::instance());
+        assign_capability('powereduc/user:viewalldetails', CAP_ALLOW, $userrole, context_system::instance());
 
         $exporter = new custom_report_audience_cards_exporter(null);
         $export = $exporter->export($PAGE->get_renderer('core_reportbuilder'));
@@ -105,7 +105,7 @@ class custom_report_audience_cards_exporter_test extends advanced_testcase {
         $this->setUser($user);
 
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        assign_capability('moodle/cohort:view', CAP_ALLOW, $userrole, context_system::instance());
+        assign_capability('powereduc/cohort:view', CAP_ALLOW, $userrole, context_system::instance());
 
         $exporter = new custom_report_audience_cards_exporter(null);
         $export = $exporter->export($PAGE->get_renderer('core_reportbuilder'));

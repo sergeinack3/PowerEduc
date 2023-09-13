@@ -26,7 +26,7 @@ namespace gradereport_singleview\local\ui;
 
 use grade_item;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * UI element that generates a grade_item min/max range (text only).

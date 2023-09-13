@@ -104,7 +104,7 @@
 
 use core_admin\local\settings\linkable_settings_page;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /// Add libraries
 require_once($CFG->libdir.'/ddllib.php');
@@ -9698,7 +9698,7 @@ class admin_setting_enablemobileservice extends admin_setting_configcheckbox {
 
         require_once($CFG->dirroot . '/webservice/lib.php');
         $webservicemanager = new webservice();
-        $mobileservice = $webservicemanager->get_external_service_by_shortname(MOODLE_OFFICIAL_MOBILE_SERVICE);
+        $mobileservice = $webservicemanager->get_external_service_by_shortname(POWEREDUC_OFFICIAL_MOBILE_SERVICE);
         if ($mobileservice->enabled and $this->is_protocol_cap_allowed()) {
             return $result;
         } else {
@@ -9720,7 +9720,7 @@ class admin_setting_enablemobileservice extends admin_setting_configcheckbox {
             return '';
         }
 
-        $servicename = MOODLE_OFFICIAL_MOBILE_SERVICE;
+        $servicename = POWEREDUC_OFFICIAL_MOBILE_SERVICE;
 
         require_once($CFG->dirroot . '/webservice/lib.php');
         $webservicemanager = new webservice();
@@ -9732,7 +9732,7 @@ class admin_setting_enablemobileservice extends admin_setting_configcheckbox {
              set_config('enablewebservices', true);
 
              //enable mobile service
-             $mobileservice = $webservicemanager->get_external_service_by_shortname(MOODLE_OFFICIAL_MOBILE_SERVICE);
+             $mobileservice = $webservicemanager->get_external_service_by_shortname(POWEREDUC_OFFICIAL_MOBILE_SERVICE);
              $mobileservice->enabled = 1;
              $webservicemanager->update_external_service($mobileservice);
 
@@ -9752,7 +9752,7 @@ class admin_setting_enablemobileservice extends admin_setting_configcheckbox {
              $this->set_protocol_cap(true);
          } else {
              // Disable the mobile service.
-             $mobileservice = $webservicemanager->get_external_service_by_shortname(MOODLE_OFFICIAL_MOBILE_SERVICE);
+             $mobileservice = $webservicemanager->get_external_service_by_shortname(POWEREDUC_OFFICIAL_MOBILE_SERVICE);
              $mobileservice->enabled = 0;
              $webservicemanager->update_external_service($mobileservice);
          }

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Profile field API library file.
@@ -23,27 +23,27 @@
  */
 
 /**
- * Visible to anyone who has the moodle/site:viewuseridentity permission.
- * Editable by the profile owner if they have the moodle/user:editownprofile capability
- * or any user with the moodle/user:update capability.
+ * Visible to anyone who has the powereduc/site:viewuseridentity permission.
+ * Editable by the profile owner if they have the powereduc/user:editownprofile capability
+ * or any user with the powereduc/user:update capability.
  */
 define('PROFILE_VISIBLE_TEACHERS', '3');
 
 /**
  * Visible to anyone who can view the user.
- * Editable by the profile owner if they have the moodle/user:editownprofile capability
- * or any user with the moodle/user:update capability.
+ * Editable by the profile owner if they have the powereduc/user:editownprofile capability
+ * or any user with the powereduc/user:update capability.
  */
 define('PROFILE_VISIBLE_ALL', '2');
 /**
- * Visible to the profile owner or anyone with the moodle/user:viewalldetails capability.
- * Editable by the profile owner if they have the moodle/user:editownprofile capability
- * or any user with moodle/user:viewalldetails and moodle/user:update capabilities.
+ * Visible to the profile owner or anyone with the powereduc/user:viewalldetails capability.
+ * Editable by the profile owner if they have the powereduc/user:editownprofile capability
+ * or any user with powereduc/user:viewalldetails and powereduc/user:update capabilities.
  */
 define('PROFILE_VISIBLE_PRIVATE', '1');
 /**
- * Only visible to users with the moodle/user:viewalldetails capability.
- * Only editable by users with the moodle/user:viewalldetails and moodle/user:update capabilities.
+ * Only visible to users with the powereduc/user:viewalldetails capability.
+ * Only editable by users with the powereduc/user:viewalldetails and powereduc/user:update capabilities.
  */
 define('PROFILE_VISIBLE_NONE', '0');
 
@@ -92,7 +92,7 @@ class profile_field_base {
         global $CFG;
 
         if ($CFG->debugdeveloper) {
-            // In Moodle 3.4 the new argument $fielddata was added to the constructor. Make sure that
+            // In PowerEduc 3.4 the new argument $fielddata was added to the constructor. Make sure that
             // plugin constructor properly passes this argument.
             $backtrace = debug_backtrace();
             if (isset($backtrace[1]['class']) && $backtrace[1]['function'] === '__construct' &&
@@ -120,7 +120,7 @@ class profile_field_base {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function profile_field_base($fieldid=0, $userid=0) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -128,12 +128,12 @@ class profile_field_base {
     }
 
     /**
-     * Abstract method: Adds the profile field to the moodle form class
+     * Abstract method: Adds the profile field to the powereduc form class
      * @abstract The following methods must be overwritten by child classes
-     * @param MoodleQuickForm $mform instance of the moodleform class
+     * @param PowerEducQuickForm $mform instance of the powereducform class
      */
     public function edit_field_add($mform) {
-        throw new \moodle_exception('mustbeoveride', 'debug', '', 'edit_field_add');
+        throw new \powereduc_exception('mustbeoveride', 'debug', '', 'edit_field_add');
     }
 
     /**
@@ -143,12 +143,12 @@ class profile_field_base {
     public function display_data() {
         $options = new stdClass();
         $options->para = false;
-        return format_text($this->data, FORMAT_MOODLE, $options);
+        return format_text($this->data, FORMAT_POWEREDUC, $options);
     }
 
     /**
      * Print out the form field in the edit profile page
-     * @param MoodleQuickForm $mform instance of the moodleform class
+     * @param PowerEducQuickForm $mform instance of the powereducform class
      * @return bool
      */
     public function edit_field($mform) {
@@ -164,7 +164,7 @@ class profile_field_base {
 
     /**
      * Tweaks the edit form
-     * @param MoodleQuickForm $mform instance of the moodleform class
+     * @param PowerEducQuickForm $mform instance of the powereducform class
      * @return bool
      */
     public function edit_after_data($mform) {
@@ -255,7 +255,7 @@ class profile_field_base {
 
     /**
      * Sets the default data for the field in the form object
-     * @param MoodleQuickForm $mform instance of the moodleform class
+     * @param PowerEducQuickForm $mform instance of the powereducform class
      */
     public function edit_field_set_default($mform) {
         if (!empty($this->field->defaultdata)) {
@@ -266,7 +266,7 @@ class profile_field_base {
     /**
      * Sets the required flag for the field in the form object
      *
-     * @param MoodleQuickForm $mform instance of the moodleform class
+     * @param PowerEducQuickForm $mform instance of the powereducform class
      */
     public function edit_field_set_required($mform) {
         global $USER;
@@ -277,13 +277,13 @@ class profile_field_base {
 
     /**
      * HardFreeze the field if locked.
-     * @param MoodleQuickForm $mform instance of the moodleform class
+     * @param PowerEducQuickForm $mform instance of the powereducform class
      */
     public function edit_field_set_locked($mform) {
         if (!$mform->elementExists($this->inputname)) {
             return;
         }
-        if ($this->is_locked() and !has_capability('moodle/user:update', context_system::instance())) {
+        if ($this->is_locked() and !has_capability('powereduc/user:update', context_system::instance())) {
             $mform->hardFreeze($this->inputname);
             $mform->setConstant($this->inputname, $this->data);
         }
@@ -454,10 +454,10 @@ class profile_field_base {
                 } else if ($this->userid == $USER->id) {
                     return true;
                 } else if ($this->userid > 0) {
-                    return has_capability('moodle/user:viewalldetails', $context);
+                    return has_capability('powereduc/user:viewalldetails', $context);
                 } else {
                     $coursecontext = context_course::instance($COURSE->id);
-                    return has_capability('moodle/site:viewuseridentity', $coursecontext);
+                    return has_capability('powereduc/site:viewuseridentity', $coursecontext);
                 }
             case PROFILE_VISIBLE_ALL:
                 return true;
@@ -467,14 +467,14 @@ class profile_field_base {
                 } else if ($this->userid == $USER->id) {
                     return true;
                 } else {
-                    return has_capability('moodle/user:viewalldetails', $context);
+                    return has_capability('powereduc/user:viewalldetails', $context);
                 }
             default:
                 // PROFILE_VISIBLE_NONE, so let's check capabilities at system level.
                 if ($this->userid > 0) {
                     $context = context_system::instance();
                 }
-                return has_capability('moodle/user:viewalldetails', $context);
+                return has_capability('powereduc/user:viewalldetails', $context);
         }
     }
 
@@ -497,18 +497,18 @@ class profile_field_base {
 
         $systemcontext = context_system::instance();
 
-        if ($this->userid == $USER->id && has_capability('moodle/user:editownprofile', $systemcontext)) {
+        if ($this->userid == $USER->id && has_capability('powereduc/user:editownprofile', $systemcontext)) {
             return true;
         }
 
-        if (has_capability('moodle/user:update', $systemcontext)) {
+        if (has_capability('powereduc/user:update', $systemcontext)) {
             return true;
         }
 
         // Checking for mentors have capability to edit user's profile.
         if ($this->userid > 0) {
             $usercontext = context_user::instance($this->userid);
-            if ($this->userid != $USER->id && has_capability('moodle/user:editprofile', $usercontext, $USER->id)) {
+            if ($this->userid != $USER->id && has_capability('powereduc/user:editprofile', $usercontext, $USER->id)) {
                 return true;
             }
         }
@@ -566,7 +566,7 @@ class profile_field_base {
      * By default it return all the field settings.
      *
      * @return array all the settings
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_field_config_for_external() {
         return (array) $this->field;
@@ -577,7 +577,7 @@ class profile_field_base {
      * This will be used for validating the data submitted by a user.
      *
      * @return array the param type and null property
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_field_properties() {
         return array(PARAM_RAW, NULL_NOT_ALLOWED);
@@ -655,10 +655,10 @@ function profile_load_data(stdClass $user): void {
 /**
  * Print out the customisable categories and fields for a users profile
  *
- * @param MoodleQuickForm $mform instance of the moodleform class
+ * @param PowerEducQuickForm $mform instance of the powereducform class
  * @param int $userid id of user whose profile is being edited or 0 for the new user
  */
-function profile_definition(MoodleQuickForm $mform, int $userid = 0): void {
+function profile_definition(PowerEducQuickForm $mform, int $userid = 0): void {
     $categories = profile_get_user_fields_with_data_by_category($userid);
     foreach ($categories as $categoryid => $fields) {
         // Check first if *any* fields will be displayed.
@@ -684,10 +684,10 @@ function profile_definition(MoodleQuickForm $mform, int $userid = 0): void {
 
 /**
  * Adds profile fields to user edit forms.
- * @param MoodleQuickForm $mform
+ * @param PowerEducQuickForm $mform
  * @param int $userid
  */
-function profile_definition_after_data(MoodleQuickForm $mform, int $userid): void {
+function profile_definition_after_data(PowerEducQuickForm $mform, int $userid): void {
     $userid = ($userid < 0) ? 0 : (int)$userid;
 
     $fields = profile_get_user_fields_with_data($userid);
@@ -700,7 +700,7 @@ function profile_definition_after_data(MoodleQuickForm $mform, int $userid): voi
  * Validates profile data.
  * @param stdClass $usernew
  * @param array $files
- * @return array array of errors, same as in {@see moodleform::validation()}
+ * @return array array of errors, same as in {@see powereducform::validation()}
  */
 function profile_validation(stdClass $usernew, array $files): array {
     $err = array();
@@ -727,14 +727,14 @@ function profile_save_data(stdClass $usernew): void {
 /**
  * Display profile fields.
  *
- * @deprecated since Moodle 3.11 MDL-71051 - please do not use this function any more.
- * @todo MDL-71413 This will be deleted in Moodle 4.3.
+ * @deprecated since PowerEduc 3.11 MDL-71051 - please do not use this function any more.
+ * @todo MDL-71413 This will be deleted in PowerEduc 4.3.
  *
  * @param int $userid
  */
 function profile_display_fields($userid) {
     debugging('Function profile_display_fields() is deprecated because it is no longer used and will be '.
-        'removed in future versions of Moodle', DEBUG_DEVELOPER);
+        'removed in future versions of PowerEduc', DEBUG_DEVELOPER);
 
     $categories = profile_get_user_fields_with_data_by_category($userid);
     foreach ($categories as $categoryid => $fields) {
@@ -751,7 +751,7 @@ function profile_display_fields($userid) {
  * Retrieves a list of profile fields that must be displayed in the sign-up form.
  *
  * @return array list of profile fields info
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function profile_get_signup_fields(): array {
     $profilefields = array();
@@ -772,11 +772,11 @@ function profile_get_signup_fields(): array {
 }
 
 /**
- * Adds code snippet to a moodle form object for custom profile fields that
+ * Adds code snippet to a powereduc form object for custom profile fields that
  * should appear on the signup page
- * @param MoodleQuickForm $mform moodle form object
+ * @param PowerEducQuickForm $mform powereduc form object
  */
-function profile_signup_fields(MoodleQuickForm $mform): void {
+function profile_signup_fields(PowerEducQuickForm $mform): void {
 
     if ($fields = profile_get_signup_fields()) {
         foreach ($fields as $field) {
@@ -821,7 +821,7 @@ function profile_user_record(int $userid, bool $onlyinuserobject = true): stdCla
  *
  * @param bool $onlyinuserobject True if you only want the ones in $USER
  * @return array Array of field objects from database (indexed by id)
- * @since Moodle 2.7.1
+ * @since PowerEduc 2.7.1
  */
 function profile_get_custom_fields(bool $onlyinuserobject = false): array {
     $fieldobjects = profile_get_user_fields_with_data(0);
@@ -912,7 +912,7 @@ function profile_get_custom_field_data_by_shortname(string $shortname, bool $cas
  * @param stdClass  $user user  object
  * @param stdClass  $context  context object (course or user)
  * @param stdClass  $course course  object
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  */
 function profile_view($user, $context, $course = null) {
 

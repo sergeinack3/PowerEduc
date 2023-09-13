@@ -26,7 +26,7 @@ namespace core_admin\local\externalpage;
 
 use admin_externalpage;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("{$CFG->libdir}/adminlib.php");
 

@@ -1,31 +1,31 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the datetime profile field definition class.
  *
  * @package profilefield_datetime
- * @copyright 2010 Mark Nelson <markn@moodle.com>
+ * @copyright 2010 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 
 /**
  * Define datetime fields.
  *
- * @copyright 2010 Mark Nelson <markn@moodle.com>
+ * @copyright 2010 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 class profile_define_datetime extends profile_define_base {
@@ -33,7 +33,7 @@ class profile_define_datetime extends profile_define_base {
     /**
      * Define the setting for a datetime custom field.
      *
-     * @param moodleform $form the user form
+     * @param powereducform $form the user form
      */
     public function define_form_specific($form) {
         // Get the current calendar in use - see MDL-18375.
@@ -95,7 +95,7 @@ class profile_define_datetime extends profile_define_base {
     /**
      * Alter form based on submitted or existing data.
      *
-     * @param moodleform $mform
+     * @param powereducform $mform
      */
     public function define_after_data(&$mform) {
         global $DB;

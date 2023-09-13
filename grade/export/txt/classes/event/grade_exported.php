@@ -24,7 +24,7 @@
 
 namespace gradeexport_txt\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Grade export event class.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/lib/externallib.php');
@@ -25,7 +25,7 @@ require_once($CFG->dirroot . '/lib/externallib.php');
  * Contains tests for course related notifications.
  *
  * @package    core
- * @copyright  2021 Juan Leyva <juan@moodle.com>
+ * @copyright  2021 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class login_notifications_test extends \advanced_testcase {
@@ -170,14 +170,14 @@ class login_notifications_test extends \advanced_testcase {
         // Mock data for test.
         $USER->lastip = '1.2.3.4.6'; // Different ip that current.
 
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
         $token = external_generate_token_for_current_user($service);
         \core_useragent::instance(true, 'MoodleMobile'); // Force fake mobile app user agent.
 
         // Simulate we are using an new device.
         $fakedevice = (object) [
             'userid' => $USER->id,
-            'appid' => 'com.moodle.moodlemobile',
+            'appid' => 'com.powereduc.powereducmobile',
             'name' => 'occam',
             'model' => 'Nexus 4',
             'platform' => 'Android',
@@ -219,14 +219,14 @@ class login_notifications_test extends \advanced_testcase {
 
         // Mock data for test.
         $USER->lastip = '0.0.0.0';
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
         $token = external_generate_token_for_current_user($service);
         \core_useragent::instance(true, 'MoodleMobile'); // Force fake mobile app user agent.
 
         // Simulate we are using an new device.
         $fakedevice = (object) [
             'userid' => $USER->id,
-            'appid' => 'com.moodle.moodlemobile',
+            'appid' => 'com.powereduc.powereducmobile',
             'name' => 'occam',
             'model' => 'Nexus 4',
             'platform' => 'Android',
@@ -266,7 +266,7 @@ class login_notifications_test extends \advanced_testcase {
 
         // Mock data for test.
         $USER->lastip = '1.2.3.4.6';    // New ip.
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
         $token = external_generate_token_for_current_user($service);
         \core_useragent::instance(true, 'MoodleMobile'); // Force fake mobile app user agent.
 

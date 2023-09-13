@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>ناتوانرێت داتابەیس دروست بکرێت.</p>
 <p>داتابەیستی دیاری کراو بوونی نییەو بەکارهێنەری دراو مۆڵەتی دروست کردنی داتابەیسی نییە.</p>

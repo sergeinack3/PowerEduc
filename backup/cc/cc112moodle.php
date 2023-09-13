@@ -21,7 +21,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 require_once($CFG->dirroot . '/backup/cc/cc2moodle.php');
 require_once($CFG->dirroot . '/backup/cc/entities11.class.php');
@@ -71,22 +71,22 @@ class cc112moodle extends cc2moodle {
 
         $sheet_base = static::loadsheet(SHEET_BASE);
 
-        // MOODLE_BACKUP / INFO / DETAILS / MOD
+        // POWEREDUC_BACKUP / INFO / DETAILS / MOD
         $node_info_details_mod = $this->create_code_info_details_mod();
 
-        // MOODLE_BACKUP / BLOCKS / BLOCK
+        // POWEREDUC_BACKUP / BLOCKS / BLOCK
         $node_course_blocks_block = $this->create_node_course_blocks_block();
 
-        // MOODLE_BACKUP / COURSES / SECTIONS / SECTION
+        // POWEREDUC_BACKUP / COURSES / SECTIONS / SECTION
         $node_course_sections_section = $this->create_node_course_sections_section();
 
-        // MOODLE_BACKUP / COURSES / QUESTION_CATEGORIES
+        // POWEREDUC_BACKUP / COURSES / QUESTION_CATEGORIES
         $node_course_question_categories = $this->create_node_question_categories();
 
-        // MOODLE_BACKUP / COURSES / MODULES / MOD
+        // POWEREDUC_BACKUP / COURSES / MODULES / MOD
         $node_course_modules_mod = $this->create_node_course_modules_mod();
 
-        // MOODLE_BACKUP / COURSE / HEADER
+        // POWEREDUC_BACKUP / COURSE / HEADER
         $node_course_header = $this->create_node_course_header();
 
         // GENERAL INFO
@@ -142,7 +142,7 @@ class cc112moodle extends cc2moodle {
 
         if ($type == TYPE_UNKNOWN) {
             if ($cc_type == static::CC_TYPE_BASICLTI) {
-                $type = MOODLE_TYPE_LTI;
+                $type = POWEREDUC_TYPE_LTI;
             }
         }
 
@@ -163,15 +163,15 @@ class cc112moodle extends cc2moodle {
     protected function create_code_info_details_mod () {
         $result = parent::create_code_info_details_mod();
 
-        $count_blti = $this->count_instances(MOODLE_TYPE_LTI);
+        $count_blti = $this->count_instances(POWEREDUC_TYPE_LTI);
 
         $sheet_info_details_mod_instances_instance = static::loadsheet(SHEET_INFO_DETAILS_MOD_INSTANCE);
 
         $blti_mod = '';
 
         if ($count_blti > 0) {
-            $blti_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_blti, static::$instances['instances'][MOODLE_TYPE_LTI]);
-            $blti_mod = $blti_instance ? $this->create_mod_info_details_mod(MOODLE_TYPE_LTI, $blti_instance) : '';
+            $blti_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_blti, static::$instances['instances'][POWEREDUC_TYPE_LTI]);
+            $blti_mod = $blti_instance ? $this->create_mod_info_details_mod(POWEREDUC_TYPE_LTI, $blti_instance) : '';
         }
 
         return $result . $blti_mod;

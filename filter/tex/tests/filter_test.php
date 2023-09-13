@@ -26,7 +26,7 @@ namespace filter_tex;
 
 use filter_tex;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/filter/tex/filter.php');

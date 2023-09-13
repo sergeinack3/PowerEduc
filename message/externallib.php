@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 require_once($CFG->dirroot . "/message/lib.php");
@@ -53,7 +53,7 @@ class core_message_external extends external_api {
                     new external_single_structure(
                         array(
                             'text' => new external_value(PARAM_RAW, 'the text of the message'),
-                            'textformat' => new external_format_value('text', VALUE_DEFAULT, FORMAT_MOODLE),
+                            'textformat' => new external_format_value('text', VALUE_DEFAULT, FORMAT_POWEREDUC),
                         )
                     )
                 )
@@ -76,7 +76,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Ensure the current user is allowed to run this function.
@@ -92,7 +92,7 @@ class core_message_external extends external_api {
         foreach ($params['messages'] as $message) {
             // Check message length.
             if (strlen($message['text']) > \core_message\api::MESSAGE_MAX_LENGTH) {
-                throw new moodle_exception('errormessagetoolong', 'message');
+                throw new powereduc_exception('errormessagetoolong', 'message');
             }
         }
 
@@ -138,7 +138,7 @@ class core_message_external extends external_api {
                         array(
                             'touserid' => new external_value(PARAM_INT, 'id of the user to send the private message'),
                             'text' => new external_value(PARAM_RAW, 'the text of the message'),
-                            'textformat' => new external_format_value('text', VALUE_DEFAULT, FORMAT_MOODLE),
+                            'textformat' => new external_format_value('text', VALUE_DEFAULT, FORMAT_POWEREDUC),
                             'clientmsgid' => new external_value(PARAM_ALPHANUMEXT, 'your own client id for the message. If this id is provided, the fail message id will be returned to you', VALUE_OPTIONAL),
                         )
                     )
@@ -159,16 +159,16 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Ensure the current user is allowed to run this function
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:sendmessage', $context);
+        require_capability('powereduc/site:sendmessage', $context);
 
         // Ensure the current user is allowed to delete message for everyone.
-        $candeletemessagesforallusers = has_capability('moodle/site:deleteanymessage', $context);
+        $candeletemessagesforallusers = has_capability('powereduc/site:deleteanymessage', $context);
 
         $params = self::validate_parameters(self::send_instant_messages_parameters(), array('messages' => $messages));
 
@@ -227,7 +227,7 @@ class core_message_external extends external_api {
             } else {
                 // WARNINGS: for backward compatibility we return this errormessage.
                 //          We should have thrown exceptions as these errors prevent results to be returned.
-                // See http://docs.moodle.org/dev/Errors_handling_in_web_services#When_to_send_a_warning_on_the_server_side .
+                // See http://docs.powereduc.org/dev/Errors_handling_in_web_services#When_to_send_a_warning_on_the_server_side .
                 $resultmsg['msgid'] = -1;
                 if (!isset($errormessage)) { // Nobody has set a message error or thrown an exception, let's set it.
                     $errormessage = get_string('messageundeliveredbynotificationsettings', 'error');
@@ -317,7 +317,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         if (empty($userid)) {
@@ -331,7 +331,7 @@ class core_message_external extends external_api {
         $params = array('userids' => $userids, 'userid' => $userid);
         $params = self::validate_parameters(self::delete_contacts_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -381,7 +381,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -391,7 +391,7 @@ class core_message_external extends external_api {
         $params = ['userid' => $userid, 'conversationids' => $conversationids];
         $params = self::validate_parameters(self::mute_conversations_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -441,7 +441,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -451,7 +451,7 @@ class core_message_external extends external_api {
         $params = ['userid' => $userid, 'conversationids' => $conversationids];
         $params = self::validate_parameters(self::unmute_conversations_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -498,7 +498,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -508,7 +508,7 @@ class core_message_external extends external_api {
         $params = ['userid' => $userid, 'blockeduserid' => $blockeduserid];
         $params = self::validate_parameters(self::block_user_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -559,7 +559,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -569,7 +569,7 @@ class core_message_external extends external_api {
         $params = ['userid' => $userid, 'unblockeduserid' => $unblockeduserid];
         $params = self::validate_parameters(self::unblock_user_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -620,7 +620,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -634,7 +634,7 @@ class core_message_external extends external_api {
         ];
         $params = self::validate_parameters(self::get_contact_requests_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -678,7 +678,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -690,7 +690,7 @@ class core_message_external extends external_api {
         ];
         $params = self::validate_parameters(self::get_received_contact_requests_count_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -744,7 +744,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -761,14 +761,14 @@ class core_message_external extends external_api {
         ];
         $params = self::validate_parameters(self::get_conversation_members_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
 
         // The user needs to be a part of the conversation before querying who the members are.
         if (!\core_message\api::is_user_in_conversation($params['userid'], $params['conversationid'])) {
-            throw new moodle_exception('You are not a member of this conversation.');
+            throw new powereduc_exception('You are not a member of this conversation.');
         }
 
         return \core_message\api::get_conversation_members($params['userid'], $params['conversationid'], $params['includecontactrequests'],
@@ -811,7 +811,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -821,7 +821,7 @@ class core_message_external extends external_api {
         $params = ['userid' => $userid, 'requesteduserid' => $requesteduserid];
         $params = self::validate_parameters(self::create_contact_request_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['userid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -897,7 +897,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -907,7 +907,7 @@ class core_message_external extends external_api {
         $params = ['userid' => $userid, 'requesteduserid' => $requesteduserid];
         $params = self::validate_parameters(self::confirm_contact_request_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['requesteduserid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -951,7 +951,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate context.
@@ -961,7 +961,7 @@ class core_message_external extends external_api {
         $params = ['userid' => $userid, 'requesteduserid' => $requesteduserid];
         $params = self::validate_parameters(self::decline_contact_request_parameters(), $params);
 
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $params['requesteduserid']) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -1133,7 +1133,7 @@ class core_message_external extends external_api {
      * @param int $limitfrom
      * @param int $limitnum
      * @return array
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.6
      */
     public static function message_search_users($userid, $search, $limitfrom = 0, $limitnum = 0) {
@@ -1150,8 +1150,8 @@ class core_message_external extends external_api {
         $params = self::validate_parameters(self::message_search_users_parameters(), $params);
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         list($contacts, $noncontacts) = \core_message\api::message_search_users(
@@ -1207,7 +1207,7 @@ class core_message_external extends external_api {
      * @param int $limitfrom
      * @param int $limitnum
      * @return stdClass
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.2
      */
     public static function data_for_messagearea_search_messages($userid, $search, $limitfrom = 0, $limitnum = 0) {
@@ -1215,7 +1215,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $systemcontext = context_system::instance();
@@ -1230,8 +1230,8 @@ class core_message_external extends external_api {
         $params = self::validate_parameters(self::data_for_messagearea_search_messages_parameters(), $params);
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         $messages = \core_message\api::search_messages(
@@ -1324,7 +1324,7 @@ class core_message_external extends external_api {
      * @param bool $mergeself whether to include self-conversations (true) or ONLY private conversations (false)
      *             when private conversations are requested.
      * @return stdClass
-     * @throws \moodle_exception if the messaging feature is disabled on the site.
+     * @throws \powereduc_exception if the messaging feature is disabled on the site.
      * @since 3.2
      */
     public static function get_conversations($userid, $limitfrom = 0, $limitnum = 0, int $type = null, bool $favourites = null,
@@ -1333,7 +1333,7 @@ class core_message_external extends external_api {
 
         // All the standard BL checks.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $params = array(
@@ -1349,8 +1349,8 @@ class core_message_external extends external_api {
         $systemcontext = context_system::instance();
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         $conversations = \core_message\api::get_conversations(
@@ -1415,7 +1415,7 @@ class core_message_external extends external_api {
      * @param int $messageoffset Offset the messages
      * @param bool $newestmessagesfirst Order messages by newest first
      * @return stdClass
-     * @throws \moodle_exception if the messaging feature is disabled on the site.
+     * @throws \powereduc_exception if the messaging feature is disabled on the site.
      */
     public static function get_conversation(
         int $userid,
@@ -1432,7 +1432,7 @@ class core_message_external extends external_api {
 
         // All the standard BL checks.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $params = [
@@ -1468,7 +1468,7 @@ class core_message_external extends external_api {
         } else {
             // We have to throw an exception here because the external functions annoyingly
             // don't accept null to be returned for a single structure.
-            throw new \moodle_exception('errorconversationdoesnotexist', 'message');
+            throw new \powereduc_exception('errorconversationdoesnotexist', 'message');
         }
     }
 
@@ -1515,7 +1515,7 @@ class core_message_external extends external_api {
      * @param int $messageoffset Offset the messages
      * @param bool $newestmessagesfirst Order messages by newest first
      * @return stdClass
-     * @throws \moodle_exception if the messaging feature is disabled on the site.
+     * @throws \powereduc_exception if the messaging feature is disabled on the site.
      */
     public static function get_conversation_between_users(
         int $userid,
@@ -1532,7 +1532,7 @@ class core_message_external extends external_api {
 
         // All the standard BL checks.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $params = [
@@ -1573,7 +1573,7 @@ class core_message_external extends external_api {
         } else {
             // We have to throw an exception here because the external functions annoyingly
             // don't accept null to be returned for a single structure.
-            throw new \moodle_exception('errorconversationdoesnotexist', 'message');
+            throw new \powereduc_exception('errorconversationdoesnotexist', 'message');
         }
     }
 
@@ -1610,7 +1610,7 @@ class core_message_external extends external_api {
      * @param int $messageoffset Offset the messages
      * @param bool $newestmessagesfirst Order messages by newest first
      * @return stdClass
-     * @throws \moodle_exception if the messaging feature is disabled on the site.
+     * @throws \powereduc_exception if the messaging feature is disabled on the site.
      * @since Moodle 3.7
      */
     public static function get_self_conversation(
@@ -1623,7 +1623,7 @@ class core_message_external extends external_api {
 
         // All the standard BL checks.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $params = [
@@ -1658,7 +1658,7 @@ class core_message_external extends external_api {
         } else {
             // We have to throw an exception here because the external functions annoyingly
             // don't accept null to be returned for a single structure.
-            throw new \moodle_exception('errorconversationdoesnotexist', 'message');
+            throw new \powereduc_exception('errorconversationdoesnotexist', 'message');
         }
     }
 
@@ -1701,7 +1701,7 @@ class core_message_external extends external_api {
      * @param  bool $newest True for getting first newest messages, false otherwise.
      * @param  int  $timefrom The time from the conversation messages to get.
      * @return array The messages and members who have sent some of these messages.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.6
      */
     public static function get_conversation_messages(int $currentuserid, int $convid, int $limitfrom = 0, int $limitnum = 0,
@@ -1710,7 +1710,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $systemcontext = context_system::instance();
@@ -1726,13 +1726,13 @@ class core_message_external extends external_api {
         $params = self::validate_parameters(self::get_conversation_messages_parameters(), $params);
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['currentuserid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['currentuserid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         // Check that the user belongs to the conversation.
         if (!\core_message\api::is_user_in_conversation($params['currentuserid'], $params['convid'])) {
-            throw new moodle_exception('User is not part of conversation.');
+            throw new powereduc_exception('User is not part of conversation.');
         }
 
         $sort = $newest ? 'timecreated DESC' : 'timecreated ASC';
@@ -1806,14 +1806,14 @@ class core_message_external extends external_api {
      * @param int $limitfrom
      * @param int $limitnum
      * @return array
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_user_contacts(int $userid, int $limitfrom = 0, int $limitnum = 0) {
         global $CFG, $USER;
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $systemcontext = context_system::instance();
@@ -1826,8 +1826,8 @@ class core_message_external extends external_api {
         $params = self::validate_parameters(self::get_user_contacts_parameters(), $params);
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         return \core_message\api::get_user_contacts($params['userid'], $params['limitfrom'], $params['limitnum']);
@@ -1874,7 +1874,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         require_once($CFG->libdir . '/enrollib.php');
@@ -1884,7 +1884,7 @@ class core_message_external extends external_api {
 
         // Extra validation, we do not allow empty queries.
         if ($params['searchtext'] === '') {
-            throw new moodle_exception('querystringcannotbeempty');
+            throw new powereduc_exception('querystringcannotbeempty');
         }
 
         $courseids = array();
@@ -1979,7 +1979,7 @@ class core_message_external extends external_api {
      *
      * @since  2.8
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @param  int      $useridto       the user id who received the message
      * @param  int      $useridfrom     the user id who send the message. -10 or -20 for no-reply or support user
      * @param  string   $type           type of message to return, expected values: notifications, conversations and both
@@ -2028,7 +2028,7 @@ class core_message_external extends external_api {
         if (empty($CFG->messaging)) {
             // If we are retreiving only conversations, and messaging is disabled, throw an exception.
             if ($type == "conversations") {
-                throw new moodle_exception('disabled', 'message');
+                throw new powereduc_exception('disabled', 'message');
             }
             if ($type == "both") {
                 $warning = array();
@@ -2045,7 +2045,7 @@ class core_message_external extends external_api {
             if (core_user::is_real_user($useridto)) {
                 $userto = core_user::get_user($useridto, '*', MUST_EXIST);
             } else {
-                throw new moodle_exception('invaliduser');
+                throw new powereduc_exception('invaliduser');
             }
         }
 
@@ -2056,8 +2056,8 @@ class core_message_external extends external_api {
 
         // Check if the current user is the sender/receiver or just a privileged user.
         if ($useridto != $USER->id and $useridfrom != $USER->id and
-             !has_capability('moodle/site:readallmessages', $context)) {
-            throw new moodle_exception('accessdenied', 'admin');
+             !has_capability('powereduc/site:readallmessages', $context)) {
+            throw new powereduc_exception('accessdenied', 'admin');
         }
 
         // Which type of messages to retrieve.
@@ -2070,7 +2070,7 @@ class core_message_external extends external_api {
         $sort = "mr.timecreated $orderdirection";
 
         if ($messages = message_get_messages($useridto, $useridfrom, $notifications, $read, $sort, $limitfrom, $limitnum)) {
-            $canviewfullname = has_capability('moodle/site:viewfullnames', $context);
+            $canviewfullname = has_capability('powereduc/site:viewfullnames', $context);
 
             // In some cases, we don't need to get the to/from user objects from the sql query.
             $userfromfullname = '';
@@ -2215,7 +2215,7 @@ class core_message_external extends external_api {
      *
      * @since  3.2
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @param  int      $useridto       the user id who received the message
      * @param  int      $useridfrom     the user id who send the message. -10 or -20 for no-reply or support user
      * @param  int      $timecreatedto  mark message created before this time as read, 0 for all messages
@@ -2244,7 +2244,7 @@ class core_message_external extends external_api {
             if (core_user::is_real_user($useridto)) {
                 $userto = core_user::get_user($useridto, '*', MUST_EXIST);
             } else {
-                throw new moodle_exception('invaliduser');
+                throw new powereduc_exception('invaliduser');
             }
         }
 
@@ -2256,8 +2256,8 @@ class core_message_external extends external_api {
         // Check if the current user is the sender/receiver or just a privileged user.
         if ($useridto != $USER->id and $useridfrom != $USER->id and
             // The deleteanymessage cap seems more reasonable here than readallmessages.
-             !has_capability('moodle/site:deleteanymessage', $context)) {
-            throw new moodle_exception('accessdenied', 'admin');
+             !has_capability('powereduc/site:deleteanymessage', $context)) {
+            throw new powereduc_exception('accessdenied', 'admin');
         }
 
         \core_message\api::mark_all_notifications_as_read($useridto, $useridfrom, $timecreatedto);
@@ -2294,7 +2294,7 @@ class core_message_external extends external_api {
      *
      * @since  3.2
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @param  int      $useridto       the user id who received the message
      * @return external_description
      */
@@ -2303,7 +2303,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $params = self::validate_parameters(
@@ -2320,15 +2320,15 @@ class core_message_external extends external_api {
             if (core_user::is_real_user($useridto)) {
                 $userto = core_user::get_user($useridto, '*', MUST_EXIST);
             } else {
-                throw new moodle_exception('invaliduser');
+                throw new powereduc_exception('invaliduser');
             }
         } else {
             $useridto = $USER->id;
         }
 
         // Check if the current user is the receiver or just a privileged user.
-        if ($useridto != $USER->id and !has_capability('moodle/site:readallmessages', $context)) {
-            throw new moodle_exception('accessdenied', 'admin');
+        if ($useridto != $USER->id and !has_capability('powereduc/site:readallmessages', $context)) {
+            throw new powereduc_exception('accessdenied', 'admin');
         }
 
         return \core_message\api::count_unread_conversations($userto);
@@ -2386,14 +2386,14 @@ class core_message_external extends external_api {
 
         // Check if private messaging between users is allowed.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $user = core_user::get_user($userid, '*', MUST_EXIST);
         core_user::require_active_user($user);
 
         // Check if we have permissions for retrieve the information.
-        $capability = 'moodle/site:manageallmessaging';
+        $capability = 'powereduc/site:manageallmessaging';
         if (($USER->id != $userid) && !has_capability($capability, $context)) {
             throw new required_capability_exception($context, $capability, 'nopermissions', '');
         }
@@ -2469,7 +2469,7 @@ class core_message_external extends external_api {
      * @param  int $timeread timestamp for when the message should be marked read
      * @return external_description
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 2.9
      */
     public static function mark_message_read($messageid, $timeread) {
@@ -2477,7 +2477,7 @@ class core_message_external extends external_api {
 
         // Check if private messaging between users is allowed.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Warnings array, it can be empty at the end but is mandatory.
@@ -2569,7 +2569,7 @@ class core_message_external extends external_api {
      * @param int $timeread timestamp for when the notification should be marked read
      * @return external_description
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function mark_notification_read($notificationid, $timeread) {
         global $CFG, $DB, $USER;
@@ -2653,7 +2653,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $params = array(
@@ -2671,7 +2671,7 @@ class core_message_external extends external_api {
         if (\core_message\api::can_mark_all_messages_as_read($params['userid'], $params['conversationid'])) {
             \core_message\api::mark_all_messages_as_read($params['userid'], $params['conversationid']);
         } else {
-            throw new moodle_exception('accessdenied', 'admin');
+            throw new powereduc_exception('accessdenied', 'admin');
         }
     }
 
@@ -2709,7 +2709,7 @@ class core_message_external extends external_api {
      * @param int $userid The user id of who we want to delete the conversation for
      * @param int[] $conversationids The ids of the conversations
      * @return array
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.6
      */
     public static function delete_conversations_by_id($userid, array $conversationids) {
@@ -2717,7 +2717,7 @@ class core_message_external extends external_api {
 
         // Check if private messaging between users is allowed.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate params.
@@ -2738,7 +2738,7 @@ class core_message_external extends external_api {
             if (\core_message\api::can_delete_conversation($user->id, $conversationid)) {
                 \core_message\api::delete_conversation_by_id($user->id, $conversationid);
             } else {
-                throw new moodle_exception("You do not have permission to delete the conversation '$conversationid'");
+                throw new powereduc_exception("You do not have permission to delete the conversation '$conversationid'");
             }
         }
 
@@ -2778,7 +2778,7 @@ class core_message_external extends external_api {
      * @param  int $userid the user id of who we want to delete the message for
      * @param  bool $read if is a message read (default to true)
      * @return external_description
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.1
      */
     public static function delete_message($messageid, $userid, $read = true) {
@@ -2786,7 +2786,7 @@ class core_message_external extends external_api {
 
         // Check if private messaging between users is allowed.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Warnings array, it can be empty at the end but is mandatory.
@@ -2810,7 +2810,7 @@ class core_message_external extends external_api {
         if (\core_message\api::can_delete_message($user->id, $params['messageid'])) {
             $status = \core_message\api::delete_message($user->id, $params['messageid']);
         } else {
-            throw new moodle_exception('You do not have permission to delete this message');
+            throw new powereduc_exception('You do not have permission to delete this message');
         }
 
         $results = array(
@@ -2867,7 +2867,7 @@ class core_message_external extends external_api {
      * @param  string $name the name of the processor
      * @param  array $formvalues the form values
      * @return external_description
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.2
      */
     public static function message_processor_config_form($userid, $name, $formvalues) {
@@ -2932,7 +2932,7 @@ class core_message_external extends external_api {
      * @param int $userid
      * @param string $name the name of the processor
      * @return external_description
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.2
      */
     public static function get_message_processor($userid, $name) {
@@ -2940,7 +2940,7 @@ class core_message_external extends external_api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         $params = self::validate_parameters(
@@ -2987,7 +2987,7 @@ class core_message_external extends external_api {
      *
      * @param  int $userid the user id requesting the preferences
      * @return stdClass full user object
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since  Moodle 3.2
      */
     protected static function validate_preferences_permissions($userid) {
@@ -3006,11 +3006,11 @@ class core_message_external extends external_api {
         // Check access control.
         if ($user->id == $USER->id) {
             // Editing own message profile.
-            require_capability('moodle/user:editownmessageprofile', $systemcontext);
+            require_capability('powereduc/user:editownmessageprofile', $systemcontext);
         } else {
             // Teachers, parents, etc.
             $personalcontext = context_user::instance($user->id);
-            require_capability('moodle/user:editmessageprofile', $personalcontext);
+            require_capability('powereduc/user:editmessageprofile', $personalcontext);
         }
         return $user;
     }
@@ -3111,7 +3111,7 @@ class core_message_external extends external_api {
      *
      * @param int $userid id of the user, 0 for current user
      * @return external_description
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.2
      */
     public static function get_user_notification_preferences($userid = 0) {
@@ -3173,7 +3173,7 @@ class core_message_external extends external_api {
      *
      * @param int $userid id of the user, 0 for current user
      * @return external_description
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.2
      */
     public static function get_user_message_preferences($userid = 0) {
@@ -3198,7 +3198,7 @@ class core_message_external extends external_api {
         });
 
         $providers = array_filter(message_get_providers_for_user($user->id), function($provider) {
-            return $provider->component === 'moodle';
+            return $provider->component === 'powereduc';
         });
         $preferences = \core_message\api::get_all_message_preferences($readyprocessors, $providers, $user);
         $notificationlistoutput = new \core_message\output\preferences\message_notification_list($readyprocessors,
@@ -3256,14 +3256,14 @@ class core_message_external extends external_api {
      * @param int $userid the id of the user, or 0 for the current user.
      * @param array $conversationids the list of conversations ids to favourite.
      * @return array
-     * @throws moodle_exception if messaging is disabled or if the user cannot perform the action.
+     * @throws powereduc_exception if messaging is disabled or if the user cannot perform the action.
      */
     public static function set_favourite_conversations(int $userid, array $conversationids) {
         global $CFG, $USER;
 
         // All the business logic checks that really shouldn't be in here.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
         $params = [
             'userid' => $userid,
@@ -3273,8 +3273,8 @@ class core_message_external extends external_api {
         $systemcontext = context_system::instance();
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         foreach ($params['conversations'] as $conversationid) {
@@ -3315,14 +3315,14 @@ class core_message_external extends external_api {
      * @param int $userid the id of the user, or 0 for the current user.
      * @param array $conversationids the list of conversations ids unset as favourites.
      * @return array
-     * @throws moodle_exception if messaging is disabled or if the user cannot perform the action.
+     * @throws powereduc_exception if messaging is disabled or if the user cannot perform the action.
      */
     public static function unset_favourite_conversations(int $userid, array $conversationids) {
         global $CFG, $USER;
 
         // All the business logic checks that really shouldn't be in here.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
         $params = [
             'userid' => $userid,
@@ -3332,8 +3332,8 @@ class core_message_external extends external_api {
         $systemcontext = context_system::instance();
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         foreach ($params['conversations'] as $conversationid) {
@@ -3379,7 +3379,7 @@ class core_message_external extends external_api {
      * @param int $referenceuserid the id of the user which check contact and blocked status.
      * @param array $userids
      * @return array the array of objects containing member info.
-     * @throws moodle_exception if messaging is disabled or if the user cannot perform the action.
+     * @throws powereduc_exception if messaging is disabled or if the user cannot perform the action.
      */
     public static function get_member_info(
         int $referenceuserid,
@@ -3391,7 +3391,7 @@ class core_message_external extends external_api {
 
         // All the business logic checks that really shouldn't be in here.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
         $params = [
             'referenceuserid' => $referenceuserid,
@@ -3403,8 +3403,8 @@ class core_message_external extends external_api {
         $systemcontext = context_system::instance();
         self::validate_context($systemcontext);
 
-        if (($USER->id != $referenceuserid) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $referenceuserid) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         return \core_message\helper::get_member_info(
@@ -3453,14 +3453,14 @@ class core_message_external extends external_api {
      *
      * @param int $userid the id of the user whose counts we are fetching.
      * @return array the array of conversation counts, indexed by type.
-     * @throws moodle_exception if the current user cannot perform this action.
+     * @throws powereduc_exception if the current user cannot perform this action.
      */
     public static function get_conversation_counts(int $userid) {
         global $CFG, $USER;
 
         // All the business logic checks that really shouldn't be in here.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         if (empty($userid)) {
@@ -3473,8 +3473,8 @@ class core_message_external extends external_api {
         $systemcontext = context_system::instance();
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         return \core_message\api::get_conversation_counts($params['userid']);
@@ -3530,14 +3530,14 @@ class core_message_external extends external_api {
      *
      * @param int $userid the id of the user whose counts we are fetching.
      * @return array the array of unread conversation counts, indexed by type.
-     * @throws moodle_exception if the current user cannot perform this action.
+     * @throws powereduc_exception if the current user cannot perform this action.
      */
     public static function get_unread_conversation_counts(int $userid) {
         global $CFG, $USER;
 
         // All the business logic checks that really shouldn't be in here.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         if (empty($userid)) {
@@ -3550,8 +3550,8 @@ class core_message_external extends external_api {
         $systemcontext = context_system::instance();
         self::validate_context($systemcontext);
 
-        if (($USER->id != $params['userid']) && !has_capability('moodle/site:readallmessages', $systemcontext)) {
-            throw new moodle_exception('You do not have permission to perform this action.');
+        if (($USER->id != $params['userid']) && !has_capability('powereduc/site:readallmessages', $systemcontext)) {
+            throw new powereduc_exception('You do not have permission to perform this action.');
         }
 
         return \core_message\api::get_unread_conversation_counts($params['userid']);
@@ -3600,7 +3600,7 @@ class core_message_external extends external_api {
      * @param  int $messageid the message id
      * @param  int $userid the user id of who we want to delete the message for all users, is no longer used.
      * @return external_description
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since 3.7
      */
     public static function delete_message_for_all_users(int $messageid, int $userid) {
@@ -3608,7 +3608,7 @@ class core_message_external extends external_api {
 
         // Check if private messaging between users is allowed.
         if (empty($CFG->messaging)) {
-            throw new moodle_exception('disabled', 'message');
+            throw new powereduc_exception('disabled', 'message');
         }
 
         // Validate params.
@@ -3628,7 +3628,7 @@ class core_message_external extends external_api {
         if (core_message\api::can_delete_message_for_all_users($USER->id, $params['messageid'])) {
             \core_message\api::delete_message_for_all_users($params['messageid']);
         } else {
-            throw new moodle_exception('You do not have permission to delete this message for everyone.');
+            throw new powereduc_exception('You do not have permission to delete this message for everyone.');
         }
 
         return [];

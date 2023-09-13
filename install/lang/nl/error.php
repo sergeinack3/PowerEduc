@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Kan databank niet maken.</p>
 <p>De opgegeven databank bestaat niet en de opgegeven gebruiker heeft onvoldoende rechten om de databank te maken.</p>

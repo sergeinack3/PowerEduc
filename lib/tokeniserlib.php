@@ -13,9 +13,9 @@
 // Modifications:
 //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment
-//          http://moodle.com
+//          http://powereduc.com
 //
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,11 +41,11 @@
  * (see function definition for more info)
  *
  * Major Contributors
- *  - Martin Dougiamas  {@link http://moodle.com}
+ *  - Martin Dougiamas  {@link http://powereduc.com}
  *  - Eloy Lafuente (stronk7) {@link http://contiento.com}
  *  - Antonio Vicent          {@link http://ludens.es}
  *
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright (C) 2001-3001 Eloy Lafuente (stronk7) {@link http://contiento.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

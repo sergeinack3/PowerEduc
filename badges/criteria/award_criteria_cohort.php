@@ -24,7 +24,7 @@
  * @author     Eugene Venter <eugene@catalyst.net.nz>
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/cohort/lib.php');
 

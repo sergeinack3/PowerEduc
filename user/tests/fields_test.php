@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_user;
 
@@ -105,21 +105,21 @@ class fields_test extends \advanced_testcase {
         // Give the student the basic identity fields permission (also makes them count as 'teacher'
         // for the teacher-restricted field).
         $roleid = $DB->get_field('role', 'id', ['shortname' => 'student']);
-        role_change_permission($roleid, $coursecontext, 'moodle/site:viewuseridentity', CAP_ALLOW);
+        role_change_permission($roleid, $coursecontext, 'powereduc/site:viewuseridentity', CAP_ALLOW);
         $this->assertEquals(['department', 'profile_field_a', 'profile_field_d'],
                 fields::get_identity_fields($coursecontext));
         $this->assertEquals(['department'],
                 fields::get_identity_fields($coursecontext, false));
 
         // Give them permission to view hidden user fields.
-        role_change_permission($roleid, $coursecontext, 'moodle/course:viewhiddenuserfields', CAP_ALLOW);
+        role_change_permission($roleid, $coursecontext, 'powereduc/course:viewhiddenuserfields', CAP_ALLOW);
         $this->assertEquals(['email', 'department', 'profile_field_a', 'profile_field_d'],
                 fields::get_identity_fields($coursecontext));
         $this->assertEquals(['email', 'department'],
                 fields::get_identity_fields($coursecontext, false));
 
         // Also give them permission to view all profile fields.
-        role_change_permission($roleid, $coursecontext, 'moodle/user:viewalldetails', CAP_ALLOW);
+        role_change_permission($roleid, $coursecontext, 'powereduc/user:viewalldetails', CAP_ALLOW);
         $this->assertEquals(['email', 'department', 'profile_field_a', 'profile_field_b',
                 'profile_field_c', 'profile_field_d'],
                 fields::get_identity_fields($coursecontext));
@@ -131,21 +131,21 @@ class fields_test extends \advanced_testcase {
         $this->assertEquals([], fields::get_identity_fields($usercontext));
 
         // Give them basic permission.
-        role_change_permission($roleid, $usercontext, 'moodle/site:viewuseridentity', CAP_ALLOW);
+        role_change_permission($roleid, $usercontext, 'powereduc/site:viewuseridentity', CAP_ALLOW);
         $this->assertEquals(['department', 'profile_field_a', 'profile_field_d'],
                 fields::get_identity_fields($usercontext));
         $this->assertEquals(['department'],
                 fields::get_identity_fields($usercontext, false));
 
         // Give them the hidden user fields permission (it's a different one).
-        role_change_permission($roleid, $usercontext, 'moodle/user:viewhiddendetails', CAP_ALLOW);
+        role_change_permission($roleid, $usercontext, 'powereduc/user:viewhiddendetails', CAP_ALLOW);
         $this->assertEquals(['email', 'department', 'profile_field_a', 'profile_field_d'],
                 fields::get_identity_fields($usercontext));
         $this->assertEquals(['email', 'department'],
                 fields::get_identity_fields($usercontext, false));
 
         // Also give them permission to view all profile fields.
-        role_change_permission($roleid, $usercontext, 'moodle/user:viewalldetails', CAP_ALLOW);
+        role_change_permission($roleid, $usercontext, 'powereduc/user:viewalldetails', CAP_ALLOW);
         $this->assertEquals(['email', 'department', 'profile_field_a', 'profile_field_b',
                 'profile_field_c', 'profile_field_d'],
                 fields::get_identity_fields($usercontext));

@@ -1,34 +1,34 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 //
-// This file is part of BasicLTI4Moodle
+// This file is part of BasicLTI4PowerEduc
 //
-// BasicLTI4Moodle is an IMS BasicLTI (Basic Learning Tools for Interoperability)
-// consumer for Moodle 1.9 and Moodle 2.0. BasicLTI is a IMS Standard that allows web
+// BasicLTI4PowerEduc is an IMS BasicLTI (Basic Learning Tools for Interoperability)
+// consumer for PowerEduc 1.9 and PowerEduc 2.0. BasicLTI is a IMS Standard that allows web
 // based learning tools to be easily integrated in LMS as native ones. The IMS BasicLTI
 // specification is part of the IMS standard Common Cartridge 1.1 Sakai and other main LMS
 // are already supporting or going to support BasicLTI. This project Implements the consumer
-// for Moodle. Moodle is a Free Open source Learning Management System by Martin Dougiamas.
-// BasicLTI4Moodle is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
+// for PowerEduc. PowerEduc is a Free Open source Learning Management System by Martin Dougiamas.
+// BasicLTI4PowerEduc is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
 // at the GESSI research group at UPC.
-// SimpleLTI consumer for Moodle is an implementation of the early specification of LTI
+// SimpleLTI consumer for PowerEduc is an implementation of the early specification of LTI
 // by Charles Severance (Dr Chuck) htp://dr-chuck.com , developed by Jordi Piguillem in a
 // Google Summer of Code 2008 project co-mentored by Charles Severance and Marc Alier.
 //
-// BasicLTI4Moodle is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
+// BasicLTI4PowerEduc is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
 // of the Universitat Politecnica de Catalunya http://www.upc.edu
 // Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier @ upc.edu.
 
@@ -46,7 +46,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $string['accept'] = 'Accept';
 $string['accepted'] = 'Accepted';
@@ -54,11 +54,11 @@ $string['accept_grades'] = 'Accept grades from the tool';
 $string['accept_grades_admin'] = 'Accept grades from the tool';
 $string['accept_grades_admin_help'] = 'Specify whether the tool provider can add, update, read, and delete grades associated with instances of this tool.
 
-Some tool providers support reporting grades back to Moodle based on actions taken within the tool, creating a more integrated
+Some tool providers support reporting grades back to PowerEduc based on actions taken within the tool, creating a more integrated
 experience.';
 $string['accept_grades_help'] = 'Specify whether the tool provider can add, update, read, and delete grades associated only with this external tool instance.
 
-Some tool providers support reporting grades back to Moodle based on actions taken within the tool, creating a more integrated experience.
+Some tool providers support reporting grades back to PowerEduc based on actions taken within the tool, creating a more integrated experience.
 
 Note that this setting may be overridden in the tool configuration.';
 $string['action'] = 'Action';
@@ -72,7 +72,7 @@ $string['addnewapp'] = 'Enable external application';
 $string['addserver'] = 'Add new trusted server';
 $string['addtype'] = 'Add preconfigured tool';
 $string['allow'] = 'Allow';
-$string['allowsetting'] = 'Allow tool to store 8K of settings in Moodle';
+$string['allowsetting'] = 'Allow tool to store 8K of settings in PowerEduc';
 $string['always'] = 'Always';
 $string['automatic'] = 'Automatic, based on tool URL';
 $string['autoaddtype'] = 'Add tool';
@@ -135,11 +135,11 @@ $string['debuglaunchon'] = 'Debug launch';
 $string['default'] = 'Default';
 $string['default_launch_container'] = 'Default launch container';
 $string['default_launch_container_help'] = 'The launch container affects the display of the tool when launched from the course. Some launch containers provide more screen
-real estate to the tool, and others provide a more integrated feel with the Moodle environment.
+real estate to the tool, and others provide a more integrated feel with the PowerEduc environment.
 
 * **Default** - Use the launch container specified by the tool configuration.
-* **Embed** - The tool is displayed within the existing Moodle window, in a manner similar to most other Activity types.
-* **Embed, without blocks** - The tool is displayed within the existing Moodle window, with just the navigation controls
+* **Embed** - The tool is displayed within the existing PowerEduc window, in a manner similar to most other Activity types.
+* **Embed, without blocks** - The tool is displayed within the existing PowerEduc window, with just the navigation controls
         at the top of the page.
 * **New window** - The tool opens in a new window, occupying all the available space.
         Depending on the browser, it will open in a new tab or a popup window.
@@ -189,7 +189,7 @@ $string['errorincorrectconsumerkey'] = 'Consumer key is incorrect.';
 $string['errorinvaliddata'] = 'Invalid data: {$a}';
 $string['errorinvalidmediatype'] = 'Invalid media type: {$a}';
 $string['errorinvalidresponseformat'] = 'Invalid Content-Item response format.';
-$string['errormisconfig'] = 'Misconfigured tool. Please ask your Moodle administrator to fix the configuration of the tool.';
+$string['errormisconfig'] = 'Misconfigured tool. Please ask your PowerEduc administrator to fix the configuration of the tool.';
 $string['errortooltypenotfound'] = 'LTI tool type not found.';
 $string['existing_window'] = 'Existing window';
 $string['extensions'] = 'LTI extension services';
@@ -206,7 +206,7 @@ Three icons are available after the preconfigured tool drop-down menu:
 * **Edit** - Select a course level tool from the drop-down menu, then click this icon. The details of the tool configuration may be edited.
 * **Delete** - Remove the selected course level tool.';
 $string['external_tool_types'] = 'Preconfigured tools';
-$string['failedtoconnect'] = 'Moodle was unable to communicate with the "{$a}" system';
+$string['failedtoconnect'] = 'PowerEduc was unable to communicate with the "{$a}" system';
 $string['failedtocreatetooltype'] = 'Failed to create new tool. Please check the URL and try again.';
 $string['failedtodeletetoolproxy'] = 'Failed to delete tool registration. You may need to visit "Manage external tool registrations" and delete it manually.';
 $string['filter_basiclti_configlink'] = 'Configure your preferred sites and their passwords';
@@ -223,7 +223,7 @@ $string['force_ssl_help'] = 'Selecting this option forces all launches to this t
 
 In addition, all web service requests from the tool provider will use SSL.
 
-If using this option, confirm that this Moodle site and the tool provider support SSL.';
+If using this option, confirm that this PowerEduc site and the tool provider support SSL.';
 $string['generaltool'] = 'General tool';
 $string['global_tool_types'] = 'Preconfigured tools';
 $string['grading'] = 'Grade routing';
@@ -249,7 +249,7 @@ $string['keytype'] = 'Public key type';
 $string['keytype_help'] = 'The authentication method used to validate the tool.';
 $string['keytype_keyset'] = 'Keyset URL';
 $string['keytype_rsa'] = 'RSA key';
-$string['launch_in_moodle'] = 'Launch tool in Moodle';
+$string['launch_in_powereduc'] = 'Launch tool in PowerEduc';
 $string['launch_in_popup'] = 'Launch tool in a pop-up';
 $string['launch_url'] = 'Tool URL';
 $string['launch_url_help'] = 'The tool URL indicates the web address of the External Tool, and may contain additional information, such as the resource to show.
@@ -261,11 +261,11 @@ If you have selected a preconfigured tool, you may not need to enter a tool URL.
 into the tool provider\'s system, and not go to a specific resource, this will likely be the case.';
 $string['launchinpopup'] = 'Launch container';
 $string['launchinpopup_help'] = 'The launch container affects the display of the tool when launched from the course. Some launch containers provide more screen
-real estate to the tool, and others provide a more integrated feel with the Moodle environment.
+real estate to the tool, and others provide a more integrated feel with the PowerEduc environment.
 
 * **Default** - Use the launch container specified by the tool configuration.
-* **Embed** - The tool is displayed within the existing Moodle window, in a manner similar to most other Activity types.
-* **Embed, without blocks** - The tool is displayed within the existing Moodle window, with just the navigation controls
+* **Embed** - The tool is displayed within the existing PowerEduc window, in a manner similar to most other Activity types.
+* **Embed, without blocks** - The tool is displayed within the existing PowerEduc window, with just the navigation controls
         at the top of the page.
 * **New window** - The tool opens in a new window, occupying all the available space.
         Depending on the browser, it will open in a new tab or a popup window.
@@ -298,7 +298,7 @@ $string['ltiunknownserviceapicall'] = 'LTI unknown service API call.';
 $string['ltiversion'] = 'LTI version';
 $string['ltiversion_help'] = 'The version of LTI being used for signing messages and service requests: LTI 1.0/1.1 and LTI 2.0 use the OAuth 1.0A security profile; LTI 1.3.0 uses JWTs.';
 $string['main_admin'] = 'General help';
-$string['main_admin_help'] = 'External tools allow Moodle users to interact with learning resources hosted remotely. Through a special launch protocol, the remote tool has access to general information about the launching user. For example, the institution name, course ID, user ID, and other information such as the user\'s name or email address.
+$string['main_admin_help'] = 'External tools allow PowerEduc users to interact with learning resources hosted remotely. Through a special launch protocol, the remote tool has access to general information about the launching user. For example, the institution name, course ID, user ID, and other information such as the user\'s name or email address.
 
 Tools listed on this page are separated into three categories:
 
@@ -312,7 +312,7 @@ $string['manuallyaddtype'] = 'Alternatively, you can <a href="{$a}">configure a 
 $string['miscellaneous'] = 'Miscellaneous';
 $string['misconfiguredtools'] = 'Misconfigured tool instances were detected';
 $string['missingparameterserror'] = 'The page is misconfigured: "{$a}"';
-$string['module_class_type'] = 'Moodle module type';
+$string['module_class_type'] = 'PowerEduc module type';
 $string['modulename'] = 'External tool';
 $string['modulename_help'] = 'The external tool activity module enables students to interact with learning resources and activities on other web sites. For example, an external tool could provide access to a new activity type or learning materials from a publisher.
 
@@ -343,7 +343,7 @@ $string['noattempts'] = 'No attempts have been made on this tool instance';
 $string['noltis'] = 'There are no external tool instances';
 $string['noprofileservice'] = 'Profile service not found';
 $string['noservers'] = 'No servers found';
-$string['notypes'] = 'There are currently no LTI tools set up in Moodle. Click the Install link above to add some.';
+$string['notypes'] = 'There are currently no LTI tools set up in PowerEduc. Click the Install link above to add some.';
 $string['noviewusers'] = 'No users were found with permissions to use this tool';
 $string['oauthsecurity'] = 'LTI 1.0/1.1';
 $string['optionalsettings'] = 'Optional settings';
@@ -352,13 +352,13 @@ $string['organizationdescr'] = 'Organisation description';
 $string['organizationid_default'] = 'Default organisation ID';
 $string['siteid'] = 'Site ID';
 $string['sitehost'] = 'Site hostname';
-$string['organizationid_default_help'] = 'The default value to use for Organisation ID. Site ID identifies this installation of Moodle.';
+$string['organizationid_default_help'] = 'The default value to use for Organisation ID. Site ID identifies this installation of PowerEduc.';
 $string['organizationidguid'] = 'Organisation ID';
-$string['organizationidguid_help'] = 'A unique identifier for this Moodle instance passed to the tool as the Platform Instance GUID.
+$string['organizationidguid_help'] = 'A unique identifier for this PowerEduc instance passed to the tool as the Platform Instance GUID.
 
 If this field is left blank, the default value will be used.';
 $string['organizationurl'] = 'Organisation URL';
-$string['organizationurl_help'] = 'The base URL of this Moodle instance.
+$string['organizationurl_help'] = 'The base URL of this PowerEduc instance.
 
 If this field is left blank, a default value will be used based on the site configuration.';
 $string['pagesize'] = 'Submissions shown per page';
@@ -369,7 +369,7 @@ $string['password_admin'] = 'Shared secret';
 $string['password_admin_help'] = 'The shared secret can be thought of as a password used to authenticate access to the tool. It should be provided
 along with the consumer key from the tool provider.
 
-Tools which do not require secure communication from Moodle and do not provide additional services (such as grade reporting)
+Tools which do not require secure communication from PowerEduc and do not provide additional services (such as grade reporting)
 may not require a shared secret.';
 $string['password_help'] = 'For pre-configured tools, it is not necessary to enter a shared secret here, as the shared secret will be
 provided as part of the configuration process.
@@ -380,7 +380,7 @@ If the tool provider is to be used more than once in this course, adding a cours
 The shared secret can be thought of as a password used to authenticate access to the tool. It should be provided
 along with the consumer key from the tool provider.
 
-Tools which do not require secure communication from Moodle and do not provide additional services (such as grade reporting)
+Tools which do not require secure communication from PowerEduc and do not provide additional services (such as grade reporting)
 may not require a shared secret.';
 $string['pending'] = 'Pending';
 $string['pluginadministration'] = 'External tool administration';
@@ -426,7 +426,7 @@ $string['redirect'] = 'You will be redirected in few seconds. If you are not, pr
 $string['redirectionuris'] = 'Redirection URI(s)';
 $string['redirectionuris_help'] = 'A list of URIs (one per line) which the tool uses when making authorisation requests.  At least one must be registered before a message can be successfully sent to the tool.';
 $string['register'] = 'Register';
-$string['register_warning'] = 'The registration page seems to be taking a while to open. If it does not appear, check that you entered the correct URL in the configuration settings. If Moodle is using https, ensure the tool you are configuring supports https and you are using https in the URL.';
+$string['register_warning'] = 'The registration page seems to be taking a while to open. If it does not appear, check that you entered the correct URL in the configuration settings. If PowerEduc is using https, ensure the tool you are configuring supports https and you are using https in the URL.';
 $string['registertype'] = 'Configure a new external tool registration';
 $string['registration_options'] = 'Registration options';
 $string['registrationname'] = 'Tool provider name';
@@ -439,12 +439,12 @@ $string['resource'] = 'Resource';
 $string['resourcekey'] = 'Consumer key';
 $string['resourcekey_admin'] = 'Consumer key';
 $string['resourcekey_admin_help'] = 'The consumer key can be thought of as a username used to authenticate access to the tool.
-It can be used by the tool provider to uniquely identify the Moodle site from which users launch into the tool.
+It can be used by the tool provider to uniquely identify the PowerEduc site from which users launch into the tool.
 
 The consumer key must be provided by the tool provider. The method of obtaining a consumer key varies between
 tool providers. It may be an automated process, or it may require a dialogue with the tool provider.
 
-Tools which do not require secure communication from Moodle and do not provide additional services (such as grade reporting)
+Tools which do not require secure communication from PowerEduc and do not provide additional services (such as grade reporting)
 may not require a resource key.';
 $string['resourcekey_help'] = 'For pre-configured tools, it is not necessary to enter a resource key here, as the consumer key will be
 provided as part of the configuration process.
@@ -453,12 +453,12 @@ This field should be entered if creating a link to a tool provider which is not 
 If the tool provider is to be used more than once in this course, adding a course tool configuration is a good idea.
 
 The consumer key can be thought of as a username used to authenticate access to the tool.
-It can be used by the tool provider to uniquely identify the Moodle site from which users launch into the tool.
+It can be used by the tool provider to uniquely identify the PowerEduc site from which users launch into the tool.
 
 The consumer key must be provided by the tool provider. The method of obtaining a consumer key varies between
 tool providers. It may be an automated process, or it may require a dialogue with the tool provider.
 
-Tools which do not require secure communication from Moodle and do not provide additional services (such as grade reporting)
+Tools which do not require secure communication from PowerEduc and do not provide additional services (such as grade reporting)
 may not require a resource key.';
 $string['resourceurl'] = 'Resource URL';
 $string['return_to_course'] = 'Click <a href="{$a->link}" target="_top">here</a> to return to the course.';
@@ -467,7 +467,7 @@ $string['search:activity'] = 'External tool - activity information';
 $string['secure_icon_url'] = 'Secure icon URL';
 $string['secure_icon_url_help'] = 'Similar to the icon URL, but used when the site is accessed securely through SSL. This field is to prevent the browser from displaying a warning about an insecure image.';
 $string['secure_launch_url'] = 'Secure tool URL';
-$string['secure_launch_url_help'] = 'Similar to the tool URL, but used instead of the tool URL if high security is required. Moodle will use the secure tool URL instead of the tool URL if the Moodle site is accessed through SSL, or if the tool configuration is set to always launch through SSL.
+$string['secure_launch_url_help'] = 'Similar to the tool URL, but used instead of the tool URL if high security is required. PowerEduc will use the secure tool URL instead of the tool URL if the PowerEduc site is accessed through SSL, or if the tool configuration is set to always launch through SSL.
 
 The tool URL may also be set to an https address to force launching through SSL, and this field may be left blank.';
 $string['selectcontent'] = 'Select content';
@@ -540,7 +540,7 @@ $string['tooldetailspublickeyseturl'] = 'Public keyset URL';
 $string['toolisbeingused'] = 'This tool is being used {$a} times';
 $string['toolisnotbeingused'] = 'This tool has not yet been used';
 $string['toolproxy'] = 'External tool registrations';
-$string['toolproxy_help'] = 'External tool registrations allow Moodle site administrators to configure external tools from a tool proxy obtained from a tool provider supporting LTI 2.0. A registration URL provided by the tool provider is all that is required to initiate the process. The capabilities and services offered to the tool provider are selected when configuring a new registration.
+$string['toolproxy_help'] = 'External tool registrations allow PowerEduc site administrators to configure external tools from a tool proxy obtained from a tool provider supporting LTI 2.0. A registration URL provided by the tool provider is all that is required to initiate the process. The capabilities and services offered to the tool provider are selected when configuring a new registration.
 
 Tool registrations listed on this page are separated into four categories:
 
@@ -589,7 +589,7 @@ You can also insert a cartridge URL if you have one and the details for the tool
 $string['toolurl_contentitemselectionrequest'] = 'Content Selection URL';
 $string['toolurl_contentitemselectionrequest_help'] = 'The Content Selection URL will be used to launch the content selection page from the tool provider. If it is empty, the Tool URL will be used';
 $string['typename'] = 'Tool name';
-$string['typename_help'] = 'The tool name is used to identify the tool provider within Moodle. The name entered will be visible to teachers when adding external tools within courses.';
+$string['typename_help'] = 'The tool name is used to identify the tool provider within PowerEduc. The name entered will be visible to teachers when adding external tools within courses.';
 $string['types'] = 'Types';
 $string['unabletocreatetooltype'] = 'Unable to create tool';
 $string['unabletofindtooltype'] = 'Unable to find tool for {$a->id}';
@@ -602,7 +602,7 @@ $string['using_tool_configuration'] = 'Using tool configuration: ';
 $string['validurl'] = 'A valid URL must start with http(s)://';
 $string['viewsubmissions'] = 'View submissions and grading screen';
 
-// Deprecated since Moodle 3.10.
+// Deprecated since PowerEduc 3.10.
 $string['contentitem'] = 'Content-Item Message';
 $string['contentitem_help'] = 'If ticked, the option \'Select content\' will be available when adding an external tool.';
 

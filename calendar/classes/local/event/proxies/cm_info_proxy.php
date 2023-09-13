@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\proxies;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Course module stdClass proxy.

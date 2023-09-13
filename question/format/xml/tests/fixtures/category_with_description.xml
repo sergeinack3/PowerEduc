@@ -5,7 +5,7 @@
     <category>
         <text>$course$/Alpha</text>
     </category>
-    <info format="moodle_auto_format">
+    <info format="powereduc_auto_format">
         <text>This is Alpha category for test</text>
     </info>
     <idnumber>alpha-idnumber</idnumber>
@@ -25,13 +25,13 @@
     <defaultgrade>1.0000000</defaultgrade>
     <penalty>1.0000000</penalty>
     <hidden>0</hidden>
-    <answer fraction="100" format="moodle_auto_format">
+    <answer fraction="100" format="powereduc_auto_format">
       <text>true</text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="0" format="moodle_auto_format">
+    <answer fraction="0" format="powereduc_auto_format">
       <text>false</text>
       <feedback format="html">
         <text></text>

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ if ($id) {
 }
 
 if (!$instance) {
-    throw new moodle_exception('view_error_url_missing_parameters', plugin::COMPONENT);
+    throw new powereduc_exception('view_error_url_missing_parameters', plugin::COMPONENT);
 }
 
 $cm = $instance->get_cm();
@@ -94,7 +94,7 @@ if (!$instance->can_join() && $instance->get_type() != instance::TYPE_RECORDING_
     } else {
         notice(
             get_string('view_nojoin', plugin::COMPONENT),
-            new moodle_url('/course/view.php', ['id' => $course->id])
+            new powereduc_url('/course/view.php', ['id' => $course->id])
         );
     }
 }

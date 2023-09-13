@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Classes representing HTML elements, used by $OUTPUT methods
  *
- * Please see http://docs.moodle.org/en/Developement:How_Moodle_outputs_HTML
+ * Please see http://docs.powereduc.org/en/Developement:How_Moodle_outputs_HTML
  * for an overview.
  *
  * @package core
@@ -26,7 +26,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface marking other classes as suitable for renderer_base::render()
@@ -123,7 +123,7 @@ class file_picker implements renderable {
                 $file = $fs->get_file($usercontext->id, 'user', 'draft', $options->itemid, $options->filepath, $options->filename);
             }
             if (!empty($file)) {
-                $options->currentfile = html_writer::link(moodle_url::make_draftfile_url($file->get_itemid(), $file->get_filepath(), $file->get_filename()), $file->get_filename());
+                $options->currentfile = html_writer::link(powereduc_url::make_draftfile_url($file->get_itemid(), $file->get_filepath(), $file->get_filename()), $file->get_filename());
             }
         }
 
@@ -317,11 +317,11 @@ class user_picture implements renderable {
      * This method is recommended as it avoids costly redirects of user pictures
      * if requests are made for non-existent files etc.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param renderer_base $renderer
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_url(moodle_page $page, renderer_base $renderer = null) {
+    public function get_url(powereduc_page $page, renderer_base $renderer = null) {
         global $CFG;
 
         if (is_null($renderer)) {
@@ -386,7 +386,7 @@ class user_picture implements renderable {
                 $path .= $page->theme->name.'/';
             }
             // Set the image URL to the URL for the uploaded file and return.
-            $url = moodle_url::make_pluginfile_url(
+            $url = powereduc_url::make_pluginfile_url(
                     $contextid, 'user', 'icon', null, $path, $filename, false, $this->includetoken);
             $url->param('rev', $this->user->picture);
             return $url;
@@ -416,9 +416,9 @@ class user_picture implements renderable {
             // If the currently requested page is https then we'll return an
             // https gravatar page.
             if (is_https()) {
-                return new moodle_url("https://secure.gravatar.com/avatar/{$md5}", array('s' => $size, 'd' => $gravatardefault));
+                return new powereduc_url("https://secure.gravatar.com/avatar/{$md5}", array('s' => $size, 'd' => $gravatardefault));
             } else {
-                return new moodle_url("http://www.gravatar.com/avatar/{$md5}", array('s' => $size, 'd' => $gravatardefault));
+                return new powereduc_url("http://www.gravatar.com/avatar/{$md5}", array('s' => $size, 'd' => $gravatardefault));
             }
         }
 
@@ -515,7 +515,7 @@ class help_icon implements renderable, templatable {
             $options['strings'] = 1;
         }
 
-        $data->url = (new moodle_url('/help.php', $options))->out(false);
+        $data->url = (new powereduc_url('/help.php', $options))->out(false);
         $data->ltr = !right_to_left();
         return $data;
     }
@@ -646,7 +646,7 @@ class pix_icon implements renderable, templatable {
      * @param string $component component name
      * @param array $attributes html attributes
      */
-    public function __construct($pix, $alt, $component='moodle', array $attributes = null) {
+    public function __construct($pix, $alt, $component='powereduc', array $attributes = null) {
         global $PAGE;
 
         $this->pix = $pix;
@@ -770,7 +770,7 @@ class pix_emoticon extends pix_icon implements renderable {
      * @param string $component emoticon image provider
      * @param array $attributes explicit HTML attributes
      */
-    public function __construct($pix, $alt, $component = 'moodle', array $attributes = array()) {
+    public function __construct($pix, $alt, $component = 'powereduc', array $attributes = array()) {
         if (empty($attributes['class'])) {
             $attributes['class'] = 'emoticon';
         }
@@ -790,7 +790,7 @@ class pix_emoticon extends pix_icon implements renderable {
 class single_button implements renderable {
 
     /**
-     * @var moodle_url Target url
+     * @var powereduc_url Target url
      */
     public $url;
 
@@ -851,13 +851,13 @@ class single_button implements renderable {
 
     /**
      * Constructor
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param string $label button text
      * @param string $method get or post submit method
      * @param bool $primary whether this is a primary button, used for styling
      * @param array $attributes Attributes for the HTML button tag
      */
-    public function __construct(moodle_url $url, $label, $method='post', $primary=false, $attributes = []) {
+    public function __construct(powereduc_url $url, $label, $method='post', $primary=false, $attributes = []) {
         $this->url    = clone($url);
         $this->label  = $label;
         $this->method = $method;
@@ -954,7 +954,7 @@ class single_button implements renderable {
 class single_select implements renderable, templatable {
 
     /**
-     * @var moodle_url Target url - includes hidden fields
+     * @var powereduc_url Target url - includes hidden fields
      */
     var $url;
 
@@ -1028,14 +1028,14 @@ class single_select implements renderable, templatable {
 
     /**
      * Constructor
-     * @param moodle_url $url form action target, includes hidden fields
+     * @param powereduc_url $url form action target, includes hidden fields
      * @param string $name name of selection field - the changing parameter in url
      * @param array $options list of options
      * @param string $selected selected element
      * @param array $nothing
      * @param string $formid
      */
-    public function __construct(moodle_url $url, $name, array $options, $selected = '', $nothing = array('' => 'choosedots'), $formid = null) {
+    public function __construct(powereduc_url $url, $name, array $options, $selected = '', $nothing = array('' => 'choosedots'), $formid = null) {
         $this->url      = $url;
         $this->name     = $name;
         $this->options  = $options;
@@ -1068,7 +1068,7 @@ class single_select implements renderable, templatable {
      *
      * @deprecated since Moodle 2.0
      */
-    public function set_old_help_icon($helppage, $title, $component = 'moodle') {
+    public function set_old_help_icon($helppage, $title, $component = 'powereduc') {
         throw new coding_exception('set_old_help_icon() can not be used any more, please see set_help_icon().');
     }
 
@@ -1078,7 +1078,7 @@ class single_select implements renderable, templatable {
      * @param string $identifier The keyword that defines a help page
      * @param string $component
      */
-    public function set_help_icon($identifier, $component = 'moodle') {
+    public function set_help_icon($identifier, $component = 'powereduc') {
         $this->helpicon = new help_icon($identifier, $component);
     }
 
@@ -1308,7 +1308,7 @@ class url_select implements renderable, templatable {
      *
      * @deprecated since Moodle 2.0
      */
-    public function set_old_help_icon($helppage, $title, $component = 'moodle') {
+    public function set_old_help_icon($helppage, $title, $component = 'powereduc') {
         throw new coding_exception('set_old_help_icon() can not be used any more, please see set_help_icon().');
     }
 
@@ -1318,7 +1318,7 @@ class url_select implements renderable, templatable {
      * @param string $identifier The keyword that defines a help page
      * @param string $component
      */
-    public function set_help_icon($identifier, $component = 'moodle') {
+    public function set_help_icon($identifier, $component = 'powereduc') {
         $this->helpicon = new help_icon($identifier, $component);
     }
 
@@ -1433,7 +1433,7 @@ class url_select implements renderable, templatable {
         $data->title = $this->tooltip;
         $data->id = !empty($attributes['id']) ? $attributes['id'] : html_writer::random_id('url_select');
         $data->sesskey = sesskey();
-        $data->action = (new moodle_url('/course/jumpto.php'))->out(false);
+        $data->action = (new powereduc_url('/course/jumpto.php'))->out(false);
 
         // Remove attributes passed as property directly.
         unset($attributes['class']);
@@ -1492,7 +1492,7 @@ class url_select implements renderable, templatable {
 class action_link implements renderable {
 
     /**
-     * @var moodle_url Href url
+     * @var powereduc_url Href url
      */
     public $url;
 
@@ -1518,13 +1518,13 @@ class action_link implements renderable {
 
     /**
      * Constructor
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param string $text HTML fragment
      * @param component_action $action
      * @param array $attributes associative array of html link attributes + disabled
      * @param pix_icon $icon optional pix_icon to render with the link text
      */
-    public function __construct(moodle_url $url,
+    public function __construct(powereduc_url $url,
                                 $text,
                                 component_action $action=null,
                                 array $attributes=null,
@@ -1699,7 +1699,7 @@ class html_writer {
      * @return string HTML fragment
      */
     public static function attribute($name, $value) {
-        if ($value instanceof moodle_url) {
+        if ($value instanceof powereduc_url) {
             return ' ' . $name . '="' . $value->out() . '"';
         }
 
@@ -1767,7 +1767,7 @@ class html_writer {
     /**
      * Generates a simple html link
      *
-     * @param string|moodle_url $url The URL
+     * @param string|powereduc_url $url The URL
      * @param string $text The text
      * @param array $attributes HTML attributes
      * @return string HTML fragment
@@ -2041,11 +2041,11 @@ class html_writer {
     /**
      * Returns hidden input fields created from url parameters.
      *
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param array $exclude list of excluded parameters
      * @return string HTML fragment
      */
-    public static function input_hidden_params(moodle_url $url, array $exclude = null) {
+    public static function input_hidden_params(powereduc_url $url, array $exclude = null) {
         $exclude = (array)$exclude;
         $params = $url->params();
         foreach ($exclude as $key) {
@@ -2064,7 +2064,7 @@ class html_writer {
      * Generate a script tag containing the the specified code.
      *
      * @param string $jscode the JavaScript code
-     * @param moodle_url|string $url optional url of the external script, $code ignored if specified
+     * @param powereduc_url|string $url optional url of the external script, $code ignored if specified
      * @return string HTML, the code wrapped in <script> tags.
      */
     public static function script($jscode, $url=null) {
@@ -2933,9 +2933,9 @@ class paging_bar implements renderable, templatable {
     public $perpage;
 
     /**
-     * @var string|moodle_url If this  is a string then it is the url which will be appended with $pagevar,
+     * @var string|powereduc_url If this  is a string then it is the url which will be appended with $pagevar,
      * an equals sign and the page number.
-     * If this is a moodle_url object then the pagevar param will be replaced by
+     * If this is a powereduc_url object then the pagevar param will be replaced by
      * the page no, for each page.
      */
     public $baseurl;
@@ -2977,7 +2977,7 @@ class paging_bar implements renderable, templatable {
      * @param int $totalcount The total number of entries available to be paged through
      * @param int $page The page you are currently viewing
      * @param int $perpage The number of entries that should be shown per page
-     * @param string|moodle_url $baseurl url of the current page, the $pagevar parameter is added
+     * @param string|powereduc_url $baseurl url of the current page, the $pagevar parameter is added
      * @param string $pagevar name of page parameter that holds the page number
      */
     public function __construct($totalcount, $page, $perpage, $baseurl, $pagevar = 'page') {
@@ -2995,11 +2995,11 @@ class paging_bar implements renderable, templatable {
      * produces fragments of HTML to assist display later on.
      *
      * @param renderer_base $output
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @param string $target
      * @throws coding_exception
      */
-    public function prepare(renderer_base $output, moodle_page $page, $target) {
+    public function prepare(renderer_base $output, powereduc_page $page, $target) {
         if (!isset($this->totalcount) || is_null($this->totalcount)) {
             throw new coding_exception('paging_bar requires a totalcount value.');
         }
@@ -3017,7 +3017,7 @@ class paging_bar implements renderable, templatable {
             $pagenum = $this->page - 1;
 
             if ($this->page > 0) {
-                $this->previouslink = html_writer::link(new moodle_url($this->baseurl, array($this->pagevar=>$pagenum)), get_string('previous'), array('class'=>'previous'));
+                $this->previouslink = html_writer::link(new powereduc_url($this->baseurl, array($this->pagevar=>$pagenum)), get_string('previous'), array('class'=>'previous'));
             }
 
             if ($this->perpage > 0) {
@@ -3029,7 +3029,7 @@ class paging_bar implements renderable, templatable {
             if ($this->page > round(($this->maxdisplay/3)*2)) {
                 $currpage = $this->page - round($this->maxdisplay/3);
 
-                $this->firstlink = html_writer::link(new moodle_url($this->baseurl, array($this->pagevar=>0)), '1', array('class'=>'first'));
+                $this->firstlink = html_writer::link(new powereduc_url($this->baseurl, array($this->pagevar=>0)), '1', array('class'=>'first'));
             } else {
                 $currpage = 0;
             }
@@ -3042,7 +3042,7 @@ class paging_bar implements renderable, templatable {
                 if ($this->page == $currpage) {
                     $this->pagelinks[] = html_writer::span($displaypage, 'current-page');
                 } else {
-                    $pagelink = html_writer::link(new moodle_url($this->baseurl, array($this->pagevar=>$currpage)), $displaypage);
+                    $pagelink = html_writer::link(new powereduc_url($this->baseurl, array($this->pagevar=>$currpage)), $displaypage);
                     $this->pagelinks[] = $pagelink;
                 }
 
@@ -3052,13 +3052,13 @@ class paging_bar implements renderable, templatable {
 
             if ($currpage < $lastpage) {
                 $lastpageactual = $lastpage - 1;
-                $this->lastlink = html_writer::link(new moodle_url($this->baseurl, array($this->pagevar=>$lastpageactual)), $lastpage, array('class'=>'last'));
+                $this->lastlink = html_writer::link(new powereduc_url($this->baseurl, array($this->pagevar=>$lastpageactual)), $lastpage, array('class'=>'last'));
             }
 
             $pagenum = $this->page + 1;
 
             if ($pagenum != $lastpage) {
-                $this->nextlink = html_writer::link(new moodle_url($this->baseurl, array($this->pagevar=>$pagenum)), get_string('next'), array('class'=>'next'));
+                $this->nextlink = html_writer::link(new powereduc_url($this->baseurl, array($this->pagevar=>$pagenum)), get_string('next'), array('class'=>'next'));
             }
         }
     }
@@ -3087,7 +3087,7 @@ class paging_bar implements renderable, templatable {
         if ($this->page > 0) {
             $data->previous = [
                 'page' => $this->page,
-                'url' => (new moodle_url($this->baseurl, [$this->pagevar => $this->page - 1]))->out(false)
+                'url' => (new powereduc_url($this->baseurl, [$this->pagevar => $this->page - 1]))->out(false)
             ];
         }
 
@@ -3096,7 +3096,7 @@ class paging_bar implements renderable, templatable {
             $currpage = $this->page - round($this->maxdisplay / 3);
             $data->first = [
                 'page' => 1,
-                'url' => (new moodle_url($this->baseurl, [$this->pagevar => 0]))->out(false)
+                'url' => (new powereduc_url($this->baseurl, [$this->pagevar => 0]))->out(false)
             ];
         }
 
@@ -3111,7 +3111,7 @@ class paging_bar implements renderable, templatable {
             $displaypage = $currpage + 1;
 
             $iscurrent = $this->page == $currpage;
-            $link = new moodle_url($this->baseurl, [$this->pagevar => $currpage]);
+            $link = new powereduc_url($this->baseurl, [$this->pagevar => $currpage]);
 
             $data->pages[] = [
                 'page' => $displaypage,
@@ -3126,14 +3126,14 @@ class paging_bar implements renderable, templatable {
         if ($currpage < $lastpage) {
             $data->last = [
                 'page' => $lastpage,
-                'url' => (new moodle_url($this->baseurl, [$this->pagevar => $lastpage - 1]))->out(false)
+                'url' => (new powereduc_url($this->baseurl, [$this->pagevar => $lastpage - 1]))->out(false)
             ];
         }
 
         if ($this->page + 1 != $lastpage) {
             $data->next = [
                 'page' => $this->page + 2,
-                'url' => (new moodle_url($this->baseurl, [$this->pagevar => $this->page + 1]))->out(false)
+                'url' => (new powereduc_url($this->baseurl, [$this->pagevar => $this->page + 1]))->out(false)
             ];
         }
 
@@ -3265,7 +3265,7 @@ class initials_bar implements renderable, templatable {
  * During output, each block instance is asked to return a block_contents object,
  * those are then passed to the $OUTPUT->block function for display.
  *
- * contents should probably be generated using a moodle_block_..._renderer.
+ * contents should probably be generated using a powereduc_block_..._renderer.
  *
  * Other block-like things that need to appear on the page, for example the
  * add new block UI, are also represented as block_contents objects.
@@ -3422,15 +3422,15 @@ class block_contents {
 class block_move_target {
 
     /**
-     * @var moodle_url Move url
+     * @var powereduc_url Move url
      */
     public $url;
 
     /**
      * Constructor
-     * @param moodle_url $url
+     * @param powereduc_url $url
      */
-    public function __construct(moodle_url $url) {
+    public function __construct(powereduc_url $url) {
         $this->url  = $url;
     }
 }
@@ -3455,7 +3455,7 @@ class custom_menu_item implements renderable, templatable {
     protected $text;
 
     /**
-     * @var moodle_url The link to give the icon if it has no children
+     * @var powereduc_url The link to give the icon if it has no children
      */
     protected $url;
 
@@ -3493,14 +3493,14 @@ class custom_menu_item implements renderable, templatable {
      * Constructs the new custom menu item
      *
      * @param string $text
-     * @param moodle_url $url A moodle url to apply as the link for this item [Optional]
+     * @param powereduc_url $url A powereduc url to apply as the link for this item [Optional]
      * @param string $title A title to apply to this item [Optional]
      * @param int $sort A sort or to use if we need to sort differently [Optional]
      * @param custom_menu_item $parent A reference to the parent custom_menu_item this child
      *        belongs to, only if the child has a parent. [Optional]
      * @param array $attributes Array of other HTML attributes for the custom menu item.
      */
-    public function __construct($text, moodle_url $url = null, $title = null, $sort = null, custom_menu_item $parent = null,
+    public function __construct($text, powereduc_url $url = null, $title = null, $sort = null, custom_menu_item $parent = null,
                                 array $attributes = []) {
         $this->text = $text;
         $this->url = $url;
@@ -3514,13 +3514,13 @@ class custom_menu_item implements renderable, templatable {
      * Adds a custom menu item as a child of this node given its properties.
      *
      * @param string $text
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param string $title
      * @param int $sort
      * @param array $attributes Array of other HTML attributes for the custom menu item.
      * @return custom_menu_item
      */
-    public function add($text, moodle_url $url = null, $title = null, $sort = null, $attributes = []) {
+    public function add($text, powereduc_url $url = null, $title = null, $sort = null, $attributes = []) {
         $key = count($this->children);
         if (empty($sort)) {
             $sort = $this->lastsort + 1;
@@ -3564,7 +3564,7 @@ class custom_menu_item implements renderable, templatable {
 
     /**
      * Returns the url for this item
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
         return $this->url;
@@ -3636,9 +3636,9 @@ class custom_menu_item implements renderable, templatable {
 
     /**
      * Sets the url for the node
-     * @param moodle_url $url
+     * @param powereduc_url $url
      */
-    public function set_url(moodle_url $url) {
+    public function set_url(powereduc_url $url) {
         $this->url = $url;
     }
 
@@ -3744,15 +3744,15 @@ class custom_menu extends custom_menu_item {
      * languages are optional, comma separated list of languages the line is for.
      *
      * Example structure:
-     *     First level first item|http://www.moodle.com/
-     *     -Second level first item|http://www.moodle.com/partners/
-     *     -Second level second item|http://www.moodle.com/hq/
-     *     --Third level first item|http://www.moodle.com/jobs/
-     *     -Second level third item|http://www.moodle.com/development/
-     *     First level second item|http://www.moodle.com/feedback/
+     *     First level first item|http://www.powereduc.com/
+     *     -Second level first item|http://www.powereduc.com/partners/
+     *     -Second level second item|http://www.powereduc.com/hq/
+     *     --Third level first item|http://www.powereduc.com/jobs/
+     *     -Second level third item|http://www.powereduc.com/development/
+     *     First level second item|http://www.powereduc.com/feedback/
      *     First level third item
-     *     English only|http://moodle.com|English only item|en
-     *     German only|http://moodle.de|Deutsch|de,de_du,de_kids
+     *     English only|http://powereduc.com|English only item|en
+     *     German only|http://powereduc.de|Deutsch|de,de_du,de_kids
      *
      *
      * @static
@@ -3786,8 +3786,8 @@ class custom_menu extends custom_menu_item {
                             break;
                         case 1: // URL.
                             try {
-                                $itemurl = new moodle_url($setting);
-                            } catch (moodle_exception $exception) {
+                                $itemurl = new powereduc_url($setting);
+                            } catch (powereduc_exception $exception) {
                                 // We're not actually worried about this, we don't want to mess up the display
                                 // just for a wrongly entered URL.
                                 $itemurl = null;
@@ -3855,7 +3855,7 @@ class custom_menu extends custom_menu_item {
 class tabobject implements renderable, templatable {
     /** @var string unique id of the tab in this tree, it is used to find selected and/or inactive tabs */
     var $id;
-    /** @var moodle_url|string link */
+    /** @var powereduc_url|string link */
     var $link;
     /** @var string text on the tab */
     var $text;
@@ -3878,7 +3878,7 @@ class tabobject implements renderable, templatable {
      * Constructor
      *
      * @param string $id unique id of the tab in this tree, it is used to find selected and/or inactive tabs
-     * @param string|moodle_url $link
+     * @param string|powereduc_url $link
      * @param string $text text on the tab
      * @param string $title title under the link, by defaul equals to text
      * @param bool $linkedwhenselected whether to display a link under the tab name when it's selected
@@ -3977,7 +3977,7 @@ class tabobject implements renderable, templatable {
  * @package core
  * @category output
  * @since 2.9
- * @copyright 2015 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2015 Adrian Greeve <adrian@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class context_header implements renderable {
@@ -3997,7 +3997,7 @@ class context_header implements renderable {
     /**
      * @var array $additionalbuttons Additional buttons for the header e.g. Messaging button for the user header.
      *      array elements - title => alternate text for the image, or if no image is available the button text.
-     *                       url => Link for the button to head to. Should be a moodle_url.
+     *                       url => Link for the button to head to. Should be a powereduc_url.
      *                       image => location to the image, or name of the image in /pix/t/{image name}.
      *                       linkattributes => additional attributes for the <a href> element.
      *                       page => page object. Don't include if the image is an external image.
@@ -4042,7 +4042,7 @@ class context_header implements renderable {
                 $this->additionalbuttons[$buttontype]['formattedimage'] = $button['title'];
             } else {
                 // Check to see if this is an internal Moodle icon.
-                $internalimage = $page->theme->resolve_image_location('t/' . $button['image'], 'moodle');
+                $internalimage = $page->theme->resolve_image_location('t/' . $button['image'], 'powereduc');
                 if ($internalimage) {
                     $this->additionalbuttons[$buttontype]['formattedimage'] = 't/' . $button['image'];
                 } else {
@@ -4264,8 +4264,8 @@ class action_menu implements renderable, templatable {
 
         $this->attributes = array(
             'id' => 'action-menu-'.$this->instance,
-            'class' => 'moodle-actionmenu',
-            'data-enhance' => 'moodle-core-actionmenu'
+            'class' => 'powereduc-actionmenu',
+            'data-enhance' => 'powereduc-core-actionmenu'
         );
         $this->attributesprimary = array(
             'id' => 'action-menu-'.$this->instance.'-menubar',
@@ -4317,12 +4317,12 @@ class action_menu implements renderable, templatable {
      * Initialises JS required fore the action menu.
      * The JS is only required once as it manages all action menu's on the page.
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      */
-    public function initialise_js(moodle_page $page) {
+    public function initialise_js(powereduc_page $page) {
         static $initialised = false;
         if (!$initialised) {
-            $page->requires->yui_module('moodle-core-actionmenu', 'M.core.actionmenu.init');
+            $page->requires->yui_module('powereduc-core-actionmenu', 'M.core.actionmenu.init');
             $initialised = true;
         }
     }
@@ -4397,11 +4397,11 @@ class action_menu implements renderable, templatable {
             $pixicon = '<b class="caret"></b>';
             $linkclasses[] = 'textmenu';
         } else {
-            $title = new lang_string('actionsmenu', 'moodle');
+            $title = new lang_string('actionsmenu', 'powereduc');
             $this->actionicon = new pix_icon(
                 't/edit_menu',
                 '',
-                'moodle',
+                'powereduc',
                 array('class' => 'iconsmall actionmenu', 'title' => '')
             );
             $pixicon = $this->actionicon;
@@ -4633,7 +4633,7 @@ class action_menu implements renderable, templatable {
         } else {
             $primary->title = get_string('actionsmenu');
             $iconattributes = ['class' => 'iconsmall actionmenu', 'title' => $primary->title];
-            $actionicon = new pix_icon('t/edit_menu', '', 'moodle', $iconattributes);
+            $actionicon = new pix_icon('t/edit_menu', '', 'powereduc', $iconattributes);
         }
 
         // If the menu trigger is within the menubar, assign a role of menuitem. Otherwise, assign as a button.
@@ -4754,13 +4754,13 @@ class action_menu_link extends action_link implements renderable {
     /**
      * Constructs the object.
      *
-     * @param moodle_url $url The URL for the action.
+     * @param powereduc_url $url The URL for the action.
      * @param pix_icon|null $icon The icon to represent the action.
      * @param string $text The text to represent the action.
      * @param bool $primary Whether this is a primary action or not.
      * @param array $attributes Any attribtues associated with the action.
      */
-    public function __construct(moodle_url $url, ?pix_icon $icon, $text, $primary = true, array $attributes = array()) {
+    public function __construct(powereduc_url $url, ?pix_icon $icon, $text, $primary = true, array $attributes = array()) {
         parent::__construct($url, $text, null, $attributes, $icon);
         $this->primary = (bool)$primary;
         $this->add_class('menu-action');
@@ -4825,12 +4825,12 @@ class action_menu_link_primary extends action_menu_link {
     /**
      * Constructs the object.
      *
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param pix_icon|null $icon
      * @param string $text
      * @param array $attributes
      */
-    public function __construct(moodle_url $url, ?pix_icon $icon, $text, array $attributes = array()) {
+    public function __construct(powereduc_url $url, ?pix_icon $icon, $text, array $attributes = array()) {
         parent::__construct($url, $icon, $text, true, $attributes);
     }
 }
@@ -4847,12 +4847,12 @@ class action_menu_link_secondary extends action_menu_link {
     /**
      * Constructs the object.
      *
-     * @param moodle_url $url
+     * @param powereduc_url $url
      * @param pix_icon|null $icon
      * @param string $text
      * @param array $attributes
      */
-    public function __construct(moodle_url $url, ?pix_icon $icon, $text, array $attributes = array()) {
+    public function __construct(powereduc_url $url, ?pix_icon $icon, $text, array $attributes = array()) {
         parent::__construct($url, $icon, $text, false, $attributes);
     }
 }

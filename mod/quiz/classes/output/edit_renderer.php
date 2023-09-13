@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Renderer outputting the quiz editing UI.
@@ -23,7 +23,7 @@
  */
 
 namespace mod_quiz\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_quiz\question\bank\qbank_helper;
 use \mod_quiz\structure;
@@ -35,7 +35,7 @@ use renderable;
  *
  * @copyright 2013 The Open University.
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.7
+ * @since PowerEduc 2.7
  */
 class edit_renderer extends \plugin_renderer_base {
 
@@ -48,12 +48,12 @@ class edit_renderer extends \plugin_renderer_base {
      * @param \quiz $quizobj object containing all the quiz settings information.
      * @param structure $structure object containing the structure of the quiz.
      * @param \core_question\local\bank\question_edit_contexts $contexts the relevant question bank contexts.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @param array $pagevars the variables from {@link question_edit_setup()}.
      * @return string HTML to output.
      */
     public function edit_page(\quiz $quizobj, structure $structure,
-        \core_question\local\bank\question_edit_contexts $contexts, \moodle_url $pageurl, array $pagevars) {
+        \core_question\local\bank\question_edit_contexts $contexts, \powereduc_url $pageurl, array $pagevars) {
         $output = '';
 
         // Page title.
@@ -173,10 +173,10 @@ class edit_renderer extends \plugin_renderer_base {
      * Render the form for setting a quiz' overall grade
      *
      * @param structure $structure the quiz structure.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
-    public function maximum_grade_input($structure, \moodle_url $pageurl) {
+    public function maximum_grade_input($structure, \powereduc_url $pageurl) {
         $output = '';
         $output .= html_writer::start_div('maxgrade');
         $output .= html_writer::start_tag('form', array('method' => 'post', 'action' => 'edit.php',
@@ -201,10 +201,10 @@ class edit_renderer extends \plugin_renderer_base {
     /**
      * Return the repaginate button
      * @param structure $structure the structure of the quiz being edited.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
-    protected function repaginate_button(structure $structure, \moodle_url $pageurl) {
+    protected function repaginate_button(structure $structure, \powereduc_url $pageurl) {
         $header = html_writer::tag('span', get_string('repaginatecommand', 'quiz'), array('class' => 'repaginatecommand'));
         $form = $this->repaginate_form($structure, $pageurl);
 
@@ -270,7 +270,7 @@ class edit_renderer extends \plugin_renderer_base {
         $buttoncanceloptions = array(
             'type' => 'button',
             'id' => 'selectmultiplecancelcommand',
-            'value' => get_string('cancel', 'moodle'),
+            'value' => get_string('cancel', 'powereduc'),
             'class' => 'btn btn-secondary'
         );
 
@@ -282,7 +282,7 @@ class edit_renderer extends \plugin_renderer_base {
         $output .= html_writer::tag('div',
                         html_writer::tag('button', get_string('deleteselected', 'mod_quiz'), $buttondeleteoptions) .
                         " " .
-                        html_writer::tag('button', get_string('cancel', 'moodle'),
+                        html_writer::tag('button', get_string('cancel', 'powereduc'),
                 $buttoncanceloptions), $groupoptions);
 
         $toolbaroptions = array(
@@ -293,8 +293,8 @@ class edit_renderer extends \plugin_renderer_base {
 
         // Select all/deselect all questions.
         $selectallid = 'questionselectall';
-        $selectalltext = get_string('selectall', 'moodle');
-        $deselectalltext = get_string('deselectall', 'moodle');
+        $selectalltext = get_string('selectall', 'powereduc');
+        $deselectalltext = get_string('deselectall', 'powereduc');
         $mastercheckbox = new \core\output\checkbox_toggleall($this->togglegroup, true, [
             'id' => $selectallid,
             'name' => $selectallid,
@@ -312,10 +312,10 @@ class edit_renderer extends \plugin_renderer_base {
     /**
      * Return the repaginate form
      * @param structure $structure the structure of the quiz being edited.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
-    protected function repaginate_form(structure $structure, \moodle_url $pageurl) {
+    protected function repaginate_form(structure $structure, \powereduc_url $pageurl) {
         $perpage = array();
         $perpage[0] = get_string('allinone', 'quiz');
         for ($i = 1; $i <= 50; ++$i) {
@@ -408,9 +408,9 @@ class edit_renderer extends \plugin_renderer_base {
         if (!$structure->can_be_edited()) {
             $editsectionheadingicon = '';
         } else {
-            $editsectionheadingicon = html_writer::link(new \moodle_url('#'),
+            $editsectionheadingicon = html_writer::link(new \powereduc_url('#'),
                 $this->pix_icon('t/editstring', get_string('sectionheadingedit', 'quiz', $section->heading),
-                        'moodle', array('class' => 'editicon visibleifjs')),
+                        'powereduc', array('class' => 'editicon visibleifjs')),
                         array('class' => 'editing_section', 'data-action' => 'edit_section_title'));
         }
         $output .= html_writer::div($headingtext . $editsectionheadingicon, 'instancesectioncontainer');
@@ -483,7 +483,7 @@ class edit_renderer extends \plugin_renderer_base {
      */
     public function section_remove_icon($section) {
         $title = get_string('sectionheadingremove', 'quiz', $section->heading);
-        $url = new \moodle_url('/mod/quiz/edit.php',
+        $url = new \powereduc_url('/mod/quiz/edit.php',
                 array('sesskey' => sesskey(), 'removesection' => '1', 'sectionid' => $section->id));
         $image = $this->pix_icon('t/delete', $title);
         return $this->action_link($url, $image, null, array(
@@ -499,7 +499,7 @@ class edit_renderer extends \plugin_renderer_base {
      * @param \stdClass $section information about the section.
      * @param \core_question\local\bank\question_edit_contexts $contexts the relevant question bank contexts.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
     public function questions_in_section(structure $structure, $section,
@@ -519,7 +519,7 @@ class edit_renderer extends \plugin_renderer_base {
      * @param int $slot which slot we are outputting.
      * @param \core_question\local\bank\question_edit_contexts $contexts the relevant question bank contexts.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
     public function question_row(structure $structure, $slot, $contexts, $pagevars, $pageurl) {
@@ -552,7 +552,7 @@ class edit_renderer extends \plugin_renderer_base {
      * @param int $slot the first slot on the page we are outputting.
      * @param \core_question\local\bank\question_edit_contexts $contexts the relevant question bank contexts.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
     public function page_row(structure $structure, $slot, $contexts, $pagevars, $pageurl) {
@@ -583,12 +583,12 @@ class edit_renderer extends \plugin_renderer_base {
      * Returns the add menu that is output once per page.
      * @param structure $structure object containing the structure of the quiz.
      * @param int $page the page number that this menu will add to.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @param \core_question\local\bank\question_edit_contexts $contexts the relevant question bank contexts.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
      * @return string HTML to output.
      */
-    public function add_menu_actions(structure $structure, $page, \moodle_url $pageurl,
+    public function add_menu_actions(structure $structure, $page, \powereduc_url $pageurl,
             \core_question\local\bank\question_edit_contexts $contexts, array $pagevars) {
 
         $actions = $this->edit_menu_actions($structure, $page, $pageurl, $pagevars);
@@ -626,12 +626,12 @@ class edit_renderer extends \plugin_renderer_base {
      * Returns the list of actions to go in the add menu.
      * @param structure $structure object containing the structure of the quiz.
      * @param int $page the page number that this menu will add to.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
      * @return array the actions.
      */
     public function edit_menu_actions(structure $structure, $page,
-            \moodle_url $pageurl, array $pagevars) {
+            \powereduc_url $pageurl, array $pagevars) {
         $questioncategoryid = question_get_category_id_from_pagevars($pagevars);
         static $str;
         if (!isset($str)) {
@@ -643,19 +643,19 @@ class edit_renderer extends \plugin_renderer_base {
         $actions = array();
 
         // Add a new question to the quiz.
-        $returnurl = new \moodle_url($pageurl, array('addonpage' => $page));
+        $returnurl = new \powereduc_url($pageurl, array('addonpage' => $page));
         $params = array('returnurl' => $returnurl->out_as_local_url(false),
                 'cmid' => $structure->get_cmid(), 'category' => $questioncategoryid,
                 'addonpage' => $page, 'appendqnumstring' => 'addquestion');
 
         $actions['addaquestion'] = new \action_menu_link_secondary(
-            new \moodle_url('/question/bank/editquestion/addquestion.php', $params),
-            new \pix_icon('t/add', $str->addaquestion, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+            new \powereduc_url('/question/bank/editquestion/addquestion.php', $params),
+            new \pix_icon('t/add', $str->addaquestion, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
             $str->addaquestion, array('class' => 'cm-edit-action addquestion', 'data-action' => 'addquestion')
         );
 
         // Call question bank.
-        $icon = new \pix_icon('t/add', $str->questionbank, 'moodle', array('class' => 'iconsmall', 'title' => ''));
+        $icon = new \pix_icon('t/add', $str->questionbank, 'powereduc', array('class' => 'iconsmall', 'title' => ''));
         if ($page) {
             $title = get_string('addquestionfrombanktopage', 'quiz', $page);
         } else {
@@ -667,10 +667,10 @@ class edit_renderer extends \plugin_renderer_base {
 
         // Add a random question.
         if ($structure->can_add_random_questions()) {
-            $returnurl = new \moodle_url('/mod/quiz/edit.php', array('cmid' => $structure->get_cmid(), 'data-addonpage' => $page));
+            $returnurl = new \powereduc_url('/mod/quiz/edit.php', array('cmid' => $structure->get_cmid(), 'data-addonpage' => $page));
             $params = ['returnurl' => $returnurl, 'cmid' => $structure->get_cmid(), 'appendqnumstring' => 'addarandomquestion'];
-            $url = new \moodle_url('/mod/quiz/addrandom.php', $params);
-            $icon = new \pix_icon('t/add', $str->addarandomquestion, 'moodle', array('class' => 'iconsmall', 'title' => ''));
+            $url = new \powereduc_url('/mod/quiz/addrandom.php', $params);
+            $icon = new \pix_icon('t/add', $str->addarandomquestion, 'powereduc', array('class' => 'iconsmall', 'title' => ''));
             $attributes = array('class' => 'cm-edit-action addarandomquestion', 'data-action' => 'addarandomquestion');
             if ($page) {
                 $title = get_string('addrandomquestiontopage', 'quiz', $page);
@@ -687,8 +687,8 @@ class edit_renderer extends \plugin_renderer_base {
         $params = array('cmid' => $structure->get_cmid(), 'addsectionatpage' => $page);
 
         $actions['addasection'] = new \action_menu_link_secondary(
-            new \moodle_url($pageurl, $params),
-            new \pix_icon('t/add', $str->addasection, 'moodle', array('class' => 'iconsmall', 'title' => '')),
+            new \powereduc_url($pageurl, $params),
+            new \pix_icon('t/add', $str->addasection, 'powereduc', array('class' => 'iconsmall', 'title' => '')),
             $str->addasection, array('class' => 'cm-edit-action addasection', 'data-action' => 'addasection')
         );
 
@@ -700,11 +700,11 @@ class edit_renderer extends \plugin_renderer_base {
      *
      * @param structure $structure object containing the structure of the quiz.
      * @param int $page the page number that this menu will add to.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
      * @return string HTML to output.
      */
-    protected function add_question_form(structure $structure, $page, \moodle_url $pageurl, array $pagevars) {
+    protected function add_question_form(structure $structure, $page, \powereduc_url $pageurl, array $pagevars) {
 
         $questioncategoryid = question_get_category_id_from_pagevars($pagevars);
 
@@ -720,7 +720,7 @@ class edit_renderer extends \plugin_renderer_base {
 
         return html_writer::tag('form', html_writer::div($output),
                 array('class' => 'addnewquestion', 'method' => 'post',
-                        'action' => new \moodle_url('/question/bank/editquestion/addquestion.php')));
+                        'action' => new \powereduc_url('/question/bank/editquestion/addquestion.php')));
     }
 
     /**
@@ -728,10 +728,10 @@ class edit_renderer extends \plugin_renderer_base {
      *
      * @param structure $structure object containing the structure of the quiz.
      * @param int $slot the first slot on the page we are outputting.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
-    public function question(structure $structure, int $slot, \moodle_url $pageurl) {
+    public function question(structure $structure, int $slot, \powereduc_url $pageurl) {
         // Get the data required by the question_slot template.
         $slotid = $structure->get_slot_id_for_slot($slot);
 
@@ -792,10 +792,10 @@ class edit_renderer extends \plugin_renderer_base {
      *
      * @param structure $structure object containing the structure of the quiz.
      * @param int $slot the slot on the page we are outputting.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
-    public function get_question_name_for_slot(structure $structure, int $slot, \moodle_url $pageurl) : string {
+    public function get_question_name_for_slot(structure $structure, int $slot, \powereduc_url $pageurl) : string {
         // Display the link to the question (or do nothing if question has no url).
         if ($structure->get_question_type_for_slot($slot) === 'random') {
             $questionname = $this->random_question($structure, $slot, $pageurl);
@@ -811,10 +811,10 @@ class edit_renderer extends \plugin_renderer_base {
      *
      * @param structure $structure object containing the structure of the quiz.
      * @param int $slot the slot on the page we are outputting.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
-    public function get_action_icon(structure $structure, int $slot, \moodle_url $pageurl) : string {
+    public function get_action_icon(structure $structure, int $slot, \powereduc_url $pageurl) : string {
         // Action icons.
         $qtype = $structure->get_question_type_for_slot($slot);
         $questionicons = '';
@@ -839,8 +839,8 @@ class edit_renderer extends \plugin_renderer_base {
      * @return string The markup for the move action.
      */
     public function question_move_icon(structure $structure, $slot) {
-        return html_writer::link(new \moodle_url('#'),
-            $this->pix_icon('i/dragdrop', get_string('move'), 'moodle', array('class' => 'iconsmall', 'title' => '')),
+        return html_writer::link(new \powereduc_url('#'),
+            $this->pix_icon('i/dragdrop', get_string('move'), 'powereduc', array('class' => 'iconsmall', 'title' => '')),
             array('class' => 'editing_move', 'data-action' => 'move')
         );
     }
@@ -898,11 +898,11 @@ class edit_renderer extends \plugin_renderer_base {
      *
      * @param structure $structure object containing the structure of the quiz.
      * @param int $slot the first slot on the page we are outputting.
-     * @param \moodle_url $pageurl the canonical URL of the edit page.
+     * @param \powereduc_url $pageurl the canonical URL of the edit page.
      * @return string HTML to output.
      */
     public function question_remove_icon(structure $structure, $slot, $pageurl) {
-        $url = new \moodle_url($pageurl, array('sesskey' => sesskey(), 'remove' => $slot));
+        $url = new \powereduc_url($pageurl, array('sesskey' => sesskey(), 'remove' => $slot));
         $strdelete = get_string('delete');
 
         $image = $this->pix_icon('t/delete', $strdelete);
@@ -920,7 +920,7 @@ class edit_renderer extends \plugin_renderer_base {
      */
     public function page_split_join_button($structure, $slot) {
         $insertpagebreak = !$structure->is_last_slot_on_page($slot);
-        $url = new \moodle_url('repaginate.php', array('quizid' => $structure->get_quizid(),
+        $url = new \powereduc_url('repaginate.php', array('quizid' => $structure->get_quizid(),
                 'slot' => $slot, 'repag' => $insertpagebreak ? 2 : 1, 'sesskey' => sesskey()));
 
         if ($insertpagebreak) {
@@ -959,12 +959,12 @@ class edit_renderer extends \plugin_renderer_base {
         if ($structure->is_question_dependent_on_previous_slot($slot)) {
             $title = get_string('questiondependencyremove', 'quiz', $a);
             $image = $this->pix_icon('t/locked', get_string('questiondependsonprevious', 'quiz'),
-                    'moodle', array('title' => ''));
+                    'powereduc', array('title' => ''));
             $action = 'removedependency';
         } else {
             $title = get_string('questiondependencyadd', 'quiz', $a);
             $image = $this->pix_icon('t/unlocked', get_string('questiondependencyfree', 'quiz'),
-                    'moodle', array('title' => ''));
+                    'powereduc', array('title' => ''));
             $action = 'adddependency';
         }
 
@@ -990,14 +990,14 @@ class edit_renderer extends \plugin_renderer_base {
      *
      * @param structure $structure object containing the structure of the quiz.
      * @param int $slot which slot we are outputting.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
     public function question_name(structure $structure, $slot, $pageurl) {
         $output = '';
 
         $question = $structure->get_question_in_slot($slot);
-        $editurl = new \moodle_url('/question/bank/editquestion/question.php', array(
+        $editurl = new \powereduc_url('/question/bank/editquestion/question.php', array(
                 'returnurl' => $pageurl->out_as_local_url(),
                 'cmid' => $structure->get_cmid(), 'id' => $question->questionid));
 
@@ -1009,7 +1009,7 @@ class edit_renderer extends \plugin_renderer_base {
         $icon = $this->pix_icon('icon', $namestr, $qtype->plugin_name(), array('title' => $namestr,
                 'class' => 'activityicon', 'alt' => ' ', 'role' => 'presentation'));
 
-        $editicon = $this->pix_icon('t/edit', '', 'moodle', array('title' => ''));
+        $editicon = $this->pix_icon('t/edit', '', 'powereduc', array('title' => ''));
 
         // Need plain question name without html tags for link title.
         $title = shorten_text(format_string($question->name), 100);
@@ -1028,13 +1028,13 @@ class edit_renderer extends \plugin_renderer_base {
      *
      * @param structure $structure object containing the structure of the quiz.
      * @param int $slotnumber which slot we are outputting.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML to output.
      */
     public function random_question(structure $structure, $slotnumber, $pageurl) {
         $question = $structure->get_question_in_slot($slotnumber);
         $slot = $structure->get_slot_by_number($slotnumber);
-        $editurl = new \moodle_url('/mod/quiz/editrandom.php',
+        $editurl = new \powereduc_url('/mod/quiz/editrandom.php',
                 array('returnurl' => $pageurl->out_as_local_url(), 'slotid' => $slot->id));
 
         $temp = clone($question);
@@ -1048,7 +1048,7 @@ class edit_renderer extends \plugin_renderer_base {
         $icon = $this->pix_icon('icon', $namestr, $qtype->plugin_name(), array('title' => $namestr,
                 'class' => 'icon activityicon', 'alt' => ' ', 'role' => 'presentation'));
 
-        $editicon = $this->pix_icon('t/edit', $configuretitle, 'moodle', array('title' => ''));
+        $editicon = $this->pix_icon('t/edit', $configuretitle, 'powereduc', array('title' => ''));
         $qbankurlparams = [
             'cmid' => $structure->get_cmid(),
             'cat' => $slot->category . ',' . $slot->contextid,
@@ -1066,7 +1066,7 @@ class edit_renderer extends \plugin_renderer_base {
 
         // If this is a random question, display a link to show the questions
         // selected from in the question bank.
-        $qbankurl = new \moodle_url('/question/edit.php', $qbankurlparams);
+        $qbankurl = new \powereduc_url('/question/edit.php', $qbankurlparams);
         $qbanklink = ' ' . \html_writer::link($qbankurl,
                         get_string('seequestions', 'quiz'), array('class' => 'mod_quiz_random_qbank_link'));
 
@@ -1087,7 +1087,7 @@ class edit_renderer extends \plugin_renderer_base {
                     'instancemaxmark decimalplaces_' . $structure->get_decimal_places_for_question_marks());
 
             $output .= html_writer::span(
-                    $this->pix_icon('spacer', '', 'moodle', array('class' => 'editicon visibleifjs', 'title' => '')),
+                    $this->pix_icon('spacer', '', 'powereduc', array('class' => 'editicon visibleifjs', 'title' => '')),
                     'editing_maxmark');
             return html_writer::span($output, 'instancemaxmarkcontainer infoitem');
         }
@@ -1098,8 +1098,8 @@ class edit_renderer extends \plugin_renderer_base {
 
         $output .= html_writer::span(
             html_writer::link(
-                new \moodle_url('#'),
-                $this->pix_icon('t/editstring', '', 'moodle', array('class' => 'editicon visibleifjs', 'title' => '')),
+                new \powereduc_url('#'),
+                $this->pix_icon('t/editstring', '', 'powereduc', array('class' => 'editicon visibleifjs', 'title' => '')),
                 array(
                     'class' => 'editing_maxmark',
                     'data-action' => 'editmaxmark',
@@ -1146,11 +1146,11 @@ class edit_renderer extends \plugin_renderer_base {
      * @param structure $structure object containing the structure of the quiz.
      * @param \core_question\local\bank\question_edit_contexts $contexts the relevant question bank contexts.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return bool Always returns true
      */
     protected function initialise_editing_javascript(structure $structure,
-            \core_question\local\bank\question_edit_contexts $contexts, array $pagevars, \moodle_url $pageurl) {
+            \core_question\local\bank\question_edit_contexts $contexts, array $pagevars, \powereduc_url $pageurl) {
 
         $config = new \stdClass();
         $config->resourceurl = '/mod/quiz/edit_rest.php';
@@ -1160,7 +1160,7 @@ class edit_renderer extends \plugin_renderer_base {
         $config->pagehtml = $this->new_page_template($structure, $contexts, $pagevars, $pageurl);
         $config->addpageiconhtml = $this->add_page_icon_template($structure);
 
-        $this->page->requires->yui_module('moodle-mod_quiz-toolboxes',
+        $this->page->requires->yui_module('powereduc-mod_quiz-toolboxes',
                 'M.mod_quiz.init_resource_toolbox',
                 array(array(
                         'courseid' => $structure->get_courseid(),
@@ -1173,7 +1173,7 @@ class edit_renderer extends \plugin_renderer_base {
         unset($config->addpageiconhtml);
 
         $this->page->requires->strings_for_js(array('areyousureremoveselected'), 'quiz');
-        $this->page->requires->yui_module('moodle-mod_quiz-toolboxes',
+        $this->page->requires->yui_module('powereduc-mod_quiz-toolboxes',
                 'M.mod_quiz.init_section_toolbox',
                 array(array(
                         'courseid' => $structure,
@@ -1183,7 +1183,7 @@ class edit_renderer extends \plugin_renderer_base {
                 ))
         );
 
-        $this->page->requires->yui_module('moodle-mod_quiz-dragdrop', 'M.mod_quiz.init_section_dragdrop',
+        $this->page->requires->yui_module('powereduc-mod_quiz-dragdrop', 'M.mod_quiz.init_section_dragdrop',
                 array(array(
                         'courseid' => $structure,
                         'quizid' => $structure->get_quizid(),
@@ -1191,7 +1191,7 @@ class edit_renderer extends \plugin_renderer_base {
                         'config' => $config,
                 )), null, true);
 
-        $this->page->requires->yui_module('moodle-mod_quiz-dragdrop', 'M.mod_quiz.init_resource_dragdrop',
+        $this->page->requires->yui_module('powereduc-mod_quiz-dragdrop', 'M.mod_quiz.init_resource_dragdrop',
                 array(array(
                         'courseid' => $structure,
                         'quizid' => $structure->get_quizid(),
@@ -1219,7 +1219,7 @@ class edit_renderer extends \plugin_renderer_base {
                 'selectall',
                 'show',
                 'tocontent',
-        ), 'moodle');
+        ), 'powereduc');
 
         $this->page->requires->strings_for_js(array(
                 'addpagebreak',
@@ -1252,11 +1252,11 @@ class edit_renderer extends \plugin_renderer_base {
      * @param structure $structure object containing the structure of the quiz.
      * @param \core_question\local\bank\question_edit_contexts $contexts the relevant question bank contexts.
      * @param array $pagevars the variables from {@link \question_edit_setup()}.
-     * @param \moodle_url $pageurl the canonical URL of this page.
+     * @param \powereduc_url $pageurl the canonical URL of this page.
      * @return string HTML for a new page.
      */
     protected function new_page_template(structure $structure,
-            \core_question\local\bank\question_edit_contexts $contexts, array $pagevars, \moodle_url $pageurl) {
+            \core_question\local\bank\question_edit_contexts $contexts, array $pagevars, \powereduc_url $pageurl) {
         if (!$structure->has_questions()) {
             return '';
         }

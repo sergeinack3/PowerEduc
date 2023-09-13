@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace core_message\search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/message/lib.php');
 
@@ -61,7 +61,7 @@ abstract class base_message extends \core_search\base {
         // Get user context.
         try {
             $usercontext = \context_user::instance($options['user1id']);
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             // Notify it as we run here as admin, we should see everything.
             debugging('Error retrieving ' . $this->areaid . ' ' . $record->id . ' document, not all required data is available: ' .
                     $ex->getMessage(), DEBUG_DEVELOPER);
@@ -91,12 +91,12 @@ abstract class base_message extends \core_search\base {
      * Link to the message.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         $users = $this->get_current_other_users($doc);
         $position = 'm'.$doc->get('itemid');
-        return new \moodle_url('/message/index.php', array('history' => MESSAGE_HISTORY_ALL,
+        return new \powereduc_url('/message/index.php', array('history' => MESSAGE_HISTORY_ALL,
                 'user1' => $users['currentuserid'], 'user2' => $users['otheruserid']), $position);
     }
 
@@ -104,11 +104,11 @@ abstract class base_message extends \core_search\base {
      * Link to the conversation.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
         $users = $this->get_current_other_users($doc);
-        return new \moodle_url('/message/index.php', array('user1' => $users['currentuserid'], 'user2' => $users['otheruserid']));
+        return new \powereduc_url('/message/index.php', array('user1' => $users['currentuserid'], 'user2' => $users['otheruserid']));
     }
 
     /**
@@ -138,7 +138,7 @@ abstract class base_message extends \core_search\base {
      * @param int $modifiedfrom Modified from date
      * @param \context|null $context Context or null
      * @param string $userfield Name of user field (from or to) being considered
-     * @return \moodle_recordset|null Recordset or null if no results possible
+     * @return \powereduc_recordset|null Recordset or null if no results possible
      * @throws \coding_exception If context invalid
      */
     protected function get_document_recordset_helper($modifiedfrom, ?\context $context,

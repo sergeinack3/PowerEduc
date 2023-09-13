@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Glossary module external functions.
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $functions = array(
 
@@ -33,7 +33,7 @@ $functions = array(
         'description'   => 'Retrieve a list of glossaries from several courses.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_view_glossary' => array(
@@ -42,7 +42,7 @@ $functions = array(
         'description'   => 'Notify the glossary as being viewed.',
         'type'          => 'write',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_view_entry' => array(
@@ -51,7 +51,7 @@ $functions = array(
         'description'   => 'Notify a glossary entry as being viewed.',
         'type'          => 'write',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_by_letter' => array(
@@ -60,7 +60,7 @@ $functions = array(
         'description'   => 'Browse entries by letter.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_by_date' => array(
@@ -69,7 +69,7 @@ $functions = array(
         'description'   => 'Browse entries by date.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_categories' => array(
@@ -78,7 +78,7 @@ $functions = array(
         'description'   => 'Get the categories.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_by_category' => array(
@@ -87,7 +87,7 @@ $functions = array(
         'description'   => 'Browse entries by category.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_authors' => array(
@@ -96,7 +96,7 @@ $functions = array(
         'description'   => 'Get the authors.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_by_author' => array(
@@ -105,7 +105,7 @@ $functions = array(
         'description'   => 'Browse entries by author.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_by_author_id' => array(
@@ -114,7 +114,7 @@ $functions = array(
         'description'   => 'Browse entries by author ID.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_by_search' => array(
@@ -123,7 +123,7 @@ $functions = array(
         'description'   => 'Browse entries by search query.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_by_term' => array(
@@ -132,7 +132,7 @@ $functions = array(
         'description'   => 'Browse entries by term (concept or alias).',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entries_to_approve' => array(
@@ -141,7 +141,7 @@ $functions = array(
         'description'   => 'Browse entries to be approved.',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:approve',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_get_entry_by_id' => array(
@@ -150,7 +150,7 @@ $functions = array(
         'description'   => 'Get an entry by ID',
         'type'          => 'read',
         'capabilities'  => 'mod/glossary:view',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_add_entry' => array(
@@ -159,7 +159,7 @@ $functions = array(
         'description'   => 'Add a new entry to a given glossary',
         'type'          => 'write',
         'capabilities'  => 'mod/glossary:write',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_glossary_delete_entry' => [
@@ -167,7 +167,7 @@ $functions = array(
         'classpath'     => '',
         'description'   => 'Delete the given entry from the glossary.',
         'type'          => 'write',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE]
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE]
     ],
 
     'mod_glossary_update_entry' => [
@@ -175,7 +175,7 @@ $functions = array(
         'classpath'     => '',
         'description'   => 'Updates the given glossary entry.',
         'type'          => 'write',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE]
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE]
     ],
 
     'mod_glossary_prepare_entry_for_edition' => [
@@ -183,6 +183,6 @@ $functions = array(
         'classpath'     => '',
         'description'   => 'Prepares the given entry for edition returning draft item areas and file areas information.',
         'type'          => 'read',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE]
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE]
     ],
 );

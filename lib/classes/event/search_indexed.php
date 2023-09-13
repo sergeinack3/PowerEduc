@@ -24,7 +24,7 @@
 
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Event when new data has been indexed.

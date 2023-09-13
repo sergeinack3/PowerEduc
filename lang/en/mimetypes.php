@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'mimetypes', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'mimetypes', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * Strings are used to display human-readable name of mimetype. Some mimetypes share the same
  * string. The following attributes are passed in the parameter when processing the string:

@@ -25,7 +25,7 @@
 declare(strict_types = 1);
 namespace core\plugininfo;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_plugin_manager;
 use testable_core_plugin_manager;

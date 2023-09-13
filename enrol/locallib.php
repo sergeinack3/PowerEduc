@@ -25,7 +25,7 @@
 
 use core_user\fields;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * This class provides a targeted tied together means of interfacing the enrolment

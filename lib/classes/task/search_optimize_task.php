@@ -24,7 +24,7 @@
 
 namespace core\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Runs search index optimization.

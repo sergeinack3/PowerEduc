@@ -16,7 +16,7 @@ $mode   = optional_param('mode', '', PARAM_ALPHA);   // cat
 
 $action = strtolower($action);
 
-$url = new moodle_url('/mod/glossary/editcategories.php', array('id'=>$id));
+$url = new powereduc_url('/mod/glossary/editcategories.php', array('id'=>$id));
 if ($usedynalink !== 0) {
     $url->param('usedynalink', $usedynalink);
 }
@@ -39,25 +39,25 @@ if ($mode !== 'mode') {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('glossary', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if ($hook > 0) {
     if ($category = $DB->get_record("glossary_categories", array("id"=>$hook))) {
         //Check it belongs to the same glossary
         if ($category->glossaryid != $glossary->id) {
-            throw new \moodle_exception('invalidid', 'glossary');
+            throw new \powereduc_exception('invalidid', 'glossary');
         }
     } else {
-        throw new \moodle_exception('invalidcategoryid');
+        throw new \powereduc_exception('invalidcategoryid');
     }
 }
 
@@ -70,7 +70,7 @@ $strglossaries   = get_string("modulenameplural", "glossary");
 $strglossary     = get_string("modulename", "glossary");
 
 $PAGE->navbar->add(get_string("categories","glossary"),
-        new moodle_url('/mod/glossary/editcategories.php', array('id' => $cm->id,'mode' => 'cat')));
+        new powereduc_url('/mod/glossary/editcategories.php', array('id' => $cm->id,'mode' => 'cat')));
 if (!empty($action)) {
     $navaction = get_string(core_text::strtolower($action."category"), 'glossary');
     $PAGE->navbar->add($navaction);
@@ -182,7 +182,7 @@ if ( $hook >0 ) {
 <?php
             unset($options);
             $options = array ("id" => $id);
-            echo $OUTPUT->single_button(new moodle_url("editcategories.php", $options), get_string("no"));
+            echo $OUTPUT->single_button(new powereduc_url("editcategories.php", $options), get_string("no"));
             echo "</td></tr></table>";
             echo "</div>";
             echo $OUTPUT->box_end();
@@ -287,12 +287,12 @@ echo $OUTPUT->heading(format_string($glossary->name), 2);
              $options['action'] = "add";
 
              echo "<table class=\"editbuttons\" border=\"0\"><tr><td align=\"$rightalignment\">";
-             echo $OUTPUT->single_button(new moodle_url("editcategories.php", $options), get_string("addcategory", "glossary"));
+             echo $OUTPUT->single_button(new powereduc_url("editcategories.php", $options), get_string("addcategory", "glossary"));
              echo "</td><td align=\"$leftalignment\">";
              unset($options['action']);
              $options['mode'] = 'cat';
              $options['hook'] = $hook;
-             echo $OUTPUT->single_button(new moodle_url("view.php", $options), get_string("back","glossary"));
+             echo $OUTPUT->single_button(new powereduc_url("view.php", $options), get_string("back","glossary"));
              echo "</td></tr>";
              echo "</table>";
 

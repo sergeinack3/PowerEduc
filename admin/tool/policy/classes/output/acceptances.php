@@ -27,7 +27,7 @@ namespace tool_policy\output;
 
 use tool_policy\api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use moodle_url;
 use renderable;

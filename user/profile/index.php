@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Manage user profile fields.
@@ -82,8 +82,8 @@ switch ($action) {
         $PAGE->navbar->add($strheading);
         echo $OUTPUT->header();
         echo $OUTPUT->heading($strheading);
-        $formcontinue = new single_button(new moodle_url($redirect, $optionsyes), get_string('yes'), 'post');
-        $formcancel = new single_button(new moodle_url($redirect), get_string('no'), 'get');
+        $formcontinue = new single_button(new powereduc_url($redirect, $optionsyes), get_string('yes'), 'post');
+        $formcancel = new single_button(new powereduc_url($redirect), get_string('no'), 'get');
         echo $OUTPUT->confirm(get_string('profileconfirmfielddeletion', 'admin', $datacount), $formcontinue, $formcancel);
         echo $OUTPUT->footer();
         die;
@@ -137,7 +137,7 @@ foreach ($categories as $category) {
     $menu = new \action_menu();
     $menu->set_menu_trigger($strcreatefield);
     foreach ($options as $type => $fieldname) {
-        $action = new \action_menu_link_secondary(new \moodle_url('#'), null, $fieldname,
+        $action = new \action_menu_link_secondary(new \powereduc_url('#'), null, $fieldname,
             ['data-action' => 'createfield', 'data-categoryid' => $category->id, 'data-datatype' => $type,
                 'data-datatypename' => $fieldname]);
         $menu->add($action);
@@ -160,7 +160,7 @@ foreach ($categories as $category) {
 echo $OUTPUT->render_from_template('core_user/edit_profile_fields', [
     'categories' => $outputcategories,
     'sesskey' => sesskey(),
-    'baseurl' => (new moodle_url('/user/profile/index.php'))->out(false)
+    'baseurl' => (new powereduc_url('/user/profile/index.php'))->out(false)
 ]);
 
 echo $OUTPUT->footer();

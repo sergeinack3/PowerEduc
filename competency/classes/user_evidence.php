@@ -23,7 +23,7 @@
  */
 
 namespace core_competency;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context_user;
 use lang_string;
@@ -57,7 +57,7 @@ class user_evidence extends persistent {
                 'default' => '',
             ),
             'descriptionformat' => array(
-                'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                'choices' => array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN),
                 'type' => PARAM_INT,
                 'default' => FORMAT_HTML,
             ),

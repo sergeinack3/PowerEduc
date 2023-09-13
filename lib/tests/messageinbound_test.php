@@ -27,7 +27,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Test script for message class.

@@ -20,7 +20,7 @@ use comment_exception;
 use core_comment_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -326,7 +326,7 @@ class externallib_test extends externallib_advanced_testcase {
         // The content for each comment should come back formatted.
         foreach ($result as $index => $comment) {
             $formatoptions = array('overflowdiv' => true, 'blanktarget' => true);
-            $expectedcontent = format_text($inputdata[$index]['content'], FORMAT_MOODLE, $formatoptions);
+            $expectedcontent = format_text($inputdata[$index]['content'], FORMAT_POWEREDUC, $formatoptions);
             $this->assertEquals($expectedcontent, $comment['content']);
         }
     }

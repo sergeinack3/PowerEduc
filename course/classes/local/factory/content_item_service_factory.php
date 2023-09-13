@@ -24,7 +24,7 @@
  */
 namespace core_course\local\factory;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_course\local\repository\caching_content_item_readonly_repository;
 use core_course\local\repository\content_item_readonly_repository;

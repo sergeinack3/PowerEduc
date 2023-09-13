@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Player that creates HTML5 <video> tag.
@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class media_videojs_plugin extends core_media_player_native {
-    /** @var array caches last moodle_page used to include AMD modules */
+    /** @var array caches last powereduc_page used to include AMD modules */
     protected $loadedonpage = [];
     /** @var string language file to use */
     protected $language = 'en';
@@ -53,7 +53,7 @@ class media_videojs_plugin extends core_media_player_native {
     /**
      * Generates code required to embed the player.
      *
-     * @param moodle_url[] $urls
+     * @param powereduc_url[] $urls
      * @param string $name
      * @param int $width
      * @param int $height
@@ -416,7 +416,7 @@ class media_videojs_plugin extends core_media_player_native {
     /**
      * Setup page requirements.
      *
-     * @param moodle_page $page The page we are going to add requirements to.
+     * @param powereduc_page $page The page we are going to add requirements to.
      */
     public function setup($page) {
         if (during_initial_install() || is_major_upgrade_required()) {

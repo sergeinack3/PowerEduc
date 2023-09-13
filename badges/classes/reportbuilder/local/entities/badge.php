@@ -29,7 +29,7 @@ use core_reportbuilder\local\entities\base;
 use core_reportbuilder\local\filters\{select, text};
 use core_reportbuilder\local\report\{column, filter};
 
-defined('MOODLE_INTERNAL') or die;
+defined('POWEREDUC_INTERNAL') or die;
 
 global $CFG;
 require_once("{$CFG->libdir}/badgeslib.php");

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag\output\tagcollsearchable
@@ -45,7 +45,7 @@ class tagcollsearchable extends \core\output\inplace_editable {
     public function __construct($tagcoll) {
         $defaultid = core_tag_collection::get_default();
         $editable = $tagcoll->id != $defaultid &&
-                has_capability('moodle/tag:manage', context_system::instance());
+                has_capability('powereduc/tag:manage', context_system::instance());
         $edithint = new lang_string('editsearchable', 'core_tag');
         $value = $tagcoll->searchable ? 1 : 0;
 
@@ -78,7 +78,7 @@ class tagcollsearchable extends \core\output\inplace_editable {
      */
     public static function update($itemid, $newvalue) {
         global $DB;
-        require_capability('moodle/tag:manage', context_system::instance());
+        require_capability('powereduc/tag:manage', context_system::instance());
         $tagcoll = $DB->get_record('tag_coll', array('id' => $itemid), '*', MUST_EXIST);
         core_tag_collection::update($tagcoll, array('searchable' => $newvalue));
         return new self($tagcoll);

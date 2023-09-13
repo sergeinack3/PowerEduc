@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@ namespace mod_bigbluebuttonbn\output;
 
 use lang_string;
 use mod_bigbluebuttonbn\local\bigbluebutton;
-use moodle_exception;
+use powereduc_exception;
 use core\output\inplace_editable;
 use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
@@ -77,13 +77,13 @@ abstract class recording_editable extends \core\output\inplace_editable {
      * Check user can access and or modify this item.
      *
      * @return bool
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function check_capability() {
         global $USER;
 
         if (!can_access_course($this->instance->get_course(), $USER)) {
-            throw new moodle_exception('noaccess', 'mod_bigbluebuttonbn');
+            throw new powereduc_exception('noaccess', 'mod_bigbluebuttonbn');
         }
 
         return $this->instance->can_manage_recordings();

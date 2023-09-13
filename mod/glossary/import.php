@@ -11,7 +11,7 @@ $id = required_param('id', PARAM_INT);    // Course Module ID
 $mode     = optional_param('mode', 'letter', PARAM_ALPHA );
 $hook     = optional_param('hook', 'ALL', PARAM_ALPHANUM);
 
-$url = new moodle_url('/mod/glossary/import.php', array('id'=>$id));
+$url = new powereduc_url('/mod/glossary/import.php', array('id'=>$id));
 if ($mode !== 'letter') {
     $url->param('mode', $mode);
 }
@@ -21,15 +21,15 @@ if ($hook !== 'ALL') {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('glossary', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
-    throw new \moodle_exception('invalidid', 'glossary');
+    throw new \powereduc_exception('invalidid', 'glossary');
 }
 
 require_login($course, false, $cm);
@@ -54,7 +54,7 @@ $PAGE->activityheader->disable();
 
 $form = new mod_glossary_import_form('');
 if ($form->is_cancelled()) {
-    redirect(new moodle_url('view.php', ['id' => $id]));
+    redirect(new powereduc_url('view.php', ['id' => $id]));
 }
 
 echo $OUTPUT->header();
@@ -104,7 +104,7 @@ if ($xml = glossary_read_imported_file($result)) {
             $glossary->name = ($xmlglossary['NAME'][0]['#']);
             $glossary->globalglossary = ($xmlglossary['GLOBALGLOSSARY'][0]['#']);
             $glossary->intro = ($xmlglossary['INTRO'][0]['#']);
-            $glossary->introformat = isset($xmlglossary['INTROFORMAT'][0]['#']) ? $xmlglossary['INTROFORMAT'][0]['#'] : FORMAT_MOODLE;
+            $glossary->introformat = isset($xmlglossary['INTROFORMAT'][0]['#']) ? $xmlglossary['INTROFORMAT'][0]['#'] : FORMAT_POWEREDUC;
             $glossary->showspecial = ($xmlglossary['SHOWSPECIAL'][0]['#']);
             $glossary->showalphabet = ($xmlglossary['SHOWALPHABET'][0]['#']);
             $glossary->showall = ($xmlglossary['SHOWALL'][0]['#']);
@@ -185,7 +185,7 @@ if ($xml = glossary_read_imported_file($result)) {
         $newentry->concept = trim($xmlentry['#']['CONCEPT'][0]['#']);
         $definition = $xmlentry['#']['DEFINITION'][0]['#'];
         if (!is_string($definition)) {
-            throw new \moodle_exception('errorparsingxml', 'glossary');
+            throw new \powereduc_exception('errorparsingxml', 'glossary');
         }
         $newentry->definition = trusttext_strip($definition);
         if ( isset($xmlentry['#']['CASESENSITIVE'][0]['#']) ) {

@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $functions = array(
 
@@ -73,7 +73,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:coursecompetencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'tool_lp_data_for_template_competencies_page' => array(
         'classname'    => 'tool_lp\external',
@@ -101,7 +101,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:planviewown',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'tool_lp_data_for_plan_page' => array(
         'classname'    => 'tool_lp\external',
@@ -111,7 +111,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:planview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'tool_lp_data_for_related_competencies_section' => array(
         'classname'    => 'tool_lp\external',
@@ -151,7 +151,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:userevidenceview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'tool_lp_data_for_user_evidence_page' => array(
         'classname'    => 'tool_lp\external',
@@ -161,7 +161,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:userevidenceview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 
     // User competency.
@@ -173,7 +173,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:planview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'tool_lp_data_for_user_competency_summary_in_plan' => array(
         'classname'    => 'tool_lp\external',
@@ -183,7 +183,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:planview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'tool_lp_data_for_user_competency_summary_in_course' => array(
         'classname'    => 'tool_lp\external',
@@ -193,7 +193,7 @@ $functions = array(
         'type'         => 'read',
         'capabilities' => 'moodle/competency:coursecompetencyview',
         'ajax'         => true,
-        'services'     => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'     => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 );
 

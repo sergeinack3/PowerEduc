@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once(__DIR__.'/lib.php');
 require_once($CFG->dirroot.'/mod/book/locallib.php');
@@ -138,7 +138,7 @@ function toolbook_importhtml_import_chapters($package, $type, $book, $context, $
                 $chapterpath = toolbook_importhtml_fix_path($chapterpath);
                 foreach ($allchapters as $target) {
                     if ($target->importsrc === $chapterpath) {
-                        $newcontent = str_replace($match, 'href="'.new moodle_url('/mod/book/view.php',
+                        $newcontent = str_replace($match, 'href="'.new powereduc_url('/mod/book/view.php',
                                 array('id'=>$context->instanceid, 'chapterid'=>$target->id)).'"', $newcontent);
                     }
                 }

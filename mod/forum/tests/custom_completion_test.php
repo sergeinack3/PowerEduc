@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains unit tests for core_completion/activity_custom_completion.
  *
  * @package   mod_forum
- * @copyright Simey Lameze <simey@moodle.com>
+ * @copyright Simey Lameze <simey@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,9 +30,9 @@ use advanced_testcase;
 use cm_info;
 use coding_exception;
 use mod_forum\completion\custom_completion;
-use moodle_exception;
+use powereduc_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/completionlib.php');
@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/mod/forum/tests/generator_trait.php');
  * Class for unit testing mod_forum/activity_custom_completion.
  *
  * @package   mod_forum
- * @copyright Simey Lameze <simey@moodle.com>
+ * @copyright Simey Lameze <simey@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_completion_test extends advanced_testcase {
@@ -61,7 +61,7 @@ class custom_completion_test extends advanced_testcase {
                 'somenonexistentrule', 0, COMPLETION_TRACKING_NONE, 0, 0, 0, null, coding_exception::class
             ],
             'Completion discussions rule not available'  => [
-                'completiondiscussions', 0,  COMPLETION_TRACKING_NONE, 0, 0, 0, null, moodle_exception::class
+                'completiondiscussions', 0,  COMPLETION_TRACKING_NONE, 0, 0, 0, null, powereduc_exception::class
             ],
             'Completion discussions rule available, user has not created discussion' => [
                 'completiondiscussions', 0, COMPLETION_TRACKING_AUTOMATIC, 5, 0, 0, COMPLETION_INCOMPLETE, null
@@ -70,7 +70,7 @@ class custom_completion_test extends advanced_testcase {
                 'completiondiscussions', 5, COMPLETION_TRACKING_AUTOMATIC, 5, 0, 0, COMPLETION_COMPLETE, null
             ],
             'Completion replies rule not available' => [
-                'completionreplies', 0, COMPLETION_TRACKING_NONE, 0, 0, 0, null, moodle_exception::class
+                'completionreplies', 0, COMPLETION_TRACKING_NONE, 0, 0, 0, null, powereduc_exception::class
             ],
             'Rule available, user has not replied' => [
                 'completionreplies', 0, COMPLETION_TRACKING_AUTOMATIC, 0, 5, 0, COMPLETION_INCOMPLETE, null
@@ -79,7 +79,7 @@ class custom_completion_test extends advanced_testcase {
                 'completionreplies', 5, COMPLETION_TRACKING_AUTOMATIC, 0, 5, 0, COMPLETION_COMPLETE, null
             ],
             'Completion posts rule not available' => [
-                'completionposts', 0, COMPLETION_TRACKING_NONE, 0, 0, 0, null, moodle_exception::class
+                'completionposts', 0, COMPLETION_TRACKING_NONE, 0, 0, 0, null, powereduc_exception::class
             ],
             'Rule available, user has not posted' => [
                 'completionposts', 0, COMPLETION_TRACKING_AUTOMATIC, 0, 0, 5, COMPLETION_INCOMPLETE, null

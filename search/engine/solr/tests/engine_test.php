@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace search_solr;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/search/tests/fixtures/testable_core_search.php');
@@ -126,7 +126,7 @@ class engine_test extends \advanced_testcase {
         // Cleanup before doing anything on it as the index it is out of this test control.
         $this->search->delete_index();
 
-        // Add moodle fields if they don't exist.
+        // Add powereduc fields if they don't exist.
         $schema = new \search_solr\schema($this->engine);
         $schema->setup(false);
     }
@@ -134,7 +134,7 @@ class engine_test extends \advanced_testcase {
     public function tearDown(): void {
         // For unit tests before PHP 7, teardown is called even on skip. So only do our teardown if we did setup.
         if ($this->generator) {
-            // Moodle DML freaks out if we don't teardown the temp table after each run.
+            // PowerEduc DML freaks out if we don't teardown the temp table after each run.
             $this->generator->teardown();
             $this->generator = null;
         }
@@ -1232,14 +1232,14 @@ class engine_test extends \advanced_testcase {
     }
 
     /**
-     * Tests with bogus content (that can be entered into Moodle) to see if it crashes.
+     * Tests with bogus content (that can be entered into PowerEduc) to see if it crashes.
      */
     public function test_bogus_content() {
         $generator = $this->getDataGenerator();
         $course1 = $generator->create_course(['fullname' => 'Course 1']);
         $course1context = \context_course::instance($course1->id);
 
-        // It is possible to enter into a Moodle database content containing these characters,
+        // It is possible to enter into a PowerEduc database content containing these characters,
         // which are Unicode non-characters / byte order marks. If sent to Solr, these cause
         // failures.
         $boguscontent = html_entity_decode('&#xfffe;', ENT_COMPAT) . 'frog';
@@ -1289,7 +1289,7 @@ class engine_test extends \advanced_testcase {
      * Tries out deleting data for a context or a course.
      *
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function test_deleted_contexts_and_courses() {
         // Create some courses and activities.
@@ -1324,7 +1324,7 @@ class engine_test extends \advanced_testcase {
         $this->engine->delete_index_for_course($course2->id);
         $this->assert_raw_solr_query_result('content:xyzzy', ['C1', 'C1P1', 'C1P2']);
 
-        // Finally let's delete using Moodle functions to check that works. Single context first.
+        // Finally let's delete using PowerEduc functions to check that works. Single context first.
         course_delete_module($course1page1->cmid);
         $this->assert_raw_solr_query_result('content:xyzzy', ['C1', 'C1P2']);
         delete_course($course1, false);
@@ -1476,7 +1476,7 @@ class engine_test extends \advanced_testcase {
     /**
      * Carries out a raw Solr query using the Solr basic query syntax.
      *
-     * This is used to test data contained in the index without going through Moodle processing.
+     * This is used to test data contained in the index without going through PowerEduc processing.
      *
      * @param string $q Search query
      * @param string[] $expected Expected titles of results, in alphabetical order

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class mod_h5pactivity\output\reportlink
@@ -24,13 +24,13 @@
 
 namespace mod_h5pactivity\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_h5pactivity\local\attempt as activity_attempt;
 use renderable;
 use templatable;
 use renderer_base;
-use moodle_url;
+use powereduc_url;
 use user_picture;
 use stdClass;
 
@@ -91,7 +91,7 @@ class attempt implements renderable, templatable {
             'successicon' => $this->success_icon($output, $attempt->get_success()),
             'successtext' => $this->success_icon($output, $attempt->get_success(), true),
             'scaled' => $attempt->get_scaled(),
-            'reporturl' => new moodle_url('/mod/h5pactivity/report.php', [
+            'reporturl' => new powereduc_url('/mod/h5pactivity/report.php', [
                 'a' => $attempt->get_h5pactivityid(), 'attemptid' => $attempt->get_id()
             ]),
         ];
@@ -180,13 +180,13 @@ class attempt implements renderable, templatable {
     private function format_duration (stdClass $duration): string {
         $result = [];
         if ($duration->h) {
-            $result[] = get_string('numhours', 'moodle', $duration->h);
+            $result[] = get_string('numhours', 'powereduc', $duration->h);
         }
         if ($duration->m) {
-            $result[] = get_string('numminutes', 'moodle', $duration->m);
+            $result[] = get_string('numminutes', 'powereduc', $duration->m);
         }
         if ($duration->s) {
-            $result[] = get_string('numseconds', 'moodle', $duration->s);
+            $result[] = get_string('numseconds', 'powereduc', $duration->s);
         }
         return implode(' ', $result);
     }

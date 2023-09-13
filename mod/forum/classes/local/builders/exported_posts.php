@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Exported post builder class.
  *
  * @package    mod_forum
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_forum\local\builders;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_forum\local\entities\discussion as discussion_entity;
 use mod_forum\local\entities\forum as forum_entity;
@@ -34,7 +34,7 @@ use mod_forum\local\factories\exporter as exporter_factory;
 use mod_forum\local\factories\vault as vault_factory;
 use mod_forum\local\factories\manager as manager_factory;
 use core_tag_tag;
-use moodle_exception;
+use powereduc_exception;
 use renderer_base;
 use stdClass;
 
@@ -52,7 +52,7 @@ use stdClass;
  * See this doc for more information on the builder pattern:
  * https://designpatternsphp.readthedocs.io/en/latest/Creational/Builder/README.html
  *
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class exported_posts {
@@ -229,7 +229,7 @@ class exported_posts {
         return array_reduce($posts, function($carry, $post) use ($forums, $discussions) {
             $discussionid = $post->get_discussion_id();
             if (!isset($discussions[$discussionid])) {
-                throw new moodle_exception('Unable to find discussion with id ' . $discussionid);
+                throw new powereduc_exception('Unable to find discussion with id ' . $discussionid);
             }
 
             if (isset($carry[$discussionid])) {
@@ -239,7 +239,7 @@ class exported_posts {
                 $forumid = $discussion->get_forum_id();
 
                 if (!isset($forums[$forumid])) {
-                    throw new moodle_exception('Unable to find forum with id ' . $forumid);
+                    throw new powereduc_exception('Unable to find forum with id ' . $forumid);
                 }
 
                 $carry[$discussionid] = [

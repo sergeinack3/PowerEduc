@@ -24,7 +24,7 @@
 
 namespace availability_grouping\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for availability_grouping implementing null_provider.

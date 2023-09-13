@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace mod_feedback\output;
 
 use confirm_action;
 use context_system;
-use moodle_url;
+use powereduc_url;
 use action_link;
 
 /**
@@ -54,7 +54,7 @@ class edit_template_action_bar extends base_action_bar {
     public function get_items(): array {
         global $DB;
         $additionalparams = ($this->mode ? ['mode' => $this->mode] : []);
-        $templateurl = new moodle_url('/mod/feedback/manage_templates.php', $this->urlparams + $additionalparams);
+        $templateurl = new powereduc_url('/mod/feedback/manage_templates.php', $this->urlparams + $additionalparams);
         $items['left'][]['actionlink'] = new action_link($templateurl, get_string('back'), null, ['class' => 'btn btn-secondary']);
 
         if (has_capability('mod/feedback:edititems', $this->context)) {
@@ -76,7 +76,7 @@ class edit_template_action_bar extends base_action_bar {
                 'deletetemplate' => $this->templateid,
                 'sesskey' => sesskey()
             ];
-            $deleteurl = new moodle_url('/mod/feedback/manage_templates.php', $params);
+            $deleteurl = new powereduc_url('/mod/feedback/manage_templates.php', $params);
             $deleteaction = new confirm_action(get_string('confirmdeletetemplate', 'feedback'));
             $items['export'] = new action_link($deleteurl, get_string('delete'), $deleteaction, ['class' => 'btn btn-secondary']);
         }

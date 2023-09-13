@@ -8,7 +8,7 @@ $confirm  = optional_param('confirm', 0, PARAM_BOOL); // export confirmation
 $prevmode = required_param('prevmode', PARAM_ALPHA);
 $hook     = optional_param('hook', '', PARAM_CLEAN);
 
-$url = new moodle_url('/mod/glossary/exportentry.php', array('id'=>$id,'prevmode'=>$prevmode));
+$url = new powereduc_url('/mod/glossary/exportentry.php', array('id'=>$id,'prevmode'=>$prevmode));
 if ($confirm !== 0) {
     $url->param('confirm', $confirm);
 }
@@ -18,27 +18,27 @@ if ($hook !== 'ALL') {
 $PAGE->set_url($url);
 
 if (!$entry = $DB->get_record('glossary_entries', array('id'=>$id))) {
-    throw new \moodle_exception('invalidentry');
+    throw new \powereduc_exception('invalidentry');
 }
 
 if ($entry->sourceglossaryid) {
     //already exported
     if (!$cm = get_coursemodule_from_id('glossary', $entry->sourceglossaryid)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     redirect('view.php?id='.$cm->id.'&amp;mode=entry&amp;hook='.$entry->id);
 }
 
 if (!$cm = get_coursemodule_from_instance('glossary', $entry->glossaryid)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (!$glossary = $DB->get_record('glossary', array('id'=>$cm->instance))) {
-    throw new \moodle_exception('invalidid', 'glossary');
+    throw new \powereduc_exception('invalidid', 'glossary');
 }
 
 if (!$course = $DB->get_record('course', array('id'=>$cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 require_course_login($course->id, true, $cm);
@@ -53,14 +53,14 @@ if (!$mainglossary = $DB->get_record('glossary', array('course'=>$cm->course, 'm
 }
 
 if (!$maincm = get_coursemodule_from_instance('glossary', $mainglossary->id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 $context     = context_module::instance($cm->id);
 $maincontext = context_module::instance($maincm->id);
 
 if (!$course = $DB->get_record('course', array('id'=>$cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 
@@ -95,7 +95,7 @@ if (!data_submitted() or !$confirm or !confirm_sesskey()) {
     $optionsyes = array('id'=>$entry->id, 'confirm'=>1, 'sesskey'=>sesskey(), 'prevmode'=>$prevmode, 'hook'=>$hook);
     $optionsno  = array('id'=>$cm->id, 'mode'=>$prevmode, 'hook'=>$hook);
 
-    echo $OUTPUT->confirm($areyousure, new moodle_url($linkyes, $optionsyes), new moodle_url($linkno, $optionsno));
+    echo $OUTPUT->confirm($areyousure, new powereduc_url($linkyes, $optionsyes), new powereduc_url($linkno, $optionsno));
     echo '</div>';
     echo $OUTPUT->footer();
     die;

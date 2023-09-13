@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_history;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/editlib.php');
@@ -60,7 +60,7 @@ class question_history_view_test extends \advanced_testcase {
         $entry = get_question_bank_entry($questiondata1->id);
 
         // Generate the view.
-        $view = new question_history_view($contexts, new \moodle_url('/'), $course,  $entry->id, '/');
+        $view = new question_history_view($contexts, new \powereduc_url('/'), $course,  $entry->id, '/');
         ob_start();
         $pagevars = [
             'qpage' => 0,
@@ -104,7 +104,7 @@ class question_history_view_test extends \advanced_testcase {
         $entry = get_question_bank_entry($questiondata1->id);
 
         // Generate the view.
-        $view = new question_history_view($contexts, new \moodle_url('/'), $course,  $entry->id, '/');
+        $view = new question_history_view($contexts, new \powereduc_url('/'), $course,  $entry->id, '/');
         ob_start();
         $view->display_question_bank_header();
         $headerhtml = ob_get_clean();
@@ -113,7 +113,7 @@ class question_history_view_test extends \advanced_testcase {
 
         $questiondata2 = $questiongenerator->update_question($questiondata1, null,
             ['name' => 'Second version']);
-        $view = new question_history_view($contexts, new \moodle_url('/'), $course,  $entry->id, new \moodle_url('/'));
+        $view = new question_history_view($contexts, new \powereduc_url('/'), $course,  $entry->id, new \powereduc_url('/'));
         ob_start();
         $view->display_question_bank_header();
         $headerhtml = ob_get_clean();

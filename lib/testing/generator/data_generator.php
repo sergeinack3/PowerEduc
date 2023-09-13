@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Data generator class for unit tests and other tools that need to create fake test sites.
@@ -339,7 +339,7 @@ EOD;
         }
 
         if (!isset($record['descriptionformat'])) {
-            $record['descriptionformat'] = FORMAT_MOODLE;
+            $record['descriptionformat'] = FORMAT_POWEREDUC;
         }
 
         if (!isset($record['visible'])) {
@@ -400,7 +400,7 @@ EOD;
         }
 
         if (!isset($record['summaryformat'])) {
-            $record['summaryformat'] = FORMAT_MOODLE;
+            $record['summaryformat'] = FORMAT_POWEREDUC;
         }
 
         if (!isset($record['category'])) {
@@ -418,7 +418,7 @@ EOD;
         if (!empty($options['createsections']) && empty($record['numsections'])) {
             // Since Moodle 3.3 function create_course() automatically creates sections if numsections is specified.
             // For BC if 'createsections' is given but 'numsections' is not, assume the default value from config.
-            $record['numsections'] = get_config('moodlecourse', 'numsections');
+            $record['numsections'] = get_config('powereduccourse', 'numsections');
         }
 
         if (!empty($record['customfields'])) {
@@ -538,7 +538,7 @@ EOD;
         }
 
         if (!isset($record['descriptionformat'])) {
-            $record['descriptionformat'] = FORMAT_MOODLE;
+            $record['descriptionformat'] = FORMAT_POWEREDUC;
         }
 
         $id = groups_create_group((object)$record);
@@ -624,7 +624,7 @@ EOD;
         }
 
         if (!isset($record['descriptionformat'])) {
-            $record['descriptionformat'] = FORMAT_MOODLE;
+            $record['descriptionformat'] = FORMAT_POWEREDUC;
         }
 
         $id = groups_create_grouping((object)$record);
@@ -720,7 +720,7 @@ EOD;
         }
 
         if (!isset($record['descriptionformat'])) {
-            $record['descriptionformat'] = FORMAT_MOODLE;
+            $record['descriptionformat'] = FORMAT_POWEREDUC;
         }
 
         $record['timemodified'] = time();
@@ -865,7 +865,7 @@ EOD;
         }
 
         if (!isset($record['descriptionformat'])) {
-            $record['descriptionformat'] = FORMAT_MOODLE;
+            $record['descriptionformat'] = FORMAT_POWEREDUC;
         }
 
         if (!isset($record['flag'])) {

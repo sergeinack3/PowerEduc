@@ -19,7 +19,7 @@ namespace enrol_self;
 use enrol_self_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

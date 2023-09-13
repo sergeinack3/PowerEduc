@@ -25,7 +25,7 @@ namespace editor_tinymce\plugininfo;
 
 use core\plugininfo\base, moodle_url, part_of_admin_tree, admin_settingpage, core_component;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 class tinymce extends base {

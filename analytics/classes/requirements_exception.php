@@ -24,7 +24,7 @@
 
 namespace core_analytics;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Dummy class to identify model requirements exceptions.

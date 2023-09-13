@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Delete question page.
@@ -35,7 +35,7 @@ $cmid = optional_param('cmid', 0, PARAM_INT);
 $courseid = optional_param('courseid', 0, PARAM_INT);
 
 if ($returnurl) {
-    $returnurl = new moodle_url($returnurl);
+    $returnurl = new powereduc_url($returnurl);
 }
 
 \core_question\local\bank\helper::require_plugin_enabled('qbank_deletequestion');
@@ -48,11 +48,11 @@ if ($cmid) {
     require_login($courseid, false);
     $thiscontext = context_course::instance($courseid);
 } else {
-    throw new moodle_exception('missingcourseorcmid', 'question');
+    throw new powereduc_exception('missingcourseorcmid', 'question');
 }
 
 $contexts = new core_question\local\bank\question_edit_contexts($thiscontext);
-$url = new moodle_url('/question/bank/deletequestion/delete.php');
+$url = new powereduc_url('/question/bank/deletequestion/delete.php');
 
 $PAGE->set_url($url);
 $streditingquestions = get_string('deletequestion', 'qbank_deletequestion');
@@ -93,7 +93,7 @@ if ($deleteselected && ($confirm = optional_param('confirm', '', PARAM_ALPHANUM)
         }
         redirect($returnurl);
     } else {
-        throw new \moodle_exception('invalidconfirm', 'question');
+        throw new \powereduc_exception('invalidconfirm', 'question');
     }
 }
 
@@ -126,7 +126,7 @@ if ($deleteselected) {
     if ($inuse) {
         $questionnames .= '<br />'.get_string('questionsinuse', 'question');
     }
-    $deleteurl = new \moodle_url('/question/bank/deletequestion/delete.php',
+    $deleteurl = new \powereduc_url('/question/bank/deletequestion/delete.php',
             array('deleteselected' => $questionlist, 'confirm' => md5($questionlist),
             'sesskey' => sesskey(), 'returnurl' => $returnurl, 'cmid' => $cmid, 'courseid' => $courseid));
 

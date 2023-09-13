@@ -10,7 +10,7 @@ $courseid = optional_param('courseid', 0, PARAM_INT);
 $eid      = optional_param('eid', 0, PARAM_INT); // glossary entry id
 $displayformat = optional_param('displayformat',-1, PARAM_SAFEDIR);
 
-$url = new moodle_url('/mod/glossary/showentry.php');
+$url = new powereduc_url('/mod/glossary/showentry.php');
 $url->param('concept', $concept);
 $url->param('courseid', $courseid);
 $url->param('eid', $eid);
@@ -38,7 +38,7 @@ if ($eid) {
     $entries = glossary_get_entries_search($concept, $courseid);
 
 } else {
-    throw new \moodle_exception('invalidelementid');
+    throw new \powereduc_exception('invalidelementid');
 }
 
 if ($entries) {

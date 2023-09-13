@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for site policy handlers.
@@ -24,7 +24,7 @@
 
 namespace core_privacy\local\sitepolicy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base class for site policy handlers.
@@ -51,11 +51,11 @@ abstract class handler {
     /**
      * Returns URL to redirect user to when user needs to agree to site policy
      *
-     * This is a regular interactive page for web users. It should have normal Moodle header/footers, it should
+     * This is a regular interactive page for web users. It should have normal PowerEduc header/footers, it should
      * allow user to view policies and accept them.
      *
      * @param bool $forguests
-     * @return moodle_url|null (returns null if site policy is not defined)
+     * @return powereduc_url|null (returns null if site policy is not defined)
      */
     abstract public static function get_redirect_url($forguests = false);
 
@@ -66,7 +66,7 @@ abstract class handler {
      * the "Accept" button and call {@link self::accept()} on completion.
      *
      * @param bool $forguests
-     * @return moodle_url|null
+     * @return powereduc_url|null
      */
     abstract public static function get_embed_url($forguests = false);
 
@@ -98,7 +98,7 @@ abstract class handler {
      *
      * Sitepolicy handlers can override the simple checkbox with their own controls.
      *
-     * @param \MoodleQuickForm $mform
+     * @param \PowerEducQuickForm $mform
      */
     public static function signup_form($mform) {
         if ($url = static::get_embed_url()) {

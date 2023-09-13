@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatelangdir'] = '언어팩 경로를 생성할 수 없음';
 $string['cannotcreatetempdir'] = 'temp 디렉토리를 만들 수 없음';

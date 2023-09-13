@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Manage question banks page.
@@ -97,7 +97,7 @@ class manage_qbank_plugins_page extends \admin_setting {
         }
 
         foreach ($types as $type) {
-            $url = new \moodle_url('/admin/qbankplugins.php', ['sesskey' => sesskey(), 'name' => $type->name]);
+            $url = new \powereduc_url('/admin/qbankplugins.php', ['sesskey' => sesskey(), 'name' => $type->name]);
 
             $class = '';
             if ($pluginmanager->get_plugin_info('qbank_'.$type->name)->get_status() ===
@@ -109,11 +109,11 @@ class manage_qbank_plugins_page extends \admin_setting {
 
             if ($type->is_enabled()) {
                 $hideshow = \html_writer::link($url->out(false, ['action' => 'disable']),
-                        $OUTPUT->pix_icon('t/hide', $txt->disable, 'moodle', ['class' => 'iconsmall']));
+                        $OUTPUT->pix_icon('t/hide', $txt->disable, 'powereduc', ['class' => 'iconsmall']));
             } else {
                 $class = 'dimmed_text';
                 $hideshow = \html_writer::link($url->out(false, ['action' => 'enable']),
-                        $OUTPUT->pix_icon('t/show', $txt->enable, 'moodle', ['class' => 'iconsmall']));
+                        $OUTPUT->pix_icon('t/show', $txt->enable, 'powereduc', ['class' => 'iconsmall']));
             }
 
             $settings = '';

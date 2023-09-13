@@ -18,7 +18,7 @@ Feature: Course participants can be filtered
       | student1 | Student   | 1        | student1@example.com      | SID1     |         | SCITY1 | 0           | Kermit             |
       | student2 | Student   | 2        | student2@example.com      | SID2     | GB      | SCITY2 | 1           | Mr Toad            |
       | student3 | Student   | 3        | student3@example.com      | SID3     | AU      | SCITY3 | 0           |                    |
-      | student4 | Student   | 4        | student4@moodle.com       | SID4     | AT      | SCITY4 | 0           |                    |
+      | student4 | Student   | 4        | student4@powereduc.com       | SID4     | AT      | SCITY4 | 0           |                    |
       | student5 | Trendy    | Learnson | trendy@learnson.com       | SID5     | AU      | SCITY5 | 0           |                    |
       | patricia | Patricia  | Pea      | patricia.pea1@example.org | TID1     | US      | TCITY1 | 0           |                    |
     And the following "course enrolments" exist:
@@ -573,8 +573,8 @@ Feature: Course participants can be filtered
 
     # Set two keyword values.
     # Match:
-    #   Keyword None ["1@example", "moodle"].
-    When I set the field "Type..." to "1@example, moodle"
+    #   Keyword None ["1@example", "powereduc"].
+    When I set the field "Type..." to "1@example, powereduc"
     And I click on "Apply filters" "button"
 
     Then I should see "Student 2" in the "participants" "table"
@@ -585,7 +585,7 @@ Feature: Course participants can be filtered
 
     # Set two keyword values.
     # Match:
-    #   Keyword Any ["1@example", "moodle"].
+    #   Keyword Any ["1@example", "powereduc"].
     When I set the field "Match" in the "Filter 1" "fieldset" to "Any"
     And I click on "Apply filters" "button"
 
@@ -596,7 +596,7 @@ Feature: Course participants can be filtered
     And I should not see "Student 3" in the "participants" "table"
 
     # Match:
-    #   Keyword All ["1@example", "moodle"].
+    #   Keyword All ["1@example", "powereduc"].
     When I set the field "Match" in the "Filter 1" "fieldset" to "All"
     And I click on "Apply filters" "button"
 
@@ -734,7 +734,7 @@ Feature: Course participants can be filtered
   Scenario: Filter by user identity fields when cannot see the field data
     Given I log in as "admin"
     And I set the following system permissions of "Teacher" role:
-      | moodle/site:viewuseridentity | Prevent |
+      | powereduc/site:viewuseridentity | Prevent |
     And the following config values are set as admin:
       | showuseridentity | idnumber,email,city,country |
     And I log out

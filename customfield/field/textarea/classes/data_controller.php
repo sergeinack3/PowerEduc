@@ -24,7 +24,7 @@
 
 namespace customfield_textarea;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class data
@@ -92,7 +92,7 @@ class data_controller extends \core_customfield\data_controller {
 
         if (!$this->get('id')) {
             $this->data->set('value', '');
-            $this->data->set('valueformat', FORMAT_MOODLE);
+            $this->data->set('valueformat', FORMAT_POWEREDUC);
             $this->save();
         }
 

@@ -19,7 +19,7 @@ namespace core_calendar;
 use core_calendar\local\event\factories\event_factory;
 use core_calendar\local\event\entities\event_interface;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/calendar/lib.php');

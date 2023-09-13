@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides user rendering functionality such as printing private files tree and displaying a search utility
  *
  * @package    core_user
- * @copyright  2010 Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright  2010 Dongsheng Cai <dongsheng@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Provides user rendering functionality such as printing private files tree and displaying a search utility
- * @copyright  2010 Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright  2010 Dongsheng Cai <dongsheng@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_user_renderer extends plugin_renderer_base {
@@ -55,7 +55,7 @@ class core_user_renderer extends plugin_renderer_base {
             $heading = get_string('allparticipants');
         }
 
-        $content = html_writer::start_tag('form', array('action' => new moodle_url($url)));
+        $content = html_writer::start_tag('form', array('action' => new powereduc_url($url)));
         $content .= html_writer::start_tag('div');
 
         // Search utility heading.
@@ -88,7 +88,7 @@ class core_user_renderer extends plugin_renderer_base {
             $userpicture = $this->output->user_picture($user, array('size' => $exclusivemode ? 100 : 35));
             $fullname = fullname($user);
             if (user_can_view_profile($user)) {
-                $profilelink = new moodle_url('/user/view.php', array('id' => $user->id));
+                $profilelink = new powereduc_url('/user/view.php', array('id' => $user->id));
                 $fullname = html_writer::link($profilelink, $fullname);
             }
             $tagfeed->add($userpicture, $fullname);
@@ -142,7 +142,7 @@ class core_user_renderer extends plugin_renderer_base {
      * @return array The formatted option with the ['filtertype:value' => 'criteria: label'] format.
      */
     protected function format_filter_option($filtertype, $criteria, $value, $label) {
-        $optionlabel = get_string('filteroption', 'moodle', (object)['criteria' => $criteria, 'value' => $label]);
+        $optionlabel = get_string('filteroption', 'powereduc', (object)['criteria' => $criteria, 'value' => $label]);
         $optionvalue = "$filtertype:$value";
         return [$optionvalue => $optionlabel];
     }
@@ -176,7 +176,7 @@ class core_user_renderer extends plugin_renderer_base {
                             if ($timestamp < $value) {
                                 break;
                             }
-                            $val = get_string('numdays', 'moodle', $i);
+                            $val = get_string('numdays', 'powereduc', $i);
                             $filteroptions += $this->format_filter_option(USER_FILTER_LAST_ACCESS, $criteria, $timestamp, $val);
                         }
                         // Weeks.
@@ -185,7 +185,7 @@ class core_user_renderer extends plugin_renderer_base {
                             if ($timestamp < $value) {
                                 break;
                             }
-                            $val = get_string('numweeks', 'moodle', $i);
+                            $val = get_string('numweeks', 'powereduc', $i);
                             $filteroptions += $this->format_filter_option(USER_FILTER_LAST_ACCESS, $criteria, $timestamp, $val);
                         }
                         // Months.
@@ -194,13 +194,13 @@ class core_user_renderer extends plugin_renderer_base {
                             if ($timestamp < $value) {
                                 break;
                             }
-                            $val = get_string('nummonths', 'moodle', $i);
+                            $val = get_string('nummonths', 'powereduc', $i);
                             $filteroptions += $this->format_filter_option(USER_FILTER_LAST_ACCESS, $criteria, $timestamp, $val);
                         }
                         // Try a year.
                         $timestamp = strtotime('-1 year', $now);
                         if ($timestamp >= $value) {
-                            $val = get_string('numyear', 'moodle', 1);
+                            $val = get_string('numyear', 'powereduc', 1);
                             $filteroptions += $this->format_filter_option(USER_FILTER_LAST_ACCESS, $criteria, $timestamp, $val);
                         }
                         break;

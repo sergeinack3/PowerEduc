@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Text profile field.
@@ -57,7 +57,7 @@ class profile_field_text extends profile_field_base {
 
     /**
      * Add fields for editing a text profile field.
-     * @param moodleform $mform
+     * @param powereducform $mform
      */
     public function edit_field_add($mform) {
         $size = $this->field->param1;
@@ -75,7 +75,7 @@ class profile_field_text extends profile_field_base {
      * This will be used for validating the data submitted by a user.
      *
      * @return array the param type and null property
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_field_properties() {
         return array(PARAM_TEXT, NULL_NOT_ALLOWED);

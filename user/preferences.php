@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Preferences.
@@ -36,7 +36,7 @@ $currentuser = $userid == $USER->id;
 // Check that the user is a valid user.
 $user = core_user::get_user($userid);
 if (!$user || !core_user::is_real_user($userid)) {
-    throw new moodle_exception('invaliduser', 'error');
+    throw new powereduc_exception('invaliduser', 'error');
 }
 
 $PAGE->set_context(context_user::instance($userid));
@@ -53,11 +53,11 @@ if (!$currentuser) {
     if ($settings = $PAGE->settingsnav->find('userviewingsettings' . $user->id, null)) {
         $settings->make_active();
     }
-    $url = new moodle_url('/user/preferences.php', array('userid' => $userid));
-    $navbar = $PAGE->navbar->add(get_string('preferences', 'moodle'), $url);
+    $url = new powereduc_url('/user/preferences.php', array('userid' => $userid));
+    $navbar = $PAGE->navbar->add(get_string('preferences', 'powereduc'), $url);
     // Show an error if there are no preferences that this user has access to.
     if (!$PAGE->settingsnav->can_view_user_preferences($userid)) {
-        throw new moodle_exception('cannotedituserpreferences', 'error');
+        throw new powereduc_exception('cannotedituserpreferences', 'error');
     }
 } else {
     // Shutdown the users node in the navigation menu.

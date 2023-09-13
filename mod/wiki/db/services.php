@@ -1,27 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Wiki external functions and service definitions.
  *
  * @package    mod_wiki
  * @category   external
- * @copyright  2015 Dani Palou <dani@moodle.com>
+ * @copyright  2015 Dani Palou <dani@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 
 $functions = array(
@@ -33,7 +33,7 @@ $functions = array(
                            'no courses are provided then all the wiki instances the user has access to will be returned.',
         'type'          => 'read',
         'capabilities'  => 'mod/wiki:viewpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_view_wiki' => array(
@@ -42,7 +42,7 @@ $functions = array(
         'description'   => 'Trigger the course module viewed event and update the module completion status.',
         'type'          => 'write',
         'capabilities'  => 'mod/wiki:viewpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_view_page' => array(
@@ -51,7 +51,7 @@ $functions = array(
         'description'   => 'Trigger the page viewed event and update the module completion status.',
         'type'          => 'write',
         'capabilities'  => 'mod/wiki:viewpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_get_subwikis' => array(
@@ -60,7 +60,7 @@ $functions = array(
         'description'   => 'Returns the list of subwikis the user can see in a specific wiki.',
         'type'          => 'read',
         'capabilities'  => 'mod/wiki:viewpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_wiki_get_subwiki_pages' => array(
         'classname'     => 'mod_wiki_external',
@@ -68,7 +68,7 @@ $functions = array(
         'description'   => 'Returns the list of pages for a specific subwiki.',
         'type'          => 'read',
         'capabilities'  => 'mod/wiki:viewpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_get_subwiki_files' => array(
@@ -77,7 +77,7 @@ $functions = array(
         'description'   => 'Returns the list of files for a specific subwiki.',
         'type'          => 'read',
         'capabilities'  => 'mod/wiki:viewpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_get_page_contents' => array(
@@ -86,7 +86,7 @@ $functions = array(
         'description'   => 'Returns the contents of a page.',
         'type'          => 'read',
         'capabilities'  => 'mod/wiki:viewpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_get_page_for_editing' => array(
@@ -95,7 +95,7 @@ $functions = array(
         'description'   => 'Locks and retrieves info of page-section to be edited.',
         'type'          => 'write',
         'capabilities'  => 'mod/wiki:editpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_new_page' => array(
@@ -104,7 +104,7 @@ $functions = array(
         'description'   => 'Create a new page in a subwiki.',
         'type'          => 'write',
         'capabilities'  => 'mod/wiki:editpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_wiki_edit_page' => array(
@@ -113,6 +113,6 @@ $functions = array(
         'description'   => 'Save the contents of a page.',
         'type'          => 'write',
         'capabilities'  => 'mod/wiki:editpage',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     )
 );

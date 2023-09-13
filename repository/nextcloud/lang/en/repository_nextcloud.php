@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Language strings' definition for Nextcloud repository.
@@ -39,15 +39,15 @@ $string['chooseissuer_help'] = 'To add a new issuer, go to Site administration /
 $string['foldername'] = 'Name of folder created in Nextcloud users\' private space that holds all access-controlled links.';
 $string['foldername_help'] = 'To ensure that users find files shared with them, shares are saved into a specific folder.
 
-This setting determines the name of the folder. It is recommended to choose a name associated with your Moodle instance.';
+This setting determines the name of the folder. It is recommended to choose a name associated with your PowerEduc instance.';
 $string['oauth2serviceslink'] = '<a href="{$a}" title="Link to OAuth 2 services configuration">OAuth 2 services configuration</a>';
 $string['privacy:metadata'] = 'The Nextcloud repository plugin neither stores any personal data nor transmits user data to the remote system.';
-$string['internal'] = 'Internal (files stored in Moodle)';
-$string['external'] = 'External (only links stored in Moodle)';
+$string['internal'] = 'Internal (files stored in PowerEduc)';
+$string['external'] = 'External (only links stored in PowerEduc)';
 $string['both'] = 'Internal and external';
 $string['supportedreturntypes'] = 'Supported files';
 $string['defaultreturntype'] = 'Default return type';
-$string['fileoptions'] = 'The types and defaults for returned files is configurable here. Note that all files linked externally will be updated so that the owner is the Moodle system account.';
+$string['fileoptions'] = 'The types and defaults for returned files is configurable here. Note that all files linked externally will be updated so that the owner is the PowerEduc system account.';
 
 // Exceptions.
 $string['configuration_exception'] = 'An error in the configuration of the OAuth 2 client occurred: {$a}';

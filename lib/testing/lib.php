@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,14 +35,14 @@ define('TESTING_EXITCODE_COMPOSER', 255);
 /**
  * Returns relative path against current working directory,
  * to be used for shell execution hints.
- * @param string $moodlepath starting with "/", ex: "/admin/tool/cli/init.php"
+ * @param string $powereducpath starting with "/", ex: "/admin/tool/cli/init.php"
  * @return string path relative to current directory or absolute path
  */
-function testing_cli_argument_path($moodlepath) {
+function testing_cli_argument_path($powereducpath) {
     global $CFG;
 
     if (isset($CFG->admin) and $CFG->admin !== 'admin') {
-        $moodlepath = preg_replace('|^/admin/|', "/$CFG->admin/", $moodlepath);
+        $powereducpath = preg_replace('|^/admin/|', "/$CFG->admin/", $powereducpath);
     }
 
     if (isset($_SERVER['REMOTE_ADDR'])) {
@@ -58,7 +58,7 @@ function testing_cli_argument_path($moodlepath) {
         $cwd = substr($cwd, -1);
     }
 
-    $path = realpath($CFG->dirroot.$moodlepath);
+    $path = realpath($CFG->dirroot.$powereducpath);
 
     // We need standrad directory seperator for path and cwd, so it can be compared.
     $cwd = testing_cli_fix_directory_separator($cwd);
@@ -270,7 +270,7 @@ function testing_update_composer_dependencies(bool $selfupdate = true, bool $upd
  *
  * NOTE: Because PHP on Windows will accept either forward or backslashes,
  * paths should be built using ONLY forward slashes, regardless of
- * OS. MOODLE_DIRECTORY_SEPARATOR should only be used when parsing
+ * OS. POWEREDUC_DIRECTORY_SEPARATOR should only be used when parsing
  * paths returned by the shell.
  *
  * @param string $path

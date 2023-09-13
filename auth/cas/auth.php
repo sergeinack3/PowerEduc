@@ -26,7 +26,7 @@
  * @package auth_cas
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/auth/ldap/auth.php');
 require_once($CFG->dirroot.'/auth/cas/CAS/vendor/autoload.php');

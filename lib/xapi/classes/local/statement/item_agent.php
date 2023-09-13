@@ -28,7 +28,7 @@ use core_xapi\xapi_exception;
 use core_user;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Agent xAPI statement element representing a Moodle user.

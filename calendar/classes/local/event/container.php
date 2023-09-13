@@ -28,7 +28,7 @@
 
 namespace core_calendar\local\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_calendar\action_factory;
 use core_calendar\local\event\data_access\event_vault;

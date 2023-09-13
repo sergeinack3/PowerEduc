@@ -24,7 +24,7 @@
 
 namespace gradereport_singleview\local\screen;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Interface for a list of selectable things.

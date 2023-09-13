@@ -16,7 +16,7 @@
 
 namespace core_backup;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -49,7 +49,7 @@ class backup_cleanup_task_test extends \advanced_testcase {
         $controller = new \backup_controller(
             \backup::TYPE_1COURSE,
             $courseid,
-            \backup::FORMAT_MOODLE,
+            \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO,
             \backup::MODE_AUTOMATED,
             $user->id

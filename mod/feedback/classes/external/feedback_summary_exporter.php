@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * Class for exporting partial feedback data.
  *
  * @package    mod_feedback
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_feedback\external;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\external\exporter;
 use renderer_base;
@@ -32,7 +32,7 @@ use external_files;
 /**
  * Class for exporting partial feedback data (some fields are only viewable by admins).
  *
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class feedback_summary_exporter extends exporter {
@@ -57,9 +57,9 @@ class feedback_summary_exporter extends exporter {
                 'description' => 'Feedback introduction text.',
             ),
             'introformat' => array(
-                'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                'choices' => array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN),
                 'type' => PARAM_INT,
-                'default' => FORMAT_MOODLE,
+                'default' => FORMAT_POWEREDUC,
                 'description' => 'Feedback intro text format.',
             ),
             'lang' => array(
@@ -97,9 +97,9 @@ class feedback_summary_exporter extends exporter {
                 'description' => 'Text to display after submission.',
             ),
             'page_after_submitformat' => array(
-                'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                'choices' => array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN),
                 'type' => PARAM_INT,
-                'default' => FORMAT_MOODLE,
+                'default' => FORMAT_POWEREDUC,
                 'description' => 'Text to display after submission format.',
             ),
             'publish_stats' => array(

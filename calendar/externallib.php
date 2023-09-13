@@ -25,7 +25,7 @@
  * @since Moodle 2.5
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 require_once($CFG->dirroot . '/calendar/lib.php');

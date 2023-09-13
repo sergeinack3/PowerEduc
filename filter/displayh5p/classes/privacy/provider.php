@@ -24,7 +24,7 @@
 
 namespace filter_displayh5p\privacy;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Privacy Subsystem for filter_displayh5p implementing null_provider.

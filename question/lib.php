@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Question related functions.
@@ -22,20 +22,20 @@
  * Please, do not add new functions to this file.
  *
  * @package   core_question
- * @copyright 2018 Simey Lameze <simey@moodle.com>
+ * @copyright 2018 Simey Lameze <simey@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Question tags fragment callback.
  *
  * @param array $args Arguments to the form.
  * @return null|string The rendered form.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see /question/bank/qbank_tagquestion/lib.php
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function core_question_output_fragment_tags_form($args) {
     debugging('Function core_question_output_fragment_tags_form() is deprecated,

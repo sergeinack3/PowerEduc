@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ use mod_bigbluebuttonbn\local\config;
 use mod_bigbluebuttonbn\local\exceptions\bigbluebutton_exception;
 use mod_bigbluebuttonbn\local\exceptions\server_not_available_exception;
 use mod_bigbluebuttonbn\plugin;
-use moodle_url;
+use powereduc_url;
 use SimpleXMLElement;
 
 /**
@@ -40,7 +40,7 @@ abstract class proxy_base {
      * Sometimes the server sends back some error and errorKeys that
      * can be converted to Moodle error messages
      */
-    const BBB_TO_MOODLE_ERROR_CODE = [
+    const BBB_TO_POWEREDUC_ERROR_CODE = [
         'checksumError' => 'index_error_checksum',
         'notFound' => 'general_error_not_found',
         'maxConcurrent' => 'view_error_max_concurrent',
@@ -72,7 +72,7 @@ abstract class proxy_base {
     protected static function sanitized_url() {
         $serverurl = trim(config::get('server_url'));
         if (PHPUNIT_TEST) {
-            $serverurl = (new moodle_url(TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER))->out(false);
+            $serverurl = (new powereduc_url(TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER))->out(false);
         }
         if (substr($serverurl, -1) == '/') {
             $serverurl = rtrim($serverurl, '/');
@@ -110,7 +110,7 @@ abstract class proxy_base {
             throw new server_not_available_exception(
                 $errorcode,
                 plugin::COMPONENT,
-                (new moodle_url('/admin/settings.php?section=modsettingbigbluebuttonbn'))->out(),
+                (new powereduc_url('/admin/settings.php?section=modsettingbigbluebuttonbn'))->out(),
             );
         }
         // If it is a checksum error, this is equivalent to the server not being available.
@@ -139,7 +139,7 @@ abstract class proxy_base {
     private static function get_errorcode_from_xml_messagekey(string $messagekey): string {
         $errorcode = 'general_error_no_answer';
         if ($messagekey) {
-            $errorcode = self::BBB_TO_MOODLE_ERROR_CODE[$messagekey] ?? $errorcode;
+            $errorcode = self::BBB_TO_POWEREDUC_ERROR_CODE[$messagekey] ?? $errorcode;
         }
         return $errorcode;
     }

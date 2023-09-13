@@ -23,7 +23,7 @@
  */
 namespace fileconverter_unoconv;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/filelib.php');
 

@@ -84,7 +84,7 @@ information provided here is intended especially for developers.
   override the add_documents() function, and return an extra parameter from this function (see base
   class in engine.php). Unmodified plugins will still work, but without supporting time limits.
 * Search areas should now implement the get_document_recordset function instead of the old
-  get_recordset_by_timestamp API (implement both if the area should work in older Moodle versions
+  get_recordset_by_timestamp API (implement both if the area should work in older PowerEduc versions
   as well). The new function is the same as the old one, but has an additional context parameter.
   There is a helper function get_context_restriction_sql to make this easy to implement; see code
   in base_activity.php for an example of how to implement this in your search area. (The

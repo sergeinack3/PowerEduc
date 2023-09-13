@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ use context;
 use context_module;
 use context_system;
 use mod_bigbluebuttonbn\instance;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
@@ -195,7 +195,7 @@ class files {
         }
 
         // Note: $pnoncevalue is an int.
-        $url = moodle_url::make_pluginfile_url(
+        $url = powereduc_url::make_pluginfile_url(
             $file->get_contextid(),
             $file->get_component(),
             $file->get_filearea(),

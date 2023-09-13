@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use core_completion\activity_custom_completion;
  * of the custom completion rules for a given choice instance and a user.
  *
  * @package mod_choice
- * @copyright 2021 Jun Pataleta <jun@moodle.com>
+ * @copyright 2021 Jun Pataleta <jun@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_completion extends activity_custom_completion {

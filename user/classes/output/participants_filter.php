@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class for rendering user filters on the course participants page.
  *
  * @package    core_user
- * @copyright  2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2020 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_user\output;
@@ -30,7 +30,7 @@ use stdClass;
 /**
  * Class for rendering user filters on the course participants page.
  *
- * @copyright  2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2020 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class participants_filter extends \core\output\datafilter {
@@ -78,7 +78,7 @@ class participants_filter extends \core\output\datafilter {
      * @return stdClass|null
      */
     protected function get_enrolmentstatus_filter(): ?stdClass {
-        if (!has_capability('moodle/course:enrolreview', $this->context)) {
+        if (!has_capability('powereduc/course:enrolreview', $this->context)) {
             return null;
         }
 
@@ -111,7 +111,7 @@ class participants_filter extends \core\output\datafilter {
         $roles += [-1 => get_string('noroles', 'role')];
         $roles += get_viewable_roles($this->context, null, ROLENAME_BOTH);
 
-        if (has_capability('moodle/role:assign', $this->context)) {
+        if (has_capability('powereduc/role:assign', $this->context)) {
             $roles += get_assignable_roles($this->context, ROLENAME_BOTH);
         }
 
@@ -136,7 +136,7 @@ class participants_filter extends \core\output\datafilter {
      * @return stdClass|null
      */
     protected function get_enrolments_filter(): ?stdClass {
-        if (!has_capability('moodle/course:enrolreview', $this->context)) {
+        if (!has_capability('powereduc/course:enrolreview', $this->context)) {
             return null;
         }
 
@@ -176,7 +176,7 @@ class participants_filter extends \core\output\datafilter {
         global $USER;
 
         // Filter options for groups, if available.
-        $seeallgroups = has_capability('moodle/site:accessallgroups', $this->context);
+        $seeallgroups = has_capability('powereduc/site:accessallgroups', $this->context);
         $seeallgroups = $seeallgroups || ($this->course->groupmode != SEPARATEGROUPS);
         if ($seeallgroups) {
             $groups = [];
@@ -219,7 +219,7 @@ class participants_filter extends \core\output\datafilter {
         global $CFG, $DB;
 
         $hiddenfields = [];
-        if (!has_capability('moodle/course:viewhiddenuserfields', $this->context)) {
+        if (!has_capability('powereduc/course:viewhiddenuserfields', $this->context)) {
             $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
         }
 
@@ -259,9 +259,9 @@ class participants_filter extends \core\output\datafilter {
                 }
 
                 if ($i === 1) {
-                    $title = get_string("num{$singletype}", 'moodle', $i);
+                    $title = get_string("num{$singletype}", 'powereduc', $i);
                 } else {
-                    $title = get_string("num{$type}", 'moodle', $i);
+                    $title = get_string("num{$type}", 'powereduc', $i);
                 }
 
                 $values[] = [
@@ -283,7 +283,7 @@ class participants_filter extends \core\output\datafilter {
         if ($lastaccess0exists) {
             $values[] = [
                 'value' => time(),
-                'title' => get_string('never', 'moodle'),
+                'title' => get_string('never', 'powereduc'),
             ];
         }
 

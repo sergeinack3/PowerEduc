@@ -16,7 +16,7 @@
 
 namespace gradereport_history;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Grade history report test class.

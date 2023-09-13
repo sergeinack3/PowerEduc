@@ -19,7 +19,7 @@ namespace core_analytics;
 use test_timesplitting_seconds;
 use test_timesplitting_upcoming_seconds;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/fixtures/test_timesplitting_seconds.php');
 require_once(__DIR__ . '/fixtures/test_timesplitting_upcoming_seconds.php');

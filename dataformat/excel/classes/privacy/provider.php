@@ -24,7 +24,7 @@
 
 namespace dataformat_excel\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider implementation for dataformat_excel.

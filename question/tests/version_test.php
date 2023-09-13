@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_question;
 
@@ -203,9 +203,9 @@ class version_test extends \advanced_testcase {
         // Move the category to system context.
         $contexts = new \core_question\local\bank\question_edit_contexts($systemcontext);
         $qcobject = new \qbank_managecategories\question_category_object(null,
-            new \moodle_url('/question/bank/managecategories/category.php', ['courseid' => SITEID]),
+            new \powereduc_url('/question/bank/managecategories/category.php', ['courseid' => SITEID]),
             $contexts->having_one_edit_tab_cap('categories'), 0, null, 0,
-            $contexts->having_cap('moodle/question:add'));
+            $contexts->having_cap('powereduc/question:add'));
         $qcobject->move_questions_and_delete_category($qcategorychild->id, $qcategorysys->id);
 
         // The bank entry record should point to the new category in order to not break quizzes.

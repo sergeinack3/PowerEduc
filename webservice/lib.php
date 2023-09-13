@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
  * Web services utility functions and classes
  *
  * @package    core_webservice
- * @copyright  2009 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2009 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ define('WEBSERVICE_AUTHMETHOD_USERNAME', 0);
 define('WEBSERVICE_AUTHMETHOD_PERMANENT_TOKEN', 1);
 
 /**
- * WEBSERVICE_AUTHMETHOD_SESSION_TOKEN - token for embedded application (requires Moodle session)
+ * WEBSERVICE_AUTHMETHOD_SESSION_TOKEN - token for embedded application (requires PowerEduc session)
  */
 define('WEBSERVICE_AUTHMETHOD_SESSION_TOKEN', 2);
 
@@ -44,7 +44,7 @@ define('WEBSERVICE_AUTHMETHOD_SESSION_TOKEN', 2);
  * General web service library
  *
  * @package    core_webservice
- * @copyright  2010 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2010 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class webservice {
@@ -73,8 +73,8 @@ class webservice {
 
         // Obtain token record
         if (!$token = $DB->get_record('external_tokens', array('token' => $token))) {
-            //client may want to display login form => moodle_exception
-            throw new moodle_exception('invalidtoken', 'webservice');
+            //client may want to display login form => powereduc_exception
+            throw new powereduc_exception('invalidtoken', 'webservice');
         }
 
         $loginfaileddefaultparams = array(
@@ -130,10 +130,10 @@ class webservice {
         }
 
         // Cannot authenticate unless maintenance access is granted.
-        $hasmaintenanceaccess = has_capability('moodle/site:maintenanceaccess', context_system::instance(), $user);
+        $hasmaintenanceaccess = has_capability('powereduc/site:maintenanceaccess', context_system::instance(), $user);
         if (!empty($CFG->maintenance_enabled) and !$hasmaintenanceaccess) {
-            //this is usually temporary, client want to implement code logic  => moodle_exception
-            throw new moodle_exception('sitemaintenance', 'admin');
+            //this is usually temporary, client want to implement code logic  => powereduc_exception
+            throw new powereduc_exception('sitemaintenance', 'admin');
         }
 
         //retrieve web service record
@@ -176,7 +176,7 @@ class webservice {
             $event->add_record_snapshot('external_tokens', $token);
             $event->set_legacy_logdata(array(SITEID, 'webservice', 'user unconfirmed', '', $user->username));
             $event->trigger();
-            throw new moodle_exception('usernotconfirmed', 'moodle', '', $user->username);
+            throw new powereduc_exception('usernotconfirmed', 'powereduc', '', $user->username);
         }
 
         //check the user is suspended
@@ -187,7 +187,7 @@ class webservice {
             $event->add_record_snapshot('external_tokens', $token);
             $event->set_legacy_logdata(array(SITEID, 'webservice', 'user suspended', '', $user->username));
             $event->trigger();
-            throw new moodle_exception('wsaccessusersuspended', 'moodle', '', $user->username);
+            throw new powereduc_exception('wsaccessusersuspended', 'powereduc', '', $user->username);
         }
 
         //check if the auth method is nologin (in this case refuse connection)
@@ -198,7 +198,7 @@ class webservice {
             $event->add_record_snapshot('external_tokens', $token);
             $event->set_legacy_logdata(array(SITEID, 'webservice', 'nologin auth attempt with web service', '', $user->username));
             $event->trigger();
-            throw new moodle_exception('wsaccessusernologin', 'moodle', '', $user->username);
+            throw new powereduc_exception('wsaccessusernologin', 'powereduc', '', $user->username);
         }
 
         //Check if the user password is expired
@@ -212,7 +212,7 @@ class webservice {
                 $event->add_record_snapshot('external_tokens', $token);
                 $event->set_legacy_logdata(array(SITEID, 'webservice', 'expired password', '', $user->username));
                 $event->trigger();
-                throw new moodle_exception('passwordisexpired', 'webservice');
+                throw new powereduc_exception('passwordisexpired', 'webservice');
             }
         }
 
@@ -337,7 +337,7 @@ class webservice {
         global $CFG, $DB;
 
         // generate a token for non admin if web service are enable and the user has the capability to create a token
-        if (!is_siteadmin() && has_capability('moodle/webservice:createtoken', context_system::instance(), $userid) && !empty($CFG->enablewebservices)) {
+        if (!is_siteadmin() && has_capability('powereduc/webservice:createtoken', context_system::instance(), $userid) && !empty($CFG->enablewebservices)) {
             // for every service than the user is authorised on, create a token (if it doesn't already exist)
 
             // get all services which are set to all user (no restricted to specific users)
@@ -510,7 +510,7 @@ class webservice {
      * Get a full database token record for a given token value
      *
      * @param string $token
-     * @throws moodle_exception if there is multiple result
+     * @throws powereduc_exception if there is multiple result
      */
     public function get_user_ws_token($token) {
         global $DB;
@@ -592,16 +592,16 @@ class webservice {
      *  (
      *    [core_group_create_groups] => Array
      *    (
-     *       [0] => moodle/course:managegroups
+     *       [0] => powereduc/course:managegroups
      *    )
      *
      *    [core_enrol_get_enrolled_users] => Array
      *    (
-     *       [0] => moodle/user:viewdetails
-     *       [1] => moodle/user:viewhiddendetails
-     *       [2] => moodle/course:useremail
-     *       [3] => moodle/user:update
-     *       [4] => moodle/site:accessallgroups
+     *       [0] => powereduc/user:viewdetails
+     *       [1] => powereduc/user:viewhiddendetails
+     *       [2] => powereduc/course:useremail
+     *       [3] => powereduc/user:update
+     *       [4] => powereduc/site:accessallgroups
      *    )
      *  )
      * @param int $serviceid service id
@@ -629,8 +629,8 @@ class webservice {
      * as the front end does not display it itself. In pratice,
      * admins would like the info, for more info you can follow: MDL-29962
      *
-     * @deprecated since Moodle 3.11 in MDL-67748 without a replacement.
-     * @todo MDL-70187 Please delete this method completely in Moodle 4.3, thank you.
+     * @deprecated since PowerEduc 3.11 in MDL-67748 without a replacement.
+     * @todo MDL-70187 Please delete this method completely in PowerEduc 4.3, thank you.
      * @param int $userid user id
      * @return array
      */
@@ -860,7 +860,7 @@ class webservice {
      *
      * @param  string $userid user id to retrieve tokens from
      * @return array array of token entries
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public static function get_active_tokens($userid) {
         global $DB;
@@ -884,7 +884,7 @@ class webservice {
  * @copyright  2009 Petr Skodak
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class webservice_access_exception extends moodle_exception {
+class webservice_access_exception extends powereduc_exception {
 
     /**
      * Constructor
@@ -1002,7 +1002,7 @@ abstract class webservice_server implements webservice_server_interface {
     protected function authenticate_user() {
         global $CFG, $DB;
 
-        if (!NO_MOODLE_COOKIES) {
+        if (!NO_POWEREDUC_COOKIES) {
             throw new coding_exception('Cookies must be disabled in WS servers!');
         }
 
@@ -1028,11 +1028,11 @@ abstract class webservice_server implements webservice_server_interface {
             $this->restricted_context = context_system::instance();
 
             if (!$this->username) {
-                throw new moodle_exception('missingusername', 'webservice');
+                throw new powereduc_exception('missingusername', 'webservice');
             }
 
             if (!$this->password) {
-                throw new moodle_exception('missingpassword', 'webservice');
+                throw new powereduc_exception('missingpassword', 'webservice');
             }
 
             if (!$auth->user_login_webservice($this->username, $this->password)) {
@@ -1046,7 +1046,7 @@ abstract class webservice_server implements webservice_server_interface {
                     get_string('failedtolog', 'webservice').": ".$this->username."/".$this->password." - ".getremoteaddr() , 0));
                 $event->trigger();
 
-                throw new moodle_exception('wrongusernamepassword', 'webservice');
+                throw new powereduc_exception('wrongusernamepassword', 'webservice');
             }
 
             $user = $DB->get_record('user', array('username'=>$this->username, 'mnethostid'=>$CFG->mnet_localhost_id), '*', MUST_EXIST);
@@ -1058,9 +1058,9 @@ abstract class webservice_server implements webservice_server_interface {
         }
 
         // Cannot authenticate unless maintenance access is granted.
-        $hasmaintenanceaccess = has_capability('moodle/site:maintenanceaccess', context_system::instance(), $user);
+        $hasmaintenanceaccess = has_capability('powereduc/site:maintenanceaccess', context_system::instance(), $user);
         if (!empty($CFG->maintenance_enabled) and !$hasmaintenanceaccess) {
-            throw new moodle_exception('sitemaintenance', 'admin');
+            throw new powereduc_exception('sitemaintenance', 'admin');
         }
 
         //only confirmed user should be able to call web service
@@ -1072,7 +1072,7 @@ abstract class webservice_server implements webservice_server_interface {
             $event->set_legacy_logdata(array(SITEID, '', '', '', get_string('wsaccessuserdeleted', 'webservice',
                 $user->username) . " - ".getremoteaddr(), 0, $user->id));
             $event->trigger();
-            throw new moodle_exception('wsaccessuserdeleted', 'webservice', '', $user->username);
+            throw new powereduc_exception('wsaccessuserdeleted', 'webservice', '', $user->username);
         }
 
         //only confirmed user should be able to call web service
@@ -1084,7 +1084,7 @@ abstract class webservice_server implements webservice_server_interface {
             $event->set_legacy_logdata(array(SITEID, '', '', '', get_string('wsaccessuserunconfirmed', 'webservice',
                 $user->username) . " - ".getremoteaddr(), 0, $user->id));
             $event->trigger();
-            throw new moodle_exception('wsaccessuserunconfirmed', 'webservice', '', $user->username);
+            throw new powereduc_exception('wsaccessuserunconfirmed', 'webservice', '', $user->username);
         }
 
         //check the user is suspended
@@ -1096,7 +1096,7 @@ abstract class webservice_server implements webservice_server_interface {
             $event->set_legacy_logdata(array(SITEID, '', '', '', get_string('wsaccessusersuspended', 'webservice',
                 $user->username) . " - ".getremoteaddr(), 0, $user->id));
             $event->trigger();
-            throw new moodle_exception('wsaccessusersuspended', 'webservice', '', $user->username);
+            throw new powereduc_exception('wsaccessusersuspended', 'webservice', '', $user->username);
         }
 
         //retrieve the authentication plugin if no previously done
@@ -1115,7 +1115,7 @@ abstract class webservice_server implements webservice_server_interface {
                 $event->set_legacy_logdata(array(SITEID, '', '', '', get_string('wsaccessuserexpired', 'webservice',
                     $user->username) . " - ".getremoteaddr(), 0, $user->id));
                 $event->trigger();
-                throw new moodle_exception('wsaccessuserexpired', 'webservice', '', $user->username);
+                throw new powereduc_exception('wsaccessuserexpired', 'webservice', '', $user->username);
             }
         }
 
@@ -1128,7 +1128,7 @@ abstract class webservice_server implements webservice_server_interface {
             $event->set_legacy_logdata(array(SITEID, '', '', '', get_string('wsaccessusernologin', 'webservice',
                 $user->username) . " - ".getremoteaddr(), 0, $user->id));
             $event->trigger();
-            throw new moodle_exception('wsaccessusernologin', 'webservice', '', $user->username);
+            throw new powereduc_exception('wsaccessusernologin', 'webservice', '', $user->username);
         }
 
         // now fake user login, the session is completely empty too
@@ -1170,7 +1170,7 @@ abstract class webservice_server implements webservice_server_interface {
             $event->set_legacy_logdata(array(SITEID, 'webservice', get_string('tokenauthlog', 'webservice'), '' ,
                 get_string('failedtolog', 'webservice').": ".$this->token. " - ".getremoteaddr() , 0));
             $event->trigger();
-            throw new moodle_exception('invalidtoken', 'webservice');
+            throw new powereduc_exception('invalidtoken', 'webservice');
         }
 
         if ($token->validuntil and $token->validuntil < time()) {
@@ -1211,7 +1211,7 @@ abstract class webservice_server implements webservice_server_interface {
     }
 
     /**
-     * Intercept some moodlewssettingXXX $_GET and $_POST parameter
+     * Intercept some powereducwssettingXXX $_GET and $_POST parameter
      * that are related to the web service call and are not the function parameters
      */
     protected function set_web_service_call_settings() {
@@ -1219,7 +1219,7 @@ abstract class webservice_server implements webservice_server_interface {
 
         // Default web service settings.
         // Must be the same XXX key name as the external_settings::set_XXX function.
-        // Must be the same XXX ws parameter name as 'moodlewssettingXXX'.
+        // Must be the same XXX ws parameter name as 'powereducwssettingXXX'.
         $externalsettings = array(
             'raw' => array('default' => false, 'type' => PARAM_BOOL),
             'fileurl' => array('default' => true, 'type' => PARAM_BOOL),
@@ -1232,7 +1232,7 @@ abstract class webservice_server implements webservice_server_interface {
         $settings = external_settings::get_instance();
         foreach ($externalsettings as $name => $settingdata) {
 
-            $wsparamname = 'moodlewssetting' . $name;
+            $wsparamname = 'powereducwssetting' . $name;
 
             // Retrieve and remove the setting parameter from the request.
             $value = optional_param($wsparamname, $settingdata['default'], $settingdata['type']);
@@ -1496,7 +1496,7 @@ abstract class webservice_base_server extends webservice_server {
         $params = call_user_func(array($this->function->classname, 'validate_parameters'), $this->function->parameters_desc, $this->parameters);
         $params = array_values($params);
 
-        // Allow any Moodle plugin a chance to override this call. This is a convenient spot to
+        // Allow any PowerEduc plugin a chance to override this call. This is a convenient spot to
         // make arbitrary behaviour customisations, for example to affect the mobile app behaviour.
         // The overriding plugin could call the 'real' function first and then modify the results,
         // or it could do a completely separate thing.
@@ -1662,7 +1662,7 @@ EOD;
      * @param stdClass $function a record from external_function
      * @return string The PHP code of the virtual method.
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_virtual_method_code($function) {
         $function = external_api::external_function_info($function);
@@ -1682,7 +1682,7 @@ EOD;
             $paramanddefault = $param;
             if ($keydesc->required == VALUE_OPTIONAL) {
                 // It does not make sense to declare a parameter VALUE_OPTIONAL. VALUE_OPTIONAL is used only for array/object key.
-                throw new moodle_exception('erroroptionalparamarray', 'webservice', '', $name);
+                throw new powereduc_exception('erroroptionalparamarray', 'webservice', '', $name);
             } else if ($keydesc->required == VALUE_DEFAULT) {
                 // Need to generate the default, if there is any.
                 if ($keydesc instanceof external_value) {
@@ -1710,7 +1710,7 @@ EOD;
                         $paramanddefault .= ' = array()';
                     } else {
                         // For the moment we do not support default for other structure types.
-                        throw new moodle_exception('errornotemptydefaultparamarray', 'webservice', '', $name);
+                        throw new powereduc_exception('errornotemptydefaultparamarray', 'webservice', '', $name);
                     }
                 }
             }

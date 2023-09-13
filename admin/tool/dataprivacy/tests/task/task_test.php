@@ -18,7 +18,7 @@ namespace tool_dataprivacy\task;
 
 use tool_dataprivacy\api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once(__DIR__ . '/../data_privacy_testcase.php');
 
 /**

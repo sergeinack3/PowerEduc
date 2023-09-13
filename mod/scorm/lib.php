@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_scorm
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** SCORM_TYPE_LOCAL = local */
 define('SCORM_TYPE_LOCAL', 'local');
@@ -360,7 +360,7 @@ function scorm_user_outline($course, $user, $mod, $scorm) {
         $result = (object) [
             'time' => grade_get_date_for_user_grade($grade, $user),
         ];
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $result->info = get_string('gradenoun') . ': '. $grade->str_long_grade;
         } else {
             $result->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -403,7 +403,7 @@ function scorm_user_complete($course, $user, $mod, $scorm) {
     $grades = grade_get_grades($course->id, 'mod', 'scorm', $scorm->id, $user->id);
     if (!empty($grades->items[0]->grades)) {
         $grade = reset($grades->items[0]->grades);
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             echo $OUTPUT->container(get_string('gradenoun').': '.$grade->str_long_grade);
             if ($grade->str_feedback) {
                 echo $OUTPUT->container(get_string('feedback').': '.$grade->str_feedback);
@@ -535,7 +535,7 @@ function scorm_user_complete($course, $user, $mod, $scorm) {
 }
 
 /**
- * Function to be run periodically according to the moodle Tasks API
+ * Function to be run periodically according to the powereduc Tasks API
  * This function searches for things that need to be done, such
  * as sending out mail, toggling flags etc ...
  *
@@ -882,7 +882,7 @@ function scorm_get_file_areas($course, $cm, $context) {
 function scorm_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     global $CFG;
 
-    if (!has_capability('moodle/course:managefiles', $context)) {
+    if (!has_capability('powereduc/course:managefiles', $context)) {
         return null;
     }
 
@@ -951,7 +951,7 @@ function scorm_pluginfile($course, $cm, $context, $filearea, $args, $forcedownlo
 
     require_login($course, true, $cm);
 
-    $canmanageactivity = has_capability('moodle/course:manageactivities', $context);
+    $canmanageactivity = has_capability('powereduc/course:manageactivities', $context);
     $lifetime = null;
 
     // Check SCORM availability.
@@ -1038,7 +1038,7 @@ function scorm_supports($feature) {
         case FEATURE_COMPLETION_HAS_RULES:    return true;
         case FEATURE_GRADE_HAS_GRADE:         return true;
         case FEATURE_GRADE_OUTCOMES:          return true;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_CONTENT;
 
@@ -1101,7 +1101,7 @@ function scorm_debug_log_remove($type, $scoid) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function scorm_print_overview() {
     throw new coding_exception('scorm_print_overview() can not be used any more and is obsolete.');
@@ -1372,7 +1372,7 @@ function scorm_check_mode($scorm, &$newattempt, &$attempt, $userid, &$mode) {
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function scorm_view($scorm, $course, $cm, $context) {
 
@@ -1396,7 +1396,7 @@ function scorm_view($scorm, $course, $cm, $context) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function scorm_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER, $CFG;
@@ -1571,7 +1571,7 @@ function mod_scorm_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('enter', 'scorm'),
-        new \moodle_url('/mod/scorm/view.php', array('id' => $cm->id)),
+        new \powereduc_url('/mod/scorm/view.php', array('id' => $cm->id)),
         1,
         $actionable
     );
@@ -1676,7 +1676,7 @@ function mod_scorm_get_completion_active_rule_descriptions($cm) {
  * It will set the timeopen or timeclose value of the scorm instance
  * according to the type of event provided.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event
  * @param stdClass $scorm The module instance to get the range from
  */
@@ -1704,7 +1704,7 @@ function mod_scorm_core_calendar_event_timestart_updated(\calendar_event $event,
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 
@@ -1842,7 +1842,7 @@ function mod_scorm_core_calendar_get_event_action_string(string $eventtype): str
  */
 function scorm_extend_settings_navigation(settings_navigation $settings, navigation_node $scormnode): void {
     if (has_capability('mod/scorm:viewreport', $settings->get_page()->cm->context)) {
-        $url = new moodle_url('/mod/scorm/report.php', ['id' => $settings->get_page()->cm->id]);
+        $url = new powereduc_url('/mod/scorm/report.php', ['id' => $settings->get_page()->cm->id]);
         $scormnode->add(get_string("reports", "scorm"), $url, navigation_node::TYPE_CUSTOM, null, 'scormreport');
     }
 }

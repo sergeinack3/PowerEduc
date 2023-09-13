@@ -24,7 +24,7 @@
 
 namespace core\analytics\time_splitting;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Range processor splitting the course in ten parts and accumulating data.

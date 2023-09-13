@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ class player_test extends \advanced_testcase {
 
         // Create list of URLs for each extension.
         $urls = array_map(function($ext){
-            return new \moodle_url('http://example.org/video.' . $ext);
+            return new \powereduc_url('http://example.org/video.' . $ext);
         }, $nativeextensions);
 
         // Make sure that the list of supported URLs is not filtering permitted extensions.
@@ -89,7 +89,7 @@ class player_test extends \advanced_testcase {
     public function test_embed_url() {
         global $CFG;
 
-        $url = new \moodle_url('http://example.org/1.webm');
+        $url = new \powereduc_url('http://example.org/1.webm');
 
         $manager = core_media_manager::instance();
         $embedoptions = array(
@@ -118,7 +118,7 @@ class player_test extends \advanced_testcase {
      */
     public function test_embed_link() {
         global $CFG;
-        $url = new \moodle_url('http://example.org/some_filename.mp4');
+        $url = new \powereduc_url('http://example.org/some_filename.mp4');
         $text = \html_writer::link($url, 'Watch this one');
         $content = format_text($text, FORMAT_HTML);
 
@@ -133,8 +133,8 @@ class player_test extends \advanced_testcase {
      * Test that mediaplugin filter does not work on <video> tags.
      */
     public function test_embed_media() {
-        $url = new \moodle_url('http://example.org/some_filename.mp4');
-        $trackurl = new \moodle_url('http://example.org/some_filename.vtt');
+        $url = new \powereduc_url('http://example.org/some_filename.mp4');
+        $trackurl = new \powereduc_url('http://example.org/some_filename.vtt');
         $text = '<video controls="true"><source src="'.$url.'"/><source src="somethinginvalid"/>' .
             '<track src="'.$trackurl.'">Unsupported text</video>';
         $content = format_text($text, FORMAT_HTML);

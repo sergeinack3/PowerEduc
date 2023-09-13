@@ -28,7 +28,7 @@ use coding_exception;
 use core\task\scheduled_task;
 use tool_dataprivacy\api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/' . $CFG->admin . '/tool/dataprivacy/lib.php');
 

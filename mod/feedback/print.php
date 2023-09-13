@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ $PAGE->set_pagelayout('popup');
 $strfeedbacks = get_string("modulenameplural", "feedback");
 $strfeedback  = get_string("modulename", "feedback");
 
-$feedback_url = new moodle_url('/mod/feedback/index.php', array('id'=>$course->id));
+$feedback_url = new powereduc_url('/mod/feedback/index.php', array('id'=>$course->id));
 $PAGE->navbar->add($strfeedbacks, $feedback_url);
 $PAGE->navbar->add(format_string($feedback->name));
 
@@ -51,7 +51,7 @@ $PAGE->set_heading($course->fullname);
 $PAGE->activityheader->set_title(format_string($feedback->name));
 echo $OUTPUT->header();
 
-$continueurl = new moodle_url('/mod/feedback/view.php', array('id' => $id));
+$continueurl = new powereduc_url('/mod/feedback/view.php', array('id' => $id));
 if ($courseid) {
     $continueurl->param('courseid', $courseid);
 }

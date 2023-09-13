@@ -36,7 +36,7 @@ use external_multiple_structure;
 use external_warnings;
 use core_component;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir .'/externallib.php');
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class mod_feedback_responses_anon_table
@@ -92,10 +92,10 @@ class mod_feedback_responses_anon_table extends mod_feedback_responses_table {
     /**
      * Returns a link for viewing a single response
      * @param stdClass $row
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     protected function get_link_single_entry($row) {
-        return new moodle_url($this->baseurl, ['showcompleted' => $row->id]);
+        return new powereduc_url($this->baseurl, ['showcompleted' => $row->id]);
     }
 
     /**

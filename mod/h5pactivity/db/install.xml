@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/h5pactivity/db" VERSION="20200422" COMMENT="XMLDB file for Moodle mod_h5pactivity"
+<XMLDB PATH="mod/h5pactivity/db" VERSION="20200422" COMMENT="XMLDB file for PowerEduc mod_h5pactivity"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >

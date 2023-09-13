@@ -24,7 +24,7 @@
 
 namespace enrol_lti\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\output\notification;
 use enrol_lti\local\ltiadvantage\repository\application_registration_repository;

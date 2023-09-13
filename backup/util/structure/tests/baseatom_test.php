@@ -20,7 +20,7 @@ use base_atom_content_exception;
 use base_atom_struct_exception;
 use mock_base_atom;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 require_once(__DIR__.'/fixtures/structure_fixtures.php');

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Solr schema manipulation manager.
@@ -24,7 +24,7 @@
 
 namespace search_solr;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/lib/filelib.php');
 
@@ -32,7 +32,7 @@ require_once($CFG->dirroot . '/lib/filelib.php');
  * Schema class to interact with Solr schema.
  *
  * At the moment it only implements create which should be enough for a basic
- * moodle configuration in Solr.
+ * powereduc configuration in Solr.
  *
  * @package   search_solr
  * @copyright 2015 David Monllao {@link http://www.davidmonllao.com}
@@ -61,16 +61,16 @@ class schema {
      * Constructor.
      *
      * @param engine $engine Optional engine parameter, if not specified then one will be created
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @return void
      */
     public function __construct(engine $engine = null) {
         if (!$this->config = get_config('search_solr')) {
-            throw new \moodle_exception('missingconfig', 'search_solr');
+            throw new \powereduc_exception('missingconfig', 'search_solr');
         }
 
         if (empty($this->config->server_hostname) || empty($this->config->indexname)) {
-            throw new \moodle_exception('missingconfig', 'search_solr');
+            throw new \powereduc_exception('missingconfig', 'search_solr');
         }
 
         $this->engine = $engine ?? new engine();
@@ -104,7 +104,7 @@ class schema {
     }
 
     /**
-     * Setup solr stuff required by moodle.
+     * Setup solr stuff required by powereduc.
      *
      * @param  bool $checkexisting Whether to check if the fields already exist or not
      * @return bool
@@ -128,7 +128,7 @@ class schema {
     /**
      * Checks the schema is properly set up.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @return void
      */
     public function validate_setup() {
@@ -144,7 +144,7 @@ class schema {
     /**
      * Checks if the index is ready, triggers an exception otherwise.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @return void
      */
     protected function check_index() {
@@ -153,10 +153,10 @@ class schema {
         $url = $this->engine->get_connection_url('/select?wt=json');
         $result = $this->curl->get($url);
         if ($this->curl->error) {
-            throw new \moodle_exception('connectionerror', 'search_solr');
+            throw new \powereduc_exception('connectionerror', 'search_solr');
         }
         if ($this->curl->info['http_code'] === 404) {
-            throw new \moodle_exception('connectionerror', 'search_solr');
+            throw new \powereduc_exception('connectionerror', 'search_solr');
         }
     }
 
@@ -167,7 +167,7 @@ class schema {
      * fields separately.
      *
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param  array $fields \core_search\document::$requiredfields format
      * @param  bool $checkexisting Whether to check if the fields already exist or not
      * @return bool
@@ -204,7 +204,7 @@ class schema {
             // We only validate if we are interested on it.
             if ($checkexisting) {
                 if ($this->curl->error) {
-                    throw new \moodle_exception('errorcreatingschema', 'search_solr', '', $this->curl->error);
+                    throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', $this->curl->error);
                 }
                 $this->validate_add_field_result($results);
             }
@@ -216,7 +216,7 @@ class schema {
     /**
      * Checks if the schema existing fields are properly set, triggers an exception otherwise.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param array $fields
      * @param bool $requireexisting Require the fields to exist, otherwise exception.
      * @return void
@@ -229,11 +229,11 @@ class schema {
             $results = $this->curl->get($url);
 
             if ($this->curl->error) {
-                throw new \moodle_exception('errorcreatingschema', 'search_solr', '', $this->curl->error);
+                throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', $this->curl->error);
             }
 
             if (!$results) {
-                throw new \moodle_exception('errorcreatingschema', 'search_solr', '', get_string('nodatafromserver', 'search_solr'));
+                throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', get_string('nodatafromserver', 'search_solr'));
             }
             $results = json_decode($results);
 
@@ -241,13 +241,13 @@ class schema {
                 $a = new \stdClass();
                 $a->fieldname = $fieldname;
                 $a->setupurl = $CFG->wwwroot . '/search/engine/solr/setup_schema.php';
-                throw new \moodle_exception('errorvalidatingschema', 'search_solr', '', $a);
+                throw new \powereduc_exception('errorvalidatingschema', 'search_solr', '', $a);
             }
 
             // The field should not exist so we only accept 404 errors.
             if (empty($results->error) || (!empty($results->error) && $results->error->code !== 404)) {
                 if (!empty($results->error)) {
-                    throw new \moodle_exception('errorcreatingschema', 'search_solr', '', $results->error->msg);
+                    throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', $results->error->msg);
                 } else {
                     // All these field attributes are set when fields are added through this script and should
                     // be returned and match the defined field's values.
@@ -257,7 +257,7 @@ class schema {
                             !isset($results->field->multiValued) || !isset($results->field->indexed) ||
                             !isset($results->field->stored)) {
 
-                        throw new \moodle_exception('errorcreatingschema', 'search_solr', '',
+                        throw new \powereduc_exception('errorcreatingschema', 'search_solr', '',
                             get_string('schemafieldautocreated', 'search_solr', $fieldname));
 
                     } else if ($results->field->type !== $expectedsolrfield ||
@@ -265,7 +265,7 @@ class schema {
                             $results->field->indexed !== $data['indexed'] ||
                             $results->field->stored !== $data['stored']) {
 
-                        throw new \moodle_exception('errorcreatingschema', 'search_solr', '',
+                        throw new \powereduc_exception('errorcreatingschema', 'search_solr', '',
                             get_string('schemafieldautocreated', 'search_solr', $fieldname));
                     } else {
                         // The field already exists and it is properly defined, no need to create it.
@@ -279,14 +279,14 @@ class schema {
     /**
      * Checks that the field results do not contain errors.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param string $results curl response body
      * @return void
      */
     protected function validate_add_field_result($result) {
 
         if (!$result) {
-            throw new \moodle_exception('errorcreatingschema', 'search_solr', '', get_string('nodatafromserver', 'search_solr'));
+            throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', get_string('nodatafromserver', 'search_solr'));
         }
 
         $results = json_decode($result);
@@ -296,12 +296,12 @@ class schema {
             } else {
                 $errormsg = json_encode($result);
             }
-            throw new \moodle_exception('errorcreatingschema', 'search_solr', '', $errormsg);
+            throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', $errormsg);
         }
 
         // It comes as error when fetching fields data.
         if (!empty($results->error)) {
-            throw new \moodle_exception('errorcreatingschema', 'search_solr', '', $results->error);
+            throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', $results->error);
         }
 
         // It comes as errors when adding fields.
@@ -312,7 +312,7 @@ class schema {
             foreach ($results->errors as $error) {
                 $errorstr .= implode(', ', $error->errorMessages);
             }
-            throw new \moodle_exception('errorcreatingschema', 'search_solr', '', $errorstr);
+            throw new \powereduc_exception('errorcreatingschema', 'search_solr', '', $errorstr);
         }
 
     }

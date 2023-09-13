@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'course', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'course', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   core_courseformat
  * @copyright 2021 Ferran Recio <ferran@moodle.com>

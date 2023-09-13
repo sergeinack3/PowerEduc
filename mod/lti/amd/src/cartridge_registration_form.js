@@ -1,26 +1,26 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Encapsules the behavior for creating a tool type from a cartridge URL
- * in Moodle. Manages the UI while operations are occuring.
+ * in PowerEduc. Manages the UI while operations are occuring.
  *
  * See template: mod_lti/cartridge_registration_form
  *
  * @module     mod_lti/cartridge_registration_form
- * @copyright  2015 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2015 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      3.1
  */
@@ -124,7 +124,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'mod_lti/tool_type', 'mod_lt
 
     /**
      * Create a tool type from the cartridge URL that the user input. This will
-     * send an ajax request to the Moodle server to create the Type. The request will
+     * send an ajax request to the PowerEduc server to create the Type. The request will
      * include the consumer key and secret, if any.
      *
      * On success the page will be re-rendered to take the user back to the original

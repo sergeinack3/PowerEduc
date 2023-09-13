@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -55,7 +55,7 @@ abstract class core_backup_backup_restore_base_testcase extends advanced_testcas
         $coursecontext = context_course::instance($course->id);
 
         // Start backup process.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_NO, backup::MODE_GENERAL, $USER->id);
         $bc->execute_plan();
         $backupid = $bc->get_backupid();
@@ -105,7 +105,7 @@ abstract class core_backup_backup_restore_base_testcase extends advanced_testcas
         global $USER;
 
         // Start backup process.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course1->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course1->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_NO, backup::MODE_IMPORT, $USER->id);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();

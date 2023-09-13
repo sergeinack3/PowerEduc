@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc. If not, see <http://www.gnu.org/licenses/>.
 
 require_once('../../config.php');
 require_once(__DIR__ . '/create_form.php');
@@ -32,11 +32,11 @@ $swid = optional_param('swid', 0, PARAM_INT);
 $group = optional_param('group', 0, PARAM_INT);
 $uid = optional_param('uid', 0, PARAM_INT);
 
-// 'create' action must be submitted by moodle form
+// 'create' action must be submitted by powereduc form
 // so sesskey must be checked
 if ($action == 'create') {
     if (!confirm_sesskey()) {
-        throw new \moodle_exception('invalidsesskey');
+        throw new \powereduc_exception('invalidsesskey');
     }
 }
 
@@ -44,26 +44,26 @@ if (!empty($swid)) {
     $subwiki = wiki_get_subwiki($swid);
 
     if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
-        throw new \moodle_exception('incorrectwikiid', 'wiki');
+        throw new \powereduc_exception('incorrectwikiid', 'wiki');
     }
 
 } else {
     $subwiki = wiki_get_subwiki_by_group($wid, $group, $uid);
 
     if (!$wiki = wiki_get_wiki($wid)) {
-        throw new \moodle_exception('incorrectwikiid', 'wiki');
+        throw new \powereduc_exception('incorrectwikiid', 'wiki');
     }
 
 }
 
 if (!$cm = get_coursemodule_from_instance('wiki', $wiki->id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 $groups = new stdClass();
 if (groups_get_activity_groupmode($cm)) {
     $modulecontext = context_module::instance($cm->id);
-    $canaccessgroups = has_capability('moodle/site:accessallgroups', $modulecontext);
+    $canaccessgroups = has_capability('powereduc/site:accessallgroups', $modulecontext);
     if ($canaccessgroups) {
         $groups->availablegroups = groups_get_all_groups($cm->course);
         $allpart = new stdClass();
@@ -101,7 +101,7 @@ if (!empty($swid)) {
 $wikipage->set_availablegroups($groups);
 $wikipage->set_title($title);
 
-// set page action, and initialise moodle form
+// set page action, and initialise powereduc form
 $wikipage->set_action($action);
 
 switch ($action) {

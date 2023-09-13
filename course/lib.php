@@ -22,7 +22,7 @@
  * @package core_course
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use core_courseformat\base as course_format;
 
@@ -1813,7 +1813,7 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
 
     // Duplicate (require both target import caps to be able to duplicate and backup2 support, see modduplicate.php)
     if (has_all_capabilities($dupecaps, $coursecontext) &&
-            plugin_supports('mod', $mod->modname, FEATURE_BACKUP_MOODLE2) &&
+            plugin_supports('mod', $mod->modname, FEATURE_BACKUP_POWEREDUC2) &&
             course_allowed_module($mod->get_course(), $mod->modname)) {
         $actions['duplicate'] = new action_menu_link_secondary(
             new moodle_url($baseurl, array('duplicate' => $mod->id)),
@@ -3386,13 +3386,13 @@ function duplicate_module($course, $cm) {
     $a->modtype = get_string('modulename', $cm->modname);
     $a->modname = format_string($cm->name);
 
-    if (!plugin_supports('mod', $cm->modname, FEATURE_BACKUP_MOODLE2)) {
+    if (!plugin_supports('mod', $cm->modname, FEATURE_BACKUP_POWEREDUC2)) {
         throw new moodle_exception('duplicatenosupport', 'error', '', $a);
     }
 
     // Backup the activity.
 
-    $bc = new backup_controller(backup::TYPE_1ACTIVITY, $cm->id, backup::FORMAT_MOODLE,
+    $bc = new backup_controller(backup::TYPE_1ACTIVITY, $cm->id, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_IMPORT, $USER->id);
 
     $backupid       = $bc->get_backupid();

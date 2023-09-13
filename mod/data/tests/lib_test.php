@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace mod_data;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/data/lib.php');
@@ -41,7 +41,7 @@ require_once($CFG->dirroot . '/mod/data/lib.php');
 class lib_test extends \advanced_testcase {
 
     /**
-     * @var moodle_database
+     * @var powereduc_database
      */
     protected $DB = null;
 
@@ -237,7 +237,7 @@ class lib_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_data\event\comment_created', $event);
         $this->assertEquals($context, $event->get_context());
-        $url = new \moodle_url('/mod/data/view.php', array('id' => $cm->id));
+        $url = new \powereduc_url('/mod/data/view.php', array('id' => $cm->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
@@ -301,7 +301,7 @@ class lib_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_data\event\comment_deleted', $event);
         $this->assertEquals($context, $event->get_context());
-        $url = new \moodle_url('/mod/data/view.php', array('id' => $module->cmid));
+        $url = new \powereduc_url('/mod/data/view.php', array('id' => $module->cmid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
@@ -637,7 +637,7 @@ class lib_test extends \advanced_testcase {
         $DB->insert_record('data_content', $datacontent);
 
         // Now try to access it as various users.
-        unassign_capability('moodle/site:accessallgroups', $role->id);
+        unassign_capability('powereduc/site:accessallgroups', $role->id);
         // Eveyone should have access to the record with the group id of zero.
         $params1 = array('contextid' => 2,
                         'component' => 'mod_data',
@@ -665,7 +665,7 @@ class lib_test extends \advanced_testcase {
         $this->assertTrue(mod_data_rating_can_see_item_ratings($params1));
 
         // Now try with accessallgroups cap and make sure everything is visible.
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $role->id, $context->id);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $role->id, $context->id);
         $this->setUser($user1);
         $this->assertTrue(mod_data_rating_can_see_item_ratings($params));
         $this->assertTrue(mod_data_rating_can_see_item_ratings($params1));
@@ -682,7 +682,7 @@ class lib_test extends \advanced_testcase {
         // Change group mode and verify visibility.
         $course->groupmode = VISIBLEGROUPS;
         $DB->update_record('course', $course);
-        unassign_capability('moodle/site:accessallgroups', $role->id);
+        unassign_capability('powereduc/site:accessallgroups', $role->id);
         $this->setUser($user1);
         $this->assertTrue(mod_data_rating_can_see_item_ratings($params));
         $this->assertTrue(mod_data_rating_can_see_item_ratings($params1));
@@ -1367,7 +1367,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('add', 'data'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -1405,7 +1405,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('add', 'data'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -1490,7 +1490,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('add', 'data'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -1528,7 +1528,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('add', 'data'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -1556,7 +1556,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('add', 'data'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -1593,7 +1593,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('add', 'data'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -1956,7 +1956,7 @@ class lib_test extends \advanced_testcase {
         $user = self::getDataGenerator()->create_and_enrol($course, 'editingteacher');
         $roleid = self::getDataGenerator()->create_role();
         self::getDataGenerator()->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
         $generator = self::getDataGenerator()->get_plugin_generator('mod_data');
         // Create an instance as a user without the calendar capabilities.
         $this->setUser($user);

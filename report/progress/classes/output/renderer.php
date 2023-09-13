@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace report_progress\output;
 
@@ -31,13 +31,13 @@ class renderer extends plugin_renderer_base {
     /**
      * Render include activity single select box.
      *
-     * @param \moodle_url $url The base url.
+     * @param \powereduc_url $url The base url.
      * @param array $activitytypes The activity type options.
      * @param string $activityinclude The current selected option.
      * @return string HTML
      * @throws \coding_exception
      */
-    public function render_include_activity_select(\moodle_url $url, array $activitytypes,
+    public function render_include_activity_select(\powereduc_url $url, array $activitytypes,
             string $activityinclude): string {
         $includeurl = fullclone($url);
         $includeurl->remove_params(['page', 'activityinclude']);
@@ -53,12 +53,12 @@ class renderer extends plugin_renderer_base {
     /**
      * Render activity order single select box.
      *
-     * @param \moodle_url $url The base url.
+     * @param \powereduc_url $url The base url.
      * @param string $activityorder The current selected option.
      * @return string HTML
      * @throws \coding_exception
      */
-    public function render_activity_order_select(\moodle_url $url, string $activityorder): string {
+    public function render_activity_order_select(\powereduc_url $url, string $activityorder): string {
         $activityorderurl = fullclone($url);
         $activityorderurl->remove_params(['activityorder']);
         $options = ['orderincourse' => get_string('orderincourse', 'report_progress'),
@@ -75,11 +75,11 @@ class renderer extends plugin_renderer_base {
     /**
      * Render groups single select box.
      *
-     * @param \moodle_url $url The base url.
+     * @param \powereduc_url $url The base url.
      * @param \stdClass $course Current course.
      * @return string HTML
      */
-    public function render_groups_select(\moodle_url $url, \stdClass $course): string {
+    public function render_groups_select(\powereduc_url $url, \stdClass $course): string {
         $groupurl = fullclone($url);
         $groupurl->remove_params(['page', 'group']);
         $groupoutput = groups_print_course_menu($course, $groupurl, true);
@@ -94,11 +94,11 @@ class renderer extends plugin_renderer_base {
     /**
      * Render download buttons.
      *
-     * @param \moodle_url $url The base url.
+     * @param \powereduc_url $url The base url.
      * @return string HTML
      * @throws \coding_exception
      */
-    public function render_download_buttons(\moodle_url $url): string {
+    public function render_download_buttons(\powereduc_url $url): string {
         $downloadurl = fullclone($url);
         $downloadurl->remove_params(['page']);
         $downloadurl->param('format', 'csv');

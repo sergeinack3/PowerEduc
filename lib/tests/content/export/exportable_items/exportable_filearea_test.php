@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use context;
 use context_system;
 use core\content\export\zipwriter;
 use core\content\export\exported_item;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
@@ -84,7 +84,7 @@ class exportable_filearea_test extends advanced_testcase {
         $file2 = reset($files2);
         $item = $this->assert_exportable_matches_file($component, $user, $context, $filearea, '', $files2, false, $exportable);
         $this->assertCount(count($files2), $item->get_all_files());
-        $comparisonurl = new moodle_url('/tokenpluginfile.php/');
+        $comparisonurl = new powereduc_url('/tokenpluginfile.php/');
         foreach ($item->get_all_files() as $url) {
             $this->assertStringStartsWith($comparisonurl->out(false), $url->filepath);
         }

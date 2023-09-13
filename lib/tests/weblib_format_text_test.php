@@ -78,14 +78,14 @@ class weblib_format_text_test extends \advanced_testcase {
         $this->assertMatchesRegularExpression('~^<div class="text_to_html"><p>' .
                 '<img class="icon emoticon" alt="smile" title="smile" ' .
                 'src="https://www.example.com/moodle/theme/image.php/_s/boost/core/1/s/smiley" /></p></div>$~',
-                format_text('<p>:-)</p>', FORMAT_MOODLE));
+                format_text('<p>:-)</p>', FORMAT_POWEREDUC));
     }
 
     public function test_format_text_format_moodle_no_filters() {
         $this->resetAfterTest();
         filter_set_global_state('emoticon', TEXTFILTER_ON);
         $this->assertEquals('<div class="text_to_html"><p>:-)</p></div>',
-                format_text('<p>:-)</p>', FORMAT_MOODLE, array('filter' => false)));
+                format_text('<p>:-)</p>', FORMAT_POWEREDUC, array('filter' => false)));
     }
 
     public function test_format_text_overflowdiv() {
@@ -101,7 +101,7 @@ class weblib_format_text_test extends \advanced_testcase {
      * @param string $expected The expected filter value
      */
     public function test_format_text_blanktarget($link, $expected) {
-        $actual = format_text($link, FORMAT_MOODLE, array('blanktarget' => true, 'filter' => false, 'noclean' => true));
+        $actual = format_text($link, FORMAT_POWEREDUC, array('blanktarget' => true, 'filter' => false, 'noclean' => true));
         $this->assertEquals($expected, $actual);
     }
 

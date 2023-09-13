@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines the renderer for the quiz module.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -301,7 +301,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
     /**
      * Create a preview link
      *
-     * @param moodle_url $url contains a url to the given page
+     * @param powereduc_url $url contains a url to the given page
      */
     public function restart_preview_button($url) {
         return $this->single_button($url, get_string('startnewpreview', 'quiz'));
@@ -464,7 +464,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
     /**
      * Render the tertiary navigation for pages during the attempt.
      *
-     * @param string|moodle_url $quizviewurl url of the view.php page for this quiz.
+     * @param string|powereduc_url $quizviewurl url of the view.php page for this quiz.
      * @return string HTML to output.
      */
     public function during_attempt_tertiary_nav($quizviewurl): string {
@@ -510,7 +510,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
 
         // Start the form.
         $output .= html_writer::start_tag('form',
-                array('action' => new moodle_url($attemptobj->processattempt_url(),
+                array('action' => new powereduc_url($attemptobj->processattempt_url(),
                 array('cmid' => $attemptobj->get_cmid())), 'method' => 'post',
                 'enctype' => 'multipart/form-data', 'accept-charset' => 'utf-8',
                 'id' => 'responseform'));
@@ -614,7 +614,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
     /**
      * Output a page with an optional message, and JavaScript code to close the
      * current window and redirect the parent window to a new URL.
-     * @param moodle_url $url the URL to redirect the parent window to.
+     * @param powereduc_url $url the URL to redirect the parent window to.
      * @param string $message message to display before closing the window. (optional)
      * @return string HTML to output.
      */
@@ -766,7 +766,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
         // Return to place button.
         if ($attemptobj->get_state() == quiz_attempt::IN_PROGRESS) {
             $button = new single_button(
-                    new moodle_url($attemptobj->attempt_url(null, $attemptobj->get_currentpage())),
+                    new powereduc_url($attemptobj->attempt_url(null, $attemptobj->get_currentpage())),
                     get_string('returnattempt', 'quiz'));
             $output .= $this->container($this->container($this->render($button),
                     'controls'), 'submitbtns mdl-align');
@@ -783,7 +783,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
         );
 
         $button = new single_button(
-                new moodle_url($attemptobj->processattempt_url(), $options),
+                new powereduc_url($attemptobj->processattempt_url(), $options),
                 get_string('submitallandfinish', 'quiz'));
         $button->id = 'responseform';
         $button->class = 'btn-finishattempt';
@@ -896,13 +896,13 @@ class mod_quiz_renderer extends plugin_renderer_base {
      * Generates the view attempt button
      *
      * @param string $buttontext the label to display on the button.
-     * @param moodle_url $url The URL to POST to in order to start the attempt.
+     * @param powereduc_url $url The URL to POST to in order to start the attempt.
      * @param mod_quiz_preflight_check_form $preflightcheckform deprecated.
      * @param bool $popuprequired whether the attempt needs to be opened in a pop-up.
      * @param array $popupoptions the options to use if we are opening a popup.
      * @return string HTML fragment.
      */
-    public function start_attempt_button($buttontext, moodle_url $url,
+    public function start_attempt_button($buttontext, powereduc_url $url,
             mod_quiz_preflight_check_form $preflightcheckform = null,
             $popuprequired = false, $popupoptions = null) {
 
@@ -943,10 +943,10 @@ class mod_quiz_renderer extends plugin_renderer_base {
      * go to the edit page, if the user has the right capability.
      *
      * @param bool $canedit can the current user edit the quiz?
-     * @param moodle_url $editurl URL of the edit quiz page.
+     * @param powereduc_url $editurl URL of the edit quiz page.
      * @return string HTML to output.
      *
-     * @deprecated since Moodle 4.0 MDL-71915 - please do not use this function any more.
+     * @deprecated since PowerEduc 4.0 MDL-71915 - please do not use this function any more.
      */
     public function no_questions_message($canedit, $editurl) {
         debugging('no_questions_message() is deprecated, please use generate_no_questions_message() instead.', DEBUG_DEVELOPER);
@@ -1271,7 +1271,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
      * Output either a link to the review page for an attempt, or a button to
      * open the review in a popup window.
      *
-     * @param moodle_url $url of the target page.
+     * @param powereduc_url $url of the target page.
      * @param bool $reviewinpopup whether a pop-up is required.
      * @param array $popupoptions options to pass to the popup_action constructor.
      * @return string HTML to output.
@@ -1322,7 +1322,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
         }
 
         require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');
-        $url = new moodle_url('/mod/quiz/report.php', array(
+        $url = new powereduc_url('/mod/quiz/report.php', array(
                 'id' => $cm->id, 'mode' => quiz_report_default_report($context)));
         return html_writer::link($url, $summary);
     }
@@ -1337,16 +1337,16 @@ class mod_quiz_renderer extends plugin_renderer_base {
      */
     public function quiz_override_summary_links(stdClass $quiz, stdClass $cm, $currentgroup = 0): string {
 
-        $baseurl = new moodle_url('/mod/quiz/overrides.php', ['cmid' => $cm->id]);
+        $baseurl = new powereduc_url('/mod/quiz/overrides.php', ['cmid' => $cm->id]);
         $counts = quiz_override_summary($quiz, $cm, $currentgroup);
 
         $links = [];
         if ($counts['group']) {
-            $links[] = html_writer::link(new moodle_url($baseurl, ['mode' => 'group']),
+            $links[] = html_writer::link(new powereduc_url($baseurl, ['mode' => 'group']),
                     get_string('overridessummarygroup', 'quiz', $counts['group']));
         }
         if ($counts['user']) {
-            $links[] = html_writer::link(new moodle_url($baseurl, ['mode' => 'user']),
+            $links[] = html_writer::link(new powereduc_url($baseurl, ['mode' => 'user']),
                     get_string('overridessummaryuser', 'quiz', $counts['user']));
         }
 
@@ -1385,11 +1385,11 @@ class mod_quiz_renderer extends plugin_renderer_base {
 
     /**
      * Output a graph, or a message saying that GD is required.
-     * @param moodle_url $url the URL of the graph.
+     * @param powereduc_url $url the URL of the graph.
      * @param string $title the title to display above the graph.
      * @return string HTML fragment for the graph.
      */
-    public function graph(moodle_url $url, $title) {
+    public function graph(powereduc_url $url, $title) {
         global $CFG;
 
         $graph = html_writer::empty_tag('img', array('src' => $url, 'alt' => $title));
@@ -1415,7 +1415,7 @@ class mod_quiz_renderer extends plugin_renderer_base {
 class mod_quiz_links_to_other_attempts implements renderable {
     /**
      * @var array string attempt number => url, or null for the current attempt.
-     * url may be either a moodle_url, or a renderable.
+     * url may be either a powereduc_url, or a renderable.
      */
     public $links = array();
 }
@@ -1435,7 +1435,7 @@ class mod_quiz_view_object {
     public $canreviewmine;
     /** @var bool $canedit whether the current user has the capability to edit the quiz. */
     public $canedit;
-    /** @var moodle_url $editurl the URL for editing this quiz. */
+    /** @var powereduc_url $editurl the URL for editing this quiz. */
     public $editurl;
     /** @var int $attemptcolumn contains the number of attempts done. */
     public $attemptcolumn;
@@ -1469,12 +1469,12 @@ class mod_quiz_view_object {
     /** @var string $buttontext caption for the start attempt button. If this is null, show no
      *      button, or if it is '' show a back to the course button. */
     public $buttontext;
-    /** @var moodle_url $startattempturl URL to start an attempt. */
+    /** @var powereduc_url $startattempturl URL to start an attempt. */
     public $startattempturl;
     /** @var mod_quiz_preflight_check_form|null $preflightcheckform confirmation form that must be
      *       submitted before an attempt is started, if required. */
     public $preflightcheckform;
-    /** @var moodle_url $startattempturl URL for any Back to the course button. */
+    /** @var powereduc_url $startattempturl URL for any Back to the course button. */
     public $backtocourseurl;
     /** @var bool $showbacktocourse should we show a back to the course button? */
     public $showbacktocourse;

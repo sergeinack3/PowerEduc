@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * message Renderer
@@ -104,7 +104,7 @@ class core_message_renderer extends plugin_renderer_base {
             // Settings
             $settings = new html_table_cell();
             if ($processor->available && $processor->hassettings) {
-                $settingsurl = new moodle_url('/admin/settings.php', array('section' => 'messagesetting'.$processor->name));
+                $settingsurl = new powereduc_url('/admin/settings.php', array('section' => 'messagesetting'.$processor->name));
                 $settings->text = html_writer::link($settingsurl, get_string('settings', 'message'));
             }
 
@@ -171,7 +171,7 @@ class core_message_renderer extends plugin_renderer_base {
 
             // Order the components so that the activities appear first, followed
             // by the system and then anything else.
-            if ($provider->component != 'moodle') {
+            if ($provider->component != 'powereduc') {
                 if (substr($provider->component, 0, 4) == 'mod_') {
                     // Activities.
                     $activitycomponents[] = $provider->component;
@@ -186,7 +186,7 @@ class core_message_renderer extends plugin_renderer_base {
         asort($activitycomponents);
         $othercomponents = array_unique($othercomponents);
         asort($othercomponents);
-        $components = array_merge($activitycomponents, ['moodle'], $othercomponents);
+        $components = array_merge($activitycomponents, ['powereduc'], $othercomponents);
         asort($providers);
 
         $colspan = count($processors) + 2;
@@ -196,7 +196,7 @@ class core_message_renderer extends plugin_renderer_base {
             $componentexport = new StdClass();
             $componentexport->name = $component;
 
-            if ($component != 'moodle') {
+            if ($component != 'powereduc') {
                 $componentexport->displayname = get_string('pluginname', $component);
             } else {
                 $componentexport->displayname = get_string('coresystem');
@@ -254,7 +254,7 @@ class core_message_renderer extends plugin_renderer_base {
         });
 
         $providers = array_filter(message_get_providers_for_user($user->id), function($provider) {
-            return $provider->component === 'moodle';
+            return $provider->component === 'powereduc';
         });
         $preferences = \core_message\api::get_all_message_preferences($readyprocessors, $providers, $user);
         $notificationlistoutput = new \core_message\output\preferences\message_notification_list($readyprocessors,

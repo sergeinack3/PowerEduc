@@ -83,7 +83,7 @@ Feature: Quiz user override
   Scenario: Teacher without 'See full user identity in lists' can see and edit overrides
     Given the following "permission overrides" exist:
       | capability                   | permission | role           | contextlevel | reference |
-      | moodle/site:viewuseridentity | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:viewuseridentity | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity   | name      | course | idnumber | visible |
       | quiz       | Test quiz | C1     | quiz1    | 0       |
@@ -112,7 +112,7 @@ Feature: Quiz user override
       | student2 | G2    |
     And the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name      | course | idnumber | groupmode |
       | quiz     | Test quiz | C1     | quiz1    | 1         |
@@ -130,7 +130,7 @@ Feature: Quiz user override
       | student1 | G1    |
     And the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name      | course | idnumber | groupmode |
       | quiz     | Test quiz | C1     | quiz1    | 1         |

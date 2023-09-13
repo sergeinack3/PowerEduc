@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  *
  * It has been developed harcoding some important limits that are
  * explained below:
- *    - It only can check, download and install items under moodledata.
+ *    - It only can check, download and install items under powereducdata.
  *    - Every downloadeable item must be one zip file.
  *    - The zip file root content must be 1 directory, i.e, everything
  *      is stored under 1 directory.
@@ -67,18 +67,18 @@
  * To install one component:
  * <code>
  *     require_once($CFG->libdir.'/componentlib.class.php');
- *     if ($cd = new component_installer('https://download.moodle.org', 'langpack/2.0',
+ *     if ($cd = new component_installer('https://download.powereduc.org', 'langpack/2.0',
  *                                       'es.zip', 'languages.md5', 'lang')) {
  *         $status = $cd->install(); //returns COMPONENT_(ERROR | UPTODATE | INSTALLED)
  *         switch ($status) {
  *             case COMPONENT_ERROR:
  *                 if ($cd->get_error() == 'remotedownloaderror') {
  *                     $a = new stdClass();
- *                     $a->url = 'https://download.moodle.org/langpack/2.0/es.zip';
+ *                     $a->url = 'https://download.powereduc.org/langpack/2.0/es.zip';
  *                     $a->dest= $CFG->dataroot.'/lang';
- *                     throw new \moodle_exception($cd->get_error(), 'error', '', $a);
+ *                     throw new \powereduc_exception($cd->get_error(), 'error', '', $a);
  *                 } else {
- *                     throw new \moodle_exception($cd->get_error(), 'error');
+ *                     throw new \powereduc_exception($cd->get_error(), 'error');
  *                 }
  *                 break;
  *             case COMPONENT_UPTODATE:
@@ -125,7 +125,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
  /**
   * @global object $CFG
@@ -142,7 +142,7 @@ define('COMPONENT_INSTALLED',       3);
 
 /**
  * This class is used to check, download and install items from
- * download.moodle.org to the moodledata directory.
+ * download.powereduc.org to the powereducdata directory.
  *
  * It always return true/false in all their public methods to say if
  * execution has ended succesfuly or not. If there is any problem
@@ -150,7 +150,7 @@ define('COMPONENT_INSTALLED',       3);
  * to be used with the standard get/print_string() functions.
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package moodlecore
+ * @package powereduccore
  */
 class component_installer {
     /**
@@ -165,7 +165,7 @@ class component_installer {
                        /// the extension. And it defines a lot of things:
                        /// the md5 line to search for, the default m5 file name
                        /// and the name of the root dir stored inside the zip file
-    var $destpath;     /// Relative path (from moodledata) where the .zip
+    var $destpath;     /// Relative path (from powereducdata) where the .zip
                        /// file will be expanded.
     var $errorstring;  /// Latest error produced. It will contain one lang string key.
     var $extramd5info; /// Contents of the optional third field in the .md5 file.
@@ -186,8 +186,8 @@ class component_installer {
      * @param string $zipfilename Name of the .zip file to be downloaded
      * @param string $md5filename Name of the .md5 file to be read (default '' = same
      *               than zipfilename)
-     * @param string $destpath Relative path (from moodledata) where the .zip file will
-     *               be expanded (default='' = moodledataitself)
+     * @param string $destpath Relative path (from powereducdata) where the .zip file will
+     *               be expanded (default='' = powereducdataitself)
      * @return object
      */
     public function __construct($sourcebase, $zippath, $zipfilename, $md5filename='', $destpath='') {
@@ -235,7 +235,7 @@ class component_installer {
             return false;
         }
     /// Check for correct sourcebase (this will be out in the future)
-        if (!PHPUNIT_TEST and $this->sourcebase != 'https://download.moodle.org') {
+        if (!PHPUNIT_TEST and $this->sourcebase != 'https://download.powereduc.org') {
             $this->errorstring='wrongsourcebase';
             return false;
         }
@@ -586,7 +586,7 @@ class component_installer {
  * and installs them. It detects eventual dependencies and installs
  * all parent languages, too.
  *
- * @copyright 2011 David Mudrak <david@moodle.com>
+ * @copyright 2011 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lang_installer {
@@ -616,7 +616,7 @@ class lang_installer {
         global $CFG;
 
         $this->set_queue($langcode);
-        $this->version = moodle_major_version(true);
+        $this->version = powereduc_major_version(true);
 
         if (!empty($CFG->langotherroot) and $CFG->langotherroot !== $CFG->dataroot . '/lang') {
             debugging('The in-built language pack installer does not support alternative location ' .
@@ -690,19 +690,19 @@ class lang_installer {
     public function lang_pack_url($langcode = '') {
 
         if (empty($langcode)) {
-            return 'https://download.moodle.org/langpack/'.$this->version.'/';
+            return 'https://download.powereduc.org/langpack/'.$this->version.'/';
         } else {
-            return 'https://download.moodle.org/download.php/langpack/'.$this->version.'/'.$langcode.'.zip';
+            return 'https://download.powereduc.org/download.php/langpack/'.$this->version.'/'.$langcode.'.zip';
         }
     }
 
     /**
-     * Returns the list of available language packs from download.moodle.org
+     * Returns the list of available language packs from download.powereduc.org
      *
      * @return array|bool false if can not download
      */
     public function get_remote_list_of_languages() {
-        $source = 'https://download.moodle.org/langpack/' . $this->version . '/languages.md5';
+        $source = 'https://download.powereduc.org/langpack/' . $this->version . '/languages.md5';
         $availablelangs = array();
 
         if ($content = download_file_content($source)) {
@@ -794,7 +794,7 @@ class lang_installer {
     protected function install_language_pack($langcode) {
 
         // initialise new component installer to process this language
-        $installer = new component_installer('https://download.moodle.org', 'download.php/direct/langpack/' . $this->version,
+        $installer = new component_installer('https://download.powereduc.org', 'download.php/direct/langpack/' . $this->version,
             $langcode . '.zip', 'languages.md5', 'lang');
 
         if (!$installer->requisitesok) {
@@ -826,10 +826,10 @@ class lang_installer {
 /**
  * Exception thrown by {@link lang_installer}
  *
- * @copyright 2011 David Mudrak <david@moodle.com>
+ * @copyright 2011 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class lang_installer_exception extends moodle_exception {
+class lang_installer_exception extends powereduc_exception {
 
     public function __construct($errorcode, $debuginfo = null) {
         parent::__construct($errorcode, 'error', '', null, $debuginfo);

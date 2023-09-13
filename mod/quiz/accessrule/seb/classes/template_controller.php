@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class for manipulating with the template records.
@@ -28,7 +28,7 @@ namespace quizaccess_seb;
 use core\notification;
 use quizaccess_seb\local\table\template_list;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for manipulating with the template records.
@@ -208,7 +208,7 @@ class template_controller {
     protected function edit($action, $id = null) {
         global $PAGE;
 
-        $PAGE->set_url(new \moodle_url(static::get_base_url(), ['action' => $action, 'id' => $id]));
+        $PAGE->set_url(new \powereduc_url(static::get_base_url(), ['action' => $action, 'id' => $id]));
         $instance = null;
 
         if ($id) {
@@ -218,7 +218,7 @@ class template_controller {
         $form = $this->get_form($instance);
 
         if ($form->is_cancelled()) {
-            redirect(new \moodle_url(static::get_base_url()));
+            redirect(new \powereduc_url(static::get_base_url()));
         } else if ($data = $form->get_data()) {
             unset($data->submitbutton);
             try {
@@ -246,7 +246,7 @@ class template_controller {
             } catch (\Exception $e) {
                 notification::error($e->getMessage());
             }
-            redirect(new \moodle_url(static::get_base_url()));
+            redirect(new \powereduc_url(static::get_base_url()));
         } else {
             if (empty($instance)) {
                 $this->header($this->get_new_heading());
@@ -280,10 +280,10 @@ class template_controller {
                 \context_system::instance()
             )->trigger();
 
-            redirect(new \moodle_url(static::get_base_url()));
+            redirect(new \powereduc_url(static::get_base_url()));
         } else {
             notification::warning(get_string('cantdelete', 'quizaccess_seb'));
-            redirect(new \moodle_url(static::get_base_url()));
+            redirect(new \powereduc_url(static::get_base_url()));
         }
     }
 
@@ -335,7 +335,7 @@ class template_controller {
 
         $this->trigger_enabled_event($template);
 
-        redirect(new \moodle_url(self::get_base_url()));
+        redirect(new \powereduc_url(self::get_base_url()));
     }
 
     /**
@@ -343,7 +343,7 @@ class template_controller {
      */
     protected function print_add_button() {
         echo $this->output->single_button(
-            new \moodle_url(static::get_base_url(), ['action' => self::ACTION_ADD]),
+            new \powereduc_url(static::get_base_url(), ['action' => self::ACTION_ADD]),
             $this->get_create_button_text()
         );
     }

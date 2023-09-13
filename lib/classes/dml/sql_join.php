@@ -26,7 +26,7 @@
 
 namespace core\dml;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * An object that contains sql join fragments.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Handle sending a user to a tool provider to initiate a content-item selection.
@@ -46,7 +46,7 @@ if ($config->lti_ltiversion === LTI_VERSION_1P3) {
 $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 require_login($course);
 $context = context_course::instance($courseid);
-require_capability('moodle/course:manageactivities', $context);
+require_capability('powereduc/course:manageactivities', $context);
 require_capability('mod/lti:addcoursetool', $context);
 
 // Set the return URL. We send the launch container along to help us avoid frames-within-frames when the user returns.
@@ -55,7 +55,7 @@ $returnurlparams = [
     'id' => $id,
     'sesskey' => sesskey()
 ];
-$returnurl = new \moodle_url('/mod/lti/contentitem_return.php', $returnurlparams);
+$returnurl = new \powereduc_url('/mod/lti/contentitem_return.php', $returnurlparams);
 
 // Prepare the request.
 $request = lti_build_content_item_selection_request($id, $course, $returnurl, $title, $text, [], []);

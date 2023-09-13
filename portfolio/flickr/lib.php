@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    portfolio
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/portfolio/plugin.php');
 require_once($CFG->libdir.'/filelib.php');
@@ -137,7 +137,7 @@ class portfolio_plugin_flickr extends portfolio_plugin_push_base {
         $accesstoken = $this->get_user_config('accesstoken');
         $accesstokensecret = $this->get_user_config('accesstokensecret');
 
-        $callbackurl = new moodle_url('/portfolio/add.php', ['postcontrol' => 1, 'type' => 'flickr']);
+        $callbackurl = new powereduc_url('/portfolio/add.php', ['postcontrol' => 1, 'type' => 'flickr']);
         $this->flickr = new flickr_client($this->get_config('apikey'), $this->get_config('sharedsecret'), $callbackurl);
 
         if (!empty($accesstoken) && !empty($accesstokensecret)) {
@@ -149,7 +149,7 @@ class portfolio_plugin_flickr extends portfolio_plugin_push_base {
         $reqtoken = $this->flickr->request_token();
         $this->flickr->set_request_token_secret(['caller' => 'portfolio_flickr'], $reqtoken['oauth_token_secret']);
 
-        $authurl = new moodle_url($reqtoken['authorize_url'], ['perms' => 'write']);
+        $authurl = new powereduc_url($reqtoken['authorize_url'], ['perms' => 'write']);
 
         return $authurl->out(false);
     }
@@ -163,7 +163,7 @@ class portfolio_plugin_flickr extends portfolio_plugin_push_base {
             throw new portfolio_plugin_exception('noauthtoken', 'portfolio_flickr');
         }
 
-        $callbackurl = new moodle_url('/portfolio/add.php', ['postcontrol' => 1, 'type' => 'flickr']);
+        $callbackurl = new powereduc_url('/portfolio/add.php', ['postcontrol' => 1, 'type' => 'flickr']);
         $this->flickr = new flickr_client($this->get_config('apikey'), $this->get_config('sharedsecret'), $callbackurl);
 
         $secret = $this->flickr->get_request_token_secret(['caller' => 'portfolio_flickr']);

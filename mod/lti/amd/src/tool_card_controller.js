@@ -1,17 +1,17 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Controls all of the behaviour and interaction with a tool type card. These are
@@ -20,7 +20,7 @@
  * See template: mod_lti/tool_card
  *
  * @module     mod_lti/tool_card_controller
- * @copyright  2015 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2015 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      3.1
  */
@@ -217,7 +217,7 @@
     };
 
     /**
-     * Delete the tool type from the Moodle server. Triggers a success
+     * Delete the tool type from the PowerEduc server. Triggers a success
      * or failure announcement depending on the result.
      *
      * @method deleteType
@@ -329,7 +329,7 @@
 
     /**
      * Send a request to update the description value for this tool
-     * in the Moodle server.
+     * in the PowerEduc server.
      *
      * @method updateDescription
      * @private
@@ -401,7 +401,7 @@
 
     /**
      * Send a request to update the name value for this tool
-     * in the Moodle server.
+     * in the PowerEduc server.
      *
      * @method updateName
      * @private
@@ -453,7 +453,7 @@
 
     /**
      * Send a request to update the state for this tool to be configured (active)
-     * in the Moodle server. A success or failure announcement is triggered depending
+     * in the PowerEduc server. A success or failure announcement is triggered depending
      * on the result.
      *
      * @method setStatusActive
@@ -495,7 +495,7 @@
 
     /**
      * Show the capabilities approval screen to show which groups of data this
-     * type requires access to in Moodle (if any).
+     * type requires access to in PowerEduc (if any).
      *
      * @method displayCapabilitiesApproval
      * @private

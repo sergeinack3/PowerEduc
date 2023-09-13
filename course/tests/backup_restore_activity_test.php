@@ -96,7 +96,7 @@ class backup_restore_activity_test extends \advanced_testcase {
         // Do backup with default settings. MODE_IMPORT means it will just
         // create the directory and not zip it.
         $bc = new \backup_controller(backup::TYPE_1COURSE, $course->id,
-                backup::FORMAT_MOODLE, backup::INTERACTIVE_NO, backup::MODE_IMPORT,
+                backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO, backup::MODE_IMPORT,
                 $USER->id);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();

@@ -31,7 +31,7 @@ use IMSGlobal\LTI\ToolProvider\ToolConsumer;
 use IMSGlobal\LTI\ToolProvider\ToolProvider;
 use IMSGlobal\LTI\ToolProvider\User;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Tests for the tool_provider class.

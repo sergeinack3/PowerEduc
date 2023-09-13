@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Course completion progress report
@@ -49,7 +49,7 @@ $edituser = optional_param('edituser', 0, PARAM_INT);
 $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 $context = context_course::instance($course->id);
 
-$url = new moodle_url('/report/completion/index.php', array('course'=>$course->id));
+$url = new powereduc_url('/report/completion/index.php', array('course'=>$course->id));
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('report');
 
@@ -79,7 +79,7 @@ require_capability('report/completion:view', $context);
 // Get group mode
 $group = groups_get_course_group($course, true); // Supposed to verify group
 if ($group === 0 && $course->groupmode == SEPARATEGROUPS) {
-    require_capability('moodle/site:accessallgroups',$context);
+    require_capability('powereduc/site:accessallgroups',$context);
 }
 
 /**
@@ -93,7 +93,7 @@ $modinfo = get_fast_modinfo($course);
 $completion = new completion_info($course);
 
 if (!$completion->has_criteria()) {
-    throw new \moodle_exception('nocriteriaset', 'completion', $CFG->wwwroot.'/course/report.php?id='.$course->id);
+    throw new \powereduc_exception('nocriteriaset', 'completion', $CFG->wwwroot.'/course/report.php?id='.$course->id);
 }
 
 // Get criteria and put in correct order
@@ -551,7 +551,7 @@ foreach ($progress as $user) {
     if ($csv) {
         $row = array();
         $row[] = $user->id;
-        $row[] = fullname($user, has_capability('moodle/site:viewfullnames', $context));
+        $row[] = fullname($user, has_capability('powereduc/site:viewfullnames', $context));
         foreach ($extrafields as $field) {
             $row[] = $user->{$field};
         }
@@ -559,13 +559,13 @@ foreach ($progress as $user) {
         print PHP_EOL.'<tr id="user-'.$user->id.'">';
 
         if (completion_can_view_data($user->id, $course)) {
-            $userurl = new moodle_url('/blocks/completionstatus/details.php', array('course' => $course->id, 'user' => $user->id));
+            $userurl = new powereduc_url('/blocks/completionstatus/details.php', array('course' => $course->id, 'user' => $user->id));
         } else {
-            $userurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
+            $userurl = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
         }
 
         print '<th scope="row"><a href="' . $userurl->out() . '">' .
-            fullname($user, has_capability('moodle/site:viewfullnames', $context)) . '</a></th>';
+            fullname($user, has_capability('powereduc/site:viewfullnames', $context)) . '</a></th>';
         foreach ($extrafields as $field) {
             echo '<td>'.s($user->{$field}).'</td>';
         }
@@ -658,7 +658,7 @@ foreach ($progress as $user) {
             if ($allow_marking_criteria === $criterion->id) {
                 $describe = get_string('completion-'.$completiontype, 'completion');
 
-                $toggleurl = new moodle_url(
+                $toggleurl = new powereduc_url(
                     '/course/togglecompletion.php',
                     array(
                         'user' => $user->id,
@@ -731,8 +731,8 @@ if ($csv) {
 
 print '</table>';
 
-$csvurl = new moodle_url('/report/completion/index.php', array('course' => $course->id, 'format' => 'csv'));
-$excelurl = new moodle_url('/report/completion/index.php', array('course' => $course->id, 'format' => 'excelcsv'));
+$csvurl = new powereduc_url('/report/completion/index.php', array('course' => $course->id, 'format' => 'csv'));
+$excelurl = new powereduc_url('/report/completion/index.php', array('course' => $course->id, 'format' => 'excelcsv'));
 
 print '<ul class="export-actions">';
 print '<li><a href="'.$csvurl->out().'">'.get_string('csvdownload','completion').'</a></li>';

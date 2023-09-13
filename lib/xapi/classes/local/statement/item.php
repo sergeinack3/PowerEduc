@@ -27,7 +27,7 @@ use stdClass;
 use JsonSerializable;
 use core_xapi\iri;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Item class used for xAPI statement elements without validation.

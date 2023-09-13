@@ -24,8 +24,8 @@ Feature: Viewing the list of cohorts to enrol in a course
     And I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability           | permission |
-      | moodle/cohort:manage | Prohibit |
-      | moodle/cohort:view   | Prohibit |
+      | powereduc/cohort:manage | Prohibit |
+      | powereduc/cohort:view   | Prohibit |
     And I log out
     And I am on the "Course 1" course page logged in as teacher1
     And I navigate to course participants

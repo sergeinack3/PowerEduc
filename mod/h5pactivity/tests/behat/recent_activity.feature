@@ -20,7 +20,7 @@ Feature: Users can see the H5P recent activity from the recent activity block
       | student2 | C1     | student        |
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/h5p:updatelibraries | Allow      | editingteacher | System       |           |
+      | powereduc/h5p:updatelibraries | Allow      | editingteacher | System       |           |
     And the following "activity" exists:
       | activity        | h5pactivity                                |
       | course          | C1                                         |

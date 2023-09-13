@@ -23,7 +23,7 @@
  */
 namespace core_calendar\local\event\forms;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The trait for adding eventtype fields to a form.

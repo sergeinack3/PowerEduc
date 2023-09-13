@@ -1,18 +1,18 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+    This file is part of PowerEduc - http://powereduc.org/
 
-    Moodle is free software: you can redistribute it and/or modify
+    PowerEduc is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
+    PowerEduc is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+    along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
     @template core_user/edit_profile_fields
@@ -74,7 +74,7 @@
                     <a href="{{baseurl}}?id={{id}}&action=movecategory&dir=up&amp;sesskey={{sesskey}}">
                     {{#pix}}t/up, core, {{#str}}moveup{{/str}}{{/pix}}</a>
                 {{/isfirst}}
-                {{#isfirst}}{{#pix}}spacer, moodle{{/pix}}{{/isfirst}}
+                {{#isfirst}}{{#pix}}spacer, powereduc{{/pix}}{{/isfirst}}
                 {{^islast}}
                     <a href="{{baseurl}}?id={{id}}&action=movecategory&dir=down&amp;sesskey={{sesskey}}">
                     {{#pix}}t/down, core, {{#str}}movedown{{/str}}{{/pix}}</a>
@@ -109,12 +109,12 @@
                                 <a href="{{baseurl}}?id={{id}}&action=movefield&dir=up&amp;sesskey={{sesskey}}">
                                 {{#pix}}t/up, core, {{#str}}moveup{{/str}}{{/pix}}</a>
                             {{/isfirst}}
-                            {{#isfirst}}{{#pix}}spacer, moodle{{/pix}}{{/isfirst}}
+                            {{#isfirst}}{{#pix}}spacer, powereduc{{/pix}}{{/isfirst}}
                             {{^islast}}
                                 <a href="{{baseurl}}?id={{id}}&action=movefield&dir=down&amp;sesskey={{sesskey}}">
                                 {{#pix}}t/down, core, {{#str}}movedown{{/str}}{{/pix}}</a>
                             {{/islast}}
-                            {{#islast}}{{#pix}}spacer, moodle{{/pix}}{{/islast}}
+                            {{#islast}}{{#pix}}spacer, powereduc{{/pix}}{{/islast}}
                         </td>
                     </tr>
                 {{/fields}}

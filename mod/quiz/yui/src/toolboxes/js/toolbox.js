@@ -5,7 +5,7 @@
  * This class is responsible for managing AJAX interactions with activities and resources
  * when viewing a course in editing mode.
  *
- * @module moodle-course-toolboxes
+ * @module powereduc-course-toolboxes
  * @namespace M.course.toolboxes
  */
 
@@ -187,7 +187,7 @@ Y.extend(TOOLBOX, Y.Base, {
     NAME: 'mod_quiz-toolbox',
     ATTRS: {
         /**
-         * The ID of the Moodle Course being edited.
+         * The ID of the PowerEduc Course being edited.
          *
          * @attribute courseid
          * @default 0
@@ -198,7 +198,7 @@ Y.extend(TOOLBOX, Y.Base, {
         },
 
         /**
-         * The Moodle course format.
+         * The PowerEduc course format.
          *
          * @attribute format
          * @default 'topics'

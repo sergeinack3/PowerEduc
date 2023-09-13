@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Display information about all the mod_h5pactivity modules in the requested course.
  *
  * @package     mod_h5pactivity
- * @copyright   2020 Ferran Recio <ferran@moodle.com>
+ * @copyright   2020 Ferran Recio <ferran@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -49,7 +49,7 @@ echo $OUTPUT->heading($modulenameplural);
 $h5pactivities = get_all_instances_in_course('h5pactivity', $course);
 
 if (empty($h5pactivities)) {
-    notice(get_string('thereareno', 'moodle'), new moodle_url('/course/view.php', ['id' => $course->id]));
+    notice(get_string('thereareno', 'powereduc'), new powereduc_url('/course/view.php', ['id' => $course->id]));
     exit;
 }
 
@@ -74,7 +74,7 @@ foreach ($h5pactivities as $h5pactivity) {
         $attributes['class'] = 'dimmed';
     }
     $link = html_writer::link(
-        new moodle_url('/mod/h5pactivity/view.php', ['id' => $h5pactivity->coursemodule]),
+        new powereduc_url('/mod/h5pactivity/view.php', ['id' => $h5pactivity->coursemodule]),
         format_string($h5pactivity->name, true),
         $attributes);
 

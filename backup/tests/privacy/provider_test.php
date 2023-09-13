@@ -26,7 +26,7 @@ namespace core_backup\privacy;
 use core_backup\privacy\provider;
 use core_privacy\local\request\approved_userlist;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider tests class.

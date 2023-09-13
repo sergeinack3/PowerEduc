@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
 
@@ -90,15 +90,15 @@ class behat_mod_data extends behat_base {
      *
      * @param string $type identifies which type of page this is, e.g. 'Add entry'.
      * @param string $identifier identifies the particular page, e.g. 'My database name'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_instance_url(string $type, string $identifier): moodle_url {
+    protected function resolve_page_instance_url(string $type, string $identifier): powereduc_url {
         global $DB;
 
         switch (strtolower($type)) {
             case 'add entry':
-                return new moodle_url('/mod/data/edit.php', [
+                return new powereduc_url('/mod/data/edit.php', [
                     'd' => $this->get_cm_by_activity_name('data', $identifier)->instance,
                 ]);
 

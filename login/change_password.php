@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ if ($return) {
 $strparticipants = get_string('participants');
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 // require proper login; guest user can not change password
@@ -73,12 +73,12 @@ $PAGE->set_course($course);
 
 // do not require change own password cap if change forced
 if (!get_user_preferences('auth_forcepasswordchange', false)) {
-    require_capability('moodle/user:changeownpassword', $systemcontext);
+    require_capability('powereduc/user:changeownpassword', $systemcontext);
 }
 
 // do not allow "Logged in as" users to change any passwords
 if (\core\session\manager::is_loggedinas()) {
-    throw new \moodle_exception('cannotcallscript');
+    throw new \powereduc_exception('cannotcallscript');
 }
 
 if (is_mnet_remote_user($USER)) {
@@ -86,14 +86,14 @@ if (is_mnet_remote_user($USER)) {
     if ($idprovider = $DB->get_record('mnet_host', array('id'=>$USER->mnethostid))) {
         $message .= get_string('userchangepasswordlink', 'mnet', $idprovider);
     }
-    throw new \moodle_exception('userchangepasswordlink', 'mnet', '', $message);
+    throw new \powereduc_exception('userchangepasswordlink', 'mnet', '', $message);
 }
 
 // load the appropriate auth plugin
 $userauth = get_auth_plugin($USER->auth);
 
 if (!$userauth->can_change_password()) {
-    throw new \moodle_exception('nopasswordchange', 'auth');
+    throw new \powereduc_exception('nopasswordchange', 'auth');
 }
 
 if ($changeurl = $userauth->change_password_url()) {
@@ -112,7 +112,7 @@ if ($mform->is_cancelled()) {
 } else if ($data = $mform->get_data()) {
 
     if (!$userauth->user_update_password($USER, $data->newpassword1)) {
-        throw new \moodle_exception('errorpasswordupdate', 'auth');
+        throw new \powereduc_exception('errorpasswordupdate', 'auth');
     }
 
     user_add_password_history($USER->id, $data->newpassword1);
@@ -143,7 +143,7 @@ if ($mform->is_cancelled()) {
     $PAGE->set_heading(fullname($USER));
     echo $OUTPUT->header();
 
-    notice($strpasswordchanged, new moodle_url($PAGE->url, array('return'=>1)));
+    notice($strpasswordchanged, new powereduc_url($PAGE->url, array('return'=>1)));
 
     echo $OUTPUT->footer();
     exit;

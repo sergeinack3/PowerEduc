@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-define('NO_MOODLE_COOKIES', true); // Session not used here.
+define('NO_POWEREDUC_COOKIES', true); // Session not used here.
 
 require_once('../../../config.php');
 require_once($CFG->dirroot.'/mod/chat/lib.php');
@@ -26,18 +26,18 @@ $PAGE->set_url('/mod/chat/gui_header_js/users.php', array('chat_sid' => $chatsid
 $PAGE->set_popup_notification_allowed(false);
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
-    throw new \moodle_exception('notlogged', 'chat');
+    throw new \powereduc_exception('notlogged', 'chat');
 }
 
 // Get the minimal course.
 if (!$course = $DB->get_record('course', array('id' => $chatuser->course))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 // Get the user theme and enough info to be used in chat_format_message() which passes it along to.
 // No optimisation here, it would break again in future!
 if (!$user = $DB->get_record('user', array('id' => $chatuser->userid, 'deleted' => 0, 'suspended' => 0))) {
-    throw new \moodle_exception('invaliduser');
+    throw new \powereduc_exception('invaliduser');
 }
 \core\session\manager::set_user($user);
 
@@ -49,7 +49,7 @@ $PAGE->set_course($course);
 $courseid = $chatuser->course;
 
 if (!$cm = get_coursemodule_from_instance('chat', $chatuser->chatid, $courseid)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if ($beep) {
@@ -65,7 +65,7 @@ $refreshurl = "users.php?chat_sid=$chatsid";
 // Get list of users.
 
 if (!$chatusers = chat_get_users($chatuser->chatid, $chatuser->groupid, $cm->groupingid)) {
-    throw new \moodle_exception('errornousers', 'chat');
+    throw new \powereduc_exception('errornousers', 'chat');
 }
 
 $uidles = Array();
@@ -105,7 +105,7 @@ foreach ($chatusers as $chatuser) {
                                                                     $idle,
                                                                     array('name' => 'uidles', 'id' => 'uidle'.$chatuser->id)),
                                 array('class' => 'dimmed_text')) . ' ';
-    $row[1] .= html_writer::tag('a', $strbeep, array('href' => new moodle_url('/mod/chat/gui_header_js/users.php',
+    $row[1] .= html_writer::tag('a', $strbeep, array('href' => new powereduc_url('/mod/chat/gui_header_js/users.php',
                                                                               array('chat_sid' => $chatsid,
                                                                               'beep' => $chatuser->id))));
     $row[1] .= html_writer::end_tag('font');

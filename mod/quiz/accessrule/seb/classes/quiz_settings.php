@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Entity model representing quiz settings for the seb plugin.
@@ -32,10 +32,10 @@ use CFPropertyList\CFNumber;
 use CFPropertyList\CFString;
 use core\persistent;
 use lang_string;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Entity model representing quiz settings for the seb plugin.
@@ -489,7 +489,7 @@ class quiz_settings extends persistent {
 
         // If there was no file, create an empty plist so the rest of this wont explode.
         if (empty($file)) {
-            throw new moodle_exception('noconfigfilefound', 'quizaccess_seb', '', $this->get('cmid'));
+            throw new powereduc_exception('noconfigfilefound', 'quizaccess_seb', '', $this->get('cmid'));
         } else {
             $this->plist = new property_list($file->get_content());
         }
@@ -513,7 +513,7 @@ class quiz_settings extends persistent {
     private function process_required_enforced_settings() {
         global $CFG;
 
-        $quizurl = new moodle_url($CFG->wwwroot . "/mod/quiz/view.php", ['id' => $this->get('cmid')]);
+        $quizurl = new powereduc_url($CFG->wwwroot . "/mod/quiz/view.php", ['id' => $this->get('cmid')]);
         $this->plist->set_or_update_value('startURL', new CFString($quizurl->out(true)));
         $this->plist->set_or_update_value('sendBrowserExamKey', new CFBoolean(true));
 
@@ -524,7 +524,7 @@ class quiz_settings extends persistent {
     }
 
     /**
-     * Use the boolean map to add Moodle boolean setting to config PList.
+     * Use the boolean map to add PowerEduc boolean setting to config PList.
      */
     private function process_bool_settings() {
         $settings = $this->to_record();
@@ -635,7 +635,7 @@ class quiz_settings extends persistent {
     /**
      * Map the settings that are booleans to the Safe Exam Browser config keys.
      *
-     * @return array Moodle setting as key, SEB setting as value.
+     * @return array PowerEduc setting as key, SEB setting as value.
      */
     private function get_bool_seb_setting_map() : array {
         return [

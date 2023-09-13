@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for the Moodle XML format.
+ * Unit tests for the PowerEduc XML format.
  *
  * @package    qformat_xml
  * @copyright  2010 The Open University
@@ -32,7 +32,7 @@ use question_check_specified_fields_expectation;
 use question_hint;
 use question_hint_with_parts;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/questionlib.php');
@@ -171,13 +171,13 @@ class xmlformat_test extends \question_testcase {
         );
         $q->qtype = 'shortanswer';
         $q->hints = array(
-            new question_hint(0, 'This is the first hint.', FORMAT_MOODLE),
+            new question_hint(0, 'This is the first hint.', FORMAT_POWEREDUC),
         );
 
         $exporter = new qformat_xml();
         $xml = $exporter->writequestion($q);
 
-        $this->assertMatchesRegularExpression('|<hint format=\"moodle_auto_format\">\s*<text>\s*' .
+        $this->assertMatchesRegularExpression('|<hint format=\"powereduc_auto_format\">\s*<text>\s*' .
                 'This is the first hint\.\s*</text>\s*</hint>|', $xml);
         $this->assertDoesNotMatchRegularExpression('|<shownumcorrect/>|', $xml);
         $this->assertDoesNotMatchRegularExpression('|<clearwrong/>|', $xml);
@@ -382,7 +382,7 @@ END;
     <name>
       <text>An essay</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Write something.</text>
     </questiontext>
     <generalfeedback>
@@ -406,7 +406,7 @@ END;
         $expectedq->qtype = 'essay';
         $expectedq->name = 'An essay';
         $expectedq->questiontext = 'Write something.';
-        $expectedq->questiontextformat = FORMAT_MOODLE;
+        $expectedq->questiontextformat = FORMAT_POWEREDUC;
         $expectedq->generalfeedback = 'I hope you wrote something interesting.';
         $expectedq->defaultmark = 1;
         $expectedq->length = 1;
@@ -423,9 +423,9 @@ END;
         $expectedq->maxbytes = 0;
         $expectedq->filetypeslist = null;
         $expectedq->graderinfo['text'] = '';
-        $expectedq->graderinfo['format'] = FORMAT_MOODLE;
+        $expectedq->graderinfo['format'] = FORMAT_POWEREDUC;
         $expectedq->responsetemplate['text'] = '';
-        $expectedq->responsetemplate['format'] = FORMAT_MOODLE;
+        $expectedq->responsetemplate['format'] = FORMAT_POWEREDUC;
         $expectedq->tags = array('tagEssay', 'tagEssay20', 'tagTest');
 
         $this->assert(new question_check_specified_fields_expectation($expectedq), $q);
@@ -436,7 +436,7 @@ END;
     <name>
       <text>An essay</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Write something.</text>
     </questiontext>
     <generalfeedback>
@@ -471,7 +471,7 @@ END;
         $expectedq->qtype = 'essay';
         $expectedq->name = 'An essay';
         $expectedq->questiontext = 'Write something.';
-        $expectedq->questiontextformat = FORMAT_MOODLE;
+        $expectedq->questiontextformat = FORMAT_POWEREDUC;
         $expectedq->generalfeedback = 'I hope you wrote something interesting.';
         $expectedq->defaultmark = 1;
         $expectedq->length = 1;
@@ -501,7 +501,7 @@ END;
     <name>
       <text>An essay</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Write something.</text>
     </questiontext>
     <generalfeedback>
@@ -540,7 +540,7 @@ END;
         $expectedq->qtype = 'essay';
         $expectedq->name = 'An essay';
         $expectedq->questiontext = 'Write something.';
-        $expectedq->questiontextformat = FORMAT_MOODLE;
+        $expectedq->questiontextformat = FORMAT_POWEREDUC;
         $expectedq->generalfeedback = 'I hope you wrote something interesting.';
         $expectedq->defaultmark = 1;
         $expectedq->length = 1;
@@ -572,9 +572,9 @@ END;
         $qdata->qtype = 'essay';
         $qdata->name = 'An essay';
         $qdata->questiontext = 'Write something.';
-        $qdata->questiontextformat = FORMAT_MOODLE;
+        $qdata->questiontextformat = FORMAT_POWEREDUC;
         $qdata->generalfeedback = 'I hope you wrote something interesting.';
-        $qdata->generalfeedbackformat = FORMAT_MOODLE;
+        $qdata->generalfeedbackformat = FORMAT_POWEREDUC;
         $qdata->defaultmark = 1;
         $qdata->length = 1;
         $qdata->penalty = 0;
@@ -604,10 +604,10 @@ END;
     <name>
       <text>An essay</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Write something.</text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="powereduc_auto_format">
       <text>I hope you wrote something interesting.</text>
     </generalfeedback>
     <defaultgrade>1</defaultgrade>
@@ -1746,8 +1746,8 @@ END;
 
         $xml = <<<END
 <questiontext format="html">
-    <text><![CDATA[<p><a href="@@PLUGINFILE@@/moodle.txt">This text file</a> contains the word 'Moodle'.</p>]]></text>
-    <file name="moodle.txt" encoding="base64">TW9vZGxl</file>
+    <text><![CDATA[<p><a href="@@PLUGINFILE@@/powereduc.txt">This text file</a> contains the word 'PowerEduc'.</p>]]></text>
+    <file name="powereduc.txt" encoding="base64">TW9vZGxl</file>
 </questiontext>
 END;
 
@@ -1761,7 +1761,7 @@ END;
         $this->assertEquals(1, count($files->list));
 
         $file = $files->list[0];
-        $this->assertEquals('moodle.txt', $file->filename);
+        $this->assertEquals('powereduc.txt', $file->filename);
         $this->assertEquals('/',          $file->filepath);
         $this->assertEquals(6,            $file->size);
     }
@@ -1775,22 +1775,22 @@ END;
       <text>truefalse</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<p><a href="@@PLUGINFILE@@/myfolder/moodle.txt">This text file</a> contains the word Moodle.</p>]]></text>
-<file name="moodle.txt" path="/myfolder/" encoding="base64">TW9vZGxl</file>
+      <text><![CDATA[<p><a href="@@PLUGINFILE@@/myfolder/powereduc.txt">This text file</a> contains the word PowerEduc.</p>]]></text>
+<file name="powereduc.txt" path="/myfolder/" encoding="base64">TW9vZGxl</file>
     </questiontext>
     <generalfeedback format="html">
-      <text><![CDATA[<p>For further information, see the documentation about Moodle.</p>]]></text>
+      <text><![CDATA[<p>For further information, see the documentation about PowerEduc.</p>]]></text>
 </generalfeedback>
     <defaultgrade>1.0000000</defaultgrade>
     <penalty>1.0000000</penalty>
     <hidden>0</hidden>
-    <answer fraction="100" format="moodle_auto_format">
+    <answer fraction="100" format="powereduc_auto_format">
       <text>true</text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="0" format="moodle_auto_format">
+    <answer fraction="0" format="powereduc_auto_format">
       <text>false</text>
       <feedback format="html">
         <text></text>
@@ -1808,7 +1808,7 @@ END;
         $this->assertEquals(1, count($files->list));
 
         $file = $files->list[0];
-        $this->assertEquals('moodle.txt', $file->filename);
+        $this->assertEquals('powereduc.txt', $file->filename);
         $this->assertEquals('/myfolder/', $file->filepath);
         $this->assertEquals(6,            $file->size);
     }

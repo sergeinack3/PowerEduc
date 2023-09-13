@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Returned when the login was successful.
@@ -83,7 +83,7 @@ define('AUTH_LOGIN_UNAUTHORISED', 5);
  * Abstract authentication plugin.
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package moodlecore
+ * @package powereduccore
  */
 class auth_plugin_base {
 
@@ -122,7 +122,7 @@ class auth_plugin_base {
 
     /**
      * This is the primary method that is used by the authenticate_user_login()
-     * function in moodlelib.php.
+     * function in powereduclib.php.
      *
      * This method should return a boolean indicating
      * whether or not the username and password authenticate successfully.
@@ -136,7 +136,7 @@ class auth_plugin_base {
      * @return bool Authentication success or failure.
      */
     function user_login($username, $password) {
-        throw new \moodle_exception('mustbeoveride', 'debug', '', 'user_login()' );
+        throw new \powereduc_exception('mustbeoveride', 'debug', '', 'user_login()' );
     }
 
     /**
@@ -159,7 +159,7 @@ class auth_plugin_base {
      * If you are using a plugin config variable in this method, please make sure it is set before using it,
      * as this method can be called even if the plugin is disabled, in which case the config values won't be set.
      *
-     * @return moodle_url url of the profile page or null if standard used
+     * @return powereduc_url url of the profile page or null if standard used
      */
     function change_password_url() {
         //override if needed
@@ -184,7 +184,7 @@ class auth_plugin_base {
      * This method is used if can_edit_profile() returns true.
      * This method is called only when user is logged in, it may use global $USER.
      *
-     * @return moodle_url url of the profile page or null if standard used
+     * @return powereduc_url url of the profile page or null if standard used
      */
     function edit_profile_url() {
         //override if needed
@@ -213,7 +213,7 @@ class auth_plugin_base {
     }
 
     /**
-     * Indicates if password hashes should be stored in local moodle database.
+     * Indicates if password hashes should be stored in local powereduc database.
      * @return bool true means md5 password hash stored in user table, false means flag 'not_cached' stored there instead
      */
     function prevent_local_passwords() {
@@ -221,7 +221,7 @@ class auth_plugin_base {
     }
 
     /**
-     * Indicates if moodle should automatically update internal user
+     * Indicates if powereduc should automatically update internal user
      * records with data from external sources using the information
      * from get_userinfo() method.
      *
@@ -305,13 +305,13 @@ class auth_plugin_base {
      */
     function user_signup($user, $notify=true) {
         //override when can signup
-        throw new \moodle_exception('mustbeoveride', 'debug', '', 'user_signup()' );
+        throw new \powereduc_exception('mustbeoveride', 'debug', '', 'user_signup()' );
     }
 
     /**
      * Return a form to capture user details for account creation.
      * This is used in /login/signup.php.
-     * @return moodle_form A form which edits a record from the user table.
+     * @return powereduc_form A form which edits a record from the user table.
      */
     function signup_form() {
         global $CFG;
@@ -338,7 +338,7 @@ class auth_plugin_base {
      */
     function user_confirm($username, $confirmsecret) {
         //override when can confirm
-        throw new \moodle_exception('mustbeoveride', 'debug', '', 'user_confirm()' );
+        throw new \powereduc_exception('mustbeoveride', 'debug', '', 'user_confirm()' );
     }
 
     /**
@@ -376,7 +376,7 @@ class auth_plugin_base {
     /**
      * Read user information from external database and returns it as array().
      * Function should return all information available. If you are saving
-     * this information to moodle user-table you should honour synchronisation flags
+     * this information to powereduc user-table you should honour synchronisation flags
      *
      * @param string $username username
      *
@@ -580,9 +580,9 @@ class auth_plugin_base {
      * The returned value is expected to be a list of associative arrays with
      * string keys:
      *
-     * - url => (moodle_url|string) URL of the page to send the user to for authentication
+     * - url => (powereduc_url|string) URL of the page to send the user to for authentication
      * - name => (string) Human readable name of the IdP
-     * - iconurl => (moodle_url|string) URL of the icon representing the IdP (since Moodle 3.3)
+     * - iconurl => (powereduc_url|string) URL of the icon representing the IdP (since Moodle 3.3)
      *
      * For legacy reasons, pre-3.3 plugins can provide the icon via the key:
      *
@@ -623,7 +623,7 @@ class auth_plugin_base {
     /**
      * Post logout hook.
      *
-     * This method is used after moodle logout by auth classes to execute server logout.
+     * This method is used after powereduc logout by auth classes to execute server logout.
      *
      * @param stdClass $user clone of USER object before the user session was terminated
      */
@@ -632,7 +632,7 @@ class auth_plugin_base {
 
     /**
      * Update a local user record from an external source.
-     * This is a lighter version of the one in moodlelib -- won't do
+     * This is a lighter version of the one in powereduclib -- won't do
      * expensive ops such as enrolment.
      *
      * @param string $username username
@@ -654,7 +654,7 @@ class auth_plugin_base {
         $user = $DB->get_record('user', array('username' => $username, 'mnethostid' => $CFG->mnet_localhost_id));
         if (empty($user)) { // Trouble.
             error_log($this->errorlogtag . get_string('auth_usernotexist', 'auth', $username));
-            throw new \moodle_exception('auth_usernotexist', 'auth', '', $username);
+            throw new \powereduc_exception('auth_usernotexist', 'auth', '', $username);
             die;
         }
 
@@ -752,11 +752,11 @@ class auth_plugin_base {
                 // Pre-3.3 auth plugins provide icon as a pix_icon instance. New auth plugins (since 3.3) provide iconurl.
                 $idp['iconurl'] = $output->image_url($idp['icon']->pix, $idp['icon']->component);
             }
-            if ($idp['iconurl'] instanceof moodle_url) {
+            if ($idp['iconurl'] instanceof powereduc_url) {
                 $idp['iconurl'] = $idp['iconurl']->out(false);
             }
             unset($idp['icon']);
-            if ($idp['url'] instanceof moodle_url) {
+            if ($idp['url'] instanceof powereduc_url) {
                 $idp['url'] = $idp['url']->out(false);
             }
             $data[] = $idp;
@@ -797,7 +797,7 @@ class auth_plugin_base {
         }
         $USER = $olduser;
 
-        if (!empty($data->link) and has_capability('moodle/user:changeownpassword', $systemcontext, $user->id)) {
+        if (!empty($data->link) and has_capability('powereduc/user:changeownpassword', $systemcontext, $user->id)) {
             $subject = get_string('emailpasswordchangeinfosubject', '', format_string($site->fullname));
             $message = get_string('emailpasswordchangeinfo', '', $data);
         } else {
@@ -899,7 +899,7 @@ function login_attempt_valid($user) {
 /**
  * To be called after failed user login.
  * @param stdClass $user
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function login_attempt_failed($user) {
     global $CFG;
@@ -957,7 +957,7 @@ function login_attempt_failed($user) {
         }
     } else {
         // We did not get access to the resource in time, give up.
-        throw new moodle_exception('locktimeout');
+        throw new powereduc_exception('locktimeout');
     }
 }
 
@@ -1094,9 +1094,9 @@ function signup_validate_data($data, $files) {
 
         // If there are other user(s) that already have the same email, show an error.
         if ($DB->record_exists_sql($sql, $params)) {
-            $forgotpasswordurl = new moodle_url('/login/forgot_password.php');
+            $forgotpasswordurl = new powereduc_url('/login/forgot_password.php');
             $forgotpasswordlink = html_writer::link($forgotpasswordurl, get_string('emailexistshintlink'));
-            $errors['email'] = get_string('emailexists') . ' ' . get_string('emailexistssignuphint', 'moodle', $forgotpasswordlink);
+            $errors['email'] = get_string('emailexists') . ' ' . get_string('emailexistssignuphint', 'powereduc', $forgotpasswordlink);
         }
     }
     if (empty($data['email2'])) {
@@ -1257,7 +1257,7 @@ function display_auth_lock_options($settings, $auth, $userfields, $helptext, $ma
         // Generate the list of fields / mappings.
         if ($fieldnametoolong) {
             // Display a message that the field can not be mapped because it's too long.
-            $url = new moodle_url('/user/profile/index.php');
+            $url = new powereduc_url('/user/profile/index.php');
             $a = (object)['fieldname' => s($fieldname), 'shortname' => s($field), 'charlimit' => 67, 'link' => $url->out()];
             $settings->add(new admin_setting_heading($auth.'/field_not_mapped_'.sha1($field), '',
                 get_string('cannotmapfield', 'auth', $a)));

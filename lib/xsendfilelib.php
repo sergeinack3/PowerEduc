@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-//NOTE: do not verify MOODLE_INTERNAL here, this is used from themes too
+//NOTE: do not verify POWEREDUC_INTERNAL here, this is used from themes too
 
 /**
  * Serve file using X-Sendfile header, this needs special server module

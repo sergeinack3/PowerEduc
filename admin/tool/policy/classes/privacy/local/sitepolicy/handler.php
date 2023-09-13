@@ -24,7 +24,7 @@
 
 namespace tool_policy\privacy\local\sitepolicy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_policy\api;
 use tool_policy\policy_version;

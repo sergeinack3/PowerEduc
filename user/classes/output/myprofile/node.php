@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines a node in my profile page navigation.
@@ -23,12 +23,12 @@
  */
 
 namespace core_user\output\myprofile;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Defines a node in my profile page navigation.
  *
- * @since     Moodle 2.9
+ * @since     PowerEduc 2.9
  * @package   core_user
  * @copyright 2015 onwards Ankit Agarwal
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -55,7 +55,7 @@ class node implements \renderable {
     private $title;
 
     /**
-     * @var string|\moodle_url Url that this node should link to.
+     * @var string|\powereduc_url Url that this node should link to.
      */
     private $url;
 
@@ -86,7 +86,7 @@ class node implements \renderable {
      * @param string $name Name of this node.
      * @param string $title Title of this node.
      * @param null|string $after Name of the node after which this node should appear.
-     * @param null|string|\moodle_url $url Url that this node should link to.
+     * @param null|string|\powereduc_url $url Url that this node should link to.
      * @param null|string $content Content to display under this node.
      * @param null|string|\pix_icon $icon Icon for this node.
      * @param null|string $classes a list of css classes.
@@ -97,7 +97,7 @@ class node implements \renderable {
         $this->after = $after;
         $this->name = $name;
         $this->title = $title;
-        $this->url = is_null($url) ? null : new \moodle_url($url);
+        $this->url = is_null($url) ? null : new \powereduc_url($url);
         $this->content = $content;
         $this->icon = $icon;
         $this->classes = $classes;

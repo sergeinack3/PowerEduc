@@ -27,7 +27,7 @@
 
 namespace core_availability;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Used while evaluating conditions in bulk.

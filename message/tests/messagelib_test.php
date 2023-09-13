@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core_message;
 
 use core_message\tests\helper as testhelper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/message/lib.php');
@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/message/lib.php');
  *
  * @package core_message
  * @category test
- * @copyright 2014 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright 2014 Rajesh Taneja <rajesh@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class messagelib_test extends \advanced_testcase {

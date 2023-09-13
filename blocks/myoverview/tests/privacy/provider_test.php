@@ -23,7 +23,7 @@
  */
 namespace block_myoverview\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\local\request\writer;
 use block_myoverview\privacy\provider;

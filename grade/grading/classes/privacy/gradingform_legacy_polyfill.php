@@ -24,7 +24,7 @@
 
 namespace core_grading\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The trait used to provide backwards compatability for third-party plugins.

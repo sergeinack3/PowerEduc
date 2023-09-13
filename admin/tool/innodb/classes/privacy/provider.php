@@ -24,7 +24,7 @@
 
 namespace tool_innodb\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tool_innodb implementing null_provider.

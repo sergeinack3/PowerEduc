@@ -1,7 +1,7 @@
 /**
  * Provides a tool for enabling/disabling elements using AJAX/REST.
  *
- * @module moodle-message_airnotifier-toolboxes
+ * @module powereduc-message_airnotifier-toolboxes
  */
 
 // The CSS selectors we use.
@@ -68,7 +68,7 @@ Y.extend(TOOLBOX, Y.Base, {
         // Change the UI.
         element.toggleClass(toggle_class);
         // We need to toggle dimming on the description too element.all(CSS.CONTENTAFTERLINK).toggleClass(CSS.DIMMEDTEXT);.
-        var newstring = M.util.get_string(status, 'moodle');
+        var newstring = M.util.get_string(status, 'powereduc');
         hideicon.setAttrs({
             'alt': newstring,
             'title': newstring,
@@ -115,7 +115,7 @@ Y.extend(TOOLBOX, Y.Base, {
                     try {
                         responsetext = Y.JSON.parse(response.responseText);
                         if (responsetext.error) {
-                            Y.use('moodle-core-notification-ajaxexception', function() {
+                            Y.use('powereduc-core-notification-ajaxexception', function() {
                                 return new M.core.ajaxException(responsetext).show();
                             });
                         } else if (responsetext.success) {
@@ -132,7 +132,7 @@ Y.extend(TOOLBOX, Y.Base, {
                     if (statusspinner) {
                         statusspinner.hide();
                     }
-                    Y.use('moodle-core-notification-ajaxexception', function() {
+                    Y.use('powereduc-core-notification-ajaxexception', function() {
                         return new M.core.ajaxException(response).show();
                     });
                 }

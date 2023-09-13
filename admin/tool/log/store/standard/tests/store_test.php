@@ -16,7 +16,7 @@
 
 namespace logstore_standard;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/fixtures/event.php');
 require_once(__DIR__ . '/fixtures/restore_hack.php');
@@ -491,7 +491,7 @@ class store_test extends \advanced_testcase {
         // Do backup with default settings. MODE_IMPORT means it will just
         // create the directory and not zip it.
         $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id,
-                \backup::FORMAT_MOODLE, \backup::INTERACTIVE_NO, \backup::MODE_IMPORT,
+                \backup::FORMAT_POWEREDUC, \backup::INTERACTIVE_NO, \backup::MODE_IMPORT,
                 $USER->id);
         $bc->get_plan()->get_setting('users')->set_status(\backup_setting::NOT_LOCKED);
         $bc->get_plan()->get_setting('users')->set_value(true);

@@ -303,19 +303,19 @@ table.quizattemptsummary .noreviewmessage {
     display: none;
 }
 
-.moodle-dialogue-base .moodle-dialogue.mod_quiz_preflight_popup {
+.powereduc-dialogue-base .powereduc-dialogue.mod_quiz_preflight_popup {
     width: 600px;
 }
-.moodle-dialogue-base .moodle-dialogue.mod_quiz_preflight_popup .moodle-dialogue-wrap {
+.powereduc-dialogue-base .powereduc-dialogue.mod_quiz_preflight_popup .powereduc-dialogue-wrap {
     overflow: hidden;
 }
 
-.moodle-dialogue-base .moodle-dialogue.mod_quiz_preflight_popup .moodle-dialogue-bd {
+.powereduc-dialogue-base .powereduc-dialogue.mod_quiz_preflight_popup .powereduc-dialogue-bd {
     padding: 1rem;
 }
 
-/* Standard Moodle rule that needs to be more specific here. */
-.moodle-dialogue-bd #mod_quiz_preflight_form fieldset.hidden {
+/* Standard PowerEduc rule that needs to be more specific here. */
+.powereduc-dialogue-bd #mod_quiz_preflight_form fieldset.hidden {
     display: inherit;
     visibility: inherit;
 }
@@ -959,7 +959,7 @@ table#categoryquestions {
     min-height: 200px;
 }
 
-.mod_quiz_qbank_dialogue.moodle-dialogue-fullscreen {
+.mod_quiz_qbank_dialogue.powereduc-dialogue-fullscreen {
     width: 100%;
 }
 

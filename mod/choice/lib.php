@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,11 +17,11 @@
 
 /**
  * @package   mod_choice
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** @global int $CHOICE_COLUMN_HEIGHT */
 global $CHOICE_COLUMN_HEIGHT;
@@ -327,15 +327,15 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
     global $DB, $CFG, $USER;
     require_once($CFG->libdir.'/completionlib.php');
 
-    $continueurl = new moodle_url('/mod/choice/view.php', array('id' => $cm->id));
+    $continueurl = new powereduc_url('/mod/choice/view.php', array('id' => $cm->id));
 
     if (empty($formanswer)) {
-        throw new \moodle_exception('atleastoneoption', 'choice', $continueurl);
+        throw new \powereduc_exception('atleastoneoption', 'choice', $continueurl);
     }
 
     if (is_array($formanswer)) {
         if (!$choice->allowmultiple) {
-            throw new \moodle_exception('multiplenotallowederror', 'choice', $continueurl);
+            throw new \powereduc_exception('multiplenotallowederror', 'choice', $continueurl);
         }
         $formanswers = $formanswer;
     } else {
@@ -345,7 +345,7 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
     $options = $DB->get_records('choice_options', array('choiceid' => $choice->id), '', 'id');
     foreach ($formanswers as $key => $val) {
         if (!isset($options[$val])) {
-            throw new \moodle_exception('cannotsubmit', 'choice', $continueurl);
+            throw new \powereduc_exception('cannotsubmit', 'choice', $continueurl);
         }
     }
     // Start lock to prevent synchronous access to the same data
@@ -360,7 +360,7 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
         // Opening the lock.
         $choicelock = $lockfactory->get_lock($resouce, $timeout, MINSECS);
         if (!$choicelock) {
-            throw new \moodle_exception('cannotsubmit', 'choice', $continueurl);
+            throw new \powereduc_exception('cannotsubmit', 'choice', $continueurl);
         }
     }
 
@@ -476,7 +476,7 @@ function choice_user_submit_response($formanswer, $choice, $userid, $course, $cm
     } else {
         // This is a choice with limited options, and one of the options selected has just run over its limit.
         $choicelock->release();
-        throw new \moodle_exception('choicefull', 'choice', $continueurl);
+        throw new \powereduc_exception('choicefull', 'choice', $continueurl);
     }
 
     // Release lock.
@@ -561,7 +561,7 @@ function prepare_choice_show_results($choice, $course, $cm, $allresponses) {
     $context = context_module::instance($cm->id);
     $display->viewresponsecapability = has_capability('mod/choice:readresponses', $context);
     $display->deleterepsonsecapability = has_capability('mod/choice:deleteresponses',$context);
-    $display->fullnamecapability = has_capability('moodle/site:viewfullnames', $context);
+    $display->fullnamecapability = has_capability('powereduc/site:viewfullnames', $context);
 
     if (empty($allresponses)) {
         echo $OUTPUT->heading(get_string("nousersyet"), 3, null);
@@ -847,7 +847,7 @@ function choice_supports($feature) {
         case FEATURE_COMPLETION_HAS_RULES:    return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_COMMUNICATION;
 
@@ -864,7 +864,7 @@ function choice_supports($feature) {
 function choice_extend_settings_navigation(settings_navigation $settings, navigation_node $choicenode) {
     if (has_capability('mod/choice:readresponses', $settings->get_page()->cm->context)) {
         $choicenode->add(get_string('responses', 'choice'),
-            new moodle_url('/mod/choice/report.php', array('id' => $settings->get_page()->cm->id)));
+            new powereduc_url('/mod/choice/report.php', array('id' => $settings->get_page()->cm->id)));
     }
 }
 
@@ -1150,7 +1150,7 @@ function mod_choice_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('viewchoices', 'choice'),
-        new \moodle_url('/mod/choice/view.php', array('id' => $cm->id)),
+        new \powereduc_url('/mod/choice/view.php', array('id' => $cm->id)),
         1,
         $actionable
     );
@@ -1206,7 +1206,7 @@ function mod_choice_core_calendar_get_valid_event_timestart_range(\calendar_even
  * It will set the timeopen or timeclose value of the choice instance
  * according to the type of event provided.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event
  * @param stdClass $choice The module instance to get the range from
  */
@@ -1236,7 +1236,7 @@ function mod_choice_core_calendar_event_timestart_updated(\calendar_event $event
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 

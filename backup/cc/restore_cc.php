@@ -19,7 +19,7 @@
  * @copyright 2009 Mauro Rondinelli (mauro.rondinelli [AT] uvcms.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 require_once($CFG->dirroot . '/backup/cc/includes/constants.php');
 require_once($CFG->dirroot . '/backup/cc/cc2moodle.php');

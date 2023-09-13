@@ -23,7 +23,7 @@
  */
 
 namespace tool_log\helper;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helper trait buffered_writer. Adds buffer support for the store.

@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->dirroot/grade/grading/lib.php");
@@ -517,7 +517,7 @@ class core_grading_external extends external_api {
             }
         }
         $text = '';
-        $format = FORMAT_MOODLE;
+        $format = FORMAT_POWEREDUC;
         if (isset($definition['description'])) {
             $text = $definition['description'];
             if (isset($definition['descriptionformat'])) {

@@ -28,7 +28,7 @@ namespace tool_policy\output;
 use html_writer;
 use tool_policy\api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use action_menu;
 use action_menu_link;

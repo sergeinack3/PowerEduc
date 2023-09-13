@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,14 +19,14 @@
  *
  * @package    mod_book
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -35,7 +35,7 @@ require_once("$CFG->libdir/externallib.php");
  *
  * @package    mod_book
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
@@ -63,7 +63,7 @@ class mod_book_external extends external_api {
      * @param int $chapterid the book chapter id
      * @return array of warnings and status result
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_book($bookid, $chapterid = 0) {
         global $DB, $CFG;
@@ -122,7 +122,7 @@ class mod_book_external extends external_api {
             $viewhidden = has_capability('mod/book:viewhiddenchapters', $context);
 
             if (!$chapter or ($chapter->hidden and !$viewhidden)) {
-                throw new moodle_exception('errorchapter', 'mod_book');
+                throw new powereduc_exception('errorchapter', 'mod_book');
             }
 
             // Trigger the chapter viewed event.
@@ -203,7 +203,7 @@ class mod_book_external extends external_api {
                 $bookdetails['navstyle']          = $book->navstyle;
                 $bookdetails['customtitles']      = $book->customtitles;
 
-                if (has_capability('moodle/course:manageactivities', context_module::instance($book->coursemodule))) {
+                if (has_capability('powereduc/course:manageactivities', context_module::instance($book->coursemodule))) {
                     $bookdetails['revision']      = $book->revision;
                     $bookdetails['timecreated']   = $book->timecreated;
                     $bookdetails['timemodified']  = $book->timemodified;

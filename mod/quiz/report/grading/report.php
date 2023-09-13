@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file defines the quiz manual grading report class.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/report/grading/gradingsettings_form.php');
 
@@ -107,7 +107,7 @@ class quiz_grading_report extends quiz_default_report {
         }
         if (!data_submitted() && !preg_match(self::REGEX_POSITIVE_INT, $pagesize)) {
             // We only validate if the user accesses the page via a cleaned-up GET URL here.
-            throw new moodle_exception('invalidpagesize');
+            throw new powereduc_exception('invalidpagesize');
         }
         if ($pagesize != self::DEFAULT_PAGE_SIZE) {
             $this->viewoptions['pagesize'] = $pagesize;
@@ -143,7 +143,7 @@ class quiz_grading_report extends quiz_default_report {
         // Get the list of questions in this quiz.
         $this->questions = quiz_report_get_significant_questions($quiz);
         if ($slot && !array_key_exists($slot, $this->questions)) {
-            throw new moodle_exception('unknownquestion', 'quiz_grading');
+            throw new powereduc_exception('unknownquestion', 'quiz_grading');
         }
 
         // Process any submitted data.
@@ -265,10 +265,10 @@ class quiz_grading_report extends quiz_default_report {
     /**
      * Get the URL of the front page of the report that lists all the questions.
      *
-     * @return moodle_url the URL.
+     * @return powereduc_url the URL.
      */
     protected function base_url() {
-        return new moodle_url('/mod/quiz/report.php',
+        return new powereduc_url('/mod/quiz/report.php',
                 ['id' => $this->cm->id, 'mode' => 'grading']);
     }
 
@@ -277,7 +277,7 @@ class quiz_grading_report extends quiz_default_report {
      *
      * @param bool $includeauto if not given, use the current setting, otherwise,
      *      force a particular value of includeauto in the URL.
-     * @return moodle_url the URL.
+     * @return powereduc_url the URL.
      */
     protected function list_questions_url($includeauto = null) {
         $url = $this->base_url();
@@ -299,7 +299,7 @@ class quiz_grading_report extends quiz_default_report {
      * @param string $grade
      * @param int|bool $page = true, link to current page. false = omit page.
      *      number = link to specific page.
-     * @return moodle_url
+     * @return powereduc_url
      */
     protected function grade_question_url($slot, $questionid, $grade, $page = true) {
         $url = $this->base_url();

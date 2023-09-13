@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ $courseitemfilter = optional_param('courseitemfilter', '0', PARAM_INT);
 $courseitemfiltertyp = optional_param('courseitemfiltertyp', '0', PARAM_ALPHANUM);
 $courseid = optional_param('courseid', false, PARAM_INT);
 
-$url = new moodle_url('/mod/feedback/analysis_course.php', array('id'=>$id));
+$url = new powereduc_url('/mod/feedback/analysis_course.php', array('id'=>$id));
 navigation_node::override_active_url($url);
 if ($courseid !== false) {
     $url->param('courseid', $courseid);
@@ -53,7 +53,7 @@ require_course_login($course, true, $cm);
 $feedback = $PAGE->activityrecord;
 
 if (!($feedback->publish_stats OR has_capability('mod/feedback:viewreports', $context))) {
-    throw new \moodle_exception('error');
+    throw new \powereduc_exception('error');
 }
 
 $feedbackstructure = new mod_feedback_structure($feedback, $PAGE->cm, $courseid);
@@ -61,7 +61,7 @@ $feedbackstructure = new mod_feedback_structure($feedback, $PAGE->cm, $courseid)
 // Process course select form.
 $courseselectform = new mod_feedback_course_select_form($url, $feedbackstructure);
 if ($data = $courseselectform->get_data()) {
-    redirect(new moodle_url($url, ['courseid' => $data->courseid]));
+    redirect(new powereduc_url($url, ['courseid' => $data->courseid]));
 }
 
 /// Print the page header
@@ -84,7 +84,7 @@ $courseselectform->display();
 // Button "Export to excel".
 if (has_capability('mod/feedback:viewreports', $context) && $feedbackstructure->get_items()) {
     echo $OUTPUT->container_start('form-buttons');
-    $aurl = new moodle_url('/mod/feedback/analysis_to_excel.php',
+    $aurl = new powereduc_url('/mod/feedback/analysis_to_excel.php',
         ['sesskey' => sesskey(), 'id' => $id, 'courseid' => (int)$courseid]);
     echo $OUTPUT->single_button($aurl, get_string('export_to_excel', 'feedback'));
     echo $OUTPUT->container_end();
@@ -139,7 +139,7 @@ if ($courseitemfilter > 0) {
         $printnr = ($feedback->autonumbering && $item->itemnr) ? ($item->itemnr . '.') : '';
         $itemobj->print_analysed($item, $printnr, $mygroupid, $feedbackstructure->get_courseid());
         if (preg_match('/rated$/i', $item->typ)) {
-            $url = new moodle_url('/mod/feedback/analysis_course.php', array('id' => $id,
+            $url = new powereduc_url('/mod/feedback/analysis_course.php', array('id' => $id,
                 'courseitemfilter' => $item->id, 'courseitemfiltertyp' => $item->typ));
             $anker = html_writer::link($url, get_string('sort_by_course', 'feedback'));
 

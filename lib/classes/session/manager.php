@@ -24,7 +24,7 @@
 
 namespace core\session;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use html_writer;
 
@@ -33,7 +33,7 @@ use html_writer;
  *
  * Following PHP functions MUST NOT be used directly:
  * - session_start() - not necessary, lib/setup.php starts session automatically,
- *   use define('NO_MOODLE_COOKIE', true) if session not necessary.
+ *   use define('NO_POWEREDUC_COOKIE', true) if session not necessary.
  * - session_write_close() - use \core\session\manager::write_close() instead.
  * - session_destroy() - use require_logout() instead.
  *
@@ -114,7 +114,7 @@ class manager {
 
         // Init the session handler only if everything initialised properly in lib/setup.php file
         // and the session is actually required.
-        if (empty($DB) or empty($CFG->version) or !defined('NO_MOODLE_COOKIES') or NO_MOODLE_COOKIES or CLI_SCRIPT) {
+        if (empty($DB) or empty($CFG->version) or !defined('NO_POWEREDUC_COOKIES') or NO_POWEREDUC_COOKIES or CLI_SCRIPT) {
             self::$sessionactive = false;
             self::init_empty_session();
             return;

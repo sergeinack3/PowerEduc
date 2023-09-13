@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the moodle hooks for the assign module.
+ * This file contains the powereduc hooks for the assign module.
  *
  * It delegates most functions to the assignment class.
  *
@@ -23,7 +23,7 @@
  * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/deprecatedlib.php');
 
@@ -59,7 +59,7 @@ function assign_delete_instance($id) {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  * This function will remove all assignment submissions and feedbacks in the database
  * and clean up any related data.
  *
@@ -200,7 +200,7 @@ function assign_reset_gradebook($courseid, $type='') {
 /**
  * Implementation of the function for printing the form elements that control
  * whether the course reset functionality affects the assignment.
- * @param moodleform $mform form passed by reference
+ * @param powereducform $mform form passed by reference
  */
 function assign_reset_course_form_definition(&$mform) {
     $mform->addElement('header', 'assignheader', get_string('modulenameplural', 'assign'));
@@ -361,7 +361,7 @@ function assign_update_events($assign, $override = null) {
 }
 
 /**
- * Return the list if Moodle features this module supports
+ * Return the list if PowerEduc features this module supports
  *
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed True if module supports feature, false if not, null if doesn't know or string for the module purpose.
@@ -382,7 +382,7 @@ function assign_supports($feature) {
             return true;
         case FEATURE_GRADE_OUTCOMES:
             return true;
-        case FEATURE_BACKUP_MOODLE2:
+        case FEATURE_BACKUP_POWEREDUC2:
             return true;
         case FEATURE_SHOW_DESCRIPTION:
             return true;
@@ -434,7 +434,7 @@ function assign_extend_settings_navigation(settings_navigation $settings, naviga
     }
 
     if (has_capability('mod/assign:manageoverrides', $settings->get_page()->cm->context)) {
-        $url = new moodle_url('/mod/assign/overrides.php', ['cmid' => $settings->get_page()->cm->id, 'mode' => 'user']);
+        $url = new powereduc_url('/mod/assign/overrides.php', ['cmid' => $settings->get_page()->cm->id, 'mode' => 'user']);
 
         $node = navigation_node::create(get_string('overrides', 'assign'),
             $url,
@@ -448,7 +448,7 @@ function assign_extend_settings_navigation(settings_navigation $settings, naviga
 
         if ($assignment && $assignment->blindmarking && !$assignment->revealidentities) {
             $urlparams = array('id' => $cm->id, 'action'=>'revealidentities');
-            $url = new moodle_url('/mod/assign/view.php', $urlparams);
+            $url = new powereduc_url('/mod/assign/view.php', $urlparams);
             $linkname = get_string('revealidentities', 'assign');
             $node = $navref->add($linkname, $url, navigation_node::TYPE_SETTING);
         }
@@ -619,21 +619,21 @@ function assign_page_type_list($pagetype, $parentcontext, $currentcontext) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function assign_print_overview() {
     throw new coding_exception('assign_print_overview() can not be used any more and is obsolete.');
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function assign_get_mysubmission_details_for_print_overview() {
     throw new coding_exception('assign_get_mysubmission_details_for_print_overview() can not be used any more and is obsolete.');
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function assign_get_grade_details_for_print_overview() {
     throw new coding_exception('assign_get_grade_details_for_print_overview() can not be used any more and is obsolete.');
@@ -698,7 +698,7 @@ function assign_print_recent_activity($course, $viewfullnames, $timestart) {
         // only graders will see it if specified.
         if (empty($showrecentsubmissions)) {
             if (!array_key_exists($cm->id, $grader)) {
-                $grader[$cm->id] = has_capability('moodle/grade:viewall', $context);
+                $grader[$cm->id] = has_capability('powereduc/grade:viewall', $context);
             }
             if (!$grader[$cm->id]) {
                 continue;
@@ -708,7 +708,7 @@ function assign_print_recent_activity($course, $viewfullnames, $timestart) {
         $groupmode = groups_get_activity_groupmode($cm, $course);
 
         if ($groupmode == SEPARATEGROUPS &&
-                !has_capability('moodle/site:accessallgroups',  $context)) {
+                !has_capability('powereduc/site:accessallgroups',  $context)) {
             if (isguestuser()) {
                 // Shortcut - guest user does not belong into any group.
                 continue;
@@ -832,9 +832,9 @@ function assign_get_recent_mod_activity(&$activities,
 
     $groupmode       = groups_get_activity_groupmode($cm, $course);
     $cmcontext      = context_module::instance($cm->id);
-    $grader          = has_capability('moodle/grade:viewall', $cmcontext);
-    $accessallgroups = has_capability('moodle/site:accessallgroups', $cmcontext);
-    $viewfullnames   = has_capability('moodle/site:viewfullnames', $cmcontext);
+    $grader          = has_capability('powereduc/grade:viewall', $cmcontext);
+    $accessallgroups = has_capability('powereduc/site:accessallgroups', $cmcontext);
+    $viewfullnames   = has_capability('powereduc/site:viewfullnames', $cmcontext);
 
 
     $showrecentsubmissions = get_config('assign', 'showrecentsubmissions');
@@ -962,7 +962,7 @@ function assign_print_recent_mod_activity($activity, $courseid, $detail, $modnam
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function assign_scale_used() {
     throw new coding_exception('assign_scale_used() can not be used anymore. Plugins can implement ' .
@@ -1019,7 +1019,7 @@ function assign_get_post_actions() {
  * @return array Array of capability strings
  */
 function assign_get_extra_capabilities() {
-    return ['gradereport/grader:view', 'moodle/grade:viewall'];
+    return ['gradereport/grader:view', 'powereduc/grade:viewall'];
 }
 
 /**
@@ -1209,7 +1209,7 @@ function assign_get_file_info($browser,
     // Need to find where this belongs to.
     $assignment = new assign($context, $cm, $course);
     if ($filearea === ASSIGN_INTROATTACHMENT_FILEAREA || $filearea === ASSIGN_ACTIVITYATTACHMENT_FILEAREA) {
-        if (!has_capability('moodle/course:managefiles', $context)) {
+        if (!has_capability('powereduc/course:managefiles', $context)) {
             // Students can not peak here!
             return null;
         }
@@ -1354,7 +1354,7 @@ function assign_user_outline($course, $user, $coursemodule, $assignment) {
         return null;
     }
     $result = new stdClass();
-    if (!$gradingitem->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+    if (!$gradingitem->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
         $result->info = get_string('outlinegrade', 'assign', $gradebookgrade->str_long_grade);
     } else {
         $result->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -1468,7 +1468,7 @@ function mod_assign_output_fragment_gradingpanel($args) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function assign_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER, $CFG;
@@ -1530,7 +1530,7 @@ function assign_check_updates_since(cm_info $cm, $from, $filter = array()) {
 /**
  * Is the event visible?
  *
- * This is used to determine global visibility of an event in all places throughout Moodle. For example,
+ * This is used to determine global visibility of an event in all places throughout PowerEduc. For example,
  * the ASSIGN_EVENT_TYPE_GRADINGDUE event will not be shown to students on their calendar.
  *
  * @param calendar_event $event
@@ -1599,7 +1599,7 @@ function mod_assign_core_calendar_provide_event_action(calendar_event $event,
 
     if ($event->eventtype == ASSIGN_EVENT_TYPE_GRADINGDUE) {
         $name = get_string('gradeverb');
-        $url = new \moodle_url('/mod/assign/view.php', [
+        $url = new \powereduc_url('/mod/assign/view.php', [
             'id' => $cm->id,
             'action' => 'grader'
         ]);
@@ -1623,7 +1623,7 @@ function mod_assign_core_calendar_provide_event_action(calendar_event $event,
 
         // The user has not yet submitted anything. Show the addsubmission link.
         $name = get_string('addsubmission', 'assign');
-        $url = new \moodle_url('/mod/assign/view.php', [
+        $url = new \powereduc_url('/mod/assign/view.php', [
             'id' => $cm->id,
             'action' => 'editsubmission'
         ]);
@@ -1700,7 +1700,7 @@ function mod_assign_core_calendar_get_valid_event_timestart_range(\calendar_even
  * This function will update the assign module according to the
  * event that has been modified.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event
  * @param stdClass $instance The module instance to get the range from
  */
@@ -1729,7 +1729,7 @@ function mod_assign_core_calendar_event_timestart_updated(\calendar_event $event
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 

@@ -28,7 +28,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ExpectationException;
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 require_once(__DIR__ . '/../../../../behat/behat_base.php');
 
 /**

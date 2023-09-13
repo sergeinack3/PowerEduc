@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Allows you to edit a users profile
@@ -37,7 +37,7 @@ $cancelemailchange = optional_param('cancelemailchange', 0, PARAM_INT);   // Cou
 $PAGE->set_url('/user/edit.php', array('course' => $course, 'id' => $userid));
 
 if (!$course = $DB->get_record('course', array('id' => $course))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 if ($course->id != SITEID) {
@@ -53,17 +53,17 @@ if ($course->id != SITEID) {
 
 // Guest can not edit.
 if (isguestuser()) {
-    throw new \moodle_exception('guestnoeditprofile');
+    throw new \powereduc_exception('guestnoeditprofile');
 }
 
 // The user profile we are editing.
 if (!$user = $DB->get_record('user', array('id' => $userid))) {
-    throw new \moodle_exception('invaliduserid');
+    throw new \powereduc_exception('invaliduserid');
 }
 
 // Guest can not be edited.
 if (isguestuser($user)) {
-    throw new \moodle_exception('guestnoeditprofile');
+    throw new \powereduc_exception('guestnoeditprofile');
 }
 
 // User interests separated by commas.
@@ -75,7 +75,7 @@ $user->interests = core_tag_tag::get_item_tags_array('core', 'user', $user->id);
 if (is_mnet_remote_user($user)) {
     if (user_not_fully_set_up($user, true)) {
         $hostwwwroot = $DB->get_field('mnet_host', 'wwwroot', array('id' => $user->mnethostid));
-        throw new \moodle_exception('usernotfullysetup', 'mnet', '', $hostwwwroot);
+        throw new \powereduc_exception('usernotfullysetup', 'mnet', '', $hostwwwroot);
     }
     redirect($CFG->wwwroot . "/user/view.php?course={$course->id}");
 }
@@ -84,7 +84,7 @@ if (is_mnet_remote_user($user)) {
 $userauth = get_auth_plugin($user->auth);
 
 if (!$userauth->can_edit_profile()) {
-    throw new \moodle_exception('noprofileedit', 'auth');
+    throw new \powereduc_exception('noprofileedit', 'auth');
 }
 
 if ($editurl = $userauth->edit_profile_url()) {
@@ -103,20 +103,20 @@ $personalcontext = context_user::instance($user->id);
 // Check access control.
 if ($user->id == $USER->id) {
     // Editing own profile - require_login() MUST NOT be used here, it would result in infinite loop!
-    if (!has_capability('moodle/user:editownprofile', $systemcontext)) {
-        throw new \moodle_exception('cannotedityourprofile');
+    if (!has_capability('powereduc/user:editownprofile', $systemcontext)) {
+        throw new \powereduc_exception('cannotedityourprofile');
     }
 
 } else {
     // Teachers, parents, etc.
-    require_capability('moodle/user:editprofile', $personalcontext);
+    require_capability('powereduc/user:editprofile', $personalcontext);
     // No editing of guest user account.
     if (isguestuser($user->id)) {
-        throw new \moodle_exception('guestnoeditprofileother');
+        throw new \powereduc_exception('guestnoeditprofileother');
     }
     // No editing of primary admin!
     if (is_siteadmin($user) and !is_siteadmin($USER)) {  // Only admins may edit other admins.
-        throw new \moodle_exception('useradmineditadmin');
+        throw new \powereduc_exception('useradmineditadmin');
     }
 }
 
@@ -170,7 +170,7 @@ $filemanageroptions = array('maxbytes'       => $CFG->maxbytes,
 file_prepare_draft_area($draftitemid, $filemanagercontext->id, 'user', 'newicon', 0, $filemanageroptions);
 $user->imagefile = $draftitemid;
 // Create form.
-$userform = new user_edit_form(new moodle_url($PAGE->url, array('returnto' => $returnto)), array(
+$userform = new user_edit_form(new powereduc_url($PAGE->url, array('returnto' => $returnto)), array(
     'editoroptions' => $editoroptions,
     'filemanageroptions' => $filemanageroptions,
     'user' => $user));
@@ -180,12 +180,12 @@ $emailchanged = false;
 // Deciding where to send the user back in most cases.
 if ($returnto === 'profile') {
     if ($course->id != SITEID) {
-        $returnurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
+        $returnurl = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
     } else {
-        $returnurl = new moodle_url('/user/profile.php', array('id' => $user->id));
+        $returnurl = new powereduc_url('/user/profile.php', array('id' => $user->id));
     }
 } else {
-    $returnurl = new moodle_url('/user/preferences.php', array('userid' => $user->id));
+    $returnurl = new powereduc_url('/user/preferences.php', array('userid' => $user->id));
 }
 
 if ($userform->is_cancelled()) {
@@ -195,9 +195,9 @@ if ($userform->is_cancelled()) {
     $emailchangedhtml = '';
 
     if ($CFG->emailchangeconfirmation) {
-        // Users with 'moodle/user:update' can change their email address immediately.
+        // Users with 'powereduc/user:update' can change their email address immediately.
         // Other users require a confirmation email.
-        if (isset($usernew->email) and $user->email != $usernew->email && !has_capability('moodle/user:update', $systemcontext)) {
+        if (isset($usernew->email) and $user->email != $usernew->email && !has_capability('powereduc/user:update', $systemcontext)) {
             $a = new stdClass();
             $emailchangedkey = random_string(20);
             set_user_preference('newemail', $usernew->email, $user->id);
@@ -224,7 +224,7 @@ if ($userform->is_cancelled()) {
     // Pass a true old $user here.
     if (!$authplugin->user_update($user, $usernew)) {
         // Auth update failed.
-        throw new \moodle_exception('cannotupdateprofile');
+        throw new \powereduc_exception('cannotupdateprofile');
     }
 
     // Update user with new profile data.
@@ -294,7 +294,7 @@ if ($userform->is_cancelled()) {
 
     if (is_siteadmin() and empty($SITE->shortname)) {
         // Fresh cli install - we need to finish site settings.
-        redirect(new moodle_url('/admin/index.php'));
+        redirect(new powereduc_url('/admin/index.php'));
     }
 
     if (!$emailchanged || !$CFG->emailchangeconfirmation) {

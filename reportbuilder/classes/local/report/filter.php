@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
 namespace core_reportbuilder\local\report;
 
 use lang_string;
-use moodle_exception;
+use powereduc_exception;
 use core_reportbuilder\local\filters\base;
 use core_reportbuilder\local\models\filter as filter_model;
 
@@ -27,7 +27,7 @@ use core_reportbuilder\local\models\filter as filter_model;
  * Class to represent a report filter
  *
  * @package     core_reportbuilder
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class filter {
@@ -76,7 +76,7 @@ final class filter {
      *      it should be the name of the entity as passed to {@see \core_reportbuilder\local\report\base::annotate_entity}
      * @param string $fieldsql SQL clause to use for filtering, {@see set_field_sql}
      * @param array $fieldparams
-     * @throws moodle_exception For invalid filter class
+     * @throws powereduc_exception For invalid filter class
      */
     public function __construct(
         string $filterclass,
@@ -87,7 +87,7 @@ final class filter {
         array $fieldparams = []
     ) {
         if (!class_exists($filterclass) || !is_subclass_of($filterclass, base::class)) {
-            throw new moodle_exception('filterinvalid', 'reportbuilder', '', null, $filterclass);
+            throw new powereduc_exception('filterinvalid', 'reportbuilder', '', null, $filterclass);
         }
 
         $this->filterclass = $filterclass;

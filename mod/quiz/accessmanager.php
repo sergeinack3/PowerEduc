@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Classes to enforce the various access rules that can apply to a quiz.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @copyright 2009 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.2
+ * @since     PowerEduc 2.2
  */
 class quiz_access_manager {
     /** @var quiz the quiz settings object. */
@@ -100,10 +100,10 @@ class quiz_access_manager {
      * settings are stored in the quiz table.
      *
      * @param mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
     public static function add_settings_form_fields(
-            mod_quiz_mod_form $quizform, MoodleQuickForm $mform) {
+            mod_quiz_mod_form $quizform, PowerEducQuickForm $mform) {
 
         foreach (self::get_rule_classes() as $rule) {
             $rule::add_settings_form_fields($quizform, $mform);
@@ -165,7 +165,7 @@ class quiz_access_manager {
      *
      * @param object $quiz the data from the database, including $quiz->id
      *      which is the id of the quiz being deleted.
-     * @since Moodle 2.7.1, 2.6.4, 2.5.7
+     * @since PowerEduc 2.7.1, 2.6.4, 2.5.7
      */
     public static function delete_settings($quiz) {
 
@@ -362,12 +362,12 @@ class quiz_access_manager {
 
     /**
      * Build the form required to do the pre-flight checks.
-     * @param moodle_url $url the form action URL.
+     * @param powereduc_url $url the form action URL.
      * @param int|null $attemptid the id of the current attempt, if there is one,
      *      otherwise null.
      * @return mod_quiz_preflight_check_form the form.
      */
-    public function get_preflight_check_form(moodle_url $url, $attemptid) {
+    public function get_preflight_check_form(powereduc_url $url, $attemptid) {
         // This form normally wants POST submissins. However, it also needs to
         // accept GET submissions. Since formslib is strict, we have to detect
         // which case we are in, and set the form property appropriately.
@@ -425,7 +425,7 @@ class quiz_access_manager {
      * Sets up the attempt (review or summary) page with any properties required
      * by the access rules.
      *
-     * @param moodle_page $page the page object to initialise.
+     * @param powereduc_page $page the page object to initialise.
      */
     public function setup_attempt_page($page) {
         foreach ($this->rules as $rule) {
@@ -544,11 +544,11 @@ class quiz_access_manager {
      * Run the preflight checks using the given data in all the rules supporting them.
      *
      * @param array $data passed data for validation
-     * @param array $files un-used, Moodle seems to not support it anymore
+     * @param array $files un-used, PowerEduc seems to not support it anymore
      * @param int|null $attemptid the id of the current attempt, if there is one,
      *      otherwise null.
      * @return array of errors, empty array means no erros
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     public function validate_preflight_check($data, $files, $attemptid) {
         $errors = array();

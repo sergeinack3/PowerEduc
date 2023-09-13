@@ -24,7 +24,7 @@
 
 namespace logstore_standard\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class cleanup_task extends \core\task\scheduled_task {
 

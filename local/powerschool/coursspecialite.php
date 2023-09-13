@@ -33,12 +33,12 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/message:managemessages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/coursspecialite.php'));
+$PAGE->set_url(new powereduc_url('/local/powerschool/coursspecialite.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('coursspecialite', 'local_powerschool'));
 $PAGE->set_heading(get_string('coursspecialite', 'local_powerschool'));
 
-$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new moodle_url('/local/powerschool/configurationmini.php'));
+$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new powereduc_url('/local/powerschool/configurationmini.php'));
 $PAGE->navbar->add(get_string('coursspecialite', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -299,48 +299,48 @@ $templatecontext = (object)[
     'coursspecialite' => array_values($tarcoursspecialite),
     'coursspecialite1' => array_values($coursspecialites1),
     'coursspecialite2' => array_values($coursspecialites2),
-    'coursspecialiteedit' => new moodle_url('/local/powerschool/coursspecialiteedit.php'),
-    'coursspecialitesupp'=> new moodle_url('/local/powerschool/coursspecialite.php'),
-    'creditt'=> new moodle_url('/local/powerschool/credit.php'),
-    'cours'=> new moodle_url('/course/edit.php'),
-    'affecterprof' => new moodle_url('/local/powerschool/affecterprof.php'),
-    'affectersemes' => new moodle_url('/local/powerschool/courssemestre.php'),
+    'coursspecialiteedit' => new powereduc_url('/local/powerschool/coursspecialiteedit.php'),
+    'coursspecialitesupp'=> new powereduc_url('/local/powerschool/coursspecialite.php'),
+    'creditt'=> new powereduc_url('/local/powerschool/credit.php'),
+    'cours'=> new powereduc_url('/course/edit.php'),
+    'affecterprof' => new powereduc_url('/local/powerschool/affecterprof.php'),
+    'affectersemes' => new powereduc_url('/local/powerschool/courssemestre.php'),
     'idca'=>$_GET["idca"]
 ];
 
 // $menu = (object)[
-//     'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
-//     'campus' => new moodle_url('/local/powerschool/campus.php'),
-//     'semestre' => new moodle_url('/local/powerschool/semestre.php'),
-//     'salle' => new moodle_url('/local/powerschool/salle.php'),
-//     'filiere' => new moodle_url('/local/powerschool/filiere.php'),
-//     'cycle' => new moodle_url('/local/powerschool/cycle.php'),
-//     'modepayement' => new moodle_url('/local/powerschool/modepayement.php'),
-//     'matiere' => new moodle_url('/local/powerschool/matiere.php'),
-//     'seance' => new moodle_url('/local/powerschool/seance.php'),
-//     'inscription' => new moodle_url('/local/powerschool/inscription.php'),
-//     'enseigner' => new moodle_url('/local/powerschool/enseigner.php'),
-//     'paiement' => new moodle_url('/local/powerschool/paiement.php'),
-//     'notes' => new moodle_url('/local/powerschool/note.php'),
+//     'annee' => new powereduc_url('/local/powerschool/anneescolaire.php'),
+//     'campus' => new powereduc_url('/local/powerschool/campus.php'),
+//     'semestre' => new powereduc_url('/local/powerschool/semestre.php'),
+//     'salle' => new powereduc_url('/local/powerschool/salle.php'),
+//     'filiere' => new powereduc_url('/local/powerschool/filiere.php'),
+//     'cycle' => new powereduc_url('/local/powerschool/cycle.php'),
+//     'modepayement' => new powereduc_url('/local/powerschool/modepayement.php'),
+//     'matiere' => new powereduc_url('/local/powerschool/matiere.php'),
+//     'seance' => new powereduc_url('/local/powerschool/seance.php'),
+//     'inscription' => new powereduc_url('/local/powerschool/inscription.php'),
+//     'enseigner' => new powereduc_url('/local/powerschool/enseigner.php'),
+//     'paiement' => new powereduc_url('/local/powerschool/paiement.php'),
+//     'notes' => new powereduc_url('/local/powerschool/note.php'),
 
 // ];
 
 $menumini = (object)[
-    'affecterprof' => new moodle_url('/local/powerschool/affecterprof.php'),
-    'configurerpaie' => new moodle_url('/local/powerschool/configurerpaiement.php'),
-    'coursspecialite' => new moodle_url('/local/powerschool/coursspecialite.php'),
-    'salleele' => new moodle_url('/local/powerschool/salleele.php'),
-    'tranche' => new moodle_url('/local/powerschool/tranche.php'),
-    'confinot' => new moodle_url('/local/powerschool/configurationnote.php'),
-    'logo' => new moodle_url('/local/powerschool/logo.php'),
-    'message' => new moodle_url('/local/powerschool/message.php'),
+    'affecterprof' => new powereduc_url('/local/powerschool/affecterprof.php'),
+    'configurerpaie' => new powereduc_url('/local/powerschool/configurerpaiement.php'),
+    'coursspecialite' => new powereduc_url('/local/powerschool/coursspecialite.php'),
+    'salleele' => new powereduc_url('/local/powerschool/salleele.php'),
+    'tranche' => new powereduc_url('/local/powerschool/tranche.php'),
+    'confinot' => new powereduc_url('/local/powerschool/configurationnote.php'),
+    'logo' => new powereduc_url('/local/powerschool/logo.php'),
+    'message' => new powereduc_url('/local/powerschool/message.php'),
 
 
 ];
 $campus=$DB->get_records('campus');
 $campuss=(object)[
         'campus'=>array_values($campus),
-        'confpaie'=>new moodle_url('/local/powerschool/coursspecialite.php'),
+        'confpaie'=>new powereduc_url('/local/powerschool/coursspecialite.php'),
     ];
 echo $OUTPUT->header();
 

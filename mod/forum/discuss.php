@@ -1,26 +1,26 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Displays a post, and all the posts below it.
  * If no post is given, displays all posts in a discussion
  *
  * @package   mod_forum
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ $mark   = optional_param('mark', '', PARAM_ALPHA);       // Used for tracking re
 $postid = optional_param('postid', 0, PARAM_INT);        // Used for tracking read posts if user initiated.
 $pin    = optional_param('pin', -1, PARAM_INT);          // If set, pin or unpin this discussion.
 
-$url = new moodle_url('/mod/forum/discuss.php', array('d'=>$d));
+$url = new powereduc_url('/mod/forum/discuss.php', array('d'=>$d));
 if ($parent !== 0) {
     $url->param('parent', $parent);
 }
@@ -45,14 +45,14 @@ $discussionvault = $vaultfactory->get_discussion_vault();
 $discussion = $discussionvault->get_from_id($d);
 
 if (!$discussion) {
-    throw new \moodle_exception('errordiscussionnotfound', 'mod_forum');
+    throw new \powereduc_exception('errordiscussionnotfound', 'mod_forum');
 }
 
 $forumvault = $vaultfactory->get_forum_vault();
 $forum = $forumvault->get_from_id($discussion->get_forum_id());
 
 if (!$forum) {
-    throw new \moodle_exception('errorforumnotfound', 'mod_forum');
+    throw new \powereduc_exception('errorforumnotfound', 'mod_forum');
 }
 
 $course = $forum->get_course_record();
@@ -66,7 +66,7 @@ $urlfactory = mod_forum\local\container::get_url_factory();
 
 // Make sure we can render.
 if (!$capabilitymanager->can_view_discussions($USER)) {
-    throw new moodle_exception('noviewdiscussionspermission', 'mod_forum');
+    throw new powereduc_exception('noviewdiscussionspermission', 'mod_forum');
 }
 
 $datamapperfactory = mod_forum\local\container::get_legacy_data_mapper_factory();
@@ -107,31 +107,31 @@ if ($move > 0 && confirm_sesskey()) {
     $return = $discussionviewurl->out(false);
 
     if (!$forumto = $DB->get_record('forum', ['id' => $move])) {
-        throw new \moodle_exception('cannotmovetonotexist', 'forum', $return);
+        throw new \powereduc_exception('cannotmovetonotexist', 'forum', $return);
     }
 
     if (!$capabilitymanager->can_move_discussions($USER)) {
         if ($forum->get_type() == 'single') {
-            throw new \moodle_exception('cannotmovefromsingleforum', 'forum', $return);
+            throw new \powereduc_exception('cannotmovefromsingleforum', 'forum', $return);
         } else {
-            throw new \moodle_exception('nopermissions', 'error', $return, get_capability_string('mod/forum:movediscussions'));
+            throw new \powereduc_exception('nopermissions', 'error', $return, get_capability_string('mod/forum:movediscussions'));
         }
     }
 
     if ($forumto->type == 'single') {
-        throw new \moodle_exception('cannotmovetosingleforum', 'forum', $return);
+        throw new \powereduc_exception('cannotmovetosingleforum', 'forum', $return);
     }
 
     // Get target forum cm and check it is visible to current user.
     $modinfo = get_fast_modinfo($course);
     $forums = $modinfo->get_instances_of('forum');
     if (!array_key_exists($forumto->id, $forums)) {
-        throw new \moodle_exception('cannotmovetonotfound', 'forum', $return);
+        throw new \powereduc_exception('cannotmovetonotfound', 'forum', $return);
     }
 
     $cmto = $forums[$forumto->id];
     if (!$cmto->uservisible) {
-        throw new \moodle_exception('cannotmovenotvisible', 'forum', $return);
+        throw new \powereduc_exception('cannotmovenotvisible', 'forum', $return);
     }
 
     $destinationctx = context_module::instance($cmto->id);
@@ -216,7 +216,7 @@ if ($move > 0 && confirm_sesskey()) {
 // Pin or unpin discussion if requested.
 if ($pin !== -1 && confirm_sesskey()) {
     if (!$capabilitymanager->can_pin_discussions($USER)) {
-        throw new \moodle_exception('nopermissions', 'error', $return, get_capability_string('mod/forum:pindiscussions'));
+        throw new \powereduc_exception('nopermissions', 'error', $return, get_capability_string('mod/forum:pindiscussions'));
     }
 
     $params = ['context' => $modcontext, 'objectid' => $discussion->get_id(), 'other' => ['forumid' => $forum->get_id()]];
@@ -276,11 +276,11 @@ if ($parent) {
 
 $postvault = $vaultfactory->get_post_vault();
 if (!$post = $postvault->get_from_id($parent)) {
-    throw new \moodle_exception("notexists", 'forum', "$CFG->wwwroot/mod/forum/view.php?f={$forum->get_id()}");
+    throw new \powereduc_exception("notexists", 'forum', "$CFG->wwwroot/mod/forum/view.php?f={$forum->get_id()}");
 }
 
 if (!$capabilitymanager->can_view_post($USER, $discussion, $post)) {
-    throw new \moodle_exception('noviewdiscussionspermission', 'forum', "$CFG->wwwroot/mod/forum/view.php?id={$forum->get_id()}");
+    throw new \powereduc_exception('noviewdiscussionspermission', 'forum', "$CFG->wwwroot/mod/forum/view.php?id={$forum->get_id()}");
 }
 
 $istracked = forum_tp_is_tracked($forumrecord, $USER);

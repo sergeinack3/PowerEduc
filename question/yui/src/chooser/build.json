@@ -1,7 +1,7 @@
 {
-    "name": "moodle-question-chooser",
+    "name": "powereduc-question-chooser",
     "builds": {
-        "moodle-question-chooser": {
+        "powereduc-question-chooser": {
             "jsfiles": [
                 "chooser.js"
             ]

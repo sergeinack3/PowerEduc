@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ $current_tab = 'analysis';
 
 $id = required_param('id', PARAM_INT);  // Course module id.
 
-$url = new moodle_url('/mod/feedback/analysis.php', array('id'=>$id));
+$url = new powereduc_url('/mod/feedback/analysis.php', array('id'=>$id));
 $PAGE->set_url($url);
 
 list($course, $cm) = get_course_and_cm_from_cmid($id, 'feedback');
@@ -41,7 +41,7 @@ $feedbackstructure = new mod_feedback_structure($feedback, $cm);
 $context = context_module::instance($cm->id);
 
 if (!$feedbackstructure->can_view_analysis()) {
-    throw new \moodle_exception('error');
+    throw new \powereduc_exception('error');
 }
 
 /// Print the page header
@@ -63,7 +63,7 @@ groups_print_activity_menu($cm, $url);
 // Button "Export to excel".
 if (has_capability('mod/feedback:viewreports', $context) && $feedbackstructure->get_items()) {
     echo $OUTPUT->container_start('form-buttons');
-    $aurl = new moodle_url('/mod/feedback/analysis_to_excel.php', ['sesskey' => sesskey(), 'id' => $id]);
+    $aurl = new powereduc_url('/mod/feedback/analysis_to_excel.php', ['sesskey' => sesskey(), 'id' => $id]);
     echo $OUTPUT->single_button($aurl, get_string('export_to_excel', 'feedback'));
     echo $OUTPUT->container_end();
 }

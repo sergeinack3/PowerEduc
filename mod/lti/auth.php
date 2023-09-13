@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file responds to a login authentication request
@@ -87,11 +87,11 @@ if ($ok && ($loginhint !== $USER->id)) {
 
 // If we're unable to load up config; we cannot trust the redirect uri for POSTing to.
 if (empty($config)) {
-    throw new moodle_exception('invalidrequest', 'error');
+    throw new powereduc_exception('invalidrequest', 'error');
 } else {
     $uris = array_map("trim", explode("\n", $config->lti_redirectionuris));
     if (!in_array($redirecturi, $uris)) {
-        throw new moodle_exception('invalidrequest', 'error');
+        throw new powereduc_exception('invalidrequest', 'error');
     }
 }
 if ($ok) {
@@ -126,7 +126,7 @@ if ($ok) {
     } else {
         require_login($course);
         $context = context_course::instance($courseid);
-        require_capability('moodle/course:manageactivities', $context);
+        require_capability('powereduc/course:manageactivities', $context);
         require_capability('mod/lti:addcoursetool', $context);
         // Set the return URL. We send the launch container along to help us avoid frames-within-frames when the user returns.
         $returnurlparams = [
@@ -134,7 +134,7 @@ if ($ok) {
             'id' => $typeid,
             'sesskey' => sesskey()
         ];
-        $returnurl = new \moodle_url('/mod/lti/contentitem_return.php', $returnurlparams);
+        $returnurl = new \powereduc_url('/mod/lti/contentitem_return.php', $returnurlparams);
         // Prepare the request.
         $title = base64_decode($titleb64);
         $text = base64_decode($textb64);

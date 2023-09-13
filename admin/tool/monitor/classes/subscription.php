@@ -24,7 +24,7 @@
 
 namespace tool_monitor;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class represents a single subscription instance (i.e with all the subscription info).

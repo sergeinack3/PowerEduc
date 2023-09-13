@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -99,7 +99,7 @@ class encryption_test extends \basic_testcase {
     /**
      * Tests encryption and decryption with empty strings.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function test_encrypt_and_decrypt_empty(): void {
         $this->assertEquals('', encryption::encrypt(''));
@@ -248,7 +248,7 @@ class encryption_test extends \basic_testcase {
      *
      * @dataProvider encryption_method_provider
      * @param string $method Encryption method
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function test_encrypt_and_decrypt_realdata(string $method): void {
         $this->require_sodium($method);

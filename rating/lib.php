@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * A class representing a single rating and containing some static methods for manipulating ratings
@@ -41,7 +41,7 @@ define ('RATING_DEFAULT_SCALE', 5);
  * @category  rating
  * @copyright 2010 Andrew Davis
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
 class rating implements renderable {
 
@@ -310,7 +310,7 @@ class rating implements renderable {
      * (this one included).
      *
      * @param bool $popup whether of not the URL should be loaded in a popup
-     * @return moodle_url URL to view all of the ratings for the item this rating is for.
+     * @return powereduc_url URL to view all of the ratings for the item this rating is for.
      */
     public function get_view_ratings_url($popup = false) {
         $attributes = array(
@@ -323,15 +323,15 @@ class rating implements renderable {
         if ($popup) {
             $attributes['popup'] = 1;
         }
-        return new moodle_url('/rating/index.php', $attributes);
+        return new powereduc_url('/rating/index.php', $attributes);
     }
 
     /**
      * Returns a URL that can be used to rate the associated item.
      *
      * @param int|null          $rating    The rating to give the item, if null then no rating param is added.
-     * @param moodle_url|string $returnurl The URL to return to.
-     * @return moodle_url can be used to rate the associated item.
+     * @param powereduc_url|string $returnurl The URL to return to.
+     * @return powereduc_url can be used to rate the associated item.
      */
     public function get_rate_url($rating = null, $returnurl = null) {
         if (empty($returnurl)) {
@@ -356,7 +356,7 @@ class rating implements renderable {
         if (!empty($rating)) {
             $args['rating'] = $rating;
         }
-        $url = new moodle_url('/rating/rate.php', $args);
+        $url = new powereduc_url('/rating/rate.php', $args);
         return $url;
     }
 
@@ -369,7 +369,7 @@ class rating implements renderable {
  * @category  rating
  * @copyright 2010 Andrew Davis
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
 class rating_manager {
 
@@ -381,7 +381,7 @@ class rating_manager {
     /**
      * Delete one or more ratings. Specify either a rating id, an item id or just the context id.
      *
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $options {
      *            contextid => int the context in which the ratings exist [required]
      *            ratingid => int the id of an individual rating to delete [optional]
@@ -675,13 +675,13 @@ class rating_manager {
         // Check site capabilities.
         $settings->permissions = new stdClass;
         // Can view the aggregate of ratings of their own items.
-        $settings->permissions->view    = has_capability('moodle/rating:view', $options->context);
+        $settings->permissions->view    = has_capability('powereduc/rating:view', $options->context);
         // Can view the aggregate of ratings of other people's items.
-        $settings->permissions->viewany = has_capability('moodle/rating:viewany', $options->context);
+        $settings->permissions->viewany = has_capability('powereduc/rating:viewany', $options->context);
         // Can view individual ratings.
-        $settings->permissions->viewall = has_capability('moodle/rating:viewall', $options->context);
+        $settings->permissions->viewall = has_capability('powereduc/rating:viewall', $options->context);
         // Can submit ratings.
-        $settings->permissions->rate    = has_capability('moodle/rating:rate', $options->context);
+        $settings->permissions->rate    = has_capability('powereduc/rating:rate', $options->context);
 
         // Check module capabilities
         // This is mostly for backwards compatability with old modules that previously implemented their own ratings.
@@ -700,7 +700,7 @@ class rating_manager {
     /**
      * Generates a scale object that can be returned
      *
-     * @global moodle_database $DB moodle database object
+     * @global powereduc_database $DB powereduc database object
      * @param int $scaleid scale-type identifier
      * @return stdClass scale for ratings
      */
@@ -1005,10 +1005,10 @@ class rating_manager {
     /**
      * Initialises JavaScript to enable AJAX ratings on the provided page
      *
-     * @param moodle_page $page
+     * @param powereduc_page $page
      * @return true always returns true
      */
-    public function initialise_rating_javascript(moodle_page $page) {
+    public function initialise_rating_javascript(powereduc_page $page) {
         global $CFG;
 
         // Only needs to be initialized once.
@@ -1064,7 +1064,7 @@ class rating_manager {
      * @param int $userrating the user rating
      * @param int $rateduserid the rated user id
      * @param int $aggregationmethod the aggregation method
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function add_rating($cm, $context, $component, $ratingarea, $itemid, $scaleid, $userrating, $rateduserid,
                                 $aggregationmethod) {
@@ -1183,7 +1183,7 @@ class rating_manager {
      * @param  string $component  component name
      * @param  int $since         the time to check
      * @return array list of ratings db records since the given timelimit
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_component_ratings_since($context, $component, $since) {
         global $DB, $USER;
@@ -1218,9 +1218,9 @@ class rating_manager {
  * @category  rating
  * @copyright 2010 Andrew Davis
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
-class rating_exception extends moodle_exception {
+class rating_exception extends powereduc_exception {
     /**
      * @var string The message to accompany the thrown exception
      */

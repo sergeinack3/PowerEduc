@@ -23,7 +23,7 @@
  */
 
 namespace block_lp\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_competency\api;
 use core_competency\external\competency_exporter;

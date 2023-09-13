@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines the \mod_quiz\structure class.
@@ -25,7 +25,7 @@
 namespace mod_quiz;
 use mod_quiz\question\bank\qbank_helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Quiz structure class.
@@ -259,7 +259,7 @@ class structure {
         } else {
             // Random question.
             $context = \context::instance_by_id($slot->contextid);
-            return has_capability('moodle/question:useall', $context);
+            return has_capability('powereduc/question:useall', $context);
         }
     }
 
@@ -323,8 +323,8 @@ class structure {
         if (!$this->can_be_edited()) {
             $reportlink = quiz_attempt_summary_link_to_reports($this->get_quiz(),
                     $this->quizobj->get_cm(), $this->quizobj->get_context());
-            throw new \moodle_exception('cannoteditafterattempts', 'quiz',
-                    new \moodle_url('/mod/quiz/edit.php', array('cmid' => $this->get_cmid())), $reportlink);
+            throw new \powereduc_exception('cannoteditafterattempts', 'quiz',
+                    new \powereduc_url('/mod/quiz/edit.php', array('cmid' => $this->get_cmid())), $reportlink);
         }
     }
 
@@ -744,7 +744,7 @@ class structure {
 
         $movingslot = $this->get_slot_by_id($idmove);
         if (empty($movingslot)) {
-            throw new \moodle_exception('Bad slot ID ' . $idmove);
+            throw new \powereduc_exception('Bad slot ID ' . $idmove);
         }
         $movingslotnumber = (int) $movingslot->slot;
 
@@ -1247,7 +1247,7 @@ class structure {
 
     /**
      * Whether the current user can add random questions to the quiz or not.
-     * It is only possible to add a random question if the user has the moodle/question:useall capability
+     * It is only possible to add a random question if the user has the powereduc/question:useall capability
      * on at least one of the contexts related to the one where we are currently editing questions.
      *
      * @return bool
@@ -1256,7 +1256,7 @@ class structure {
         if ($this->canaddrandom === null) {
             $quizcontext = $this->quizobj->get_context();
             $relatedcontexts = new \core_question\local\bank\question_edit_contexts($quizcontext);
-            $usablecontexts = $relatedcontexts->having_cap('moodle/question:useall');
+            $usablecontexts = $relatedcontexts->having_cap('powereduc/question:useall');
 
             $this->canaddrandom = !empty($usablecontexts);
         }
@@ -1270,8 +1270,8 @@ class structure {
      *
      * @param  int $slotid The id for the slot
      * @return \stdClass[] The list of slot tag records
-     * @deprecated since Moodle 4.0 MDL-71573
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @deprecated since PowerEduc 4.0 MDL-71573
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public function get_slot_tags_for_slot_id($slotid) {
         debugging('Function get_slot_tags_for_slot_id() has been deprecated and the structure

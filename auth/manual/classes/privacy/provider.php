@@ -23,7 +23,7 @@
 
 namespace auth_manual\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use \core_privacy\local\request\writer;
 use \core_privacy\local\metadata\collection;

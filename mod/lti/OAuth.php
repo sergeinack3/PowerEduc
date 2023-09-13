@@ -1,19 +1,19 @@
 <?php
-// This file is part of BasicLTI4Moodle
+// This file is part of BasicLTI4PowerEduc
 //
-// BasicLTI4Moodle is an IMS BasicLTI (Basic Learning Tools for Interoperability)
-// consumer for Moodle 1.9 and Moodle 2.0. BasicLTI is a IMS Standard that allows web
+// BasicLTI4PowerEduc is an IMS BasicLTI (Basic Learning Tools for Interoperability)
+// consumer for PowerEduc 1.9 and PowerEduc 2.0. BasicLTI is a IMS Standard that allows web
 // based learning tools to be easily integrated in LMS as native ones. The IMS BasicLTI
 // specification is part of the IMS standard Common Cartridge 1.1 Sakai and other main LMS
 // are already supporting or going to support BasicLTI. This project Implements the consumer
-// for Moodle. Moodle is a Free Open source Learning Management System by Martin Dougiamas.
-// BasicLTI4Moodle is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
+// for PowerEduc. PowerEduc is a Free Open source Learning Management System by Martin Dougiamas.
+// BasicLTI4PowerEduc is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
 // at the GESSI research group at UPC.
-// SimpleLTI consumer for Moodle is an implementation of the early specification of LTI
+// SimpleLTI consumer for PowerEduc is an implementation of the early specification of LTI
 // by Charles Severance (Dr Chuck) htp://dr-chuck.com , developed by Jordi Piguillem in a
 // Google Summer of Code 2008 project co-mentored by Charles Severance and Marc Alier.
 //
-// BasicLTI4Moodle is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
+// BasicLTI4PowerEduc is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
 // of the Universitat Politecnica de Catalunya http://www.upc.edu
 // Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier @ upc.edu
 //
@@ -41,29 +41,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the OAuth 1.0a implementation used for support for LTI 1.1.
  *
  * @package    mod_lti
- * @copyright moodle
+ * @copyright powereduc
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace moodle\mod\lti;//Using a namespace as the basicLTI module imports classes with the same names
+namespace powereduc\mod\lti;//Using a namespace as the basicLTI module imports classes with the same names
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $lastcomputedsignature = false;
 
@@ -765,7 +765,7 @@ class OAuthUtil {
     public static function urlencode_rfc3986($input) {
         if (is_array($input)) {
             return array_map(array(
-                'moodle\mod\lti\OAuthUtil',
+                'powereduc\mod\lti\OAuthUtil',
                 'urlencode_rfc3986'
             ), $input);
         } else {

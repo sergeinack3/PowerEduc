@@ -25,7 +25,7 @@
 
 namespace core\antivirus;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir.'/filelib.php');
 
 /**
@@ -78,7 +78,7 @@ class quarantine {
         // Create Zip file.
         $ziparchive = new \zip_archive();
         if ($ziparchive->open($zipfilepath, \file_archive::CREATE)) {
-            $ziparchive->add_file_from_string($detailsfilename, format_text($incidentdetails, FORMAT_MOODLE));
+            $ziparchive->add_file_from_string($detailsfilename, format_text($incidentdetails, FORMAT_POWEREDUC));
             $ziparchive->add_file_from_pathname($filename, $file);
             $ziparchive->close();
         }
@@ -109,7 +109,7 @@ class quarantine {
         // Create Zip file.
         $ziparchive = new \zip_archive();
         if ($ziparchive->open($zipfilepath, \file_archive::CREATE)) {
-            $ziparchive->add_file_from_string($detailsfilename, format_text($incidentdetails, FORMAT_MOODLE));
+            $ziparchive->add_file_from_string($detailsfilename, format_text($incidentdetails, FORMAT_POWEREDUC));
             $ziparchive->add_file_from_string($filename, $data);
             $ziparchive->close();
         }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,18 +18,18 @@
  * Contains a helper class providing util methods for testing.
  *
  * @package    core_message
- * @copyright  2018 Jake Dallimore <markn@moodle.com>
+ * @copyright  2018 Jake Dallimore <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_message\tests;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The helper class providing util methods for testing.
  *
- * @copyright  2018 Jake Dallimore <markn@moodle.com>
+ * @copyright  2018 Jake Dallimore <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper {

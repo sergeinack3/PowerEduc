@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Vault factory.
  *
  * @package    mod_forum
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_forum\local\factories;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_forum\local\factories\entity as entity_factory;
 use mod_forum\local\vaults\author as author_vault;
@@ -35,7 +35,7 @@ use mod_forum\local\vaults\post as post_vault;
 use mod_forum\local\vaults\post_attachment as post_attachment_vault;
 use mod_forum\local\vaults\post_read_receipt_collection as post_read_receipt_collection_vault;
 use file_storage;
-use moodle_database;
+use powereduc_database;
 
 /**
  * Vault factory.
@@ -43,7 +43,7 @@ use moodle_database;
  * See:
  * https://designpatternsphp.readthedocs.io/en/latest/Creational/SimpleFactory/README.html
  *
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class vault {
@@ -51,7 +51,7 @@ class vault {
     private $entityfactory;
     /** @var legacy_data_mapper $legacymapper Entity factory */
     private $legacymapper;
-    /** @var moodle_database $db A moodle database */
+    /** @var powereduc_database $db A powereduc database */
     private $db;
     /** @var file_storage $filestorage A file storage instance */
     private $filestorage;
@@ -59,12 +59,12 @@ class vault {
     /**
      * Constructor.
      *
-     * @param moodle_database $db A moodle database
+     * @param powereduc_database $db A powereduc database
      * @param entity_factory $entityfactory Entity factory
      * @param file_storage $filestorage A file storage instance
      * @param legacy_data_mapper $legacyfactory Datamapper
      */
-    public function __construct(moodle_database $db, entity_factory $entityfactory,
+    public function __construct(powereduc_database $db, entity_factory $entityfactory,
         file_storage $filestorage, legacy_data_mapper $legacyfactory) {
         $this->db = $db;
         $this->entityfactory = $entityfactory;

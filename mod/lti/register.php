@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains all necessary code to launch a Tool Proxy registration
@@ -32,7 +32,7 @@ $tab = optional_param('tab', '', PARAM_ALPHAEXT);
 
 require_login(0, false);
 
-$redirect = new moodle_url('/mod/lti/toolproxies.php', array('tab' => $tab));
+$redirect = new powereduc_url('/mod/lti/toolproxies.php', array('tab' => $tab));
 $redirect = $redirect->out();
 
 require_sesskey();
@@ -49,7 +49,7 @@ foreach ($toolproxies as $key => $toolproxy) {
     }
 }
 
-$redirect = new moodle_url('/mod/lti/toolproxies.php');
+$redirect = new powereduc_url('/mod/lti/toolproxies.php');
 if ($duplicate) {
     redirect($redirect,  get_string('duplicateregurl', 'lti'));
 }
@@ -60,7 +60,7 @@ if (empty($profileservice)) {
     redirect($redirect,  get_string('noprofileservice', 'lti'));
 }
 
-$url = new moodle_url('/mod/lti/register.php', array('id' => $id));
+$url = new powereduc_url('/mod/lti/register.php', array('id' => $id));
 $PAGE->set_url($url);
 
 admin_externalpage_setup('ltitoolproxies');
@@ -77,7 +77,7 @@ echo $OUTPUT->heading(get_string('toolproxyregistration', 'lti'));
 echo $OUTPUT->box_start('generalbox');
 
 // Request the registration request content with an object tag.
-$registration = new moodle_url('/mod/lti/registration.php',
+$registration = new powereduc_url('/mod/lti/registration.php',
     array('id' => $id, 'sesskey' => sesskey()));
 
 echo "<p id=\"id_warning\" style=\"display: none; color: red; font-weight: bold; margin-top: 1em; padding-top: 1em;\">\n";

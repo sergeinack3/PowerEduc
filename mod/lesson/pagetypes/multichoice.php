@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Multichoice
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** Multichoice question type */
 define("LESSON_PAGE_MULTICHOICE",   "3");
@@ -65,7 +65,7 @@ class lesson_page_type_multichoice extends lesson_page {
                 $jumps[] = $this->get_jump_name($answer->jumpto);
             }
         } else {
-            // We get here is the lesson was created on a Moodle 1.9 site and
+            // We get here is the lesson was created on a PowerEduc 1.9 site and
             // the lesson contains question pages without any answers.
             $jumps[] = $this->get_jump_name($this->properties->nextpageid);
         }
@@ -238,7 +238,7 @@ class lesson_page_type_multichoice extends lesson_page {
             }
             $result->answerid = $data->answerid;
             if (!$answer = $DB->get_record("lesson_answers", array("id" => $result->answerid))) {
-                throw new \moodle_exception("Continue: answer record not found");
+                throw new \powereduc_exception("Continue: answer record not found");
             }
             $answer = parent::rewrite_answers_urls($answer);
             if ($this->lesson->jumpto_is_correct($this->properties->id, $answer->jumpto)) {
@@ -454,7 +454,7 @@ class lesson_add_page_form_multichoice extends lesson_add_page_form_base {
     }
 }
 
-class lesson_display_answer_form_multichoice_singleanswer extends moodleform {
+class lesson_display_answer_form_multichoice_singleanswer extends powereducform {
 
     public function definition() {
         global $USER, $OUTPUT;
@@ -515,7 +515,7 @@ class lesson_display_answer_form_multichoice_singleanswer extends moodleform {
 
 }
 
-class lesson_display_answer_form_multichoice_multianswer extends moodleform {
+class lesson_display_answer_form_multichoice_multianswer extends powereducform {
 
     public function definition() {
         global $USER, $OUTPUT;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,12 +17,12 @@
 /**
  * @package    core
  * @subpackage session
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @copyright  2008, 2009 Petr Skoda  {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -82,7 +82,7 @@ function confirm_sesskey($sesskey=NULL) {
  */
 function require_sesskey() {
     if (!confirm_sesskey()) {
-        throw new \moodle_exception('invalidsesskey');
+        throw new \powereduc_exception('invalidsesskey');
     }
 }
 
@@ -90,7 +90,7 @@ function require_sesskey() {
  * Determine wether the secure flag should be set on cookies
  * @return bool
  */
-function is_moodle_cookie_secure() {
+function is_powereduc_cookie_secure() {
     global $CFG;
 
     if (!isset($CFG->cookiesecure)) {
@@ -103,15 +103,15 @@ function is_moodle_cookie_secure() {
 }
 
 /**
- * Sets a moodle cookie with a weakly encrypted username
+ * Sets a powereduc cookie with a weakly encrypted username
  *
  * @param string $username to encrypt and place in a cookie, '' means delete current cookie
  * @return void
  */
-function set_moodle_cookie($username) {
+function set_powereduc_cookie($username) {
     global $CFG;
 
-    if (NO_MOODLE_COOKIES) {
+    if (NO_POWEREDUC_COOKIES) {
         return;
     }
 
@@ -125,9 +125,9 @@ function set_moodle_cookie($username) {
         return;
     }
 
-    $cookiename = 'MOODLEID1_'.$CFG->sessioncookie;
+    $cookiename = 'POWEREDUCID1_'.$CFG->sessioncookie;
 
-    $cookiesecure = is_moodle_cookie_secure();
+    $cookiesecure = is_powereduc_cookie_secure();
 
     // Delete old cookie.
     setcookie($cookiename, '', time() - HOURSECS, $CFG->sessioncookiepath, $CFG->sessioncookiedomain, $cookiesecure, $CFG->cookiehttponly);
@@ -139,14 +139,14 @@ function set_moodle_cookie($username) {
 }
 
 /**
- * Gets a moodle cookie with a weakly encrypted username
+ * Gets a powereduc cookie with a weakly encrypted username
  *
  * @return string username
  */
-function get_moodle_cookie() {
+function get_powereduc_cookie() {
     global $CFG;
 
-    if (NO_MOODLE_COOKIES) {
+    if (NO_POWEREDUC_COOKIES) {
         return '';
     }
 
@@ -154,7 +154,7 @@ function get_moodle_cookie() {
         return '';
     }
 
-    $cookiename = 'MOODLEID1_'.$CFG->sessioncookie;
+    $cookiename = 'POWEREDUCID1_'.$CFG->sessioncookie;
 
     if (empty($_COOKIE[$cookiename])) {
         return '';
@@ -223,7 +223,7 @@ function cron_setup_user($user = null, $course = null, $leavepagealone = false) 
     // TODO MDL-19774 relying on global $PAGE in cron is a bad idea.
     // Temporary hack so that cron does not give fatal errors.
     if (!$leavepagealone) {
-        $PAGE = new moodle_page();
+        $PAGE = new powereduc_page();
         if ($course) {
             $PAGE->set_course($course);
         } else {

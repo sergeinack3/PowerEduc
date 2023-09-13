@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 require_once('../../config.php');
 require_once($CFG->dirroot.'/mod/scorm/locallib.php');
@@ -25,26 +25,26 @@ $delayseconds = 2;  // Delay time before sco launch, used to give time to browse
 
 if (!empty($id)) {
     if (! $cm = get_coursemodule_from_id('scorm', $id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record('course', array('id' => $cm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $scorm = $DB->get_record('scorm', array('id' => $cm->instance))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 } else if (!empty($a)) {
     if (! $scorm = $DB->get_record('scorm', array('id' => $a))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $course = $DB->get_record('course', array('id' => $scorm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $cm = get_coursemodule_from_instance('scorm', $scorm->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 } else {
-    throw new \moodle_exception('missingparameter');
+    throw new \powereduc_exception('missingparameter');
 }
 
 $PAGE->set_url('/mod/scorm/loadSCO.php', array('scoid' => $scoid, 'id' => $cm->id));
@@ -141,7 +141,7 @@ echo html_writer::tag('title', 'LoadSCO');
         else {
             document.body.innerHTML = "<p><?php echo get_string('activityloading', 'scorm');?>" +
                                         "<span id='countdown'><?php echo $delayseconds ?></span> " +
-                                        "<?php echo get_string('numseconds', 'moodle', '');?>. &nbsp; " +
+                                        "<?php echo get_string('numseconds', 'powereduc', '');?>. &nbsp; " +
                                         "<?php echo addslashes($OUTPUT->pix_icon('wait', '', 'scorm')); ?></p>";
             var e = document.getElementById("countdown");
             var cSeconds = parseInt(e.innerHTML);

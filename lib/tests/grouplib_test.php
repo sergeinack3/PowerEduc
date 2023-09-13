@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -779,7 +779,7 @@ class grouplib_test extends \advanced_testcase {
         $role = $DB->get_field("role", "id", array("shortname" => "manager"));
         $generator->enrol_user($user3->id, $course->id, $role);
         // Make sure the user has the capability.
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $role, $coursecontext->id);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $role, $coursecontext->id);
 
         // No groups , not forced.
         $result = groups_group_visible($group1->id, $course, null, $user1->id);
@@ -1344,7 +1344,7 @@ class grouplib_test extends \advanced_testcase {
         $role = $DB->get_field("role", "id", array("shortname" => "manager"));
         $generator->enrol_user($user3->id, $course->id, $role);
         // Make sure the user has the capability.
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $role, $coursecontext->id);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $role, $coursecontext->id);
 
         // Normal users in different groups.
         $this->setUser($user1);

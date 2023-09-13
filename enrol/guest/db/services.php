@@ -31,6 +31,6 @@ $functions = array(
         'methodname'  => 'get_instance_info',
         'description' => 'Return guest enrolment instance information.',
         'type'        => 'read',
-        'services'    => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'    => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 );

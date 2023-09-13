@@ -24,7 +24,7 @@
 
 namespace atto_backcolor\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_backcolor implementing null_provider.

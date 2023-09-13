@@ -139,7 +139,7 @@ date_default_timezone_set(@date_default_timezone_get());
 @ini_set('memory_limit', '128M');
 
 /** Used by library scripts to check they are being called by Moodle */
-define('MOODLE_INTERNAL', true);
+define('POWEREDUC_INTERNAL', true);
 
 // Disables all caching.
 define('CACHE_DISABLE_ALL', true);

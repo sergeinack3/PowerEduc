@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../../lib/behat/behat_base.php');
 require_once(__DIR__ . '/../../../lib/behat/behat_field_manager.php');
@@ -118,7 +118,7 @@ class behat_forms extends behat_base {
     }
 
     /**
-     * Expands all moodleform's fields, including collapsed fieldsets and advanced fields if they are present.
+     * Expands all powereducform's fields, including collapsed fieldsets and advanced fields if they are present.
      * @Given /^I expand all fieldsets$/
      */
     public function i_expand_all_fieldsets() {
@@ -126,7 +126,7 @@ class behat_forms extends behat_base {
     }
 
     /**
-     * Expands all moodle form fieldsets if they exists.
+     * Expands all powereduc form fieldsets if they exists.
      *
      * Externalized from i_expand_all_fields to call it from
      * other form-related steps without having to use steps-group calls.

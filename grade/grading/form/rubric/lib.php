@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/grade/grading/form/lib.php');
 require_once($CFG->dirroot.'/lib/filelib.php');
@@ -174,7 +174,7 @@ class gradingform_rubric_controller extends gradingform_controller {
             $criterionmaxscore = null;
             if (preg_match('/^NEWID\d+$/', $id)) {
                 // insert criterion into DB
-                $data = array('definitionid' => $this->definition->id, 'descriptionformat' => FORMAT_MOODLE); // TODO MDL-31235 format is not supported yet
+                $data = array('definitionid' => $this->definition->id, 'descriptionformat' => FORMAT_POWEREDUC); // TODO MDL-31235 format is not supported yet
                 foreach ($criteriafields as $key) {
                     if (array_key_exists($key, $criterion)) {
                         $data[$key] = $criterion[$key];
@@ -219,7 +219,7 @@ class gradingform_rubric_controller extends gradingform_controller {
                 }
                 if (preg_match('/^NEWID\d+$/', $levelid)) {
                     // insert level into DB
-                    $data = array('criterionid' => $id, 'definitionformat' => FORMAT_MOODLE); // TODO MDL-31235 format is not supported yet
+                    $data = array('criterionid' => $id, 'definitionformat' => FORMAT_POWEREDUC); // TODO MDL-31235 format is not supported yet
                     foreach ($levelfields as $key) {
                         if (array_key_exists($key, $level)) {
                             $data[$key] = $level[$key];
@@ -860,7 +860,7 @@ class gradingform_rubric_instance extends gradingform_instance {
         foreach ($data['criteria'] as $criterionid => $record) {
             if (!array_key_exists($criterionid, $currentgrade['criteria'])) {
                 $newrecord = array('instanceid' => $this->get_id(), 'criterionid' => $criterionid,
-                    'levelid' => $record['levelid'], 'remarkformat' => FORMAT_MOODLE);
+                    'levelid' => $record['levelid'], 'remarkformat' => FORMAT_POWEREDUC);
                 if (isset($record['remark'])) {
                     $newrecord['remark'] = $record['remark'];
                 }

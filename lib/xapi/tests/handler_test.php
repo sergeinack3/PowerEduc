@@ -32,7 +32,7 @@ use core_xapi\local\statement\item_activity;
 use advanced_testcase;
 use core\event\base;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Contains test cases for testing xAPI statement handler base methods.

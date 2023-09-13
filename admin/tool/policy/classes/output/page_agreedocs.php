@@ -25,7 +25,7 @@
 
 namespace tool_policy\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context_system;
 use core\output\notification;

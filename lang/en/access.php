@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'access', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'access', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   core_access
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}

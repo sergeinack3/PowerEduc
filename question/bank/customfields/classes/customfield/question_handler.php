@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_customfields\customfield;
 
@@ -175,10 +175,10 @@ class question_handler extends \core_customfield\handler {
     /**
      * URL for configuration page for the fields for the question custom fields.
      *
-     * @return \moodle_url The URL to configure custom fields for this component
+     * @return \powereduc_url The URL to configure custom fields for this component
      */
-    public function get_configuration_url() : \moodle_url {
-        return new \moodle_url('/question/customfield.php');
+    public function get_configuration_url() : \powereduc_url {
+        return new \powereduc_url('/question/customfield.php');
     }
 
     /**
@@ -273,9 +273,9 @@ class question_handler extends \core_customfield\handler {
     /**
      * Add custom controls to the field configuration form that will be saved.
      *
-     * @param \MoodleQuickForm $mform The form to add the custom fields to.
+     * @param \PowerEducQuickForm $mform The form to add the custom fields to.
      */
-    public function config_form_definition(\MoodleQuickForm $mform): void {
+    public function config_form_definition(\PowerEducQuickForm $mform): void {
         $mform->addElement('header', 'question_handler_header',
                 get_string('customfieldsettings', 'qbank_customfields'));
         $mform->setExpanded('question_handler_header', true);

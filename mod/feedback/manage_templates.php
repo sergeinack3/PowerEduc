@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,11 +43,11 @@ $params = ['id' => $id];
 if ($mode) {
     $params += ['mode' => $mode];
 }
-$url = new moodle_url('/mod/feedback/manage_templates.php', $params);
+$url = new powereduc_url('/mod/feedback/manage_templates.php', $params);
 if ($mode == 'manage') {
     navigation_node::override_active_url($url);
 } else {
-    navigation_node::override_active_url(new moodle_url('/mod/feedback/view.php', $params));
+    navigation_node::override_active_url(new powereduc_url('/mod/feedback/view.php', $params));
 }
 
 $PAGE->set_url($url);
@@ -68,7 +68,7 @@ if ($templateid) {
     }
 
     feedback_delete_template($template);
-    $successurl = new moodle_url('/mod/feedback/manage_templates.php', ['id' => $id]);
+    $successurl = new powereduc_url('/mod/feedback/manage_templates.php', ['id' => $id]);
     redirect($url, get_string('template_deleted', 'feedback'), null, \core\output\notification::NOTIFY_SUCCESS);
 }
 $PAGE->activityheader->set_attrs([
@@ -88,7 +88,7 @@ $templates = feedback_get_template_list($course, 'own');
 echo $OUTPUT->box_start('coursetemplates');
 echo $OUTPUT->heading(get_string('course'), 4);
 
-$baseurl = new moodle_url('/mod/feedback/use_templ.php', $params);
+$baseurl = new powereduc_url('/mod/feedback/use_templ.php', $params);
 $tablecourse = new mod_feedback_templates_table('feedback_template_course_table', $baseurl, $mode);
 $tablecourse->display($templates);
 echo $OUTPUT->box_end();

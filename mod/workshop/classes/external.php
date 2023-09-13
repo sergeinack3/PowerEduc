@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Workshop external API
  *
  * @package    mod_workshop
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.4
+ * @since      PowerEduc 3.4
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 require_once($CFG->dirroot . '/mod/workshop/locallib.php');
@@ -38,9 +38,9 @@ use mod_workshop\external\assessment_exporter;
  *
  * @package    mod_workshop
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.4
+ * @since      PowerEduc 3.4
  */
 class mod_workshop_external extends external_api {
 
@@ -48,7 +48,7 @@ class mod_workshop_external extends external_api {
      * Describes the parameters for get_workshops_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_workshops_by_courses_parameters() {
         return new external_function_parameters (
@@ -66,7 +66,7 @@ class mod_workshop_external extends external_api {
      *
      * @param array $courseids course ids
      * @return array of warnings and workshops
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_workshops_by_courses($courseids = array()) {
         global $PAGE;
@@ -117,7 +117,7 @@ class mod_workshop_external extends external_api {
      * Describes the get_workshops_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_workshops_by_courses_returns() {
         return new external_single_structure(
@@ -135,7 +135,7 @@ class mod_workshop_external extends external_api {
      *
      * @param int $workshopid workshop instance id
      * @return array array containing the workshop object, course, context and course module objects
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     protected static function validate_workshop($workshopid) {
         global $DB, $USER;
@@ -157,7 +157,7 @@ class mod_workshop_external extends external_api {
      * Describes the parameters for get_workshop_access_information.
      *
      * @return external_external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_workshop_access_information_parameters() {
         return new external_function_parameters (
@@ -172,8 +172,8 @@ class mod_workshop_external extends external_api {
      *
      * @param int $workshopid workshop instance id
      * @return array of warnings and the access information
-     * @since Moodle 3.4
-     * @throws  moodle_exception
+     * @since PowerEduc 3.4
+     * @throws  powereduc_exception
      */
     public static function get_workshop_access_information($workshopid) {
         global $USER;
@@ -210,7 +210,7 @@ class mod_workshop_external extends external_api {
      * Describes the get_workshop_access_information return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_workshop_access_information_returns() {
 
@@ -246,7 +246,7 @@ class mod_workshop_external extends external_api {
      * Describes the parameters for get_user_plan.
      *
      * @return external_external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_user_plan_parameters() {
         return new external_function_parameters (
@@ -263,8 +263,8 @@ class mod_workshop_external extends external_api {
      * @param int $workshopid workshop instance id
      * @param int $userid user id
      * @return array of warnings and the user plan
-     * @since Moodle 3.4
-     * @throws  moodle_exception
+     * @since PowerEduc 3.4
+     * @throws  powereduc_exception
      */
     public static function get_user_plan($workshopid, $userid = 0) {
         global $USER;
@@ -281,11 +281,11 @@ class mod_workshop_external extends external_api {
         if (empty($params['userid']) || $params['userid'] == $USER->id) {
             $userid = $USER->id;
         } else {
-            require_capability('moodle/course:manageactivities', $context);
+            require_capability('powereduc/course:manageactivities', $context);
             $user = core_user::get_user($params['userid'], '*', MUST_EXIST);
             core_user::require_active_user($user);
             if (!$workshop->check_group_membership($user->id)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
             $userid = $user->id;
         }
@@ -298,13 +298,13 @@ class mod_workshop_external extends external_api {
             $userplan['phases'][$phasecode] = (array) $phase;
             foreach ($userplan['phases'][$phasecode]['tasks'] as $taskcode => $task) {
                 $task->code = $taskcode;
-                if ($task->link instanceof moodle_url) {
+                if ($task->link instanceof powereduc_url) {
                     $task->link = $task->link->out(false);
                 }
                 $userplan['phases'][$phasecode]['tasks'][$taskcode] = (array) $task;
             }
             foreach ($userplan['phases'][$phasecode]['actions'] as $actioncode => $action) {
-                if ($action->url instanceof moodle_url) {
+                if ($action->url instanceof powereduc_url) {
                     $action->url = $action->url->out(false);
                 }
                 $userplan['phases'][$phasecode]['actions'][$actioncode] = (array) $action;
@@ -320,7 +320,7 @@ class mod_workshop_external extends external_api {
      * Describes the get_user_plan return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_user_plan_returns() {
         return new external_single_structure(
@@ -380,7 +380,7 @@ class mod_workshop_external extends external_api {
      * Describes the parameters for view_workshop.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function view_workshop_parameters() {
         return new external_function_parameters (
@@ -395,8 +395,8 @@ class mod_workshop_external extends external_api {
      *
      * @param int $workshopid workshop instance id
      * @return array of warnings and status result
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function view_workshop($workshopid) {
 
@@ -419,7 +419,7 @@ class mod_workshop_external extends external_api {
      * Describes the view_workshop return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function view_workshop_returns() {
         return new external_single_structure(
@@ -434,14 +434,14 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function add_submission_parameters() {
         return new external_function_parameters(array(
             'workshopid' => new external_value(PARAM_INT, 'Workshop id'),
             'title' => new external_value(PARAM_TEXT, 'Submission title'),
             'content' => new external_value(PARAM_RAW, 'Submission text content', VALUE_DEFAULT, ''),
-            'contentformat' => new external_value(PARAM_INT, 'The format used for the content', VALUE_DEFAULT, FORMAT_MOODLE),
+            'contentformat' => new external_value(PARAM_INT, 'The format used for the content', VALUE_DEFAULT, FORMAT_POWEREDUC),
             'inlineattachmentsid' => new external_value(PARAM_INT, 'The draft file area id for inline attachments in the content',
                 VALUE_DEFAULT, 0),
             'attachmentsid' => new external_value(PARAM_INT, 'The draft file area id for attachments', VALUE_DEFAULT, 0),
@@ -458,10 +458,10 @@ class mod_workshop_external extends external_api {
      * @param int $inlineattachmentsid  the draft file area id for inline attachments in the content
      * @param int $attachmentsid        the draft file area id for attachments
      * @return array Containing the new created submission id and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
-    public static function add_submission($workshopid, $title, $content = '', $contentformat = FORMAT_MOODLE,
+    public static function add_submission($workshopid, $title, $content = '', $contentformat = FORMAT_POWEREDUC,
             $inlineattachmentsid = 0, $attachmentsid = 0) {
         global $USER;
 
@@ -483,7 +483,7 @@ class mod_workshop_external extends external_api {
         $canaddsubmission = $workshop->creating_submission_allowed($USER->id);
         $canaddsubmission = $canaddsubmission && $workshop->check_examples_assessed_before_submission($USER->id);
         if (!$canaddsubmission) {
-            throw new moodle_exception('nopermissions', 'error', '', 'add submission');
+            throw new powereduc_exception('nopermissions', 'error', '', 'add submission');
         }
 
         // Prepare the submission object.
@@ -500,7 +500,7 @@ class mod_workshop_external extends external_api {
         $submission->attachment_filemanager = $params['attachmentsid'];
 
         if (empty($submission->title)) {
-            throw new moodle_exception('errorinvalidparam', 'webservice', '', 'title');
+            throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'title');
         }
 
         $errors = $workshop->validate_submission_data((array) $submission);
@@ -533,7 +533,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function add_submission_returns() {
         return new external_single_structure(array(
@@ -547,14 +547,14 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function update_submission_parameters() {
         return new external_function_parameters(array(
             'submissionid' => new external_value(PARAM_INT, 'Submission id'),
             'title' => new external_value(PARAM_TEXT, 'Submission title'),
             'content' => new external_value(PARAM_RAW, 'Submission text content', VALUE_DEFAULT, ''),
-            'contentformat' => new external_value(PARAM_INT, 'The format used for the content', VALUE_DEFAULT, FORMAT_MOODLE),
+            'contentformat' => new external_value(PARAM_INT, 'The format used for the content', VALUE_DEFAULT, FORMAT_POWEREDUC),
             'inlineattachmentsid' => new external_value(PARAM_INT, 'The draft file area id for inline attachments in the content',
                 VALUE_DEFAULT, 0),
             'attachmentsid' => new external_value(PARAM_INT, 'The draft file area id for attachments', VALUE_DEFAULT, 0),
@@ -572,10 +572,10 @@ class mod_workshop_external extends external_api {
      * @param int $inlineattachmentsid  the draft file area id for inline attachments in the content
      * @param int $attachmentsid        the draft file area id for attachments
      * @return array whether the submission was updated and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
-    public static function update_submission($submissionid, $title, $content = '', $contentformat = FORMAT_MOODLE,
+    public static function update_submission($submissionid, $title, $content = '', $contentformat = FORMAT_POWEREDUC,
             $inlineattachmentsid = 0, $attachmentsid = 0) {
         global $USER, $DB;
 
@@ -599,13 +599,13 @@ class mod_workshop_external extends external_api {
         $canupdatesubmission = $canupdatesubmission && $workshop->modifying_submission_allowed($USER->id);
         $canupdatesubmission = $canupdatesubmission && $workshop->check_examples_assessed_before_submission($USER->id);
         if (!$canupdatesubmission) {
-            throw new moodle_exception('nopermissions', 'error', '', 'update submission');
+            throw new powereduc_exception('nopermissions', 'error', '', 'update submission');
         }
 
         // Prepare the submission object.
         $submission->title = trim($params['title']);
         if (empty($submission->title)) {
-            throw new moodle_exception('errorinvalidparam', 'webservice', '', 'title');
+            throw new powereduc_exception('errorinvalidparam', 'webservice', '', 'title');
         }
         $submission->content_editor = array(
             'text' => $params['content'],
@@ -641,7 +641,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function update_submission_returns() {
         return new external_single_structure(array(
@@ -654,7 +654,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function delete_submission_parameters() {
         return new external_function_parameters(
@@ -670,8 +670,8 @@ class mod_workshop_external extends external_api {
      *
      * @param int $submissionid the submission id.
      * @return array containing the result status and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function delete_submission($submissionid) {
         global $USER, $DB;
@@ -691,7 +691,7 @@ class mod_workshop_external extends external_api {
             $candeletesubmission = $candeletesubmission && $workshop->modifying_submission_allowed($USER->id);
             $candeletesubmission = $candeletesubmission && count($workshop->get_assessments_of_submission($submission->id)) == 0;
             if (!$candeletesubmission) {
-                throw new moodle_exception('nopermissions', 'error', '', 'delete submission');
+                throw new powereduc_exception('nopermissions', 'error', '', 'delete submission');
             }
         }
 
@@ -707,7 +707,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function return value.
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function delete_submission_returns() {
         return new external_single_structure(array(
@@ -725,7 +725,7 @@ class mod_workshop_external extends external_api {
      * @param  bool $canviewauthornames whether the user has the capability mod/workshop:vviewauthornames on
      * @param  bool $canviewallsubmissions whether the user has the capability mod/workshop:viewallsubmissions on
      * @return stdClass object with the submission data filtered
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     protected static function prepare_submission_for_external($submission, workshop $workshop, $canviewauthorpublished = null,
             $canviewauthornames = null, $canviewallsubmissions = null) {
@@ -769,7 +769,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_submissions_parameters() {
         return new external_function_parameters(
@@ -796,8 +796,8 @@ class mod_workshop_external extends external_api {
      * @param int $page             page of records to return
      * @param int $perpage          number of records to return per page
      * @return array of warnings and the entries
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_submissions($workshopid, $userid = 0, $groupid = 0, $page = 0, $perpage = 0) {
         global $PAGE, $USER;
@@ -815,7 +815,7 @@ class mod_workshop_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0 -> all groups).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -826,7 +826,7 @@ class mod_workshop_external extends external_api {
             $user = core_user::get_user($params['userid'], '*', MUST_EXIST);
             core_user::require_active_user($user);
             if (!$workshop->check_group_membership($user->id)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         }
 
@@ -871,7 +871,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_submissions_returns() {
         return new external_single_structure(
@@ -893,7 +893,7 @@ class mod_workshop_external extends external_api {
      * @param  stdClass   $submission submission object
      * @param  workshop   $workshop     workshop instance
      * @return void
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     protected static function validate_submission($submission, workshop $workshop) {
         global $USER;
@@ -910,10 +910,10 @@ class mod_workshop_external extends external_api {
             // Here we should check if the user share group.
             if ($submission->authorid != $USER->id &&
                     !groups_user_groups_visible($workshop->course, $submission->authorid, $workshop->cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
-            throw new moodle_exception('nopermissions', 'error', '', 'view submission');
+            throw new powereduc_exception('nopermissions', 'error', '', 'view submission');
         }
     }
 
@@ -921,7 +921,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_submission_parameters() {
         return new external_function_parameters(
@@ -937,8 +937,8 @@ class mod_workshop_external extends external_api {
      *
      * @param int $submissionid the submission id
      * @return array containing the submission and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_submission($submissionid) {
         global $USER, $DB, $PAGE;
@@ -966,7 +966,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_submission_returns() {
         return new external_single_structure(
@@ -983,7 +983,7 @@ class mod_workshop_external extends external_api {
      * @param  stdClass   $submission submission object
      * @param  workshop   $workshop     workshop instance
      * @return void
-     * @since  Moodle 3.4
+     * @since  PowerEduc 3.4
      */
     protected static function check_view_submission_assessments($submission, workshop $workshop) {
         global $USER;
@@ -996,10 +996,10 @@ class mod_workshop_external extends external_api {
             // Here we should check if the user share group.
             if ($submission->authorid != $USER->id &&
                     !groups_user_groups_visible($workshop->course, $submission->authorid, $workshop->cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
-            throw new moodle_exception('nopermissions', 'error', '', 'view assessment');
+            throw new powereduc_exception('nopermissions', 'error', '', 'view assessment');
         }
     }
 
@@ -1009,7 +1009,7 @@ class mod_workshop_external extends external_api {
      * @param  stdClass $assessment the assessment data
      * @param  workshop $workshop   the workshop class
      * @return stdClass object with the assessment data filtered or null if is not viewable yet
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     protected static function prepare_assessment_for_external($assessment, workshop $workshop) {
         global $USER;
@@ -1066,7 +1066,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_submission_assessments_parameters() {
         return new external_function_parameters(
@@ -1082,8 +1082,8 @@ class mod_workshop_external extends external_api {
      *
      * @param int $submissionid the submission id
      * @return array containing the assessments and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_submission_assessments($submissionid) {
         global $USER, $DB, $PAGE;
@@ -1119,7 +1119,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_submission_assessments_returns() {
         return new external_single_structure(
@@ -1136,7 +1136,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_assessment_parameters() {
         return new external_function_parameters(
@@ -1152,8 +1152,8 @@ class mod_workshop_external extends external_api {
      *
      * @param int $assessmentid the assessment id
      * @return array containing the assessment and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_assessment($assessmentid) {
         global $DB, $PAGE;
@@ -1172,7 +1172,7 @@ class mod_workshop_external extends external_api {
         $assessment = $workshop->get_assessment_by_id($assessment->id);
         $assessment = self::prepare_assessment_for_external($assessment, $workshop);
         if (empty($assessment)) {
-            throw new moodle_exception('nopermissions', 'error', '', 'view assessment');
+            throw new powereduc_exception('nopermissions', 'error', '', 'view assessment');
         }
         $related = array('context' => $context);
         $exporter = new assessment_exporter($assessment, $related);
@@ -1187,7 +1187,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_assessment_returns() {
         return new external_single_structure(
@@ -1202,7 +1202,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_assessment_form_definition_parameters() {
         return new external_function_parameters(
@@ -1220,8 +1220,8 @@ class mod_workshop_external extends external_api {
      * @param int $assessmentid the assessment id
      * @param string $mode the form mode (assessment or preview)
      * @return array containing the assessment and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_assessment_form_definition($assessmentid, $mode = 'assessment') {
         global $DB, $USER;
@@ -1296,7 +1296,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_assessment_form_definition_returns() {
         return new external_single_structure(
@@ -1347,7 +1347,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_reviewer_assessments_parameters() {
         return new external_function_parameters(
@@ -1366,8 +1366,8 @@ class mod_workshop_external extends external_api {
      * @param int $workshopid   the workshop instance id
      * @param int $userid       the reviewer user id
      * @return array containing the user assessments and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_reviewer_assessments($workshopid, $userid = 0) {
         global $USER, $DB, $PAGE;
@@ -1385,17 +1385,17 @@ class mod_workshop_external extends external_api {
             $userid = $USER->id;
             list($assessed, $notice) = $workshop->check_examples_assessed_before_assessment($userid);
             if (!$assessed) {
-                throw new moodle_exception($notice, 'mod_workshop');
+                throw new powereduc_exception($notice, 'mod_workshop');
             }
             if ($workshop->phase < workshop::PHASE_ASSESSMENT) {    // Can view assessments only in assessment phase onwards.
-                throw new moodle_exception('nopermissions', 'error', '', 'view assessments');
+                throw new powereduc_exception('nopermissions', 'error', '', 'view assessments');
             }
         } else {
             require_capability('mod/workshop:viewallassessments', $context);
             $user = core_user::get_user($params['userid'], '*', MUST_EXIST);
             core_user::require_active_user($user);
             if (!$workshop->check_group_membership($user->id)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
             $userid = $user->id;
         }
@@ -1422,7 +1422,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_reviewer_assessments_returns() {
         return new external_single_structure(
@@ -1439,7 +1439,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function update_assessment_parameters() {
         return new external_function_parameters(
@@ -1471,8 +1471,8 @@ class mod_workshop_external extends external_api {
      * @param int $assessmentid the assessment id
      * @param array $data the assessment data
      * @return array indicates if the assessment was updated, the new raw grade and possible warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function update_assessment($assessmentid, $data) {
         global $DB, $USER;
@@ -1550,7 +1550,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function update_assessment_returns() {
         return new external_single_structure(
@@ -1567,7 +1567,7 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_grades_parameters() {
         return new external_function_parameters (
@@ -1584,8 +1584,8 @@ class mod_workshop_external extends external_api {
      * @param int $workshopid workshop instance id
      * @param int $userid user id
      * @return array of warnings and the user plan
-     * @since Moodle 3.4
-     * @throws  moodle_exception
+     * @since PowerEduc 3.4
+     * @throws  powereduc_exception
      */
     public static function get_grades($workshopid, $userid = 0) {
         global $USER;
@@ -1607,7 +1607,7 @@ class mod_workshop_external extends external_api {
             $user = core_user::get_user($params['userid'], '*', MUST_EXIST);
             core_user::require_active_user($user);
             if (!$workshop->check_group_membership($user->id)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
             $userid = $user->id;
         }
@@ -1639,7 +1639,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_grades_returns() {
         return new external_single_structure(
@@ -1659,14 +1659,14 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function evaluate_assessment_parameters() {
         return new external_function_parameters(
             array(
                 'assessmentid' => new external_value(PARAM_INT, 'Assessment id.'),
                 'feedbacktext' => new external_value(PARAM_RAW, 'The feedback for the reviewer.', VALUE_DEFAULT, ''),
-                'feedbackformat' => new external_value(PARAM_INT, 'The feedback format for text.', VALUE_DEFAULT, FORMAT_MOODLE),
+                'feedbackformat' => new external_value(PARAM_INT, 'The feedback format for text.', VALUE_DEFAULT, FORMAT_POWEREDUC),
                 'weight' => new external_value(PARAM_INT, 'The new weight for the assessment.', VALUE_DEFAULT, 1),
                 'gradinggradeover' => new external_value(PARAM_ALPHANUMEXT, 'The new grading grade.', VALUE_DEFAULT, ''),
             )
@@ -1683,10 +1683,10 @@ class mod_workshop_external extends external_api {
      * @param int $weight the new weight for the assessment
      * @param mixed $gradinggradeover the new grading grade (empty for no overriding the grade)
      * @return array containing the status and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
-    public static function evaluate_assessment($assessmentid, $feedbacktext = '', $feedbackformat = FORMAT_MOODLE, $weight = 1,
+    public static function evaluate_assessment($assessmentid, $feedbacktext = '', $feedbackformat = FORMAT_POWEREDUC, $weight = 1,
             $gradinggradeover = '') {
         global $DB;
 
@@ -1712,7 +1712,7 @@ class mod_workshop_external extends external_api {
         $cansetassessmentweight = has_capability('mod/workshop:allocate', $context);
         $canoverridegrades      = has_capability('mod/workshop:overridegrades', $context);
         if (!$canoverridegrades && !$cansetassessmentweight) {
-            throw new moodle_exception('nopermissions', 'error', '', 'evaluate assessments');
+            throw new powereduc_exception('nopermissions', 'error', '', 'evaluate assessments');
         }
 
         // Process data.
@@ -1771,7 +1771,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function evaluate_assessment_returns() {
         return new external_single_structure(
@@ -1786,7 +1786,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_grades_report_parameters() {
         return new external_function_parameters(
@@ -1813,8 +1813,8 @@ class mod_workshop_external extends external_api {
      * @param int $page             page of records to return
      * @param int $perpage          number of records to return per page
      * @return array of warnings and the report data
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function get_grades_report($workshopid, $groupid = 0, $sortby = 'lastname', $sortdirection = 'ASC',
             $page = 0, $perpage = 0) {
@@ -1846,7 +1846,7 @@ class mod_workshop_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -1854,7 +1854,7 @@ class mod_workshop_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0 -> all groups).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -1894,14 +1894,14 @@ class mod_workshop_external extends external_api {
                 );
             }
         }
-        throw new moodle_exception('nothingfound', 'workshop');
+        throw new powereduc_exception('nothingfound', 'workshop');
     }
 
     /**
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function get_grades_report_returns() {
 
@@ -1957,7 +1957,7 @@ class mod_workshop_external extends external_api {
      * Describes the parameters for view_submission.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function view_submission_parameters() {
         return new external_function_parameters (
@@ -1972,8 +1972,8 @@ class mod_workshop_external extends external_api {
      *
      * @param int $submissionid submission id
      * @return array of warnings and status result
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
     public static function view_submission($submissionid) {
         global $DB;
@@ -2000,7 +2000,7 @@ class mod_workshop_external extends external_api {
      * Describes the view_submission return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function view_submission_returns() {
         return new external_single_structure(
@@ -2015,14 +2015,14 @@ class mod_workshop_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function evaluate_submission_parameters() {
         return new external_function_parameters(
             array(
                 'submissionid' => new external_value(PARAM_INT, 'submission id.'),
                 'feedbacktext' => new external_value(PARAM_RAW, 'The feedback for the author.', VALUE_DEFAULT, ''),
-                'feedbackformat' => new external_value(PARAM_INT, 'The feedback format for text.', VALUE_DEFAULT, FORMAT_MOODLE),
+                'feedbackformat' => new external_value(PARAM_INT, 'The feedback format for text.', VALUE_DEFAULT, FORMAT_POWEREDUC),
                 'published' => new external_value(PARAM_BOOL, 'Publish the submission for others?.', VALUE_DEFAULT, false),
                 'gradeover' => new external_value(PARAM_ALPHANUMEXT, 'The new submission grade.', VALUE_DEFAULT, ''),
             )
@@ -2039,10 +2039,10 @@ class mod_workshop_external extends external_api {
      * @param bool $published whether to publish the submission for other users
      * @param mixed $gradeover the new submission grade (empty for no overriding the grade)
      * @return array containing the status and warnings.
-     * @since Moodle 3.4
-     * @throws moodle_exception
+     * @since PowerEduc 3.4
+     * @throws powereduc_exception
      */
-    public static function evaluate_submission($submissionid, $feedbacktext = '', $feedbackformat = FORMAT_MOODLE, $published = 1,
+    public static function evaluate_submission($submissionid, $feedbacktext = '', $feedbackformat = FORMAT_POWEREDUC, $published = 1,
             $gradeover = '') {
         global $DB;
 
@@ -2069,7 +2069,7 @@ class mod_workshop_external extends external_api {
             has_capability('mod/workshop:overridegrades', $context));
 
         if (!$canpublish && !$canoverride) {
-            throw new moodle_exception('nopermissions', 'error', '', 'evaluate submission');
+            throw new powereduc_exception('nopermissions', 'error', '', 'evaluate submission');
         }
 
         // Process data.
@@ -2121,7 +2121,7 @@ class mod_workshop_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.4
+     * @since PowerEduc 3.4
      */
     public static function evaluate_submission_returns() {
         return new external_single_structure(

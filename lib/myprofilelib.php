@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Defines core nodes for my profile navigation tree.
@@ -63,7 +63,7 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
     // Full profile node.
     if (!empty($course)) {
         if (user_can_view_profile($user, null, $usercontext)) {
-            $url = new moodle_url('/user/profile.php', array('id' => $user->id));
+            $url = new powereduc_url('/user/profile.php', array('id' => $user->id));
             $node = new core_user\output\myprofile\node('miscellaneous', 'fullprofile', get_string('fullprofile'), null, $url);
             $tree->add_node($node);
         }
@@ -71,15 +71,15 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
 
     // Edit profile.
     if (isloggedin() && !isguestuser($user) && !is_mnet_remote_user($user)) {
-        if (($iscurrentuser || is_siteadmin($USER) || !is_siteadmin($user)) && has_capability('moodle/user:update',
+        if (($iscurrentuser || is_siteadmin($USER) || !is_siteadmin($user)) && has_capability('powereduc/user:update',
                     $systemcontext)) {
-            $url = new moodle_url('/user/editadvanced.php', array('id' => $user->id, 'course' => $courseid,
+            $url = new powereduc_url('/user/editadvanced.php', array('id' => $user->id, 'course' => $courseid,
                 'returnto' => 'profile'));
             $node = new core_user\output\myprofile\node('contact', 'editprofile', get_string('editmyprofile'), null, $url,
                 null, null, 'editprofile');
             $tree->add_node($node);
-        } else if ((has_capability('moodle/user:editprofile', $usercontext) && !is_siteadmin($user))
-                   || ($iscurrentuser && has_capability('moodle/user:editownprofile', $systemcontext))) {
+        } else if ((has_capability('powereduc/user:editprofile', $usercontext) && !is_siteadmin($user))
+                   || ($iscurrentuser && has_capability('powereduc/user:editownprofile', $systemcontext))) {
             $userauthplugin = false;
             if (!empty($user->auth)) {
                 $userauthplugin = get_auth_plugin($user->auth);
@@ -88,9 +88,9 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
                 $url = $userauthplugin->edit_profile_url();
                 if (empty($url)) {
                     if (empty($course)) {
-                        $url = new moodle_url('/user/edit.php', array('id' => $user->id, 'returnto' => 'profile'));
+                        $url = new powereduc_url('/user/edit.php', array('id' => $user->id, 'returnto' => 'profile'));
                     } else {
-                        $url = new moodle_url('/user/edit.php', array('id' => $user->id, 'course' => $course->id,
+                        $url = new powereduc_url('/user/edit.php', array('id' => $user->id, 'course' => $course->id,
                             'returnto' => 'profile'));
                     }
                 }
@@ -103,24 +103,24 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
 
     // Preference page.
     if (!$iscurrentuser && $PAGE->settingsnav->can_view_user_preferences($user->id)) {
-        $url = new moodle_url('/user/preferences.php', array('userid' => $user->id));
-        $title = get_string('preferences', 'moodle');
+        $url = new powereduc_url('/user/preferences.php', array('userid' => $user->id));
+        $title = get_string('preferences', 'powereduc');
         $node = new core_user\output\myprofile\node('administration', 'preferences', $title, null, $url);
         $tree->add_node($node);
     }
 
     // Login as ...
     if (!$user->deleted && !$iscurrentuser &&
-                !\core\session\manager::is_loggedinas() && has_capability('moodle/user:loginas',
+                !\core\session\manager::is_loggedinas() && has_capability('powereduc/user:loginas',
                 $courseorsystemcontext) && !is_siteadmin($user->id)) {
-        $url = new moodle_url('/course/loginas.php',
+        $url = new powereduc_url('/course/loginas.php',
                 array('id' => $courseid, 'user' => $user->id, 'sesskey' => sesskey()));
         $node = new  core_user\output\myprofile\node('administration', 'loginas', get_string('loginas'), null, $url);
         $tree->add_node($node);
     }
 
     // Contact details.
-    if (has_capability('moodle/user:viewhiddendetails', $courseorusercontext)) {
+    if (has_capability('powereduc/user:viewhiddendetails', $courseorusercontext)) {
         $hiddenfields = array();
     } else {
         $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
@@ -150,7 +150,7 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
         or (!isset($hiddenfields['email']) and (
             $user->maildisplay == core_user::MAILDISPLAY_EVERYONE
             or ($user->maildisplay == core_user::MAILDISPLAY_COURSE_MEMBERS_ONLY and enrol_sharing_course($user, $USER))
-            or has_capability('moodle/course:useremail', $courseorusercontext) // TODO: Deprecate/remove for MDL-37479.
+            or has_capability('powereduc/course:useremail', $courseorusercontext) // TODO: Deprecate/remove for MDL-37479.
         ))
         or (isset($identityfields['email']))
        ) {
@@ -169,9 +169,9 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
         $tree->add_node($node);
     }
 
-    if (!isset($hiddenfields['moodlenetprofile']) && $user->moodlenetprofile) {
-        $node = new core_user\output\myprofile\node('contact', 'moodlenetprofile', get_string('moodlenetprofile', 'user'), null,
-                null, $user->moodlenetprofile);
+    if (!isset($hiddenfields['powereducnetprofile']) && $user->powereducnetprofile) {
+        $node = new core_user\output\myprofile\node('contact', 'powereducnetprofile', get_string('powereducnetprofile', 'user'), null,
+                null, $user->powereducnetprofile);
         $tree->add_node($node);
     }
 
@@ -244,7 +244,7 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
                     if (!isset($course) || $mycourse->id != $course->id) {
                         $linkattributes = null;
                         if ($mycourse->visible == 0) {
-                            if (!has_capability('moodle/course:viewhiddencourses', $ccontext)) {
+                            if (!has_capability('powereduc/course:viewhiddencourses', $ccontext)) {
                                 continue;
                             }
                             $linkattributes['class'] = 'dimmed';
@@ -253,7 +253,7 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
                         if ($showallcourses) {
                             $params['showallcourses'] = 1;
                         }
-                        $url = new moodle_url('/user/view.php', $params);
+                        $url = new powereduc_url('/user/view.php', $params);
                         $courselisting .= html_writer::tag('li', html_writer::link($url, $ccontext->get_context_name(false),
                                 $linkattributes));
                     } else {
@@ -264,10 +264,10 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
                 if (!$showallcourses && $shown == $CFG->navcourselimit) {
                     $url = null;
                     if (isset($course)) {
-                        $url = new moodle_url('/user/view.php',
+                        $url = new powereduc_url('/user/view.php',
                                 array('id' => $user->id, 'course' => $course->id, 'showallcourses' => 1));
                     } else {
-                        $url = new moodle_url('/user/profile.php', array('id' => $user->id, 'showallcourses' => 1));
+                        $url = new powereduc_url('/user/profile.php', array('id' => $user->id, 'showallcourses' => 1));
                     }
                     $courselisting .= html_writer::tag('li', html_writer::link($url, get_string('viewmore'),
                             array('title' => get_string('viewmore'))), array('class' => 'viewmore'));
@@ -294,7 +294,7 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
 
         // Show groups this user is in.
         if (!isset($hiddenfields['groups']) && !empty($course)) {
-            $accessallgroups = has_capability('moodle/site:accessallgroups', $courseorsystemcontext);
+            $accessallgroups = has_capability('powereduc/site:accessallgroups', $courseorsystemcontext);
             if ($usergroups = groups_get_all_groups($course->id, $user->id)) {
                 $groupstr = '';
                 foreach ($usergroups as $group) {
@@ -376,9 +376,9 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
     }
 
     // Last ip.
-    if (has_capability('moodle/user:viewlastip', $usercontext) && !isset($hiddenfields['lastip'])) {
+    if (has_capability('powereduc/user:viewlastip', $usercontext) && !isset($hiddenfields['lastip'])) {
         if ($user->lastip) {
-            $iplookupurl = new moodle_url('/iplookup/index.php', array('ip' => $user->lastip, 'user' => $user->id));
+            $iplookupurl = new powereduc_url('/iplookup/index.php', array('ip' => $user->lastip, 'user' => $user->id));
             $ipstring = html_writer::link($iplookupurl, $user->lastip);
         } else {
             $ipstring = get_string("none");

@@ -24,7 +24,7 @@
 
 namespace tool_dataprivacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * An implementation of a userlist which can be filtered by role.

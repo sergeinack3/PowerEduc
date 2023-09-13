@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 
 //It must be included from a Moodle page
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden.');
 }
 
@@ -34,7 +34,7 @@ require_once($CFG->libdir.'/formslib.php');
  *
  * @deprecated since 4.0 new dynamic forms created
  */
-class feedback_edit_use_template_form extends moodleform {
+class feedback_edit_use_template_form extends powereducform {
     public function __construct($action = null, $customdata = null, $method = 'post', $target = '',
             $attributes = null, $editable = true, $ajaxformdata = null) {
         debugging('Class feedback_edit_use_template_form is deprecated. Replaced with dynamic forms.', DEBUG_DEVELOPER);
@@ -166,7 +166,7 @@ class feedback_edit_use_template_form extends moodleform {
  *
  * @deprecated since 4.0, new dynamic forms have been created instead.
  */
-class feedback_edit_create_template_form extends moodleform {
+class feedback_edit_create_template_form extends powereducform {
     public function __construct($action = null, $customdata = null, $method = 'post',
             $target = '', $attributes = null, $editable = true, $ajaxformdata = null) {
         debugging('Class feedback_edit_create_template_form is deprecated. Replaced with dynamic forms.', DEBUG_DEVELOPER);

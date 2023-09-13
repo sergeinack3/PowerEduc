@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'admin', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'admin', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   core
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -62,7 +62,7 @@ $string['allowindexingnowhere'] = 'Nowhere';
 $string['allowusermailcharset'] = 'Allow user to select character set';
 $string['allowframembedding'] = 'Allow frame embedding';
 $string['allowframembedding_help'] = 'If enabled, this site may be embedded in a frame in a remote system, as recommended when using the \'Publish as LTI tool\' enrolment plugin. Otherwise, it is recommended to leave frame embedding disabled for security reasons. Please note that for the mobile app this setting is ignored and frame embedding is always allowed.';
-$string['allowguestmymoodle'] = 'Allow guest access to Dashboard';
+$string['allowguestmypowereduc'] = 'Allow guest access to Dashboard';
 $string['allowobjectembed'] = 'Allow EMBED and OBJECT tags';
 $string['allowthemechangeonurl'] = 'Allow theme changes in the URL';
 $string['allowuserblockhiding'] = 'Allow users to hide blocks';
@@ -160,16 +160,16 @@ $string['configallowcoursethemes'] = 'If enabled, then courses will be allowed t
 $string['configallowedemaildomains'] = 'List email domains that are allowed to be disclosed in the "From" section of outgoing email. The default of "Empty" will use the No-reply address for all outgoing email. The use of wildcards is allowed e.g. *.example.com will allow emails sent from any subdomain of example.com, but not example.com itself. This will require separate entry.';
 $string['configallowemailaddresses'] = 'To restrict new email addresses to particular domains, list them here separated by spaces. All other domains will be rejected. To allow subdomains, add the domain with a preceding \'.\'. To allow a root domain together with its subdomains, add the domain twice - once with a preceding \'.\' and once without e.g. .ourcollege.edu.au ourcollege.edu.au.';
 $string['configallowemojipicker'] = 'The emoji picker enables users to select emojis, such as smilies, to add to messages and other text areas via an emoji picker button in the Atto toolbar.';
-$string['configallowemojipickerincompatible'] = 'Your current database configuration does not properly support emojis. In order to enable the emoji picker you will need to <a href="https://docs.moodle.org/en/MySQL_full_unicode_support">upgrade your database for full unicode support</a>.';
-$string['configallowguestmymoodle'] = 'If enabled, guests can access the Dashboard. Otherwise guests are redirected to the site home.';
+$string['configallowemojipickerincompatible'] = 'Your current database configuration does not properly support emojis. In order to enable the emoji picker you will need to <a href="https://docs.powereduc.org/en/MySQL_full_unicode_support">upgrade your database for full unicode support</a>.';
+$string['configallowguestmypowereduc'] = 'If enabled, guests can access the Dashboard. Otherwise guests are redirected to the site home.';
 $string['configallowobjectembed'] = 'As a default security measure, normal users are not allowed to embed multimedia (like Flash) within texts using explicit EMBED and OBJECT tags in their HTML (although it can still be done safely using the mediaplugins filter).  If you wish to allow these tags then enable this option.';
 $string['configallowoverride'] = 'You can allow people with the roles on the left side to override some of the column roles';
-$string['configallowoverride2'] = 'For each role in the left column, select which roles that they can set overrides for.<br />Users must also have either the capability moodle/role:override or moodle/role:safeoverride.';
-$string['configallowswitch'] = 'For each role in the left column, select which roles they can switch to.<br />Users must also have the capability moodle/role:switchroles.';
-$string['configallowthemechangeonurl'] = 'If enabled, the theme can be changed by adding either:<br />?theme=themename to any Moodle URL (eg: mymoodlesite.com/?theme=afterburner ) or <br />&theme=themename to any internal Moodle URL (eg: mymoodlesite.com/course/view.php?id=2&theme=afterburner ).';
+$string['configallowoverride2'] = 'For each role in the left column, select which roles that they can set overrides for.<br />Users must also have either the capability powereduc/role:override or powereduc/role:safeoverride.';
+$string['configallowswitch'] = 'For each role in the left column, select which roles they can switch to.<br />Users must also have the capability powereduc/role:switchroles.';
+$string['configallowthemechangeonurl'] = 'If enabled, the theme can be changed by adding either:<br />?theme=themename to any Moodle URL (eg: mypowereducsite.com/?theme=afterburner ) or <br />&theme=themename to any internal Moodle URL (eg: mypowereducsite.com/course/view.php?id=2&theme=afterburner ).';
 $string['configallowuserblockhiding'] = 'Do you want to allow users to hide/show side blocks throughout this site?  This feature uses Javascript and cookies to remember the state of each collapsible block, and only affects the user\'s own view.';
 $string['configallowusermailcharset'] = 'If enabled, users can choose an email charset in their messaging preferences.';
-$string['configallowuserswitchrolestheycantassign'] = 'By default, moodle/role:assign is required for users to switch roles. Enabling this setting removes this requirement, and results in the roles available in the "Switch role to" dropdown menu being determined by settings in the "Allow role assignments" table only.
+$string['configallowuserswitchrolestheycantassign'] = 'By default, powereduc/role:assign is required for users to switch roles. Enabling this setting removes this requirement, and results in the roles available in the "Switch role to" dropdown menu being determined by settings in the "Allow role assignments" table only.
 It is recommended that the settings in the "Allow role assignments" table do not allow users to switch to a role with more capabilities than their existing role.';
 $string['configallowuserthemes'] = 'If you enable this, then users will be allowed to set their own themes.  User themes override site themes (but not course themes)';
 $string['configallowview'] = 'For each role in the left column, select which roles that they can view, search and filter by.';
@@ -236,7 +236,7 @@ $string['configemailheaders'] = 'Raw email headers to be added verbatim to all o
 $string['configemaildkimselector'] = 'The DKIM selector is arbitrary and your DNS record(s) must match this.';
 $string['configenablecalendarexport'] = 'Enable exporting or subscribing to calendars.';
 $string['configenablecomments'] = 'Enable comments';
-$string['configenablecourserequests'] = 'If enabled, users with the capability to request new courses (moodle/course:request) will have the option to request a course. This capability is not allowed for any of the default roles. It may be applied in the system or category context.';
+$string['configenablecourserequests'] = 'If enabled, users with the capability to request new courses (powereduc/course:request) will have the option to request a course. This capability is not allowed for any of the default roles. It may be applied in the system or category context.';
 $string['configenablemobilewebservice'] = 'Enable mobile service for the official Moodle app or other app requesting it. For more information, read the {$a}';
 $string['configenablerssfeeds'] = 'If enabled, RSS feeds are generated by various features across the site, such as blogs, forums, database activities and glossaries. Note that RSS feeds also need to be enabled for the particular activity modules.';
 $string['configenablerssfeedsdisabled'] = 'It is not available because RSS feeds are disabled in all the Site. To enable them, go to the Variables settings under Admin Configuration.';
@@ -301,7 +301,7 @@ $string['configminpasswordlower'] = 'Passwords must have at least these many low
 $string['configminpasswordnonalphanum'] = 'Passwords must have at least these many non-alphanumeric characters.';
 $string['configminpasswordupper'] = 'Passwords must have at least these many upper case letters.';
 $string['configmycoursesperpage'] = 'Maximum number of courses to display in any list of a user\'s own courses';
-$string['configmymoodleredirect'] = 'This setting forces redirects to /my on login for non-admins and replaces the top level site navigation with /my';
+$string['configmypowereducredirect'] = 'This setting forces redirects to /my on login for non-admins and replaces the top level site navigation with /my';
 $string['configmypagelocked'] = 'This setting prevents the default page from being edited by any non-admins';
 $string['confignavcourselimit'] = 'Limits the number of courses shown to the user in the navigation.';
 $string['confignavshowallcourses'] = 'This setting determines whether users who are enrolled in courses can see Courses (listing all courses) in the navigation, in addition to My courses (listing courses in which they are enrolled).';
@@ -610,7 +610,7 @@ $string['environmentmariadbwrongdbtype'] = 'Wrong <code>$CFG->dbtype</code>: you
 $string['errordeletingconfig'] = 'An error occurred while deleting the configuration records for plugin \'{$a}\'.';
 $string['errorsetting'] = 'Could not save setting:';
 $string['errorwithsettings'] = 'Some settings were not changed due to an error.';
-$string['eventshandlersinuse'] = 'The following plugins in your system are using Events 1 API deprecated handlers: \'{$a}\'. Please, update them to use Events 2 API. See https://docs.moodle.org/dev/Event_2#Event_dispatching_and_observers.';
+$string['eventshandlersinuse'] = 'The following plugins in your system are using Events 1 API deprecated handlers: \'{$a}\'. Please, update them to use Events 2 API. See https://docs.powereduc.org/dev/Event_2#Event_dispatching_and_observers.';
 $string['everyonewhocan'] = 'Everyone who can \'{$a}\'';
 $string['exceptions'] = 'exceptions';
 $string['execpathnotallowed'] = 'Setting executable and local paths disabled in config.php';
@@ -873,8 +873,8 @@ $string['mustenablestats'] = 'Statistics have not yet been enabled on this site.
 $string['mycourses'] = 'My courses';
 $string['mycoursesperpage'] = 'Number of courses';
 $string['mydashboard'] = 'System default dashboard';
-$string['mymoodle'] = 'Dashboard';
-$string['mymoodleredirect'] = 'Force users to use My Moodle';
+$string['mypowereduc'] = 'Dashboard';
+$string['mypowereducredirect'] = 'Force users to use My Moodle';
 $string['mypage'] = 'Default Dashboard page';
 $string['myprofile'] = 'Default profile page';
 $string['mypagelocked'] = 'Lock default page';
@@ -908,20 +908,20 @@ $string['nosupportedlogstore'] = 'No supported logstore found';
 $string['noteunneededblocks'] = 'Note: Blocks set to show will not be listed in the \'Add a block\' menu in a course if they are specified in the theme setting \'Unneeded blocks\'.';
 $string['maxtimelimit'] = 'Maximum time limit';
 $string['maxtimelimit_desc'] = 'To restrict the maximum PHP execution time that Moodle will allow without any output being displayed, enter a value in seconds here. 0 means that Moodle default restrictions are used. If you have a front-end server with its own time limit, set this value lower to receive PHP errors in logs. Does not apply to CLI scripts.';
-$string['moodleapp'] = 'Moodle app';
-$string['moodleapp_help'] = '<p>The free Moodle app enables users to access their courses on mobile devices. Additional app features are available with a Pro or Premium app plan.</p>
-<a href="https://moodle.com/mobile-app">Get the Moodle app</a><br />
-<a href="https://apps.moodle.com">Moodle Apps Portal</a>';
-$string['moodlebrandedapp'] = 'Branded Moodle app';
-$string['moodlebrandedapp_help'] = '<p>The Branded Moodle app has all the functionality of our free mobile app for Moodle combined with your own custom branding.</p>
-<a href="https://moodle.com/branded-app">About the Branded Moodle app</a>';
-$string['moodlebrandedappreference'] = 'Alternatively, get a <a href="https://moodle.com/branded-app/">Branded Moodle app</a> with your own custom branding.';
-$string['moodlepartners'] = 'Moodle Partners';
-$string['moodlepartners_help'] = '<p>Moodle Partners are services providers that are certified by Moodle HQ to provide high quality Moodle services for your organisation\'s online learning environment.</p>
-<a href="https://moodle.com/about-partners/">About our Partners</a><br />
-<a href="https://moodle.com/partners">Find a Partner</a>';
-$string['moodleservices'] = 'Moodle services';
-$string['moodleservices_help'] = 'Make sure you get the best from your Moodle learning environment by using these Moodle services:';
+$string['powereducapp'] = 'Moodle app';
+$string['powereducapp_help'] = '<p>The free Moodle app enables users to access their courses on mobile devices. Additional app features are available with a Pro or Premium app plan.</p>
+<a href="https://powereduc.com/mobile-app">Get the Moodle app</a><br />
+<a href="https://apps.powereduc.com">Moodle Apps Portal</a>';
+$string['powereducbrandedapp'] = 'Branded Moodle app';
+$string['powereducbrandedapp_help'] = '<p>The Branded Moodle app has all the functionality of our free mobile app for Moodle combined with your own custom branding.</p>
+<a href="https://powereduc.com/branded-app">About the Branded Moodle app</a>';
+$string['powereducbrandedappreference'] = 'Alternatively, get a <a href="https://powereduc.com/branded-app/">Branded Moodle app</a> with your own custom branding.';
+$string['powereducpartners'] = 'Moodle Partners';
+$string['powereducpartners_help'] = '<p>Moodle Partners are services providers that are certified by Moodle HQ to provide high quality Moodle services for your organisation\'s online learning environment.</p>
+<a href="https://powereduc.com/about-partners/">About our Partners</a><br />
+<a href="https://powereduc.com/partners">Find a Partner</a>';
+$string['powereducservices'] = 'Moodle services';
+$string['powereducservices_help'] = 'Make sure you get the best from your Moodle learning environment by using these Moodle services:';
 $string['noreplyaddress'] = 'No-reply address';
 $string['noreplydomain'] = 'No-reply and domain';
 $string['noreplydomaindetail'] = 'Settings for No-reply and configured domains';
@@ -1233,7 +1233,7 @@ $string['setupsearchengine'] = 'Setup search engine';
 $string['showcommentscount'] = 'Show comments count';
 $string['showdetails'] = 'Show details';
 $string['showuseridentity'] = 'Show user identity';
-$string['showuseridentity_desc'] = 'When selecting or searching for users, and when displaying lists of users, these fields may be shown in addition to their full name. The fields are only shown to users who have the moodle/site:viewuseridentity capability; by default, teachers and managers. (This option makes most sense if you choose one or two fields that are mandatory at your institution.)
+$string['showuseridentity_desc'] = 'When selecting or searching for users, and when displaying lists of users, these fields may be shown in addition to their full name. The fields are only shown to users who have the powereduc/site:viewuseridentity capability; by default, teachers and managers. (This option makes most sense if you choose one or two fields that are mandatory at your institution.)
 
 Fields marked * are custom user profile fields. You can select these fields, but there are currently some screens on which they will not appear.';
 $string['simplexmlrequired'] = 'The SimpleXML PHP extension is now required by Moodle.';
@@ -1259,7 +1259,7 @@ $string['sitepolicyguest_help'] = 'The URL of the site policy that all guests mu
 $string['sitesectionhelp'] = 'If selected, a topic section will be displayed on the site home.';
 $string['sixtyfourbitswarning'] = 'It has been detected that your site is not using a 64-bit PHP version. It is recommended that you upgrade your site to ensure future compatibility.';
 $string['slasharguments'] = 'Use slash arguments';
-$string['slashargumentswarning'] = 'It is recommended that the use of slash arguments is enabled. In future it will be required. For more details, see the documentation <a href="https://docs.moodle.org/en/admin/environment/slasharguments">Using slash arguments</a>.';
+$string['slashargumentswarning'] = 'It is recommended that the use of slash arguments is enabled. In future it will be required. For more details, see the documentation <a href="https://docs.powereduc.org/en/admin/environment/slasharguments">Using slash arguments</a>.';
 $string['smartpix'] = 'Smart pix search';
 $string['smtp'] = 'SMTP';
 $string['smtpauthtype'] = 'SMTP Auth Type';
@@ -1280,14 +1280,14 @@ $string['splrequired'] = 'The SPL PHP extension is now required by Moodle.';
 $string['stats'] = 'Statistics';
 $string['statsfirstrun'] = 'Maximum processing interval';
 $string['statsmaxruntime'] = 'Maximum runtime';
-$string['statsmoodleorg'] = 'statistics';
+$string['statspowereducorg'] = 'statistics';
 $string['statsruntimedays'] = 'Days to process';
 $string['statsruntimestart'] = 'Run at';
 $string['statsuserthreshold'] = 'User threshold';
 $string['stickyblocks'] = 'Sticky blocks';
 $string['stickyblockscourseview'] = 'Course page';
 $string['stickyblocksduplicatenotice'] = 'If any block you add here is already present in a particular page, it will result in a duplicate.<br />Only the pinned block will be non-editable, the duplicate will still be editable.';
-$string['stickyblocksmymoodle'] = 'My Moodle';
+$string['stickyblocksmypowereduc'] = 'My Moodle';
 $string['stickyblockspagetype'] = 'Page type to configure';
 $string['strictformsrequired'] = 'Strict validation of required fields';
 $string['stripalltitletags'] = 'Remove HTML tags from all activity names';
@@ -1432,11 +1432,11 @@ $string['unlockaccount'] = 'Unlock account';
 $string['unoconvwarning'] = 'The version of unoconv you have installed is not supported.';
 $string['unsettheme'] = 'Unset theme';
 $string['unsupported'] = 'Unsupported';
-$string['unsupporteddbfileformat'] = 'Your database uses Antelope as the file format. Full UTF-8 support in MySQL and MariaDB requires the Barracuda file format. Please switch to the Barracuda file format. See the documentation <a href="https://docs.moodle.org/en/admin/environment/custom check/mysql full unicode support">MySQL full unicode support</a> for details.';
+$string['unsupporteddbfileformat'] = 'Your database uses Antelope as the file format. Full UTF-8 support in MySQL and MariaDB requires the Barracuda file format. Please switch to the Barracuda file format. See the documentation <a href="https://docs.powereduc.org/en/admin/environment/custom check/mysql full unicode support">MySQL full unicode support</a> for details.';
 $string['unsupporteddbfilepertable'] = 'For full support of UTF-8 both MySQL and MariaDB require you to change your MySQL setting \'innodb_file_per_table\' to \'ON\'. See the documentation for further details.';
 $string['unsupporteddblargeprefix'] = 'For full support of UTF-8 both MySQL and MariaDB require you to change your MySQL setting \'innodb_large_prefix\' to \'ON\'. See the documentation for further details.';
 $string['unsupporteddbstorageengine'] = 'The database storage engine being used is no longer supported.';
-$string['unsupporteddbtablerowformat'] = 'Your database has tables using Antelope as the file format. You are recommended to convert the tables to the Barracuda file format. See the documentation <a href="https://docs.moodle.org/en/cli">Administration via command line</a> for details of a tool for converting InnoDB tables to Barracuda.';
+$string['unsupporteddbtablerowformat'] = 'Your database has tables using Antelope as the file format. You are recommended to convert the tables to the Barracuda file format. See the documentation <a href="https://docs.powereduc.org/en/cli">Administration via command line</a> for details of a tool for converting InnoDB tables to Barracuda.';
 $string['unsupportedphpversion7'] = 'PHP version 7 is not supported.';
 $string['unsupportedphpversion71'] = 'PHP version 7.1 is not supported.';
 $string['unsupportedphpversion72'] = 'PHP version 7.2 is not supported.';
@@ -1487,9 +1487,9 @@ This can cause significant problems later, so in order to continue you must ensu
 
 The recommended way to clean your Moodle directory is as follows:
 
-* rename the current Moodle directory to "moodle_old"
+* rename the current Moodle directory to "powereduc_old"
 * create a new Moodle directory containing only files from either a standard Moodle package download, or from the Moodle Git repository
-* move the original config.php file and any non-standard plugins from the "moodle_old" directory to the new Moodle directory
+* move the original config.php file and any non-standard plugins from the "powereduc_old" directory to the new Moodle directory
 
 When you have a clean Moodle directory, refresh this page to resume the Moodle update process.
 

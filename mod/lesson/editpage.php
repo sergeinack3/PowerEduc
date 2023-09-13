@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Action for adding a question page.  Prints an HTML form.
@@ -35,9 +35,9 @@ $edit   = optional_param('edit', false, PARAM_BOOL);
 $returnto = optional_param('returnto', null, PARAM_LOCALURL);
 
 if (!empty($returnto)) {
-    $returnto = new moodle_url($returnto);
+    $returnto = new powereduc_url($returnto);
 } else {
-    $returnto = new moodle_url('/mod/lesson/edit.php', array('id' => $id));
+    $returnto = new powereduc_url('/mod/lesson/edit.php', array('id' => $id));
     $returnto->set_anchor('lesson-' . $pageid);
 }
 
@@ -70,7 +70,7 @@ $editoroptions = array('noclean'=>true, 'maxfiles'=>EDITOR_UNLIMITED_FILES, 'max
 // If the previous page was the Question type selection form, this form
 // will have a different name (e.g. _qf__lesson_add_page_form_selection
 // versus _qf__lesson_add_page_form_multichoice). This causes confusion
-// in moodleform::_process_submission because the array key check doesn't
+// in powereducform::_process_submission because the array key check doesn't
 // tie up with the current form name, which in turn means the "submitted"
 // check ends up evaluating as false, thus it's not possible to check whether
 // the Question type selection was cancelled. For this reason, a dummy form
@@ -146,7 +146,7 @@ if ($edit) {
     $data = $editpage->update_form_data($data);
 
     $mform->set_data($data);
-    $PAGE->navbar->add(get_string('edit'), new moodle_url('/mod/lesson/edit.php', array('id'=>$id)));
+    $PAGE->navbar->add(get_string('edit'), new powereduc_url('/mod/lesson/edit.php', array('id'=>$id)));
     $PAGE->navbar->add(get_string('editingquestionpage', 'lesson', get_string($mform->qtypestring, 'lesson')));
 } else {
     // Give the page type being created a chance to override the creation process

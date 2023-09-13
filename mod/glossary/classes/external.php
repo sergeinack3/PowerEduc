@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Glossary module external API.
@@ -21,12 +21,12 @@
  * @category   external
  * @copyright  2015 Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/glossary/lib.php');
@@ -38,7 +38,7 @@ require_once($CFG->dirroot . '/mod/glossary/lib.php');
  * @category   external
  * @copyright  2015 Costantino Cito <ccito@cvaconsulting.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class mod_glossary_external extends external_api {
 
@@ -130,7 +130,7 @@ class mod_glossary_external extends external_api {
      */
     protected static function fill_entry_details($entry, $context) {
         global $PAGE;
-        $canviewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $canviewfullnames = has_capability('powereduc/site:viewfullnames', $context);
 
         // Format concept and definition.
         $entry->concept = external_format_string($entry->concept, $context->id);
@@ -177,7 +177,7 @@ class mod_glossary_external extends external_api {
      * Describes the parameters for get_glossaries_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_glossaries_by_courses_parameters() {
         return new external_function_parameters (
@@ -197,7 +197,7 @@ class mod_glossary_external extends external_api {
      *
      * @param array $courseids the course IDs.
      * @return array of glossaries
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_glossaries_by_courses($courseids = array()) {
         global $CFG;
@@ -250,7 +250,7 @@ class mod_glossary_external extends external_api {
      * Describes the get_glossaries_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_glossaries_by_courses_returns() {
         return new external_single_structure(array(
@@ -307,7 +307,7 @@ class mod_glossary_external extends external_api {
      * Returns the description of the external function parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_glossary_parameters() {
         return new external_function_parameters(array(
@@ -323,7 +323,7 @@ class mod_glossary_external extends external_api {
      * @param string $mode The view mode.
      * @return array of warnings and status result
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_glossary($id, $mode) {
         $params = self::validate_parameters(self::view_glossary_parameters(), array(
@@ -377,7 +377,7 @@ class mod_glossary_external extends external_api {
      * @param int $id The entry ID.
      * @return array of warnings and status result
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function view_entry($id) {
@@ -446,7 +446,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function get_entries_by_letter($id, $letter, $from, $limit, $options) {
@@ -537,7 +537,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function get_entries_by_date($id, $order, $sort, $from, $limit, $options) {
@@ -626,7 +626,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @return array Containing count, categories and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_categories($id, $from, $limit) {
         $params = self::validate_parameters(self::get_categories_parameters(), array(
@@ -708,7 +708,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function get_entries_by_category($id, $categoryid, $from, $limit, $options) {
@@ -810,7 +810,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, authors and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_authors($id, $from, $limit, $options) {
         global $PAGE;
@@ -833,7 +833,7 @@ class mod_glossary_external extends external_api {
         // Fetching the entries.
         list($users, $count) = glossary_get_authors($glossary, $context, $limit, $from, $options);
 
-        $canviewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $canviewfullnames = has_capability('powereduc/site:viewfullnames', $context);
         foreach ($users as $user) {
             $userpicture = new user_picture($user);
             $userpicture->size = 1;
@@ -908,7 +908,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function get_entries_by_author($id, $letter, $field, $sort, $from, $limit, $options) {
@@ -1013,7 +1013,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function get_entries_by_author_id($id, $authorid, $order, $sort, $from, $limit, $options) {
@@ -1120,7 +1120,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function get_entries_by_search($id, $query, $fullsearch, $order, $sort, $from, $limit, $options) {
@@ -1216,7 +1216,7 @@ class mod_glossary_external extends external_api {
      * @param array $options Array of options.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_entries_by_term($id, $term, $from, $limit, $options) {
         $params = self::validate_parameters(self::get_entries_by_term_parameters(), array(
@@ -1299,7 +1299,7 @@ class mod_glossary_external extends external_api {
      * @param int $limit Number of records to return.
      * @return array Containing count, entries and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_entries_to_approve($id, $letter, $order, $sort, $from, $limit) {
         $params = self::validate_parameters(self::get_entries_to_approve_parameters(), array(
@@ -1375,7 +1375,7 @@ class mod_glossary_external extends external_api {
      * @param int $id The entry ID.
      * @return array Containing entry and warnings.
      * @since Moodle 3.1
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function get_entry_by_id($id) {
@@ -1474,7 +1474,7 @@ class mod_glossary_external extends external_api {
      * @param array  $options    additional settings
      * @return array Containing entry and warnings.
      * @since Moodle 3.2
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws invalid_parameter_exception
      */
     public static function add_entry($glossaryid, $concept, $definition, $definitionformat, $options = array()) {
@@ -1495,7 +1495,7 @@ class mod_glossary_external extends external_api {
 
         if (!$glossary->allowduplicatedentries) {
             if (glossary_concept_exists($glossary, $params['concept'])) {
-                throw new moodle_exception('errconceptalreadyexists', 'glossary');
+                throw new powereduc_exception('errconceptalreadyexists', 'glossary');
             }
         }
 
@@ -1539,7 +1539,7 @@ class mod_glossary_external extends external_api {
                     }
                     break;
                 default:
-                    throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                    throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
             }
         }
 

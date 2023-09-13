@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Code for exporting questions as Moodle XML.
+ * Code for exporting questions as PowerEduc XML.
  *
  * @package    qformat_xml
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/xmlize.php');
 if (!class_exists('qformat_default')) {
@@ -37,11 +37,11 @@ if (!class_exists('qformat_default')) {
 
 
 /**
- * Importer for Moodle XML question format.
+ * Importer for PowerEduc XML question format.
  *
- * See http://docs.moodle.org/en/Moodle_XML_format for a description of the format.
+ * See http://docs.powereduc.org/en/PowerEduc_XML_format for a description of the format.
  *
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qformat_xml extends qformat_default {
@@ -74,16 +74,16 @@ class qformat_xml extends qformat_default {
 
     /**
      * Translate human readable format name
-     * into internal Moodle code number
+     * into internal PowerEduc code number
      * Note the reverse function is called get_format.
      * @param string name format name from xml file
-     * @return int Moodle format code
+     * @return int PowerEduc format code
      */
     public function trans_format($name) {
         $name = trim($name);
 
-        if ($name == 'moodle_auto_format') {
-            return FORMAT_MOODLE;
+        if ($name == 'powereduc_auto_format') {
+            return FORMAT_POWEREDUC;
         } else if ($name == 'html') {
             return FORMAT_HTML;
         } else if ($name == 'plain_text') {
@@ -945,7 +945,7 @@ class qformat_xml extends qformat_default {
      * import category. The format is:
      * <question type="category">
      *     <category>tom/dick/harry</category>
-     *     <info format="moodle_auto_format"><text>Category description</text></info>
+     *     <info format="powereduc_auto_format"><text>Category description</text></info>
      * </question>
      */
     protected function import_category($question) {
@@ -953,7 +953,7 @@ class qformat_xml extends qformat_default {
         $qo->qtype = 'category';
         $qo->category = $this->import_text($question['#']['category'][0]['#']['text']);
         $qo->info = '';
-        $qo->infoformat = FORMAT_MOODLE;
+        $qo->infoformat = FORMAT_POWEREDUC;
         if (array_key_exists('info', $question['#'])) {
             $qo->info = $this->import_text($question['#']['info'][0]['#']['text']);
             // The import should have the format in human readable form, so translate to machine readable format.
@@ -1079,15 +1079,15 @@ class qformat_xml extends qformat_default {
     }
 
     /**
-     * Convert internal Moodle text format code into
+     * Convert internal PowerEduc text format code into
      * human readable form
      * @param int id internal code
      * @return string format text
      */
     public function get_format($id) {
         switch($id) {
-            case FORMAT_MOODLE:
-                return 'moodle_auto_format';
+            case FORMAT_POWEREDUC:
+                return 'powereduc_auto_format';
             case FORMAT_HTML:
                 return 'html';
             case FORMAT_PLAIN:

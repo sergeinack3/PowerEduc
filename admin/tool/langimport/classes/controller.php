@@ -24,7 +24,7 @@
 
 namespace tool_langimport;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir.'/filelib.php');
 require_once($CFG->libdir.'/componentlib.class.php');
 

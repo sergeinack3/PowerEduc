@@ -16,7 +16,7 @@
 
 namespace core\progress;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Progress handler that uses a standard Moodle progress bar to display

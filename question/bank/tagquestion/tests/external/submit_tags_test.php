@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_tagquestion\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');
@@ -25,7 +25,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  * Question external functions tests.
  *
  * @package    qbank_tagquestion
- * @copyright  2016 Pau Ferrer <pau@moodle.com>
+ * @copyright  2016 Pau Ferrer <pau@powereduc.com>
  * @author     2021 Safat Shahin <safatshahin@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -66,7 +66,7 @@ class submit_tags_test extends \externallib_advanced_testcase {
         $formdata = $this->generate_encoded_submit_tags_form_string($question, $qcat, $questioncontext, [], []);
 
         // We should receive an exception if the question doesn't exist.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         submit_tags::execute($missingquestionid, $editingcontext->id, $formdata);
     }
 
@@ -85,7 +85,7 @@ class submit_tags_test extends \externallib_advanced_testcase {
         $formdata = $this->generate_encoded_submit_tags_form_string($question, $qcat, $questioncontext, [], []);
 
         // We should receive an exception if the question doesn't exist.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         submit_tags::execute($question->id, $missingcontextid, $formdata);
     }
 
@@ -135,8 +135,8 @@ class submit_tags_test extends \externallib_advanced_testcase {
         );
 
         // Prohibit all of the tag capabilities.
-        assign_capability('moodle/question:tagmine', CAP_PROHIBIT, $teacherrole->id, $questioncontext->id);
-        assign_capability('moodle/question:tagall', CAP_PROHIBIT, $teacherrole->id, $questioncontext->id);
+        assign_capability('powereduc/question:tagmine', CAP_PROHIBIT, $teacherrole->id, $questioncontext->id);
+        assign_capability('powereduc/question:tagall', CAP_PROHIBIT, $teacherrole->id, $questioncontext->id);
 
         $generator->enrol_user($user->id, $course->id, $teacherrole->id, 'manual');
         $user->ignoresesskey = true;
@@ -174,8 +174,8 @@ class submit_tags_test extends \externallib_advanced_testcase {
         $question->createdby = $user->id + 1;
 
         // Prohibit all of the tag capabilities.
-        assign_capability('moodle/question:tagmine', CAP_ALLOW, $teacherrole->id, $questioncontext->id);
-        assign_capability('moodle/question:tagall', CAP_PROHIBIT, $teacherrole->id, $questioncontext->id);
+        assign_capability('powereduc/question:tagmine', CAP_ALLOW, $teacherrole->id, $questioncontext->id);
+        assign_capability('powereduc/question:tagall', CAP_PROHIBIT, $teacherrole->id, $questioncontext->id);
 
         $generator->enrol_user($user->id, $course->id, $teacherrole->id, 'manual');
         $user->ignoresesskey = true;
@@ -410,7 +410,7 @@ class submit_tags_test extends \externallib_advanced_testcase {
         $generator->enrol_user($user->id, $course->id, $teacherrole->id, 'manual');
 
         // Give the user global ability to tag questions.
-        assign_capability('moodle/question:tagall', CAP_ALLOW, $roleid, $systemcontext, true);
+        assign_capability('powereduc/question:tagall', CAP_ALLOW, $roleid, $systemcontext, true);
         // Allow the user to submit form data.
         $user->ignoresesskey = true;
 

@@ -22,7 +22,7 @@ Feature: Teachers can embed images into instructions and conclusion fields
     And I log in as "teacher1"
     # Upload an image into the private files.
     And I follow "Manage private files"
-    And I upload "mod/workshop/tests/fixtures/moodlelogo.png" file to "Files" filemanager
+    And I upload "mod/workshop/tests/fixtures/powereduclogo.png" file to "Files" filemanager
     And I click on "Save changes" "button"
     And I am on "Course 1" course homepage with editing mode on
     # Create and edit the workshop.
@@ -35,7 +35,7 @@ Feature: Teachers can embed images into instructions and conclusion fields
     And I click on "Insert or edit image" "button" in the "//*[@data-fieldtype='editor']/*[descendant::*[@id='id_instructauthorseditor']]" "xpath_element"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodlelogo.png" "link"
+    And I click on "powereduclogo.png" "link"
     And I click on "Select this file" "button"
     And I set the field "Describe this image for someone who cannot see it" to "How to submit"
     And I click on "Save image" "button"
@@ -48,7 +48,7 @@ Feature: Teachers can embed images into instructions and conclusion fields
     And I click on "Insert or edit image" "button" in the "//*[@data-fieldtype='editor']/*[descendant::*[@id='id_instructreviewerseditor']]" "xpath_element"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodlelogo.png" "link"
+    And I click on "powereduclogo.png" "link"
     And I click on "Select this file" "button"
     And I set the field "Describe this image for someone who cannot see it" to "How to assess"
     And I click on "Save image" "button"
@@ -61,15 +61,15 @@ Feature: Teachers can embed images into instructions and conclusion fields
     And I click on "Insert or edit image" "button" in the "//*[@data-fieldtype='editor']/*[descendant::*[@id='id_conclusioneditor']]" "xpath_element"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodlelogo.png" "link"
+    And I click on "powereduclogo.png" "link"
     And I click on "Select this file" "button"
     And I set the field "Describe this image for someone who cannot see it" to "Well done"
     And I click on "Save image" "button"
     And I press "Save and display"
     # Save the form and check the images are displayed in appropriate phases.
     And I change phase in workshop "Workshop with embedded images" to "Submission phase"
-    Then "//*[contains(@class, 'instructions')]//img[contains(@src, 'pluginfile.php') and contains(@src, '/mod_workshop/instructauthors/moodlelogo.png') and @alt='How to submit']" "xpath_element" should exist
+    Then "//*[contains(@class, 'instructions')]//img[contains(@src, 'pluginfile.php') and contains(@src, '/mod_workshop/instructauthors/powereduclogo.png') and @alt='How to submit']" "xpath_element" should exist
     And I change phase in workshop "Workshop with embedded images" to "Assessment phase"
-    And "//*[contains(@class, 'instructions')]//img[contains(@src, 'pluginfile.php') and contains(@src, '/mod_workshop/instructreviewers/moodlelogo.png') and @alt='How to assess']" "xpath_element" should exist
+    And "//*[contains(@class, 'instructions')]//img[contains(@src, 'pluginfile.php') and contains(@src, '/mod_workshop/instructreviewers/powereduclogo.png') and @alt='How to assess']" "xpath_element" should exist
     And I change phase in workshop "Workshop with embedded images" to "Closed"
-    And "//*[contains(@class, 'conclusion')]//img[contains(@src, 'pluginfile.php') and contains(@src, '/mod_workshop/conclusion/moodlelogo.png') and @alt='Well done']" "xpath_element" should exist
+    And "//*[contains(@class, 'conclusion')]//img[contains(@src, 'pluginfile.php') and contains(@src, '/mod_workshop/conclusion/powereduclogo.png') and @alt='Well done']" "xpath_element" should exist

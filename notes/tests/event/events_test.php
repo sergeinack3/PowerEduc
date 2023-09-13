@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for notes events.
@@ -78,7 +78,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals(NOTES_STATE_SITE, $event->other['publishstate']);
 
         // Test legacy data.
-        $logurl = new \moodle_url('index.php',
+        $logurl = new \powereduc_url('index.php',
                 array('course' => $this->eventnote->courseid, 'user' => $this->eventnote->userid));
         $logurl->set_anchor('note-' . $this->eventnote->id);
         $arr = array($this->eventnote->courseid, 'notes', 'delete', $logurl, 'delete note');
@@ -109,7 +109,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals(NOTES_STATE_SITE, $event->other['publishstate']);
 
         // Test legacy data.
-        $logurl = new \moodle_url('index.php',
+        $logurl = new \powereduc_url('index.php',
             array('course' => $note->courseid, 'user' => $note->userid));
         $logurl->set_anchor('note-' . $note->id);
         $arr = array($note->courseid, 'notes', 'add', $logurl, 'add note');
@@ -140,7 +140,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals(NOTES_STATE_DRAFT, $event->other['publishstate']);
 
         // Test legacy data.
-        $logurl = new \moodle_url('index.php',
+        $logurl = new \powereduc_url('index.php',
             array('course' => $note->courseid, 'user' => $note->userid));
         $logurl->set_anchor('note-' . $note->id);
         $arr = array($note->courseid, 'notes', 'update', $logurl, 'update note');
@@ -151,7 +151,7 @@ class events_test extends \advanced_testcase {
     /**
      * Test the notes viewed event.
      *
-     * It's not possible to use the moodle API to simulate the viewing of notes, so here we
+     * It's not possible to use the powereduc API to simulate the viewing of notes, so here we
      * simply create the event and trigger it.
      */
     public function test_notes_viewed() {

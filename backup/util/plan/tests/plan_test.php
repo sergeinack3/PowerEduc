@@ -24,7 +24,7 @@ use backup_plan_exception;
 use base_plan;
 use base_plan_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/fixtures/plan_fixtures.php');
 
@@ -84,7 +84,7 @@ class plan_test extends \advanced_testcase {
     function test_backup_plan() {
 
         // We need one (non interactive) controller for instantiating plan
-        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         // Instantiate one backup plan
         $bp = new backup_plan($bc);
@@ -104,7 +104,7 @@ class plan_test extends \advanced_testcase {
     function test_base_plan_wrong() {
 
         // We need one (non interactive) controller for instantiating plan
-        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         // Instantiate one backup plan
         $bp = new backup_plan($bc);

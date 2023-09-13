@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
  * - has_any_capability()
  * - has_all_capabilities()
  * - require_capability()
- * - require_login() (from moodlelib)
+ * - require_login() (from powereduclib)
  * - is_enrolled()
  * - is_viewing()
  * - is_guest()
@@ -107,7 +107,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** No capability change */
 define('CAP_INHERIT', 0);
@@ -135,17 +135,17 @@ define('CONTEXT_MODULE', 70);
  */
 define('CONTEXT_BLOCK', 80);
 
-/** Capability allow management of trusts - NOT IMPLEMENTED YET - see {@link http://docs.moodle.org/dev/Hardening_new_Roles_system} */
+/** Capability allow management of trusts - NOT IMPLEMENTED YET - see {@link http://docs.powereduc.org/dev/Hardening_new_Roles_system} */
 define('RISK_MANAGETRUST', 0x0001);
-/** Capability allows changes in system configuration - see {@link http://docs.moodle.org/dev/Hardening_new_Roles_system} */
+/** Capability allows changes in system configuration - see {@link http://docs.powereduc.org/dev/Hardening_new_Roles_system} */
 define('RISK_CONFIG',      0x0002);
-/** Capability allows user to add scripted content - see {@link http://docs.moodle.org/dev/Hardening_new_Roles_system} */
+/** Capability allows user to add scripted content - see {@link http://docs.powereduc.org/dev/Hardening_new_Roles_system} */
 define('RISK_XSS',         0x0004);
-/** Capability allows access to personal user information - see {@link http://docs.moodle.org/dev/Hardening_new_Roles_system} */
+/** Capability allows access to personal user information - see {@link http://docs.powereduc.org/dev/Hardening_new_Roles_system} */
 define('RISK_PERSONAL',    0x0008);
-/** Capability allows users to add content others may see - see {@link http://docs.moodle.org/dev/Hardening_new_Roles_system} */
+/** Capability allows users to add content others may see - see {@link http://docs.powereduc.org/dev/Hardening_new_Roles_system} */
 define('RISK_SPAM',        0x0010);
-/** capability allows mass delete of data belonging to other users - see {@link http://docs.moodle.org/dev/Hardening_new_Roles_system} */
+/** capability allows mass delete of data belonging to other users - see {@link http://docs.powereduc.org/dev/Hardening_new_Roles_system} */
 define('RISK_DATALOSS',    0x0020);
 
 /** rolename displays - the name as defined in the role definition, localised if name empty */
@@ -440,7 +440,7 @@ function has_capability($capability, context $context, $user = null, $doanything
         }
     }
 
-    if (strpos($capability, 'moodle/legacy:') === 0) {
+    if (strpos($capability, 'powereduc/legacy:') === 0) {
         throw new coding_exception('Legacy capabilities can not be used any more!');
     }
 
@@ -483,8 +483,8 @@ function has_capability($capability, context $context, $user = null, $doanything
     if (!empty($CFG->contextlocking)) {
         if ($capinfo->captype === 'write' && $context->locked) {
             // Context locking applies to any write capability in a locked context.
-            // It does not apply to moodle/site:managecontextlocks - this is to allow context locking to be unlocked.
-            if ($capinfo->name !== 'moodle/site:managecontextlocks') {
+            // It does not apply to powereduc/site:managecontextlocks - this is to allow context locking to be unlocked.
+            if ($capinfo->name !== 'powereduc/site:managecontextlocks') {
                 // It applies to all users who are not site admins.
                 // It also applies to site admins when contextlockappliestoadmin is set.
                 if (!is_siteadmin($userid) || !empty($CFG->contextlockappliestoadmin)) {
@@ -655,7 +655,7 @@ function guess_if_creator_will_have_course_capability($capability, context $cont
         return true;
     }
 
-    if (!has_capability('moodle/course:create', $context, $user)) {
+    if (!has_capability('powereduc/course:create', $context, $user)) {
         return false;
     }
 
@@ -668,11 +668,11 @@ function guess_if_creator_will_have_course_capability($capability, context $cont
     }
 
     if ($context->contextlevel == CONTEXT_COURSE) {
-        if (is_viewing($context, $user, 'moodle/role:assign') or is_enrolled($context, $user, 'moodle/role:assign')) {
+        if (is_viewing($context, $user, 'powereduc/role:assign') or is_enrolled($context, $user, 'powereduc/role:assign')) {
             return false;
         }
     } else {
-        if (has_capability('moodle/course:view', $context, $user) and has_capability('moodle/role:assign', $context, $user)) {
+        if (has_capability('powereduc/course:view', $context, $user) and has_capability('powereduc/role:assign', $context, $user)) {
             return false;
         }
     }
@@ -1073,7 +1073,7 @@ function reload_all_capabilities() {
     foreach ($sw as $path => $roleid) {
         if ($record = $DB->get_record('context', array('path'=>$path))) {
             $context = context::instance_by_id($record->id);
-            if (has_capability('moodle/role:switchroles', $context)) {
+            if (has_capability('powereduc/role:switchroles', $context)) {
                 role_switch($roleid, $context);
             }
         }
@@ -1194,7 +1194,7 @@ function assign_legacy_capabilities($capability, $legacyperms) {
         }
 
         if (!array_key_exists($type, $archetypes)) {
-            throw new \moodle_exception('invalidlegacy', '', '', $type);
+            throw new \powereduc_exception('invalidlegacy', '', '', $type);
         }
 
         if ($roles = get_archetype_roles($type)) {
@@ -1289,7 +1289,7 @@ function get_context_info_array($contextid) {
 function create_role($name, $shortname, $description, $archetype = '') {
     global $DB;
 
-    if (strpos($archetype, 'moodle/legacy:') !== false) {
+    if (strpos($archetype, 'powereduc/legacy:') !== false) {
         throw new coding_exception('Use new role archetype parameter in create_role() instead of old legacy capabilities.');
     }
 
@@ -1867,7 +1867,7 @@ function is_guest(context $context, $user = null) {
         return true;
     }
 
-    if (has_capability('moodle/course:view', $coursecontext, $user)) {
+    if (has_capability('powereduc/course:view', $coursecontext, $user)) {
         // viewing users appear out of nowhere, they are neither guests nor participants
         return false;
     }
@@ -1881,7 +1881,7 @@ function is_guest(context $context, $user = null) {
 }
 
 /**
- * Returns true if the user has moodle/course:view capability in the course,
+ * Returns true if the user has powereduc/course:view capability in the course,
  * this is intended for admins, managers (aka small admins), inspectors, etc.
  *
  * @category   access
@@ -1900,7 +1900,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') {
         return false;
     }
 
-    if (!has_capability('moodle/course:view', $coursecontext, $user)) {
+    if (!has_capability('powereduc/course:view', $coursecontext, $user)) {
         // admins are allowed to inspect courses
         return false;
     }
@@ -1976,7 +1976,7 @@ function can_access_course(stdClass $course, $user = null, $withcapability = '',
         }
     }
 
-    if (!$course->visible and !has_capability('moodle/course:viewhiddencourses', $coursecontext, $userid)) {
+    if (!$course->visible and !has_capability('powereduc/course:viewhiddencourses', $coursecontext, $userid)) {
         return false;
     }
 
@@ -2042,7 +2042,7 @@ function can_access_course(stdClass $course, $user = null, $withcapability = '',
  * capabilities are defined for the component, we simply return an empty array.
  *
  * @access private
- * @param string $component full plugin name, examples: 'moodle', 'mod_forum'
+ * @param string $component full plugin name, examples: 'powereduc', 'mod_forum'
  * @return array array of capabilities
  */
 function load_capability_def($component) {
@@ -2066,10 +2066,10 @@ function load_capability_def($component) {
  * Gets the capabilities that have been cached in the database for this component.
  *
  * @access private
- * @param string $component - examples: 'moodle', 'mod_forum'
+ * @param string $component - examples: 'powereduc', 'mod_forum'
  * @return array array of capabilities
  */
-function get_cached_capabilities($component = 'moodle') {
+function get_cached_capabilities($component = 'powereduc') {
     global $DB;
     $caps = get_all_capabilities();
     $componentcaps = array();
@@ -2236,7 +2236,7 @@ function reset_role_capabilities($roleid) {
 
 /**
  * Updates the capabilities table with the component capability definitions.
- * If no parameters are given, the function updates the core moodle
+ * If no parameters are given, the function updates the core powereduc
  * capabilities.
  *
  * Note that the absence of the db/access.php capabilities definition file
@@ -2244,10 +2244,10 @@ function reset_role_capabilities($roleid) {
  * the database.
  *
  * @access private
- * @param string $component examples: 'moodle', 'mod_forum', 'block_activity_results'
+ * @param string $component examples: 'powereduc', 'mod_forum', 'block_activity_results'
  * @return boolean true if success, exception in case of any problems
  */
-function update_capabilities($component = 'moodle') {
+function update_capabilities($component = 'powereduc') {
     global $DB, $OUTPUT;
 
     $storedcaps = array();
@@ -2366,7 +2366,7 @@ function update_capabilities($component = 'moodle') {
  * NOTE: this function is called from lib/db/upgrade.php
  *
  * @access private
- * @param string $component examples: 'moodle', 'mod_forum', 'block_activity_results'
+ * @param string $component examples: 'powereduc', 'mod_forum', 'block_activity_results'
  * @param array $newcapdef array of the new capability definitions that will be
  *                     compared with the cached capabilities
  * @return int number of deprecated capabilities that have been removed
@@ -2385,7 +2385,7 @@ function capabilities_cleanup($component, $newcapdef = null) {
                 if ($roles = get_roles_with_capability($cachedcap->name)) {
                     foreach ($roles as $role) {
                         if (!unassign_capability($cachedcap->name, $role->id)) {
-                            throw new \moodle_exception('cannotunassigncap', 'error', '',
+                            throw new \powereduc_exception('cannotunassigncap', 'error', '',
                                 (object)array('cap' => $cachedcap->name, 'role' => $role->name));
                         }
                     }
@@ -2425,7 +2425,7 @@ function get_all_risks() {
 }
 
 /**
- * Return a link to moodle docs for a given capability name
+ * Return a link to powereduc docs for a given capability name
  *
  * @param stdClass $capability a capability - a row from the mdl_capabilities table.
  * @return string the human-readable capability name as a link to Moodle Docs.
@@ -2630,7 +2630,7 @@ function get_capability_string($capabilityname) {
     // Typical capability name is 'plugintype/pluginname:capabilityname'
     list($type, $name, $capname) = preg_split('|[/:]|', $capabilityname);
 
-    if ($type === 'moodle') {
+    if ($type === 'powereduc') {
         $component = 'core_role';
     } else if ($type === 'quizreport') {
         //ugly hack!!
@@ -2664,7 +2664,7 @@ function get_capability_string($capabilityname) {
  */
 function get_component_string($component, $contextlevel) {
 
-    if ($component === 'moodle' || $component === 'core') {
+    if ($component === 'powereduc' || $component === 'core') {
         return context_helper::get_level_name($contextlevel);
     }
 
@@ -2722,7 +2722,7 @@ function get_profile_roles(context $context) {
     global $CFG, $DB;
     // If the current user can assign roles, then they can see all roles on the profile and participants page,
     // provided the roles are assigned to at least 1 user in the context. If not, only the policy-defined roles.
-    if (has_capability('moodle/role:assign', $context)) {
+    if (has_capability('powereduc/role:assign', $context)) {
         $rolesinscope = array_keys(get_all_roles($context));
     } else {
         $rolesinscope = empty($CFG->profileroles) ? [] : array_map('trim', explode(',', $CFG->profileroles));
@@ -2803,7 +2803,7 @@ function get_user_roles_in_course($userid, $courseid) {
     }
     // If the current user can assign roles, then they can see all roles on the profile and participants page,
     // provided the roles are assigned to at least 1 user in the context. If not, only the policy-defined roles.
-    if (has_capability('moodle/role:assign', $context)) {
+    if (has_capability('powereduc/role:assign', $context)) {
         $rolesinscope = array_keys(get_all_roles($context));
     } else {
         $rolesinscope = empty($CFG->profileroles) ? [] : array_map('trim', explode(',', $CFG->profileroles));
@@ -2840,7 +2840,7 @@ function get_user_roles_in_course($userid, $courseid) {
         $rolenames = array();
         foreach ($roles as $roleid => $unused) {
             if (isset($viewableroles[$roleid])) {
-                $url = new moodle_url('/user/index.php', ['contextid' => $context->id, 'roleid' => $roleid]);
+                $url = new powereduc_url('/user/index.php', ['contextid' => $context->id, 'roleid' => $roleid]);
                 $rolenames[] = '<a href="' . $url . '">' . $viewableroles[$roleid] . '</a>';
             }
         }
@@ -2867,7 +2867,7 @@ function user_can_assign(context $context, $targetroleid) {
 
     // Check if user has override capability.
     // If not return false.
-    if (!has_capability('moodle/role:assign', $context)) {
+    if (!has_capability('powereduc/role:assign', $context)) {
         return false;
     }
     // pull out all active roles of this user from this context(or above)
@@ -3168,7 +3168,7 @@ function get_assignable_roles(context $context, $rolenamedisplay = ROLENAME_ALIA
         $userid = is_object($user) ? $user->id : $user;
     }
 
-    if (!has_capability('moodle/role:assign', $context, $userid)) {
+    if (!has_capability('powereduc/role:assign', $context, $userid)) {
         if ($withusercounts) {
             return array(array(), array(), array());
         } else {
@@ -3236,7 +3236,7 @@ function get_assignable_roles(context $context, $rolenamedisplay = ROLENAME_ALIA
  *
  * Gets a list of roles that this user can switch to in a context, for the switchrole menu.
  * This function just process the contents of the role_allow_switch table. You also need to
- * test the moodle/role:switchroles to see if the user is allowed to switch in the first place.
+ * test the powereduc/role:switchroles to see if the user is allowed to switch in the first place.
  *
  * @param context $context a context.
  * @param int $rolenamedisplay the type of role name to display. One of the
@@ -3247,7 +3247,7 @@ function get_switchable_roles(context $context, $rolenamedisplay = ROLENAME_ALIA
     global $USER, $DB;
 
     // You can't switch roles without this capability.
-    if (!has_capability('moodle/role:switchroles', $context)) {
+    if (!has_capability('powereduc/role:switchroles', $context)) {
         return [];
     }
 
@@ -3357,7 +3357,7 @@ function get_viewable_roles(context $context, $userid = null, $rolenamedisplay =
 function get_overridable_roles(context $context, $rolenamedisplay = ROLENAME_ALIAS, $withcounts = false) {
     global $USER, $DB;
 
-    if (!has_any_capability(array('moodle/role:safeoverride', 'moodle/role:override'), $context)) {
+    if (!has_any_capability(array('powereduc/role:safeoverride', 'powereduc/role:override'), $context)) {
         if ($withcounts) {
             return array(array(), array(), array());
         } else {
@@ -3581,7 +3581,7 @@ function get_with_capability_join(context $context, $capability, $useridcolumn) 
     if (!empty($CFG->contextlocking) && $context->locked) {
         $excludelockedcaps = 'AND (cap.captype = :capread OR cap.name = :managelockscap)';
         $excludelockedcapsparams['capread'] = 'read';
-        $excludelockedcapsparams['managelockscap'] = 'moodle/site:managecontextlocks';
+        $excludelockedcapsparams['managelockscap'] = 'powereduc/site:managecontextlocks';
     }
 
     $params = array_merge($params, $params2, $excludelockedcapsparams);
@@ -3772,7 +3772,7 @@ function get_with_capability_join(context $context, $capability, $useridcolumn) 
  * @param bool $notuseddoanything not used any more, admin accounts are never returned
  * @param bool $notusedview - use get_enrolled_sql() instead
  * @param bool $useviewallgroups if $groups is set the return users who
- *               have capability both $capability and moodle/site:accessallgroups
+ *               have capability both $capability and powereduc/site:accessallgroups
  *               in this context, as well as users who have $capability and who are
  *               in $groups.
  * @return array of user records
@@ -3841,7 +3841,7 @@ function get_users_by_capability(context $context, $capability, $fields = '', $s
 
         $grouptest = 'gm.userid IS NOT NULL';
         if ($useviewallgroups) {
-            $viewallgroupsusers = get_users_by_capability($context, 'moodle/site:accessallgroups', 'u.id, u.id', '', '', '', '', $exceptions);
+            $viewallgroupsusers = get_users_by_capability($context, 'powereduc/site:accessallgroups', 'u.id, u.id', '', '', '', '', $exceptions);
             if (!empty($viewallgroupsusers)) {
                 $grouptest .= ' OR u.id IN (' . implode(',', array_keys($viewallgroupsusers)) . ')';
             }
@@ -3958,7 +3958,7 @@ function sort_by_roleassignment_authority($users, context $context, $roles = arr
 /**
  * Gets all the users assigned this role in this context or higher
  *
- * Note that moodle is based on capabilities and it is usually better
+ * Note that powereduc is based on capabilities and it is usually better
  * to check permissions than to check role ids as the capabilities
  * system is more flexible. If you really need, you can to use this
  * function but consider has_capability() as a possible substitute.
@@ -4968,10 +4968,10 @@ function role_change_permission($roleid, $context, $capname, $permission) {
 
 
 /**
- * Basic moodle context abstraction class.
+ * Basic powereduc context abstraction class.
  *
  * Google confirms that no other important framework is using "context" class,
- * we could use something else like mcontext or moodle_context, but we need to type
+ * we could use something else like mcontext or powereduc_context, but we need to type
  * this very often which would be annoying and it would take too much space...
  *
  * This class is derived from stdClass for backwards compatibility with
@@ -5316,7 +5316,7 @@ abstract class context extends stdClass implements IteratorAggregate {
 
         if (isset($record->locked)) {
             $this->_locked = $record->locked;
-        } else if (!during_initial_install() && !moodle_needs_upgrading()) {
+        } else if (!during_initial_install() && !powereduc_needs_upgrading()) {
             debugging('Locked value missing. Code is possibly not usings the getter properly.', DEBUG_DEVELOPER);
         }
     }
@@ -5675,7 +5675,7 @@ abstract class context extends stdClass implements IteratorAggregate {
     /**
      * Returns the most relevant URL for this context.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public abstract function get_url();
 
@@ -6380,10 +6380,10 @@ class context_system extends context {
     /**
      * Returns the most relevant URL for this context.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
-        return new moodle_url('/');
+        return new powereduc_url('/');
     }
 
     /**
@@ -6645,15 +6645,15 @@ class context_user extends context {
     /**
      * Returns the most relevant URL for this context.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
         global $COURSE;
 
         if ($COURSE->id == SITEID) {
-            $url = new moodle_url('/user/profile.php', array('id'=>$this->_instanceid));
+            $url = new powereduc_url('/user/profile.php', array('id'=>$this->_instanceid));
         } else {
-            $url = new moodle_url('/user/view.php', array('id'=>$this->_instanceid, 'courseid'=>$COURSE->id));
+            $url = new powereduc_url('/user/view.php', array('id'=>$this->_instanceid, 'courseid'=>$COURSE->id));
         }
         return $url;
     }
@@ -6667,7 +6667,7 @@ class context_user extends context {
     public function get_capabilities(string $sort = self::DEFAULT_CAPABILITY_SORT) {
         global $DB;
 
-        $extracaps = array('moodle/grade:viewall');
+        $extracaps = array('powereduc/grade:viewall');
         list($extra, $params) = $DB->get_in_or_equal($extracaps, SQL_PARAMS_NAMED, 'cap');
 
         return $DB->get_records_select('capabilities', "contextlevel = :level OR name {$extra}",
@@ -6833,10 +6833,10 @@ class context_coursecat extends context {
     /**
      * Returns the most relevant URL for this context.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
-        return new moodle_url('/course/index.php', array('categoryid' => $this->_instanceid));
+        return new powereduc_url('/course/index.php', array('categoryid' => $this->_instanceid));
     }
 
     /**
@@ -7082,14 +7082,14 @@ class context_course extends context {
     /**
      * Returns the most relevant URL for this context.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
         if ($this->_instanceid != SITEID) {
-            return new moodle_url('/course/view.php', array('id'=>$this->_instanceid));
+            return new powereduc_url('/course/view.php', array('id'=>$this->_instanceid));
         }
 
-        return new moodle_url('/');
+        return new powereduc_url('/');
     }
 
     /**
@@ -7305,7 +7305,7 @@ class context_module extends context {
     /**
      * Returns the most relevant URL for this context.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
         global $DB;
@@ -7314,10 +7314,10 @@ class context_module extends context {
                                              FROM {course_modules} cm
                                              JOIN {modules} md ON md.id = cm.module
                                             WHERE cm.id = ?", array($this->_instanceid))) {
-            return new moodle_url('/mod/' . $modname . '/view.php', array('id'=>$this->_instanceid));
+            return new powereduc_url('/mod/' . $modname . '/view.php', array('id'=>$this->_instanceid));
         }
 
-        return new moodle_url('/');
+        return new powereduc_url('/');
     }
 
     /**
@@ -7566,7 +7566,7 @@ class context_block extends context {
         $name = '';
         if ($blockinstance = $DB->get_record('block_instances', array('id'=>$this->_instanceid))) {
             global $CFG;
-            require_once("$CFG->dirroot/blocks/moodleblock.class.php");
+            require_once("$CFG->dirroot/blocks/powereducblock.class.php");
             require_once("$CFG->dirroot/blocks/$blockinstance->blockname/block_$blockinstance->blockname.php");
             $blockname = "block_$blockinstance->blockname";
             if ($blockobject = new $blockname()) {
@@ -7583,7 +7583,7 @@ class context_block extends context {
     /**
      * Returns the most relevant URL for this context.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
         $parentcontexts = $this->get_parent_context();

@@ -21,7 +21,7 @@ Feature: Tables can be sorted by additional names
     Given I navigate to "Users > Accounts > Browse list of users" in site administration
     Then the following should exist in the "users" table:
     | First name / Middle name / Alternate name / Surname | Email address |
-    | Admin User | moodle@example.com |
+    | Admin User | powereduc@example.com |
     | Annie Faith Anne Edison | student1@example.com |
     | George David Gman Bradley | student2@example.com |
     | Travis Peter Mr T Sutcliff | student3@example.com |

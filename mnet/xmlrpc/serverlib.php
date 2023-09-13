@@ -679,11 +679,11 @@ function mnet_server_dummy_method($methodname, $argsarray, $functionname) {
     }
 }
 /**
- * mnet server exception.  extends moodle_exception, but takes slightly different arguments.
- * and unlike the rest of moodle, the actual int error code is used.
+ * mnet server exception.  extends powereduc_exception, but takes slightly different arguments.
+ * and unlike the rest of powereduc, the actual int error code is used.
  * this exception should only be used during an xmlrpc server request, ie, not for client requests.
  */
-class mnet_server_exception extends moodle_exception {
+class mnet_server_exception extends powereduc_exception {
 
     /**
      * @param int    $intcode      the numerical error associated with this fault.  this is <b>not</b> the string errorcode

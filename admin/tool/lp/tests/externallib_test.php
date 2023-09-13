@@ -28,7 +28,7 @@ use core_competency\template_competency;
 use core_competency\course_competency_settings;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -228,9 +228,9 @@ class externallib_test extends externallib_advanced_testcase {
 
         $master = $dg->create_user();
         $manager = $dg->create_user();
-        $slave1 = $dg->create_user(array('lastname' => 'MOODLER'));
-        $slave2 = $dg->create_user(array('lastname' => 'MOODLER'));
-        $slave3 = $dg->create_user(array('lastname' => 'MOODLER'));
+        $slave1 = $dg->create_user(array('lastname' => 'POWEREDUCR'));
+        $slave2 = $dg->create_user(array('lastname' => 'POWEREDUCR'));
+        $slave3 = $dg->create_user(array('lastname' => 'POWEREDUCR'));
 
         $syscontext = \context_system::instance();
         $slave1context = \context_user::instance($slave1->id);
@@ -270,14 +270,14 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Now do the test.
         $this->setUser($master);
-        $result = external::search_users('MOODLER', 'moodle/site:config');
+        $result = external::search_users('POWEREDUCR', 'moodle/site:config');
         $this->assertCount(2, $result['users']);
         $this->assertEquals(2, $result['count']);
         $this->assertArrayHasKey($slave1->id, $result['users']);
         $this->assertArrayHasKey($slave3->id, $result['users']);
 
         $this->setUser($manager);
-        $result = external::search_users('MOODLER', 'moodle/site:config');
+        $result = external::search_users('POWEREDUCR', 'moodle/site:config');
         $this->assertCount(1, $result['users']);
         $this->assertEquals(1, $result['count']);
         $this->assertArrayHasKey($slave1->id, $result['users']);

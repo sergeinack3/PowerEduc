@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['allowedcourses'] = 'Courses allowed';
 $string['allowedcourses_help'] = 'Select courses to be migrated to the new framework. If no course is specified, then all courses will be migrated.';

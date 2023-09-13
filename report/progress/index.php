@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Activity progress reports
@@ -33,7 +33,7 @@ require_once($CFG->libdir . '/completionlib.php');
 $id = required_param('course',PARAM_INT);
 $course = $DB->get_record('course',array('id'=>$id));
 if (!$course) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 $context = context_course::instance($course->id);
 
@@ -68,7 +68,7 @@ function csv_quote($value) {
     }
 }
 
-$url = new moodle_url('/report/progress/index.php', array('course'=>$id));
+$url = new powereduc_url('/report/progress/index.php', array('course'=>$id));
 if ($sort !== '') {
     $url->param('sort', $sort);
 }
@@ -105,7 +105,7 @@ require_capability('report/progress:view',$context);
 // Get group mode
 $group = groups_get_course_group($course,true); // Supposed to verify group
 if ($group===0 && $course->groupmode==SEPARATEGROUPS) {
-    require_capability('moodle/site:accessallgroups',$context);
+    require_capability('powereduc/site:accessallgroups',$context);
 }
 
 // Get data on activities and progress of all users, and give error if we've
@@ -340,14 +340,14 @@ if ($csv) {
 foreach($progress as $user) {
     // User name
     if ($csv) {
-        print csv_quote(fullname($user, has_capability('moodle/site:viewfullnames', $context)));
+        print csv_quote(fullname($user, has_capability('powereduc/site:viewfullnames', $context)));
         foreach ($extrafields as $field) {
             echo $sep . csv_quote($user->{$field});
         }
     } else {
         print '<tr><th scope="row"><a href="' . $CFG->wwwroot . '/user/view.php?id=' .
             $user->id . '&amp;course=' . $course->id . '">' .
-            fullname($user, has_capability('moodle/site:viewfullnames', $context)) . '</a></th>';
+            fullname($user, has_capability('powereduc/site:viewfullnames', $context)) . '</a></th>';
         foreach ($extrafields as $field) {
             echo '<td>' . s($user->{$field}) . '</td>';
         }
@@ -395,7 +395,7 @@ foreach($progress as $user) {
         $a=new StdClass;
         $a->state=$describe;
         $a->date=$date;
-        $a->user = fullname($user, has_capability('moodle/site:viewfullnames', $context));
+        $a->user = fullname($user, has_capability('powereduc/site:viewfullnames', $context));
         $a->activity = $formattedactivities[$activity->id]->displayname;
         $fulldescribe=get_string('progress-title','completion',$a);
 
@@ -406,11 +406,11 @@ foreach($progress as $user) {
             print $sep.csv_quote($describe).$sep.csv_quote($date);
         } else {
             $celltext = $OUTPUT->pix_icon('i/' . $completionicon, s($fulldescribe));
-            if (has_capability('moodle/course:overridecompletion', $context) &&
+            if (has_capability('powereduc/course:overridecompletion', $context) &&
                     $state != COMPLETION_COMPLETE_PASS && $state != COMPLETION_COMPLETE_FAIL) {
                 $newstate = ($state == COMPLETION_COMPLETE) ? COMPLETION_INCOMPLETE : COMPLETION_COMPLETE;
                 $changecompl = $user->id . '-' . $activity->id . '-' . $newstate;
-                $url = new moodle_url($PAGE->url, ['sesskey' => sesskey()]);
+                $url = new powereduc_url($PAGE->url, ['sesskey' => sesskey()]);
                 $celltext = html_writer::link($url, $celltext, array('class' => 'changecompl', 'data-changecompl' => $changecompl,
                                                                      'data-activityname' => $a->activity,
                                                                      'data-userfullname' => $a->user,

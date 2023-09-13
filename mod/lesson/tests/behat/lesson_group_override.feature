@@ -134,7 +134,7 @@ Feature: Lesson group override
     Given I am on the "Test lesson name" "lesson activity editing" page logged in as teacher1
     And I set the following fields to these values:
       | Password protected lesson | Yes |
-      | id_password               | moodle_rules |
+      | id_password               | powereduc_rules |
     And I press "Save and display"
     And I navigate to "Overrides" in current page administration
     And I select "Group overrides" from the "jump" singleselect
@@ -148,7 +148,7 @@ Feature: Lesson group override
     And I am on the "Test lesson name" "lesson activity" page logged in as student1
     Then I should see "Test lesson name is a password protected lesson"
     And I should not see "Cat is an amphibian"
-    And I set the field "userpassword" to "moodle_rules"
+    And I set the field "userpassword" to "powereduc_rules"
     And I press "Continue"
     And I should see "Login failed, please try again..."
     And I should see "Test lesson name is a password protected lesson"
@@ -168,7 +168,7 @@ Feature: Lesson group override
     And I press "Continue"
     And I should see "Login failed, please try again..."
     And I should see "Test lesson name is a password protected lesson"
-    And I set the field "userpassword" to "moodle_rules"
+    And I set the field "userpassword" to "powereduc_rules"
     And I press "Continue"
 
   Scenario: Allow a group to have a different due date
@@ -319,7 +319,7 @@ Feature: Lesson group override
   Scenario: Override a group when teacher is in no group, and does not have accessallgroups permission, and the activity's group mode is 'separate groups'
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name     | intro                | course | idnumber | groupmode |
       | lesson   | Lesson 2 | Lesson 2 description | C1     | lesson2  | 1         |
@@ -332,7 +332,7 @@ Feature: Lesson group override
   Scenario: A teacher without accessallgroups permission should only be able to add group override for their groups, when the activity's group mode is 'separate groups'
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name     | intro                | course | idnumber | groupmode |
       | lesson   | Lesson 2 | Lesson 2 description | C1     | lesson2  | 1         |
@@ -349,7 +349,7 @@ Feature: Lesson group override
   Scenario: A teacher without accessallgroups permission should only be able to see the group overrides for their groups, when the activity's group mode is 'separate groups'
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name     | intro                | course | idnumber | groupmode |
       | lesson   | Lesson 2 | Lesson 2 description | C1     | lesson2  | 1         |

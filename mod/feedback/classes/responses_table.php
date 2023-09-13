@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/tablelib.php');
@@ -90,7 +90,7 @@ class mod_feedback_responses_table extends table_sql {
         parent::__construct('feedback-showentry-list-' . $feedbackstructure->get_cm()->instance);
 
         $this->showall = optional_param($this->showallparamname, 0, PARAM_BOOL);
-        $this->define_baseurl(new moodle_url('/mod/feedback/show_entries.php',
+        $this->define_baseurl(new powereduc_url('/mod/feedback/show_entries.php',
             ['id' => $this->feedbackstructure->get_cm()->id]));
         if ($courseid = $this->feedbackstructure->get_courseid()) {
             $this->baseurl->param('courseid', $courseid);
@@ -223,7 +223,7 @@ class mod_feedback_responses_table extends table_sql {
      */
     public function col_deleteentry($row) {
         global $OUTPUT;
-        $deleteentryurl = new moodle_url($this->baseurl, ['delete' => $row->id, 'sesskey' => sesskey()]);
+        $deleteentryurl = new powereduc_url($this->baseurl, ['delete' => $row->id, 'sesskey' => sesskey()]);
         $deleteaction = new confirm_action(get_string('confirmdeleteentry', 'feedback'));
         return $OUTPUT->action_icon($deleteentryurl,
             new pix_icon('t/delete', get_string('delete_entry', 'feedback')), $deleteaction);
@@ -232,10 +232,10 @@ class mod_feedback_responses_table extends table_sql {
     /**
      * Returns a link for viewing a single response
      * @param stdClass $row
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     protected function get_link_single_entry($row) {
-        return new moodle_url($this->baseurl, ['userid' => $row->{$this->useridfield}, 'showcompleted' => $row->id]);
+        return new powereduc_url($this->baseurl, ['userid' => $row->{$this->useridfield}, 'showcompleted' => $row->id]);
     }
 
     /**
@@ -441,10 +441,10 @@ class mod_feedback_responses_table extends table_sql {
         // Toggle 'Show all' link.
         if ($this->totalrows > FEEDBACK_DEFAULT_PAGE_COUNT) {
             if (!$this->use_pages) {
-                echo html_writer::div(html_writer::link(new moodle_url($this->baseurl, [$this->showallparamname => 0]),
+                echo html_writer::div(html_writer::link(new powereduc_url($this->baseurl, [$this->showallparamname => 0]),
                         get_string('showperpage', '', FEEDBACK_DEFAULT_PAGE_COUNT)), 'showall');
             } else {
-                echo html_writer::div(html_writer::link(new moodle_url($this->baseurl, [$this->showallparamname => 1]),
+                echo html_writer::div(html_writer::link(new powereduc_url($this->baseurl, [$this->showallparamname => 1]),
                         get_string('showall', '', $this->totalrows)), 'showall');
             }
         }
@@ -481,7 +481,7 @@ class mod_feedback_responses_table extends table_sql {
         }
         return [
             $lastrow ? $this->get_link_single_entry($lastrow) : null,
-            new moodle_url($this->baseurl, [$this->request[TABLE_VAR_PAGE] => $page]),
+            new powereduc_url($this->baseurl, [$this->request[TABLE_VAR_PAGE] => $page]),
             $nextrow ? $this->get_link_single_entry($nextrow) : null,
         ];
     }

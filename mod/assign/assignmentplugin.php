@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the functions for assign_plugin abstract class
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Abstract class for assign_plugin (submission/feedback).
@@ -88,12 +88,12 @@ abstract class assign_plugin {
     }
 
     /**
-     * This function should be overridden to provide an array of elements that can be added to a moodle
+     * This function should be overridden to provide an array of elements that can be added to a powereduc
      * form for display in the settings page for the assignment.
-     * @param MoodleQuickForm $mform The form to add the elements to
+     * @param PowerEducQuickForm $mform The form to add the elements to
      * @return $array
      */
-    public function get_settings(MoodleQuickForm $mform) {
+    public function get_settings(PowerEducQuickForm $mform) {
         return;
     }
 
@@ -174,7 +174,7 @@ abstract class assign_plugin {
     }
 
     /**
-     * Get the required moodle version for this plugin
+     * Get the required powereduc version for this plugin
      *
      * @return string
      */
@@ -238,13 +238,13 @@ abstract class assign_plugin {
      *
      * @param mixed $submissionorgrade submission|grade - For submission plugins this is the submission data,
      *                                                    for feedback plugins it is the grade data
-     * @param MoodleQuickForm $mform - This is the form
+     * @param PowerEducQuickForm $mform - This is the form
      * @param stdClass $data - This is the form data that can be modified for example by a filemanager element
      * @param int $userid - This is the userid for the current submission.
      *                      This is passed separately as there may not yet be a submission or grade.
      * @return boolean - true if we added anything to the form
      */
-    public function get_form_elements_for_user($submissionorgrade, MoodleQuickForm $mform, stdClass $data, $userid) {
+    public function get_form_elements_for_user($submissionorgrade, PowerEducQuickForm $mform, stdClass $data, $userid) {
         return $this->get_form_elements($submissionorgrade, $mform, $data);
     }
 
@@ -254,11 +254,11 @@ abstract class assign_plugin {
      *
      * @param mixed $submissionorgrade submission|grade - For submission plugins this is the submission data,
      *                                                    for feedback plugins it is the grade data
-     * @param MoodleQuickForm $mform - This is the form
+     * @param PowerEducQuickForm $mform - This is the form
      * @param stdClass $data - This is the form data that can be modified for example by a filemanager element
      * @return boolean - true if we added anything to the form
      */
-    public function get_form_elements($submissionorgrade, MoodleQuickForm $mform, stdClass $data) {
+    public function get_form_elements($submissionorgrade, PowerEducQuickForm $mform, stdClass $data) {
         return false;
     }
 
@@ -476,7 +476,7 @@ abstract class assign_plugin {
     }
 
     /**
-     * Return true if this plugin can upgrade an old Moodle 2.2 assignment of this type
+     * Return true if this plugin can upgrade an old PowerEduc 2.2 assignment of this type
      * and version.
      *
      * @param string $type The old assignment subtype
@@ -697,7 +697,7 @@ abstract class assign_plugin {
      * in some cases the configs will need formatting or be returned only if the current user has some capabilities enabled.
      *
      * @return array the list of settings
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_config_for_external() {
         return array();

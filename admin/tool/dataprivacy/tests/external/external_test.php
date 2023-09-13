@@ -29,7 +29,7 @@ use tool_dataprivacy\api;
 use tool_dataprivacy\context_instance;
 use tool_dataprivacy\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');

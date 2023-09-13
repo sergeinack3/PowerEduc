@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,24 +28,24 @@ $chatlasttime = optional_param('chat_lasttime', 0, PARAM_INT);
 $chatlastrow  = optional_param('chat_lastrow', 1, PARAM_INT);
 
 if (!confirm_sesskey()) {
-    throw new moodle_exception('invalidsesskey', 'error');
+    throw new powereduc_exception('invalidsesskey', 'error');
 }
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
-    throw new moodle_exception('notlogged', 'chat');
+    throw new powereduc_exception('notlogged', 'chat');
 }
 if (!$chat = $DB->get_record('chat', array('id' => $chatuser->chatid))) {
-    throw new moodle_exception('invaliduserid', 'error');
+    throw new powereduc_exception('invaliduserid', 'error');
 }
 if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
-    throw new moodle_exception('invalidcourseid', 'error');
+    throw new powereduc_exception('invalidcourseid', 'error');
 }
 if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
-    throw new moodle_exception('invalidcoursemodule', 'error');
+    throw new powereduc_exception('invalidcoursemodule', 'error');
 }
 
 if (!isloggedin()) {
-    throw new moodle_exception('notlogged', 'chat');
+    throw new powereduc_exception('notlogged', 'chat');
 }
 
 // Set up $PAGE so that format_text will work properly.
@@ -75,7 +75,7 @@ switch ($action) {
     case 'chat':
         \core\session\manager::write_close();
         chat_delete_old_users();
-        $chatmessage = clean_text($chatmessage, FORMAT_MOODLE);
+        $chatmessage = clean_text($chatmessage, FORMAT_POWEREDUC);
 
         if (!empty($beepid)) {
             $chatmessage = 'beep '.$beepid;

@@ -45,6 +45,6 @@ li[aria-expanded=true]:not(.item) {
     list-style-image: url('pix/navigationitem.svg');
 }
 
-.moodle-logo {
+.powereduc-logo {
     width: 110px;
 }

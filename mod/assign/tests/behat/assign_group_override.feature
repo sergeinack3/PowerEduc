@@ -179,7 +179,7 @@ Feature: Assign group override
   Scenario: Override a group when teacher is in no group, and does not have accessallgroups permission, and the activity's group mode is "separate groups"
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name         | intro                    | course | groupmode |
       | assign   | Assignment 2 | Assignment 2 description | C1     | 1         |
@@ -193,7 +193,7 @@ Feature: Assign group override
         when the activity's group mode is "separate groups"
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name         | intro                    | course | groupmode |
       | assign   | Assignment 2 | Assignment 2 description | C1     | 1         |
@@ -211,7 +211,7 @@ Feature: Assign group override
         when the activity's group mode is "separate groups"
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     And the following "activities" exist:
       | activity | name         | intro                    | course | groupmode |
       | assign   | Assignment 2 | Assignment 2 description | C1     | 1         |

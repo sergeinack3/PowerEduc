@@ -21,7 +21,7 @@
  * @package    core_group
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Groups not used in course or activity

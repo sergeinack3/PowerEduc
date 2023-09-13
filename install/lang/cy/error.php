@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Methu creu y gronfa ddata.</p> <p>Dydy’r gronfa ddata benodedig ddim yn bodoli a does gan y defnyddiwr dan sylw ddim hawl i greu cronfa ddata.</p> <p>Dylai gweinyddwr y safle wirio ffurfweddu cronfeydd data.</p>';
 $string['cannotcreatelangdir'] = 'Does dim modd creu cyfeiriadur iaith';

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ use action_menu_link_secondary;
 use core\output\checkbox_toggleall;
 use html_writer;
 use mod_data\manager;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use stdClass;
 use user_picture;
@@ -35,7 +35,7 @@ use core_tag_tag;
  * Class template for database activity
  *
  * @package    mod_data
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @copyright  2022 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class template {
@@ -52,7 +52,7 @@ class template {
     /** @var string the template name. */
     private $templatename;
 
-    /** @var moodle_url the base url. */
+    /** @var powereduc_url the base url. */
     private $baseurl;
 
     /** @var string the current search if any. */
@@ -171,7 +171,7 @@ class template {
      * The extra options are:
      *  - page: the current pagination page
      *  - search: the current search text
-     *  - baseurl: an alternative entry url (moodle_url)
+     *  - baseurl: an alternative entry url (powereduc_url)
      *  - comments: if comments must be added if not present
      *  - ratings: if ratings must be added
      *
@@ -179,7 +179,7 @@ class template {
      */
     public function add_options(array $options = []) {
         $cm = $this->manager->get_coursemodule();
-        $baseurl = $options['baseurl'] ?? new moodle_url('/mod/data/view.php', ['id' => $cm->id]);
+        $baseurl = $options['baseurl'] ?? new powereduc_url('/mod/data/view.php', ['id' => $cm->id]);
         if (isset($options['page'])) {
             $baseurl->params([
                 'page' => $options['page'],
@@ -365,11 +365,11 @@ class template {
         if (!$canmanageentry) {
             return '';
         }
-        $backurl = new moodle_url($this->baseurl, [
+        $backurl = new powereduc_url($this->baseurl, [
             'rid' => $entry->id,
             'mode' => 'single',
         ]);
-        $url = new moodle_url('/mod/data/edit.php', $this->baseurl->params());
+        $url = new powereduc_url('/mod/data/edit.php', $this->baseurl->params());
         $url->params([
             'rid' => $entry->id,
             'sesskey' => sesskey(),
@@ -394,7 +394,7 @@ class template {
         if (!$canmanageentry) {
             return '';
         }
-        $url = new moodle_url($this->baseurl, [
+        $url = new powereduc_url($this->baseurl, [
             'delete' => $entry->id,
             'sesskey' => sesskey(),
             'mode' => 'single',
@@ -421,7 +421,7 @@ class template {
             return '';
         }
 
-        $url = new moodle_url($this->baseurl, [
+        $url = new powereduc_url($this->baseurl, [
             'rid' => $entry->id,
             'filter' => 1,
         ]);
@@ -440,7 +440,7 @@ class template {
      * @return string the tag replacement
      */
     protected function get_tag_moreurl_replacement(stdClass $entry, bool $canmanageentry): string {
-        $url = new moodle_url($this->baseurl, [
+        $url = new powereduc_url($this->baseurl, [
             'rid' => $entry->id,
             'filter' => 1,
         ]);
@@ -477,7 +477,7 @@ class template {
      */
     protected function get_tag_user_replacement(stdClass $entry, bool $canmanageentry): string {
         $cm = $this->manager->get_coursemodule();
-        $url = new moodle_url('/user/view.php', [
+        $url = new powereduc_url('/user/view.php', [
             'id' => $entry->userid,
             'course' => $cm->course,
         ]);
@@ -586,7 +586,7 @@ class template {
         if (!has_capability('mod/data:approve', $context) || !$this->instance->approval || $entry->approved) {
             return '';
         }
-        $url = new moodle_url($this->baseurl, [
+        $url = new powereduc_url($this->baseurl, [
             'approve' => $entry->id,
             'sesskey' => sesskey(),
         ]);
@@ -610,7 +610,7 @@ class template {
         if (!has_capability('mod/data:approve', $context) || !$this->instance->approval || !$entry->approved) {
             return '';
         }
-        $url = new moodle_url($this->baseurl, [
+        $url = new powereduc_url($this->baseurl, [
             'disapprove' => $entry->id,
             'sesskey' => sesskey(),
         ]);
@@ -725,7 +725,7 @@ class template {
 
         // Show more.
         if ($this->showmore) {
-            $showmoreurl = new moodle_url($this->baseurl, [
+            $showmoreurl = new powereduc_url($this->baseurl, [
                 'rid' => $entry->id,
                 'filter' => 1,
             ]);
@@ -738,11 +738,11 @@ class template {
 
         if ($canmanageentry) {
             // Edit entry.
-            $backurl = new moodle_url($this->baseurl, [
+            $backurl = new powereduc_url($this->baseurl, [
                 'rid' => $entry->id,
                 'mode' => 'single',
             ]);
-            $editurl = new moodle_url('/mod/data/edit.php', $this->baseurl->params());
+            $editurl = new powereduc_url('/mod/data/edit.php', $this->baseurl->params());
             $editurl->params([
                 'rid' => $entry->id,
                 'sesskey' => sesskey(),
@@ -756,7 +756,7 @@ class template {
             ));
 
             // Delete entry.
-            $deleteurl = new moodle_url($this->baseurl, [
+            $deleteurl = new powereduc_url($this->baseurl, [
                 'delete' => $entry->id,
                 'sesskey' => sesskey(),
                 'mode' => 'single',
@@ -773,7 +773,7 @@ class template {
         $context = $this->manager->get_context();
         if (has_capability('mod/data:approve', $context) && $this->instance->approval) {
             if ($entry->approved) {
-                $disapproveurl = new moodle_url($this->baseurl, [
+                $disapproveurl = new powereduc_url($this->baseurl, [
                     'disapprove' => $entry->id,
                     'sesskey' => sesskey(),
                 ]);
@@ -783,7 +783,7 @@ class template {
                     get_string('disapprove', 'mod_data')
                 ));
             } else {
-                $approveurl = new moodle_url($this->baseurl, [
+                $approveurl = new powereduc_url($this->baseurl, [
                     'approve' => $entry->id,
                     'sesskey' => sesskey(),
                 ]);
@@ -813,7 +813,7 @@ class template {
                 $fields = $this->manager->get_fields();
                 list($formats, $files) = data_portfolio_caller::formats($fields, $entry);
                 $button->set_formats($formats);
-                $exporturl = $button->to_html(PORTFOLIO_ADD_MOODLE_URL);
+                $exporturl = $button->to_html(PORTFOLIO_ADD_POWEREDUC_URL);
                 if (!is_null($exporturl)) {
                     $actionmenu->add(new action_menu_link_secondary(
                         $exporturl,

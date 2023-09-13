@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ $SESSION->wantsurl = "$CFG->wwwroot/";
 // Do not disclose details about existence or status of user accounts here.
 
 if (!$user = $DB->get_record('user', array('id'=>$userid, 'deleted'=>0, 'suspended'=>0))) {
-    throw new \moodle_exception('lockouterrorunlock', 'admin', get_login_url());
+    throw new \powereduc_exception('lockouterrorunlock', 'admin', get_login_url());
 }
 
 $usersecret = get_user_preferences('login_lockout_secret', false, $user);
@@ -51,4 +51,4 @@ if ($secret === $usersecret) {
     }
 }
 
-throw new \moodle_exception('lockouterrorunlock', 'admin', get_login_url());
+throw new \powereduc_exception('lockouterrorunlock', 'admin', get_login_url());

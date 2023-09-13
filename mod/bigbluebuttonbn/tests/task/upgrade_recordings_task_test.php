@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -286,7 +286,7 @@ class upgrade_recordings_task_test extends advanced_testcase {
      * @param bool $importedrecording
      * @return void
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function setup_basic_data($importedrecording = false) {
         global $DB;
@@ -310,7 +310,7 @@ class upgrade_recordings_task_test extends advanced_testcase {
      *
      * @return array
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function setup_basic_course_and_meeting() {
         $generator = $this->getDataGenerator();

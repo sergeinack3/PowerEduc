@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,11 +37,11 @@ function($, ajax, str, notification) {
                 },
                 {
                     key:        'yes',
-                    component:  'moodle'
+                    component:  'powereduc'
                 },
                 {
                     key:        'no',
-                    component:  'moodle'
+                    component:  'powereduc'
                 }
             ])
             .then(function(s) {

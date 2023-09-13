@@ -18,7 +18,7 @@ namespace auth_manual;
 
 use auth_plugin_manual;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/auth/manual/auth.php');

@@ -31,7 +31,7 @@ use progressive_parser_exception;
 use progressive_parser_processor;
 use simplified_parser_processor;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;
@@ -360,10 +360,10 @@ class parser_test extends \advanced_testcase {
         // Instantiate grouped_parser_processor
         $pr = new mock_simplified_parser_processor();
         // Add interesting paths
-        $pr->add_path('/MOODLE_BACKUP/COURSE');
-        $pr->add_path('/MOODLE_BACKUP/COURSE/SECTIONS/SECTION');
-        $pr->add_path('/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $pr->add_path('/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE');
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION');
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
         $this->assertTrue($pr instanceof progressive_parser_processor);
         // Assign processor to parser
         $pp->set_processor($pr);
@@ -381,26 +381,26 @@ class parser_test extends \advanced_testcase {
         // Check we have received the correct number of notifications
         $this->assertEquals(count($snotifs), 10); // Start tags are dispatched for empties (ROLES_OVERRIDES)
         // Check first and last notifications
-        $this->assertEquals($snotifs[0], '/MOODLE_BACKUP/COURSE');
-        $this->assertEquals($snotifs[1], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION');
-        $this->assertEquals($snotifs[2], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $this->assertEquals($snotifs[3], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
-        $this->assertEquals($snotifs[7], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $this->assertEquals($snotifs[8], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $this->assertEquals($snotifs[9], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($snotifs[0], '/POWEREDUC_BACKUP/COURSE');
+        $this->assertEquals($snotifs[1], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION');
+        $this->assertEquals($snotifs[2], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($snotifs[3], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
+        $this->assertEquals($snotifs[7], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($snotifs[8], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($snotifs[9], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
 
         // Now check end notifications
         $enotifs = $pr->get_end_notifications();
         // Check we have received the correct number of notifications
         $this->assertEquals(count($snotifs), 10); // End tags are dispatched for empties (ROLES_OVERRIDES)
         // Check first, and last notifications
-        $this->assertEquals($enotifs[0], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
-        $this->assertEquals($enotifs[1], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $this->assertEquals($enotifs[2], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $this->assertEquals($enotifs[3], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $this->assertEquals($enotifs[7], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $this->assertEquals($enotifs[8], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION');
-        $this->assertEquals($enotifs[9], '/MOODLE_BACKUP/COURSE');
+        $this->assertEquals($enotifs[0], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
+        $this->assertEquals($enotifs[1], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($enotifs[2], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($enotifs[3], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($enotifs[7], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $this->assertEquals($enotifs[8], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION');
+        $this->assertEquals($enotifs[9], '/POWEREDUC_BACKUP/COURSE');
 
         // Check start and end notifications are balanced
         sort($snotifs);
@@ -602,10 +602,10 @@ class parser_test extends \advanced_testcase {
         // Instantiate grouped_parser_processor
         $pr = new mock_grouped_parser_processor();
         // Add interesting paths
-        $pr->add_path('/MOODLE_BACKUP/COURSE');
-        $pr->add_path('/MOODLE_BACKUP/COURSE/SECTIONS/SECTION', true);
-        $pr->add_path('/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
-        $pr->add_path('/MOODLE_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE');
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION', true);
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD');
+        $pr->add_path('/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION/MODS/MOD/ROLES_OVERRIDES');
         $this->assertTrue($pr instanceof progressive_parser_processor);
         // Assign processor to parser
         $pp->set_processor($pr);
@@ -623,16 +623,16 @@ class parser_test extends \advanced_testcase {
         // Check we have received the correct number of notifications
         $this->assertEquals(count($snotifs), 2);
         // Check first and last notifications
-        $this->assertEquals($snotifs[0], '/MOODLE_BACKUP/COURSE');
-        $this->assertEquals($snotifs[1], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION');
+        $this->assertEquals($snotifs[0], '/POWEREDUC_BACKUP/COURSE');
+        $this->assertEquals($snotifs[1], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION');
 
         // Now check end notifications
         $enotifs = $pr->get_end_notifications();
         // Check we have received the correct number of notifications
         $this->assertEquals(count($snotifs), 2); // End tags are dispatched for empties (ROLES_OVERRIDES)
         // Check first, and last notifications
-        $this->assertEquals($enotifs[0], '/MOODLE_BACKUP/COURSE/SECTIONS/SECTION');
-        $this->assertEquals($enotifs[1], '/MOODLE_BACKUP/COURSE');
+        $this->assertEquals($enotifs[0], '/POWEREDUC_BACKUP/COURSE/SECTIONS/SECTION');
+        $this->assertEquals($enotifs[1], '/POWEREDUC_BACKUP/COURSE');
 
         // Check start and end notifications are balanced
         sort($snotifs);
@@ -657,11 +657,11 @@ class parser_test extends \advanced_testcase {
         $pr = new mock_grouped_parser_processor();
         $this->assertTrue($pr instanceof progressive_parser_processor);
         // Add interesting paths - moodle1 style.
-        $pr->add_path('/test/MOODLE_BACKUP/COURSE/FORMATDATA', true);
-        $pr->add_path('/test/MOODLE_BACKUP/COURSE/FORMATDATA/WEEKS/WEEK');
-        $pr->add_path('/test/MOODLE_BACKUP/COURSE/EMPTYGROUPED', true);
-        $pr->add_path('/test/MOODLE_BACKUP/COURSE/SECONDGROUPED', true);
-        $pr->add_path('/test/MOODLE_BACKUP/COURSE/SECONDGROUPED/SUBS/SUB');
+        $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA', true);
+        $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA/WEEKS/WEEK');
+        $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/EMPTYGROUPED', true);
+        $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', true);
+        $pr->add_path('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED/SUBS/SUB');
         // Add interesting paths - moodle2 style.
         $pr->add_path('/test/moodle2/grouped', true);
         $pr->add_path('/test/moodle2/grouped/subs/sub');
@@ -680,13 +680,13 @@ class parser_test extends \advanced_testcase {
         $this->assertEquals(count($chunks), 6); // All grouped elements.
 
         // Check some random data.
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/FORMATDATA', $chunks[0]['path']);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA', $chunks[0]['path']);
         $this->assertEquals(2, $chunks[0]['tags']['WEEKS']['WEEK'][1]['SECTION']);
 
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/EMPTYGROUPED', $chunks[1]['path']);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/EMPTYGROUPED', $chunks[1]['path']);
         $this->assertEquals(array(), $chunks[1]['tags']);
 
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/SECONDGROUPED', $chunks[2]['path']);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', $chunks[2]['path']);
         $this->assertEquals('Unit tests rock!', $chunks[2]['tags']['SUBS']['SUB'][0]['PROP']);
 
         $this->assertEquals('/test/moodle2/grouped', $chunks[3]['path']);
@@ -708,9 +708,9 @@ class parser_test extends \advanced_testcase {
         // Check we have received the correct number of notifications.
         $this->assertEquals(count($snotifs), 6);
         // Check the order of notifications (in order they appear in test6.xml).
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/FORMATDATA', $snotifs[0]);
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/EMPTYGROUPED', $snotifs[1]);
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/SECONDGROUPED', $snotifs[2]);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA', $snotifs[0]);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/EMPTYGROUPED', $snotifs[1]);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', $snotifs[2]);
         $this->assertEquals('/test/moodle2/grouped', $snotifs[3]);
         $this->assertEquals('/test/moodle2/groupednonemptywithattr', $snotifs[4]);
         $this->assertEquals('/test/moodle2/groupedemptywithattr', $snotifs[5]);
@@ -720,9 +720,9 @@ class parser_test extends \advanced_testcase {
         // Check we have received the correct number of notifications.
         $this->assertEquals(count($enotifs), 6);
         // Check the order of notifications (in order they appear in test6.xml).
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/FORMATDATA', $enotifs[0]);
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/EMPTYGROUPED', $enotifs[1]);
-        $this->assertEquals('/test/MOODLE_BACKUP/COURSE/SECONDGROUPED', $enotifs[2]);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/FORMATDATA', $enotifs[0]);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/EMPTYGROUPED', $enotifs[1]);
+        $this->assertEquals('/test/POWEREDUC_BACKUP/COURSE/SECONDGROUPED', $enotifs[2]);
         $this->assertEquals('/test/moodle2/grouped', $enotifs[3]);
         $this->assertEquals('/test/moodle2/groupednonemptywithattr', $enotifs[4]);
         $this->assertEquals('/test/moodle2/groupedemptywithattr', $enotifs[5]);

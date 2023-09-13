@@ -445,12 +445,12 @@ $CFG->admin = 'admin';
 //     $CFG->apacheloguser = 3; // Log username.
 // To get the values logged in Apache's log, add to your httpd.conf
 // the following statements. In the General part put:
-//     LogFormat "%h %l %{MOODLEUSER}n %t \"%r\" %s %b \"%{Referer}i\" \"%{User-Agent}i\"" moodleformat
+//     LogFormat "%h %l %{POWEREDUCUSER}n %t \"%r\" %s %b \"%{Referer}i\" \"%{User-Agent}i\"" moodleformat
 // And in the part specific to your Moodle install / virtualhost:
 //     CustomLog "/your/path/to/log" moodleformat
 //
 // Alternatively for other webservers such as nginx, you can instead have the username sent via a http header
-// 'X-MOODLEUSER' which can be saved in the logfile and then stripped out before being sent to the browser:
+// 'X-POWEREDUCUSER' which can be saved in the logfile and then stripped out before being sent to the browser:
 //     $CFG->headerloguser = 0; // Turn this feature off. Default value.
 //     $CFG->headerloguser = 1; // Log user id.
 //     $CFG->headerloguser = 2; // Log full name in cleaned format. ie, Darth Vader will be displayed as darth_vader.
@@ -1158,7 +1158,7 @@ $CFG->admin = 'admin';
 // This setting accepts the following values:
 // - One of the core preset names (i.e "starter" or "full").
 // - The path of a valid XML preset file, that will be imported and applied. Absolute paths are recommended, to
-//   guarantee the file is found: i.e."MOODLEPATH/admin/presets/tests/fixtures/import_settings_plugins.xml".
+//   guarantee the file is found: i.e."POWEREDUCPATH/admin/presets/tests/fixtures/import_settings_plugins.xml".
 //
 // This setting is only used during the installation process. So once the Moodle site is installed, it is ignored.
 //

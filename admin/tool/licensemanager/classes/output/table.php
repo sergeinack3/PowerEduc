@@ -29,7 +29,7 @@ use html_table_row;
 use html_writer;
 use license_manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Renderable for display of license manager table.

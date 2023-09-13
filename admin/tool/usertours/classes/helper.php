@@ -27,7 +27,7 @@ namespace tool_usertours;
 use core\output\inplace_editable;
 use tool_usertours\local\clientside_filter\clientside_filter;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Tour helper.

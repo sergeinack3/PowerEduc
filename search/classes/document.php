@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Document representation.
@@ -26,7 +26,7 @@ namespace core_search;
 
 use context;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Represents a document to index.
@@ -51,12 +51,12 @@ class document implements \renderable, \templatable {
     protected $extradata = array();
 
     /**
-     * @var \moodle_url Link to the document.
+     * @var \powereduc_url Link to the document.
      */
     protected $docurl = null;
 
     /**
-     * @var \moodle_url Link to the document context.
+     * @var \powereduc_url Link to the document context.
      */
     protected $contexturl = null;
 
@@ -309,7 +309,7 @@ class document implements \renderable, \templatable {
                 } else {
                     $docid = '(unknown)';
                 }
-                throw new \moodle_exception('error_indexing', 'search', '', null, '"' . $fieldname .
+                throw new \powereduc_exception('error_indexing', 'search', '', null, '"' . $fieldname .
                         '" value causes preg_replace error (may be caused by unusual characters) ' .
                         'in document with id "' . $docid . '"');
             }
@@ -487,17 +487,17 @@ class document implements \renderable, \templatable {
     /**
      * Sets the document url.
      *
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      * @return void
      */
-    public function set_doc_url(\moodle_url $url) {
+    public function set_doc_url(\powereduc_url $url) {
         $this->docurl = $url;
     }
 
     /**
      * Gets the url to the doc.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url() {
         return $this->docurl;
@@ -521,14 +521,14 @@ class document implements \renderable, \templatable {
         return $this->docicon;
     }
 
-    public function set_context_url(\moodle_url $url) {
+    public function set_context_url(\powereduc_url $url) {
         $this->contexturl = $url;
     }
 
     /**
      * Gets the url to the context.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url() {
         return $this->contexturl;
@@ -654,9 +654,9 @@ class document implements \renderable, \templatable {
 
         if ($this->is_set('userid')) {
             if ($this->get('userid') == $USER->id ||
-                    (has_capability('moodle/user:viewdetails', $context) &&
-                    has_capability('moodle/course:viewparticipants', $context))) {
-                $data['userurl'] = new \moodle_url(
+                    (has_capability('powereduc/user:viewdetails', $context) &&
+                    has_capability('powereduc/course:viewparticipants', $context))) {
+                $data['userurl'] = new \powereduc_url(
                     '/user/view.php',
                     ['id' => $this->get('userid'), 'course' => $this->get('courseid')]
                 );

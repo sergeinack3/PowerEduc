@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * A Helper for LTI Dynamic Registration.
@@ -23,7 +23,7 @@
  */
 namespace mod_lti\local\ltiopenid;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
 use Firebase\JWT\JWK;
@@ -94,12 +94,12 @@ class registration_helper {
     }
 
     /**
-     * Transforms an LTI 1.3 Registration to a Moodle LTI Config.
+     * Transforms an LTI 1.3 Registration to a PowerEduc LTI Config.
      *
      * @param array $registrationpayload the registration data received from the tool.
      * @param string $clientid the clientid to be issued for that tool.
      *
-     * @return object the Moodle LTI config.
+     * @return object the PowerEduc LTI config.
      */
     public function registration_to_config(array $registrationpayload, string $clientid): object {
         $responsetypes = $this->get_parameter($registrationpayload, 'response_types', true);
@@ -273,9 +273,9 @@ class registration_helper {
     }
 
     /**
-     * Transforms a moodle LTI 1.3 Config to an OAuth/LTI Client Registration.
+     * Transforms a powereduc LTI 1.3 Config to an OAuth/LTI Client Registration.
      *
-     * @param object $config Moodle LTI Config.
+     * @param object $config PowerEduc LTI Config.
      * @param int $typeid which is the LTI deployment id.
      * @param object $type tool instance in case the tool already exists.
      *

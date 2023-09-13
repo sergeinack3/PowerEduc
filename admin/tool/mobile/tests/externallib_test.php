@@ -18,7 +18,7 @@ namespace tool_mobile;
 
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -57,8 +57,8 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Test default values.
         $context = \context_system::instance();
-        list($authinstructions, $notusedformat) = external_format_text($CFG->auth_instructions, FORMAT_MOODLE, $context->id);
-        list($maintenancemessage, $notusedformat) = external_format_text($CFG->maintenance_message, FORMAT_MOODLE, $context->id);
+        list($authinstructions, $notusedformat) = external_format_text($CFG->auth_instructions, FORMAT_POWEREDUC, $context->id);
+        list($maintenancemessage, $notusedformat) = external_format_text($CFG->maintenance_message, FORMAT_POWEREDUC, $context->id);
 
         $expected = array(
             'wwwroot' => $CFG->wwwroot,
@@ -126,7 +126,7 @@ class externallib_test extends externallib_advanced_testcase {
         set_config('auth_name', 'CAS', 'auth_cas');
         set_config('auth', 'oauth2,cas');
 
-        list($authinstructions, $notusedformat) = external_format_text($authinstructions, FORMAT_MOODLE, $context->id);
+        list($authinstructions, $notusedformat) = external_format_text($authinstructions, FORMAT_POWEREDUC, $context->id);
         $expected['registerauth'] = 'email';
         $expected['authinstructions'] = $authinstructions;
         $expected['typeoflogin'] = api::LOGIN_VIA_BROWSER;
@@ -265,7 +265,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user);
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
 
         $token = external_generate_token_for_current_user($service);
 
@@ -369,7 +369,7 @@ class externallib_test extends externallib_advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user);
 
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
 
         $token = external_generate_token_for_current_user($service);
         $_GET['wstoken'] = $token->token;   // Mock parameters.
@@ -491,7 +491,7 @@ class externallib_test extends externallib_advanced_testcase {
                 . '<span lang="eo" class="multilang">Kurso resumo</span>'
                 . '@@PLUGINFILE@@/filename.txt'
                 . '<!-- Comment stripped when formatting text -->',
-            'summaryformat' => FORMAT_MOODLE
+            'summaryformat' => FORMAT_POWEREDUC
         ]);
         $user1 = self::getDataGenerator()->create_user(['username' => 'user1', 'lastaccess' => time()]);
         $user2 = self::getDataGenerator()->create_user(['username' => 'user2', 'lastaccess' => time()]);
@@ -500,7 +500,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Setup WS token.
         $webservicemanager = new \webservice;
-        $service = $webservicemanager->get_external_service_by_shortname(MOODLE_OFFICIAL_MOBILE_SERVICE);
+        $service = $webservicemanager->get_external_service_by_shortname(POWEREDUC_OFFICIAL_MOBILE_SERVICE);
         $token = external_generate_token_for_current_user($service);
         $_POST['wstoken'] = $token->token;
 
@@ -637,7 +637,7 @@ class externallib_test extends externallib_advanced_testcase {
         $qrloginkey = api::get_qrlogin_key($mobilesettings);
 
         // Generate new tokens, the ones we expect to receive.
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
         $token = external_generate_token_for_current_user($service);
 
         // Fake the app.
@@ -676,7 +676,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($key->iprestriction);
 
         // Generate new tokens, the ones we expect to receive.
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
         $token = external_generate_token_for_current_user($service);
 
         // Fake the app.
@@ -715,7 +715,7 @@ class externallib_test extends externallib_advanced_testcase {
         $DB->set_field('user_private_key', 'iprestriction', '6.6.6.6', ['value' => $qrloginkey]);
 
         // Generate new tokens, the ones we expect to receive.
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
         $token = external_generate_token_for_current_user($service);
 
         // Fake the app.

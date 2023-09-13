@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Action to delete (or hide) a question, or restore a previously hidden question.
@@ -49,7 +49,7 @@ class delete_action_column extends menu_action_column_base {
 
     /**
      * Contains the url of the delete question page.
-     * @var \moodle_url|string
+     * @var \powereduc_url|string
      */
     public $deletequestionurl;
 
@@ -63,7 +63,7 @@ class delete_action_column extends menu_action_column_base {
         parent::init();
         $this->strdelete = get_string('delete');
         $this->strrestore = get_string('restore');
-        $this->deletequestionurl = new \moodle_url('/question/bank/deletequestion/delete.php');
+        $this->deletequestionurl = new \powereduc_url('/question/bank/deletequestion/delete.php');
         if (!empty($this->qbank->cm->id)) {
             $this->returnparams['cmid'] = $this->qbank->cm->id;
         }
@@ -88,7 +88,7 @@ class delete_action_column extends menu_action_column_base {
                     'unhide' => $question->id,
                     'sesskey' => sesskey());
             $hiddenparams = array_merge($hiddenparams, $this->returnparams);
-            $url = new \moodle_url($this->deletequestionurl, $hiddenparams);
+            $url = new \powereduc_url($this->deletequestionurl, $hiddenparams);
             return [$url, 't/restore', $this->strrestore];
         } else {
             $deleteparams = array(
@@ -96,7 +96,7 @@ class delete_action_column extends menu_action_column_base {
                     'q' . $question->id => 1,
                     'sesskey' => sesskey());
             $deleteparams = array_merge($deleteparams, $this->returnparams);
-            $url = new \moodle_url($this->deletequestionurl, $deleteparams);
+            $url = new \powereduc_url($this->deletequestionurl, $deleteparams);
             return [$url, 't/delete', $this->strdelete];
         }
     }

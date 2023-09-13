@@ -4,9 +4,9 @@
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
-//          http://moodle.org                                            //
+//          http://powereduc.org                                            //
 //                                                                       //
-// Copyright (C) 1999-onwards Moodle Pty Ltd  http://moodle.com          //
+// Copyright (C) 1999-onwards Moodle Pty Ltd  http://powereduc.com          //
 //                                                                       //
 // This program is free software; you can redistribute it and/or modify  //
 // it under the terms of the GNU General Public License as published by  //
@@ -21,7 +21,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -141,7 +141,7 @@ class data_field_textarea extends data_field_base {
             $image_options->env = 'editor';
             $image_options->itemid = $draftitemid;
 
-            // moodlemedia plugin
+            // powereducmedia plugin
             $args->accepted_types = array('video', 'audio');
             $media_options = initialise_filepicker($args);
             $media_options->context = $this->context;

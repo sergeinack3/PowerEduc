@@ -24,7 +24,7 @@
 
 namespace tool_dataprivacy\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
 use html_writer;

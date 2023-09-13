@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * GIFT format question importer/exporter.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -52,7 +52,7 @@ defined('MOODLE_INTERNAL') || die();
  * and are enclosed in percent signs (% %). See docs and examples.txt for more.
  *
  * This filter was written through the collaboration of numerous
- * members of the Moodle community. It was originally based on
+ * members of the PowerEduc community. It was originally based on
  * the missingword format, which included code from Thomas Robb
  * and others. Paul Tsuchido Shew wrote this filter in December 2003.
  *
@@ -151,7 +151,7 @@ class qformat_gift extends qformat_default {
         return true;
     }
 
-    protected function parse_text_with_format($text, $defaultformat = FORMAT_MOODLE) {
+    protected function parse_text_with_format($text, $defaultformat = FORMAT_POWEREDUC) {
         $result = array(
             'text' => $text,
             'format' => $defaultformat,
@@ -172,7 +172,7 @@ class qformat_gift extends qformat_default {
 
     public function readquestion($lines) {
         // Given an array of lines known to define a question in this format, this function
-        // converts it into a question object suitable for processing and insertion into Moodle.
+        // converts it into a question object suitable for processing and insertion into PowerEduc.
 
         $question = $this->defaultquestion();
         // Define replaced by simple assignment, stop redefine notices.
@@ -585,8 +585,8 @@ class qformat_gift extends qformat_default {
      * @return string the corresponding name.
      */
     protected function format_const_to_name($format) {
-        if ($format == FORMAT_MOODLE) {
-            return 'moodle';
+        if ($format == FORMAT_POWEREDUC) {
+            return 'powereduc';
         } else if ($format == FORMAT_HTML) {
             return 'html';
         } else if ($format == FORMAT_PLAIN) {
@@ -594,7 +594,7 @@ class qformat_gift extends qformat_default {
         } else if ($format == FORMAT_MARKDOWN) {
             return 'markdown';
         } else {
-            return 'moodle';
+            return 'powereduc';
         }
     }
 
@@ -603,8 +603,8 @@ class qformat_gift extends qformat_default {
      * @return string the corresponding name.
      */
     protected function format_name_to_const($format) {
-        if ($format == 'moodle') {
-            return FORMAT_MOODLE;
+        if ($format == 'powereduc') {
+            return FORMAT_POWEREDUC;
         } else if ($format == 'html') {
             return FORMAT_HTML;
         } else if ($format == 'plain') {
@@ -669,7 +669,7 @@ class qformat_gift extends qformat_default {
         return '::' . $this->repchar($name) . '::';
     }
 
-    public function write_questiontext($text, $format, $defaultformat = FORMAT_MOODLE) {
+    public function write_questiontext($text, $format, $defaultformat = FORMAT_POWEREDUC) {
         $output = '';
         if ($text != '' && $format != $defaultformat) {
             $output .= '[' . $this->format_const_to_name($format) . ']';

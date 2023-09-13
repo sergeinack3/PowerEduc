@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 require_once($CFG->dirroot . "/notes/lib.php");
@@ -36,7 +36,7 @@ require_once($CFG->dirroot . "/notes/lib.php");
  * @category   external
  * @copyright  2011 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.2
+ * @since PowerEduc 2.2
  */
 class core_notes_external extends external_api {
 
@@ -44,7 +44,7 @@ class core_notes_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_notes_parameters() {
         return new external_function_parameters(
@@ -54,7 +54,7 @@ class core_notes_external extends external_api {
                         array(
                             'userid' => new external_value(PARAM_INT, 'id of the user the note is about'),
                             'publishstate' => new external_value(PARAM_ALPHA, '\'personal\', \'course\' or \'site\''),
-                            'courseid' => new external_value(PARAM_INT, 'course id of the note (in Moodle a note can only be created into a course, even for site and personal notes)'),
+                            'courseid' => new external_value(PARAM_INT, 'course id of the note (in PowerEduc a note can only be created into a course, even for site and personal notes)'),
                             'text' => new external_value(PARAM_RAW, 'the text of the message - text or HTML'),
                             'format' => new external_format_value('text', VALUE_DEFAULT),
                             'clientnoteid' => new external_value(PARAM_ALPHANUMEXT, 'your own client id for the note. If this id is provided, the fail message id will be returned to you', VALUE_OPTIONAL),
@@ -72,7 +72,7 @@ class core_notes_external extends external_api {
      *
      * @param array $notes  An array of notes to create.
      * @return array (success infos and fail infos)
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_notes($notes = array()) {
         global $CFG, $DB;
@@ -81,7 +81,7 @@ class core_notes_external extends external_api {
 
         // Check if note system is enabled.
         if (!$CFG->enablenotes) {
-            throw new moodle_exception('notesdisabled', 'notes');
+            throw new powereduc_exception('notesdisabled', 'notes');
         }
 
         // Retrieve all courses.
@@ -113,7 +113,7 @@ class core_notes_external extends external_api {
                 // Ensure the current user is allowed to run this function.
                 $context = context_course::instance($note['courseid']);
                 self::validate_context($context);
-                require_capability('moodle/notes:manage', $context);
+                require_capability('powereduc/notes:manage', $context);
             }
 
             // Check the user exists.
@@ -171,7 +171,7 @@ class core_notes_external extends external_api {
             } else {
                 // WARNINGS: for backward compatibility we return this errormessage.
                 //          We should have thrown exceptions as these errors prevent results to be returned.
-                // See http://docs.moodle.org/dev/Errors_handling_in_web_services#When_to_send_a_warning_on_the_server_side .
+                // See http://docs.powereduc.org/dev/Errors_handling_in_web_services#When_to_send_a_warning_on_the_server_side .
                 $resultnote['noteid'] = -1;
                 $resultnote['errormessage'] = $errormessage;
             }
@@ -186,7 +186,7 @@ class core_notes_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function create_notes_returns() {
         return new external_multiple_structure(
@@ -204,7 +204,7 @@ class core_notes_external extends external_api {
      * Returns description of delete_notes parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_notes_parameters() {
         return new external_function_parameters(
@@ -222,7 +222,7 @@ class core_notes_external extends external_api {
      *
      * @param array $notes An array of ids for the notes to delete.
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_notes($notes = array()) {
         global $CFG;
@@ -231,7 +231,7 @@ class core_notes_external extends external_api {
 
         // Check if note system is enabled.
         if (!$CFG->enablenotes) {
-            throw new moodle_exception('notesdisabled', 'notes');
+            throw new powereduc_exception('notesdisabled', 'notes');
         }
         $warnings = array();
         foreach ($params['notes'] as $noteid) {
@@ -240,7 +240,7 @@ class core_notes_external extends external_api {
                 // Ensure the current user is allowed to run this function.
                 $context = context_course::instance($note->courseid);
                 self::validate_context($context);
-                require_capability('moodle/notes:manage', $context);
+                require_capability('powereduc/notes:manage', $context);
                 note_delete($note);
             } else {
                 $warnings[] = array('item'=>'note', 'itemid'=>$noteid, 'warningcode'=>'badid', 'message'=>'Note does not exist');
@@ -253,7 +253,7 @@ class core_notes_external extends external_api {
      * Returns description of delete_notes result value.
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function delete_notes_returns() {
         return  new external_warnings('item is always \'note\'',
@@ -268,7 +268,7 @@ class core_notes_external extends external_api {
      * Returns description of get_notes parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_notes_parameters() {
         return new external_function_parameters(
@@ -285,7 +285,7 @@ class core_notes_external extends external_api {
      *
      * @param array $notes An array of ids for the notes to retrieve.
      * @return null
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_notes($notes) {
         global $CFG;
@@ -293,7 +293,7 @@ class core_notes_external extends external_api {
         $params = self::validate_parameters(self::get_notes_parameters(), array('notes' => $notes));
         // Check if note system is enabled.
         if (!$CFG->enablenotes) {
-            throw new moodle_exception('notesdisabled', 'notes');
+            throw new powereduc_exception('notesdisabled', 'notes');
         }
         $resultnotes = array();
         foreach ($params['notes'] as $noteid) {
@@ -304,7 +304,7 @@ class core_notes_external extends external_api {
                 // Ensure the current user is allowed to run this function.
                 $context = context_course::instance($note->courseid);
                 self::validate_context($context);
-                require_capability('moodle/notes:view', $context);
+                require_capability('powereduc/notes:view', $context);
                 list($gotnote['text'], $gotnote['format']) = external_format_text($note->content,
                                                                                   $note->format,
                                                                                   $context->id,
@@ -330,7 +330,7 @@ class core_notes_external extends external_api {
      * Returns description of get_notes result value.
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_notes_returns() {
         return new external_single_structure(
@@ -360,7 +360,7 @@ class core_notes_external extends external_api {
      * Returns description of update_notes parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_notes_parameters() {
         return new external_function_parameters(
@@ -384,7 +384,7 @@ class core_notes_external extends external_api {
      *
      * @param array $notes An array of ids for the notes to update.
      * @return array fail infos.
-     * @since Moodle 2.2
+     * @since PowerEduc 2.2
      */
     public static function update_notes($notes = array()) {
         global $CFG, $DB;
@@ -393,7 +393,7 @@ class core_notes_external extends external_api {
 
         // Check if note system is enabled.
         if (!$CFG->enablenotes) {
-            throw new moodle_exception('notesdisabled', 'notes');
+            throw new powereduc_exception('notesdisabled', 'notes');
         }
 
         $warnings = array();
@@ -403,7 +403,7 @@ class core_notes_external extends external_api {
                 // Ensure the current user is allowed to run this function.
                 $context = context_course::instance($notedetails->courseid);
                 self::validate_context($context);
-                require_capability('moodle/notes:manage', $context);
+                require_capability('powereduc/notes:manage', $context);
 
                 $dbnote = new stdClass;
                 $dbnote->id = $note['id'];
@@ -448,7 +448,7 @@ class core_notes_external extends external_api {
      * Returns description of update_notes result value.
      *
      * @return external_description
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function update_notes_returns() {
         return new external_warnings('item is always \'note\'',
@@ -462,7 +462,7 @@ class core_notes_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_course_notes_parameters() {
         return new external_function_parameters(
@@ -482,7 +482,7 @@ class core_notes_external extends external_api {
      * @param int $state
      * @param int $author
      * @return array of notes
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     protected static function create_note_list($courseid, $context, $userid, $state, $author = 0) {
         $results = array();
@@ -506,14 +506,14 @@ class core_notes_external extends external_api {
      * @param int $courseid ID of the Course
      * @param int $userid ID of the User
      * @return array of site, course and personal notes and warnings
-     * @since Moodle 2.9
-     * @throws moodle_exception
+     * @since PowerEduc 2.9
+     * @throws powereduc_exception
      */
     public static function get_course_notes($courseid, $userid = 0) {
         global $CFG, $USER;
 
         if (empty($CFG->enablenotes)) {
-            throw new moodle_exception('notesdisabled', 'notes');
+            throw new powereduc_exception('notesdisabled', 'notes');
         }
 
         $warnings = array();
@@ -535,14 +535,14 @@ class core_notes_external extends external_api {
         $course = get_course($params['courseid']);
 
         $systemcontext = context_system::instance();
-        $canmanagesystemnotes = has_capability('moodle/notes:manage', $systemcontext);
+        $canmanagesystemnotes = has_capability('powereduc/notes:manage', $systemcontext);
 
         if ($course->id == SITEID) {
             $context = $systemcontext;
             $canmanagecoursenotes = $canmanagesystemnotes;
         } else {
             $context = context_course::instance($course->id);
-            $canmanagecoursenotes = has_capability('moodle/notes:manage', $context);
+            $canmanagecoursenotes = has_capability('powereduc/notes:manage', $context);
         }
         self::validate_context($context);
 
@@ -552,13 +552,13 @@ class core_notes_external extends external_api {
 
         if ($course->id != SITEID) {
 
-            require_capability('moodle/notes:view', $context);
+            require_capability('powereduc/notes:view', $context);
             $sitenotes = self::create_note_list(0, $systemcontext, $params['userid'], NOTES_STATE_SITE);
             $coursenotes = self::create_note_list($course->id, $context, $params['userid'], NOTES_STATE_PUBLIC);
             $personalnotes = self::create_note_list($course->id, $context, $params['userid'], NOTES_STATE_DRAFT,
                                                         $USER->id);
         } else {
-            if (has_capability('moodle/notes:view', $context)) {
+            if (has_capability('powereduc/notes:view', $context)) {
                 $sitenotes = self::create_note_list(0, $context, $params['userid'], NOTES_STATE_SITE);
             }
             // It returns notes only for a specific user!
@@ -566,7 +566,7 @@ class core_notes_external extends external_api {
                 $usercourses = enrol_get_users_courses($user->id, true);
                 foreach ($usercourses as $c) {
                     // All notes at course level, only if we have capability on every course.
-                    if (has_capability('moodle/notes:view', context_course::instance($c->id))) {
+                    if (has_capability('powereduc/notes:view', context_course::instance($c->id))) {
                         $coursenotes += self::create_note_list($c->id, $context, $params['userid'], NOTES_STATE_PUBLIC);
                     }
                 }
@@ -589,7 +589,7 @@ class core_notes_external extends external_api {
      * Returns array of note structure
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     protected static function get_note_structure() {
         return array(
@@ -609,7 +609,7 @@ class core_notes_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function get_course_notes_returns() {
         return new external_single_structure(
@@ -636,7 +636,7 @@ class core_notes_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_notes_parameters() {
         return new external_function_parameters(
@@ -653,15 +653,15 @@ class core_notes_external extends external_api {
      * @param int $courseid id of the course
      * @param int $userid id of the user
      * @return array of warnings and status result
-     * @since Moodle 2.9
-     * @throws moodle_exception
+     * @since PowerEduc 2.9
+     * @throws powereduc_exception
      */
     public static function view_notes($courseid, $userid = 0) {
         global $CFG;
         require_once($CFG->dirroot . "/notes/lib.php");
 
         if (empty($CFG->enablenotes)) {
-            throw new moodle_exception('notesdisabled', 'notes');
+            throw new powereduc_exception('notesdisabled', 'notes');
         }
 
         $warnings = array();
@@ -685,14 +685,14 @@ class core_notes_external extends external_api {
 
         // First of all, validate the context before do further permission checks.
         self::validate_context($context);
-        require_capability('moodle/notes:view', $context);
+        require_capability('powereduc/notes:view', $context);
 
         if (!empty($params['userid'])) {
             $user = core_user::get_user($params['userid'], '*', MUST_EXIST);
             core_user::require_active_user($user);
 
             if ($course->id != SITEID and !can_access_course($course, $user, '', true)) {
-                throw new moodle_exception('notenrolledprofile');
+                throw new powereduc_exception('notenrolledprofile');
             }
         }
 
@@ -709,7 +709,7 @@ class core_notes_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_notes_returns() {
         return new external_single_structure(

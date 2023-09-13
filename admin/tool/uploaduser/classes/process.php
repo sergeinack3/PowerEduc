@@ -24,7 +24,7 @@
 
 namespace tool_uploaduser;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context_system;
 use context_coursecat;
@@ -373,7 +373,7 @@ class process {
                     // This must be some hacky field that is abusing arrays to store content and format.
                     $user->$key = array();
                     $user->{$key['text']}   = $value;
-                    $user->{$key['format']} = FORMAT_MOODLE;
+                    $user->{$key['format']} = FORMAT_POWEREDUC;
                 } else {
                     $user->$key = trim($value);
                 }

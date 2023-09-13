@@ -25,7 +25,7 @@
 
 namespace core_calendar\external\subscription;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/calendar/lib.php');
 

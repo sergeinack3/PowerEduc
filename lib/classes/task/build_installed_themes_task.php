@@ -24,7 +24,7 @@
 
 namespace core\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class that builds and caches all of the site's installed themes.

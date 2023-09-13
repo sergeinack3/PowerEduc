@@ -24,7 +24,7 @@
 
 namespace availability_mock;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Mock condition.

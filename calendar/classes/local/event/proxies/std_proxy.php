@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\proxies;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_calendar\local\event\exceptions\member_does_not_exist_exception;
 

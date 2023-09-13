@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The class for displaying the forum report table.
  *
  * @package   forumreport_summary
- * @copyright 2019 Michael Hawkins <michaelh@moodle.com>
+ * @copyright 2019 Michael Hawkins <michaelh@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace forumreport_summary;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/tablelib.php');
 
@@ -33,7 +33,7 @@ use table_sql;
 /**
  * The class for displaying the forum report table.
  *
- * @copyright  2019 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2019 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class summary_table extends table_sql {
@@ -255,7 +255,7 @@ class summary_table extends table_sql {
             'id' => 'user' . $data->userid,
             'name' => 'user' . $data->userid,
             'checked' => false,
-            'label' => get_string('selectitem', 'moodle', fullname($data)),
+            'label' => get_string('selectitem', 'powereduc', fullname($data)),
             'labelclasses' => 'accesshide',
         ]);
 
@@ -362,7 +362,7 @@ class summary_table extends table_sql {
         }
 
         $buttoncontext = [
-            'url' => new \moodle_url('/mod/forum/export.php', $params),
+            'url' => new \powereduc_url('/mod/forum/export.php', $params),
             'label' => get_string('exportpostslabel', 'forumreport_summary', fullname($data)),
         ];
 
@@ -865,7 +865,7 @@ class summary_table extends table_sql {
                     continue;
                 }
 
-                $aag = has_capability('moodle/site:accessallgroups', $this->forumcontexts[$cm->id]);
+                $aag = has_capability('powereduc/site:accessallgroups', $this->forumcontexts[$cm->id]);
 
                 if ($groupmode == VISIBLEGROUPS || $aag) {
                     $allgroups = true;
@@ -1011,9 +1011,9 @@ class summary_table extends table_sql {
         // Include the pagination size selector.
         $perpageoptions = array_combine($this->perpageoptions, $this->perpageoptions);
         $selected = in_array($this->perpage, $this->perpageoptions) ? $this->perpage : $this->perpageoptions[0];
-        $perpageselect = new \single_select(new \moodle_url(''), 'perpage',
+        $perpageselect = new \single_select(new \powereduc_url(''), 'perpage',
                 $perpageoptions, $selected, null, 'selectperpage');
-        $perpageselect->set_label(get_string('perpage', 'moodle'));
+        $perpageselect->set_label(get_string('perpage', 'powereduc'));
 
         $data->perpage = $perpageselect->export_for_template($OUTPUT);
 

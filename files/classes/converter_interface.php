@@ -23,7 +23,7 @@
  */
 namespace core_files;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for converting files between different file formats.

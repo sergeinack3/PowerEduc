@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quizaccess_seb;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/test_helper_trait.php');
 
@@ -34,7 +34,7 @@ class quiz_settings_test extends \advanced_testcase {
     /** @var context_module $context Test context. */
     protected $context;
 
-    /** @var moodle_url $url Test quiz URL. */
+    /** @var powereduc_url $url Test quiz URL. */
     protected $url;
 
     /**
@@ -52,7 +52,7 @@ class quiz_settings_test extends \advanced_testcase {
             'seb_requiresafeexambrowser' => settings_provider::USE_SEB_CONFIG_MANUALLY,
         ]);
         $this->context = \context_module::instance($this->quiz->cmid);
-        $this->url = new \moodle_url("/mod/quiz/view.php", ['id' => $this->quiz->cmid]);
+        $this->url = new \powereduc_url("/mod/quiz/view.php", ['id' => $this->quiz->cmid]);
     }
 
     /**
@@ -213,7 +213,7 @@ class quiz_settings_test extends \advanced_testcase {
      * Test that uploaded seb file gets converted to config string.
      */
     public function test_config_file_uploaded_converted_to_config() {
-        $url = new \moodle_url("/mod/quiz/view.php", ['id' => $this->quiz->cmid]);
+        $url = new \powereduc_url("/mod/quiz/view.php", ['id' => $this->quiz->cmid]);
         $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                 . "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"
                 . "<plist version=\"1.0\"><dict><key>hashedQuitPassword</key><string>hashedpassword</string>"
@@ -234,7 +234,7 @@ class quiz_settings_test extends \advanced_testcase {
         $quizsettings = quiz_settings::get_record(['quizid' => $this->quiz->id]);
         $quizsettings->set('requiresafeexambrowser', settings_provider::USE_SEB_UPLOAD_CONFIG);
         $cmid = $quizsettings->get('cmid');
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage("No uploaded SEB config file could be found for quiz with cmid: {$cmid}");
         $quizsettings->get_config();
     }
@@ -286,7 +286,7 @@ class quiz_settings_test extends \advanced_testcase {
         $quizsettings->save();
 
         $this->assertStringContainsString(
-            "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id={$this->quiz->cmid}</string>",
+            "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id={$this->quiz->cmid}</string>",
             $quizsettings->get_config()
         );
 
@@ -354,7 +354,7 @@ class quiz_settings_test extends \advanced_testcase {
         $quizsettings->save();
 
         $this->assertStringContainsString(
-            "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id={$this->quiz->cmid}</string>",
+            "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id={$this->quiz->cmid}</string>",
             $quizsettings->get_config()
         );
 
@@ -391,7 +391,7 @@ class quiz_settings_test extends \advanced_testcase {
         $quizsettings->save();
 
         $this->assertStringContainsString(
-            "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id={$this->quiz->cmid}</string>",
+            "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id={$this->quiz->cmid}</string>",
             $quizsettings->get_config()
         );
 
@@ -569,7 +569,7 @@ class quiz_settings_test extends \advanced_testcase {
                 . "<key>regex</key><false/></dict><dict><key>action</key><integer>1</integer>"
                 . "<key>active</key><true/><key>expression</key>"
                 . "<string>second.hello</string><key>regex</key><false/></dict></array>"
-                . "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id=1</string>"
+                . "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id=1</string>"
                 . "<key>sendBrowserExamKey</key><true/><key>browserWindowWebView</key><integer>3</integer>"
                 . "<key>examSessionClearCookiesOnStart</key><false/>"
                 . "<key>allowPreferencesWindow</key><false/></dict></plist>\n",
@@ -597,7 +597,7 @@ class quiz_settings_test extends \advanced_testcase {
                 . "<key>regex</key><false/></dict><dict><key>action</key><integer>0</integer>"
                 . "<key>active</key><true/><key>expression</key>"
                 . "<string>second.hello</string><key>regex</key><false/></dict></array>"
-                . "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id=1</string>"
+                . "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id=1</string>"
                 . "<key>sendBrowserExamKey</key><true/><key>browserWindowWebView</key><integer>3</integer>"
                 . "<key>examSessionClearCookiesOnStart</key><false/>"
                 . "<key>allowPreferencesWindow</key><false/></dict></plist>\n",
@@ -625,7 +625,7 @@ class quiz_settings_test extends \advanced_testcase {
                 . "<key>regex</key><true/></dict><dict><key>action</key><integer>1</integer>"
                 . "<key>active</key><true/><key>expression</key>"
                 . "<string>second.hello</string><key>regex</key><true/></dict></array>"
-                . "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id=1</string>"
+                . "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id=1</string>"
                 . "<key>sendBrowserExamKey</key><true/><key>browserWindowWebView</key><integer>3</integer>"
                 . "<key>examSessionClearCookiesOnStart</key><false/>"
                 . "<key>allowPreferencesWindow</key><false/></dict></plist>\n",
@@ -653,7 +653,7 @@ class quiz_settings_test extends \advanced_testcase {
                 . "<key>regex</key><true/></dict><dict><key>action</key><integer>0</integer>"
                 . "<key>active</key><true/><key>expression</key>"
                 . "<string>second.hello</string><key>regex</key><true/></dict></array>"
-                . "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id=1</string>"
+                . "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id=1</string>"
                 . "<key>sendBrowserExamKey</key><true/><key>browserWindowWebView</key><integer>3</integer>"
                 . "<key>examSessionClearCookiesOnStart</key><false/>"
                 . "<key>allowPreferencesWindow</key><false/></dict></plist>\n",
@@ -683,7 +683,7 @@ class quiz_settings_test extends \advanced_testcase {
                 . "<key>regex</key><true/></dict><dict><key>action</key><integer>0</integer>"
                 . "<key>active</key><true/><key>expression</key>"
                 . "<string>second.hello</string><key>regex</key><true/></dict></array>"
-                . "<key>startURL</key><string>https://www.example.com/moodle/mod/quiz/view.php?id=1</string>"
+                . "<key>startURL</key><string>https://www.example.com/powereduc/mod/quiz/view.php?id=1</string>"
                 . "<key>sendBrowserExamKey</key><true/><key>browserWindowWebView</key><integer>3</integer>"
                 . "<key>examSessionClearCookiesOnStart</key><false/>"
                 . "<key>allowPreferencesWindow</key><false/></dict></plist>\n",

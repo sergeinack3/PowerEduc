@@ -25,7 +25,7 @@
  * @category output
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * This class tracks all the things that are needed by the current page.

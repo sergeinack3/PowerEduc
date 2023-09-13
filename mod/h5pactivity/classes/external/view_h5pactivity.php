@@ -1,31 +1,31 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external method for triggering the course module viewed event.
  *
  * @package    mod_h5pactivity
- * @since      Moodle 3.9
- * @copyright  2020 Carlos Escobedo <carlos@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_h5pactivity\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 
@@ -41,8 +41,8 @@ use mod_h5pactivity\local\manager;
  * This is the external method for triggering the course module viewed event.
  *
  * @package    mod_h5pactivity
- * @since      Moodle 3.9
- * @copyright  2020 Carlos Escobedo <carlos@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class view_h5pactivity extends external_api {
@@ -64,8 +64,8 @@ class view_h5pactivity extends external_api {
      *
      * @param  int $h5pactivityid The h5p activity id.
      * @return array of warnings and the access information
-     * @since Moodle 3.9
-     * @throws  moodle_exception
+     * @since PowerEduc 3.9
+     * @throws  powereduc_exception
      */
     public static function execute(int $h5pactivityid): array {
 
@@ -94,7 +94,7 @@ class view_h5pactivity extends external_api {
      * Describes the view_h5pactivity return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.9
+     * @since PowerEduc 3.9
      */
     public static function execute_returns() {
         return new external_single_structure(

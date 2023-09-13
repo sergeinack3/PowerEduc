@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core;
 
 use media_test_native_plugin;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once(__DIR__ . '/fixtures/testable_core_media_player_native.php');
 
 /**
@@ -65,7 +65,7 @@ class core_media_player_native_test extends \advanced_testcase {
 
         // Create list of URLs for each extension.
         $urls = array_map(function($ext){
-            return new \moodle_url('http://example.org/video.' . $ext);
+            return new \powereduc_url('http://example.org/video.' . $ext);
         }, $nativeextensions);
 
         // Make sure that the list of supported URLs is not filtering permitted extensions.
@@ -78,8 +78,8 @@ class core_media_player_native_test extends \advanced_testcase {
      */
     public function test_get_attribute() {
         $urls = [
-            new \moodle_url('http://example.org/some_filename.mp4'),
-            new \moodle_url('http://example.org/some_filename_hires.mp4'),
+            new \powereduc_url('http://example.org/some_filename.mp4'),
+            new \powereduc_url('http://example.org/some_filename_hires.mp4'),
         ];
 
         $player = new media_test_native_plugin();
@@ -96,8 +96,8 @@ class core_media_player_native_test extends \advanced_testcase {
      */
     public function test_add_remove_attributes() {
         $urls = [
-            new \moodle_url('http://example.org/some_filename.mp4'),
-            new \moodle_url('http://example.org/some_filename_hires.mp4'),
+            new \powereduc_url('http://example.org/some_filename.mp4'),
+            new \powereduc_url('http://example.org/some_filename_hires.mp4'),
         ];
 
         $player = new media_test_native_plugin();
@@ -135,8 +135,8 @@ class core_media_player_native_test extends \advanced_testcase {
      */
     public function test_replace_sources() {
         $urls = [
-            new \moodle_url('http://example.org/some_filename.mp4'),
-            new \moodle_url('http://example.org/some_filename_hires.mp4'),
+            new \powereduc_url('http://example.org/some_filename.mp4'),
+            new \powereduc_url('http://example.org/some_filename_hires.mp4'),
         ];
 
         $player = new media_test_native_plugin();

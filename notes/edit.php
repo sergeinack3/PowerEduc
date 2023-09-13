@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 require_once('../config.php');
 require_once('lib.php');
@@ -21,13 +21,13 @@ require_once($CFG->dirroot . '/course/lib.php');
 
 $noteid = optional_param('id', 0, PARAM_INT);
 
-$url = new moodle_url('/notes/edit.php');
+$url = new powereduc_url('/notes/edit.php');
 
 if ($noteid) {
     // Existing note.
     $url->param('id', $noteid);
     if (!$note = note_load($noteid)) {
-        throw new \moodle_exception('invalidid', 'notes');
+        throw new \powereduc_exception('invalidid', 'notes');
     }
 
 } else {
@@ -51,20 +51,20 @@ if ($noteid) {
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id' => $note->courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course);
 
 if (empty($CFG->enablenotes)) {
-    throw new \moodle_exception('notesdisabled', 'notes');
+    throw new \powereduc_exception('notesdisabled', 'notes');
 }
 
 $context = context_course::instance($course->id);
-require_capability('moodle/notes:manage', $context);
+require_capability('powereduc/notes:manage', $context);
 
 if (!$user = $DB->get_record('user', array('id' => $note->userid))) {
-    throw new \moodle_exception('invaliduserid');
+    throw new \powereduc_exception('invaliduserid');
 }
 
 $noteform = new note_edit_form();
@@ -97,12 +97,12 @@ if ($noteid) {
 // Output HTML.
 $link = null;
 if (course_can_view_participants($context) || course_can_view_participants(context_system::instance())) {
-    $link = new moodle_url('/user/index.php', array('id' => $course->id));
+    $link = new powereduc_url('/user/index.php', array('id' => $course->id));
 }
 $PAGE->navbar->add(get_string('participants'), $link);
-$PAGE->navbar->add(fullname($user), new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id)));
+$PAGE->navbar->add(fullname($user), new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id)));
 $PAGE->navbar->add(get_string('notes', 'notes'),
-                   new moodle_url('/notes/index.php', array('user' => $user->id, 'course' => $course->id)));
+                   new powereduc_url('/notes/index.php', array('user' => $user->id, 'course' => $course->id)));
 $PAGE->navbar->add($strnotes);
 $PAGE->set_title($course->shortname . ': ' . $strnotes);
 $PAGE->set_heading($course->fullname);

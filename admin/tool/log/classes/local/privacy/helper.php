@@ -24,7 +24,7 @@
  */
 
 namespace tool_log\local\privacy;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\local\request\transform;
 

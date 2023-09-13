@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ $id      = required_param('id', PARAM_INT);
 $groupid = optional_param('groupid', 0, PARAM_INT); // Only for teachers.
 $theme   = optional_param('chat_theme', 'course_theme', PARAM_SAFEDIR); // The value course_theme == the current theme.
 
-$url = new moodle_url('/mod/chat/gui_ajax/index.php', array('id' => $id));
+$url = new powereduc_url('/mod/chat/gui_ajax/index.php', array('id' => $id));
 if ($groupid !== 0) {
     $url->param('groupid', $groupid);
 }
@@ -41,7 +41,7 @@ require_capability('mod/chat:chat', $context);
 if ($groupmode = groups_get_activity_groupmode($cm)) {   // Groups are being used.
     if ($groupid = groups_get_activity_group($cm)) {
         if (!$group = groups_get_group($groupid)) {
-            throw new \moodle_exception('invalidgroupid');
+            throw new \powereduc_exception('invalidgroupid');
         }
         $groupname = ': '.$group->name;
     } else {
@@ -58,7 +58,7 @@ if ($theme != 'course_theme' and !file_exists(__DIR__ . '/theme/'.$theme.'/chat.
 
 // Log into the chat room.
 if (!$chatsid = chat_login_user($chat->id, 'ajax', $groupid, $course)) {
-    throw new \moodle_exception('cantlogin', 'chat');
+    throw new \powereduc_exception('cantlogin', 'chat');
 }
 $courseshortname = format_string($course->shortname, true, array('context' => context_course::instance($course->id)));
 $module = array(

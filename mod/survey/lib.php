@@ -1,23 +1,23 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_survey
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -795,7 +795,7 @@ function survey_supports($feature) {
         case FEATURE_COMPLETION_HAS_RULES:    return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_COMMUNICATION;
 
@@ -817,7 +817,7 @@ function survey_extend_settings_navigation(settings_navigation $settings, naviga
     if (has_capability('mod/survey:readresponses', $settings->get_page()->cm->context)) {
         $cm = get_coursemodule_from_id('survey', $settings->get_page()->cm->id);
         $survey = $DB->get_record("survey", ["id" => $cm->instance]);
-        $url = new moodle_url('/mod/survey/report.php', ['id' => $settings->get_page()->cm->id]);
+        $url = new powereduc_url('/mod/survey/report.php', ['id' => $settings->get_page()->cm->id]);
         if ($survey && ($survey->template != SURVEY_CIQ)) {
             $url->param('action', 'summary');
         } else {
@@ -846,7 +846,7 @@ function survey_page_type_list($pagetype, $parentcontext, $currentcontext) {
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
  * @param  string $viewed       which page viewed
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function survey_view($survey, $course, $cm, $context, $viewed) {
 
@@ -875,7 +875,7 @@ function survey_view($survey, $course, $cm, $context, $viewed) {
  * @param  array $questions     array of questions objects
  * @param  array $questionorder array of questions ids indicating the correct order
  * @return array                list of questions ordered
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function survey_order_questions($questions, $questionorder) {
 
@@ -891,7 +891,7 @@ function survey_order_questions($questions, $questionorder) {
  *
  * @param  stdClass $question question object
  * @return stdClass question object with all the text fields translated
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function survey_translate_question($question) {
 
@@ -918,15 +918,15 @@ function survey_translate_question($question) {
  *
  * @param  stdClass $survey survey object
  * @return array list of questions ordered
- * @since Moodle 3.0
- * @throws  moodle_exception
+ * @since PowerEduc 3.0
+ * @throws  powereduc_exception
  */
 function survey_get_questions($survey) {
     global $DB;
 
     $questionids = explode(',', $survey->questions);
     if (! $questions = $DB->get_records_list("survey_questions", "id", $questionids)) {
-        throw new moodle_exception('cannotfindquestion', 'survey');
+        throw new powereduc_exception('cannotfindquestion', 'survey');
     }
 
     return survey_order_questions($questions, $questionids);
@@ -937,7 +937,7 @@ function survey_get_questions($survey) {
  *
  * @param  stdClass $question questin object
  * @return array list of subquestions ordered
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function survey_get_subquestions($question) {
     global $DB;
@@ -955,7 +955,7 @@ function survey_get_subquestions($question) {
  * @param  array $answersrawdata the answers to be saved
  * @param  stdClass $course   a course object (required for trigger the submitted event)
  * @param  stdClass $context  a context object (required for trigger the submitted event)
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function survey_save_answers($survey, $answersrawdata, $course, $context) {
     global $DB, $USER;
@@ -1030,7 +1030,7 @@ function survey_save_answers($survey, $answersrawdata, $course, $context) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function survey_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER;
@@ -1112,7 +1112,7 @@ function mod_survey_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/survey/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/survey/view.php', ['id' => $cm->id]),
         1,
         true
     );

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once(__DIR__.'/fixtures/event_fixtures.php');
 
 /**
@@ -62,7 +62,7 @@ class core_event_course_module_viewed_testcase extends advanced_testcase {
         $legacydata = array($course->id, 'feedback', 'view', 'view.php?id=' . $cm->id, $feed->id, $cm->id);
         $this->assertEventLegacyLogData($legacydata, $event);
         $this->assertSame('feedback', $event->objecttable);
-        $url = new moodle_url('/mod/feedback/view.php', array('id' => $cm->id));
+        $url = new powereduc_url('/mod/feedback/view.php', array('id' => $cm->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 

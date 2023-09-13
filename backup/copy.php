@@ -26,7 +26,7 @@
 require_once('../config.php');
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $courseid = required_param('id', PARAM_INT);
 $returnto = optional_param('returnto', 'course', PARAM_ALPHANUM); // Generic navigation return page switch.

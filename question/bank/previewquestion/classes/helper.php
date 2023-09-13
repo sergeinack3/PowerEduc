@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_previewquestion;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/editlib.php');
 
@@ -28,7 +28,7 @@ use core\plugininfo\qbank;
 use core_question\local\bank\edit_menu_column;
 use core_question\local\bank\view;
 use core_question\local\bank\question_edit_contexts;
-use moodle_url;
+use powereduc_url;
 use question_bank;
 use question_definition;
 use question_display_options;
@@ -102,11 +102,11 @@ class helper {
      * @param int $qubaid the id of the question usage for this preview
      * @param question_preview_options $options the options in use
      * @param context $context context for the question preview
-     * @param moodle_url $returnurl url of the page to return to
-     * @return moodle_url
+     * @param powereduc_url $returnurl url of the page to return to
+     * @return powereduc_url
      */
     public static function question_preview_action_url($questionid, $qubaid,
-            question_preview_options $options, $context, $returnurl = null): moodle_url {
+            question_preview_options $options, $context, $returnurl = null): powereduc_url {
         $params = [
                 'id' => $questionid,
                 'previewid' => $qubaid,
@@ -120,19 +120,19 @@ class helper {
             $params['returnurl'] = $returnurl;
         }
         $params = array_merge($params, $options->get_url_params());
-        return new moodle_url('/question/bank/previewquestion/preview.php', $params);
+        return new powereduc_url('/question/bank/previewquestion/preview.php', $params);
     }
 
     /**
      * The the URL to use for actions relating to this preview.
      *
      * @param int $questionid the question being previewed
-     * @param context $context the current moodle context
+     * @param context $context the current powereduc context
      * @param int $previewid optional previewid to sign post saved previewed answers
-     * @param moodle_url $returnurl url of the page to return to
-     * @return moodle_url
+     * @param powereduc_url $returnurl url of the page to return to
+     * @return powereduc_url
      */
-    public static function question_preview_form_url($questionid, $context, $previewid = null, $returnurl = null): moodle_url {
+    public static function question_preview_form_url($questionid, $context, $previewid = null, $returnurl = null): powereduc_url {
         $params = [
                 'id' => $questionid,
         ];
@@ -147,7 +147,7 @@ class helper {
         if ($returnurl !== null) {
             $params['returnurl'] = $returnurl;
         }
-        return new moodle_url('/question/bank/previewquestion/preview.php', $params);
+        return new powereduc_url('/question/bank/previewquestion/preview.php', $params);
     }
 
     /**
@@ -157,7 +157,7 @@ class helper {
      * @param int $questionid id of the question in preview
      * @param object $displayoptions display options for the question in preview
      * @param object $context context of the question for preview
-     * @param moodle_url $returnurl url of the page to return to
+     * @param powereduc_url $returnurl url of the page to return to
      * @param int|null $version version of the question in preview
      */
     public static function restart_preview($previewid, $questionid, $displayoptions, $context,
@@ -184,13 +184,13 @@ class helper {
      *      be picked randomly
      * @param object $context context to run the preview in (affects things like
      *      filter settings, theme, lang, etc.) Defaults to $PAGE->context
-     * @param moodle_url $returnurl url of the page to return to
+     * @param powereduc_url $returnurl url of the page to return to
      * @param int $version version of the question
-     * @return moodle_url the URL
+     * @return powereduc_url the URL
      */
     public static function question_preview_url($questionid, $preferredbehaviour = null,
             $maxmark = null, $displayoptions = null, $variant = null, $context = null, $returnurl = null,
-            $version = null): moodle_url {
+            $version = null): powereduc_url {
 
         $params = ['id' => $questionid];
 
@@ -233,7 +233,7 @@ class helper {
             $params['variant'] = $variant;
         }
 
-        return new moodle_url('/question/bank/previewquestion/preview.php', $params);
+        return new powereduc_url('/question/bank/previewquestion/preview.php', $params);
     }
 
     /**

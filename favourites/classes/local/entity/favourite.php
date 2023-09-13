@@ -23,7 +23,7 @@
  */
 namespace core_favourites\local\entity;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Contains the favourite class, each instance being a representation of a DB row for the 'favourite' table.

@@ -26,9 +26,9 @@ Feature: Users can edit tags to add description or rename
     Given I log in as "admin"
     And I set the following system permissions of "Tag editor" role:
       | capability                   | permission |
-      | moodle/tag:edit              | Allow      |
-      | moodle/site:viewparticipants | Allow      |
-      | moodle/user:viewdetails      | Allow      |
+      | powereduc/tag:edit              | Allow      |
+      | powereduc/site:viewparticipants | Allow      |
+      | powereduc/user:viewdetails      | Allow      |
     And I log out
     When I log in as "editor1"
     And I turn editing mode on

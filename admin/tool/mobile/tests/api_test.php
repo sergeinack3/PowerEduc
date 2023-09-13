@@ -16,7 +16,7 @@
 
 namespace tool_mobile;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -139,7 +139,7 @@ class api_test extends \externallib_advanced_testcase {
         $CFG->enablemobilewebservice = 1;
         $user3 = $this->getDataGenerator()->create_user();
         $this->setUser($user3);
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE));
         $token = external_generate_token_for_current_user($service);
 
         $message->userto = $user3;

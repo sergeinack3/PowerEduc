@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -103,7 +103,7 @@ if ($confirm) {
         ]);
     }
 
-    redirect(new moodle_url('/mod/book/view.php', ['id' => $cm->id]), $message);
+    redirect(new powereduc_url('/mod/book/view.php', ['id' => $cm->id]), $message);
 }
 
-redirect(new moodle_url('/mod/book/view.php', ['id' => $cm->id]));
+redirect(new powereduc_url('/mod/book/view.php', ['id' => $cm->id]));

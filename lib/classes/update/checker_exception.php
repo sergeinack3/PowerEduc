@@ -23,7 +23,7 @@
  */
 namespace core\update;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * General exception thrown by the {@link \core\update\checker} class

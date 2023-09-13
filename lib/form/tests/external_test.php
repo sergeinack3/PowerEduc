@@ -28,7 +28,7 @@ namespace core_form;
 use advanced_testcase;
 use external_api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Page to export forum discussions.
  *
  * @package    mod_forum
- * @copyright  2019 Simey Lameze <simey@moodle.com>
+ * @copyright  2019 Simey Lameze <simey@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define('NO_OUTPUT_BUFFERING', true);
@@ -57,12 +57,12 @@ $forumvault = $vaultfactory->get_forum_vault();
 
 $forum = $forumvault->get_from_id($forumid);
 if (empty($forum)) {
-    throw new moodle_exception('Unable to find forum with id ' . $forumid);
+    throw new powereduc_exception('Unable to find forum with id ' . $forumid);
 }
 
 $capabilitymanager = $managerfactory->get_capability_manager($forum);
 if (!$capabilitymanager->can_export_forum($USER)) {
-    throw new moodle_exception('cannotexportforum', 'forum');
+    throw new powereduc_exception('cannotexportforum', 'forum');
 }
 
 $course = $forum->get_course_record();
@@ -71,7 +71,7 @@ $cm = cm_info::create($coursemodule);
 
 require_course_login($course, true, $cm);
 
-$url = new moodle_url('/mod/forum/export.php');
+$url = new powereduc_url('/mod/forum/export.php');
 $pagetitle = get_string('export', 'mod_forum');
 $context = $forum->get_context();
 
@@ -80,7 +80,7 @@ $form = new mod_forum\form\export_form($url->out(false), [
 ]);
 
 if ($form->is_cancelled()) {
-    redirect(new moodle_url('/mod/forum/view.php', ['id' => $cm->id]));
+    redirect(new powereduc_url('/mod/forum/view.php', ['id' => $cm->id]));
 } else if ($data = $form->get_data()) {
     $dataformat = $data->format;
 
@@ -124,7 +124,7 @@ if ($form->is_cancelled()) {
                 'messageformat', 'messagetrust', 'attachment', 'totalscore', 'mailnow', 'deleted', 'privatereplyto',
                 'privatereplytofullname', 'wordcount', 'charcount'];
 
-    $canviewfullname = has_capability('moodle/site:viewfullnames', $context);
+    $canviewfullname = has_capability('powereduc/site:viewfullnames', $context);
 
     $datamapper = $legacydatamapperfactory->get_post_data_mapper();
     $exportdata = new ArrayObject($datamapper->to_legacy_objects($posts));

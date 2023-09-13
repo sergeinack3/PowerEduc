@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file defines the quiz overview report class.
  *
  * @package   quiz_overview
- * @copyright 1999 onwards Martin Dougiamas and others {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas and others {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use mod_quiz\question\bank\qbank_helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/report/attemptsreport.php');
 require_once($CFG->dirroot . '/mod/quiz/report/overview/overview_options.php');
@@ -35,7 +35,7 @@ require_once($CFG->dirroot . '/mod/quiz/report/overview/overview_table.php');
 /**
  * Quiz report subclass for the overview (grades) report.
  *
- * @copyright 1999 onwards Martin Dougiamas and others {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas and others {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class quiz_overview_report extends quiz_attempts_report {
@@ -156,7 +156,7 @@ class quiz_overview_report extends quiz_attempts_report {
                         $regradealllabel =
                                 get_string('regradeall', 'quiz_overview');
                     }
-                    $displayurl = new moodle_url($options->get_url(), array('sesskey' => sesskey()));
+                    $displayurl = new powereduc_url($options->get_url(), array('sesskey' => sesskey()));
                     echo '<div class="mdl-align">';
                     echo '<form action="'.$displayurl->out_omit_querystring().'">';
                     echo '<div>';
@@ -261,7 +261,7 @@ class quiz_overview_report extends quiz_attempts_report {
      * @param int $currentgroup
      * @param \core\dml\sql_join $groupstudentsjoins (joins, wheres, params)
      * @param \core\dml\sql_join $allowedjoins (joins, wheres, params)
-     * @param moodle_url $redirecturl
+     * @param powereduc_url $redirecturl
      */
     protected function process_actions($quiz, $cm, $currentgroup, \core\dml\sql_join $groupstudentsjoins,
             \core\dml\sql_join $allowedjoins, $redirecturl) {
@@ -306,7 +306,7 @@ class quiz_overview_report extends quiz_attempts_report {
 
     /**
      * Finish displaying the regrade progress page.
-     * @param moodle_url $nexturl where to send the user after the regrade.
+     * @param powereduc_url $nexturl where to send the user after the regrade.
      * @uses exit. This method never returns.
      */
     protected function finish_regrade($nexturl) {

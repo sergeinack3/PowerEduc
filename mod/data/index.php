@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ $id = required_param('id', PARAM_INT);   // course
 $PAGE->set_url('/mod/data/index.php', array('id'=>$id));
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_course_login($course);
@@ -50,14 +50,14 @@ $strname = get_string('name');
 $strdata = get_string('modulename','data');
 $strdataplural  = get_string('modulenameplural','data');
 
-$PAGE->navbar->add($strdata, new moodle_url('/mod/data/index.php', array('id'=>$course->id)));
+$PAGE->navbar->add($strdata, new powereduc_url('/mod/data/index.php', array('id'=>$course->id)));
 $PAGE->set_title($strdata);
 $PAGE->set_heading($course->fullname);
 echo $OUTPUT->header();
 echo $OUTPUT->heading($strdataplural, 2);
 
 if (! $datas = get_all_instances_in_course("data", $course)) {
-    notice(get_string('thereareno', 'moodle',$strdataplural) , "$CFG->wwwroot/course/view.php?id=$course->id");
+    notice(get_string('thereareno', 'powereduc',$strdataplural) , "$CFG->wwwroot/course/view.php?id=$course->id");
 }
 
 $usesections = course_format_uses_sections($course->format);

@@ -24,7 +24,7 @@
 
 namespace core_xapi\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for core_xapi implementing null_provider.

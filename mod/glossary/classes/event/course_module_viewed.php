@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 
 namespace mod_glossary\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The mod_glossary course module viewed event class.
@@ -53,14 +53,14 @@ class course_module_viewed extends \core\event\course_module_viewed {
     /**
      * Get URL related to the action.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
         $params = array('id' => $this->contextinstanceid);
         if (!empty($this->other['mode'])) {
             $params['mode'] = $this->other['mode'];
         }
-        return new \moodle_url("/mod/$this->objecttable/view.php", $params);
+        return new \powereduc_url("/mod/$this->objecttable/view.php", $params);
     }
 
     /**
@@ -69,7 +69,7 @@ class course_module_viewed extends \core\event\course_module_viewed {
      * @return array|null
      */
     public function get_legacy_logdata() {
-        // In moodle 2.6 and below the url was logged incorrectly, always having tab=-1 .
+        // In powereduc 2.6 and below the url was logged incorrectly, always having tab=-1 .
         return array($this->courseid, $this->objecttable, 'view',
             'view.php?id=' . $this->contextinstanceid . '&amp;tab=-1',
             $this->objectid, $this->contextinstanceid);

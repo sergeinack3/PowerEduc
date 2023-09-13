@@ -25,7 +25,7 @@ namespace core_xapi;
 
 use advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Contains test cases for testing xAPI iri class.

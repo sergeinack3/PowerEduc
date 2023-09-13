@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-define('NO_MOODLE_COOKIES', true); // Session not used here.
+define('NO_POWEREDUC_COOKIES', true); // Session not used here.
 
 require('../../../config.php');
 require_once('../lib.php');
@@ -25,7 +25,7 @@ $PAGE->set_url('/mod/chat/gui_sockets/chatinput.php', array('chat_sid' => $chats
 $PAGE->set_popup_notification_allowed(false);
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
-    throw new \moodle_exception('notlogged', 'chat');
+    throw new \powereduc_exception('notlogged', 'chat');
 }
 
 // Get the user theme.

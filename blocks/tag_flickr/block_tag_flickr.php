@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 define('FLICKR_DEV_KEY', '4fddbdd7ff2376beec54d7f6afad425e');
 define('DEFAULT_NUMBER_OF_PHOTOS', 6);
 

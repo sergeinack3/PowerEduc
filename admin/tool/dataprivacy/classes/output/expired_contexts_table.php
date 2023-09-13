@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_dataprivacy\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/tablelib.php');
 
@@ -39,7 +39,7 @@ use tool_dataprivacy\expired_context;
 use tool_dataprivacy\external\purpose_exporter;
 use tool_dataprivacy\purpose;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * The class for displaying the expired contexts table.

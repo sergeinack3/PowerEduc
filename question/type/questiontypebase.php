@@ -1,37 +1,37 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The default questiontype class.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questiontypes
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/engine/lib.php');
 require_once($CFG->libdir . '/questionlib.php');
 
 
 /**
- * This is the base class for Moodle question types.
+ * This is the base class for PowerEduc question types.
  *
  * There are detailed comments on each method, explaining what the method is
  * for, and the circumstances under which you might need to override it.
@@ -43,7 +43,7 @@ require_once($CFG->libdir . '/questionlib.php');
  * interface to meet their needs, rather the freeze the API prematurely and
  * condem everyone to working round a clunky interface for ever afterwards.
  *
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class question_type {
@@ -238,7 +238,7 @@ class question_type {
      * Get extra actions for a question of this type to add to the question bank edit menu.
      *
      * This method is called if the {@link edit_menu_column} is being used in the
-     * question bank, which it is by default since Moodle 3.8. If applicable for
+     * question bank, which it is by default since PowerEduc 3.8. If applicable for
      * your question type, you can return arn array of {@link action_menu_link}s.
      * These will be added at the end of the Edit menu for this question.
      *
@@ -538,7 +538,7 @@ class question_type {
         $result = $this->save_question_options($form);
 
         if (!empty($result->error)) {
-            throw new \moodle_exception($result->error);
+            throw new \powereduc_exception($result->error);
         }
 
         if (!empty($result->notice)) {
@@ -1106,7 +1106,7 @@ class question_type {
      * @param object $questiondata the question data loaded from the database.
      * @param bool $forceplaintextanswers most qtypes assume that answers are
      *      FORMAT_PLAIN, and dont use the answerformat DB column (it contains
-     *      the default 0 = FORMAT_MOODLE). Therefore, by default this method
+     *      the default 0 = FORMAT_POWEREDUC). Therefore, by default this method
      *      ingores answerformat. Pass false here to use answerformat. For example
      *      multichoice does this.
      */
@@ -1294,7 +1294,7 @@ class question_type {
     // IMPORT/EXPORT FUNCTIONS --------------------------------- .
 
     /*
-     * Imports question from the Moodle XML format
+     * Imports question from the PowerEduc XML format
      *
      * Imports question using information from extra_question_fields function
      * If some of you fields contains id's you'll need to reimplement this
@@ -1347,7 +1347,7 @@ class question_type {
     }
 
     /*
-     * Export question to the Moodle XML format
+     * Export question to the PowerEduc XML format
      *
      * Export question using information from extra_question_fields function
      * If some of you fields contains id's you'll need to reimplement this

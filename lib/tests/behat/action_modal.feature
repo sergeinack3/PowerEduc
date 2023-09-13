@@ -17,7 +17,7 @@ Feature: Close modals by clicking outside them
     And I click on "Add" "link"
     And I click on "a new question" "link"
     # Cannot use the normal ‘I click on’ here, because the pop-up gets in the way.
-    And I click on ".moodle-dialogue-lightbox" "css_element" skipping visibility check
+    And I click on ".powereduc-dialogue-lightbox" "css_element" skipping visibility check
     # The modal does not close because it contains a form.
     Then I should see "Choose a question type to add"
 

@@ -22,7 +22,7 @@ use backup_check;
 use backup_controller;
 use backup_controller_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;
@@ -131,7 +131,7 @@ class checks_test extends \advanced_testcase {
 
         // Pass correct controller, check must return true in any case with $apply enabled
         // and $bc must continue being mock_backup_controller
-        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $this->assertTrue(backup_check::check_security($bc, true));
         $this->assertTrue($bc instanceof backup_controller);

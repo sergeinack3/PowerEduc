@@ -23,7 +23,7 @@
  */
 namespace core\update;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Defines the structure of objects returned by {@link \core\update\checker::get_update_info()}

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Class for providing quiz settings, to make setting up quiz form manageable.
@@ -35,7 +35,7 @@ use lang_string;
 use stdClass;
 use stored_file;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helper class for providing quiz settings, to make setting up quiz form manageable.
@@ -74,12 +74,12 @@ class settings_provider {
      * Insert form element.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      * @param \HTML_QuickForm_element $element Element to insert.
      * @param string $before Insert element before.
      */
     protected static function insert_element(\mod_quiz_mod_form $quizform,
-                                             \MoodleQuickForm $mform, \HTML_QuickForm_element $element, $before = 'security') {
+                                             \PowerEducQuickForm $mform, \HTML_QuickForm_element $element, $before = 'security') {
         $mform->insertElementBefore($element, $before);
     }
 
@@ -87,10 +87,10 @@ class settings_provider {
      * Remove element from the form.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      * @param string $elementname Element name.
      */
-    protected static function remove_element(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform, string  $elementname) {
+    protected static function remove_element(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform, string  $elementname) {
         if ($mform->elementExists($elementname)) {
             $mform->removeElement($elementname);
             $mform->setDefault($elementname, null);
@@ -101,10 +101,10 @@ class settings_provider {
      * Add help button to the element.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      * @param string $elementname Element name.
      */
-    protected static function add_help_button(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform, string $elementname) {
+    protected static function add_help_button(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform, string $elementname) {
         if ($mform->elementExists($elementname)) {
             $mform->addHelpButton($elementname, $elementname, 'quizaccess_seb');
         }
@@ -114,11 +114,11 @@ class settings_provider {
      * Set default value for the element.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      * @param string $elementname Element name.
      * @param mixed $value Default value.
      */
-    protected static function set_default(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform, string  $elementname, $value) {
+    protected static function set_default(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform, string  $elementname, $value) {
         $mform->setDefault($elementname, $value);
     }
 
@@ -126,11 +126,11 @@ class settings_provider {
      * Set element type.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      * @param string $elementname Element name.
      * @param string $type Type of the form element.
      */
-    protected static function set_type(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform, string $elementname, string $type) {
+    protected static function set_type(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform, string $elementname, string $type) {
         $mform->setType($elementname, $type);
     }
 
@@ -138,10 +138,10 @@ class settings_provider {
      * Freeze form element.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      * @param string $elementname Element name.
      */
-    protected static function freeze_element(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform, string $elementname) {
+    protected static function freeze_element(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform, string $elementname) {
         if ($mform->elementExists($elementname)) {
             $mform->freeze($elementname);
         }
@@ -151,9 +151,9 @@ class settings_provider {
      * Add SEB header element to  the form.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function add_seb_header_element(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function add_seb_header_element(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         global  $OUTPUT;
 
         $element = $mform->createElement('header', 'seb', get_string('seb', 'quizaccess_seb'));
@@ -185,9 +185,9 @@ class settings_provider {
      * Add SEB usage element with all available options.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function add_seb_usage_options(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function add_seb_usage_options(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         $element = $mform->createElement(
             'select',
             'seb_requiresafeexambrowser',
@@ -209,9 +209,9 @@ class settings_provider {
      * Add Templates element.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function add_seb_templates(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function add_seb_templates(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         if (self::can_use_seb_template($quizform->get_context()) || self::is_conflicting_permissions($quizform->get_context())) {
             $element = $mform->createElement(
                 'select',
@@ -239,9 +239,9 @@ class settings_provider {
      * Add upload config file element.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function add_seb_config_file(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function add_seb_config_file(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         $itemid = 0;
 
         $draftitemid = 0;
@@ -275,9 +275,9 @@ class settings_provider {
      * Add Show Safe Exam Browser download button.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function add_seb_show_download_link(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function add_seb_show_download_link(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         if (self::can_change_seb_showsebdownloadlink($quizform->get_context())) {
             $element = $mform->createElement('selectyesno',
                 'seb_showsebdownloadlink',
@@ -294,9 +294,9 @@ class settings_provider {
      * Add Allowed Browser Exam Keys setting.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function add_seb_allowedbrowserexamkeys(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function add_seb_allowedbrowserexamkeys(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         if (self::can_change_seb_allowedbrowserexamkeys($quizform->get_context())) {
             $element = $mform->createElement('textarea',
                 'seb_allowedbrowserexamkeys',
@@ -313,9 +313,9 @@ class settings_provider {
      * Add SEB config elements.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function add_seb_config_elements(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function add_seb_config_elements(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         $defaults = self::get_seb_config_element_defaults();
         $types = self::get_seb_config_element_types();
 
@@ -344,9 +344,9 @@ class settings_provider {
      * Add setting fields.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    public static function add_seb_settings_fields(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    public static function add_seb_settings_fields(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         if (self::can_configure_seb($quizform->get_context())) {
             self::add_seb_header_element($quizform, $mform);
             self::add_seb_usage_options($quizform, $mform);
@@ -364,9 +364,9 @@ class settings_provider {
      * Hide SEB elements if required.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function hide_seb_elements(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function hide_seb_elements(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         foreach (self::get_quiz_hideifs() as $elname => $rules) {
             if ($mform->elementExists($elname)) {
                 foreach ($rules as $hideif) {
@@ -385,9 +385,9 @@ class settings_provider {
      * Lock SEB elements if required.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      */
-    protected static function lock_seb_elements(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) {
+    protected static function lock_seb_elements(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) {
         if (self::is_seb_settings_locked($quizform->get_instance()) || self::is_conflicting_permissions($quizform->get_context())) {
             // Freeze common quiz settings.
             self::freeze_element($quizform, $mform, 'seb_requiresafeexambrowser');
@@ -427,15 +427,15 @@ class settings_provider {
      * Return uploaded SEB config file link.
      *
      * @param \mod_quiz_mod_form $quizform the quiz settings form that is being built.
-     * @param \MoodleQuickForm $mform the wrapped MoodleQuickForm.
+     * @param \PowerEducQuickForm $mform the wrapped PowerEducQuickForm.
      * @return string
      */
-    protected static function get_uploaded_seb_file_download_link(\mod_quiz_mod_form $quizform, \MoodleQuickForm $mform) : string {
+    protected static function get_uploaded_seb_file_download_link(\mod_quiz_mod_form $quizform, \PowerEducQuickForm $mform) : string {
         $link = '';
         $file = self::get_module_context_sebconfig_file($quizform->get_coursemodule()->id);
 
         if ($file) {
-            $url = \moodle_url::make_pluginfile_url(
+            $url = \powereduc_url::make_pluginfile_url(
                 $file->get_contextid(),
                 $file->get_component(),
                 $file->get_filearea(),
@@ -702,7 +702,7 @@ class settings_provider {
     }
 
     /**
-     * Saves filemanager_sebconfigfile files to the moodle storage backend.
+     * Saves filemanager_sebconfigfile files to the powereduc storage backend.
      *
      * @param string $draftitemid The id of the draft area to use.
      * @param string $cmid The cmid of for the quiz.

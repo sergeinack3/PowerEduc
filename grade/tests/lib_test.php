@@ -30,7 +30,7 @@ use grade_item;
 use grade_plugin_return;
 use grade_report_summary;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/grade/lib.php');

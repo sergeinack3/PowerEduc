@@ -28,7 +28,7 @@ namespace tool_policy\output;
 use core\session\manager;
 use moodle_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context_system;
 use core_user;

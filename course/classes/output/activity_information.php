@@ -23,7 +23,7 @@
  */
 namespace core_course\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use cm_info;
 use completion_info;

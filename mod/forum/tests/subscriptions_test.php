@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum;
 
 use mod_forum_tests_generator_trait;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/generator_trait.php');
@@ -154,10 +154,10 @@ class subscriptions_test extends \advanced_testcase {
         $result = \mod_forum\subscriptions::get_unsubscribable_forums();
         $this->assertEquals(0, count($result));
 
-        // Add the moodle/course:viewhiddenactivities capability to the student user.
+        // Add the powereduc/course:viewhiddenactivities capability to the student user.
         $roleids = $DB->get_records_menu('role', null, '', 'shortname, id');
         $context = \context_course::instance($course->id);
-        assign_capability('moodle/course:viewhiddenactivities', CAP_ALLOW, $roleids['student'], $context);
+        assign_capability('powereduc/course:viewhiddenactivities', CAP_ALLOW, $roleids['student'], $context);
 
         // All of the unsubscribable forums should now be listed.
         $result = \mod_forum\subscriptions::get_unsubscribable_forums();

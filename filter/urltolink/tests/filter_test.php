@@ -27,7 +27,7 @@ namespace filter_urltolink;
 
 use filter_urltolink;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/filter/urltolink/filter.php'); // Include the code to test

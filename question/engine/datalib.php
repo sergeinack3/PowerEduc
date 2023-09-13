@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Code for loading and saving question attempts to and from the database.
@@ -42,7 +42,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -54,15 +54,15 @@ defined('MOODLE_INTERNAL') || die();
  */
 class question_engine_data_mapper {
     /**
-     * @var moodle_database normally points to global $DB, but I prefer not to
+     * @var powereduc_database normally points to global $DB, but I prefer not to
      * use globals if I can help it.
      */
     protected $db;
 
     /**
-     * @param moodle_database $db a database connectoin. Defaults to global $DB.
+     * @param powereduc_database $db a database connectoin. Defaults to global $DB.
      */
-    public function __construct(moodle_database $db = null) {
+    public function __construct(powereduc_database $db = null) {
         if (is_null($db)) {
             global $DB;
             $this->db = $DB;
@@ -1102,7 +1102,7 @@ ORDER BY
     public function update_question_attempt_flag($qubaid, $questionid, $qaid, $slot, $newstate) {
         if (!$this->db->record_exists('question_attempts', array('id' => $qaid,
                 'questionusageid' => $qubaid, 'questionid' => $questionid, 'slot' => $slot))) {
-            throw new moodle_exception('errorsavingflags', 'question');
+            throw new powereduc_exception('errorsavingflags', 'question');
         }
 
         $this->db->set_field('question_attempts', 'flagged', $newstate, array('id' => $qaid));

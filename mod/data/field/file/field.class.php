@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -166,7 +166,7 @@ class data_field_file extends data_field_base {
             if (!$file) {
                 return '';
             }
-            $fileurl = moodle_url::make_pluginfile_url(
+            $fileurl = powereduc_url::make_pluginfile_url(
                 $file->get_contextid(),
                 $file->get_component(),
                 $file->get_filearea(),
@@ -180,7 +180,7 @@ class data_field_file extends data_field_base {
         $icon = $OUTPUT->pix_icon(
             file_file_icon($file),
             get_mimetype_description($file),
-            'moodle',
+            'powereduc',
             ['width' => 16, 'height' => 16]
         );
 

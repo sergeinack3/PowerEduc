@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,11 +17,11 @@
 
 /**
  * @package   mod_data
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/data/lib.php');
 require_once($CFG->libdir . '/portfolio/caller.php');
@@ -420,7 +420,7 @@ class data_portfolio_caller extends portfolio_module_caller_base {
  * Class representing the virtual node with all itemids in the file browser
  *
  * @category  files
- * @copyright 2012 David Mudrak <david@moodle.com>
+ * @copyright 2012 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class data_file_info_container extends file_info {
@@ -739,7 +739,7 @@ function data_get_time_availability_status($data, $canmanageentries = null, $con
  * @param  stdClass  $data            database record
  * @param  boolean $canmanageentries  optional, if the user can manage entries
  * @param  stdClass  $context          Module context, required if $canmanageentries is not set
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @since  Moodle 3.3
  */
 function data_require_time_available($data, $canmanageentries = null, $context = null) {
@@ -748,7 +748,7 @@ function data_require_time_available($data, $canmanageentries = null, $context =
 
     if (!$available) {
         $reason = current(array_keys($warnings));
-        throw new moodle_exception($reason, 'data', '', $warnings[$reason]);
+        throw new powereduc_exception($reason, 'data', '', $warnings[$reason]);
     }
 }
 
@@ -931,7 +931,7 @@ function mod_data_get_tagged_records($tag, $exclusivemode = false, $fromctx = 0,
             context_helper::preload_from_record($item);
             $modinfo = get_fast_modinfo($item->courseid);
             $cm = $modinfo->get_cm($item->cmid);
-            $pageurl = new moodle_url('/mod/data/view.php', array(
+            $pageurl = new powereduc_url('/mod/data/view.php', array(
                     'rid' => $item->id,
                     'd' => $item->dataid
             ));

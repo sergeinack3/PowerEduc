@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page lets users to manage site wide competencies.
@@ -43,14 +43,14 @@ if ($currentmodule > 0) {
 $groupmode = groups_get_course_groupmode($course);
 $currentgroup = groups_get_course_group($course, true);
 if (empty($currentuser)) {
-    $gradable = get_enrolled_users($context, 'moodle/competency:coursecompetencygradable', $currentgroup, 'u.id', null, 0, 1);
+    $gradable = get_enrolled_users($context, 'powereduc/competency:coursecompetencygradable', $currentgroup, 'u.id', null, 0, 1);
     if (empty($gradable)) {
         $currentuser = 0;
     } else {
         $currentuser = array_pop($gradable)->id;
     }
 } else {
-    $gradable = get_enrolled_users($context, 'moodle/competency:coursecompetencygradable', $currentgroup, 'u.id');
+    $gradable = get_enrolled_users($context, 'powereduc/competency:coursecompetencygradable', $currentgroup, 'u.id');
     if (count($gradable) == 0) {
         $currentuser = 0;
     } else if (!in_array($currentuser, array_keys($gradable))) {
@@ -59,10 +59,10 @@ if (empty($currentuser)) {
 }
 
 $urlparams = array('id' => $id);
-$navurl = new moodle_url('/report/competency/index.php', $urlparams);
+$navurl = new powereduc_url('/report/competency/index.php', $urlparams);
 $urlparams['user'] = $currentuser;
 $urlparams['mod'] = $currentmodule;
-$url = new moodle_url('/report/competency/index.php', $urlparams);
+$url = new powereduc_url('/report/competency/index.php', $urlparams);
 
 $title = get_string('pluginname', 'report_competency');
 $coursename = format_string($course->fullname, true, array('context' => $context));
@@ -79,14 +79,14 @@ echo $output->header();
 $pluginname = get_string('pluginname', 'report_competency');
 report_helper::print_report_selector($pluginname);
 
-$baseurl = new moodle_url('/report/competency/index.php');
+$baseurl = new powereduc_url('/report/competency/index.php');
 $nav = new \report_competency\output\user_course_navigation($currentuser, $course->id, $baseurl, $currentmodule);
 $top = $output->render($nav);
 if ($currentuser > 0) {
     $user = core_user::get_user($currentuser);
     $usercontext = context_user::instance($currentuser);
     $userheading = array(
-        'heading' => fullname($user, has_capability('moodle/site:viewfullnames', $context)),
+        'heading' => fullname($user, has_capability('powereduc/site:viewfullnames', $context)),
         'user' => $user,
         'usercontext' => $usercontext
     );

@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains all necessary code to view a wiki page
@@ -65,7 +65,7 @@ $PAGE->add_body_class('limitedwidth');
 if ($id) {
     // Cheacking course module instance
     if (!$cm = get_coursemodule_from_id('wiki', $id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     // Checking course instance
@@ -75,7 +75,7 @@ if ($id) {
 
     // Checking wiki instance
     if (!$wiki = wiki_get_wiki($cm->instance)) {
-        throw new \moodle_exception('incorrectwikiid', 'wiki');
+        throw new \powereduc_exception('incorrectwikiid', 'wiki');
     }
     $PAGE->set_cm($cm);
 
@@ -97,14 +97,14 @@ if ($id) {
     // Getting subwiki. If it does not exists, redirecting to create page
     if (!$subwiki = wiki_get_subwiki_by_group($wiki->id, $currentgroup, $userid)) {
         $params = array('wid' => $wiki->id, 'group' => $currentgroup, 'uid' => $userid, 'title' => $wiki->firstpagetitle);
-        $url = new moodle_url('/mod/wiki/create.php', $params);
+        $url = new powereduc_url('/mod/wiki/create.php', $params);
         redirect($url);
     }
 
     // Getting first page. If it does not exists, redirecting to create page
     if (!$page = wiki_get_first_page($subwiki->id, $wiki)) {
         $params = array('swid'=>$subwiki->id, 'title'=>$wiki->firstpagetitle);
-        $url = new moodle_url('/mod/wiki/create.php', $params);
+        $url = new powereduc_url('/mod/wiki/create.php', $params);
         redirect($url);
     }
 
@@ -120,22 +120,22 @@ if ($id) {
 
     // Checking page instance
     if (!$page = wiki_get_page($pageid)) {
-        throw new \moodle_exception('incorrectpageid', 'wiki');
+        throw new \powereduc_exception('incorrectpageid', 'wiki');
     }
 
     // Checking subwiki
     if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
-        throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+        throw new \powereduc_exception('incorrectsubwikiid', 'wiki');
     }
 
     // Checking wiki instance of that subwiki
     if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
-        throw new \moodle_exception('incorrectwikiid', 'wiki');
+        throw new \powereduc_exception('incorrectwikiid', 'wiki');
     }
 
     // Checking course module instance
     if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     $currentgroup = $subwiki->groupid;
@@ -163,12 +163,12 @@ if ($id) {
 
     // Setting wiki instance
     if (!$wiki = wiki_get_wiki($wid)) {
-        throw new \moodle_exception('incorrectwikiid', 'wiki');
+        throw new \powereduc_exception('incorrectwikiid', 'wiki');
     }
 
     // Checking course module
     if (!$cm = get_coursemodule_from_instance("wiki", $wiki->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     // Checking course instance
@@ -207,11 +207,11 @@ if ($id) {
         $manageandedit = $manage && $edit;
 
         if ($groupmode == VISIBLEGROUPS and ($modeanduser || $modeandgroupmember) and !$manageandedit) {
-            throw new \moodle_exception('nocontent', 'wiki');
+            throw new \powereduc_exception('nocontent', 'wiki');
         }
 
         $params = array('wid' => $wiki->id, 'group' => $gid, 'uid' => $uid, 'title' => $title);
-        $url = new moodle_url('/mod/wiki/create.php', $params);
+        $url = new powereduc_url('/mod/wiki/create.php', $params);
         redirect($url);
     }
 
@@ -220,9 +220,9 @@ if ($id) {
         $params = array('wid' => $wiki->id, 'group' => $gid, 'uid' => $uid, 'title' => $wiki->firstpagetitle);
         // Check to see if the first page has been created
         if (!wiki_get_page_by_title($subwiki->id, $wiki->firstpagetitle)) {
-            $url = new moodle_url('/mod/wiki/create.php', $params);
+            $url = new powereduc_url('/mod/wiki/create.php', $params);
         } else {
-            $url = new moodle_url('/mod/wiki/view.php', $params);
+            $url = new powereduc_url('/mod/wiki/view.php', $params);
         }
         redirect($url);
     }
@@ -241,7 +241,7 @@ if ($id) {
     //
     //    // Checking wiki instance
     //    if (!$wiki = wiki_get_wiki($wid)) {
-    //        throw new \moodle_exception('incorrectwikiid', 'wiki');
+    //        throw new \powereduc_exception('incorrectwikiid', 'wiki');
     //    }
     //
     //    // Checking subwiki instance
@@ -250,7 +250,7 @@ if ($id) {
     //        $currentgroup = 0;
     //    }
     //    if (!$subwiki = wiki_get_subwiki_by_group($wid, $currentgroup)) {
-    //        throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+    //        throw new \powereduc_exception('incorrectsubwikiid', 'wiki');
     //    }
     //
     //    // Checking page instance
@@ -263,7 +263,7 @@ if ($id) {
     //
     //    // Checking course module instance
     //    if (!$cm = get_coursemodule_from_instance("wiki", $wiki->id, $course->id)) {
-    //        throw new \moodle_exception('invalidcoursemodule');
+    //        throw new \powereduc_exception('invalidcoursemodule');
     //    }
     //
     //    $subwiki = null;
@@ -275,11 +275,11 @@ if ($id) {
     //     * Error. No more options
     //     */
 } else {
-    throw new \moodle_exception('invalidparameters', 'wiki');
+    throw new \powereduc_exception('invalidparameters', 'wiki');
 }
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
-    throw new \moodle_exception('cannotviewpage', 'wiki');
+    throw new \powereduc_exception('cannotviewpage', 'wiki');
 }
 
 if (($edit != - 1) and $PAGE->user_allowed_editing()) {

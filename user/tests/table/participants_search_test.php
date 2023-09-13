@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of PowerEduc - https://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides {@link core_user_table_participants_search_test} class.
@@ -35,7 +35,7 @@ use core_table\local\filter\integer_filter;
 use core_table\local\filter\string_filter;
 use core_user\table\participants_filterset;
 use core_user\table\participants_search;
-use moodle_recordset;
+use powereduc_recordset;
 use stdClass;
 
 /**
@@ -47,12 +47,12 @@ use stdClass;
 class participants_search_test extends advanced_testcase {
 
     /**
-     * Helper to convert a moodle_recordset to an array of records.
+     * Helper to convert a powereduc_recordset to an array of records.
      *
-     * @param moodle_recordset $recordset
+     * @param powereduc_recordset $recordset
      * @return array
      */
-    protected function convert_recordset_to_array(moodle_recordset $recordset): array {
+    protected function convert_recordset_to_array(powereduc_recordset $recordset): array {
         $records = [];
         foreach ($recordset as $record) {
             $records[$record->id] = $record;
@@ -174,7 +174,7 @@ class participants_search_test extends advanced_testcase {
         // Run the search.
         $search = new participants_search($course, $coursecontext, $filterset);
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
         $records = $this->convert_recordset_to_array($rs);
 
         $this->assertCount($count, $records);
@@ -790,7 +790,7 @@ class participants_search_test extends advanced_testcase {
         $this->assertEquals(count($expectedusers), $search->get_total_participants_count());
 
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
 
         // Assert that each expected user is within the participant records.
         $records = $this->convert_recordset_to_array($rs);
@@ -983,7 +983,7 @@ class participants_search_test extends advanced_testcase {
         // Run the search.
         $search = new participants_search($course, $coursecontext, $filterset);
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
         $records = $this->convert_recordset_to_array($rs);
 
         $this->assertCount($count, $records);
@@ -1529,7 +1529,7 @@ class participants_search_test extends advanced_testcase {
         // Run the search.
         $search = new participants_search($course, $coursecontext, $filterset);
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
         $records = $this->convert_recordset_to_array($rs);
 
         $this->assertCount($count, $records);
@@ -1784,7 +1784,7 @@ class participants_search_test extends advanced_testcase {
         // Run the search.
         $search = new participants_search($course, $coursecontext, $filterset);
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
         $records = $this->convert_recordset_to_array($rs);
 
         $this->assertCount($count, $records);
@@ -2008,7 +2008,7 @@ class participants_search_test extends advanced_testcase {
         // Run the search.
         $search = new participants_search($course, $coursecontext, $filterset);
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
         $records = $this->convert_recordset_to_array($rs);
 
         $this->assertCount($count, $records);
@@ -2346,7 +2346,7 @@ class participants_search_test extends advanced_testcase {
         } else {
             // All other cases are tested as normal.
             $rs = $search->get_participants();
-            $this->assertInstanceOf(moodle_recordset::class, $rs);
+            $this->assertInstanceOf(powereduc_recordset::class, $rs);
             $records = $this->convert_recordset_to_array($rs);
 
             $this->assertCount($count, $records);
@@ -2707,7 +2707,7 @@ class participants_search_test extends advanced_testcase {
         // Run the search.
         $search = new participants_search($course, $coursecontext, $filterset);
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
         $records = $this->convert_recordset_to_array($rs);
 
         $this->assertCount($count, $records);
@@ -3112,7 +3112,7 @@ class participants_search_test extends advanced_testcase {
         // Run the search.
         $search = new participants_search($course, $coursecontext, $filterset);
         $rs = $search->get_participants();
-        $this->assertInstanceOf(moodle_recordset::class, $rs);
+        $this->assertInstanceOf(powereduc_recordset::class, $rs);
         $records = $this->convert_recordset_to_array($rs);
 
         $this->assertCount($count, $records);

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -20,7 +20,7 @@
  *
  * @package    core_webservice
  * @category   output
- * @copyright  2009 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2009 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_webservice_renderer extends plugin_renderer_base {
@@ -88,7 +88,7 @@ class core_webservice_renderer extends plugin_renderer_base {
 
         $formcontent = html_writer::tag('div', $formcontent);
 
-        $actionurl = new moodle_url('/' . $CFG->admin . '/webservice/service_users.php',
+        $actionurl = new powereduc_url('/' . $CFG->admin . '/webservice/service_users.php',
                         array('id' => $options->serviceid));
         $html = html_writer::tag('form', $formcontent,
                         array('id' => 'assignform', 'action' => $actionurl, 'method' => 'post'));
@@ -109,7 +109,7 @@ class core_webservice_renderer extends plugin_renderer_base {
         $extrafields = \core_user\fields::get_identity_fields(context_system::instance());
 
         foreach ($users as $user) {
-            $settingsurl = new moodle_url('/admin/webservice/service_user_settings.php',
+            $settingsurl = new powereduc_url('/admin/webservice/service_user_settings.php',
                 ['userid' => $user->id, 'serviceid' => $serviceid]);
 
             $identity = [];
@@ -155,9 +155,9 @@ class core_webservice_renderer extends plugin_renderer_base {
         $optionsyes = array('id' => $service->id, 'action' => 'delete',
             'confirm' => 1, 'sesskey' => sesskey(), 'fid' => $function->id);
         $optionsno = array('id' => $service->id);
-        $formcontinue = new single_button(new moodle_url('service_functions.php',
+        $formcontinue = new single_button(new powereduc_url('service_functions.php',
                                 $optionsyes), get_string('remove'));
-        $formcancel = new single_button(new moodle_url('service_functions.php',
+        $formcancel = new single_button(new powereduc_url('service_functions.php',
                                 $optionsno), get_string('cancel'), 'get');
         return $this->output->confirm(get_string('removefunctionconfirm', 'webservice',
                         (object) array('service' => $service->name, 'function' => $function->name)),
@@ -175,10 +175,10 @@ class core_webservice_renderer extends plugin_renderer_base {
         $optionsyes = array('id' => $service->id, 'action' => 'delete',
             'confirm' => 1, 'sesskey' => sesskey());
         $optionsno = array('section' => 'externalservices');
-        $formcontinue = new single_button(new moodle_url('service.php', $optionsyes),
+        $formcontinue = new single_button(new powereduc_url('service.php', $optionsyes),
                         get_string('delete'), 'post');
         $formcancel = new single_button(
-                        new moodle_url($CFG->wwwroot . "/" . $CFG->admin . "/settings.php", $optionsno),
+                        new powereduc_url($CFG->wwwroot . "/" . $CFG->admin . "/settings.php", $optionsno),
                         get_string('cancel'), 'get');
         return $this->output->confirm(get_string('deleteserviceconfirm', 'webservice', $service->name),
                 $formcontinue, $formcancel);
@@ -224,7 +224,7 @@ class core_webservice_renderer extends plugin_renderer_base {
                                 array('class' => 'functiondesc'));
                 //display remove function operation (except for build-in service)
                 if (empty($service->component)) {
-                    $removeurl = new moodle_url('/' . $CFG->admin . '/webservice/service_functions.php',
+                    $removeurl = new powereduc_url('/' . $CFG->admin . '/webservice/service_functions.php',
                                     array('sesskey' => sesskey(), 'fid' => $function->id,
                                         'id' => $service->id,
                                         'action' => 'delete'));
@@ -248,7 +248,7 @@ class core_webservice_renderer extends plugin_renderer_base {
             if (!empty($anydeprecated)) {
                 debugging('This service uses deprecated functions, replace them by the proposed ones and update your client/s.', DEBUG_DEVELOPER);
             }
-            $addurl = new moodle_url('/' . $CFG->admin . '/webservice/service_functions.php',
+            $addurl = new powereduc_url('/' . $CFG->admin . '/webservice/service_functions.php',
                             array('sesskey' => sesskey(), 'id' => $service->id, 'action' => 'add'));
             $html .= html_writer::tag('a', get_string('addfunctions', 'webservice'), array('href' => $addurl));
         }
@@ -265,8 +265,8 @@ class core_webservice_renderer extends plugin_renderer_base {
     public function user_reset_token_confirmation($token) {
         $managetokenurl = '/user/managetoken.php';
         $optionsyes = ['tokenid' => $token->id, 'action' => 'resetwstoken', 'confirm' => 1];
-        $formcontinue = new single_button(new moodle_url($managetokenurl, $optionsyes), get_string('reset'));
-        $formcancel = new single_button(new moodle_url($managetokenurl), get_string('cancel'), 'get');
+        $formcontinue = new single_button(new powereduc_url($managetokenurl, $optionsyes), get_string('reset'));
+        $formcancel = new single_button(new powereduc_url($managetokenurl), get_string('cancel'), 'get');
         $html = $this->output->confirm(get_string('resettokenconfirm', 'webservice',
                                 (object) array('user' => $token->firstname . " " .
                                     $token->lastname, 'service' => $token->name)),
@@ -313,7 +313,7 @@ class core_webservice_renderer extends plugin_renderer_base {
             foreach ($tokens as $token) {
 
                 if ($token->creatorid == $userid) {
-                    $reset = html_writer::link(new moodle_url('/user/managetoken.php', [
+                    $reset = html_writer::link(new powereduc_url('/user/managetoken.php', [
                         'action' => 'resetwstoken',
                         'tokenid' => $token->id,
                     ]), get_string('reset'));
@@ -325,7 +325,7 @@ class core_webservice_renderer extends plugin_renderer_base {
                     $reset = '';
                 }
 
-                $userprofilurl = new moodle_url('/user/view.php?id=' . $token->creatorid);
+                $userprofilurl = new powereduc_url('/user/view.php?id=' . $token->creatorid);
                 $creatoratag = html_writer::start_tag('a', array('href' => $userprofilurl));
                 $creatoratag .= $creator;
                 $creatoratag .= html_writer::end_tag('a');
@@ -342,7 +342,7 @@ class core_webservice_renderer extends plugin_renderer_base {
                 $row = array($token->token, $tokenname, $validuntil, $creatoratag, $reset);
 
                 if ($documentation) {
-                    $doclink = new moodle_url('/webservice/wsdoc.php',
+                    $doclink = new powereduc_url('/webservice/wsdoc.php',
                             array('id' => $token->id));
                     $row[] = html_writer::tag('a', get_string('doc', 'webservice'),
                             array('href' => $doclink));
@@ -646,7 +646,7 @@ EOF;
 EOF;
         // Some general information
         $docinfo = new stdClass();
-        $docurl = new moodle_url('http://docs.moodle.org/dev/Creating_a_web_service_client');
+        $docurl = new powereduc_url('http://docs.powereduc.org/dev/Creating_a_web_service_client');
         $docinfo->doclink = html_writer::tag('a',
                         get_string('wsclientdoc', 'webservice'), array('href' => $docurl));
         $documentationhtml .= get_string('wsdocumentationintro', 'webservice', $docinfo);
@@ -655,7 +655,7 @@ EOF;
 
         // Print button
         $authparams['print'] = true;
-        $url = new moodle_url($parenturl, $authparams); // Required
+        $url = new powereduc_url($parenturl, $authparams); // Required
         $documentationhtml .= $this->output->single_button($url, get_string('print', 'webservice'));
         $documentationhtml .= $br;
 

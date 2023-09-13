@@ -23,7 +23,7 @@
  */
 
 namespace tool_dataprivacy;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A failure observer for the \core_privacy\manager.

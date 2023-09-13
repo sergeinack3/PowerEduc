@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core_message\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -27,14 +27,14 @@ use external_function_parameters;
 use external_value;
 use context_system;
 use core_user;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * External service to get number of unread notifications
  *
  * @package   core_message
  * @category  external
- * @copyright 2021 Dani Palou <dani@moodle.com>
+ * @copyright 2021 Dani Palou <dani@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since     Moodle 4.0
  */
@@ -55,7 +55,7 @@ class get_unread_notification_count extends external_api {
      *
      * @param int $useridto the user id who received the notification, 0 for any user
      * @return int number of unread notifications
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function execute(int $useridto): int {
         global $USER, $DB;
@@ -74,13 +74,13 @@ class get_unread_notification_count extends external_api {
             if (core_user::is_real_user($useridto)) {
                 $userto = core_user::get_user($useridto, '*', MUST_EXIST);
             } else {
-                throw new moodle_exception('invaliduser');
+                throw new powereduc_exception('invaliduser');
             }
         }
 
         // Check if the current user is the sender/receiver or just a privileged user.
-        if ($useridto != $USER->id and !has_capability('moodle/site:readallmessages', $context)) {
-            throw new moodle_exception('accessdenied', 'admin');
+        if ($useridto != $USER->id and !has_capability('powereduc/site:readallmessages', $context)) {
+            throw new powereduc_exception('accessdenied', 'admin');
         }
 
         return $DB->count_records_sql(

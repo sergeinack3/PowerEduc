@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Rest endpoint for ajax editing of quiz structure.
@@ -190,14 +190,14 @@ switch($requestmethod) {
             case 'resource':
                 require_capability('mod/quiz:manage', $modcontext);
                 if (!$slot = $DB->get_record('quiz_slots', array('quizid' => $quiz->id, 'id' => $id))) {
-                    throw new moodle_exception('AJAX commands.php: Bad slot ID '.$id);
+                    throw new powereduc_exception('AJAX commands.php: Bad slot ID '.$id);
                 }
 
                 if (!$structure->has_use_capability($slot->slot)) {
                     $slotdetail = $structure->get_slot_by_id($slot->id);
                     $context = context::instance_by_id($slotdetail->contextid);
                     throw new required_capability_exception($context,
-                        'moodle/question:useall', 'nopermissions', '');
+                        'powereduc/question:useall', 'nopermissions', '');
                 }
                 $structure->remove_slot($slot->slot);
                 quiz_delete_previews($quiz);

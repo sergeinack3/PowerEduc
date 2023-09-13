@@ -24,7 +24,7 @@
 
 namespace logstore_database\test;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class store extends \logstore_database\log\store {
     /**

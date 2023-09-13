@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag\output\tagareacollection
@@ -54,7 +54,7 @@ class tagareacollection extends \core\output\inplace_editable {
 
         $tagcollections = \core_tag_collection::get_collections_menu(true);
         $editable = (count($tagcollections) > 1) &&
-                has_capability('moodle/tag:manage', context_system::instance());
+                has_capability('powereduc/tag:manage', context_system::instance());
         $areaname = core_tag_area::display_name($tagarea->component, $tagarea->itemtype);
         $edithint = new lang_string('edittagcollection', 'core_tag');
         $editlabel = new lang_string('changetagcoll', 'core_tag', $areaname);
@@ -74,12 +74,12 @@ class tagareacollection extends \core\output\inplace_editable {
      */
     public static function update($itemid, $newvalue) {
         global $DB;
-        require_capability('moodle/tag:manage', \context_system::instance());
+        require_capability('powereduc/tag:manage', \context_system::instance());
         $tagarea = $DB->get_record('tag_area', array('id' => $itemid), '*', MUST_EXIST);
         $newvalue = clean_param($newvalue, PARAM_INT);
         $tagcollections = \core_tag_collection::get_collections_menu(true);
         if (!array_key_exists($newvalue, $tagcollections)) {
-            throw new \moodle_exception('invalidparameter', 'debug');
+            throw new \powereduc_exception('invalidparameter', 'debug');
         }
         $data = array('tagcollid' => $newvalue);
         core_tag_area::update($tagarea, $data);

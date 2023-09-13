@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@ namespace mod_data\form;
 
 use context;
 use core\notification;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use core_form\dynamic_form;
 use mod_data\manager;
 use mod_data\preset;
@@ -28,7 +28,7 @@ use mod_data\preset;
  * Save database as preset form.
  *
  * @package    mod_data
- * @copyright  2021 Mihail Geshoski <paulh@moodle.com>
+ * @copyright  2021 Mihail Geshoski <paulh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class save_as_preset extends dynamic_form {
@@ -127,13 +127,13 @@ class save_as_preset extends dynamic_form {
      * Check if current user has access to this form, otherwise throw exception.
      *
      * @return void
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function check_access_for_dynamic_submission(): void {
         global $DB;
 
         if (!has_capability('mod/data:managetemplates', $this->get_context_for_dynamic_submission())) {
-            throw new moodle_exception('saveaspresetmissingcapability', 'data');
+            throw new powereduc_exception('saveaspresetmissingcapability', 'data');
         }
 
         $action = $this->optional_param('action', '', PARAM_ALPHANUM);
@@ -143,7 +143,7 @@ class save_as_preset extends dynamic_form {
             $hasfields = $DB->record_exists('data_fields', ['dataid' => $instanceid]);
 
             if (!$hasfields) {
-                throw new moodle_exception('nofieldindatabase', 'data');
+                throw new powereduc_exception('nofieldindatabase', 'data');
             }
         }
     }
@@ -194,7 +194,7 @@ class save_as_preset extends dynamic_form {
 
             if ($result) {
                 // Add notification in the session to be shown when the page is reloaded on the JS side.
-                $previewurl = new moodle_url(
+                $previewurl = new powereduc_url(
                     '/mod/data/preset.php',
                     ['id' => $cm->id, 'fullname' => $preset->get_fullname(), 'action' => 'preview']
                 );
@@ -229,11 +229,11 @@ class save_as_preset extends dynamic_form {
     /**
      * Returns url to set in $PAGE->set_url() when form is being rendered or submitted via AJAX
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
         $d = $this->optional_param('d', null, PARAM_INT);
 
-        return new moodle_url('/user/field.php', ['d' => $d]);
+        return new powereduc_url('/user/field.php', ['d' => $d]);
     }
 }

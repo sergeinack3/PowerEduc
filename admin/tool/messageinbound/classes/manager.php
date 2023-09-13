@@ -24,7 +24,7 @@
 
 namespace tool_messageinbound;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Mail Pickup Manager.

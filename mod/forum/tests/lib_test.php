@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum;
 
 use mod_forum_generator;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/forum/lib.php');
@@ -1121,7 +1121,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals(1, $aftercount - $startcount);
 
         // Set up the default page event to use the forum.
-        $PAGE = new \moodle_page();
+        $PAGE = new \powereduc_page();
         $PAGE->set_context($forumcontext);
         $PAGE->set_cm($forumcm, $course, $forum);
 
@@ -1142,7 +1142,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals(0, $aftercount - $startcount);
 
         // Now specify the page context of the course instead..
-        $PAGE = new \moodle_page();
+        $PAGE = new \powereduc_page();
         $PAGE->set_context($coursecontext);
 
         // Now specify a context which is not a context_module.
@@ -2189,7 +2189,7 @@ class lib_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_forum\event\course_module_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $url = new \moodle_url('/mod/forum/view.php', array('f' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/view.php', array('f' => $forum->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
@@ -2403,7 +2403,7 @@ class lib_test extends \advanced_testcase {
         $rating->update_rating(2);
 
         // Now try to access it as various users.
-        unassign_capability('moodle/site:accessallgroups', $role->id);
+        unassign_capability('powereduc/site:accessallgroups', $role->id);
         $params = array('contextid' => 2,
                         'component' => 'mod_forum',
                         'ratingarea' => 'post',
@@ -2419,7 +2419,7 @@ class lib_test extends \advanced_testcase {
         $this->assertFalse(mod_forum_rating_can_see_item_ratings($params));
 
         // Now try with accessallgroups cap and make sure everything is visible.
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $role->id, $context->id);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $role->id, $context->id);
         $this->setUser($user1);
         $this->assertTrue(mod_forum_rating_can_see_item_ratings($params));
         $this->setUser($user2);
@@ -2432,7 +2432,7 @@ class lib_test extends \advanced_testcase {
         // Change group mode and verify visibility.
         $course->groupmode = VISIBLEGROUPS;
         $DB->update_record('course', $course);
-        unassign_capability('moodle/site:accessallgroups', $role->id);
+        unassign_capability('powereduc/site:accessallgroups', $role->id);
         $this->setUser($user1);
         $this->assertTrue(mod_forum_rating_can_see_item_ratings($params));
         $this->setUser($user2);
@@ -3483,7 +3483,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('view'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(7, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -3558,7 +3558,7 @@ class lib_test extends \advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('view'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(7, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -4142,7 +4142,7 @@ class lib_test extends \advanced_testcase {
     public function test_forum_check_throttling_nonexistent_numeric_id() {
         $this->resetAfterTest();
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         forum_check_throttling(1);
     }
 
@@ -4160,7 +4160,7 @@ class lib_test extends \advanced_testcase {
             'blockafter' => 2,
             'blockperiod' => DAYSECS,
         ];
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         forum_check_throttling($dummyforum);
     }
 

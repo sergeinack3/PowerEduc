@@ -25,7 +25,7 @@ use renderable;
 use stdClass;
 use core_availability\info_module;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/completionlib.php');
 

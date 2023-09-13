@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>پایگاه داده نتوانست ساخته شود.</p>
 <p>پایگاه دادهٔ تعیین شده وجود ندارد و کاربر ارائه‌شده هم مجوز ساختن پایگاه داده را ندارد.</p>

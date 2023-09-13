@@ -20,7 +20,7 @@ namespace tool_installaddon;
 use testable_tool_installaddon_installer;
 use tool_installaddon_installer;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__.'/fixtures/testable_installer.php');

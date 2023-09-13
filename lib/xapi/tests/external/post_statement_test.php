@@ -35,7 +35,7 @@ use externallib_advanced_testcase;
 use stdClass;
 use external_api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');

@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page displays the user data from a single attempt
  *
  * @package mod_scorm
- * @copyright 1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ $attempt = optional_param('attempt', 1, PARAM_INT); // attempt number.
 $download = optional_param('download', '', PARAM_ALPHA);
 
 // Building the url to use for links.+ data details buildup.
-$url = new moodle_url('/mod/scorm/report/userreporttracks.php', array('id' => $id,
+$url = new powereduc_url('/mod/scorm/report/userreporttracks.php', array('id' => $id,
     'user' => $userid,
     'attempt' => $attempt,
     'scoid' => $scoid,
@@ -55,7 +55,7 @@ require_capability('mod/scorm:viewreport', $contextmodule);
 
 // Check user has group access.
 if (!groups_user_groups_visible($course, $userid, $cm)) {
-    throw new moodle_exception('nopermissiontoshow');
+    throw new powereduc_exception('nopermissiontoshow');
 }
 
 // Trigger a tracks viewed event.
@@ -74,9 +74,9 @@ $strattempt = get_string('attempt', 'scorm');
 
 $PAGE->set_title("$course->shortname: ".format_string($scorm->name));
 $PAGE->set_heading($course->fullname);
-$PAGE->navbar->add($strreport, new moodle_url('/mod/scorm/report.php', array('id' => $cm->id)));
+$PAGE->navbar->add($strreport, new powereduc_url('/mod/scorm/report.php', array('id' => $cm->id)));
 $PAGE->navbar->add("$strattempt $attempt - ".fullname($user),
-    new moodle_url('/mod/scorm/report/userreport.php', array('id' => $id, 'user' => $userid, 'attempt' => $attempt)));
+    new powereduc_url('/mod/scorm/report/userreport.php', array('id' => $id, 'user' => $userid, 'attempt' => $attempt)));
 $PAGE->navbar->add($selsco->title . ' - '. get_string('details', 'scorm'));
 $PAGE->set_secondary_active_tab('scormreport');
 

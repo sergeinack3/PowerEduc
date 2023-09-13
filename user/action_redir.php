@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Wrapper script redirecting user operations to correct destination.
@@ -35,11 +35,11 @@ list($formaction) = explode('?', $formaction, 2);
 $actions = array('bulkchange.php');
 
 if (array_search($formaction, $actions) === false) {
-    throw new \moodle_exception('unknownuseraction');
+    throw new \powereduc_exception('unknownuseraction');
 }
 
 if (!confirm_sesskey()) {
-    throw new \moodle_exception('confirmsesskeybad');
+    throw new \powereduc_exception('confirmsesskeybad');
 }
 
 if ($formaction == 'bulkchange.php') {
@@ -49,7 +49,7 @@ if ($formaction == 'bulkchange.php') {
     $formaction = required_param('formaction', PARAM_URL);
     require_once($CFG->dirroot . '/enrol/locallib.php');
 
-    $url = new moodle_url($formaction);
+    $url = new powereduc_url($formaction);
     // Get the enrolment plugin type and bulk action from the url.
     $plugin = $url->param('plugin');
     $operationname = $url->param('operation');
@@ -60,8 +60,8 @@ if ($formaction == 'bulkchange.php') {
     $PAGE->set_context($context);
 
     $userids = optional_param_array('userid', array(), PARAM_INT);
-    $default = new moodle_url('/user/index.php', ['id' => $course->id]);
-    $returnurl = new moodle_url(optional_param('returnto', $default, PARAM_URL));
+    $default = new powereduc_url('/user/index.php', ['id' => $course->id]);
+    $returnurl = new powereduc_url(optional_param('returnto', $default, PARAM_URL));
 
     if (empty($userids)) {
         $userids = optional_param_array('bulkuser', array(), PARAM_INT);
@@ -95,7 +95,7 @@ if ($formaction == 'bulkchange.php') {
 
                     // Get the list of fields we have to hide.
                     $hiddenfields = [];
-                    if (!has_capability('moodle/course:viewhiddenuserfields', $context)) {
+                    if (!has_capability('powereduc/course:viewhiddenuserfields', $context)) {
                         $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
                     }
 
@@ -117,7 +117,7 @@ if ($formaction == 'bulkchange.php') {
 
                     // If user can only view their own groups then they can only export users from those groups too.
                     $groupmode = groups_get_course_groupmode($course);
-                    if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $context)) {
+                    if ($groupmode == SEPARATEGROUPS && !has_capability('powereduc/site:accessallgroups', $context)) {
                         $groups = groups_get_all_groups($course->id, $USER->id, 0, 'g.id');
                         $groupids = array_column($groups, 'id');
 
@@ -182,14 +182,14 @@ if ($formaction == 'bulkchange.php') {
             }
         }
         if (!$instance) {
-            throw new \moodle_exception('errorwithbulkoperation', 'enrol');
+            throw new \powereduc_exception('errorwithbulkoperation', 'enrol');
         }
 
         $manager = new course_enrolment_manager($PAGE, $course, $instance->id);
         $plugins = $manager->get_enrolment_plugins();
 
         if (!isset($plugins[$plugin])) {
-            throw new \moodle_exception('errorwithbulkoperation', 'enrol');
+            throw new \powereduc_exception('errorwithbulkoperation', 'enrol');
         }
 
         $plugin = $plugins[$plugin];
@@ -197,7 +197,7 @@ if ($formaction == 'bulkchange.php') {
         $operations = $plugin->get_bulk_operations($manager);
 
         if (!isset($operations[$operationname])) {
-            throw new \moodle_exception('errorwithbulkoperation', 'enrol');
+            throw new \powereduc_exception('errorwithbulkoperation', 'enrol');
         }
         $operation = $operations[$operationname];
 
@@ -244,7 +244,7 @@ if ($formaction == 'bulkchange.php') {
             if ($operation->process($manager, $users, new stdClass)) {
                 redirect($returnurl);
             } else {
-                throw new \moodle_exception('errorwithbulkoperation', 'enrol');
+                throw new \powereduc_exception('errorwithbulkoperation', 'enrol');
             }
         }
         // Check if the bulk operation has been cancelled.

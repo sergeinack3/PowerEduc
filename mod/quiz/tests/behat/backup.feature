@@ -65,12 +65,12 @@ Feature: Backup and restore of quizzes
     And I should see "Attempts: 1"
 
   @javascript @_file_upload
-  Scenario: Restore a Moodle 2.8 quiz backup
+  Scenario: Restore a PowerEduc 2.8 quiz backup
     When I am on the "Course 1" "restore" page
     And I press "Manage backup files"
-    And I upload "mod/quiz/tests/fixtures/moodle_28_quiz.mbz" file to "Files" filemanager
+    And I upload "mod/quiz/tests/fixtures/powereduc_28_quiz.mbz" file to "Files" filemanager
     And I press "Save changes"
-    And I restore "moodle_28_quiz.mbz" backup into "Course 1" course using this options:
-    And I am on the "Restored Moodle 2.8 quiz" "mod_quiz > Edit" page
+    And I restore "powereduc_28_quiz.mbz" backup into "Course 1" course using this options:
+    And I am on the "Restored PowerEduc 2.8 quiz" "mod_quiz > Edit" page
     Then I should see "TF1"
     And I should see "TF2"

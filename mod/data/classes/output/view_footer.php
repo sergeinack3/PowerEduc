@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,14 +21,14 @@ use core\output\sticky_footer;
 use html_writer;
 use mod_data\manager;
 use mod_data\template;
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 
 /**
  * Renderable class for sticky footer in the view pages of the database activity.
  *
  * @package    mod_data
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @copyright  2022 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class view_footer extends sticky_footer {
@@ -42,7 +42,7 @@ class view_footer extends sticky_footer {
     /** @var int $nowperpage the number of elements per page */
     private $nowperpage;
 
-    /** @var moodle_url $baseurl the page base url */
+    /** @var powereduc_url $baseurl the page base url */
     private $baseurl;
 
     /** @var template $parser the template name */
@@ -58,7 +58,7 @@ class view_footer extends sticky_footer {
      * @param int $totalcount the total records count
      * @param int $currentpage the current page
      * @param int $nowperpage the number of elements per page
-     * @param moodle_url $baseurl the page base url
+     * @param powereduc_url $baseurl the page base url
      * @param template $parser the current template name
      */
     public function __construct(
@@ -66,7 +66,7 @@ class view_footer extends sticky_footer {
         int $totalcount,
         int $currentpage,
         int $nowperpage,
-        moodle_url $baseurl,
+        powereduc_url $baseurl,
         template $parser
     ) {
         $this->manager = $manager;
@@ -139,7 +139,7 @@ class view_footer extends sticky_footer {
             ]);
         }
         if (data_user_can_add_entry($instance, $currentgroup, $groupmode, $context)) {
-            $addentrylink = new moodle_url(
+            $addentrylink = new powereduc_url(
                 '/mod/data/edit.php',
                 ['id' => $cm->id, 'backto' => $this->baseurl]
             );

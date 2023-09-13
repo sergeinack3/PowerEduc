@@ -24,7 +24,7 @@
 
 namespace core_availability;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class represents the result of an availability check for the user.

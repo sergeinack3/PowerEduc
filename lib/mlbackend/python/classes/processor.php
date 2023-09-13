@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace mlbackend_python;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Python predictions processor.
@@ -129,12 +129,12 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
      */
     protected function is_webserver_ready() {
         if (empty($this->pathtopython)) {
-            $settingurl = new \moodle_url('/admin/settings.php', array('section' => 'systempaths'));
+            $settingurl = new \powereduc_url('/admin/settings.php', array('section' => 'systempaths'));
             return get_string('pythonpathnotdefined', 'mlbackend_python', $settingurl->out());
         }
 
         // Check the installed pip package version.
-        $cmd = "{$this->pathtopython} -m moodlemlbackend.version";
+        $cmd = "{$this->pathtopython} -m powereducmlbackend.version";
 
         $output = null;
         $exitcode = null;
@@ -175,7 +175,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
     /**
      * Delete the model version output directory.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param string $uniqueid
      * @param string $modelversionoutputdir
      * @return null
@@ -194,7 +194,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
     /**
      * Delete the model output directory.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param string $modeloutputdir
      * @param string $uniqueid
      * @return null
@@ -236,7 +236,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
         }
 
         if (!$resultobj = json_decode($result)) {
-            throw new \moodle_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
+            throw new \powereduc_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
         }
 
         if ($resultobj->status != 0) {
@@ -273,7 +273,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
         }
 
         if (!$resultobj = json_decode($result)) {
-            throw new \moodle_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
+            throw new \powereduc_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
         }
 
         if ($resultobj->status != 0) {
@@ -312,7 +312,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
 
             list($result, $exitcode) = $this->exec_command('evaluation', $params, 'errornopredictresults');
             if (!$resultobj = json_decode($result)) {
-                throw new \moodle_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
+                throw new \powereduc_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
             }
 
         } else {
@@ -330,7 +330,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
             list($result, $httpcode) = $this->server_request($url, 'post', $requestparams);
 
             if (!$resultobj = json_decode($result)) {
-                throw new \moodle_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
+                throw new \powereduc_exception('errorpredictwrongformat', 'analytics', '', json_last_error_msg());
             }
 
             // We need an extra request to get the resources generated during the evaluation process.
@@ -348,14 +348,14 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
 
             $rundir = $outputdir . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . $resultobj->runid;
             if (!mkdir($rundir, $CFG->directorypermissions, true)) {
-                throw new \moodle_exception('errorexportmodelresult', 'analytics');
+                throw new \powereduc_exception('errorexportmodelresult', 'analytics');
             }
 
             $zip = new \zip_packer();
             $success = $zip->extract_to_pathname($evaluationzippath, $rundir, null, null, true);
             if (!$success) {
                 $a = 'The evaluation files can not be exported to ' . $rundir;
-                throw new \moodle_exception('errorpredictionsprocessor', 'analytics', '', $a);
+                throw new \powereduc_exception('errorpredictionsprocessor', 'analytics', '', $a);
             }
 
             $resultobj->dir = $rundir;
@@ -369,7 +369,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
     /**
      * Exports the machine learning model.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param  string $uniqueid  The model unique id
      * @param  string $modeldir  The directory that contains the trained model.
      * @return string            The path to the directory that contains the exported model.
@@ -387,7 +387,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
                 'errorexportmodelresult');
 
             if ($exitcode != 0) {
-                throw new \moodle_exception('errorexportmodelresult', 'analytics');
+                throw new \powereduc_exception('errorexportmodelresult', 'analytics');
             }
 
         } else {
@@ -404,7 +404,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
             $zip = new \zip_packer();
             $success = $zip->extract_to_pathname($exportzippath, $exportdir, null, null, true);
             if (!$success) {
-                throw new \moodle_exception('errorexportmodelresult', 'analytics');
+                throw new \powereduc_exception('errorexportmodelresult', 'analytics');
             }
         }
 
@@ -428,7 +428,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
                 'errorimportmodelresult');
 
             if ($exitcode != 0) {
-                throw new \moodle_exception('errorimportmodelresult', 'analytics');
+                throw new \powereduc_exception('errorimportmodelresult', 'analytics');
             }
 
         } else {
@@ -438,7 +438,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
             $importzipfile = $this->zip_dir($importdir);
             if (!$importzipfile) {
                 // There was an error zipping the directory.
-                throw new \moodle_exception('errorimportmodelresult', 'analytics');
+                throw new \powereduc_exception('errorimportmodelresult', 'analytics');
             }
 
             $requestparams = ['uniqueid' => $uniqueid, 'dirhash' => $this->hash_dir($modeldir),
@@ -500,8 +500,8 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
      * @return string
      */
     protected function get_file_path(\stored_file $file) {
-        // From moodle filesystem to the local file system.
-        // This is not ideal, but there is no read access to moodle filesystem files.
+        // From powereduc filesystem to the local file system.
+        // This is not ideal, but there is no read access to powereduc filesystem files.
         return $file->copy_content_to_temp('core_analytics');
     }
 
@@ -550,7 +550,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
      */
     protected function exec_command(string $modulename, array $params, string $errorlangstr) {
 
-        $cmd = $this->pathtopython . ' -m moodlemlbackend.' . $modulename . ' ';
+        $cmd = $this->pathtopython . ' -m powereducmlbackend.' . $modulename . ' ';
         foreach ($params as $param) {
             $cmd .= escapeshellarg($param) . ' ';
         }
@@ -564,7 +564,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
         $result = exec($cmd, $output, $exitcode);
 
         if (!$result) {
-            throw new \moodle_exception($errorlangstr, 'analytics');
+            throw new \powereduc_exception($errorlangstr, 'analytics');
         }
 
         return [$result, $exitcode];
@@ -598,7 +598,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
      * Returns the url to the python ML server.
      *
      * @param  string|null $path
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     private function get_server_url(?string $path = null) {
         $protocol = !empty($this->secure) ? 'https' : 'http';
@@ -611,13 +611,13 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
             $url .= '/' . $path;
         }
 
-        return new \moodle_url($url);
+        return new \powereduc_url($url);
     }
 
     /**
      * Sends a request to the python ML server.
      *
-     * @param  \moodle_url      $url            The requested url in the python ML server
+     * @param  \powereduc_url      $url            The requested url in the python ML server
      * @param  string           $method         The curl method to use
      * @param  array            $requestparams  Curl request params
      * @param  array|null       $options        Curl request options
@@ -639,7 +639,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
         $responsebody = $curl->{$method}($url, $requestparams, $options);
 
         if ($curl->info['http_code'] !== 200) {
-            throw new \moodle_exception('errorserver', 'mlbackend_python', '',
+            throw new \powereduc_exception('errorserver', 'mlbackend_python', '',
                 $this->server_error_str($curl->info['http_code'], $responsebody));
         }
 
@@ -664,7 +664,7 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
     /**
      * Returns the proper return value for the version checking.
      *
-     * @param  string $actual   Actual moodlemlbackend version
+     * @param  string $actual   Actual powereducmlbackend version
      * @param  int    $vercheck Version checking result
      * @return true|string      Returns true on success, a string detailing the error otherwise
      */
@@ -689,11 +689,11 @@ class processor implements  \core_analytics\classifier, \core_analytics\regresso
         }
 
         if (!$this->useserver) {
-            $cmd = "{$this->pathtopython} -m moodlemlbackend.version";
+            $cmd = "{$this->pathtopython} -m powereducmlbackend.version";
         } else {
             // We can't not know which is the python bin in the python ML server, the most likely
             // value is 'python'.
-            $cmd = "python -m moodlemlbackend.version";
+            $cmd = "python -m powereducmlbackend.version";
         }
         return get_string('pythonpackagenotinstalled', 'mlbackend_python', $cmd);
     }

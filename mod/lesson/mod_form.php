@@ -1,35 +1,35 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Form to define a new instance of lesson or edit an instance.
  * It is used from /course/modedit.php.
  *
  * @package mod_lesson
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or late
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
-require_once($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot.'/course/powereducform_mod.php');
 require_once($CFG->dirroot.'/mod/lesson/locallib.php');
 
-class mod_lesson_mod_form extends moodleform_mod {
+class mod_lesson_mod_form extends powereducform_mod {
 
     protected $course = null;
 
@@ -41,7 +41,7 @@ class mod_lesson_mod_form extends moodleform_mod {
     /**
      * Old syntax of class constructor. Deprecated in PHP7.
      *
-     * @deprecated since Moodle 3.1
+     * @deprecated since PowerEduc 3.1
      */
     public function mod_lesson_mod_form($current, $section, $cm, $course) {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
@@ -400,7 +400,7 @@ class mod_lesson_mod_form extends moodleform_mod {
 
     /**
      * Display module-specific activity completion rules.
-     * Part of the API defined by moodleform_mod
+     * Part of the API defined by powereducform_mod
      * @return array Array of string IDs of added items, empty array if none
      */
     public function add_completion_rules() {
@@ -436,7 +436,7 @@ class mod_lesson_mod_form extends moodleform_mod {
      * Allows module to modify the data returned by form get_data().
      * This method is also called in the bulk activity completion form.
      *
-     * Only available on moodleform_mod.
+     * Only available on powereducform_mod.
      *
      * @param stdClass $data the form data to be modified.
      */

@@ -23,7 +23,7 @@ use error_log_logger;
 use file_logger;
 use output_indented_logger;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  *
  * @package    mod_choice
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $functions = array(
 
@@ -34,7 +34,7 @@ $functions = array(
         'description'   => 'Retrieve users results for a given choice.',
         'type'          => 'read',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_choice_get_choice_options' => array(
@@ -43,7 +43,7 @@ $functions = array(
         'description'   => 'Retrieve options for a specific choice.',
         'type'          => 'read',
         'capabilities'  => 'mod/choice:choose',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_choice_submit_choice_response' => array(
@@ -52,7 +52,7 @@ $functions = array(
         'description'   => 'Submit responses to a specific choice item.',
         'type'          => 'write',
         'capabilities'  => 'mod/choice:choose',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_choice_view_choice' => array(
@@ -61,7 +61,7 @@ $functions = array(
         'description'   => 'Trigger the course module viewed event and update the module completion status.',
         'type'          => 'write',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_choice_get_choices_by_courses' => array(
@@ -71,7 +71,7 @@ $functions = array(
                             if no courses are provided then all the choice instances the user has access to will be returned.',
         'type'          => 'read',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_choice_delete_choice_responses' => array(
@@ -80,6 +80,6 @@ $functions = array(
         'description'   => 'Delete the given submitted responses in a choice',
         'type'          => 'write',
         'capabilities'  => 'mod/choice:choose',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 );

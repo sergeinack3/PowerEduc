@@ -18,7 +18,7 @@ Feature: Change grading options in an H5P activity
       | student1 | C1     | student        |
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/h5p:updatelibraries | Allow      | editingteacher | System       |           |
+      | powereduc/h5p:updatelibraries | Allow      | editingteacher | System       |           |
     And the following "activity" exists:
       | activity        | h5pactivity                                |
       | course          | C1                                         |

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 namespace mod_bigbluebuttonbn\form;
 
 use context;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use core_form\dynamic_form;
 use mod_bigbluebuttonbn\local\config;
 
@@ -26,7 +26,7 @@ use mod_bigbluebuttonbn\local\config;
  * Accept data processing agreement form presented before enabling the BigBlueButton activity module.
  *
  * @package    mod_bigbluebuttonbn
- * @copyright  2022 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2022 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class accept_dpa extends dynamic_form {
@@ -55,10 +55,10 @@ class accept_dpa extends dynamic_form {
      * Check if current user has access to this form, otherwise throw exception.
      *
      * @return void
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function check_access_for_dynamic_submission(): void {
-        require_capability('moodle/site:config', $this->get_context_for_dynamic_submission());
+        require_capability('powereduc/site:config', $this->get_context_for_dynamic_submission());
     }
 
     /**
@@ -96,9 +96,9 @@ class accept_dpa extends dynamic_form {
     /**
      * Returns url to set in $PAGE->set_url() when form is being rendered or submitted via AJAX.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
-        return new moodle_url('/admin/modules.php', ['show' => 'bigbluebuttonbn', 'sesskey' => sesskey()]);
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
+        return new powereduc_url('/admin/modules.php', ['show' => 'bigbluebuttonbn', 'sesskey' => sesskey()]);
     }
 }

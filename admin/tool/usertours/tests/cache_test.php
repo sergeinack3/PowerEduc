@@ -16,7 +16,7 @@
 
 namespace tool_usertours;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/helper_trait.php');

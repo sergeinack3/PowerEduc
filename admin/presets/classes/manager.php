@@ -21,7 +21,7 @@ use moodle_exception;
 use stdClass;
 use xml_writer;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/adminlib.php');
@@ -120,8 +120,8 @@ class manager {
         'timecreated' => 'PRESET_DATE',
         'site' => 'SITE_URL',
         'author' => 'AUTHOR',
-        'moodleversion' => 'MOODLE_VERSION',
-        'moodlerelease' => 'MOODLE_RELEASE'
+        'moodleversion' => 'POWEREDUC_VERSION',
+        'moodlerelease' => 'POWEREDUC_RELEASE'
     ];
 
     /** @var int Non-core preset */

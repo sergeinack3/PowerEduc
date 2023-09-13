@@ -24,7 +24,7 @@
 
 namespace block_mnet_hosts\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_mnet_hosts implementing null_provider.

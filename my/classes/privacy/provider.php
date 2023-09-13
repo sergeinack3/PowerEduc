@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Privacy Subsystem implementation for core_my.
  *
  * @package    core_my
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_my\privacy;
@@ -28,12 +28,12 @@ use core_privacy\local\request\context;
 use core_privacy\local\request\contextlist;
 use core_privacy\local\request\writer;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for core_my implementing metadata, plugin, and user_preference providers.
  *
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements

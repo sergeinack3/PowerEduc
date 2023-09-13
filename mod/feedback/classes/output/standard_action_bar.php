@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace mod_feedback\output;
 
 use action_link;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Class standard_action_bar
@@ -62,12 +62,12 @@ class standard_action_bar extends base_action_bar {
         $items = [];
 
         if (has_capability('mod/feedback:edititems', $this->context)) {
-            $editurl = new moodle_url('/mod/feedback/edit.php', $this->urlparams);
+            $editurl = new powereduc_url('/mod/feedback/edit.php', $this->urlparams);
             $items['left'][]['actionlink'] = new action_link($editurl, get_string('edit_items', 'feedback'),
                 null, ['class' => 'btn btn-secondary']);
         }
 
-        $previewlnk = new moodle_url('/mod/feedback/print.php', array('id' => $this->cmid));
+        $previewlnk = new powereduc_url('/mod/feedback/print.php', array('id' => $this->cmid));
         if ($this->course->id) {
             $previewlnk->param('courseid', $this->course->id);
         }
@@ -76,7 +76,7 @@ class standard_action_bar extends base_action_bar {
 
         if ($this->viewcompletion) {
             // Display a link to complete feedback or resume.
-            $completeurl = new moodle_url('/mod/feedback/complete.php',
+            $completeurl = new powereduc_url('/mod/feedback/complete.php',
                 ['id' => $this->cmid, 'courseid' => $this->course->id]);
             if ($this->startpage) {
                 $completeurl->param('gopage', $this->startpage);

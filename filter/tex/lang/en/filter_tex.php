@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'filter_tex', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'filter_tex', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package    filter
  * @subpackage tex

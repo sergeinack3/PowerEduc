@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_quiz;
 
@@ -20,7 +20,7 @@ use mod_quiz_overdue_attempt_updater;
 use question_engine;
 use quiz;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/group/lib.php');
@@ -575,19 +575,19 @@ class attempts_test extends \advanced_testcase {
         try {
             $result = quiz_create_attempt_handling_errors($attempt->id, 9999);
             $this->fail('Exception expected due to invalid course module id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invalidcoursemodule', $e->errorcode);
         }
         try {
             quiz_create_attempt_handling_errors(9999, $result->get_cmid());
             $this->fail('Exception expected due to quiz content change.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('attempterrorcontentchange', $e->errorcode);
         }
         try {
             quiz_create_attempt_handling_errors(9999);
             $this->fail('Exception expected due to invalid quiz attempt id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('attempterrorinvalid', $e->errorcode);
         }
         // Set up as normal user without permission to view preview.
@@ -595,13 +595,13 @@ class attempts_test extends \advanced_testcase {
         try {
             quiz_create_attempt_handling_errors(9999, $result->get_cmid());
             $this->fail('Exception expected due to quiz content change for user without permission.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('attempterrorcontentchangeforuser', $e->errorcode);
         }
         try {
             quiz_create_attempt_handling_errors($attempt->id, 9999);
             $this->fail('Exception expected due to invalid course module id for user without permission.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invalidcoursemodule', $e->errorcode);
         }
     }

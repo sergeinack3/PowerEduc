@@ -21,7 +21,7 @@
  * @copyright 2022 Mathew May <mathew.solutions>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $functions = [
     'gradereport_singleview_get_grade_items_for_search_widget' => [
@@ -31,6 +31,6 @@ $functions = [
         'type' => 'read',
         'ajax' => true,
         'capabilities' => 'gradereport/singleview:view',
-        'services' => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services' => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
 ];

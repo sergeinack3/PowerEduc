@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Controls the settings page in the message drawer.
  *
  * @module     core_message/message_drawer_view_settings
- * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2018 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(
@@ -57,7 +57,7 @@ function(
         NOTIFICATION_PREFERENCES: 'core_message/message_drawer_view_settings_body_content_notification_preferences'
     };
 
-    var NOTIFICATION_PREFERENCES_KEY = 'message_provider_moodle_instantmessage';
+    var NOTIFICATION_PREFERENCES_KEY = 'message_provider_powereduc_instantmessage';
 
     /**
      * Select the correct radio button in the DOM for the privacy preference.
@@ -144,7 +144,7 @@ function(
             var newValue = values.length ? values.join(',') : 'none';
             var preferences = [
                 {
-                    type: 'message_provider_moodle_instantmessage_enabled',
+                    type: 'message_provider_powereduc_instantmessage_enabled',
                     value: newValue
                 }
             ];

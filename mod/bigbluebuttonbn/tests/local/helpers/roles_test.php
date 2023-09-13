@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class roles_test extends \advanced_testcase {
                 $numstudents, $numteachers, $groupsnum);
         $context = context_course::instance($course->id);
         // Prevent access all groups.
-        role_change_permission($roleids['teacher'], $context, 'moodle/site:accessallgroups', CAP_PREVENT);
+        role_change_permission($roleids['teacher'], $context, 'powereduc/site:accessallgroups', CAP_PREVENT);
         $this->setUser($teachers[0]);
         $users = roles::get_users_array($context, $bbactivity);
         $this->assertCount(($numstudents + $numteachers) / $groupsnum, $users);

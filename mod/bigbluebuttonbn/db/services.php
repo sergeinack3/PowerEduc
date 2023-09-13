@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @author    Jesus Federico  (jesus [at] blindsidenetworks [dt] com)
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $functions = [
     'mod_bigbluebuttonbn_can_join' => [
@@ -33,7 +33,7 @@ $functions = [
         'description'   => 'Returns information if the current user can join or not.',
         'type'          => 'read',
         'capabilities'  => 'mod/bigbluebuttonbn:view',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_get_recordings' => [
         'classname'     => 'mod_bigbluebuttonbn\external\get_recordings',
@@ -42,7 +42,7 @@ $functions = [
         'type'          => 'read',
         'ajax'          => true,
         'capabilities'  => 'mod/bigbluebuttonbn:view',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_get_recordings_to_import' => [
         'classname'     => 'mod_bigbluebuttonbn\external\get_recordings_to_import',
@@ -51,7 +51,7 @@ $functions = [
         'type'          => 'read',
         'ajax'          => true,
         'capabilities'  => 'mod/bigbluebuttonbn:importrecordings',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_update_recording' => [
         'classname'     => 'mod_bigbluebuttonbn\external\update_recording',
@@ -60,7 +60,7 @@ $functions = [
         'type'          => 'write',
         'ajax'          => true,
         'capabilities'  => 'mod/bigbluebuttonbn:managerecordings',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_end_meeting' => [
         'classname'     => 'mod_bigbluebuttonbn\external\end_meeting',
@@ -69,7 +69,7 @@ $functions = [
         'type'          => 'write',
         'ajax'          => true,
         'capabilities'  => 'mod/bigbluebuttonbn:join',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_completion_validate' => [
         'classname'     => 'mod_bigbluebuttonbn\external\completion_validate',
@@ -78,7 +78,7 @@ $functions = [
         'type'          => 'write',
         'ajax'          => true,
         'capabilities'  => 'mod/bigbluebuttonbn:view',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_meeting_info' => [
         'classname'     => 'mod_bigbluebuttonbn\external\meeting_info',
@@ -87,7 +87,7 @@ $functions = [
         'type'          => 'read',
         'ajax'          => true,
         'capabilities'  => 'mod/bigbluebuttonbn:view',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_get_bigbluebuttonbns_by_courses' => [
         'classname'     => 'mod_bigbluebuttonbn\external\get_bigbluebuttonbns_by_courses',
@@ -96,7 +96,7 @@ $functions = [
                             all bigbluebuttonbns that the user can view will be returned.',
         'type'          => 'read',
         'capabilities'  => 'mod/bigbluebuttonbn:view',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
     'mod_bigbluebuttonbn_view_bigbluebuttonbn' => [
         'classname'     => 'mod_bigbluebuttonbn\external\view_bigbluebuttonbn',
@@ -104,7 +104,7 @@ $functions = [
         'description'   => 'Trigger the course module viewed event and update the module completion status.',
         'type'          => 'write',
         'capabilities'  => 'mod/bigbluebuttonbn:view',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE]
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE]
     ],
     'mod_bigbluebuttonbn_get_join_url' => [
         'classname'     => 'mod_bigbluebuttonbn\external\get_join_url',
@@ -112,6 +112,6 @@ $functions = [
         'description'   => 'Get the join URL for the meeting and create if it does not exist.',
         'type'          => 'write',
         'capabilities'  => 'mod/bigbluebuttonbn:join',
-        'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        'services'      => [POWEREDUC_OFFICIAL_MOBILE_SERVICE],
     ],
 ];

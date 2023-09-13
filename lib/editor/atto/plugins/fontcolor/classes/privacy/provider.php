@@ -24,7 +24,7 @@
 
 namespace atto_fontcolor\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_fontcolor implementing null_provider.

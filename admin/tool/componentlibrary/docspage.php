@@ -106,11 +106,11 @@ if (!file_exists($CFG->dirroot . $docsdir)) {
 $page = file_get_contents($docspage);
 $jsdocurl = new moodle_url('/admin/tool/componentlibrary/jsdocspage.php');
 $page = str_replace('http://JSDOC', $jsdocurl, $page);
-$page = str_replace('http://MOODLEROOT', $thispageurl, $page);
-$page = str_replace('MOODLEIMAGEDIR', new moodle_url('/admin/tool/componentlibrary/content/static'), $page);
-$filtered = str_replace('MOODLEROOT', $thispageurl, $page);
+$page = str_replace('http://POWEREDUCROOT', $thispageurl, $page);
+$page = str_replace('POWEREDUCIMAGEDIR', new moodle_url('/admin/tool/componentlibrary/content/static'), $page);
+$filtered = str_replace('POWEREDUCROOT', $thispageurl, $page);
 $rooturl = new moodle_url('/');
-$filtered = str_replace('MOODLESITE', $rooturl->out(), $page);
+$filtered = str_replace('POWEREDUCSITE', $rooturl->out(), $page);
 echo $filtered;
 
 echo $OUTPUT->footer();

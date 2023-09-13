@@ -24,7 +24,7 @@
  */
 namespace core_course\local\repository;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The class caching_content_item_repository, for fetching content_items, with additional caching.

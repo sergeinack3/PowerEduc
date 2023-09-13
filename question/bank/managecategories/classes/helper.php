@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_managecategories;
 
 use context;
 use core_question\local\bank\question_version_status;
-use moodle_exception;
+use powereduc_exception;
 use html_writer;
 
 /**
@@ -110,17 +110,17 @@ class helper {
      *
      * @param int $todelete a category id.
      * @throws \required_capability_exception
-     * @throws \dml_exception|moodle_exception
+     * @throws \dml_exception|powereduc_exception
      */
     public static function question_can_delete_cat(int $todelete): void {
         global $DB;
         if (self::question_is_top_category($todelete)) {
-            throw new moodle_exception('cannotdeletetopcat', 'question');
+            throw new powereduc_exception('cannotdeletetopcat', 'question');
         } else if (self::question_is_only_child_of_top_category_in_context($todelete)) {
-            throw new moodle_exception('cannotdeletecate', 'question');
+            throw new powereduc_exception('cannotdeletecate', 'question');
         } else {
             $contextid = $DB->get_field('question_categories', 'contextid', ['id' => $todelete]);
-            require_capability('moodle/question:managecategory', context::instance_by_id($contextid));
+            require_capability('powereduc/question:managecategory', context::instance_by_id($contextid));
         }
     }
 

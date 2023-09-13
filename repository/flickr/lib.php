@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access flickr pictures
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_flickr
  * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,7 +28,7 @@ require_once($CFG->libdir.'/flickrclient.php');
 /**
  * This plugin is used to access user's private flickr repository
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_flickr
  * @copyright  2009 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -74,7 +74,7 @@ class repository_flickr extends repository {
         $this->accesstoken = get_user_preferences('repository_flickr_access_token');
         $this->accesstokensecret = get_user_preferences('repository_flickr_access_token_secret');
 
-        $callbackurl = new moodle_url('/repository/repository_callback.php', ['repo_id' => $repositoryid]);
+        $callbackurl = new powereduc_url('/repository/repository_callback.php', ['repo_id' => $repositoryid]);
         $this->flickr = new flickr_client($this->api_key, $this->secret, $callbackurl);
         $this->flickr->set_access_token($this->accesstoken, $this->accesstokensecret);
     }
@@ -170,7 +170,7 @@ class repository_flickr extends repository {
 
         // Even when the Flick auth docs states the "perms" argument is
         // optional, it does not work without it.
-        $authurl = new moodle_url($reqtoken['authorize_url'], array('perms' => 'read'));
+        $authurl = new powereduc_url($reqtoken['authorize_url'], array('perms' => 'read'));
 
         if ($this->options['ajax']) {
             return [
@@ -253,7 +253,7 @@ class repository_flickr extends repository {
                     'size' => (int)($curl->get_info()['download_content_length']),
                     'image_width' => $p->width_o,
                     'image_height' => $p->height_o,
-                    'license' => $this->license4moodle((int) $p->license),
+                    'license' => $this->license4powereduc((int) $p->license),
                 ];
             }
         }
@@ -265,12 +265,12 @@ class repository_flickr extends repository {
     }
 
     /**
-     * Map Flickr license ID to those used internally by Moodle
+     * Map Flickr license ID to those used internally by PowerEduc
      *
      * @param int $licenseid
      * @return string
      */
-    public function license4moodle(int $licenseid): string {
+    public function license4powereduc(int $licenseid): string {
         $license = [
             0 => 'allrightsreserved',
             1 => 'cc-nc-sa',
@@ -309,7 +309,7 @@ class repository_flickr extends repository {
     }
 
     /**
-     * Add Plugin settings input to Moodle form
+     * Add Plugin settings input to PowerEduc form
      * @param object $mform
      */
     public static function type_config_form($mform, $classname = 'repository') {

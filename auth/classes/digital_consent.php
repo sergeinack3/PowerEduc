@@ -24,7 +24,7 @@
 
 namespace core_auth;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helper class for digital consent.

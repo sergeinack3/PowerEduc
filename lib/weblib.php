@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,15 +22,15 @@
  *
  * Other main libraries:
  * - datalib.php - functions that access the database.
- * - moodlelib.php - general-purpose Moodle functions.
+ * - powereduclib.php - general-purpose Moodle functions.
  *
  * @package    core
  * @subpackage lib
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Constants.
 
@@ -39,7 +39,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Does all sorts of transformations and filtering.
  */
-define('FORMAT_MOODLE',   '0');
+define('FORMAT_POWEREDUC',   '0');
 
 /**
  * Plain HTML (with some tags stripped).
@@ -65,17 +65,17 @@ define('FORMAT_WIKI',     '3');
 define('FORMAT_MARKDOWN', '4');
 
 /**
- * A moodle_url comparison using this flag will return true if the base URLs match, params are ignored.
+ * A powereduc_url comparison using this flag will return true if the base URLs match, params are ignored.
  */
 define('URL_MATCH_BASE', 0);
 
 /**
- * A moodle_url comparison using this flag will return true if the base URLs match and the params of url1 are part of url2.
+ * A powereduc_url comparison using this flag will return true if the base URLs match and the params of url1 are part of url2.
  */
 define('URL_MATCH_PARAMS', 1);
 
 /**
- * A moodle_url comparison using this flag will return true if the two URLs are identical, except for the order of the params.
+ * A powereduc_url comparison using this flag will return true if the two URLs are identical, except for the order of the params.
  */
 define('URL_MATCH_EXACT', 2);
 
@@ -236,11 +236,11 @@ function get_local_referer($stripquery = true) {
 /**
  * Class for creating and manipulating urls.
  *
- * It can be used in moodle pages where config.php has been included without any further includes.
+ * It can be used in powereduc pages where config.php has been included without any further includes.
  *
  * It is useful for manipulating urls with long lists of params.
  * One situation where it will be useful is a page which links to itself to perform various actions
- * and / or to process form data. A moodle_url object :
+ * and / or to process form data. A powereduc_url object :
  * can be created for a page to refer to itself with all the proper get params being passed from page call to
  * page call and methods can be used to output a url including all the params, optionally adding and overriding
  * params and can also be used to
@@ -248,11 +248,11 @@ function get_local_referer($stripquery = true) {
  *     - and output the params as hidden fields to be output within a form
  *
  * @copyright 2007 jamiesensei
- * @link http://docs.moodle.org/dev/lib/weblib.php_moodle_url See short write up here
+ * @link http://docs.powereduc.org/dev/lib/weblib.php_powereduc_url See short write up here
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package core
  */
-class moodle_url {
+class powereduc_url {
 
     /**
      * Scheme, ex.: http, https
@@ -309,22 +309,22 @@ class moodle_url {
     protected $params = array();
 
     /**
-     * Create new instance of moodle_url.
+     * Create new instance of powereduc_url.
      *
-     * @param moodle_url|string $url - moodle_url means make a copy of another
-     *      moodle_url and change parameters, string means full url or shortened
+     * @param powereduc_url|string $url - powereduc_url means make a copy of another
+     *      powereduc_url and change parameters, string means full url or shortened
      *      form (ex.: '/course/view.php'). It is strongly encouraged to not include
      *      query string because it may result in double encoded values. Use the
      *      $params instead. For admin URLs, just use /admin/script.php, this
      *      class takes care of the $CFG->admin issue.
      * @param array $params these params override current params or add new
      * @param string $anchor The anchor to use as part of the URL if there is one.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function __construct($url, array $params = null, $anchor = null) {
         global $CFG;
 
-        if ($url instanceof moodle_url) {
+        if ($url instanceof powereduc_url) {
             $this->scheme = $url->scheme;
             $this->host = $url->host;
             $this->port = $url->port;
@@ -359,7 +359,7 @@ class moodle_url {
             // Parse the $url.
             $parts = parse_url($url);
             if ($parts === false) {
-                throw new moodle_exception('invalidurl');
+                throw new powereduc_exception('invalidurl');
             }
             if (isset($parts['query'])) {
                 // Note: the values may not be correctly decoded, url parameters should be always passed as array.
@@ -561,7 +561,7 @@ class moodle_url {
         if (isset($CFG->urlrewriteclass) && !isset($CFG->upgraderunning)) {
             $class = $CFG->urlrewriteclass;
             $pluginurl = $class::url_rewrite($url);
-            if ($pluginurl instanceof moodle_url) {
+            if ($pluginurl instanceof powereduc_url) {
                 $url = $pluginurl;
             }
         }
@@ -618,15 +618,15 @@ class moodle_url {
     }
 
     /**
-     * Compares this moodle_url with another.
+     * Compares this powereduc_url with another.
      *
      * See documentation of constants for an explanation of the comparison flags.
      *
-     * @param moodle_url $url The moodle_url object to compare
+     * @param powereduc_url $url The powereduc_url object to compare
      * @param int $matchtype The type of comparison (URL_MATCH_BASE, URL_MATCH_PARAMS, URL_MATCH_EXACT)
      * @return bool
      */
-    public function compare(moodle_url $url, $matchtype = URL_MATCH_EXACT) {
+    public function compare(powereduc_url $url, $matchtype = URL_MATCH_EXACT) {
 
         $baseself = $this->out_omit_querystring();
         $baseother = $url->out_omit_querystring();
@@ -743,19 +743,19 @@ class moodle_url {
     // Static factory methods.
 
     /**
-     * General moodle file url.
+     * General powereduc file url.
      *
      * @param string $urlbase the script serving the file
      * @param string $path
      * @param bool $forcedownload
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function make_file_url($urlbase, $path, $forcedownload = false) {
         $params = array();
         if ($forcedownload) {
             $params['forcedownload'] = 1;
         }
-        $url = new moodle_url($urlbase, $params);
+        $url = new powereduc_url($urlbase, $params);
         $url->set_slashargument($path);
         return $url;
     }
@@ -778,7 +778,7 @@ class moodle_url {
      *                user whose id is the value indicated.
      *                If the group picture is included in an e-mail or some other location where the audience is a specific
      *                user who will not be logged in when viewing, then we use a token to authenticate the user.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function make_pluginfile_url($contextid, $component, $area, $itemid, $pathname, $filename,
                                                $forcedownload = false, $includetoken = false) {
@@ -826,7 +826,7 @@ class moodle_url {
      * @param string $pathname
      * @param string $filename
      * @param bool $forcedownload
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function make_webservice_pluginfile_url($contextid, $component, $area, $itemid, $pathname, $filename,
                                                $forcedownload = false) {
@@ -846,7 +846,7 @@ class moodle_url {
      * @param string $pathname
      * @param string $filename
      * @param bool $forcedownload
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function make_draftfile_url($draftid, $pathname, $filename, $forcedownload = false) {
         global $CFG, $USER;
@@ -862,7 +862,7 @@ class moodle_url {
      * @param int $courseid
      * @param string $filepath
      * @param bool $forcedownload
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function make_legacyfile_url($courseid, $filepath, $forcedownload = false) {
         global $CFG;
@@ -1079,16 +1079,16 @@ function page_doc_link($text='') {
  * Returns the path to use when constructing a link to the docs.
  *
  * @since Moodle 2.5.1 2.6
- * @param moodle_page $page
+ * @param powereduc_page $page
  * @return string
  */
-function page_get_doc_link_path(moodle_page $page) {
+function page_get_doc_link_path(powereduc_page $page) {
     global $CFG;
 
     if (empty($CFG->docroot) || during_initial_install()) {
         return '';
     }
-    if (!has_capability('moodle/site:doclinks', $page->context)) {
+    if (!has_capability('powereduc/site:doclinks', $page->context)) {
         return '';
     }
 
@@ -1108,9 +1108,9 @@ function page_get_doc_link_path(moodle_page $page) {
  */
 function validate_email($address) {
     global $CFG;
-    require_once($CFG->libdir.'/phpmailer/moodle_phpmailer.php');
+    require_once($CFG->libdir.'/phpmailer/powereduc_phpmailer.php');
 
-    return moodle_phpmailer::validateAddress($address) && !preg_match('/[<>]/', $address);
+    return powereduc_phpmailer::validateAddress($address) && !preg_match('/[<>]/', $address);
 }
 
 /**
@@ -1179,7 +1179,7 @@ function get_file_argument() {
  * @return array
  */
 function format_text_menu() {
-    return array (FORMAT_MOODLE => get_string('formattext'),
+    return array (FORMAT_POWEREDUC => get_string('formattext'),
                   FORMAT_HTML => get_string('formathtml'),
                   FORMAT_PLAIN => get_string('formatplain'),
                   FORMAT_MARKDOWN => get_string('formatmarkdown'));
@@ -1210,12 +1210,12 @@ function format_text_menu() {
  * @staticvar array $croncache
  * @param string $text The text to be formatted. This is raw text originally from user input.
  * @param int $format Identifier of the text format to be used
- *            [FORMAT_MOODLE, FORMAT_HTML, FORMAT_PLAIN, FORMAT_MARKDOWN]
+ *            [FORMAT_POWEREDUC, FORMAT_HTML, FORMAT_PLAIN, FORMAT_MARKDOWN]
  * @param object/array $options text formatting options
  * @param int $courseiddonotuse deprecated course id, use context option instead
  * @return string
  */
-function format_text($text, $format = FORMAT_MOODLE, $options = null, $courseiddonotuse = null) {
+function format_text($text, $format = FORMAT_POWEREDUC, $options = null, $courseiddonotuse = null) {
     global $CFG, $DB, $PAGE;
 
     if ($text === '' || is_null($text)) {
@@ -1314,7 +1314,7 @@ function format_text($text, $format = FORMAT_MOODLE, $options = null, $courseidd
             // This format is deprecated.
             $text = '<p>NOTICE: Wiki-like formatting has been removed from Moodle.  You should not be seeing
                      this message as all texts should have been converted to Markdown format instead.
-                     Please post a bug report to http://moodle.org/bugs with information about where you
+                     Please post a bug report to http://powereduc.org/bugs with information about where you
                      saw this message.</p>'.s($text);
             break;
 
@@ -1326,7 +1326,7 @@ function format_text($text, $format = FORMAT_MOODLE, $options = null, $courseidd
             $text = $filtermanager->filter_text($text, $context, $filteroptions);
             break;
 
-        default:  // FORMAT_MOODLE or anything else.
+        default:  // FORMAT_POWEREDUC or anything else.
             $text = text_to_html($text, null, $options['para'], $options['newlines']);
             if (!$options['noclean']) {
                 $text = clean_text($text, FORMAT_HTML, $options);
@@ -1547,7 +1547,7 @@ function wikify_links($string) {
  *
  * @param string $text The text to be formatted. This is raw text originally from user input.
  * @param int $format Identifier of the text format to be used
- *            [FORMAT_MOODLE, FORMAT_HTML, FORMAT_PLAIN, FORMAT_WIKI, FORMAT_MARKDOWN]
+ *            [FORMAT_POWEREDUC, FORMAT_HTML, FORMAT_PLAIN, FORMAT_WIKI, FORMAT_MARKDOWN]
  * @return string
  */
 function format_text_email($text, $format) {
@@ -1568,7 +1568,7 @@ function format_text_email($text, $format) {
             return html_to_text($text);
             break;
 
-        case FORMAT_MOODLE:
+        case FORMAT_POWEREDUC:
         case FORMAT_MARKDOWN:
         default:
             $text = wikify_links($text);
@@ -1662,7 +1662,7 @@ function trusttext_pre_edit($object, $field, $context) {
  * @return bool true if user trusted
  */
 function trusttext_trusted($context) {
-    return (trusttext_active() and has_capability('moodle/site:trustcontent', $context));
+    return (trusttext_active() and has_capability('powereduc/site:trustcontent', $context));
 }
 
 /**
@@ -1688,7 +1688,7 @@ function trusttext_active() {
  * NOTE: the format parameter was deprecated because we can safely clean only HTML.
  *
  * @param string $text The text to be cleaned
- * @param int|string $format deprecated parameter, should always contain FORMAT_HTML or FORMAT_MOODLE
+ * @param int|string $format deprecated parameter, should always contain FORMAT_HTML or FORMAT_POWEREDUC
  * @param array $options Array of options; currently only option supported is 'allowid' (if true,
  *   does not remove id attributes when cleaning)
  * @return string The cleaned up text
@@ -1712,7 +1712,7 @@ function clean_text($text, $format = FORMAT_HTML, $options = array()) {
     // Originally we tried to neutralise some script events here, it was a wrong approach because
     // it was trivial to work around that (for example using style based XSS exploits).
     // We must not give false sense of security here - all developers MUST understand how to use
-    // rawurlencode(), htmlentities(), htmlspecialchars(), p(), s(), moodle_url, html_writer and friends!!!
+    // rawurlencode(), htmlentities(), htmlspecialchars(), p(), s(), powereduc_url, html_writer and friends!!!
 
     return $text;
 }
@@ -1821,7 +1821,7 @@ function purify_html($text, $options = array()) {
         require_once $CFG->libdir.'/htmlpurifier/locallib.php';
         $config = HTMLPurifier_Config::createDefault();
 
-        $config->set('HTML.DefinitionID', 'moodlehtml');
+        $config->set('HTML.DefinitionID', 'powereduchtml');
         $config->set('HTML.DefinitionRev', 6);
         $config->set('Cache.SerializerPath', $cachedir);
         $config->set('Cache.SerializerPermissions', $CFG->directorypermissions);
@@ -1940,7 +1940,7 @@ function purify_html($text, $options = array()) {
  * May contain HTML tags already.
  *
  * Do not abuse this function. It is intended as lower level formatting feature used
- * by {@link format_text()} to convert FORMAT_MOODLE to HTML. You are supposed
+ * by {@link format_text()} to convert FORMAT_POWEREDUC to HTML. You are supposed
  * to call format_text() in most of cases.
  *
  * @param string $text The string to convert.
@@ -2031,7 +2031,7 @@ function html_to_text($html, $width = 75, $dolinks = true) {
  *   multilang filter is applied to headings.
  *
  * @param string $content The text as entered by the user
- * @param int|false $contentformat False for strings or the text format: FORMAT_MOODLE/FORMAT_HTML/FORMAT_PLAIN/FORMAT_MARKDOWN
+ * @param int|false $contentformat False for strings or the text format: FORMAT_POWEREDUC/FORMAT_HTML/FORMAT_PLAIN/FORMAT_MARKDOWN
  * @return string Plain text.
  */
 function content_to_text($content, $contentformat) {
@@ -2045,7 +2045,7 @@ function content_to_text($content, $contentformat) {
             $content = html_to_text($content, 75, false);
             break;
         default:
-            // FORMAT_HTML, FORMAT_MOODLE and $contentformat = false, the later one are strings usually formatted through
+            // FORMAT_HTML, FORMAT_POWEREDUC and $contentformat = false, the later one are strings usually formatted through
             // format_string, we need to convert them from html because they can contain HTML (multilang filter).
             $content = html_to_text($content, 75, false);
     }
@@ -2311,7 +2311,7 @@ function send_headers($contenttype, $cacheable = true) {
     @header('Accept-Ranges: none');
 
     // The Moodle app must be allowed to embed content always.
-    if (empty($CFG->allowframembedding) && !core_useragent::is_moodle_app()) {
+    if (empty($CFG->allowframembedding) && !core_useragent::is_powereduc_app()) {
         @header('X-Frame-Options: sameorigin');
     }
 
@@ -2568,8 +2568,8 @@ function print_group_picture($group, $courseid, $large = false, $return = false,
     $pictureimage = html_writer::img($pictureurl, $groupname, ['title' => $groupname]);
 
     $output = '';
-    if ($link or has_capability('moodle/site:accessallgroups', $context)) {
-        $linkurl = new moodle_url('/user/index.php', ['id' => $courseid, 'group' => $group->id]);
+    if ($link or has_capability('powereduc/site:accessallgroups', $context)) {
+        $linkurl = new powereduc_url('/user/index.php', ['id' => $courseid, 'group' => $group->id]);
         $output .= html_writer::link($linkurl, $pictureimage);
     } else {
         $output .= $pictureimage;
@@ -2593,7 +2593,7 @@ function print_group_picture($group, $courseid, $large = false, $return = false,
  *                 user whose id is the value indicated.
  *                 If the group picture is included in an e-mail or some other location where the audience is a specific
  *                 user who will not be logged in when viewing, then we use a token to authenticate the user.
- * @return moodle_url Returns the url for the group picture.
+ * @return powereduc_url Returns the url for the group picture.
  */
 function get_group_picture_url($group, $courseid, $large = false, $includetoken = false) {
     global $CFG;
@@ -2611,7 +2611,7 @@ function get_group_picture_url($group, $courseid, $large = false, $includetoken 
         $file = 'f2';
     }
 
-    $grouppictureurl = moodle_url::make_pluginfile_url(
+    $grouppictureurl = powereduc_url::make_pluginfile_url(
             $context->id, 'group', 'icon', $group->id, '/', $file, false, $includetoken);
     $grouppictureurl->param('rev', $group->picture);
     return $grouppictureurl;
@@ -2636,7 +2636,7 @@ function print_recent_activity_note($time, $user, $text, $link, $return=false, $
 
     if (is_null($viewfullnames)) {
         $context = context_system::instance();
-        $viewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', $context);
     }
 
     if (is_null($strftimerecent)) {
@@ -2704,7 +2704,7 @@ function navmenulist($course, $sections, $modinfo, $strsection, $strjumpto, $wid
 
             if ($thissection->visible or
                     (isset($courseformatoptions['hiddensections']) and !$courseformatoptions['hiddensections']) or
-                    has_capability('moodle/course:viewhiddensections', $coursecontext)) {
+                    has_capability('powereduc/course:viewhiddensections', $coursecontext)) {
                 $thissection->summary = strip_tags(format_string($thissection->summary, true));
                 if (!$doneheading) {
                     $menu[] = '</ul></li>';
@@ -2785,7 +2785,7 @@ function print_grade_menu($courseid, $name, $current, $includenograde=true, $ret
     $output .= html_writer::select($grades, $name, $current, false);
 
     $linkobject = '<span class="helplink">' . $OUTPUT->pix_icon('help', $strscales) . '</span>';
-    $link = new moodle_url('/course/scales.php', array('id' => $courseid, 'list' => 1));
+    $link = new powereduc_url('/course/scales.php', array('id' => $courseid, 'list' => 1));
     $action = new popup_action('click', $link, 'ratingscales', array('height' => 400, 'width' => 500));
     $output .= $OUTPUT->action_link($link, $linkobject, $action, array('title' => $strscales));
 
@@ -2816,7 +2816,7 @@ function mdie($msg='', $errorcode=1) {
  * Print a message and exit.
  *
  * @param string $message The message to print in the notice
- * @param moodle_url|string $link The link to use for the continue button
+ * @param powereduc_url|string $link The link to use for the continue button
  * @param object $course A course object. Unused.
  * @return void This function simply exits
  */
@@ -2853,18 +2853,18 @@ function notice ($message, $link='', $course=null) {
  * <strong>Good practice:</strong> You should call this method before starting page
  * output by using any of the OUTPUT methods.
  *
- * @param moodle_url|string $url A moodle_url to redirect to. Strings are not to be trusted!
+ * @param powereduc_url|string $url A powereduc_url to redirect to. Strings are not to be trusted!
  * @param string $message The message to display to the user
  * @param int $delay The delay before redirecting
  * @param string $messagetype The type of notification to show the message in. See constants on \core\output\notification.
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function redirect($url, $message='', $delay=null, $messagetype = \core\output\notification::NOTIFY_INFO) {
     global $OUTPUT, $PAGE, $CFG;
 
     if (CLI_SCRIPT or AJAX_SCRIPT) {
         // This is wrong - developers should not use redirect in these scripts but it should not be very likely.
-        throw new moodle_exception('redirecterrordetected', 'error');
+        throw new powereduc_exception('redirecterrordetected', 'error');
     }
 
     if ($delay === null) {
@@ -2875,10 +2875,10 @@ function redirect($url, $message='', $delay=null, $messagetype = \core\output\no
     if ($PAGE) {
         $PAGE->set_context(null);
         $PAGE->set_pagelayout('redirect');  // No header and footer needed.
-        $PAGE->set_title(get_string('pageshouldredirect', 'moodle'));
+        $PAGE->set_title(get_string('pageshouldredirect', 'powereduc'));
     }
 
-    if ($url instanceof moodle_url) {
+    if ($url instanceof powereduc_url) {
         $url = $url->out(false);
     }
 
@@ -2952,7 +2952,7 @@ function redirect($url, $message='', $delay=null, $messagetype = \core\output\no
         }
     }
 
-    // Sanitise url - we can not rely on moodle_url or our URL cleaning
+    // Sanitise url - we can not rely on powereduc_url or our URL cleaning
     // because they do not support all valid external URLs.
     $url = preg_replace('/[\x00-\x1F\x7F]/', '', $url);
     $url = str_replace('"', '%22', $url);
@@ -3003,7 +3003,7 @@ function redirect($url, $message='', $delay=null, $messagetype = \core\output\no
 
     // Include a redirect message, even with a HTTP redirect, because that is recommended practice.
     if ($PAGE) {
-        $CFG->docroot = false; // To prevent the link to moodle docs from being displayed on redirect page.
+        $CFG->docroot = false; // To prevent the link to powereduc docs from being displayed on redirect page.
         echo $OUTPUT->redirect_message($encodedurl, $message, $delay, $debugdisableredirect, $messagetype);
         exit;
     } else {
@@ -3083,7 +3083,7 @@ function obfuscate_mailto($email, $label='', $dimmed=false, $subject = '', $body
     $label = obfuscate_text($label);
     $email = obfuscate_email($email);
     $mailto = obfuscate_text('mailto');
-    $url = new moodle_url("mailto:$email");
+    $url = new powereduc_url("mailto:$email");
     $attrs = array();
 
     if (!empty($subject)) {
@@ -3746,7 +3746,7 @@ function get_formatted_help_string($identifier, $component, $ajax = false, $a = 
             $linktext = get_string('morehelp');
 
             $data->doclink = new stdClass();
-            $url = new moodle_url(get_docs_url($link));
+            $url = new powereduc_url(get_docs_url($link));
             if ($ajax) {
                 $data->doclink->link = $url->out();
                 $data->doclink->linktext = $linktext;

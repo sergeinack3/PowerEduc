@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -282,7 +282,7 @@ EOF;
      * @param instance $instance
      */
     public static function log_instance_viewed(instance $instance): void {
-        self::log_moodle_event($instance, events::$events['view']);
+        self::log_powereduc_event($instance, events::$events['view']);
     }
 
     /**
@@ -292,7 +292,7 @@ EOF;
      */
     public static function log_meeting_ended_event(instance $instance): void {
         // Moodle event logger: Create an event for meeting ended.
-        self::log_moodle_event($instance, events::$events['meeting_end']);
+        self::log_powereduc_event($instance, events::$events['meeting_end']);
 
     }
 
@@ -304,7 +304,7 @@ EOF;
      */
     public static function log_meeting_joined_event(instance $instance, int $origin): void {
         // Moodle event logger: Create an event for meeting joined.
-        self::log_moodle_event($instance, events::$events['meeting_join']);
+        self::log_powereduc_event($instance, events::$events['meeting_join']);
 
         // Internal logger: Instert a record with the meeting created.
         self::log(
@@ -322,7 +322,7 @@ EOF;
      */
     public static function log_meeting_left_event(instance $instance): void {
         // Moodle event logger: Create an event for meeting left.
-        self::log_moodle_event($instance, events::$events['meeting_left']);
+        self::log_powereduc_event($instance, events::$events['meeting_left']);
     }
 
     /**
@@ -333,7 +333,7 @@ EOF;
      */
     public static function log_recording_played_event(instance $instance, int $rid): void {
         // Moodle event logger: Create an event for recording played.
-        self::log_moodle_event($instance, events::$events['recording_play'], ['other' => $rid]);
+        self::log_powereduc_event($instance, events::$events['recording_play'], ['other' => $rid]);
 
         // Internal logger: Insert a record with the playback played.
         self::log(
@@ -408,7 +408,7 @@ EOF;
      * @param string $type
      * @param array $options [timecreated, userid, other]
      */
-    protected static function log_moodle_event(instance $instance, string $type, array $options = []): void {
+    protected static function log_powereduc_event(instance $instance, string $type, array $options = []): void {
         if (!in_array($type, \mod_bigbluebuttonbn\event\events::$events)) {
             // No log will be created.
             return;

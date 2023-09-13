@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ $PAGE->set_url('/login/confirm.php');
 $PAGE->set_context(context_system::instance());
 
 if (!$authplugin = signup_get_user_confirmation_authplugin()) {
-    throw new moodle_exception('confirmationnotenabled');
+    throw new powereduc_exception('confirmationnotenabled');
 }
 
 if (!empty($data) || (!empty($p) && !empty($s))) {
@@ -72,7 +72,7 @@ if (!empty($data) || (!empty($p) && !empty($s))) {
         // The user has confirmed successfully, let's log them in
 
         if (!$user = get_complete_user_data('username', $username)) {
-            throw new \moodle_exception('cannotfinduser', '', '', s($username));
+            throw new \powereduc_exception('cannotfinduser', '', '', s($username));
         }
 
         if (!$user->suspended) {
@@ -101,10 +101,10 @@ if (!empty($data) || (!empty($p) && !empty($s))) {
         echo $OUTPUT->footer();
         exit;
     } else {
-        throw new \moodle_exception('invalidconfirmdata');
+        throw new \powereduc_exception('invalidconfirmdata');
     }
 } else {
-    throw new \moodle_exception("errorwhenconfirming");
+    throw new \powereduc_exception("errorwhenconfirming");
 }
 
 redirect("$CFG->wwwroot/");

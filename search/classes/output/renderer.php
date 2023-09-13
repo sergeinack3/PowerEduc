@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Search renderer.
@@ -24,7 +24,7 @@
 
 namespace core_search\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Search renderer.
@@ -52,7 +52,7 @@ class renderer extends \plugin_renderer_base {
      * @param \core_search\document[] $results
      * @param int $page Zero based page number.
      * @param int $totalcount Total number of results available.
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      * @param \core_search\area_category|null $cat Selected search are category or null if category functionality is disabled.
      * @return string HTML
      */
@@ -147,7 +147,7 @@ class renderer extends \plugin_renderer_base {
      *
      * @param \stdClass $info Info object from get_index_requests_info
      * @return string HTML
-     * @throws \moodle_exception Any error with template
+     * @throws \powereduc_exception Any error with template
      */
     public function render_index_requests_info(\stdClass $info) {
         return $this->output->render_from_template('core_search/index_requests', $info);

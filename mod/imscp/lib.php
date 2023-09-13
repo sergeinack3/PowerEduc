@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Mandatory public API of imscp module
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * List of features supported in IMS CP module
@@ -38,7 +38,7 @@ function imscp_supports($feature) {
         case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_CONTENT;
 
@@ -47,7 +47,7 @@ function imscp_supports($feature) {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  *
  * @param stdClass $data the data submitted from the reset course.
  * @return array status array
@@ -264,7 +264,7 @@ function imscp_get_file_info($browser, $areas, $course, $cm, $context, $filearea
 
     // Note: imscp_intro handled in file_browser automatically.
 
-    if (!has_capability('moodle/course:managefiles', $context)) {
+    if (!has_capability('powereduc/course:managefiles', $context)) {
         // No peeking here for students!
         return null;
     }
@@ -322,7 +322,7 @@ function imscp_pluginfile($course, $cm, $context, $filearea, $args, $forcedownlo
         $fs = get_file_storage();
         $relativepath = implode('/', $args);
         if ($relativepath === 'imsmanifest.xml') {
-            if (!has_capability('moodle/course:managefiles', $context)) {
+            if (!has_capability('powereduc/course:managefiles', $context)) {
                 // No stealing of detailed package info.
                 return false;
             }
@@ -336,7 +336,7 @@ function imscp_pluginfile($course, $cm, $context, $filearea, $args, $forcedownlo
         send_stored_file($file, null, 0, $forcedownload, $options);
 
     } else if ($filearea === 'backup') {
-        if (!has_capability('moodle/course:managefiles', $context)) {
+        if (!has_capability('powereduc/course:managefiles', $context)) {
             // No stealing of package backups.
             return false;
         }
@@ -408,7 +408,7 @@ function imscp_export_contents($cm, $baseurl) {
         $file['filename']     = $fileinfo->get_filename();
         $file['filepath']     = $fileinfo->get_filepath();
         $file['filesize']     = $fileinfo->get_filesize();
-        $file['fileurl']      = moodle_url::make_webservice_pluginfile_url(
+        $file['fileurl']      = powereduc_url::make_webservice_pluginfile_url(
                                     $context->id, 'mod_imscp', 'content', $imscp->revision,
                                     $fileinfo->get_filepath(), $fileinfo->get_filename())->out(false);
         $file['timecreated']  = $fileinfo->get_timecreated();
@@ -435,7 +435,7 @@ function imscp_export_contents($cm, $baseurl) {
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function imscp_view($imscp, $course, $cm, $context) {
 
@@ -463,7 +463,7 @@ function imscp_view($imscp, $course, $cm, $context) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function imscp_check_updates_since(cm_info $cm, $from, $filter = array()) {
     $updates = course_check_module_updates_since($cm, $from, array('content'), $filter);
@@ -501,7 +501,7 @@ function mod_imscp_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/imscp/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/imscp/view.php', ['id' => $cm->id]),
         1,
         true
     );

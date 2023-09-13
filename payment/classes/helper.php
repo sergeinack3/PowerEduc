@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains helper class for the payment subsystem.
  *
  * @package    core_payment
- * @copyright  2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2019 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ use core_payment\event\account_updated;
 /**
  * Helper class for the payment subsystem.
  *
- * @copyright  2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2019 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper {
@@ -206,9 +206,9 @@ class helper {
      * @param string $component Name of the component that the paymentarea and itemid belong to
      * @param string $paymentarea Payment area
      * @param int $itemid An identifier that is known to the component
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_success_url(string $component, string $paymentarea, int $itemid): \moodle_url {
+    public static function get_success_url(string $component, string $paymentarea, int $itemid): \powereduc_url {
         $providerclass = static::get_service_provider_classname($component);
         return component_class_callback($providerclass, 'get_success_url', [$paymentarea, $itemid]);
     }
@@ -221,7 +221,7 @@ class helper {
      * @param int $itemid An identifier that is known to the component
      * @param string $gatewayname The gateway name
      * @return array
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_gateway_configuration(string $component, string $paymentarea, int $itemid,
             string $gatewayname): array {
@@ -232,7 +232,7 @@ class helper {
             $gateway = $account->get_gateways()[$gatewayname] ?? null;
         }
         if (!$gateway) {
-            throw new \moodle_exception('gatewaynotfound', 'payment');
+            throw new \powereduc_exception('gatewaynotfound', 'payment');
         }
         return $gateway->get_configuration();
     }

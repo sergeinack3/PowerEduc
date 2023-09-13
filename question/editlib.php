@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Functions used to show question editing interface
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionbank
- * @copyright  1999 onwards Martin Dougiamas and others {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas and others {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
 use core_question\bank\search\category_condition;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/questionlib.php');
 
@@ -40,9 +40,9 @@ function get_module_from_cmid($cmid) {
                                     {modules} md
                                WHERE cm.id = ? AND
                                      md.id = cm.module", array($cmid))){
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     } elseif (!$modrec =$DB->get_record($cmrec->modname, array('id' => $cmrec->instance))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     $modrec->instance = $modrec->id;
     $modrec->cmid = $cmrec->id;
@@ -119,9 +119,9 @@ function get_questions_category(object $category, bool $noparent, bool $recurse 
  *
  * @param int $categoryid a category id.
  * @return bool
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_is_only_child_of_top_category_in_context($categoryid) {
     debugging('Function question_is_only_child_of_top_category_in_context()
@@ -136,9 +136,9 @@ function question_is_only_child_of_top_category_in_context($categoryid) {
  *
  * @param int $categoryid a category id.
  * @return bool
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_is_top_category($categoryid) {
     debugging('Function question_is_top_category() has been deprecated and moved to qbank_managecategories plugin,
@@ -150,9 +150,9 @@ function question_is_top_category($categoryid) {
  * Ensures that this user is allowed to delete this category.
  *
  * @param int $todelete a category id.
- * @deprecated since Moodle 4.0 MDL-71585
+ * @deprecated since PowerEduc 4.0 MDL-71585
  * @see qbank_managecategories\helper
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 function question_can_delete_cat($todelete) {
     debugging('Function question_can_delete_cat() has been deprecated and moved to qbank_managecategories plugin,
@@ -259,7 +259,7 @@ function question_build_edit_resources($edittab, $baseurl, $params,
         $defaultquestionsperpage = DEFAULT_QUESTIONS_PER_PAGE) {
     global $DB;
 
-    $thispageurl = new moodle_url($baseurl);
+    $thispageurl = new powereduc_url($baseurl);
     $thispageurl->remove_all_params(); // We are going to explicity add back everything important - this avoids unwanted params from being retained.
 
     $cleanparams = [
@@ -311,7 +311,7 @@ function question_build_edit_resources($edittab, $baseurl, $params,
     $qtagids = $cleanparams['qtagids'];
 
     if (is_null($cmid) && is_null($courseid)) {
-        throw new \moodle_exception('Must provide a cmid or courseid');
+        throw new \powereduc_exception('Must provide a cmid or courseid');
     }
 
     if ($cmid) {
@@ -392,7 +392,7 @@ function question_build_edit_resources($edittab, $baseurl, $params,
         $catparts = explode(',', $pagevars['cat']);
         if (!$catparts[0] || (false !== array_search($catparts[1], $contextlistarr)) ||
                 !$DB->count_records_select("question_categories", "id = ? AND contextid = ?", array($catparts[0], $catparts[1]))) {
-            throw new \moodle_exception('invalidcategory', 'question');
+            throw new \powereduc_exception('invalidcategory', 'question');
         }
     } else {
         $category = $defaultcategory;
@@ -439,7 +439,7 @@ function question_get_category_id_from_pagevars(array $pagevars) {
  *      parameter read. The user_preference name is 'question_bank_' . $param.
  * @param mixed $default The default value to use, if not otherwise set.
  * @param int $type one of the PARAM_... constants.
- * @param moodle_url $thispageurl if the value has been explicitly set, we add
+ * @param powereduc_url $thispageurl if the value has been explicitly set, we add
  *      it to this URL.
  * @return mixed the parameter value to use.
  */
@@ -463,7 +463,7 @@ function question_get_display_preference($param, $default, $type, $thispageurl) 
  * @param string $name The user_preference name is 'question_bank_' . $name.
  * @param mixed $value The preference value.
  * @param mixed $default The default value to use, if not otherwise set.
- * @param moodle_url $thispageurl if the value has been explicitly set, we add
+ * @param powereduc_url $thispageurl if the value has been explicitly set, we add
  *      it to this URL.
  * @return mixed the parameter value to use.
  */
@@ -492,12 +492,12 @@ function require_login_in_context($contextorid = null){
     } else if ($context && ($context->contextlevel == CONTEXT_MODULE)) {
         if ($cm = $DB->get_record('course_modules',array('id' =>$context->instanceid))) {
             if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
-                throw new \moodle_exception('invalidcourseid');
+                throw new \powereduc_exception('invalidcourseid');
             }
             require_course_login($course, true, $cm);
 
         } else {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
     } else if ($context && ($context->contextlevel == CONTEXT_SYSTEM)) {
         if (!empty($CFG->forcelogin)) {
@@ -516,9 +516,9 @@ function require_login_in_context($contextorid = null){
  *      the qtype radio buttons.
  * @param $allowedqtypes optional list of qtypes that are allowed. If given, only
  *      those qtypes will be shown. Example value array('description', 'multichoice').
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see \qbank_editquestion\editquestion_helper::print_choose_qtype_to_add_form()
- * @todo Final deprecation of this class in moodle 4.4 MDL-72438
+ * @todo Final deprecation of this class in powereduc 4.4 MDL-72438
  */
 function print_choose_qtype_to_add_form($hiddenparams, array $allowedqtypes = null, $enablejs = true) {
     debugging('Function print_choose_qtype_to_add_form() is deprecated,
@@ -542,9 +542,9 @@ function print_choose_qtype_to_add_form($hiddenparams, array $allowedqtypes = nu
  * @param string $caption the text to display on the button.
  * @param string $tooltip a tooltip to add to the button (optional).
  * @param bool $disabled if true, the button will be disabled.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see \qbank_editquestion\editquestion_helper::create_new_question_button()
- * @todo Final deprecation of this class in moodle 4.4 MDL-72438
+ * @todo Final deprecation of this class in powereduc 4.4 MDL-72438
  */
 function create_new_question_button($categoryid, $params, $caption, $tooltip = '', $disabled = false) {
     debugging('Function create_new_question_button() has been deprecated and moved to bank/editquestion,
@@ -552,7 +552,7 @@ function create_new_question_button($categoryid, $params, $caption, $tooltip = '
     global $CFG, $PAGE, $OUTPUT;
     static $choiceformprinted = false;
     $params['category'] = $categoryid;
-    $url = new moodle_url('/question/bank/editquestion/addquestion.php', $params);
+    $url = new powereduc_url('/question/bank/editquestion/addquestion.php', $params);
     echo $OUTPUT->single_button($url, $caption, 'get', array('disabled'=>$disabled, 'title'=>$tooltip));
 
     if (!$choiceformprinted) {

@@ -22,7 +22,7 @@ use grade_grade;
 use grade_report;
 use grade_tree;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot.'/grade/report/lib.php');
 

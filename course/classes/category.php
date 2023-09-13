@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class to store, cache, render and manage course category
@@ -456,7 +456,7 @@ class core_course_category implements renderable, cacheable_object, IteratorAggr
         $data = (object)$data;
         $newcategory = new stdClass();
 
-        $newcategory->descriptionformat = FORMAT_MOODLE;
+        $newcategory->descriptionformat = FORMAT_POWEREDUC;
         $newcategory->description = '';
         // Copy all description* fields regardless of whether this is form data or direct field update.
         foreach ($data as $key => $value) {

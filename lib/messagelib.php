@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../message/lib.php');
 
@@ -38,7 +38,7 @@ require_once(__DIR__ . '/../message/lib.php');
  *  userto object|int the message recipient
  *  subject string the message subject
  *  fullmessage string the full message in a given format
- *  fullmessageformat int the format if the full message (FORMAT_MOODLE, FORMAT_HTML, ..)
+ *  fullmessageformat int the format if the full message (FORMAT_POWEREDUC, FORMAT_HTML, ..)
  *  fullmessagehtml string the full version (the message processor will choose with one to use)
  *  smallmessage string the small version of the message
  *

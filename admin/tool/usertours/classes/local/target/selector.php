@@ -24,7 +24,7 @@
 
 namespace tool_usertours\local\target;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_usertours\step;
 

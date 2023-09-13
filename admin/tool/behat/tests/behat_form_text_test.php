@@ -28,7 +28,7 @@ use Behat\Mink\Session;
 use Behat\Mink\Element\NodeElement;
 use core_string_manager_standard;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 require_once($CFG->libdir . '/behat/classes/behat_session_interface.php');

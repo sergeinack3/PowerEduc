@@ -24,7 +24,7 @@
  */
 namespace core_course\local\exporters;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\external\exporter;
 use core_course\local\entity\content_item;

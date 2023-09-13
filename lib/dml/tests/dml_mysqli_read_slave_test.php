@@ -27,7 +27,7 @@ namespace core;
 
 use moodle_database;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/fixtures/read_slave_moodle_database_mock_mysqli.php');
 

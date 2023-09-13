@@ -389,7 +389,7 @@ abstract class grade_export {
             foreach ($userprofilefields as $field) {
                 $fieldvalue = grade_helper::get_user_field_value($user, $field);
                 // @see profile_field_base::display_data().
-                echo '<td>' . format_text($fieldvalue, FORMAT_MOODLE, $formatoptions) . '</td>';
+                echo '<td>' . format_text($fieldvalue, FORMAT_POWEREDUC, $formatoptions) . '</td>';
             }
             if (!$this->onlyactive) {
                 $issuspended = ($user->suspendedenrolment) ? get_string('yes') : '';

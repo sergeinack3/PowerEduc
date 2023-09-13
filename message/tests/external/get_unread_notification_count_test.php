@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core_message\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');
@@ -30,7 +30,7 @@ use \core_message\tests\helper as testhelper;
  *
  * @package    core_message
  * @category   test
- * @copyright  2021 Dani Palou <dani@moodle.com>, based on Ryan Wyllie <ryan@moodle.com> code
+ * @copyright  2021 Dani Palou <dani@powereduc.com>, based on Ryan Wyllie <ryan@powereduc.com> code
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 4.0
  */
@@ -42,7 +42,7 @@ class get_unread_notification_count_test extends externallib_advanced_testcase {
     public function test_get_unread_notification_count_invalid_user_exception(): void {
         $this->resetAfterTest(true);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = get_unread_notification_count::execute(-2132131);
     }
 
@@ -56,7 +56,7 @@ class get_unread_notification_count_test extends externallib_advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $this->setUser($user);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = get_unread_notification_count::execute($sender->id);
     }
 

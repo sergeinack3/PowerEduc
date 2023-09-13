@@ -1,25 +1,25 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page prints a particular instance of lesson
  *
  * @package mod_lesson
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or late
  **/
 
@@ -42,13 +42,13 @@ $lesson = new lesson($DB->get_record('lesson', array('id' => $cm->instance), '*'
 require_login($course, false, $cm);
 
 if ($backtocourse) {
-    redirect(new moodle_url('/course/view.php', array('id'=>$course->id)));
+    redirect(new powereduc_url('/course/view.php', array('id'=>$course->id)));
 }
 
 // Apply overrides.
 $lesson->update_effective_access($USER->id);
 
-$url = new moodle_url('/mod/lesson/view.php', array('id'=>$id));
+$url = new powereduc_url('/mod/lesson/view.php', array('id'=>$id));
 if ($pageid !== null) {
     $url->param('pageid', $pageid);
 }
@@ -149,7 +149,7 @@ if (empty($pageid)) {
             echo $lessonoutput->render($editbuttons);
             if ($lesson->timelimit) {
                 if ($lesson->retake) {
-                    $continuelink = new single_button(new moodle_url('/mod/lesson/view.php',
+                    $continuelink = new single_button(new powereduc_url('/mod/lesson/view.php',
                             array('id' => $cm->id, 'pageid' => $lesson->firstpageid, 'startlastseen' => 'no')),
                             get_string('continue', 'lesson'), 'get');
 
@@ -157,7 +157,7 @@ if (empty($pageid)) {
                             'center leftduring');
 
                 } else {
-                    $courselink = new single_button(new moodle_url('/course/view.php',
+                    $courselink = new single_button(new powereduc_url('/course/view.php',
                             array('id' => $PAGE->course->id)), get_string('returntocourse', 'lesson'), 'get');
 
                     echo html_writer::div($lessonoutput->message(get_string('leftduringtimednoretake', 'lesson'), $courselink),
@@ -175,7 +175,7 @@ if (empty($pageid)) {
         if (!$lesson->retake) {
             echo $lessonoutput->header($lesson, $cm, 'view', '', null, get_string("noretake", "lesson"));
             echo $lessonoutput->render($editbuttons);
-            $courselink = new single_button(new moodle_url('/course/view.php', array('id'=>$PAGE->course->id)), get_string('returntocourse', 'lesson'), 'get');
+            $courselink = new single_button(new powereduc_url('/course/view.php', array('id'=>$PAGE->course->id)), get_string('returntocourse', 'lesson'), 'get');
             echo $lessonoutput->message(get_string("noretake", "lesson"), $courselink);
             echo $lessonoutput->footer();
             exit();
@@ -219,7 +219,7 @@ if ($pageid != LESSON_EOL) {
 
         // Check time limit.
         if (!$lesson->check_time($timer)) {
-            redirect(new moodle_url('/mod/lesson/view.php', array('id' => $cm->id, 'pageid' => LESSON_EOL, 'outoftime' => 'normal')));
+            redirect(new powereduc_url('/mod/lesson/view.php', array('id' => $cm->id, 'pageid' => LESSON_EOL, 'outoftime' => 'normal')));
             die; // Shouldn't be reached, but make sure.
         }
     }

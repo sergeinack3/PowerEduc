@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $functions = array(
 
@@ -33,7 +33,7 @@ $functions = array(
         'description' => 'Get users starred courses.',
         'type'        => 'read',
         'ajax'        => true,
-        'services'    => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services'    => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
 );
 

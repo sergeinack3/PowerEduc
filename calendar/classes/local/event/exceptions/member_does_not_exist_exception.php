@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\exceptions;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Member does not exist exception.

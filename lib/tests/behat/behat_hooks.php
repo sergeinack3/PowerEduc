@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../behat/behat_base.php');
 
@@ -122,9 +122,9 @@ class behat_hooks extends behat_base {
     protected static $scenariotags;
 
     /**
-     * Gives access to moodle codebase, ensures all is ready and sets up the test lock.
+     * Gives access to powereduc codebase, ensures all is ready and sets up the test lock.
      *
-     * Includes config.php to use moodle codebase with $CFG->behat_* instead of $CFG->prefix and $CFG->dataroot, called
+     * Includes config.php to use powereduc codebase with $CFG->behat_* instead of $CFG->prefix and $CFG->dataroot, called
      * once per suite.
      *
      * @BeforeSuite
@@ -138,7 +138,7 @@ class behat_hooks extends behat_base {
             return;
         }
 
-        // Defined only when the behat CLI command is running, the moodle init setup process will
+        // Defined only when the behat CLI command is running, the powereduc init setup process will
         // read this value and switch to $CFG->behat_dataroot and $CFG->behat_prefix instead of
         // the normal site.
         if (!defined('BEHAT_TEST')) {
@@ -152,7 +152,7 @@ class behat_hooks extends behat_base {
         // With BEHAT_TEST we will be using $CFG->behat_* instead of $CFG->dataroot, $CFG->prefix and $CFG->wwwroot.
         require_once(__DIR__ . '/../../../config.php');
 
-        // Now that we are MOODLE_INTERNAL.
+        // Now that we are POWEREDUC_INTERNAL.
         require_once(__DIR__ . '/../../behat/classes/behat_command.php');
         require_once(__DIR__ . '/../../behat/classes/behat_selectors.php');
         require_once(__DIR__ . '/../../behat/classes/behat_context_helper.php');
@@ -226,7 +226,7 @@ EOF;
     }
 
     /**
-     * Gives access to moodle codebase, to keep track of feature start time.
+     * Gives access to powereduc codebase, to keep track of feature start time.
      *
      * @param BeforeFeatureScope $scope scope passed by event fired before feature.
      * @BeforeFeature
@@ -240,7 +240,7 @@ EOF;
     }
 
     /**
-     * Gives access to moodle codebase, to keep track of feature end time.
+     * Gives access to powereduc codebase, to keep track of feature end time.
      *
      * @param AfterFeatureScope $scope scope passed by event fired after feature.
      * @AfterFeature
@@ -258,7 +258,7 @@ EOF;
     }
 
     /**
-     * Gives access to moodle codebase, to keep track of suite timings.
+     * Gives access to powereduc codebase, to keep track of suite timings.
      *
      * @param AfterSuiteScope $scope scope passed by event fired after suite.
      * @AfterSuite

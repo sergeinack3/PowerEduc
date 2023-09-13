@@ -19,7 +19,7 @@ namespace core_cohort;
 use core_cohort_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

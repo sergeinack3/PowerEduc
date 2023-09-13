@@ -26,7 +26,7 @@ namespace core_customfield\output;
 
 use core_customfield\data_controller;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * core_customfield field value renderable class.

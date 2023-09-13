@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/choice/lib.php');
 
@@ -64,7 +64,7 @@ class mod_choice_external extends external_api {
         $params = self::validate_parameters(self::get_choice_results_parameters(), array('choiceid' => $choiceid));
 
         if (!$choice = choice_get_choice($params['choiceid'])) {
-            throw new moodle_exception("invalidcoursemodule", "error");
+            throw new powereduc_exception("invalidcoursemodule", "error");
         }
         list($course, $cm) = get_course_and_cm_from_instance($choice, 'choice');
 
@@ -83,7 +83,7 @@ class mod_choice_external extends external_api {
         $results = prepare_choice_show_results($choice, $course, $cm, $users);
 
         $options = array();
-        $fullnamecap = has_capability('moodle/site:viewfullnames', $context);
+        $fullnamecap = has_capability('powereduc/site:viewfullnames', $context);
         foreach ($results->options as $optionid => $option) {
 
             $userresponses = array();
@@ -189,7 +189,7 @@ class mod_choice_external extends external_api {
         $params = self::validate_parameters(self::get_choice_options_parameters(), array('choiceid' => $choiceid));
 
         if (!$choice = choice_get_choice($params['choiceid'])) {
-            throw new moodle_exception("invalidcoursemodule", "error");
+            throw new powereduc_exception("invalidcoursemodule", "error");
         }
         list($course, $cm) = get_course_and_cm_from_instance($choice, 'choice');
 
@@ -324,7 +324,7 @@ class mod_choice_external extends external_api {
                                             ));
 
         if (!$choice = choice_get_choice($params['choiceid'])) {
-            throw new moodle_exception("invalidcoursemodule", "error");
+            throw new powereduc_exception("invalidcoursemodule", "error");
         }
         list($course, $cm) = get_course_and_cm_from_instance($choice, 'choice');
 
@@ -335,9 +335,9 @@ class mod_choice_external extends external_api {
 
         $timenow = time();
         if (!empty($choice->timeopen) && ($choice->timeopen > $timenow)) {
-            throw new moodle_exception("notopenyet", "choice", '', userdate($choice->timeopen));
+            throw new powereduc_exception("notopenyet", "choice", '', userdate($choice->timeopen));
         } else if (!empty($choice->timeclose) && ($timenow > $choice->timeclose)) {
-            throw new moodle_exception("expired", "choice", '', userdate($choice->timeclose));
+            throw new powereduc_exception("expired", "choice", '', userdate($choice->timeclose));
         }
 
         if (!choice_get_my_response($choice) or $choice->allowupdate) {
@@ -349,7 +349,7 @@ class mod_choice_external extends external_api {
             }
             choice_user_submit_response($params['responses'], $choice, $USER->id, $course, $cm);
         } else {
-            throw new moodle_exception('missingrequiredcapability', 'webservice', '', 'allowupdate');
+            throw new powereduc_exception('missingrequiredcapability', 'webservice', '', 'allowupdate');
         }
         $answers = choice_get_my_response($choice);
 
@@ -404,7 +404,7 @@ class mod_choice_external extends external_api {
      * @param int $choiceid the choice instance id
      * @return array of warnings and status result
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_choice($choiceid) {
         global $CFG;
@@ -417,7 +417,7 @@ class mod_choice_external extends external_api {
 
         // Request and permission validation.
         if (!$choice = choice_get_choice($params['choiceid'])) {
-            throw new moodle_exception("invalidcoursemodule", "error");
+            throw new powereduc_exception("invalidcoursemodule", "error");
         }
         list($course, $cm) = get_course_and_cm_from_instance($choice, 'choice');
 
@@ -512,7 +512,7 @@ class mod_choice_external extends external_api {
                     $choicedetails['showavailable']  = $choice->showavailable;
                 }
 
-                if (has_capability('moodle/course:manageactivities', $context)) {
+                if (has_capability('powereduc/course:manageactivities', $context)) {
                     $choicedetails['timemodified']  = $choice->timemodified;
                     $choicedetails['completionsubmit']  = $choice->completionsubmit;
                 }
@@ -587,7 +587,7 @@ class mod_choice_external extends external_api {
      * @param int $choiceid the choice instance id
      * @param array $responses the response ids,  empty for deleting all the current user responses
      * @return array status information and warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.0
      */
     public static function delete_choice_responses($choiceid, $responses = array()) {
@@ -601,7 +601,7 @@ class mod_choice_external extends external_api {
                                             ));
 
         if (!$choice = choice_get_choice($params['choiceid'])) {
-            throw new moodle_exception("invalidcoursemodule", "error");
+            throw new powereduc_exception("invalidcoursemodule", "error");
         }
         list($course, $cm) = get_course_and_cm_from_instance($choice, 'choice');
 
@@ -617,7 +617,7 @@ class mod_choice_external extends external_api {
             if (!$candeleteall) {
                 $timenow = time();
                 if (!empty($choice->timeclose) && ($timenow > $choice->timeclose)) {
-                    throw new moodle_exception("expired", "choice", '', userdate($choice->timeclose));
+                    throw new powereduc_exception("expired", "choice", '', userdate($choice->timeclose));
                 }
             }
 

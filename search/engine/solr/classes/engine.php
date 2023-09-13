@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Solr engine.
@@ -24,7 +24,7 @@
 
 namespace search_solr;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Solr engine.
@@ -486,7 +486,7 @@ class engine extends \core_search\engine {
     }
 
     /**
-     * Filters the response on Moodle side.
+     * Filters the response on PowerEduc side.
      *
      * @param SolrObject $response Solr object containing the response return from solr server.
      * @param int        $limit The maximum number of results to return. 0 for all.
@@ -599,7 +599,7 @@ class engine extends \core_search\engine {
             $access = $searcharea->check_access($firstdoc->itemid);
             switch ($access) {
                 case \core_search\manager::ACCESS_DELETED:
-                    // If deleted from Moodle, delete from index and then continue.
+                    // If deleted from PowerEduc, delete from index and then continue.
                     $this->delete_by_id($firstdoc->id);
                     // Remove one from our processed and total counters, since we promptly deleted.
                     $this->processeddocs--;
@@ -1043,7 +1043,7 @@ class engine extends \core_search\engine {
      * Adds a file to the search engine.
      *
      * Notes about Solr and Tika indexing. We do not send the mime type, only the filename.
-     * Tika has much better content type detection than Moodle, and we will have many more doc failures
+     * Tika has much better content type detection than PowerEduc, and we will have many more doc failures
      * if we try to send mime types.
      *
      * @param document $document
@@ -1176,8 +1176,8 @@ class engine extends \core_search\engine {
 
         $mime = $file->get_mimetype();
 
-        if ($mime == 'application/vnd.moodle.backup') {
-            // We don't index Moodle backup files. There is nothing usefully indexable in them.
+        if ($mime == 'application/vnd.powereduc.backup') {
+            // We don't index PowerEduc backup files. There is nothing usefully indexable in them.
             return false;
         }
 
@@ -1273,7 +1273,7 @@ class engine extends \core_search\engine {
         try {
             $schema = new schema($this);
             $schema->validate_setup();
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             return $e->getMessage();
         }
 
@@ -1453,10 +1453,10 @@ class engine extends \core_search\engine {
     }
 
     /**
-     * Return a Moodle url object for the server connection.
+     * Return a PowerEduc url object for the server connection.
      *
      * @param string $path The solr path to append.
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_connection_url($path) {
         // Must use the proper protocol, or SSL will fail.
@@ -1467,7 +1467,7 @@ class engine extends \core_search\engine {
         }
         $url .= '/solr/' . $this->config->indexname . '/' . ltrim($path, '/');
 
-        return new \moodle_url($url);
+        return new \powereduc_url($url);
     }
 
     /**

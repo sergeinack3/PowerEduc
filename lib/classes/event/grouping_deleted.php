@@ -23,7 +23,7 @@
  */
 
 namespace core\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Grouping deleted event class.

@@ -17,7 +17,7 @@ Feature: Assignment with no calendar capabilites
     And I am on the "C1" "permissions" page logged in as admin
     And I override the system permissions of "Teacher" role with:
       | capability                     | permission  |
-      | moodle/calendar:manageentries  | Prohibit    |
+      | powereduc/calendar:manageentries  | Prohibit    |
 
   Scenario: Editing an assignment
     Given the following "activities" exist:

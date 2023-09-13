@@ -125,7 +125,7 @@ class lang {
         define('ABORT_AFTER_CONFIG_CANCEL', true);
 
         // Session not used here.
-        define('NO_MOODLE_COOKIES', true);
+        define('NO_POWEREDUC_COOKIES', true);
 
         // Ignore upgrade check.
         define('NO_UPGRADE_CHECK', true);

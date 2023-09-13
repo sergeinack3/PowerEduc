@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Assign feedback subplugin info class.
@@ -23,9 +23,9 @@
  */
 namespace mod_assign\plugininfo;
 
-use core\plugininfo\base, core_plugin_manager, moodle_url;
+use core\plugininfo\base, core_plugin_manager, powereduc_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 class assignfeedback extends base {
@@ -87,10 +87,10 @@ class assignfeedback extends base {
 
     /**
      * Return URL used for management of plugins of this type.
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function get_manage_url() {
-        return new moodle_url('/mod/assign/adminmanageplugins.php', array('subtype'=>'assignfeedback'));
+        return new powereduc_url('/mod/assign/adminmanageplugins.php', array('subtype'=>'assignfeedback'));
     }
 
     /**
@@ -117,7 +117,7 @@ class assignfeedback extends base {
      *
      * @param \part_of_admin_tree $adminroot
      * @param string $parentnodename
-     * @param bool $hassiteconfig whether the current user has moodle/site:config capability
+     * @param bool $hassiteconfig whether the current user has powereduc/site:config capability
      */
     public function load_settings(\part_of_admin_tree $adminroot, $parentnodename, $hassiteconfig) {
         global $CFG, $USER, $DB, $OUTPUT, $PAGE; // In case settings.php wants to refer to them.
@@ -134,7 +134,7 @@ class assignfeedback extends base {
 
         $section = $this->get_settings_section_name();
 
-        $settings = new \admin_settingpage($section, $this->displayname, 'moodle/site:config', $this->is_enabled() === false);
+        $settings = new \admin_settingpage($section, $this->displayname, 'powereduc/site:config', $this->is_enabled() === false);
 
         if ($adminroot->fulltree) {
             $shortsubtype = substr($this->type, strlen('assign'));

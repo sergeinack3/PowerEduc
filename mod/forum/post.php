@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Edit and save a new post to a discussion
  *
  * @package   mod_forum
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +38,7 @@ $subject = optional_param('subject', '', PARAM_TEXT);
 
 // Values posted via the inpage reply form.
 $prefilledpost = optional_param('post', '', PARAM_TEXT);
-$prefilledpostformat = optional_param('postformat', FORMAT_MOODLE, PARAM_INT);
+$prefilledpostformat = optional_param('postformat', FORMAT_POWEREDUC, PARAM_INT);
 $prefilledprivatereply = optional_param('privatereply', false, PARAM_BOOL);
 
 $PAGE->set_url('/mod/forum/post.php', array(
@@ -81,13 +81,13 @@ if (!isloggedin() or isguestuser()) {
         // User is starting a new discussion in a forum.
         $forumentity = $forumvault->get_from_id($forum);
         if (empty($forumentity)) {
-            throw new \moodle_exception('invalidforumid', 'forum');
+            throw new \powereduc_exception('invalidforumid', 'forum');
         }
     } else if (!empty($reply)) {
         // User is writing a new reply.
         $forumentity = $forumvault->get_from_post_id($reply);
         if (empty($forumentity)) {
-            throw new \moodle_exception('invalidparentpostid', 'forum');
+            throw new \powereduc_exception('invalidparentpostid', 'forum');
         }
     }
 
@@ -95,7 +95,7 @@ if (!isloggedin() or isguestuser()) {
     $modcontext = $forumentity->get_context();
     $course = $forumentity->get_course_record();
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
-        throw new \moodle_exception("invalidcoursemodule");
+        throw new \powereduc_exception("invalidcoursemodule");
     }
 
     $PAGE->set_cm($cm, $course, $forum);
@@ -118,14 +118,14 @@ if (!empty($forum)) {
     // User is starting a new discussion in a forum.
     $forumentity = $forumvault->get_from_id($forum);
     if (empty($forumentity)) {
-        throw new \moodle_exception('invalidforumid', 'forum');
+        throw new \powereduc_exception('invalidforumid', 'forum');
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
     $forum = $forumdatamapper->to_legacy_object($forumentity);
     $course = $forumentity->get_course_record();
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
-        throw new \moodle_exception("invalidcoursemodule");
+        throw new \powereduc_exception("invalidcoursemodule");
     }
 
     // Retrieve the contexts.
@@ -142,16 +142,16 @@ if (!empty($forum)) {
                 if (enrol_selfenrol_available($course->id)) {
                     $SESSION->wantsurl = qualified_me();
                     $SESSION->enrolcancel = get_local_referer(false);
-                    redirect(new moodle_url('/enrol/index.php', array('id' => $course->id,
+                    redirect(new powereduc_url('/enrol/index.php', array('id' => $course->id,
                         'returnurl' => '/mod/forum/view.php?f=' . $forum->id)),
                         get_string('youneedtoenrol'));
                 }
             }
         }
-        throw new \moodle_exception('nopostforum', 'forum');
+        throw new \powereduc_exception('nopostforum', 'forum');
     }
 
-    if (!$cm->visible and !has_capability('moodle/course:viewhiddenactivities', $modcontext)) {
+    if (!$cm->visible and !has_capability('powereduc/course:viewhiddenactivities', $modcontext)) {
         redirect(
                 $urlfactory->get_course_url_from_forum($forumentity),
                 get_string('activityiscurrentlyhidden'),
@@ -182,17 +182,17 @@ if (!empty($forum)) {
 
     $parententity = $postvault->get_from_id($reply);
     if (empty($parententity)) {
-        throw new \moodle_exception('invalidparentpostid', 'forum');
+        throw new \powereduc_exception('invalidparentpostid', 'forum');
     }
 
     $discussionentity = $discussionvault->get_from_id($parententity->get_discussion_id());
     if (empty($discussionentity)) {
-        throw new \moodle_exception('notpartofdiscussion', 'forum');
+        throw new \powereduc_exception('notpartofdiscussion', 'forum');
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
-        throw new \moodle_exception('invalidforumid', 'forum');
+        throw new \powereduc_exception('invalidforumid', 'forum');
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -204,7 +204,7 @@ if (!empty($forum)) {
     $coursecontext = context_course::instance($course->id);
 
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     // Ensure lang, theme, etc. is set up properly. MDL-6926.
@@ -215,17 +215,17 @@ if (!empty($forum)) {
             if (!is_enrolled($coursecontext)) {  // User is a guest here!
                 $SESSION->wantsurl = qualified_me();
                 $SESSION->enrolcancel = get_local_referer(false);
-                redirect(new moodle_url('/enrol/index.php', array('id' => $course->id,
+                redirect(new powereduc_url('/enrol/index.php', array('id' => $course->id,
                     'returnurl' => '/mod/forum/view.php?f=' . $forum->id)),
                     get_string('youneedtoenrol'));
             }
 
             // The forum has been locked. Just redirect back to the discussion page.
             if (forum_discussion_is_locked($forum, $discussion)) {
-                redirect(new moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id)));
+                redirect(new powereduc_url('/mod/forum/discuss.php', array('d' => $discussion->id)));
             }
         }
-        throw new \moodle_exception('nopostforum', 'forum');
+        throw new \powereduc_exception('nopostforum', 'forum');
     }
 
     // Make sure user can post here.
@@ -234,22 +234,22 @@ if (!empty($forum)) {
     } else {
         $groupmode = $course->groupmode;
     }
-    if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $modcontext)) {
+    if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $modcontext)) {
         if ($discussion->groupid == -1) {
-            throw new \moodle_exception('nopostforum', 'forum');
+            throw new \powereduc_exception('nopostforum', 'forum');
         } else {
             if (!groups_is_member($discussion->groupid)) {
-                throw new \moodle_exception('nopostforum', 'forum');
+                throw new \powereduc_exception('nopostforum', 'forum');
             }
         }
     }
 
-    if (!$cm->visible and !has_capability('moodle/course:viewhiddenactivities', $modcontext)) {
-        throw new \moodle_exception("activityiscurrentlyhidden");
+    if (!$cm->visible and !has_capability('powereduc/course:viewhiddenactivities', $modcontext)) {
+        throw new \powereduc_exception("activityiscurrentlyhidden");
     }
 
     if ($parententity->is_private_reply()) {
-        throw new \moodle_exception('cannotreplytoprivatereply', 'forum');
+        throw new \powereduc_exception('cannotreplytoprivatereply', 'forum');
     }
 
     // We always are going to honor the preferred format. We are creating a new post.
@@ -292,7 +292,7 @@ if (!empty($forum)) {
 
     $postentity = $postvault->get_from_id($edit);
     if (empty($postentity)) {
-        throw new \moodle_exception('invalidpostid', 'forum');
+        throw new \powereduc_exception('invalidpostid', 'forum');
     }
     if ($postentity->has_parent()) {
         $parententity = $postvault->get_from_id($postentity->get_parent_id());
@@ -301,12 +301,12 @@ if (!empty($forum)) {
 
     $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
     if (empty($discussionentity)) {
-        throw new \moodle_exception('notpartofdiscussion', 'forum');
+        throw new \powereduc_exception('notpartofdiscussion', 'forum');
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
-        throw new \moodle_exception('invalidforumid', 'forum');
+        throw new \powereduc_exception('invalidforumid', 'forum');
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -318,7 +318,7 @@ if (!empty($forum)) {
     $coursecontext = context_course::instance($course->id);
 
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     $PAGE->set_cm($cm, $course, $forum);
@@ -326,12 +326,12 @@ if (!empty($forum)) {
     if (!($forum->type == 'news' && !$post->parent && $discussion->timestart > time())) {
         if (((time() - $post->created) > $CFG->maxeditingtime) and
             !has_capability('mod/forum:editanypost', $modcontext)) {
-            throw new \moodle_exception('maxtimehaspassed', 'forum', '', format_time($CFG->maxeditingtime));
+            throw new \powereduc_exception('maxtimehaspassed', 'forum', '', format_time($CFG->maxeditingtime));
         }
     }
     if (($post->userid <> $USER->id) and
         !has_capability('mod/forum:editanypost', $modcontext)) {
-        throw new \moodle_exception('cannoteditposts', 'forum');
+        throw new \powereduc_exception('cannoteditposts', 'forum');
     }
 
     // Load up the $post variable.
@@ -353,17 +353,17 @@ if (!empty($forum)) {
 
     $postentity = $postvault->get_from_id($delete);
     if (empty($postentity)) {
-        throw new \moodle_exception('invalidpostid', 'forum');
+        throw new \powereduc_exception('invalidpostid', 'forum');
     }
 
     $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
     if (empty($discussionentity)) {
-        throw new \moodle_exception('notpartofdiscussion', 'forum');
+        throw new \powereduc_exception('notpartofdiscussion', 'forum');
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
-        throw new \moodle_exception('invalidforumid', 'forum');
+        throw new \powereduc_exception('invalidforumid', 'forum');
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -510,17 +510,17 @@ if (!empty($forum)) {
 
     $postentity = $postvault->get_from_id($prune);
     if (empty($postentity)) {
-        throw new \moodle_exception('invalidpostid', 'forum');
+        throw new \powereduc_exception('invalidpostid', 'forum');
     }
 
     $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
     if (empty($discussionentity)) {
-        throw new \moodle_exception('notpartofdiscussion', 'forum');
+        throw new \powereduc_exception('notpartofdiscussion', 'forum');
     }
 
     $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
     if (empty($forumentity)) {
-        throw new \moodle_exception('invalidforumid', 'forum');
+        throw new \powereduc_exception('invalidforumid', 'forum');
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -532,7 +532,7 @@ if (!empty($forum)) {
     $coursecontext = context_course::instance($course->id);
 
     if (!$cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     if (!$postentity->has_parent()) {
@@ -635,7 +635,7 @@ if (!empty($forum)) {
         // Display the prune form.
         $course = $DB->get_record('course', array('id' => $forum->course));
         $subjectstr = format_string($post->subject, true);
-        $PAGE->navbar->add($subjectstr, new moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id)));
+        $PAGE->navbar->add($subjectstr, new powereduc_url('/mod/forum/discuss.php', array('d' => $discussion->id)));
         $PAGE->navbar->add(get_string("prunediscussion", "forum"));
         $PAGE->set_title(format_string($discussion->name).": ".format_string($post->subject));
         $PAGE->set_heading($course->fullname);
@@ -658,7 +658,7 @@ if (!empty($forum)) {
     echo $OUTPUT->footer();
     die;
 } else {
-    throw new \moodle_exception('unknowaction');
+    throw new \powereduc_exception('unknowaction');
 
 }
 
@@ -668,7 +668,7 @@ require_login($course, false, $cm);
 
 if (isguestuser()) {
     // Just in case.
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 
 $thresholdwarning = forum_check_throttling($forum, $cm);
@@ -847,7 +847,7 @@ if ($mformpost->is_cancelled()) {
         $updatepost = $fromform;
         $updatepost->forum = $forum->id;
         if (!forum_update_post($updatepost, $mformpost)) {
-            throw new \moodle_exception("couldnotupdate", "forum", $errordestination);
+            throw new \powereduc_exception("couldnotupdate", "forum", $errordestination);
         }
 
         forum_trigger_post_updated_event($post, $discussion, $modcontext, $forum);
@@ -933,14 +933,14 @@ if ($mformpost->is_cancelled()) {
             );
 
         } else {
-            throw new \moodle_exception("couldnotadd", "forum", $errordestination);
+            throw new \powereduc_exception("couldnotadd", "forum", $errordestination);
         }
         exit;
 
     } else {
         // Adding a new discussion.
         // The location to redirect to after successfully posting.
-        $redirectto = new moodle_url('/mod/forum/view.php', array('f' => $fromform->forum));
+        $redirectto = new powereduc_url('/mod/forum/view.php', array('f' => $fromform->forum));
 
         $fromform->mailnow = empty($fromform->mailnow) ? 0 : 1;
 
@@ -993,7 +993,7 @@ if ($mformpost->is_cancelled()) {
 
         foreach ($groupstopostto as $group) {
             if (!$capabilitymanager->can_create_discussions($USER, $group)) {
-                throw new \moodle_exception('cannotcreatediscussion', 'forum');
+                throw new \powereduc_exception('cannotcreatediscussion', 'forum');
             }
 
             $discussion->groupid = $group;
@@ -1020,7 +1020,7 @@ if ($mformpost->is_cancelled()) {
 
                 $subscribemessage = forum_post_subscription($fromform, $forum, $discussion);
             } else {
-                throw new \moodle_exception("couldnotadd", "forum", $errordestination);
+                throw new \powereduc_exception("couldnotadd", "forum", $errordestination);
             }
         }
 
@@ -1109,11 +1109,11 @@ if ($edit) {
 
 // Checkup.
 if (!empty($parententity) && !$capabilitymanager->can_view_post($USER, $discussionentity, $parententity)) {
-    throw new \moodle_exception('cannotreply', 'forum');
+    throw new \powereduc_exception('cannotreply', 'forum');
 }
 
 if (empty($parententity) && empty($edit) && !$capabilitymanager->can_create_discussions($USER, $groupid)) {
-    throw new \moodle_exception('cannotcreatediscussion', 'forum');
+    throw new \powereduc_exception('cannotcreatediscussion', 'forum');
 }
 
 if (!empty($discussionentity) && 'qanda' == $forumentity->get_type()) {

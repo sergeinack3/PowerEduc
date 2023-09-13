@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 use mod_data\local\importer\preset_existing_importer;
 use mod_data\manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class mod_data_renderer extends plugin_renderer_base {
 
@@ -128,7 +128,7 @@ class mod_data_renderer extends plugin_renderer_base {
         $html .= html_writer::end_tag('div');
 
         $actionbuttons = html_writer::start_div();
-        $cancelurl = new moodle_url('/mod/data/field.php', ['d' => $datamodule->id]);
+        $cancelurl = new powereduc_url('/mod/data/field.php', ['d' => $datamodule->id]);
         $actionbuttons .= html_writer::tag('a', get_string('cancel') , [
             'href' => $cancelurl->out(false),
             'class' => 'btn btn-secondary mr-2',
@@ -173,7 +173,7 @@ class mod_data_renderer extends plugin_renderer_base {
      */
     public function render_fields_footer(manager $manager): string {
         $cm = $manager->get_coursemodule();
-        $pageurl = new moodle_url('/mod/data/templates.php', ['id' => $cm->id]);
+        $pageurl = new powereduc_url('/mod/data/templates.php', ['id' => $cm->id]);
         return $this->render_from_template('mod_data/fields_footer', [
             'pageurl' => $pageurl->out(false),
         ]);

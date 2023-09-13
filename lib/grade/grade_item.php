@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once('grade_object.php');
 
 /**
@@ -974,7 +974,7 @@ class grade_item extends grade_object {
                 // Updating the raw grade automatically updates the min/max.
                 if ($this->is_raw_used()) {
                     $rawgrade = (($grade->rawgrade - $oldgrademin) * $scale) + $newgrademin;
-                    $this->update_raw_grade(false, $rawgrade, $source, false, FORMAT_MOODLE, null, null, null, $grade);
+                    $this->update_raw_grade(false, $rawgrade, $source, false, FORMAT_POWEREDUC, null, null, null, $grade);
                 } else {
                     $finalgrade = (($grade->finalgrade - $oldgrademin) * $scale) + $newgrademin;
                     $this->update_final_grade($grade->userid, $finalgrade, $source);
@@ -1797,7 +1797,7 @@ class grade_item extends grade_object {
      * @return bool success
      */
     public function update_final_grade($userid, $finalgrade = false, $source = null, $feedback = false,
-            $feedbackformat = FORMAT_MOODLE, $usermodified = null, $timemodified = null, $isbulkupdate = false) {
+            $feedbackformat = FORMAT_POWEREDUC, $usermodified = null, $timemodified = null, $isbulkupdate = false) {
         global $USER, $CFG;
 
         $result = true;
@@ -1955,7 +1955,7 @@ class grade_item extends grade_object {
      * @return bool success
      */
     public function update_raw_grade($userid, $rawgrade = false, $source = null, $feedback = false,
-            $feedbackformat = FORMAT_MOODLE, $usermodified = null, $dategraded = null, $datesubmitted=null,
+            $feedbackformat = FORMAT_POWEREDUC, $usermodified = null, $dategraded = null, $datesubmitted=null,
             $grade = null, array $feedbackfiles = [], $isbulkupdate = false) {
         global $USER;
 

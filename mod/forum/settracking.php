@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Set tracking option for the forum.
@@ -32,18 +32,18 @@ $returnpage = optional_param('returnpage', 'index.php', PARAM_FILE);    // Page 
 require_sesskey();
 
 if (! $forum = $DB->get_record("forum", array("id" => $id))) {
-    throw new \moodle_exception('invalidforumid', 'forum');
+    throw new \powereduc_exception('invalidforumid', 'forum');
 }
 
 if (! $course = $DB->get_record("course", array("id" => $forum->course))) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (! $cm = get_coursemodule_from_instance("forum", $forum->id, $course->id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 require_login($course, false, $cm);
-$returnpageurl = new moodle_url('/mod/forum/' . $returnpage, array('id' => $course->id, 'f' => $forum->id));
+$returnpageurl = new powereduc_url('/mod/forum/' . $returnpage, array('id' => $course->id, 'f' => $forum->id));
 $returnto = forum_go_back_to($returnpageurl);
 
 if (!forum_tp_can_track_forums($forum)) {
@@ -66,7 +66,7 @@ if (forum_tp_is_tracked($forum) ) {
         $event->trigger();
         redirect($returnto, get_string("nownottracking", "forum", $info), 1);
     } else {
-        throw new \moodle_exception('cannottrack', '', get_local_referer(false));
+        throw new \powereduc_exception('cannottrack', '', get_local_referer(false));
     }
 
 } else { // subscribe
@@ -75,6 +75,6 @@ if (forum_tp_is_tracked($forum) ) {
         $event->trigger();
         redirect($returnto, get_string("nowtracking", "forum", $info), 1);
     } else {
-        throw new \moodle_exception('cannottrack', '', get_local_referer(false));
+        throw new \powereduc_exception('cannottrack', '', get_local_referer(false));
     }
 }

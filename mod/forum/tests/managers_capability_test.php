@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum;
 
@@ -21,7 +21,7 @@ use mod_forum\local\entities\forum;
 use mod_forum\local\managers\capability as capability_manager;
 use mod_forum_tests_generator_trait;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/generator_trait.php');
@@ -30,7 +30,7 @@ require_once(__DIR__ . '/generator_trait.php');
  * The capability manager tests.
  *
  * @package    mod_forum
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \mod_forum\local\managers\capability
  */
@@ -226,10 +226,10 @@ class managers_capability_test extends \advanced_testcase {
 
         $this->assertFalse($capabilitymanager->can_create_discussions($user));
 
-        $this->give_capability('moodle/site:accessallgroups', $context);
+        $this->give_capability('powereduc/site:accessallgroups', $context);
         $this->assertTrue($capabilitymanager->can_create_discussions($user));
 
-        $this->prevent_capability('moodle/site:accessallgroups', $context);
+        $this->prevent_capability('powereduc/site:accessallgroups', $context);
         $this->assertFalse($capabilitymanager->can_create_discussions($user));
 
         $group = $this->getDataGenerator()->create_group(['courseid' => $this->course->id]);
@@ -262,10 +262,10 @@ class managers_capability_test extends \advanced_testcase {
         $user = $this->user;
         $capabilitymanager = $this->managerfactory->get_capability_manager($forum);
 
-        $this->prevent_capability('moodle/site:accessallgroups');
+        $this->prevent_capability('powereduc/site:accessallgroups');
         $this->assertFalse($capabilitymanager->can_access_all_groups($user));
 
-        $this->give_capability('moodle/site:accessallgroups');
+        $this->give_capability('powereduc/site:accessallgroups');
         $this->assertTrue($capabilitymanager->can_access_all_groups($user));
     }
 
@@ -282,13 +282,13 @@ class managers_capability_test extends \advanced_testcase {
         $capabilitymanager = $this->managerfactory->get_capability_manager($forum);
         $group = $this->getDataGenerator()->create_group(['courseid' => $this->course->id]);
 
-        $this->prevent_capability('moodle/site:accessallgroups');
+        $this->prevent_capability('powereduc/site:accessallgroups');
         $this->assertFalse($capabilitymanager->can_access_group($user, $group->id));
 
-        $this->give_capability('moodle/site:accessallgroups');
+        $this->give_capability('powereduc/site:accessallgroups');
         $this->assertTrue($capabilitymanager->can_access_group($user, $group->id));
 
-        $this->prevent_capability('moodle/site:accessallgroups');
+        $this->prevent_capability('powereduc/site:accessallgroups');
         $this->getDataGenerator()->create_group_member(['userid' => $user->id, 'groupid' => $group->id]);
         $this->assertTrue($capabilitymanager->can_access_group($user, $group->id));
     }
@@ -582,10 +582,10 @@ class managers_capability_test extends \advanced_testcase {
         );
         $capabilitymanager = $this->managerfactory->get_capability_manager($forum);
 
-        $this->give_capability('moodle/site:accessallgroups', $context);
+        $this->give_capability('powereduc/site:accessallgroups', $context);
         $this->assertTrue($capabilitymanager->can_post_in_discussion($user, $discussion));
 
-        $this->prevent_capability('moodle/site:accessallgroups', $context);
+        $this->prevent_capability('powereduc/site:accessallgroups', $context);
         $this->assertFalse($capabilitymanager->can_post_in_discussion($user, $discussion));
 
         $group = $this->getDataGenerator()->create_group(['courseid' => $this->course->id]);
@@ -614,10 +614,10 @@ class managers_capability_test extends \advanced_testcase {
         );
         $capabilitymanager = $this->managerfactory->get_capability_manager($forum);
 
-        $this->give_capability('moodle/site:accessallgroups', $context);
+        $this->give_capability('powereduc/site:accessallgroups', $context);
         $this->assertTrue($capabilitymanager->can_post_in_discussion($user, $discussion));
 
-        $this->prevent_capability('moodle/site:accessallgroups', $context);
+        $this->prevent_capability('powereduc/site:accessallgroups', $context);
         $this->assertTrue($capabilitymanager->can_post_in_discussion($user, $discussion));
 
         $group = $this->getDataGenerator()->create_group(['courseid' => $this->course->id]);
@@ -723,10 +723,10 @@ class managers_capability_test extends \advanced_testcase {
             (object) array_merge((array) $this->discussionrecord, ['firstpost' => $post->get_id()])
         );
 
-        $this->prevent_capability('moodle/course:manageactivities');
+        $this->prevent_capability('powereduc/course:manageactivities');
         $this->assertFalse($capabilitymanager->can_edit_post($user, $discussion, $post));
 
-        $this->give_capability('moodle/course:manageactivities');
+        $this->give_capability('powereduc/course:manageactivities');
         $this->assertTrue($capabilitymanager->can_edit_post($user, $discussion, $post));
     }
 
@@ -904,10 +904,10 @@ class managers_capability_test extends \advanced_testcase {
         );
         $capabilitymanager = $this->managerfactory->get_capability_manager($forum);
 
-        $this->give_capability('moodle/site:accessallgroups', $context);
+        $this->give_capability('powereduc/site:accessallgroups', $context);
         $this->assertTrue($capabilitymanager->can_reply_to_post($user, $discussion, $post));
 
-        $this->prevent_capability('moodle/site:accessallgroups', $context);
+        $this->prevent_capability('powereduc/site:accessallgroups', $context);
         $this->assertFalse($capabilitymanager->can_reply_to_post($user, $discussion, $post));
 
         $group = $this->getDataGenerator()->create_group(['courseid' => $this->course->id]);
@@ -936,10 +936,10 @@ class managers_capability_test extends \advanced_testcase {
         );
         $capabilitymanager = $this->managerfactory->get_capability_manager($forum);
 
-        $this->give_capability('moodle/site:accessallgroups', $context);
+        $this->give_capability('powereduc/site:accessallgroups', $context);
         $this->assertTrue($capabilitymanager->can_reply_to_post($user, $discussion, $post));
 
-        $this->prevent_capability('moodle/site:accessallgroups', $context);
+        $this->prevent_capability('powereduc/site:accessallgroups', $context);
         $this->assertTrue($capabilitymanager->can_reply_to_post($user, $discussion, $post));
 
         $group = $this->getDataGenerator()->create_group(['courseid' => $this->course->id]);
@@ -1151,8 +1151,8 @@ class managers_capability_test extends \advanced_testcase {
 
         $this->getDataGenerator()->enrol_user($otheruser->id, $this->course->id, 'teacher');
 
-        $this->prevent_capability('moodle/course:viewparticipants');
-        $this->prevent_capability('moodle/course:enrolreview');
+        $this->prevent_capability('powereduc/course:viewparticipants');
+        $this->prevent_capability('powereduc/course:enrolreview');
         $this->prevent_capability('mod/forum:viewqandawithoutposting');
 
         $forum = $this->create_forum();
@@ -1160,11 +1160,11 @@ class managers_capability_test extends \advanced_testcase {
 
         $this->assertFalse($capabilitymanager->can_view_participants($otheruser, $discussion));
 
-        $this->give_capability('moodle/course:viewparticipants');
+        $this->give_capability('powereduc/course:viewparticipants');
         $this->assertTrue($capabilitymanager->can_view_participants($otheruser, $discussion));
 
-        $this->prevent_capability('moodle/course:viewparticipants');
-        $this->give_capability('moodle/course:enrolreview');
+        $this->prevent_capability('powereduc/course:viewparticipants');
+        $this->give_capability('powereduc/course:enrolreview');
         $this->assertTrue($capabilitymanager->can_view_participants($otheruser, $discussion));
 
         $forum = $this->create_forum(['type' => 'qanda']);
@@ -1209,10 +1209,10 @@ class managers_capability_test extends \advanced_testcase {
         $user = $this->user;
         $capabilitymanager = $this->managerfactory->get_capability_manager($forum);
 
-        $this->prevent_capability('moodle/course:manageactivities');
+        $this->prevent_capability('powereduc/course:manageactivities');
         $this->assertFalse($capabilitymanager->can_manage_forum($user));
 
-        $this->give_capability('moodle/course:manageactivities');
+        $this->give_capability('powereduc/course:manageactivities');
         $this->assertTrue($capabilitymanager->can_manage_forum($user));
     }
 
@@ -1231,10 +1231,10 @@ class managers_capability_test extends \advanced_testcase {
         $context = \context_system::instance();
         $roleid = $DB->get_field('role', 'id', ['shortname' => 'user'], MUST_EXIST);
 
-        assign_capability('moodle/tag:manage', CAP_PREVENT, $roleid, $context->id, true);
+        assign_capability('powereduc/tag:manage', CAP_PREVENT, $roleid, $context->id, true);
         $this->assertFalse($capabilitymanager->can_manage_tags($user));
 
-        assign_capability('moodle/tag:manage', CAP_ALLOW, $roleid, $context->id, true);
+        assign_capability('powereduc/tag:manage', CAP_ALLOW, $roleid, $context->id, true);
         $this->assertTrue($capabilitymanager->can_manage_tags($user));
     }
 

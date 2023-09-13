@@ -24,7 +24,7 @@
 
 namespace editor_textarea\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for editor_textarea implementing null_provider.

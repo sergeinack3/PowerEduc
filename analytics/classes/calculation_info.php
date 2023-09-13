@@ -24,7 +24,7 @@
 
 namespace core_analytics;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Extra information generated during the analysis by calculable elements.

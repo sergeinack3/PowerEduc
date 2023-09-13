@@ -24,7 +24,7 @@
 
 namespace core\analytics\indicator;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Any access before the official start of the course.

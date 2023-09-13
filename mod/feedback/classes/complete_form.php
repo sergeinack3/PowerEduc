@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class mod_feedback_complete_form
@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2016 Marina Glancy
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_feedback_complete_form extends moodleform {
+class mod_feedback_complete_form extends powereducform {
 
     /** @var int */
     const MODE_COMPLETE = 1;
@@ -424,7 +424,7 @@ class mod_feedback_complete_form extends moodleform {
     }
 
     /**
-     * Returns the CSS id attribute that will be assigned by moodleform later to this element
+     * Returns the CSS id attribute that will be assigned by powereducform later to this element
      * @param stdClass $item
      * @param HTML_QuickForm_element $element
      */

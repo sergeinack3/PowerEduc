@@ -24,7 +24,7 @@
 
 namespace tool_generator\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tool_generator implementing null_provider.

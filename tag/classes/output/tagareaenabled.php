@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag\output\tagareaenabled
@@ -41,7 +41,7 @@ class tagareaenabled extends \core\output\inplace_editable {
      * @param \stdClass $tagarea
      */
     public function __construct($tagarea) {
-        $editable = has_capability('moodle/tag:manage', context_system::instance());
+        $editable = has_capability('powereduc/tag:manage', context_system::instance());
         $value = $tagarea->enabled ? 1 : 0;
 
         parent::__construct('core_tag', 'tagareaenable', $tagarea->id, $editable, '', $value);
@@ -75,7 +75,7 @@ class tagareaenabled extends \core\output\inplace_editable {
      */
     public static function update($itemid, $newvalue) {
         global $DB;
-        require_capability('moodle/tag:manage', context_system::instance());
+        require_capability('powereduc/tag:manage', context_system::instance());
         $tagarea = $DB->get_record('tag_area', array('id' => $itemid), '*', MUST_EXIST);
         $newvalue = $newvalue ? 1 : 0;
         $data = array('enabled' => $newvalue);

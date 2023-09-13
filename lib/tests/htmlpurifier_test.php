@@ -346,7 +346,7 @@ class htmlpurifier_test extends \basic_testcase {
      * @param string $expected expected result
      */
     public function test_media_tags($mediatag, $expected) {
-        $actual = format_text($mediatag, FORMAT_MOODLE, ['filter' => false]);
+        $actual = format_text($mediatag, FORMAT_POWEREDUC, ['filter' => false]);
         $this->assertEquals($expected, $actual);
     }
 

@@ -24,7 +24,7 @@
 
 namespace core_analytics\local\time_splitting;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface for time-splitting methods whose ranges' times are before time().

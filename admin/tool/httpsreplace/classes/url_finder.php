@@ -27,7 +27,7 @@ namespace tool_httpsreplace;
 use database_column_info;
 use progress_bar;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Examines DB for non-https src or data links

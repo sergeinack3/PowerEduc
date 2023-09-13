@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @author    Jesus Federico  (jesus [at] blindsidenetworks [dt] com)
  * @author    Fred Dixon  (ffdixon [at] blindsidenetworks [dt] com)
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['activityoverview'] = 'You have upcoming BigBlueButton sessions';
 $string['acceptdpa'] = 'I understand and accept the data processing agreement';
@@ -137,7 +137,7 @@ $string['config_guestaccess_enabled_description'] = 'Allow users without an acco
 $string['config_general'] = 'General settings';
 $string['config_general_description'] = 'These settings are always used.';
 $string['config_server_url'] = 'BigBlueButton server URL';
-$string['config_server_url_description'] = 'The default credentials are for a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-moodle/" target="_blank">free BigBlueButton service for Moodle (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
+$string['config_server_url_description'] = 'The default credentials are for a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-powereduc/" target="_blank">free BigBlueButton service for Moodle (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
 <ol>
 <li>The maximum length for each session is 60 minutes</li>
 <li>The maximum number of concurrent users per session is 25</li>
@@ -619,7 +619,7 @@ $string['notification_recording_ready_subject'] = 'Recording available';
 $string['view_error_meeting_not_running'] = 'Something went wrong; the session is not running.';
 $string['view_error_current_state_not_found'] = 'Current state was not found. The recording may have been deleted or the BigBlueButton server is not compatible with the action performed.';
 $string['view_error_action_not_completed'] = 'Action could not be completed';
-$string['view_warning_default_server'] = 'This site is using a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-moodle/" target="_blank">free BigBlueButton service for Moodle (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
+$string['view_warning_default_server'] = 'This site is using a <a href="https://bigbluebutton.org/free-bigbluebutton-service-for-powereduc/" target="_blank">free BigBlueButton service for Moodle (opens in new window)</a> provided by Blindside Networks with restrictions as follows:
 <ol>
 <li>The maximum length for each session is 60 minutes</li>
 <li>The maximum number of concurrent users per session is 25</li>

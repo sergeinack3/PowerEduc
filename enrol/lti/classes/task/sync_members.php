@@ -24,7 +24,7 @@
 
 namespace enrol_lti\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\task\scheduled_task;
 use core_user;

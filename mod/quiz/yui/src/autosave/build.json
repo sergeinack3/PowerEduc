@@ -1,7 +1,7 @@
 {
-    "name": "moodle-mod_quiz-autosave",
+    "name": "powereduc-mod_quiz-autosave",
     "builds": {
-        "moodle-mod_quiz-autosave": {
+        "powereduc-mod_quiz-autosave": {
             "jsfiles": [
                 "autosave.js"
             ]

@@ -26,7 +26,7 @@ declare(strict_types=1);
 
 namespace core_table\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\local\metadata\null_provider;
 

@@ -25,7 +25,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/../../../ddl/sql_generator.php');
 

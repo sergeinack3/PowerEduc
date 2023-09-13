@@ -28,7 +28,7 @@ namespace core\dml;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helpers and methods relating to DML tables.

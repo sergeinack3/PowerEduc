@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quiz_statistics;
 
@@ -21,7 +21,7 @@ use question_bank;
 use question_finder;
 use quiz_statistics_report;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/quiz/tests/attempt_walkthrough_from_csv_test.php');
@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');
  *
  * The quiz stats below and the question stats found in qstats00.csv were calculated independently in a spreadsheet which is
  * available in open document or excel format here :
- * https://github.com/jamiepratt/moodle-quiz-tools/tree/master/statsspreadsheet
+ * https://github.com/jamiepratt/powereduc-quiz-tools/tree/master/statsspreadsheet
  *
  * Similarly the question variant's stats in qstats00.csv are calculated in stats_for_variant_1.xls and stats_for_variant_8.xls
  * The calculations in the spreadsheets are the same as for the other question stats but applied just to the attempts where the

@@ -24,7 +24,7 @@
 
 namespace tool_uploaduser\local;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Field validator class.

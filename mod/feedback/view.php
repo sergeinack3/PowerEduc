@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ $feedbackcompletion->trigger_module_viewed();
 ///////////////////////////////////////////////////////////////////////////
 
 $previewimg = $OUTPUT->pix_icon('t/preview', get_string('preview'));
-$previewlnk = new moodle_url('/mod/feedback/print.php', array('id' => $id));
+$previewlnk = new powereduc_url('/mod/feedback/print.php', array('id' => $id));
 if ($courseid) {
     $previewlnk->param('courseid', $courseid);
 }
@@ -119,7 +119,7 @@ if (has_capability('mod/feedback:edititems', $context)) {
 if (!$PAGE->has_secondary_navigation()) {
     if (!has_capability('mod/feedback:viewreports', $context) &&
         $feedbackcompletion->can_view_analysis()) {
-        $analysisurl = new moodle_url('/mod/feedback/analysis.php', array('id' => $id));
+        $analysisurl = new powereduc_url('/mod/feedback/analysis.php', array('id' => $id));
         echo '<div class="mdl-align"><a href="' . $analysisurl->out() . '">';
         echo get_string('completed_feedbacks', 'feedback') . '</a>';
         echo '</div>';
@@ -129,7 +129,7 @@ if (!$PAGE->has_secondary_navigation()) {
         echo $OUTPUT->box_start('generalbox feedback_mapped_courses');
         echo $OUTPUT->heading(get_string("mappedcourses", "feedback"), 3);
         echo '<p>' . get_string('mapcourse_help', 'feedback') . '</p>';
-        $mapurl = new moodle_url('/mod/feedback/mapcourse.php', array('id' => $id));
+        $mapurl = new powereduc_url('/mod/feedback/mapcourse.php', array('id' => $id));
         echo '<p class="mdl-align">' . html_writer::link($mapurl, get_string('mapcourses', 'feedback')) . '</p>';
         echo $OUTPUT->box_end();
     }

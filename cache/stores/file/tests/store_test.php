@@ -20,7 +20,7 @@ use cache_definition;
 use cache_store;
 use cachestore_file;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include the necessary evils.
 global $CFG;

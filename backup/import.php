@@ -87,7 +87,7 @@ require_capability('moodle/backup:backuptargetimport', $importcontext);
 // Attempt to load the existing backup controller (backupid will be false if there isn't one)
 $backupid = optional_param('backup', false, PARAM_ALPHANUM);
 if (!($bc = backup_ui::load_controller($backupid))) {
-    $bc = new backup_controller(backup::TYPE_1COURSE, $importcourse->id, backup::FORMAT_MOODLE,
+    $bc = new backup_controller(backup::TYPE_1COURSE, $importcourse->id, backup::FORMAT_POWEREDUC,
                             backup::INTERACTIVE_YES, backup::MODE_IMPORT, $USER->id);
     $bc->get_plan()->get_setting('users')->set_status(backup_setting::LOCKED_BY_CONFIG);
     $settings = $bc->get_plan()->get_settings();

@@ -34,7 +34,7 @@ Feature: Use the qbank view page to edit question title using in place edit feat
     Given I log in as "admin"
     And I set the following system permissions of "Teacher" role:
       | capability              | permission |
-      | moodle/question:editall | Prevent    |
+      | powereduc/question:editall | Prevent    |
     And I log out
     And I am on the "Test quiz" "mod_quiz > question bank" page logged in as "teacher1"
     When I set the field "Select a category" to "Test questions"

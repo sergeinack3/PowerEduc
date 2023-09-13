@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package mod_feedback
  */
-defined('MOODLE_INTERNAL') OR die('not allowed');
+defined('POWEREDUC_INTERNAL') OR die('not allowed');
 
 $tabs = array();
 $row  = array();
@@ -43,7 +43,7 @@ if (!isset($current_tab)) {
     $current_tab = '';
 }
 
-$viewurl = new moodle_url('/mod/feedback/view.php', array('id' => $usedid));
+$viewurl = new powereduc_url('/mod/feedback/view.php', array('id' => $usedid));
 $row[] = new tabobject('view', $viewurl->out(), get_string('overview', 'feedback'));
 $urlparams = ['id' => $usedid];
 if ($feedback->course == SITEID && $courseid) {
@@ -51,33 +51,33 @@ if ($feedback->course == SITEID && $courseid) {
 }
 
 if (has_capability('mod/feedback:edititems', $context)) {
-    $editurl = new moodle_url('/mod/feedback/edit.php', $urlparams + ['do_show' => 'edit']);
+    $editurl = new powereduc_url('/mod/feedback/edit.php', $urlparams + ['do_show' => 'edit']);
     $row[] = new tabobject('edit', $editurl->out(), get_string('edit_items', 'feedback'));
 
-    $templateurl = new moodle_url('/mod/feedback/edit.php', $urlparams + ['do_show' => 'templates']);
+    $templateurl = new powereduc_url('/mod/feedback/edit.php', $urlparams + ['do_show' => 'templates']);
     $row[] = new tabobject('templates', $templateurl->out(), get_string('templates', 'feedback'));
 }
 
 if ($feedback->course == SITEID && has_capability('mod/feedback:mapcourse', $context)) {
-    $mapurl = new moodle_url('/mod/feedback/mapcourse.php', $urlparams);
+    $mapurl = new powereduc_url('/mod/feedback/mapcourse.php', $urlparams);
     $row[] = new tabobject('mapcourse', $mapurl->out(), get_string('mappedcourses', 'feedback'));
 }
 
 if (has_capability('mod/feedback:viewreports', $context)) {
     if ($feedback->course == SITEID) {
-        $analysisurl = new moodle_url('/mod/feedback/analysis_course.php', $urlparams);
+        $analysisurl = new powereduc_url('/mod/feedback/analysis_course.php', $urlparams);
     } else {
-        $analysisurl = new moodle_url('/mod/feedback/analysis.php', $urlparams);
+        $analysisurl = new powereduc_url('/mod/feedback/analysis.php', $urlparams);
     }
     $row[] = new tabobject('analysis', $analysisurl->out(), get_string('analysis', 'feedback'));
 
-    $reporturl = new moodle_url('/mod/feedback/show_entries.php', $urlparams);
+    $reporturl = new powereduc_url('/mod/feedback/show_entries.php', $urlparams);
     $row[] = new tabobject('showentries',
                             $reporturl->out(),
                             get_string('show_entries', 'feedback'));
 
     if ($feedback->anonymous == FEEDBACK_ANONYMOUS_NO AND $feedback->course != SITEID) {
-        $nonrespondenturl = new moodle_url('/mod/feedback/show_nonrespondents.php', $urlparams);
+        $nonrespondenturl = new powereduc_url('/mod/feedback/show_nonrespondents.php', $urlparams);
         $row[] = new tabobject('nonrespondents',
                                 $nonrespondenturl->out(),
                                 get_string('show_nonrespondents', 'feedback'));

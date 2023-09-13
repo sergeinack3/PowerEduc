@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define('NO_MOODLE_COOKIES', true);
+define('NO_POWEREDUC_COOKIES', true);
 define('ALLOW_GET_PARAMETERS', true);
 
 require_once('service.php');

@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for lib.php
  *
  * @package    mod_glossary
  * @category   test
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ namespace mod_glossary\event;
  *
  * @package   mod_glossary
  * @category  test
- * @copyright 2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright 2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class events_test extends \advanced_testcase {
@@ -76,7 +76,7 @@ class events_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_glossary\event\comment_created', $event);
         $this->assertEquals($context, $event->get_context());
-        $url = new \moodle_url('/mod/glossary/view.php', array('id' => $glossary->cmid));
+        $url = new \powereduc_url('/mod/glossary/view.php', array('id' => $glossary->cmid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
@@ -119,7 +119,7 @@ class events_test extends \advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_glossary\event\comment_deleted', $event);
         $this->assertEquals($context, $event->get_context());
-        $url = new \moodle_url('/mod/glossary/view.php', array('id' => $glossary->cmid));
+        $url = new \powereduc_url('/mod/glossary/view.php', array('id' => $glossary->cmid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
@@ -161,7 +161,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'glossary', 'view', 'view.php?id=' . $glossary->cmid . '&amp;tab=-1',
             $glossary->id, $glossary->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $this->assertEquals(new \moodle_url('/mod/glossary/view.php', array('id' => $glossary->cmid, 'mode' => $mode)), $event->get_url());
+        $this->assertEquals(new \powereduc_url('/mod/glossary/view.php', array('id' => $glossary->cmid, 'mode' => $mode)), $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
 

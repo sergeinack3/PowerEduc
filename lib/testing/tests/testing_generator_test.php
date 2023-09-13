@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -140,7 +140,7 @@ class testing_generator_test extends \advanced_testcase {
         $this->assertMatchesRegularExpression('/^Course category \d/', $category->name);
         $this->assertSame('', $category->idnumber);
         $this->assertMatchesRegularExpression('/^Test course category \d/', $category->description);
-        $this->assertSame(FORMAT_MOODLE, $category->descriptionformat);
+        $this->assertSame(FORMAT_POWEREDUC, $category->descriptionformat);
 
         $count = $DB->count_records('cohort');
         $cohort = $generator->create_cohort();
@@ -149,7 +149,7 @@ class testing_generator_test extends \advanced_testcase {
         $this->assertMatchesRegularExpression('/^Cohort \d/', $cohort->name);
         $this->assertSame('', $cohort->idnumber);
         $this->assertMatchesRegularExpression("/^Description for '{$cohort->name}' \\n/", $cohort->description);
-        $this->assertSame(FORMAT_MOODLE, $cohort->descriptionformat);
+        $this->assertSame(FORMAT_POWEREDUC, $cohort->descriptionformat);
         $this->assertSame('', $cohort->component);
         $this->assertLessThanOrEqual(time(), $cohort->timecreated);
         $this->assertSame($cohort->timecreated, $cohort->timemodified);
@@ -164,7 +164,7 @@ class testing_generator_test extends \advanced_testcase {
         $this->assertEquals(0, $course->newsitems);
         $this->assertEquals(5, course_get_format($course)->get_last_section_number());
         $this->assertMatchesRegularExpression('/^Test course \d/', $course->summary);
-        $this->assertSame(FORMAT_MOODLE, $course->summaryformat);
+        $this->assertSame(FORMAT_POWEREDUC, $course->summaryformat);
 
         $section = $generator->create_course_section(array('course'=>$course->id, 'section'=>3));
         $this->assertEquals($course->id, $section->course);
@@ -248,7 +248,7 @@ class testing_generator_test extends \advanced_testcase {
 
         // Automatic completion is possible if module supports FEATURE_COMPLETION_TRACKS_VIEWS or FEATURE_GRADE_HAS_GRADE.
         // Note: completionusegrade is stored in DB and can be found in cm_info as 'completiongradeitemnumber' - either NULL or 0.
-        // Note: module can have more autocompletion rules as defined in moodleform_mod::add_completion_rules().
+        // Note: module can have more autocompletion rules as defined in powereducform_mod::add_completion_rules().
         $featurecompletionautomatic = array(
             'completion' => COMPLETION_TRACKING_AUTOMATIC, // "Show activity as complete when conditions are met."
             'completionview' => 1, // "Student must view this activity to complete it"

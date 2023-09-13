@@ -24,7 +24,7 @@
  */
 namespace core_favourites\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\tests\provider_testcase;
 use core_favourites\privacy\provider;

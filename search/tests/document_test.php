@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_search;
 
@@ -130,7 +130,7 @@ class document_test extends \advanced_testcase {
     public function tearDown(): void {
         // For unit tests before PHP 7, teardown is called even on skip. So only do our teardown if we did setup.
         if ($this->generator) {
-            // Moodle DML freaks out if we don't teardown the temp table after each run.
+            // PowerEduc DML freaks out if we don't teardown the temp table after each run.
             $this->generator->teardown();
             $this->generator = null;
         }
@@ -234,38 +234,38 @@ class document_test extends \advanced_testcase {
             // Adding capability exceptions.
             'Student without view profiles' => [
                 'rolename' => 'student',
-                'capexceptions' => ['moodle/user:viewdetails'],
+                'capexceptions' => ['powereduc/user:viewdetails'],
                 'expected' => false,
                 'owndocument' => false,
             ],
             'Student without view participants' => [
                 'rolename' => 'student',
-                'capexceptions' => ['moodle/course:viewparticipants'],
+                'capexceptions' => ['powereduc/course:viewparticipants'],
                 'expected' => false,
                 'owndocument' => false,
             ],
             'Student without view participants or profiles' => [
                 'rolename' => 'student',
-                'capexceptions' => ['moodle/user:viewdetails', 'moodle/course:viewparticipants'],
+                'capexceptions' => ['powereduc/user:viewdetails', 'powereduc/course:viewparticipants'],
                 'expected' => false,
                 'owndocument' => false,
             ],
             // Users should be able to see its own documents.
             'Student author without view profiles' => [
                 'rolename' => 'student',
-                'capexceptions' => ['moodle/user:viewdetails'],
+                'capexceptions' => ['powereduc/user:viewdetails'],
                 'expected' => true,
                 'owndocument' => true,
             ],
             'Student author without view participants' => [
                 'rolename' => 'student',
-                'capexceptions' => ['moodle/course:viewparticipants'],
+                'capexceptions' => ['powereduc/course:viewparticipants'],
                 'expected' => true,
                 'owndocument' => true,
             ],
             'Student author without view participants or profiles' => [
                 'rolename' => 'student',
-                'capexceptions' => ['moodle/user:viewdetails', 'moodle/course:viewparticipants'],
+                'capexceptions' => ['powereduc/user:viewdetails', 'powereduc/course:viewparticipants'],
                 'expected' => true,
                 'owndocument' => true,
             ],

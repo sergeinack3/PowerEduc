@@ -24,7 +24,7 @@
 
 namespace tool_oauth2\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tool_oauth2 implementing null_provider.

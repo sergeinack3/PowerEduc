@@ -1,23 +1,23 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_forum
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -120,7 +120,7 @@ if ($search) {
 }
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_course_login($course);
@@ -140,9 +140,9 @@ $strpage = get_string("page");
 
 if (!$search || $showform) {
 
-    $url = new moodle_url('/mod/forum/index.php', array('id' => $course->id));
+    $url = new powereduc_url('/mod/forum/index.php', array('id' => $course->id));
     $PAGE->navbar->add($strforums, $url);
-    $url = new moodle_url('/mod/forum/search.php', array('id' => $course->id));
+    $url = new powereduc_url('/mod/forum/search.php', array('id' => $course->id));
     $PAGE->navbar->add(get_string('advancedsearch', 'forum'), $url);
 
     $PAGE->set_title($strsearch);
@@ -161,7 +161,7 @@ $searchterms = explode(' ', $searchterms);
 
 $searchform = forum_search_form($course, $search);
 
-$PAGE->navbar->add($strsearch, new moodle_url('/mod/forum/search.php', array('id'=>$course->id)));
+$PAGE->navbar->add($strsearch, new powereduc_url('/mod/forum/search.php', array('id'=>$course->id)));
 $PAGE->navbar->add($strsearchresults);
 if (!$posts = forum_search_posts($searchterms, $course->id, $page*$perpage, $perpage, $totalcount)) {
     $PAGE->set_title($strsearchresults);
@@ -215,7 +215,7 @@ $params = [
     'showform'  => 1,
     'starredonly' => $starredonly
 ];
-$url    = new moodle_url("/mod/forum/search.php", $params);
+$url    = new powereduc_url("/mod/forum/search.php", $params);
 foreach ($tags as $tag) {
     $url .= "&tags[]=$tag";
 }
@@ -227,7 +227,7 @@ echo $OUTPUT->heading($strforums, 2);
 
 echo $OUTPUT->heading("$strsearchresults: $totalcount", 3);
 
-$url = new moodle_url('search.php', array('search' => $search, 'id' => $course->id, 'perpage' => $perpage));
+$url = new powereduc_url('search.php', array('search' => $search, 'id' => $course->id, 'perpage' => $perpage));
 echo $OUTPUT->paging_bar($totalcount, $page, $perpage, $url);
 
 //added to implement highlighting of search terms found only in HTML markup
@@ -284,12 +284,12 @@ foreach ($posts as $post) {
     // Replace the simple subject with the three items forum name -> thread name -> subject
     // (if all three are appropriate) each as a link.
     if (!isset($discussionsbyid[$post->discussion])) {
-        throw new \moodle_exception('invaliddiscussionid', 'forum');
+        throw new \powereduc_exception('invaliddiscussionid', 'forum');
     }
 
     $discussion = $discussionsbyid[$post->discussion];
     if (!isset($forumsbyid[$discussion->get_forum_id()])) {
-        throw new \moodle_exception('invalidforumid', 'forum');
+        throw new \powereduc_exception('invalidforumid', 'forum');
     }
 
     $forum = $forumsbyid[$discussion->get_forum_id()];

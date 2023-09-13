@@ -35,7 +35,7 @@ use section_backup_setting;
 use setting_dependency;
 use setting_dependency_disabledif_empty;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;

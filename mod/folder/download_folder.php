@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,13 +37,13 @@ $folder = $DB->get_record('folder', array('id' => $cm->instance), '*', MUST_EXIS
 
 $downloadable = folder_archive_available($folder, $cm);
 if (!$downloadable) {
-    throw new \moodle_exception('cannotdownloaddir', 'repository');
+    throw new \powereduc_exception('cannotdownloaddir', 'repository');
 }
 
 $fs = get_file_storage();
 $files = $fs->get_area_files($context->id, 'mod_folder', 'content');
 if (empty($files)) {
-    throw new \moodle_exception('cannotdownloaddir', 'repository');
+    throw new \powereduc_exception('cannotdownloaddir', 'repository');
 }
 
 // Log zip as downloaded.

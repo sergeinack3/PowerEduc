@@ -18,7 +18,7 @@ Feature: Test that meeting roles are sent to the server
       | traverst | Terry     | Travers  | t.travers@example.com |
     And the following "course enrolments" exist:
       | user     | course | role         |
-      | traverst | C1     | <moodlerole> |
+      | traverst | C1     | <powereducrole> |
     And the following "activity" exists:
       | course     | C1              |
       | activity   | bigbluebuttonbn |
@@ -32,7 +32,7 @@ Feature: Test that meeting roles are sent to the server
     Then I should see "<meetingrole>" in the "attendeeRole" "mod_bigbluebuttonbn > Meeting field"
 
     Examples:
-      | moderators          | viewers | moodlerole     | meetingrole |
+      | moderators          | viewers | powereducrole     | meetingrole |
       |                     |         | student        | VIEWER      |
       | role:editingteacher |         | editingteacher | MODERATOR   |
       | role:student        |         | editingteacher | VIEWER      |

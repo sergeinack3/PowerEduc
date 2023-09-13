@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ use core_completion\activity_custom_completion;
  * Class for defining mod_folder's custom completion rules.
  *
  * @package    mod_folder
- * @copyright  2022 David Woloszyn <david.woloszyn@moodle.com>
+ * @copyright  2022 David Woloszyn <david.woloszyn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_completion extends activity_custom_completion {

@@ -26,7 +26,7 @@ namespace core_customfield\privacy;
 
 use core_customfield\data_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface customfield_provider, all customfield plugins need to implement it

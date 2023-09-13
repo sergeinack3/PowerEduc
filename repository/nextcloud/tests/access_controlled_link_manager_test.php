@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace repository_nextcloud;
 
 use testable_access_controlled_link_manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/webdavlib.php');
@@ -358,7 +358,7 @@ XML;
      * Test the get_shares_from path() function. This function extracts from an list of shares the share of a given user
      * (the username is a parameter in the function call) and returns the id. The test firstly test whether the right fileid
      * for user1 is extracted then for user2 and last but least whether an error is thrown if the user does not have a share.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function test_get_shares_from_path() {
         $params = [
@@ -487,7 +487,7 @@ XML;
             $mydav->debug = false;
             $this->assertEquals($mydav, $dav);
         } catch (core\invalid_persistent_exception $e) {
-            // In some cases Moodle does not allow to create http connections. In those cases the exception
+            // In some cases PowerEduc does not allow to create http connections. In those cases the exception
             // is catched here and the test are executed.
             $this->expectException(\core\invalid_persistent_exception::class);
             $this->linkmanager->create_system_dav();
@@ -631,7 +631,7 @@ XML;
      * Deletes all endpoint with the given name.
      * @param string $endpointname
      * @return array|null
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function delete_endpoints($endpointname) {
         $endpoints = \core\oauth2\api::get_endpoints($this->issuer);

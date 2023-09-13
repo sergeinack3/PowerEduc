@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for unit tests for mod_assign.
  *
  * @package    mod_assign
- * @copyright  2018 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2018 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_assign\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/assign/locallib.php');
@@ -37,7 +37,7 @@ use mod_assign\privacy\provider;
 /**
  * Unit tests for mod/assign/classes/privacy/
  *
- * @copyright  2018 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2018 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends provider_testcase {
@@ -54,7 +54,7 @@ class provider_test extends provider_testcase {
     protected function create_submission($assign, $user, $submissiontext, $attemptnumber = 0) {
         $submission = $assign->get_user_submission($user->id, true, $attemptnumber);
         $submission->onlinetext_editor = ['text' => $submissiontext,
-                                         'format' => FORMAT_MOODLE];
+                                         'format' => FORMAT_POWEREDUC];
 
         $this->setUser($user);
         $notices = [];
@@ -130,7 +130,7 @@ class provider_test extends provider_testcase {
         $submission->userid = $user1->id;
         $submission->timecreated = time();
         $submission->onlinetext_editor = ['text' => 'Submission text',
-                                         'format' => FORMAT_MOODLE];
+                                         'format' => FORMAT_POWEREDUC];
 
         $this->setUser($user1);
         $notices = [];
@@ -221,7 +221,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 1;
         $data->grade = $grade;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign1->save_grade($user4->id, $data);
@@ -279,7 +279,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 0;
         $data->grade = $grade1;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user->id, $data);
@@ -294,7 +294,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 1;
         $data->grade = $grade2;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user->id, $data);
@@ -367,7 +367,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 0;
         $data->grade = $grade1;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user1->id, $data);
@@ -383,7 +383,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 0;
         $data->grade = $grade2;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user2->id, $data);
@@ -399,7 +399,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 1;
         $data->grade = $grade3;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext3, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext3, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user2->id, $data);
@@ -485,7 +485,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 0;
         $data->grade = $grade1;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user1->id, $data);
@@ -501,7 +501,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 0;
         $data->grade = $grade2;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user2->id, $data);
@@ -517,7 +517,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 1;
         $data->grade = $grade3;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext3, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext3, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user2->id, $data);
@@ -590,7 +590,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 0;
         $data->grade = $grade1;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user1->id, $data);
@@ -606,7 +606,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 0;
         $data->grade = $grade2;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext2, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user2->id, $data);
@@ -622,7 +622,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 1;
         $data->grade = $grade3;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext3, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext3, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign->save_grade($user2->id, $data);
@@ -745,7 +745,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 1;
         $data->grade = $grade;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign1->save_grade($user4->id, $data);
@@ -757,7 +757,7 @@ class provider_test extends provider_testcase {
         $data = new \stdClass();
         $data->attemptnumber = 1;
         $data->grade = $grade;
-        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_MOODLE];
+        $data->assignfeedbackcomments_editor = ['text' => $teachercommenttext, 'format' => FORMAT_POWEREDUC];
 
         // Give the submission a grade.
         $assign2->save_grade($user6->id, $data);

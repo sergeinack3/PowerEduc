@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,15 +17,15 @@
 namespace mod_data\form;
 
 use context;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use core_form\dynamic_form;
 
 /**
  * Import presets form.
  *
  * @package    mod_data
- * @copyright  2022 Laurent David <laurent.david@moodle.com>
+ * @copyright  2022 Laurent David <laurent.david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class import_presets extends dynamic_form {
@@ -34,13 +34,13 @@ class import_presets extends dynamic_form {
      * Process the form submission
      *
      * @return array
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function process_dynamic_submission(): array {
         global $CFG;
         $filepath = $this->save_temp_file('importfile');
         $context = $this->get_context_for_dynamic_submission();
-        $returnurl = new moodle_url('/mod/data/preset.php', [
+        $returnurl = new powereduc_url('/mod/data/preset.php', [
             'id' => $context->instanceid,
             'action' => 'importzip',
             'filepath' => str_replace($CFG->tempdir, '', $filepath)
@@ -79,22 +79,22 @@ class import_presets extends dynamic_form {
      * Has access ?
      *
      * @return void
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function check_access_for_dynamic_submission(): void {
         if (!has_capability('mod/data:managetemplates', $this->get_context_for_dynamic_submission())) {
-            throw new moodle_exception('importpresetmissingcapability', 'data');
+            throw new powereduc_exception('importpresetmissingcapability', 'data');
         }
     }
 
     /**
      * Get page URL
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
         $cmid = $this->optional_param('cmid', null, PARAM_INT);
-        return new moodle_url('/mod/data/preset.php', ['id' => $cmid]);
+        return new powereduc_url('/mod/data/preset.php', ['id' => $cmid]);
     }
 
     /**

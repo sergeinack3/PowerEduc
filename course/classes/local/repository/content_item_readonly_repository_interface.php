@@ -27,7 +27,7 @@
  */
 namespace core_course\local\repository;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 interface content_item_readonly_repository_interface {
     /**

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -22,8 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+if (!defined('POWEREDUC_INTERNAL')) {
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
 require_once($CFG->dirroot.'/lib/formslib.php');
@@ -36,10 +36,10 @@ require_once($CFG->dirroot.'/lib/formslib.php');
  * @copyright  2007 Luiz Cruz <luiz.laydner@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class tag_edit_form extends moodleform {
+class tag_edit_form extends powereducform {
 
     /**
-     * Overrides the abstract moodleform::definition method for defining what the form that is to be
+     * Overrides the abstract powereducform::definition method for defining what the form that is to be
      * presented to the user.
      */
     function definition () {
@@ -56,7 +56,7 @@ class tag_edit_form extends moodleform {
 
         $systemcontext   = context_system::instance();
 
-        if (has_capability('moodle/tag:manage', $systemcontext)) {
+        if (has_capability('powereduc/tag:manage', $systemcontext)) {
             $mform->addElement('text', 'rawname', get_string('name', 'tag'),
                     'maxlength="'.TAG_MAX_LENGTH.'" size="'.TAG_MAX_LENGTH.'"');
             $mform->setType('rawname', PARAM_TAG);
@@ -64,7 +64,7 @@ class tag_edit_form extends moodleform {
 
         $mform->addElement('editor', 'description_editor', get_string('description', 'tag'), null, $this->_customdata['editoroptions']);
 
-        if (has_capability('moodle/tag:manage', $systemcontext)) {
+        if (has_capability('powereduc/tag:manage', $systemcontext)) {
             $mform->addElement('checkbox', 'isstandard', get_string('standardtag', 'tag'));
         }
 

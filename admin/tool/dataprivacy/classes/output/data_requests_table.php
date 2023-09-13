@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_dataprivacy\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/tablelib.php');
 
@@ -37,7 +37,7 @@ use table_sql;
 use tool_dataprivacy\api;
 use tool_dataprivacy\external\data_request_exporter;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * The class for displaying the data requests table.

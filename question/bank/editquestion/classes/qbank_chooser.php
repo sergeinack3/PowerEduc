@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The qbank_chooser renderable.
@@ -28,7 +28,7 @@ use context;
 use context_course;
 use core\output\chooser_section;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use question_bank;
 use stdClass;
 
@@ -64,7 +64,7 @@ class qbank_chooser extends \core\output\chooser {
                 }, $fake));
         }
 
-        parent::__construct(new moodle_url('/question/bank/editquestion/question.php'),
+        parent::__construct(new powereduc_url('/question/bank/editquestion/question.php'),
                 new lang_string('chooseqtypetoadd', 'question'), $sections, 'qtype');
 
         $this->set_instructions(new lang_string('selectaqtypefordescription', 'question'));

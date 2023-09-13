@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,14 +19,14 @@
  *
  * @package    mod_folder
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -35,7 +35,7 @@ require_once("$CFG->libdir/externallib.php");
  *
  * @package    mod_folder
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
@@ -61,7 +61,7 @@ class mod_folder_external extends external_api {
      * @param int $folderid the folder instance id
      * @return array of warnings and status result
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_folder($folderid) {
         global $DB, $CFG;

@@ -35,7 +35,7 @@ use core_xapi\xapi_exception;
 use JsonSerializable;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for core_xapi implementing null_provider.

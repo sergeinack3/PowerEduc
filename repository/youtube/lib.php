@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access youtube videos
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_youtube
  * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/repository/lib.php');
 /**
  * repository_youtube class
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_youtube
  * @copyright  2009 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -173,7 +173,7 @@ class repository_youtube extends repository {
      * @param int $start
      * @param int $max max results
      * @param string $sort
-     * @throws moodle_exception If the google API returns an error.
+     * @throws powereduc_exception If the google API returns an error.
      * @return array
      */
     private function _get_collection($keyword, $start, $max, $sort) {
@@ -228,7 +228,7 @@ class repository_youtube extends repository {
             // the apikey param, so we take just the part pertaining to the
             // actual error.
             $error = $e->getErrors()[0]['message'];
-            throw new moodle_exception('apierror', 'repository_youtube', '', $error);
+            throw new powereduc_exception('apierror', 'repository_youtube', '', $error);
         }
 
         return $list;
@@ -311,7 +311,7 @@ class repository_youtube extends repository {
     }
 
     /**
-     * Add plugin settings input to Moodle form.
+     * Add plugin settings input to PowerEduc form.
      * @param object $mform
      * @param string $classname
      */

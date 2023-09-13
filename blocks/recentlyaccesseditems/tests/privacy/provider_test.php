@@ -24,7 +24,7 @@
  */
 namespace block_recentlyaccesseditems\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use block_recentlyaccesseditems\privacy\provider;
 use core_privacy\local\request\approved_contextlist;

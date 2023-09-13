@@ -31,7 +31,7 @@ use repository;
 use stored_file;
 use stored_file_creation_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/filelib.php');

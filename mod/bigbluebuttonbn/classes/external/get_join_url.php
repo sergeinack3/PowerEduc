@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use mod_bigbluebuttonbn\local\exceptions\meeting_join_exception;
 use mod_bigbluebuttonbn\meeting;
 use restricted_context_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -76,7 +76,7 @@ class get_join_url extends external_api {
 
         $instance = instance::get_from_cmid($cmid);
         if (empty($instance)) {
-            throw new \moodle_exception('nosuchinstance', 'mod_bigbluebuttonbn', null,
+            throw new \powereduc_exception('nosuchinstance', 'mod_bigbluebuttonbn', null,
                 ['entity' => get_string('module', 'course'), 'id' => $cmid]);
         }
         // Validate the groupid.

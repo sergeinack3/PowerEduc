@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file is part of the User section Moodle
+ * This file is part of the User section PowerEduc
  *
  * @copyright 1999 Martin Dougiamas  http://dougiamas.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,7 +25,7 @@
 require_once(__DIR__ . '/../config.php');
 
 if (empty($CFG->enableportfolios)) {
-    throw new \moodle_exception('disabled', 'portfolio');
+    throw new \powereduc_exception('disabled', 'portfolio');
 }
 
 require_once($CFG->libdir . '/portfoliolib.php');
@@ -35,13 +35,13 @@ $config   = optional_param('config', 0, PARAM_INT);
 $hide     = optional_param('hide', 0, PARAM_INT);
 $courseid = optional_param('courseid', SITEID, PARAM_INT);
 
-$url = new moodle_url('/user/portfolio.php', array('courseid' => $courseid));
+$url = new powereduc_url('/user/portfolio.php', array('courseid' => $courseid));
 
 if ($config !== 0) {
     $url->param('config', $config);
 }
 if (! $course = $DB->get_record("course", array("id" => $courseid))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 $user = $USER;
@@ -68,7 +68,7 @@ echo $OUTPUT->header();
 $showroles = 1;
 
 if (!empty($config)) {
-    navigation_node::override_active_url(new moodle_url('/user/portfolio.php', array('courseid' => $courseid)));
+    navigation_node::override_active_url(new powereduc_url('/user/portfolio.php', array('courseid' => $courseid)));
     $instance = portfolio_instance($config);
     $mform = new portfolio_user_form('', array('instance' => $instance, 'userid' => $user->id));
     if ($mform->is_cancelled()) {
@@ -76,7 +76,7 @@ if (!empty($config)) {
         exit;
     } else if ($fromform = $mform->get_data()) {
         if (!confirm_sesskey()) {
-            throw new \moodle_exception('confirmsesskeybad', '', $baseurl);
+            throw new \powereduc_exception('confirmsesskeybad', '', $baseurl);
         }
         // This branch is where you process validated data.
         $instance->set_user_config($fromform, $USER->id);
@@ -105,7 +105,7 @@ if ($display) {
     echo html_writer::tag('p', $introstr);
 
     if (!$instances = portfolio_instances(true, false)) {
-        throw new \moodle_exception('noinstances', 'portfolio', $CFG->wwwroot . '/user/view.php');
+        throw new \powereduc_exception('noinstances', 'portfolio', $CFG->wwwroot . '/user/view.php');
     }
 
     $table = new html_table();
@@ -118,7 +118,7 @@ if ($display) {
 
         // Configure icon.
         if ($i->has_user_config()) {
-            $configurl = new moodle_url($baseurl);
+            $configurl = new powereduc_url($baseurl);
             $configurl->param('config', $i->get('id'));
             $actions .= html_writer::link($configurl, $OUTPUT->pix_icon('t/edit', get_string('configure', 'portfolio')));
         }
@@ -126,7 +126,7 @@ if ($display) {
         // Hide/show icon.
         $visible = $i->get_user_config('visible', $USER->id);
         $visibilityaction = $visible ? 'hide' : 'show';
-        $showhideurl = new moodle_url($baseurl);
+        $showhideurl = new powereduc_url($baseurl);
         $showhideurl->param('hide', $i->get('id'));
         $actions .= html_writer::link($showhideurl, $OUTPUT->pix_icon('t/' . $visibilityaction, get_string($visibilityaction)));
 

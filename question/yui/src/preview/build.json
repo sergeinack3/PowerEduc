@@ -1,7 +1,7 @@
 {
-    "name": "moodle-question-preview",
+    "name": "powereduc-question-preview",
     "builds": {
-        "moodle-question-preview": {
+        "powereduc-question-preview": {
             "jsfiles": [
                 "preview.js"
             ]

@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->dirroot . '/cache/lib.php');
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
@@ -244,7 +244,7 @@ class tool_uploadcourse_helper {
                 // Creating restore from an existing course.
                 $courseid = $DB->get_field('course', 'id', array('shortname' => $shortname), IGNORE_MISSING);
                 if (!empty($courseid)) {
-                    $bc = new backup_controller(backup::TYPE_1COURSE, $courseid, backup::FORMAT_MOODLE,
+                    $bc = new backup_controller(backup::TYPE_1COURSE, $courseid, backup::FORMAT_POWEREDUC,
                         backup::INTERACTIVE_NO, backup::MODE_IMPORT, $USER->id);
                     $bc->execute_plan();
                     $backupid = $bc->get_backupid();

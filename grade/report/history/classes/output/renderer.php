@@ -25,7 +25,7 @@
 
 namespace gradereport_history\output;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Renderer for history grade report.

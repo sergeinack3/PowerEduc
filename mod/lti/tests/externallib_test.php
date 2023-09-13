@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_lti;
 
 use mod_lti_external;
 use mod_lti_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -32,9 +32,9 @@ require_once($CFG->dirroot . '/mod/lti/tests/mod_lti_testcase.php');
  *
  * @package    mod_lti
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 class externallib_test extends mod_lti_testcase {
 
@@ -175,7 +175,7 @@ class externallib_test extends mod_lti_testcase {
         $record->course = $course2->id;
         $lti2 = self::getDataGenerator()->create_module('lti', $record);
 
-        // Execute real Moodle enrolment as we'll call unenrol() method on the instance later.
+        // Execute real PowerEduc enrolment as we'll call unenrol() method on the instance later.
         $enrol = enrol_get_plugin('manual');
         $enrolinstances = enrol_get_instances($course2->id, true);
         foreach ($enrolinstances as $courseenrolinstance) {
@@ -294,7 +294,7 @@ class externallib_test extends mod_lti_testcase {
      * Test view_lti with an invalid instance id.
      */
     public function test_view_lti_invalid_instanceid() {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_lti_external::view_lti(0);
     }
 
@@ -310,7 +310,7 @@ class externallib_test extends mod_lti_testcase {
         $usernotenrolled = self::getDataGenerator()->create_user();
         $this->setUser($usernotenrolled);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_lti_external::view_lti($lti->id);
     }
 
@@ -333,7 +333,7 @@ class externallib_test extends mod_lti_testcase {
         accesslib_clear_all_caches_for_unit_testing();
         \course_modinfo::clear_instance_cache();
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_lti_external::view_lti($lti->id);
     }
 
@@ -365,8 +365,8 @@ class externallib_test extends mod_lti_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_lti\event\course_module_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodlelti = new \moodle_url('/mod/lti/view.php', array('id' => $cm->id));
-        $this->assertEquals($moodlelti, $event->get_url());
+        $powereduclti = new \powereduc_url('/mod/lti/view.php', array('id' => $cm->id));
+        $this->assertEquals($powereduclti, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
     }
@@ -393,7 +393,7 @@ class externallib_test extends mod_lti_testcase {
         $this->setAdminUser();
         mod_lti_external::create_tool_proxy('Test proxy 1', $this->getExternalTestFileUrl('/test.html'), array(), array());
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_lti_external::create_tool_proxy('Test proxy 2', $this->getExternalTestFileUrl('/test.html'), array(), array());
     }
 
@@ -479,7 +479,7 @@ class externallib_test extends mod_lti_testcase {
 
         $this->assertEquals('Example tool', $type['name']);
         $this->assertEquals('Example tool description', $type['description']);
-        $this->assertEquals('https://download.moodle.org/unittest/test.jpg', $type['urls']['icon']);
+        $this->assertEquals('https://download.powereduc.org/unittest/test.jpg', $type['urls']['icon']);
         $typeentry = lti_get_type($type['id']);
         $this->assertEquals('http://www.example.com/lti/provider.php', $typeentry->baseurl);
         $config = lti_get_type_config($type['id']);
@@ -493,7 +493,7 @@ class externallib_test extends mod_lti_testcase {
      * Test create_tool_type failure from non existent file.
      */
     public function test_mod_lti_create_tool_type_nonexistant_file() {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_lti_external::create_tool_type($this->getExternalTestFileUrl('/doesntexist.xml'), '', '');
     }
 
@@ -501,7 +501,7 @@ class externallib_test extends mod_lti_testcase {
      * Test create_tool_type failure from xml that is not a cartridge.
      */
     public function test_mod_lti_create_tool_type_bad_file() {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_lti_external::create_tool_type($this->getExternalTestFileUrl('/rsstest.xml'), '', '');
     }
 

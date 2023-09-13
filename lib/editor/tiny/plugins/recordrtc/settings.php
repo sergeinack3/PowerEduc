@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Needed for constants.
 require_once($CFG->dirroot . '/lib/editor/tiny/plugins/recordrtc/classes/plugininfo.php');

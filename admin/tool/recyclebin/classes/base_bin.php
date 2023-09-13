@@ -24,7 +24,7 @@
 
 namespace tool_recyclebin;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Represents a recyclebin.

@@ -27,7 +27,7 @@ namespace filter_displayh5p;
 
 use filter_displayh5p;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/filter/displayh5p/filter.php');

@@ -1,7 +1,7 @@
 @mod @mod_assign @_file_upload
 Feature: Hide grader identities identity from students
   In order to keep the grader's identity a secret
-  As a moodle teacher
+  As a powereduc teacher
   I need to enable Hide Grader in the assignment settings
 
   Background:

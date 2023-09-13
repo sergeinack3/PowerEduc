@@ -23,7 +23,7 @@
  */
 
 namespace core\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use lang_string;
 use renderer_base;

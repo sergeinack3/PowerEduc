@@ -20,7 +20,7 @@ use async_helper;
 use backup;
 use backup_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -60,7 +60,7 @@ class async_helper_test extends \advanced_testcase {
         set_user_preference('message_provider_moodle_asyncbackupnotification', 'email', $user2);
 
         // Make the backup controller for an async backup.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_YES, backup::MODE_ASYNC, $user2->id);
         $bc->finish_ui();
         $backupid = $bc->get_backupid();
@@ -130,7 +130,7 @@ class async_helper_test extends \advanced_testcase {
             'course' => $course->id, 'section' => 1));
 
         // Make the backup controller for an async backup.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_YES, backup::MODE_ASYNC, $USER->id);
         $bc->finish_ui();
         $bc->destroy();
@@ -157,7 +157,7 @@ class async_helper_test extends \advanced_testcase {
         $course = $generator->create_course();
 
         // Create the initial backupcontoller.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_COPY, $USER->id, \backup::RELEASESESSION_YES);
         $backupid = $bc->get_backupid();
         $bc->destroy();
@@ -185,7 +185,7 @@ class async_helper_test extends \advanced_testcase {
         $this->assertFalse($ispending);
 
         // Create the initial backupcontoller.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_ASYNC, $USER->id, \backup::RELEASESESSION_YES);
         $bc->destroy();
         $ispending = async_helper::is_async_pending($course->id, 'course', 'backup');
@@ -216,7 +216,7 @@ class async_helper_test extends \advanced_testcase {
         $this->assertFalse($ispending);
 
         // Create the initial backupcontoller.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_COPY, $USER->id, \backup::RELEASESESSION_YES);
         $bc->destroy();
         $ispending = async_helper::is_async_pending($course->id, 'course', 'backup');

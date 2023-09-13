@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ if (!$userid) {
     $userid = $USER->id;
 }
 
-$url = new moodle_url('/message/edit.php');
+$url = new powereduc_url('/message/edit.php');
 $url->param('id', $userid);
 
 $PAGE->set_url($url);
@@ -41,11 +41,11 @@ $PAGE->set_url($url);
 require_login();
 
 if (isguestuser()) {
-    throw new \moodle_exception('guestnoeditmessage', 'message');
+    throw new \powereduc_exception('guestnoeditmessage', 'message');
 }
 
 if (!$user = $DB->get_record('user', array('id' => $userid))) {
-    throw new \moodle_exception('invaliduserid');
+    throw new \powereduc_exception('invaliduserid');
 }
 
 $systemcontext   = context_system::instance();
@@ -57,18 +57,18 @@ $PAGE->set_pagelayout('admin');
 // check access control
 if ($user->id == $USER->id) {
     //editing own message profile
-    require_capability('moodle/user:editownmessageprofile', $systemcontext);
+    require_capability('powereduc/user:editownmessageprofile', $systemcontext);
 } else {
     $currentuser = false;
     // teachers, parents, etc.
-    require_capability('moodle/user:editmessageprofile', $personalcontext);
+    require_capability('powereduc/user:editmessageprofile', $personalcontext);
     // no editing of guest user account
     if (isguestuser($user->id)) {
-        throw new \moodle_exception('guestnoeditmessageother', 'message');
+        throw new \powereduc_exception('guestnoeditmessageother', 'message');
     }
     // no editing of admins by non admins!
     if (is_siteadmin($user) and !is_siteadmin($USER)) {
-        throw new \moodle_exception('useradmineditadmin');
+        throw new \powereduc_exception('useradmineditadmin');
     }
     $PAGE->navbar->includesettingsbase = true;
     $PAGE->navigation->extend_for_user($user);

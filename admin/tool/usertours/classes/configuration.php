@@ -24,7 +24,7 @@
 
 namespace tool_usertours;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Step configuration detail class.

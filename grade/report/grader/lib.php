@@ -335,7 +335,7 @@ class grade_report_grader extends grade_report {
                     }
 
                     $gradeitem->update_final_grade($userid, $finalgrade, 'gradebook', $feedback,
-                        FORMAT_MOODLE, null, null, true);
+                        FORMAT_POWEREDUC, null, null, true);
 
                     // We can update feedback without reloading the grade item as it doesn't affect grade calculations
                     if ($datatype === 'feedback') {

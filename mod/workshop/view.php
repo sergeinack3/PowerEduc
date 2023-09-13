@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Prints a particular instance of workshop
@@ -139,7 +139,7 @@ switch ($workshop->phase) {
 
         if (has_capability('mod/workshop:submit', $PAGE->context) and (!$examplesmust or $examplesdone)) {
             if (!$workshop->get_submission_by_author($USER->id)) {
-                $btnurl = new moodle_url($workshop->submission_url(), ['edit' => 'on']);
+                $btnurl = new powereduc_url($workshop->submission_url(), ['edit' => 'on']);
                 $btntxt = get_string('createsubmission', 'workshop');
                 echo $output->single_button($btnurl, $btntxt, 'get', ['primary' => true]);
             }
@@ -150,7 +150,7 @@ switch ($workshop->phase) {
         if (has_capability('mod/workshop:submit', $PAGE->context)) {
             if (!$workshop->get_submission_by_author($USER->id)) {
                 if ($workshop->creating_submission_allowed($USER->id)) {
-                    $btnurl = new moodle_url($workshop->submission_url(), array('edit' => 'on'));
+                    $btnurl = new powereduc_url($workshop->submission_url(), array('edit' => 'on'));
                     $btntxt = get_string('createsubmission', 'workshop');
                     echo $output->single_button($btnurl, $btntxt, 'get', ['primary' => true]);
                 }
@@ -182,7 +182,7 @@ switch ($workshop->phase) {
                     $summary->editable = true;
                     echo $output->render($summary);
                 }
-                $aurl = new moodle_url($workshop->exsubmission_url(0), array('edit' => 'on'));
+                $aurl = new powereduc_url($workshop->exsubmission_url(0), array('edit' => 'on'));
                 echo $output->single_button($aurl, get_string('exampleadd', 'workshop'), 'get');
             } else {
                 echo $output->container(get_string('noexamplesformready', 'workshop'));
@@ -240,7 +240,7 @@ switch ($workshop->phase) {
             $groupmode = groups_get_activity_groupmode($workshop->cm);
             $groupid = groups_get_activity_group($workshop->cm, true);
 
-            if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $workshop->context)) {
+            if ($groupmode == SEPARATEGROUPS && !has_capability('powereduc/site:accessallgroups', $workshop->context)) {
                 $allowedgroups = groups_get_activity_allowed_groups($workshop->cm);
                 if (empty($allowedgroups)) {
                     echo $output->container(get_string('groupnoallowed', 'mod_workshop'), 'groupwidget error');
@@ -269,7 +269,7 @@ switch ($workshop->phase) {
                 echo $output->container(groups_print_activity_menu($workshop->cm, $PAGE->url, true), 'groupwidget');
 
                 // Prepare the paging bar.
-                $baseurl = new moodle_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
+                $baseurl = new powereduc_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
                 $pagingbar = new paging_bar($data->totalcount, $page, $perpage, $baseurl, 'page');
 
                 // Populate the display options for the submissions report.
@@ -324,7 +324,7 @@ switch ($workshop->phase) {
                 $showreviewernames = has_capability('mod/workshop:viewreviewernames', $workshop->context);
 
                 // Prepare paging bar.
-                $baseurl = new moodle_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
+                $baseurl = new powereduc_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
                 $pagingbar = new paging_bar($data->totalcount, $page, $perpage, $baseurl, 'page');
 
                 // Grading report display options.
@@ -476,13 +476,13 @@ switch ($workshop->phase) {
                     echo $output->render($selector);
                     // Load the grading evaluator.
                     $evaluator = $workshop->grading_evaluation_instance();
-                    $form = $evaluator->get_settings_form(new moodle_url($workshop->aggregate_url(),
+                    $form = $evaluator->get_settings_form(new powereduc_url($workshop->aggregate_url(),
                         compact('sortby', 'sorthow', 'page')));
                     $form->display();
                 }
 
                 // Prepare paging bar.
-                $baseurl = new moodle_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
+                $baseurl = new powereduc_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
                 $pagingbar = new paging_bar($data->totalcount, $page, $perpage, $baseurl, 'page');
 
                 // Grading report display options.
@@ -514,7 +514,7 @@ switch ($workshop->phase) {
             echo $output->box_start('generalbox toolbox');
 
             // Clear aggregated grades.
-            $url = new moodle_url($workshop->toolbox_url('clearaggregatedgrades'));
+            $url = new powereduc_url($workshop->toolbox_url('clearaggregatedgrades'));
             $btn = new single_button($url, get_string('clearaggregatedgrades', 'workshop'), 'post');
             $btn->add_confirm_action(get_string('clearaggregatedgradesconfirm', 'workshop'));
             echo $output->container_start('toolboxaction');
@@ -522,7 +522,7 @@ switch ($workshop->phase) {
             echo $output->help_icon('clearaggregatedgrades', 'workshop');
             echo $output->container_end();
             // Clear assessments.
-            $url = new moodle_url($workshop->toolbox_url('clearassessments'));
+            $url = new powereduc_url($workshop->toolbox_url('clearassessments'));
             $btn = new single_button($url, get_string('clearassessments', 'workshop'), 'post');
             $btn->add_confirm_action(get_string('clearassessmentsconfirm', 'workshop'));
             echo $output->container_start('toolboxaction');
@@ -608,7 +608,7 @@ switch ($workshop->phase) {
                 $showreviewernames = has_capability('mod/workshop:viewreviewernames', $workshop->context);
 
                 // Prepare paging bar.
-                $baseurl = new moodle_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
+                $baseurl = new powereduc_url($PAGE->url, array('sortby' => $sortby, 'sorthow' => $sorthow));
                 $pagingbar = new paging_bar($data->totalcount, $page, $perpage, $baseurl, 'page');
 
                 // Grading report display options.

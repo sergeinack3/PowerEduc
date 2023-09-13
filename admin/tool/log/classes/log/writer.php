@@ -24,7 +24,7 @@
 
 namespace tool_log\log;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 interface writer extends store {
     /**

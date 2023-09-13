@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-// MOODLE_INTERNAL check intentionally missing to allow this to be used more widely!
+// POWEREDUC_INTERNAL check intentionally missing to allow this to be used more widely!
 
 /**
  * A set of PHP-compatible convenience functions to check Moodle minimum PHP version in

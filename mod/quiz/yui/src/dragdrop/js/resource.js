@@ -83,7 +83,7 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
             // Replace move icons
             var move = resourcesnode.one('a.' + CSS.EDITINGMOVE);
             if (move) {
-                var resourcedraghandle = this.get_drag_handle(M.util.get_string('move', 'moodle'),
+                var resourcedraghandle = this.get_drag_handle(M.util.get_string('move', 'powereduc'),
                                                               CSS.EDITINGMOVE, CSS.ICONCLASS, true);
                 move.replace(resourcedraghandle);
             }
@@ -128,17 +128,17 @@ Y.extend(DRAGRESOURCE, M.core.dragdrop, {
         params.quizid = this.get('quizid');
         params['class'] = 'resource';
         params.field = 'move';
-        params.id = Number(Y.Moodle.mod_quiz.util.slot.getId(dragnode));
-        params.sectionId = Y.Moodle.core_course.util.section.getId(dragnode.ancestor('li.section', true));
+        params.id = Number(Y.PowerEduc.mod_quiz.util.slot.getId(dragnode));
+        params.sectionId = Y.PowerEduc.core_course.util.section.getId(dragnode.ancestor('li.section', true));
 
         var previousslot = dragnode.previous(SELECTOR.SLOT);
         if (previousslot) {
-            params.previousid = Number(Y.Moodle.mod_quiz.util.slot.getId(previousslot));
+            params.previousid = Number(Y.PowerEduc.mod_quiz.util.slot.getId(previousslot));
         }
 
         var previouspage = dragnode.previous(SELECTOR.PAGE);
         if (previouspage) {
-            params.page = Number(Y.Moodle.mod_quiz.util.page.getId(previouspage));
+            params.page = Number(Y.PowerEduc.mod_quiz.util.page.getId(previouspage));
         }
 
         // Do AJAX request

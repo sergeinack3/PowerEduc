@@ -358,7 +358,7 @@ function print_user_entry($user, $keywords, $count) {
         }
 
         if (!isset($user->descriptionformat)) {
-            $user->descriptionformat = FORMAT_MOODLE;
+            $user->descriptionformat = FORMAT_POWEREDUC;
         }
 
         $html .= '<td align="left">'.format_text($user->description, $user->descriptionformat, array('overflowdiv'=>true)).'</td>';

@@ -16,7 +16,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\update\testable_checker;
 use core\update\testable_checker_cron_executed;

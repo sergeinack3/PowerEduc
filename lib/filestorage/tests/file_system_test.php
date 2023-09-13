@@ -21,7 +21,7 @@ use file_packer;
 use file_system;
 use file_system_filedir;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/filestorage/file_system.php');

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions and constants for notes
@@ -269,8 +269,8 @@ function note_print($note, $detail = NOTES_SHOW_FULL) {
 
     // Print note options (e.g. delete, edit).
     if ($detail & NOTES_SHOW_FOOT) {
-        if (has_capability('moodle/notes:manage', $systemcontext) && $note->publishstate == NOTES_STATE_SITE ||
-            has_capability('moodle/notes:manage', $context) &&
+        if (has_capability('powereduc/notes:manage', $systemcontext) && $note->publishstate == NOTES_STATE_SITE ||
+            has_capability('powereduc/notes:manage', $context) &&
             ($note->publishstate == NOTES_STATE_PUBLIC || $note->usermodified == $USER->id)) {
             echo '<div class="footer"><p>';
             echo '<a href="' . $CFG->wwwroot . '/notes/edit.php?id=' . $note->id. '">' . get_string('edit') . '</a> | ';
@@ -362,7 +362,7 @@ function note_page_type_list($pagetype, $parentcontext, $currentcontext) {
  *
  * @param  stdClass $context context object
  * @param  int $userid  user id (the user we are viewing the notes)
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  */
 function note_view($context, $userid) {
 
@@ -396,16 +396,16 @@ function core_notes_myprofile_navigation(core_user\output\myprofile\tree $tree, 
         return false;
     }
 
-    $url = new moodle_url("/notes/index.php", array('user' => $user->id));
+    $url = new powereduc_url("/notes/index.php", array('user' => $user->id));
     $title = get_string('notes', 'core_notes');
     if (empty($course)) {
         // Site level profile.
-        if (!has_capability('moodle/notes:view', context_system::instance())) {
+        if (!has_capability('powereduc/notes:view', context_system::instance())) {
             // No cap, nothing to do.
             return false;
         }
     } else {
-        if (!has_capability('moodle/notes:view', context_course::instance($course->id))) {
+        if (!has_capability('powereduc/notes:view', context_course::instance($course->id))) {
             // No cap, nothing to do.
             return false;
         }

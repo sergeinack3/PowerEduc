@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,11 +38,11 @@
  * before any action that may take longer time to finish.
  *
  * @package    media_videojs
- * @copyright  2021 Sara Arjona <sara@moodle.com>
+ * @copyright  2021 Sara Arjona <sara@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Main upgrade tasks to be executed on plugin version bump.

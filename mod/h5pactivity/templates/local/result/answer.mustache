@@ -1,18 +1,18 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+    This file is part of PowerEduc - http://powereduc.org/
 
-    Moodle is free software: you can redistribute it and/or modify
+    PowerEduc is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
+    PowerEduc is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+    along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
     @template mod_h5pactivity/local/result/answer
@@ -45,22 +45,22 @@
 
 }}
 {{#correct}}
-    {{#pix}}i/valid, moodle, {{#str}}answer_correct, mod_h5pactivity{{/str}}{{/pix}}{{answer}}
+    {{#pix}}i/valid, powereduc, {{#str}}answer_correct, mod_h5pactivity{{/str}}{{/pix}}{{answer}}
 {{/correct}}
 {{#incorrect}}
-    {{#pix}}i/invalid, moodle, {{#str}}answer_incorrect, mod_h5pactivity{{/str}}{{/pix}}{{answer}}
+    {{#pix}}i/invalid, powereduc, {{#str}}answer_incorrect, mod_h5pactivity{{/str}}{{/pix}}{{answer}}
 {{/incorrect}}
 {{#text}}
     {{answer}}
 {{/text}}
 {{#checked}}
-    {{#pix}}i/checkedcircle, moodle, {{#str}}answer_checked, mod_h5pactivity{{/str}}{{/pix}}
+    {{#pix}}i/checkedcircle, powereduc, {{#str}}answer_checked, mod_h5pactivity{{/str}}{{/pix}}
 {{/checked}}
 {{#unchecked}}
 {{/unchecked}}
 {{#pass}}
-    {{#pix}}i/valid, moodle, {{#str}}answer_pass, mod_h5pactivity{{/str}}{{/pix}}
+    {{#pix}}i/valid, powereduc, {{#str}}answer_pass, mod_h5pactivity{{/str}}{{/pix}}
 {{/pass}}
 {{#fail}}
-    {{#pix}}i/invalid, moodle, {{#str}}answer_fail, mod_h5pactivity{{/str}}{{/pix}}
+    {{#pix}}i/invalid, powereduc, {{#str}}answer_fail, mod_h5pactivity{{/str}}{{/pix}}
 {{/fail}}

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  *
  * @package    mod_chat
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $functions = array(
 
@@ -34,7 +34,7 @@ $functions = array(
         'description'   => 'Log a user into a chat room in the given chat.',
         'type'          => 'write',
         'capabilities'  => 'mod/chat:chat',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_chat_get_chat_users' => array(
@@ -43,7 +43,7 @@ $functions = array(
         'description'   => 'Get the list of users in the given chat session.',
         'type'          => 'read',
         'capabilities'  => 'mod/chat:chat',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_chat_send_chat_message' => array(
@@ -52,7 +52,7 @@ $functions = array(
         'description'   => 'Send a message on the given chat session.',
         'type'          => 'write',
         'capabilities'  => 'mod/chat:chat',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_chat_get_chat_latest_messages' => array(
@@ -61,7 +61,7 @@ $functions = array(
         'description'   => 'Get the latest messages from the given chat session.',
         'type'          => 'read',
         'capabilities'  => 'mod/chat:chat',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_chat_view_chat' => array(
@@ -70,7 +70,7 @@ $functions = array(
         'description'   => 'Trigger the course module viewed event and update the module completion status.',
         'type'          => 'write',
         'capabilities'  => 'mod/chat:chat',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 
     'mod_chat_get_chats_by_courses' => array(
@@ -80,20 +80,20 @@ $functions = array(
                             if no courses are provided then all the chat instances the user has access to will be returned.',
         'type'          => 'read',
         'capabilities'  => '',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_chat_get_sessions' => array(
         'classname'     => 'mod_chat_external',
         'methodname'    => 'get_sessions',
         'description'   => 'Retrieves chat sessions for a given chat.',
         'type'          => 'read',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_chat_get_session_messages' => array(
         'classname'     => 'mod_chat_external',
         'methodname'    => 'get_session_messages',
         'description'   => 'Retrieves messages of the given chat session.',
         'type'          => 'read',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
 );

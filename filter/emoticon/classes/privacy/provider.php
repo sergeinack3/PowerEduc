@@ -24,7 +24,7 @@
 
 namespace filter_emoticon\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_emoticon implementing null_provider.

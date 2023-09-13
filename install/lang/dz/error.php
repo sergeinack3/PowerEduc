@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = 'གཞི་གྲངས་མཛོད་<p>བཟོ་མི་བཏུབ། བཀོད་མི་གཞི་གྲངས་མཛོད་</p> <p>དེ་མེད་པའི་ཁར་ ལག་ལེན་པ་ལུ་ གཞི་གྲངས་མཛོད་བཟོ་ནི་གི་གནང་བ་མེད།གནས་ཁོངས་བདག་སྐྱོང་པ་ </p> <p>་གིས་གཞི་གྲངས་མཛོད་དེ་གི་སྡེབ་སྒྲིག་</p>གཏན་འབེབས་འབད་དགོ';
 $string['cannotcreatelangdir'] = 'སྐད་ཡིག་སྣོད་ཐོ་ གསར་བསྐྲུན་འབད་མི་བཏུབ།';

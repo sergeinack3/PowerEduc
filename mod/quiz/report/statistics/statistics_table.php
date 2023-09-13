@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Quiz statistics report, table for showing statistics of each question in the quiz.
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/tablelib.php');
 
@@ -57,7 +57,7 @@ class quiz_statistics_table extends flexible_table {
      *
      * @param object $quiz the quiz settings
      * @param int $cmid the quiz course_module id
-     * @param moodle_url $reporturl the URL to redisplay this report.
+     * @param powereduc_url $reporturl the URL to redisplay this report.
      * @param int $s number of attempts included in the statistics.
      */
     public function statistics_setup($quiz, $cmid, $reporturl, $s) {
@@ -138,7 +138,7 @@ class quiz_statistics_table extends flexible_table {
      * Open a div tag to wrap statistics table.
      */
     public function  wrap_html_start() {
-        // Horrible Moodle 2.0 wide-content work-around.
+        // Horrible PowerEduc 2.0 wide-content work-around.
         if (!$this->is_downloading()) {
             echo html_writer::start_tag('div', array('id' => 'tablecontainer',
                     'class' => 'statistics-tablecontainer'));
@@ -241,17 +241,17 @@ class quiz_statistics_table extends flexible_table {
             return $name;
         }
 
-        $baseurl = new moodle_url($this->baseurl);
+        $baseurl = new powereduc_url($this->baseurl);
         if (!is_null($questionstat->variant)) {
             if ($questionstat->subquestion) {
                 // Variant of a sub-question.
-                $url = new moodle_url($baseurl, array('qid' => $questionstat->questionid, 'variant' => $questionstat->variant));
+                $url = new powereduc_url($baseurl, array('qid' => $questionstat->questionid, 'variant' => $questionstat->variant));
                 $name = html_writer::link($url, $name, array('title' => get_string('detailedanalysisforvariant',
                                                                                    'quiz_statistics',
                                                                                    $questionstat->variant)));
             } else if ($questionstat->slot) {
                 // Variant of a question in a slot.
-                $url = new moodle_url($baseurl, array('slot' => $questionstat->slot, 'variant' => $questionstat->variant));
+                $url = new powereduc_url($baseurl, array('slot' => $questionstat->slot, 'variant' => $questionstat->variant));
                 $name = html_writer::link($url, $name, array('title' => get_string('detailedanalysisforvariant',
                                                                                    'quiz_statistics',
                                                                                    $questionstat->variant)));
@@ -259,14 +259,14 @@ class quiz_statistics_table extends flexible_table {
         } else {
             if ($questionstat->subquestion && !$questionstat->get_variants()) {
                 // Sub question without variants.
-                $url = new moodle_url($baseurl, array('qid' => $questionstat->questionid));
+                $url = new powereduc_url($baseurl, array('qid' => $questionstat->questionid));
                 $name = html_writer::link($url, $name, array('title' => get_string('detailedanalysis', 'quiz_statistics')));
             } else if ($baseurl->param('slot') === null && $questionstat->slot) {
                 // Question in a slot, we are not on a page showing structural analysis of one slot,
                 // we don't want linking on those pages.
                 $number = $questionstat->question->number;
                 $israndomquestion = $questionstat->question->qtype == 'random';
-                $url = new moodle_url($baseurl, array('slot' => $questionstat->slot));
+                $url = new powereduc_url($baseurl, array('slot' => $questionstat->slot));
 
                 if ($this->is_calculated_question_summary($questionstat)) {
                     // Only make the random question summary row name link to the slot structure
@@ -540,7 +540,7 @@ class quiz_statistics_table extends flexible_table {
      */
     protected function format_percentage(float $number, bool $fraction = true, int $decimals = 2) {
         $coefficient = $fraction ? 100 : 1;
-        return get_string('percents', 'moodle', format_float($number * $coefficient, $decimals));
+        return get_string('percents', 'powereduc', format_float($number * $coefficient, $decimals));
     }
 
     /**

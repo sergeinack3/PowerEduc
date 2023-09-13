@@ -35,7 +35,7 @@ use grade_item;
 use grade_grade;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * The user screen.

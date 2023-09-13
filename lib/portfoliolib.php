@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,11 +25,11 @@
  *
  * @package core_portfolio
  * @category portfolio
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // require some of the sublibraries first.
 // this is not an exhaustive list, the others are pulled in as they're needed
@@ -68,11 +68,11 @@ require_once($CFG->libdir . '/portfolio/caller.php');
  * $button = new portfolio_add_button(array('callbackclass' => 'name_of_caller_class', 'callbackargs' => array('id' => 6), 'callbackcomponent' => 'yourcomponent')); eg. mod_forum
  * $somehtml .= $button->to_html(PORTFOLIO_ADD_TEXT_LINK);
  * </code>
- *{@link http://docs.moodle.org/dev/Adding_a_Portfolio_Button_to_a_page} for more information
+ *{@link http://docs.powereduc.org/dev/Adding_a_Portfolio_Button_to_a_page} for more information
  *
  * @package core_portfolio
  * @category portfolio
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class portfolio_add_button {
@@ -266,7 +266,7 @@ class portfolio_add_button {
      *                    Optional, defaults to PORTFOLIO_ADD_FULL_FORM
      * @param string $addstr string to use for the button or icon alt text or link text.
      *                       This is whole string, not key.  optional, defaults to 'Add to portfolio';
-     * @return void|string|moodle_url
+     * @return void|string|powereduc_url
      */
     public function to_html($format=null, $addstr=null) {
         global $CFG, $COURSE, $OUTPUT, $USER;
@@ -280,7 +280,7 @@ class portfolio_add_button {
             // use the caller defaults
             $this->set_formats();
         }
-        $url = new moodle_url('/portfolio/add.php');
+        $url = new powereduc_url('/portfolio/add.php');
         foreach ($this->callbackargs as $key => $value) {
             if (!empty($value) && !is_string($value) && !is_numeric($value)) {
                 $a = new stdClass();
@@ -334,8 +334,8 @@ class portfolio_add_button {
                 return;
             }
         }
-        // If we just want a moodle_url to redirect to, do it now.
-        if ($format == PORTFOLIO_ADD_MOODLE_URL) {
+        // If we just want a powereduc_url to redirect to, do it now.
+        if ($format == PORTFOLIO_ADD_POWEREDUC_URL) {
             return $url;
         }
 
@@ -1106,7 +1106,7 @@ function portfolio_insane_notify_admins($insane, $instances=false) {
 /**
  * Setup page export
  *
- * @param moodle_page $PAGE global variable from page object
+ * @param powereduc_page $PAGE global variable from page object
  * @param portfolio_caller_base $caller plugin type caller
  */
 function portfolio_export_pagesetup($PAGE, $caller) {

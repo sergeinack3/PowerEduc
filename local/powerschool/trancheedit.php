@@ -32,7 +32,7 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/powerschool:managepages', $context);
 
-// $PAGE->set_url(new moodle_url('/local/powerschool/anneescolaireedit.php'));
+// $PAGE->set_url(new powereduc_url('/local/powerschool/anneescolaireedit.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Modifier une specialite');
 $PAGE->set_heading('Modifier une specialite');

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -64,7 +64,7 @@ class category_condition extends condition {
      * @param string     $cat           categoryID,contextID as used with question_bank_view->display()
      * @param bool       $recurse       Whether to include questions from sub-categories
      * @param array      $contexts      Context objects as used by question_category_options()
-     * @param \moodle_url $baseurl       The URL the form is submitted to
+     * @param \powereduc_url $baseurl       The URL the form is submitted to
      * @param \stdClass   $course        Course record
      * @param integer    $maxinfolength The maximum displayed length of the category info.
      */
@@ -146,9 +146,9 @@ class category_condition extends condition {
      * Display the drop down to select the category.
      *
      * @param array $contexts of contexts that can be accessed from here.
-     * @param \moodle_url $pageurl the URL of this page.
+     * @param \powereduc_url $pageurl the URL of this page.
      * @param string $current 'categoryID,contextID'.
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      */
     protected function display_category_form($contexts, $pageurl, $current) {
         debugging('Function display_category_form() is deprecated,

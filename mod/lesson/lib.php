@@ -1,29 +1,29 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Standard library of functions and constants for lesson
  *
  * @package mod_lesson
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Event types.
 define('LESSON_EVENT_TYPE_OPEN', 'open');
@@ -408,7 +408,7 @@ function lesson_user_outline($course, $user, $mod, $lesson) {
                 $return->info = get_string("nolessonattempts", "lesson");
             }
         } else {
-            if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+            if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
                 $return->info = get_string('gradenoun') . ': ' . $grade->str_long_grade;
             } else {
                 $return->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -462,7 +462,7 @@ function lesson_user_complete($course, $user, $mod, $lesson) {
                 $status = get_string("nolessonattempts", "lesson");
             }
         } else {
-            if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+            if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
                 $status = get_string('gradenoun') . ': ' . $grade->str_long_grade;
             } else {
                 $status = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -473,7 +473,7 @@ function lesson_user_complete($course, $user, $mod, $lesson) {
         echo $OUTPUT->container($status);
 
         if ($grade->str_feedback &&
-            (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id)))) {
+            (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id)))) {
             echo $OUTPUT->container(get_string('feedback').': '.$grade->str_feedback);
         }
     }
@@ -548,14 +548,14 @@ function lesson_user_complete($course, $user, $mod, $lesson) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function lesson_print_overview() {
     throw new coding_exception('lesson_print_overview() can not be used any more and is obsolete.');
 }
 
 /**
- * Function to be run periodically according to the moodle cron
+ * Function to be run periodically according to the powereduc cron
  * This function searches for things that need to be done, such
  * as sending out mail, toggling flags etc ...
  * @global stdClass
@@ -999,7 +999,7 @@ function lesson_supports($feature) {
             return true;
         case FEATURE_GRADE_OUTCOMES:
             return true;
-        case FEATURE_BACKUP_MOODLE2:
+        case FEATURE_BACKUP_POWEREDUC2:
             return true;
         case FEATURE_SHOW_DESCRIPTION:
             return true;
@@ -1032,7 +1032,7 @@ function lesson_extend_settings_navigation(settings_navigation $settings, naviga
     }
 
     if (has_capability('mod/lesson:manageoverrides', $settings->get_page()->cm->context)) {
-        $url = new moodle_url('/mod/lesson/overrides.php', ['cmid' => $settings->get_page()->cm->id, 'mode' => 'user']);
+        $url = new powereduc_url('/mod/lesson/overrides.php', ['cmid' => $settings->get_page()->cm->id, 'mode' => 'user']);
         $node = navigation_node::create(get_string('overrides', 'lesson'), $url,
                 navigation_node::TYPE_SETTING, null, 'mod_lesson_useroverrides');
         $lessonnode->add_node($node, $beforekey);
@@ -1041,7 +1041,7 @@ function lesson_extend_settings_navigation(settings_navigation $settings, naviga
     if (has_capability('mod/lesson:viewreports', $settings->get_page()->cm->context)) {
         $reportsnode = $lessonnode->add(
             get_string('reports', 'lesson'),
-            new moodle_url('/mod/lesson/report.php', ['id' => $settings->get_page()->cm->id,
+            new powereduc_url('/mod/lesson/report.php', ['id' => $settings->get_page()->cm->id,
                 'action' => 'reportoverview'])
         );
     }
@@ -1195,7 +1195,7 @@ function lesson_get_file_areas() {
 function lesson_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     global $CFG, $DB;
 
-    if (!has_capability('moodle/course:managefiles', $context)) {
+    if (!has_capability('powereduc/course:managefiles', $context)) {
         // No peaking here for students!
         return null;
     }
@@ -1293,7 +1293,7 @@ function mod_lesson_get_fontawesome_icon_map() {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.3
+ * @since PowerEduc 3.3
  */
 function lesson_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER;
@@ -1464,7 +1464,7 @@ function mod_lesson_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('startlesson', 'lesson'),
-        new \moodle_url('/mod/lesson/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/lesson/view.php', ['id' => $cm->id]),
         1,
         $lesson->is_accessible()
     );
@@ -1659,7 +1659,7 @@ function mod_lesson_core_calendar_get_valid_event_timestart_range(\calendar_even
  * It will set the available or deadline value of the lesson instance
  * according to the type of event provided.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event
  * @param stdClass $lesson The module instance to get the range from
  */
@@ -1687,7 +1687,7 @@ function mod_lesson_core_calendar_event_timestart_updated(\calendar_event $event
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 

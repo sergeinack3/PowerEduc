@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 
 use Behat\Mink\Exception\{DriverException, ExpectationException};
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../behat/behat_base.php');
 
@@ -84,7 +84,7 @@ class behat_accessibility extends behat_base {
 
         $this->require_javascript();
 
-        $axeurl = (new \moodle_url('/lib/behat/axe/axe.min.js'))->out(false);
+        $axeurl = (new \powereduc_url('/lib/behat/axe/axe.min.js'))->out(false);
         $axeconfig = $this->get_axe_config_for_tags($standardtags, $extratags);
         $runaxe = <<<EOF
 (axeurl => {

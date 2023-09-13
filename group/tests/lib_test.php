@@ -23,7 +23,7 @@
  */
 namespace core_group;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/group/lib.php');

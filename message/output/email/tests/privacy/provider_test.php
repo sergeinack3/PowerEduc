@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ use core_privacy\tests\provider_testcase;
  *
  * @package    message_email
  * @covers     \message_email\privacy\provider
- * @copyright  2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2018 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends provider_testcase {

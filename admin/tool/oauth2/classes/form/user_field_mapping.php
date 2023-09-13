@@ -23,7 +23,7 @@
  */
 
 namespace tool_oauth2\form;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use stdClass;
 use core\form\persistent;

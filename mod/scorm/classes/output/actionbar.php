@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_scorm\output;
 
 use renderable;
 use renderer_base;
 use templatable;
-use moodle_url;
+use powereduc_url;
 use url_select;
 
 /**
  * Render HTML elements for tertiary nav for scorm.
  *
  * @package mod_scorm
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class actionbar implements renderable, templatable {
@@ -61,10 +61,10 @@ class actionbar implements renderable, templatable {
     public function export_for_template(renderer_base $output): array {
         global $PAGE;
 
-        $basicreportlink = new moodle_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'basic']);
-        $graphreportlink = new moodle_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'graphs']);
-        $interactionreportlink = new moodle_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'interactions']);
-        $objectivesreportlink = new moodle_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'objectives']);
+        $basicreportlink = new powereduc_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'basic']);
+        $graphreportlink = new powereduc_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'graphs']);
+        $interactionreportlink = new powereduc_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'interactions']);
+        $objectivesreportlink = new powereduc_url('/mod/scorm/report.php', ['id' => $this->id, 'mode' => 'objectives']);
 
         $reportmenu = [
             $basicreportlink->out(false) => get_string('pluginname', 'scormreport_basic'),
@@ -96,16 +96,16 @@ class actionbar implements renderable, templatable {
             }
 
             $options['download'] = 'ODS';
-            $downloadodslink = new moodle_url($PAGE->url, $options);
+            $downloadodslink = new powereduc_url($PAGE->url, $options);
 
             $options['download'] = 'Excel';
-            $downloadexcellink = new moodle_url($PAGE->url, $options);
+            $downloadexcellink = new powereduc_url($PAGE->url, $options);
 
             $options['download'] = 'CSV';
-            $downloadtextlink = new moodle_url($PAGE->url, $options);
+            $downloadtextlink = new powereduc_url($PAGE->url, $options);
         }
 
-        $url = new moodle_url('/mod/scorm/report.php', $PAGE->url->remove_params('attemptsmode'));
+        $url = new powereduc_url('/mod/scorm/report.php', $PAGE->url->remove_params('attemptsmode'));
         $urlselect = new url_select($reportmenu, $url->out(false), null, 'selectscormreports');
         $heading = $reportmenu[$url->out(false)] ?? null;
 

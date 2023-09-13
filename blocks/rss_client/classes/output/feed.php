@@ -25,7 +25,7 @@
 
 namespace block_rss_client\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class to help display an RSS Feed

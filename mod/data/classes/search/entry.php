@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace mod_data\search;
 
 use mod_data\manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/data/lib.php');
 require_once($CFG->dirroot . '/lib/grouplib.php');
@@ -50,7 +50,7 @@ class entry extends \core_search\base_mod {
      *
      * @param int $modifiedfrom timestamp
      * @param \context|null $context Optional context to restrict scope of returned results
-     * @return moodle_recordset|null Recordset (or null if no results)
+     * @return powereduc_recordset|null Recordset (or null if no results)
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;
@@ -191,22 +191,22 @@ class entry extends \core_search\base_mod {
      * Link to database entry.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         $entry = $this->get_entry($doc->get('itemid'));
-        return new \moodle_url('/mod/data/view.php', array( 'd' => $entry->dataid, 'rid' => $entry->id ));
+        return new \powereduc_url('/mod/data/view.php', array( 'd' => $entry->dataid, 'rid' => $entry->id ));
     }
 
     /**
      * Link to the database activity.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
         $entry = $this->get_entry($doc->get('itemid'));
-        return new \moodle_url('/mod/data/view.php', array('d' => $entry->dataid));
+        return new \powereduc_url('/mod/data/view.php', array('d' => $entry->dataid));
     }
 
     /**

@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\factories;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface for an event factory class.

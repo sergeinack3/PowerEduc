@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,12 +27,12 @@ require_once("lib.php");
 
 $id = required_param('id', PARAM_INT);
 
-$url = new moodle_url('/mod/feedback/index.php', array('id'=>$id));
+$url = new powereduc_url('/mod/feedback/index.php', array('id'=>$id));
 
 $PAGE->set_url($url);
 
 if (!$course = $DB->get_record('course', array('id'=>$id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 $context = context_course::instance($course->id);
@@ -61,8 +61,8 @@ if (!$PAGE->has_secondary_navigation()) {
 /// Get all the appropriate data
 
 if (! $feedbacks = get_all_instances_in_course("feedback", $course)) {
-    $url = new moodle_url('/course/view.php', array('id'=>$course->id));
-    notice(get_string('thereareno', 'moodle', $strfeedbacks), $url);
+    $url = new powereduc_url('/course/view.php', array('id'=>$course->id));
+    notice(get_string('thereareno', 'powereduc', $strfeedbacks), $url);
     die;
 }
 
@@ -98,7 +98,7 @@ if ($usesections) {
 
 foreach ($feedbacks as $feedback) {
     //get the responses of each feedback
-    $viewurl = new moodle_url('/mod/feedback/view.php', array('id'=>$feedback->coursemodule));
+    $viewurl = new powereduc_url('/mod/feedback/view.php', array('id'=>$feedback->coursemodule));
 
     if (has_capability('mod/feedback:viewreports', $context)) {
         $completed_feedback_count = intval(feedback_get_completeds_group_count($feedback));

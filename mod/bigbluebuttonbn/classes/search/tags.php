@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ class tags extends \core_search\base_activity {
      * BBB instances.
      * @param int $modifiedfrom
      * @param \context|null $context
-     * @return \moodle_recordset|null
+     * @return \powereduc_recordset|null
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;

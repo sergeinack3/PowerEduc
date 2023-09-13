@@ -28,7 +28,7 @@ use advanced_testcase;
 use core_xapi\xapi_exception;
 use core_xapi\iri;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Contains test cases for testing statement agent class.

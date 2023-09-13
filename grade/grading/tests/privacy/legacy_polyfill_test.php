@@ -16,7 +16,7 @@
 
 namespace core_grading\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Unit tests for the Grading API's privacy legacy_polyfill.

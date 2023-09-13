@@ -24,7 +24,7 @@
 
 namespace customfield_textarea;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class field

@@ -31,7 +31,7 @@ use core_privacy\local\request\contextlist;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\approved_userlist;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The block_recent_activity does not keep any data for more than COURSE_MAX_RECENT_PERIOD.

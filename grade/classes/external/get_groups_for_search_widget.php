@@ -29,7 +29,7 @@ use invalid_parameter_exception;
 use moodle_exception;
 use restricted_context_exception;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir.'/externallib.php');
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,19 +25,19 @@
 require('../../../config.php');
 require_once($CFG->libdir . '/filelib.php');
 
-$pageurl = new moodle_url('/message/output/airnotifier/checkconfiguration.php');
+$pageurl = new powereduc_url('/message/output/airnotifier/checkconfiguration.php');
 $PAGE->set_url($pageurl);
 $PAGE->set_context(context_system::instance());
 
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability('powereduc/site:config', context_system::instance());
 
 // Build a path.
 $strheading = get_string('checkconfiguration', 'message_airnotifier');
 $PAGE->navbar->add(get_string('administrationsite'));
-$returl = new moodle_url('/admin/category.php', ['category' => 'messaging']);
+$returl = new powereduc_url('/admin/category.php', ['category' => 'messaging']);
 $PAGE->navbar->add(get_string('messagingcategory', 'admin'), $returl);
-$returl = new moodle_url('/admin/settings.php', ['section' => 'messagesettingairnotifier']);
+$returl = new powereduc_url('/admin/settings.php', ['section' => 'messagesettingairnotifier']);
 $PAGE->navbar->add(get_string('pluginname', 'message_airnotifier'), $returl);
 $PAGE->navbar->add($strheading);
 
@@ -63,7 +63,7 @@ if (data_submitted()) {
 
         echo $OUTPUT->header();
         $message = get_string('sendtestconfirmation', 'message_airnotifier');
-        $confirmurl = new moodle_url($pageurl->out(false), ['confirm' => 1]);
+        $confirmurl = new powereduc_url($pageurl->out(false), ['confirm' => 1]);
         $continueb = new single_button($confirmurl, get_string('continue'), 'post');
         $cancelb = new single_button($pageurl, get_string('cancel'), 'get');
         echo $OUTPUT->confirm($message, $continueb, $cancelb);

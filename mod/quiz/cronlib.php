@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library code used by quiz cron.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 
@@ -79,7 +79,7 @@ class mod_quiz_overdue_attempt_updater {
                 $attemptobj->handle_if_time_expired($timenow, false);
                 $count += 1;
 
-            } catch (moodle_exception $e) {
+            } catch (powereduc_exception $e) {
                 // If an error occurs while processing one attempt, don't let that kill cron.
                 mtrace("Error while processing attempt {$attempt->id} at {$attempt->quiz} quiz:");
                 mtrace($e->getMessage());
@@ -95,7 +95,7 @@ class mod_quiz_overdue_attempt_updater {
     }
 
     /**
-     * @return moodle_recordset of quiz_attempts that need to be processed because time has
+     * @return powereduc_recordset of quiz_attempts that need to be processed because time has
      *     passed. The array is sorted by courseid then quizid.
      */
     public function get_list_of_overdue_attempts($processto) {

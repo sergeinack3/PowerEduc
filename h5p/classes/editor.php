@@ -32,7 +32,7 @@ use stdClass;
 use coding_exception;
 use MoodleQuickForm;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * H5P editor class, for editing local H5P content.

@@ -29,7 +29,7 @@ use core_customfield\handler;
 use renderable;
 use templatable;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class management

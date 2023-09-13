@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qtype_essay;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . "/phpunit/classes/restore_date_testcase.php");
@@ -48,7 +48,7 @@ class restore_test extends \restore_date_testcase {
         $questiongenerator = $this->getDataGenerator()->get_plugin_generator('core_question');
         $essay = $questiongenerator->create_question('essay', null, array('category' => $category->id));
 
-        // Remove the options record, which means that the backup will look like a backup made in an old Moodle.
+        // Remove the options record, which means that the backup will look like a backup made in an old PowerEduc.
         $DB->delete_records('qtype_essay_options', ['questionid' => $essay->id]);
 
         // Do backup and restore.

@@ -70,7 +70,7 @@ foreach ($map as $name => $icon) {
     $i->name = $name;
     $i->icon = $icon;
     if ($imageicon) {
-        $i->standardicon = str_replace($CFG->wwwroot, 'MOODLESITE', $isstandard->render_pix_icon($output, $imageicon));
+        $i->standardicon = str_replace($CFG->wwwroot, 'POWEREDUCSITE', $isstandard->render_pix_icon($output, $imageicon));
     }
     $icons[] = $i;
 }

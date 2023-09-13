@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -30,7 +30,7 @@ use core_reportbuilder\reportbuilder\audience\manual;
  *
  * @package     core_reportbuilder
  * @covers      \core_reportbuilder\permission
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class permission_test extends advanced_testcase {
@@ -56,7 +56,7 @@ class permission_test extends advanced_testcase {
         $this->setUser($user);
 
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        unassign_capability('moodle/reportbuilder:view', $userrole, context_system::instance());
+        unassign_capability('powereduc/reportbuilder:view', $userrole, context_system::instance());
 
         $this->expectException(report_access_exception::class);
         $this->expectExceptionMessage('You cannot view this report');
@@ -102,7 +102,7 @@ class permission_test extends advanced_testcase {
         $this->setUser($user);
 
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        unassign_capability('moodle/reportbuilder:view', $userrole, context_system::instance());
+        unassign_capability('powereduc/reportbuilder:view', $userrole, context_system::instance());
 
         $this->expectException(report_access_exception::class);
         $this->expectExceptionMessage('You cannot view this report');
@@ -135,7 +135,7 @@ class permission_test extends advanced_testcase {
         permission::require_can_view_report($report);
 
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        unassign_capability('moodle/reportbuilder:view', $userrole, context_system::instance());
+        unassign_capability('powereduc/reportbuilder:view', $userrole, context_system::instance());
 
         // User does not have view capability and belongs to an audience.
         $this->expectException(report_access_exception::class);
@@ -208,7 +208,7 @@ class permission_test extends advanced_testcase {
         $this->setUser($user);
 
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        assign_capability('moodle/reportbuilder:edit', CAP_ALLOW, $userrole, context_system::instance());
+        assign_capability('powereduc/reportbuilder:edit', CAP_ALLOW, $userrole, context_system::instance());
 
         /** @var core_reportbuilder_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('core_reportbuilder');
@@ -237,7 +237,7 @@ class permission_test extends advanced_testcase {
         $this->setUser($user);
 
         $userrole = $DB->get_field('role', 'id', ['shortname' => 'user']);
-        assign_capability('moodle/reportbuilder:editall', CAP_ALLOW, $userrole, context_system::instance());
+        assign_capability('powereduc/reportbuilder:editall', CAP_ALLOW, $userrole, context_system::instance());
 
         /** @var core_reportbuilder_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('core_reportbuilder');
@@ -280,7 +280,7 @@ class permission_test extends advanced_testcase {
         $this->setUser($user);
 
         $roleid = create_role('Dummy role', 'dummyrole', 'dummy role description');
-        assign_capability('moodle/reportbuilder:edit', CAP_ALLOW, $roleid, context_system::instance());
+        assign_capability('powereduc/reportbuilder:edit', CAP_ALLOW, $roleid, context_system::instance());
         role_assign($roleid, $user->id, context_system::instance()->id);
 
         try {
@@ -294,7 +294,7 @@ class permission_test extends advanced_testcase {
         $this->setUser($user2);
 
         $roleid2 = create_role('Dummy role 2', 'dummyrole2', 'dummy role 2 description');
-        assign_capability('moodle/reportbuilder:editall', CAP_ALLOW, $roleid2, context_system::instance());
+        assign_capability('powereduc/reportbuilder:editall', CAP_ALLOW, $roleid2, context_system::instance());
         role_assign($roleid2, $user2->id, context_system::instance()->id);
 
         try {

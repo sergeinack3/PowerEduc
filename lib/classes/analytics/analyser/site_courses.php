@@ -24,7 +24,7 @@
 
 namespace core\analytics\analyser;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Site courses analyser working at system level (insights for the site admin).

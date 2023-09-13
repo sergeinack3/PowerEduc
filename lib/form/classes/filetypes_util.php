@@ -28,7 +28,7 @@ use core_collator;
 use core_filetypes;
 use core_text;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Utility class for handling with file types in the forms.

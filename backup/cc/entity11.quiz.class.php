@@ -21,7 +21,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 class cc11_quiz extends entities11 {
 
@@ -70,7 +70,7 @@ class cc11_quiz extends entities11 {
 
         $instances = array();
 
-        $types = array(MOODLE_TYPE_QUIZ, MOODLE_TYPE_QUESTION_BANK);
+        $types = array(POWEREDUC_TYPE_QUIZ, POWEREDUC_TYPE_QUESTION_BANK);
 
         foreach ($types as $type) {
 
@@ -78,7 +78,7 @@ class cc11_quiz extends entities11 {
 
                 foreach (cc112moodle::$instances['instances'][$type] as $instance) {
 
-                    if ($type == MOODLE_TYPE_QUIZ) {
+                    if ($type == POWEREDUC_TYPE_QUIZ) {
                         $is_question_bank = 0;
                     } else {
                         $is_question_bank = 1;
@@ -299,10 +299,10 @@ class cc11_quiz extends entities11 {
 
                 $question_type_node = '';
 
-                $question_type_node = ($question_moodle_type == MOODLE_QUIZ_MULTIPLE_CHOICE) ? $this->create_node_course_question_categories_question_category_question_multiple_choice($question) : $question_type_node;
-                $question_type_node = ($question_moodle_type == MOODLE_QUIZ_TRUE_FALSE) ? $this->create_node_course_question_categories_question_category_question_true_false($question) : $question_type_node;
-                $question_type_node = ($question_moodle_type == MOODLE_QUIZ_ESSAY) ? $this->create_node_course_question_categories_question_category_question_eesay($question) : $question_type_node;
-                $question_type_node = ($question_moodle_type == MOODLE_QUIZ_SHORTANSWER) ? $this->create_node_course_question_categories_question_category_question_shortanswer($question) : $question_type_node;
+                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_MULTIPLE_CHOICE) ? $this->create_node_course_question_categories_question_category_question_multiple_choice($question) : $question_type_node;
+                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_TRUE_FALSE) ? $this->create_node_course_question_categories_question_category_question_true_false($question) : $question_type_node;
+                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_ESSAY) ? $this->create_node_course_question_categories_question_category_question_eesay($question) : $question_type_node;
+                $question_type_node = ($question_moodle_type == POWEREDUC_QUIZ_SHORTANSWER) ? $this->create_node_course_question_categories_question_category_question_shortanswer($question) : $question_type_node;
 
                 $questionname = !empty($question['name']) ? self::safexml($question['name']) : self::safexml($this->truncate_text($question['title'], 255, true));
                 $replace_values = array($question['id'],
@@ -1006,22 +1006,22 @@ class cc11_quiz extends entities11 {
         $return_type['cc'] = $type;
 
         if ($type == CC_QUIZ_MULTIPLE_CHOICE) {
-            $return_type['moodle'] = MOODLE_QUIZ_MULTIPLE_CHOICE;
+            $return_type['moodle'] = POWEREDUC_QUIZ_MULTIPLE_CHOICE;
         }
         if ($type == CC_QUIZ_MULTIPLE_RESPONSE) {
-            $return_type['moodle'] = MOODLE_QUIZ_MULTIPLE_CHOICE;
+            $return_type['moodle'] = POWEREDUC_QUIZ_MULTIPLE_CHOICE;
         }
         if ($type == CC_QUIZ_TRUE_FALSE) {
-            $return_type['moodle'] = MOODLE_QUIZ_TRUE_FALSE;
+            $return_type['moodle'] = POWEREDUC_QUIZ_TRUE_FALSE;
         }
         if ($type == CC_QUIZ_ESSAY) {
-            $return_type['moodle'] = MOODLE_QUIZ_ESSAY;
+            $return_type['moodle'] = POWEREDUC_QUIZ_ESSAY;
         }
         if ($type == CC_QUIZ_FIB) {
-            $return_type['moodle'] = MOODLE_QUIZ_SHORTANSWER;
+            $return_type['moodle'] = POWEREDUC_QUIZ_SHORTANSWER;
         }
         if ($type == CC_QUIZ_PATTERN_MACHT) {
-            $return_type['moodle'] = MOODLE_QUIZ_SHORTANSWER;
+            $return_type['moodle'] = POWEREDUC_QUIZ_SHORTANSWER;
         }
 
         return $return_type;

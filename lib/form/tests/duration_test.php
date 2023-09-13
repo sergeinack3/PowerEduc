@@ -30,7 +30,7 @@ namespace core_form;
 use moodleform;
 use MoodleQuickForm;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/form/duration.php');

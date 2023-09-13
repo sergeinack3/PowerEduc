@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace mod_chat\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/chat/lib.php');
@@ -182,7 +182,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'chat', 'view', "view.php?id=$cm->id", $chat->id, $cm->id);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/chat/view.php', array('id' => $cm->id));
+        $url = new \powereduc_url('/mod/chat/view.php', array('id' => $cm->id));
         $this->assertEquals($url, $event->get_url());
         $event->get_name();
     }

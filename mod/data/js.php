@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 use mod_data\manager;
 use mod_data\preset;
 
-define('NO_MOODLE_COOKIES', true); // session not used here
+define('NO_POWEREDUC_COOKIES', true); // session not used here
 
 require_once('../../config.php');
 
@@ -33,7 +33,7 @@ $d = optional_param('d', 0, PARAM_INT); // Database id.
 $presetfullname = optional_param('preset', '', PARAM_PATH); // The directory the preset is in.
 
 $lifetime  = 600; // Seconds to cache this stylesheet.
-$url = new moodle_url('/mod/data/js.php');
+$url = new powereduc_url('/mod/data/js.php');
 
 $manager = null;
 if ($id) {

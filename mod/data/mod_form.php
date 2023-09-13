@@ -1,11 +1,11 @@
 <?php
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 }
 
-require_once ($CFG->dirroot.'/course/moodleform_mod.php');
+require_once ($CFG->dirroot.'/course/powereducform_mod.php');
 
-class mod_data_mod_form extends moodleform_mod {
+class mod_data_mod_form extends powereducform_mod {
 
     function definition() {
         global $CFG, $DB, $OUTPUT;
@@ -118,7 +118,7 @@ class mod_data_mod_form extends moodleform_mod {
 
     /**
      * Display module-specific activity completion rules.
-     * Part of the API defined by moodleform_mod
+     * Part of the API defined by powereducform_mod
      * @return array Array of string IDs of added items, empty array if none
      */
     public function add_completion_rules() {
@@ -166,7 +166,7 @@ class mod_data_mod_form extends moodleform_mod {
      * Allows modules to modify the data returned by form get_data().
      * This method is also called in the bulk activity completion form.
      *
-     * Only available on moodleform_mod.
+     * Only available on powereducform_mod.
      *
      * @param stdClass $data the form data to be modified.
      */

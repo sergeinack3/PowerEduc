@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * REST interface to Nextcloud's implementation of Open Collaboration Services.
@@ -26,7 +26,7 @@ namespace repository_nextcloud;
 use core\oauth2\client;
 use core\oauth2\rest;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * REST interface to Nextcloud's implementation of Open Collaboration Services.
@@ -59,7 +59,7 @@ class ocs_client extends rest {
 
     /**
      * OCS endpoint as configured for the used issuer.
-     * @var \moodle_url
+     * @var \powereduc_url
      */
     private $ocsendpoint;
 
@@ -68,7 +68,7 @@ class ocs_client extends rest {
      * Get endpoint URLs from the used issuer to use them in get_api_functions().
      * @param client $oauthclient OAuth-authenticated Nextcloud client
      * @throws configuration_exception Exception if critical endpoints are missing.
-     * @throws \moodle_exception when trying to construct a moodleurl
+     * @throws \powereduc_exception when trying to construct a powereducurl
      */
     public function __construct(client $oauthclient) {
         parent::__construct($oauthclient);
@@ -78,7 +78,7 @@ class ocs_client extends rest {
         if ($ocsendpoint === false) {
             throw new configuration_exception('Endpoint ocs_endpoint not defined.');
         }
-        $this->ocsendpoint = new \moodle_url($ocsendpoint);
+        $this->ocsendpoint = new \powereduc_url($ocsendpoint);
         if (empty($this->ocsendpoint->get_param('format'))) {
             $this->ocsendpoint->params(array('format' => 'xml'));
         }
@@ -99,7 +99,7 @@ class ocs_client extends rest {
                 'endpoint' => $this->ocsendpoint->out(false),
                 'method' => 'post',
                 'args' => [
-                    'path' => PARAM_TEXT, // Could be PARAM_PATH, we really don't want to enforce a Moodle understanding of paths.
+                    'path' => PARAM_TEXT, // Could be PARAM_PATH, we really don't want to enforce a PowerEduc understanding of paths.
                     'shareType' => PARAM_INT,
                     'shareWith' => PARAM_TEXT, // Name of receiving user/group. Required if SHARE_TYPE_USER.
                     'publicUpload' => PARAM_RAW, // Actually Boolean, but neither String-Boolean ('false') nor PARAM_BOOL (0/1).
@@ -152,11 +152,11 @@ class ocs_client extends rest {
     }
 
     /**
-     * In POST requests, Moodle's REST API assumes that params are
+     * In POST requests, PowerEduc's REST API assumes that params are
      * - transmitted as part of the URL or
      * - expressed in JSON.
      * Neither is true; we are passing an array to $functionargs which is then put into CURLOPT_POSTFIELDS.
-     * Curl assumes the content type to be `multipart/form-data` then, but the Moodle REST API tries to put
+     * Curl assumes the content type to be `multipart/form-data` then, but the PowerEduc REST API tries to put
      * a JSON content type. As a result, clients would fail.
      * To make this less tedious to use, we assume that the params-as-array-in-$functionargs is the default for us.
      *

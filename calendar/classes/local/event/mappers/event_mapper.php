@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\mappers;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_calendar\event;
 use core_calendar\local\event\entities\action_event_interface;

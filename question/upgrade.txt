@@ -11,7 +11,7 @@ This files describes API changes for code that uses the question API.
 
 === 4.0 ===
 
-Moodle 4.0 included the results of a major project to re-work the question bank.
+PowerEduc 4.0 included the results of a major project to re-work the question bank.
 
 1) Database changes (as usual, all existing data is updated automatically).
    * Previously there was a single {question} table. This has now been split into three to handle versionning questions:
@@ -117,7 +117,7 @@ Moodle 4.0 included the results of a major project to re-work the question bank.
 
 5) Function question_hash() from questionlib.php is deprecated without replacement.
 
-6) The following classes have been moved, to better follow Moodle's name-space usage rules:
+6) The following classes have been moved, to better follow PowerEduc's name-space usage rules:
    'core_question\bank\action_column_base' => 'core_question\local\bank\action_column_base',
    'core_question\bank\checkbox_column' => 'core_question\local\bank\checkbox_column',
    'core_question\bank\column_base' => 'core_question\local\bank\column_base',
@@ -144,7 +144,7 @@ Moodle 4.0 included the results of a major project to re-work the question bank.
 
 7) The Behat class for question-related steps has been renamed to behat_core_question
     to match the expected naming convention. In the unlikely event that you are directly
-    referring to the behat_question class name (nothing in the standard Moodle code was)
+    referring to the behat_question class name (nothing in the standard PowerEduc code was)
     then you will have to update your reference.
 
 

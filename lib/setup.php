@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  *
  * @package    core
  * @subpackage lib
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,15 +32,15 @@
  * are set in config.php, and the rest are loaded from the config table.
  *
  * Some typical settings in the $CFG global:
- *  - $CFG->wwwroot  - Path to moodle index directory in url format.
- *  - $CFG->dataroot - Path to moodle data files directory on server's filesystem.
- *  - $CFG->dirroot  - Path to moodle's library folder on server's filesystem.
- *  - $CFG->libdir   - Path to moodle's library folder on server's filesystem.
- *  - $CFG->backuptempdir  - Path to moodle's backup temp file directory on server's filesystem.
- *  - $CFG->tempdir  - Path to moodle's temp file directory on server's filesystem.
- *  - $CFG->cachedir - Path to moodle's cache directory on server's filesystem (shared by cluster nodes).
- *  - $CFG->localcachedir - Path to moodle's local cache directory (not shared by cluster nodes).
- *  - $CFG->localrequestdir - Path to moodle's local temp request directory (not shared by cluster nodes).
+ *  - $CFG->wwwroot  - Path to powereduc index directory in url format.
+ *  - $CFG->dataroot - Path to powereduc data files directory on server's filesystem.
+ *  - $CFG->dirroot  - Path to powereduc's library folder on server's filesystem.
+ *  - $CFG->libdir   - Path to powereduc's library folder on server's filesystem.
+ *  - $CFG->backuptempdir  - Path to powereduc's backup temp file directory on server's filesystem.
+ *  - $CFG->tempdir  - Path to powereduc's temp file directory on server's filesystem.
+ *  - $CFG->cachedir - Path to powereduc's cache directory on server's filesystem (shared by cluster nodes).
+ *  - $CFG->localcachedir - Path to powereduc's local cache directory (not shared by cluster nodes).
+ *  - $CFG->localrequestdir - Path to powereduc's local temp request directory (not shared by cluster nodes).
  *
  * @global object $CFG
  * @name $CFG
@@ -178,7 +178,7 @@ if ($CFG->dataroot === false) {
 }
 
 // wwwroot is mandatory
-if (!isset($CFG->wwwroot) or $CFG->wwwroot === 'http://example.com/moodle') {
+if (!isset($CFG->wwwroot) or $CFG->wwwroot === 'http://example.com/powereduc') {
     if (isset($_SERVER['REMOTE_ADDR'])) {
         header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error ');
     }
@@ -381,7 +381,7 @@ $CFG->yui2version = '2.9.0';
 $CFG->yui3version = '3.17.2';
 
 // Patching the upstream YUI release.
-// For important information on patching YUI modules, please see http://docs.moodle.org/dev/YUI/Patching.
+// For important information on patching YUI modules, please see http://docs.powereduc.org/dev/YUI/Patching.
 // If we need to patch a YUI modules between official YUI releases, the yuipatchlevel will need to be manually
 // incremented here. The module will also need to be listed in the yuipatchedmodules.
 // When upgrading to a subsequent version of YUI, these should be reset back to 0 and an empty array.
@@ -411,9 +411,9 @@ if (isset($CFG->debug)) {
 }
 $CFG->debugdeveloper = (($CFG->debug & (E_ALL | E_STRICT)) === (E_ALL | E_STRICT)); // DEBUG_DEVELOPER is not available yet.
 
-if (!defined('MOODLE_INTERNAL')) { // Necessary because cli installer has to define it earlier.
+if (!defined('POWEREDUC_INTERNAL')) { // Necessary because cli installer has to define it earlier.
     /** Used by library scripts to check they are being called by Moodle. */
-    define('MOODLE_INTERNAL', true);
+    define('POWEREDUC_INTERNAL', true);
 }
 
 // core_component can be used in any scripts, it does not need anything else.
@@ -441,13 +441,13 @@ if (defined('ABORT_AFTER_CONFIG')) {
 
 // Early profiling start, based exclusively on config.php $CFG settings
 if (!empty($CFG->earlyprofilingenabled)) {
-    require_once($CFG->libdir . '/xhprof/xhprof_moodle.php');
+    require_once($CFG->libdir . '/xhprof/xhprof_powereduc.php');
     profiling_start();
 }
 
 /**
  * Database connection. Used for all access to the database.
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @name $DB
  */
 global $DB;
@@ -490,7 +490,7 @@ global $SITE;
  * A central store of information about the current page we are
  * generating in response to the user's request.
  *
- * @global moodle_page $PAGE
+ * @global powereduc_page $PAGE
  * @name $PAGE
  */
 global $PAGE;
@@ -544,7 +544,7 @@ global $ME;
 global $FULLSCRIPT;
 
 /**
- * Relative moodle script path '/course/view.php'
+ * Relative powereduc script path '/course/view.php'
  * @global string $SCRIPT
  * @name $SCRIPT
  */
@@ -569,7 +569,7 @@ init_performance_info();
 // Put $OUTPUT in place, so errors can be displayed.
 $OUTPUT = new bootstrap_renderer();
 
-// Set handler for uncaught exceptions - equivalent to throw new \moodle_exception() call.
+// Set handler for uncaught exceptions - equivalent to throw new \powereduc_exception() call.
 if (!PHPUNIT_TEST or PHPUNIT_UTIL) {
     set_exception_handler('default_exception_handler');
     set_error_handler('default_error_handler', E_ALL | E_STRICT);
@@ -598,7 +598,7 @@ if (!empty($_SERVER['HTTP_X_moz']) && $_SERVER['HTTP_X_moz'] === 'prefetch'){
     exit(1);
 }
 
-//point pear include path to moodles lib/pear so that includes and requires will search there for files before anywhere else
+//point pear include path to powereducs lib/pear so that includes and requires will search there for files before anywhere else
 //the problem is that we need specific version of quickforms and hacked excel files :-(
 ini_set('include_path', $CFG->libdir.'/pear' . PATH_SEPARATOR . ini_get('include_path'));
 
@@ -622,9 +622,9 @@ require_once($CFG->libdir .'/dmllib.php');          // Database access
 require_once($CFG->libdir .'/datalib.php');         // Legacy lib with a big-mix of functions.
 require_once($CFG->libdir .'/accesslib.php');       // Access control functions
 require_once($CFG->libdir .'/deprecatedlib.php');   // Deprecated functions included for backward compatibility
-require_once($CFG->libdir .'/moodlelib.php');       // Other general-purpose functions
+require_once($CFG->libdir .'/powereduclib.php');       // Other general-purpose functions
 require_once($CFG->libdir .'/enrollib.php');        // Enrolment related functions
-require_once($CFG->libdir .'/pagelib.php');         // Library that defines the moodle_page class, used for $PAGE
+require_once($CFG->libdir .'/pagelib.php');         // Library that defines the powereduc_page class, used for $PAGE
 require_once($CFG->libdir .'/blocklib.php');        // Library for controlling blocks
 require_once($CFG->libdir .'/grouplib.php');        // Groups functions
 require_once($CFG->libdir .'/sessionlib.php');      // All session and cookie related stuff
@@ -694,7 +694,7 @@ if (isset($CFG->debug)) {
 $CFG->debugdeveloper = (($CFG->debug & DEBUG_DEVELOPER) === DEBUG_DEVELOPER);
 
 // Find out if PHP configured to display warnings,
-// this is a security problem because some moodle scripts may
+// this is a security problem because some powereduc scripts may
 // disclose sensitive information.
 if (ini_get_bool('display_errors')) {
     define('WARN_DISPLAY_ERRORS_ENABLED', true);
@@ -722,7 +722,7 @@ if (!defined('NO_UPGRADE_CHECK') and isset($CFG->upgraderunning)) {
     if ($CFG->upgraderunning < time()) {
         unset_config('upgraderunning');
     } else {
-        throw new \moodle_exception('upgraderunning');
+        throw new \powereduc_exception('upgraderunning');
     }
 }
 
@@ -734,7 +734,7 @@ if (function_exists('gc_enable')) {
 
 // detect unsupported upgrade jump as soon as possible - do not change anything, do not use system functions
 if (!empty($CFG->version) and $CFG->version < 2007101509) {
-    throw new \moodle_exception('upgraderequires19', 'error');
+    throw new \powereduc_exception('upgraderequires19', 'error');
     die;
 }
 
@@ -782,7 +782,7 @@ if (!defined('SYSCONTEXTID')) {
 // Defining the site - aka frontpage course
 try {
     $SITE = get_site();
-} catch (moodle_exception $e) {
+} catch (powereduc_exception $e) {
     $SITE = null;
     if (empty($CFG->version)) {
         $SITE = new stdClass();
@@ -800,21 +800,21 @@ define('SITEID', $SITE->id);
 // init session prevention flag - this is defined on pages that do not want session
 if (CLI_SCRIPT) {
     // no sessions in CLI scripts possible
-    define('NO_MOODLE_COOKIES', true);
+    define('NO_POWEREDUC_COOKIES', true);
 
 } else if (WS_SERVER) {
     // No sessions possible in web services.
-    define('NO_MOODLE_COOKIES', true);
+    define('NO_POWEREDUC_COOKIES', true);
 
-} else if (!defined('NO_MOODLE_COOKIES')) {
+} else if (!defined('NO_POWEREDUC_COOKIES')) {
     if (empty($CFG->version) or $CFG->version < 2009011900) {
         // no session before sessions table gets created
-        define('NO_MOODLE_COOKIES', true);
+        define('NO_POWEREDUC_COOKIES', true);
     } else if (CLI_SCRIPT) {
         // CLI scripts can not have session
-        define('NO_MOODLE_COOKIES', true);
+        define('NO_POWEREDUC_COOKIES', true);
     } else {
-        define('NO_MOODLE_COOKIES', false);
+        define('NO_POWEREDUC_COOKIES', false);
     }
 }
 
@@ -845,11 +845,11 @@ if (!empty($CFG->proxylogunsafe) || !empty($CFG->proxyfixunsafe)) {
     if (!empty($CFG->proxyfixunsafe)) {
         require_once($CFG->libdir.'/filelib.php');
 
-        $proxyurl = get_moodle_proxy_url();
+        $proxyurl = get_powereduc_proxy_url();
         // This fixes stream handlers inside php.
         $defaults = stream_context_set_default([
             'http' => [
-                'user_agent' => \core_useragent::get_moodlebot_useragent(),
+                'user_agent' => \core_useragent::get_powereducbot_useragent(),
                 'proxy' => $proxyurl
             ],
         ]);
@@ -895,7 +895,7 @@ if (!isset($CFG->filelifetime)) {
 
 // Late profiling, only happening if early one wasn't started
 if (!empty($CFG->profilingenabled)) {
-    require_once($CFG->libdir . '/xhprof/xhprof_moodle.php');
+    require_once($CFG->libdir . '/xhprof/xhprof_powereduc.php');
     profiling_start();
 }
 
@@ -948,7 +948,7 @@ unset($lang);
 if ($forcelang = optional_param('forcelang', '', PARAM_SAFEDIR)) {
     if (isloggedin()
         && get_string_manager()->translation_exists($forcelang, false)
-        && has_capability('moodle/site:forcelanguage', context_system::instance())) {
+        && has_capability('powereduc/site:forcelanguage', context_system::instance())) {
         $SESSION->forcelang = $forcelang;
     } else if (isset($SESSION->forcelang)) {
         unset($SESSION->forcelang);
@@ -968,16 +968,16 @@ if (empty($CFG->lang)) {
 
 // Set the default site locale, a lot of the stuff may depend on this
 // it is definitely too late to call this first in require_login()!
-moodle_setlocale();
+powereduc_setlocale();
 
 // Create the $PAGE global - this marks the PAGE and OUTPUT fully initialised, this MUST be done at the end of setup!
-if (!empty($CFG->moodlepageclass)) {
-    if (!empty($CFG->moodlepageclassfile)) {
-        require_once($CFG->moodlepageclassfile);
+if (!empty($CFG->powereducpageclass)) {
+    if (!empty($CFG->powereducpageclassfile)) {
+        require_once($CFG->powereducpageclassfile);
     }
-    $classname = $CFG->moodlepageclass;
+    $classname = $CFG->powereducpageclass;
 } else {
-    $classname = 'moodle_page';
+    $classname = 'powereduc_page';
 }
 $PAGE = new $classname();
 unset($classname);
@@ -1000,8 +1000,8 @@ if (!empty($CFG->debugvalidators) and !empty($CFG->guestloginbutton)) {
 }
 
 // Apache log integration. In apache conf file one can use ${MOODULEUSER}n in
-// LogFormat to get the current logged in username in moodle.
-// Alternatvely for other web servers a header X-MOODLEUSER can be set which
+// LogFormat to get the current logged in username in powereduc.
+// Alternatvely for other web servers a header X-POWEREDUCUSER can be set which
 // can be using in the logfile and stripped out if needed.
 set_access_log_user();
 
@@ -1096,7 +1096,7 @@ if (isset($CFG->maintenance_later) and $CFG->maintenance_later <= time()) {
     if (AJAX_SCRIPT) {
         die;
     } else if (!CLI_SCRIPT) {
-        redirect(new moodle_url('/'));
+        redirect(new powereduc_url('/'));
     }
 }
 
@@ -1114,9 +1114,9 @@ if (defined('BEHAT_SITE_RUNNING') && !defined('BEHAT_TEST')) {
 // this is a funny trick to make Eclipse believe that $OUTPUT and other globals
 // contains an instance of core_renderer, etc. which in turn fixes autocompletion ;-)
 if (false) {
-    $DB = new moodle_database();
+    $DB = new powereduc_database();
     $OUTPUT = new core_renderer(null, null);
-    $PAGE = new moodle_page();
+    $PAGE = new powereduc_page();
 }
 
 // Cache any immutable config locally to avoid constant DB lookups.

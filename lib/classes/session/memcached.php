@@ -24,7 +24,7 @@
 
 namespace core\session;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Memcached based session handler.

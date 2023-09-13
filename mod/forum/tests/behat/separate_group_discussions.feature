@@ -242,7 +242,7 @@ Feature: Posting to all groups in a separate group discussion is restricted to u
   Scenario: Teacher in all groups but without accessallgroups can only post in their groups
     And I log in as "admin"
     And I set the following system permissions of "Non-editing teacher" role:
-      | moodle/site:accessallgroups | Prohibit |
+      | powereduc/site:accessallgroups | Prohibit |
     And I log out
     Given I log in as "noneditor1"
     And I am on "Course 1" course homepage
@@ -257,7 +257,7 @@ Feature: Posting to all groups in a separate group discussion is restricted to u
   Scenario: Teacher in some groups and without accessallgroups can only post in their groups
     And I log in as "admin"
     And I set the following system permissions of "Non-editing teacher" role:
-      | moodle/site:accessallgroups | Prohibit |
+      | powereduc/site:accessallgroups | Prohibit |
     And I log out
     Given I log in as "noneditor1"
     And I am on "Course 1" course homepage

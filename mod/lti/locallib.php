@@ -1,34 +1,34 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 //
-// This file is part of BasicLTI4Moodle
+// This file is part of BasicLTI4PowerEduc
 //
-// BasicLTI4Moodle is an IMS BasicLTI (Basic Learning Tools for Interoperability)
-// consumer for Moodle 1.9 and Moodle 2.0. BasicLTI is a IMS Standard that allows web
+// BasicLTI4PowerEduc is an IMS BasicLTI (Basic Learning Tools for Interoperability)
+// consumer for PowerEduc 1.9 and PowerEduc 2.0. BasicLTI is a IMS Standard that allows web
 // based learning tools to be easily integrated in LMS as native ones. The IMS BasicLTI
 // specification is part of the IMS standard Common Cartridge 1.1 Sakai and other main LMS
 // are already supporting or going to support BasicLTI. This project Implements the consumer
-// for Moodle. Moodle is a Free Open source Learning Management System by Martin Dougiamas.
-// BasicLTI4Moodle is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
+// for PowerEduc. PowerEduc is a Free Open source Learning Management System by Martin Dougiamas.
+// BasicLTI4PowerEduc is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
 // at the GESSI research group at UPC.
-// SimpleLTI consumer for Moodle is an implementation of the early specification of LTI
+// SimpleLTI consumer for PowerEduc is an implementation of the early specification of LTI
 // by Charles Severance (Dr Chuck) htp://dr-chuck.com , developed by Jordi Piguillem in a
 // Google Summer of Code 2008 project co-mentored by Charles Severance and Marc Alier.
 //
-// BasicLTI4Moodle is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
+// BasicLTI4PowerEduc is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
 // of the Universitat Politecnica de Catalunya http://www.upc.edu
 // Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier @ upc.edu.
 
@@ -48,11 +48,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 // TODO: Switch to core oauthlib once implemented - MDL-30149.
 use mod_lti\helper;
-use moodle\mod\lti as lti;
+use powereduc\mod\lti as lti;
 use Firebase\JWT\JWT;
 use Firebase\JWT\JWK;
 use Firebase\JWT\Key;
@@ -71,7 +71,7 @@ define('LTI_LAUNCH_CONTAINER_DEFAULT', 1);
 define('LTI_LAUNCH_CONTAINER_EMBED', 2);
 define('LTI_LAUNCH_CONTAINER_EMBED_NO_BLOCKS', 3);
 define('LTI_LAUNCH_CONTAINER_WINDOW', 4);
-define('LTI_LAUNCH_CONTAINER_REPLACE_MOODLE_WINDOW', 5);
+define('LTI_LAUNCH_CONTAINER_REPLACE_POWEREDUC_WINDOW', 5);
 
 define('LTI_TOOL_STATE_ANY', 0);
 define('LTI_TOOL_STATE_CONFIGURED', 1);
@@ -518,7 +518,7 @@ function lti_get_jwt_claim_mapping() {
  *
  * @param  object $instance the external tool activity settings
  * @return object|null
- * @since  Moodle 3.9
+ * @since  PowerEduc 3.9
  */
 function lti_get_instance_type(object $instance) : ?object {
     if (empty($instance->typeid)) {
@@ -536,7 +536,7 @@ function lti_get_instance_type(object $instance) : ?object {
  * @param  stdClass $instance the external tool activity settings
  * @param  string $nonce  the nonce value to use (applies to LTI 1.3 only)
  * @return array the endpoint URL and parameters (including the signature)
- * @since  Moodle 3.0
+ * @since  PowerEduc 3.0
  */
 function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-launch-request', $foruserid = 0) {
     global $PAGE, $USER;
@@ -639,7 +639,7 @@ function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-l
         'sesskey' => sesskey());
 
     // Add the return URL. We send the launch container along to help us avoid frames-within-frames when the user returns.
-    $url = new \moodle_url('/mod/lti/return.php', $returnurlparams);
+    $url = new \powereduc_url('/mod/lti/return.php', $returnurlparams);
     $returnurl = $url->out(false);
 
     if (isset($typeconfig['forcessl']) && ($typeconfig['forcessl'] == '1')) {
@@ -652,7 +652,7 @@ function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-l
         case LTI_LAUNCH_CONTAINER_EMBED_NO_BLOCKS:
             $target = 'iframe';
             break;
-        case LTI_LAUNCH_CONTAINER_REPLACE_MOODLE_WINDOW:
+        case LTI_LAUNCH_CONTAINER_REPLACE_POWEREDUC_WINDOW:
             $target = 'frame';
             break;
         case LTI_LAUNCH_CONTAINER_WINDOW:
@@ -696,7 +696,7 @@ function lti_get_launch_data($instance, $nonce = '', $messagetype = 'basic-lti-l
             $parms = lti_sign_jwt($requestparams, $endpoint, $key, $typeid, $nonce);
         }
 
-        $endpointurl = new \moodle_url($endpoint);
+        $endpointurl = new \powereduc_url($endpoint);
         $endpointparams = $endpointurl->params();
 
         // Strip querystring params in endpoint url from $parms to avoid duplication.
@@ -778,7 +778,7 @@ function lti_build_registration_request($toolproxy) {
 
     // Add the return URL.
     $returnurlparams = array('id' => $toolproxy->id, 'sesskey' => sesskey());
-    $url = new \moodle_url('/mod/lti/externalregistrationreturn.php', $returnurlparams);
+    $url = new \powereduc_url('/mod/lti/externalregistrationreturn.php', $returnurlparams);
     $returnurl = $url->out(false);
 
     $requestparams['launch_presentation_return_url'] = $returnurl;
@@ -909,7 +909,7 @@ function lti_build_request($instance, $typeconfig, $course, $typeid = null, $isl
         $requestparams['lis_result_sourcedid'] = $sourcedid;
 
         // Add outcome service URL.
-        $serviceurl = new \moodle_url('/mod/lti/service.php');
+        $serviceurl = new \powereduc_url('/mod/lti/service.php');
         $serviceurl = $serviceurl->out();
 
         $forcessl = false;
@@ -983,7 +983,7 @@ function lti_build_request_lti2($tool, $params) {
  * @param string    $messagetype    The request message type. Defaults to basic-lti-launch-request if empty.
  *
  * @return array                    Request details
- * @deprecated since Moodle 3.7 MDL-62599 - please do not use this function any more.
+ * @deprecated since PowerEduc 3.7 MDL-62599 - please do not use this function any more.
  * @see lti_build_standard_message()
  */
 function lti_build_standard_request($instance, $orgid, $islti2, $messagetype = 'basic-lti-launch-request') {
@@ -1020,8 +1020,8 @@ function lti_build_standard_message($instance, $orgid, $ltiversion, $messagetype
     $requestparams['launch_presentation_locale'] = current_language();
 
     // Make sure we let the tool know what LMS they are being called from.
-    $requestparams['ext_lms'] = 'moodle-2';
-    $requestparams['tool_consumer_info_product_family_code'] = 'moodle';
+    $requestparams['ext_lms'] = 'powereduc-2';
+    $requestparams['tool_consumer_info_product_family_code'] = 'powereduc';
     $requestparams['tool_consumer_info_version'] = strval($CFG->version);
 
     // Add oauth_callback to be compliant with the 1.0A spec.
@@ -1092,7 +1092,7 @@ function lti_build_custom_parameters($toolproxy, $tool, $instance, $params, $cus
  *
  * @param int $id The tool type ID.
  * @param stdClass $course The course object.
- * @param moodle_url $returnurl The return URL in the tool consumer (TC) that the tool provider (TP)
+ * @param powereduc_url $returnurl The return URL in the tool consumer (TC) that the tool provider (TP)
  *                              will use to return the Content-Item message.
  * @param string $title The tool's title, if available.
  * @param string $text The text to display to represent the content item. This value may be a long description of the content item.
@@ -1110,10 +1110,10 @@ function lti_build_custom_parameters($toolproxy, $tool, $instance, $params, $cus
  * @param bool $copyadvice Indicates whether the TC is able and willing to make a local copy of a content item. False by default.
  * @param string $nonce
  * @return stdClass The object containing the signed request parameters and the URL to the TP's Content-Item selection interface.
- * @throws moodle_exception When the LTI tool type does not exist.`
+ * @throws powereduc_exception When the LTI tool type does not exist.`
  * @throws coding_exception For invalid media type and presentation target parameters.
  */
-function lti_build_content_item_selection_request($id, $course, moodle_url $returnurl, $title = '', $text = '', $mediatypes = [],
+function lti_build_content_item_selection_request($id, $course, powereduc_url $returnurl, $title = '', $text = '', $mediatypes = [],
                                                   $presentationtargets = [], $autocreate = false, $multiple = true,
                                                   $unsigned = false, $canconfirm = false, $copyadvice = false, $nonce = '') {
     global $USER;
@@ -1121,7 +1121,7 @@ function lti_build_content_item_selection_request($id, $course, moodle_url $retu
     $tool = lti_get_type($id);
     // Validate parameters.
     if (!$tool) {
-        throw new moodle_exception('errortooltypenotfound', 'mod_lti');
+        throw new powereduc_exception('errortooltypenotfound', 'mod_lti');
     }
     if (!is_array($mediatypes)) {
         throw new coding_exception('The list of accepted media types should be in an array');
@@ -1169,9 +1169,9 @@ function lti_build_content_item_selection_request($id, $course, moodle_url $retu
 
     // Set the tool URL.
     if (!empty($typeconfig['toolurl_ContentItemSelectionRequest'])) {
-        $toolurl = new moodle_url($typeconfig['toolurl_ContentItemSelectionRequest']);
+        $toolurl = new powereduc_url($typeconfig['toolurl_ContentItemSelectionRequest']);
     } else {
-        $toolurl = new moodle_url($typeconfig['toolurl']);
+        $toolurl = new powereduc_url($typeconfig['toolurl']);
     }
 
     // Check if SSL is forced.
@@ -1310,14 +1310,14 @@ function lti_build_content_item_selection_request($id, $course, moodle_url $retu
  * @param int $typeid The tool type ID.
  * @param string $consumerkey The consumer key.
  * @return stdClass Tool type
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @throws lti\OAuthException
  */
 function lti_verify_oauth_signature($typeid, $consumerkey) {
     $tool = lti_get_type($typeid);
     // Validate parameters.
     if (!$tool) {
-        throw new moodle_exception('errortooltypenotfound', 'mod_lti');
+        throw new powereduc_exception('errortooltypenotfound', 'mod_lti');
     }
     $typeconfig = lti_get_type_config($typeid);
 
@@ -1340,7 +1340,7 @@ function lti_verify_oauth_signature($typeid, $consumerkey) {
     }
 
     if ($consumerkey !== $key) {
-        throw new moodle_exception('errorincorrectconsumerkey', 'mod_lti');
+        throw new powereduc_exception('errorincorrectconsumerkey', 'mod_lti');
     }
 
     $store = new lti\TrivialOAuthDataStore();
@@ -1366,7 +1366,7 @@ function lti_verify_oauth_signature($typeid, $consumerkey) {
  * @param string $clientid The tool client id.
  *
  * @return object The JWT's payload as a PHP object
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @throws UnexpectedValueException     Provided JWT was invalid
  * @throws SignatureInvalidException    Provided JWT was invalid because the signature verification failed
  * @throws BeforeValidException         Provided JWT is trying to be used before it's eligible as defined by 'nbf'
@@ -1380,7 +1380,7 @@ function lti_verify_with_keyset($jwtparam, $keyseturl, $clientid) {
 
     try {
         if (empty($keyset)) {
-            throw new moodle_exception('errornocachedkeysetfound', 'mod_lti');
+            throw new powereduc_exception('errornocachedkeysetfound', 'mod_lti');
         }
         $keysetarr = json_decode($keyset, true);
         // JWK::parseKeySet uses RS256 algorithm by default.
@@ -1407,7 +1407,7 @@ function lti_verify_with_keyset($jwtparam, $keyseturl, $clientid) {
  * @param string $jwtparam JWT parameter value
  *
  * @return stdClass Tool type
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @throws UnexpectedValueException     Provided JWT was invalid
  * @throws SignatureInvalidException    Provided JWT was invalid because the signature verification failed
  * @throws BeforeValidException         Provided JWT is trying to be used before it's eligible as defined by 'nbf'
@@ -1419,10 +1419,10 @@ function lti_verify_jwt_signature($typeid, $consumerkey, $jwtparam) {
 
     // Validate parameters.
     if (!$tool) {
-        throw new moodle_exception('errortooltypenotfound', 'mod_lti');
+        throw new powereduc_exception('errortooltypenotfound', 'mod_lti');
     }
     if (isset($tool->toolproxyid)) {
-        throw new moodle_exception('JWT security not supported with LTI 2');
+        throw new powereduc_exception('JWT security not supported with LTI 2');
     }
 
     $typeconfig = lti_get_type_config($typeid);
@@ -1430,25 +1430,25 @@ function lti_verify_jwt_signature($typeid, $consumerkey, $jwtparam) {
     $key = $tool->clientid ?? '';
 
     if ($consumerkey !== $key) {
-        throw new moodle_exception('errorincorrectconsumerkey', 'mod_lti');
+        throw new powereduc_exception('errorincorrectconsumerkey', 'mod_lti');
     }
 
     if (empty($typeconfig['keytype']) || $typeconfig['keytype'] === LTI_RSA_KEY) {
         $publickey = $typeconfig['publickey'] ?? '';
         if (empty($publickey)) {
-            throw new moodle_exception('No public key configured');
+            throw new powereduc_exception('No public key configured');
         }
         // Attemps to verify jwt with RSA key.
         JWT::decode($jwtparam, new Key($publickey, 'RS256'));
     } else if ($typeconfig['keytype'] === LTI_JWK_KEYSET) {
         $keyseturl = $typeconfig['publickeyset'] ?? '';
         if (empty($keyseturl)) {
-            throw new moodle_exception('No public keyset configured');
+            throw new powereduc_exception('No public keyset configured');
         }
         // Attempts to verify jwt with jwk keyset.
         lti_verify_with_keyset($jwtparam, $keyseturl, $tool->clientid);
     } else {
-        throw new moodle_exception('Invalid public key type');
+        throw new powereduc_exception('Invalid public key type');
     }
 
     return $tool;
@@ -1499,7 +1499,7 @@ function content_item_to_form(object $tool, object $typeconfig, object $item) : 
         ];
     }
     if (isset($item->icon->{'@id'})) {
-        $iconurl = new moodle_url($item->icon->{'@id'});
+        $iconurl = new powereduc_url($item->icon->{'@id'});
         // Assign item's icon URL to secureicon or icon depending on its scheme.
         if (strtolower($iconurl->get_scheme()) === 'https') {
             $config->secureicon = $iconurl->out(false);
@@ -1508,7 +1508,7 @@ function content_item_to_form(object $tool, object $typeconfig, object $item) : 
         }
     }
     if (isset($item->url)) {
-        $url = new moodle_url($item->url);
+        $url = new powereduc_url($item->url);
         $config->toolurl = $url->out(false);
         $config->typeid = 0;
     } else {
@@ -1588,14 +1588,14 @@ function content_item_to_form(object $tool, object $typeconfig, object $item) : 
  * @param string $consumerkey The consumer key.
  * @param string $contentitemsjson The JSON string for the content_items parameter.
  * @return stdClass The array of module information objects.
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @throws lti\OAuthException
  */
 function lti_tool_configuration_from_content_item($typeid, $messagetype, $ltiversion, $consumerkey, $contentitemsjson) {
     $tool = lti_get_type($typeid);
     // Validate parameters.
     if (!$tool) {
-        throw new moodle_exception('errortooltypenotfound', 'mod_lti');
+        throw new powereduc_exception('errortooltypenotfound', 'mod_lti');
     }
     // Check lti_message_type. Show debugging if it's not set to ContentItemSelection.
     // No need to throw exceptions for now since lti_message_type does not seem to be used in this processing at the moment.
@@ -1615,10 +1615,10 @@ function lti_tool_configuration_from_content_item($typeid, $messagetype, $ltiver
 
     $items = json_decode($contentitemsjson);
     if (empty($items)) {
-        throw new moodle_exception('errorinvaliddata', 'mod_lti', '', $contentitemsjson);
+        throw new powereduc_exception('errorinvaliddata', 'mod_lti', '', $contentitemsjson);
     }
     if (!isset($items->{'@graph'}) || !is_array($items->{'@graph'})) {
-        throw new moodle_exception('errorinvalidresponseformat', 'mod_lti');
+        throw new powereduc_exception('errorinvalidresponseformat', 'mod_lti');
     }
 
     $config = null;
@@ -1789,7 +1789,7 @@ function lti_get_tool_table($tools, $id) {
             $delete = get_string('delete', 'lti');
 
             if (empty($type->toolproxyid)) {
-                $baseurl = new \moodle_url('/mod/lti/typessettings.php', array(
+                $baseurl = new \powereduc_url('/mod/lti/typessettings.php', array(
                         'action' => 'accept',
                         'id' => $type->id,
                         'sesskey' => sesskey(),
@@ -1797,7 +1797,7 @@ function lti_get_tool_table($tools, $id) {
                     ));
                 $ref = $type->baseurl;
             } else {
-                $baseurl = new \moodle_url('/mod/lti/toolssettings.php', array(
+                $baseurl = new \powereduc_url('/mod/lti/toolssettings.php', array(
                         'action' => 'accept',
                         'id' => $type->id,
                         'sesskey' => sesskey(),
@@ -1896,14 +1896,14 @@ EOD;
             $update = get_string('update', 'lti');
             $delete = get_string('delete', 'lti');
 
-            $baseurl = new \moodle_url('/mod/lti/registersettings.php', array(
+            $baseurl = new \powereduc_url('/mod/lti/registersettings.php', array(
                     'action' => 'accept',
                     'id' => $toolproxy->id,
                     'sesskey' => sesskey(),
                     'tab' => $id
                 ));
 
-            $registerurl = new \moodle_url('/mod/lti/register.php', array(
+            $registerurl = new \powereduc_url('/mod/lti/register.php', array(
                     'id' => $toolproxy->id,
                     'sesskey' => sesskey(),
                     'tab' => 'tool_proxy'
@@ -2137,7 +2137,7 @@ function lti_calculate_custom_parameter($value) {
     global $USER, $COURSE;
 
     switch ($value) {
-        case 'Moodle.Person.userGroupIds':
+        case 'PowerEduc.Person.userGroupIds':
             return implode(",", groups_get_user_groups($COURSE->id, $USER->id)[0]);
         case 'Context.id.history':
             return implode(",", get_course_history($COURSE));
@@ -2218,7 +2218,7 @@ function lti_get_ims_role($user, $cmid, $courseid, $islti2) {
         // a real LTI instance.
         $context = context_course::instance($courseid);
 
-        if (has_capability('moodle/course:manageactivities', $context, $user)) {
+        if (has_capability('powereduc/course:manageactivities', $context, $user)) {
             array_push($roles, 'Instructor');
         } else {
             array_push($roles, 'Learner');
@@ -2444,7 +2444,7 @@ function lti_get_configured_types($courseid, $sectionreturn = 0) {
             $type->helplink = get_string('modulename_shortcut_link', 'lti');
         }
         $type->icon = html_writer::empty_tag('img', ['src' => get_tool_type_icon_url($ltitype), 'alt' => '', 'class' => 'icon']);
-        $type->link = new moodle_url('/course/modedit.php', array('add' => 'lti', 'return' => 0, 'course' => $courseid,
+        $type->link = new powereduc_url('/course/modedit.php', array('add' => 'lti', 'return' => 0, 'course' => $courseid,
             'sr' => $sectionreturn, 'typeid' => $ltitype->id));
         $types[] = $type;
     }
@@ -3462,7 +3462,7 @@ function lti_sign_jwt($parms, $endpoint, $oauthconsumerkey, $typeid = 0, $nonce 
  * @param string $jwtparam   JWT parameter
  *
  * @return array  message parameters
- * @throws moodle_exception
+ * @throws powereduc_exception
  */
 function lti_convert_from_jwt($typeid, $jwtparam) {
 
@@ -3732,7 +3732,7 @@ function lti_get_launch_container($lti, $toolconfig) {
     // Opening the popup window also had some issues in testing
     // For mobile devices, always take up the entire screen to ensure the best experience.
     if ($devicetype === core_useragent::DEVICETYPE_MOBILE || $devicetype === core_useragent::DEVICETYPE_TABLET ) {
-        $launchcontainer = LTI_LAUNCH_CONTAINER_REPLACE_MOODLE_WINDOW;
+        $launchcontainer = LTI_LAUNCH_CONTAINER_REPLACE_POWEREDUC_WINDOW;
     }
 
     return $launchcontainer;
@@ -3808,7 +3808,7 @@ function lti_log_request($rawbody) {
     if ($tempdir = make_temp_directory('mod_lti', false)) {
         if ($tempfile = tempnam($tempdir, 'mod_lti_request'.date('YmdHis'))) {
             $content  = "Request Headers:\n";
-            foreach (moodle\mod\lti\OAuthUtil::get_headers() as $header => $value) {
+            foreach (powereduc\mod\lti\OAuthUtil::get_headers() as $header => $value) {
                 $content .= "$header: $value\n";
             }
             $content .= "Request Body:\n";
@@ -3938,7 +3938,7 @@ function lti_get_capabilities() {
        'Result.autocreate' => 'lis_outcome_service_url',
        'BasicOutcome.sourcedId' => 'lis_result_sourcedid',
        'BasicOutcome.url' => 'lis_outcome_service_url',
-       'Moodle.Person.userGroupIds' => null);
+       'PowerEduc.Person.userGroupIds' => null);
 
     return $capabilities;
 
@@ -4104,7 +4104,7 @@ function get_tool_type_icon_url(stdClass $type) {
  * @return string The url to edit the tool type
  */
 function get_tool_type_edit_url(stdClass $type) {
-    $url = new moodle_url('/mod/lti/typessettings.php',
+    $url = new powereduc_url('/mod/lti/typessettings.php',
                           array('action' => 'update', 'id' => $type->id, 'sesskey' => sesskey(), 'returnto' => 'toolconfigure'));
     return $url->out();
 }
@@ -4117,7 +4117,7 @@ function get_tool_type_edit_url(stdClass $type) {
  * @return string The url to edit the tool type
  */
 function get_tool_proxy_edit_url(stdClass $proxy) {
-    $url = new moodle_url('/mod/lti/registersettings.php',
+    $url = new powereduc_url('/mod/lti/registersettings.php',
                           array('action' => 'update', 'id' => $proxy->id, 'sesskey' => sesskey(), 'returnto' => 'toolconfigure'));
     return $url->out();
 }
@@ -4131,7 +4131,7 @@ function get_tool_proxy_edit_url(stdClass $proxy) {
  */
 function get_tool_type_course_url(stdClass $type) {
     if ($type->course != 1) {
-        $url = new moodle_url('/course/view.php', array('id' => $type->course));
+        $url = new powereduc_url('/course/view.php', array('id' => $type->course));
         return $url->out();
     }
     return null;
@@ -4156,11 +4156,11 @@ function get_tool_type_urls(stdClass $type) {
         $urls['course'] = $courseurl;
     }
 
-    $url = new moodle_url('/mod/lti/certs.php');
+    $url = new powereduc_url('/mod/lti/certs.php');
     $urls['publickeyset'] = $url->out();
-    $url = new moodle_url('/mod/lti/token.php');
+    $url = new powereduc_url('/mod/lti/token.php');
     $urls['accesstoken'] = $url->out();
-    $url = new moodle_url('/mod/lti/auth.php');
+    $url = new powereduc_url('/mod/lti/auth.php');
     $urls['authrequest'] = $url->out();
 
     return $urls;
@@ -4237,13 +4237,13 @@ function get_tool_type_config($type) {
     $platformid = $CFG->wwwroot;
     $clientid = $type->clientid;
     $deploymentid = $type->id;
-    $publickeyseturl = new moodle_url('/mod/lti/certs.php');
+    $publickeyseturl = new powereduc_url('/mod/lti/certs.php');
     $publickeyseturl = $publickeyseturl->out();
 
-    $accesstokenurl = new moodle_url('/mod/lti/token.php');
+    $accesstokenurl = new powereduc_url('/mod/lti/token.php');
     $accesstokenurl = $accesstokenurl->out();
 
-    $authrequesturl = new moodle_url('/mod/lti/auth.php');
+    $authrequesturl = new powereduc_url('/mod/lti/auth.php');
     $authrequesturl = $authrequesturl->out();
 
     return array(
@@ -4352,8 +4352,8 @@ function serialise_tool_type(stdClass $type) {
  *
  * @param stdClass $proxy The tool proxy
  *
- * @deprecated since Moodle 3.10
- * @todo This will be finally removed for Moodle 4.2 as part of MDL-69976.
+ * @deprecated since PowerEduc 3.10
+ * @todo This will be finally removed for PowerEduc 4.2 as part of MDL-69976.
  * @return array An array of values representing this type
  */
 function serialise_tool_proxy(stdClass $proxy) {
@@ -4384,7 +4384,7 @@ function serialise_tool_proxy(stdClass $proxy) {
  * Loads the cartridge information into the tool type, if the launch url is for a cartridge file
  *
  * @param stdClass $type The tool type object to be filled in
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function lti_load_type_if_cartridge($type) {
     if (!empty($type->lti_toolurl) && lti_is_cartridge($type->lti_toolurl)) {
@@ -4396,7 +4396,7 @@ function lti_load_type_if_cartridge($type) {
  * Loads the cartridge information into the new tool, if the launch url is for a cartridge file
  *
  * @param stdClass $lti The tools config
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function lti_load_tool_if_cartridge($lti) {
     if (!empty($lti->toolurl) && lti_is_cartridge($lti->toolurl)) {
@@ -4409,7 +4409,7 @@ function lti_load_tool_if_cartridge($lti) {
  *
  * @param  string $url The url to be checked
  * @return True if the url is for a cartridge
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function lti_is_cartridge($url) {
     // If it is empty, it's not a cartridge.
@@ -4430,7 +4430,7 @@ function lti_is_cartridge($url) {
         if (!empty($toolinfo['launchurl'])) {
             return true;
         }
-    } catch (moodle_exception $e) {
+    } catch (powereduc_exception $e) {
         return false; // Error loading the xml, so it's not a cartridge.
     }
     return false;
@@ -4441,8 +4441,8 @@ function lti_is_cartridge($url) {
  *
  * @param  string   $url     The URL to the cartridge
  * @param  stdClass $type    The tool type object to be filled in
- * @throws moodle_exception if the cartridge could not be loaded correctly
- * @since Moodle 3.1
+ * @throws powereduc_exception if the cartridge could not be loaded correctly
+ * @since PowerEduc 3.1
  */
 function lti_load_type_from_cartridge($url, $type) {
     $toolinfo = lti_load_cartridge($url,
@@ -4493,8 +4493,8 @@ function lti_load_type_from_cartridge($url, $type) {
  *
  * @param  string   $url    The URL to the cartridge
  * @param  stdClass $lti    LTI object
- * @throws moodle_exception if the cartridge could not be loaded correctly
- * @since Moodle 3.1
+ * @throws powereduc_exception if the cartridge could not be loaded correctly
+ * @since PowerEduc 3.1
  */
 function lti_load_tool_from_cartridge($url, $lti) {
     $toolinfo = lti_load_cartridge($url,
@@ -4539,8 +4539,8 @@ function lti_load_tool_from_cartridge($url, $lti) {
  * @param  array  $map The map of tags to keys in the return array
  * @param  array  $propertiesmap The map of properties to keys in the return array
  * @return array An associative array with the given keys and their values from the cartridge
- * @throws moodle_exception if the cartridge could not be loaded correctly
- * @since Moodle 3.1
+ * @throws powereduc_exception if the cartridge could not be loaded correctly
+ * @since PowerEduc 3.1
  */
 function lti_load_cartridge($url, $map, $propertiesmap = array()) {
     global $CFG;
@@ -4551,9 +4551,9 @@ function lti_load_cartridge($url, $map, $propertiesmap = array()) {
 
     // Got a completely empty response (real or error), cannot process this with
     // DOMDocument::loadXML() because it errors with ValueError. So let's throw
-    // the moodle_exception before waiting to examine the errors later.
+    // the powereduc_exception before waiting to examine the errors later.
     if (trim($response) === '') {
-        throw new moodle_exception('errorreadingfile', '', '', $url);
+        throw new powereduc_exception('errorreadingfile', '', '', $url);
     }
 
     // TODO MDL-46023 Replace this code with a call to the new library.
@@ -4577,7 +4577,7 @@ function lti_load_cartridge($url, $map, $propertiesmap = array()) {
         foreach ($errors as $error) {
             $message .= "\n" . trim($error->message, "\n\r\t .") . " at line " . $error->line;
         }
-        throw new moodle_exception('errorreadingfile', '', '', $url, $message);
+        throw new powereduc_exception('errorreadingfile', '', '', $url, $message);
     }
 
     $toolinfo = array();
@@ -4606,7 +4606,7 @@ function lti_load_cartridge($url, $map, $propertiesmap = array()) {
  * @param  XPath    $xpath   The XML to find the tag in
  * @param  XPath    $attribute The attribute to search for (if we should search for a child node with the given
  * value for the name attribute
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function get_tag($tagname, $xpath, $attribute = null) {
     if ($attribute) {
@@ -4637,7 +4637,7 @@ function lti_new_access_token($typeid, $scopes) {
         $numtries ++;
         $generatedtoken = md5(uniqid(rand(), 1));
         if ($numtries > 5) {
-            throw new moodle_exception('Failed to generate LTI access token');
+            throw new powereduc_exception('Failed to generate LTI access token');
         }
     } while ($DB->record_exists('lti_access_tokens', array('token' => $generatedtoken)));
     $newtoken = new stdClass();
@@ -4660,7 +4660,7 @@ function lti_new_access_token($typeid, $scopes) {
  * Wrapper for function libxml_disable_entity_loader() deprecated in PHP 8
  *
  * Method was deprecated in PHP 8 and it shows deprecation message. However it is still
- * required in the previous versions on PHP. While Moodle supports both PHP 7 and 8 we need to keep it.
+ * required in the previous versions on PHP. While PowerEduc supports both PHP 7 and 8 we need to keep it.
  * @see https://php.watch/versions/8.0/libxml_disable_entity_loader-deprecation
  *
  * @param bool $value

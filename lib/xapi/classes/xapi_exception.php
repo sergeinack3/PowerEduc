@@ -25,7 +25,7 @@
 
 namespace core_xapi;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * General invalid xAPI exception.

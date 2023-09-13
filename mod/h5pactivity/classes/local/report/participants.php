@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * H5P activity participants report
  *
  * @package    mod_h5pactivity
- * @since      Moodle 3.9
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,11 +30,11 @@ use mod_h5pactivity\local\manager;
 use mod_h5pactivity\local\attempt;
 use core\dml\sql_join;
 use table_sql;
-use moodle_url;
+use powereduc_url;
 use html_writer;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir.'/tablelib.php');
@@ -43,8 +43,8 @@ require_once($CFG->libdir.'/tablelib.php');
  * Class  H5P activity participants report.
  *
  * @package    mod_h5pactivity
- * @since      Moodle 3.9
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  */
 class participants extends table_sql implements report {
 
@@ -166,7 +166,7 @@ class participants extends table_sql implements report {
             if (empty($score->attemptid)) {
                 return $scaled;
             } else {
-                $url = new moodle_url('/mod/h5pactivity/report.php', ['a' => $cm->instance, 'attemptid' => $score->attemptid]);
+                $url = new powereduc_url('/mod/h5pactivity/report.php', ['a' => $cm->instance, 'attemptid' => $score->attemptid]);
                 return html_writer::link($url, $scaled);
             }
         }
@@ -183,7 +183,7 @@ class participants extends table_sql implements report {
         $cm = $this->manager->get_coursemodule();
         if (isset($this->count[$user->id])) {
             $msg = get_string('review_user_attempts', 'mod_h5pactivity', $this->count[$user->id]);
-            $url = new moodle_url('/mod/h5pactivity/report.php', ['a' => $cm->instance, 'userid' => $user->id]);
+            $url = new powereduc_url('/mod/h5pactivity/report.php', ['a' => $cm->instance, 'userid' => $user->id]);
             return html_writer::link($url, $msg);
         }
         return '';

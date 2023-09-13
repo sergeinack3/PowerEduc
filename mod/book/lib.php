@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Returns list of available numbering types
@@ -153,7 +153,7 @@ function book_print_recent_activity($course, $viewfullnames, $timestart) {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  * @param $data the data submitted from the reset course.
  * @return array status array
  */
@@ -191,7 +191,7 @@ function book_reset_userdata($data) {
 /**
  * The elements to add the course reset form.
  *
- * @param moodleform $mform
+ * @param powereducform $mform
  */
 function book_reset_course_form_definition(&$mform) {
     $mform->addElement('header', 'bookheader', get_string('modulenameplural', 'book'));
@@ -312,7 +312,7 @@ function book_supports($feature) {
         case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_CONTENT;
 
@@ -347,7 +347,7 @@ function book_extend_settings_navigation(settings_navigation $settingsnav, navig
             $string = get_string("turneditingon");
             $edit = '1';
         }
-        $url = new moodle_url('/mod/book/view.php', array('id'=>$params['id'], 'chapterid'=>$params['chapterid'], 'edit'=>$edit, 'sesskey'=>sesskey()));
+        $url = new powereduc_url('/mod/book/view.php', array('id'=>$params['id'], 'chapterid'=>$params['chapterid'], 'edit'=>$edit, 'sesskey'=>sesskey()));
         $editnode = navigation_node::create($string, $url, navigation_node::TYPE_SETTING);
         $editnode->set_show_in_secondary_navigation(false);
         $booknode->add_node($editnode, $firstkey);
@@ -604,7 +604,7 @@ function book_export_contents($cm, $baseurl) {
         // Each chapter in a subdirectory.
         $chapterindexfile['filepath']     = "/{$chapter->id}/";
         $chapterindexfile['filesize']     = 0;
-        $chapterindexfile['fileurl']      = moodle_url::make_webservice_pluginfile_url(
+        $chapterindexfile['fileurl']      = powereduc_url::make_webservice_pluginfile_url(
                     $context->id, 'mod_book', 'chapter', $chapter->id, '/', 'index.html')->out(false);
         $chapterindexfile['timecreated']  = $chapter->timecreated;
         $chapterindexfile['timemodified'] = $chapter->timemodified;
@@ -624,7 +624,7 @@ function book_export_contents($cm, $baseurl) {
             $file['filename']     = $fileinfo->get_filename();
             $file['filepath']     = "/{$chapter->id}" . $fileinfo->get_filepath();
             $file['filesize']     = $fileinfo->get_filesize();
-            $file['fileurl']      = moodle_url::make_webservice_pluginfile_url(
+            $file['fileurl']      = powereduc_url::make_webservice_pluginfile_url(
                                         $context->id, 'mod_book', 'chapter', $chapter->id,
                                         $fileinfo->get_filepath(), $fileinfo->get_filename())->out(false);
             $file['timecreated']  = $fileinfo->get_timecreated();
@@ -782,7 +782,7 @@ function mod_book_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/book/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/book/view.php', ['id' => $cm->id]),
         1,
         true
     );

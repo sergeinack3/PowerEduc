@@ -19,7 +19,7 @@ namespace core_backup;
 use backup;
 use backup_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -91,7 +91,7 @@ class async_backup_test extends \advanced_testcase {
         $this->setUser($teacher->id);
 
         // Make the backup controller for an async backup.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_YES, backup::MODE_ASYNC, $USER->id);
         $bc->finish_ui();
         $backupid = $bc->get_backupid();
@@ -177,7 +177,7 @@ class async_backup_test extends \advanced_testcase {
                 'course' => $course->id, 'section' => 1));
 
         // Make the backup controller for an async backup.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_YES, backup::MODE_ASYNC, $USER->id);
         $bc->finish_ui();
         $backupid = $bc->get_backupid();

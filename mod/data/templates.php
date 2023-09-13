@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ $mode  = optional_param('mode', 'addtemplate', PARAM_ALPHA);
 $action  = optional_param('action', '', PARAM_ALPHA);
 $useeditor = optional_param('useeditor', null, PARAM_BOOL);
 
-$url = new moodle_url('/mod/data/templates.php');
+$url = new powereduc_url('/mod/data/templates.php');
 
 if ($id) {
     list($course, $cm) = get_course_and_cm_from_cmid($id, manager::MODULE);

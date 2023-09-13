@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,14 +18,14 @@ namespace mod_data\output;
 
 use mod_data\manager;
 use mod_data\preset;
-use moodle_url;
+use powereduc_url;
 use url_select;
 
 /**
  * Class responsible for generating the action bar elements in the database module pages.
  *
  * @package    mod_data
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class action_bar {
@@ -36,16 +36,16 @@ class action_bar {
     /** @var int $cmid The database course module id. */
     private $cmid;
 
-    /** @var moodle_url $currenturl The URL of the current page. */
+    /** @var powereduc_url $currenturl The URL of the current page. */
     private $currenturl;
 
     /**
      * The class constructor.
      *
      * @param int $id The database module id.
-     * @param moodle_url $pageurl The URL of the current page.
+     * @param powereduc_url $pageurl The URL of the current page.
      */
-    public function __construct(int $id, moodle_url $pageurl) {
+    public function __construct(int $id, powereduc_url $pageurl) {
         $this->id = $id;
         [$course, $cm] = get_course_and_cm_from_instance($this->id, 'data');
         $this->cmid = $cm->id;
@@ -117,7 +117,7 @@ class action_bar {
         foreach ($menufield as $fieldtype => $fieldname) {
             $fieldselectparams['newtype'] = $fieldtype;
             $fieldselect->add(new \action_menu_link(
-                new moodle_url('/mod/data/field.php', $fieldselectparams),
+                new powereduc_url('/mod/data/field.php', $fieldselectparams),
                 new \pix_icon('field/' . $fieldtype, $fieldname, 'data'),
                 $fieldname,
                 false
@@ -138,8 +138,8 @@ class action_bar {
     public function get_view_action_bar(bool $hasentries, string $mode): string {
         global $PAGE;
 
-        $viewlistlink = new moodle_url('/mod/data/view.php', ['d' => $this->id]);
-        $viewsinglelink = new moodle_url('/mod/data/view.php', ['d' => $this->id, 'mode' => 'single']);
+        $viewlistlink = new powereduc_url('/mod/data/view.php', ['d' => $this->id]);
+        $viewsinglelink = new powereduc_url('/mod/data/view.php', ['d' => $this->id, 'mode' => 'single']);
 
         $menu = [
             $viewlistlink->out(false) => get_string('listview', 'mod_data'),
@@ -168,16 +168,16 @@ class action_bar {
     public function get_templates_action_bar(): string {
         global $PAGE;
 
-        $listtemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id,
+        $listtemplatelink = new powereduc_url('/mod/data/templates.php', ['d' => $this->id,
             'mode' => 'listtemplate']);
-        $singletemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id,
+        $singletemplatelink = new powereduc_url('/mod/data/templates.php', ['d' => $this->id,
             'mode' => 'singletemplate']);
-        $advancedsearchtemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id,
+        $advancedsearchtemplatelink = new powereduc_url('/mod/data/templates.php', ['d' => $this->id,
             'mode' => 'asearchtemplate']);
-        $addtemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'addtemplate']);
-        $rsstemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'rsstemplate']);
-        $csstemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'csstemplate']);
-        $jstemplatelink = new moodle_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'jstemplate']);
+        $addtemplatelink = new powereduc_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'addtemplate']);
+        $rsstemplatelink = new powereduc_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'rsstemplate']);
+        $csstemplatelink = new powereduc_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'csstemplate']);
+        $jstemplatelink = new powereduc_url('/mod/data/templates.php', ['d' => $this->id, 'mode' => 'jstemplate']);
 
         $menu = [
             $addtemplatelink->out(false) => get_string('addtemplate', 'mod_data'),
@@ -197,7 +197,7 @@ class action_bar {
         $presetsactions = $this->get_presets_actions_select(false);
 
         // Reset all templates action.
-        $resetallurl = new moodle_url($this->currenturl);
+        $resetallurl = new powereduc_url($this->currenturl);
         $resetallurl->param('action', 'resetalltemplates');
         $presetsactions->add(new \action_menu_link(
             $resetallurl,
@@ -244,7 +244,7 @@ class action_bar {
         $menu = [];
         $selected = null;
         foreach (['listtemplate', 'singletemplate'] as $templatename) {
-            $link = new moodle_url('/mod/data/preset.php', [
+            $link = new powereduc_url('/mod/data/preset.php', [
                 'd' => $this->id,
                 'template' => $templatename,
                 'fullname' => $fullname,
@@ -262,7 +262,7 @@ class action_bar {
             'title' => get_string('preview', manager::PLUGINNAME, preset::get_name_from_plugin($fullname)),
             'hasback' => true,
             'backtitle' => get_string('back'),
-            'backurl' => new moodle_url('/mod/data/preset.php', ['id' => $cm->id]),
+            'backurl' => new powereduc_url('/mod/data/preset.php', ['id' => $cm->id]),
             'extraurlselect' => $urlselect->export_for_template($renderer),
         ];
         return $renderer->render_from_template('mod_data/action_bar', $data);
@@ -292,7 +292,7 @@ class action_bar {
             // Import.
             $actionsselectparams = ['id' => $this->cmid];
             $actionsselect->add(new \action_menu_link(
-                new moodle_url('/mod/data/preset.php', $actionsselectparams),
+                new powereduc_url('/mod/data/preset.php', $actionsselectparams),
                 null,
                 get_string('importpreset', 'mod_data'),
                 false,
@@ -305,14 +305,14 @@ class action_bar {
             // Export.
             $actionsselectparams = ['id' => $this->cmid, 'action' => 'export'];
             $actionsselect->add(new \action_menu_link(
-                new moodle_url('/mod/data/preset.php', $actionsselectparams),
+                new powereduc_url('/mod/data/preset.php', $actionsselectparams),
                 null,
                 get_string('exportpreset', 'mod_data'),
                 false
             ));
             // Save as preset.
             $actionsselect->add(new \action_menu_link(
-                new moodle_url('/mod/data/preset.php', $actionsselectparams),
+                new powereduc_url('/mod/data/preset.php', $actionsselectparams),
                 null,
                 get_string('saveaspreset', 'mod_data'),
                 false,

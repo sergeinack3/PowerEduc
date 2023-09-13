@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_question\local\bank;
 
@@ -52,15 +52,15 @@ abstract class bulk_action_base {
      * and finally doing the action. The url will be url of the page where users will be redirected to
      * select what to do with the selected questions.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    abstract public function get_bulk_action_url(): \moodle_url;
+    abstract public function get_bulk_action_url(): \powereduc_url;
 
     /**
      * Get the capabilities for the bulk action.
      * The bulk actions might have some capabilities to action them as a user.
      * This method helps to get those caps which will be used by the base view before actioning the bulk action.
-     * For ex: ['moodle/question:moveall', 'moodle/question:add']
+     * For ex: ['powereduc/question:moveall', 'powereduc/question:add']
      * At least one of the cap need to be true for the user to use this action.
      *
      * @return array|null
@@ -75,9 +75,9 @@ abstract class bulk_action_base {
      * When questions are selected, it will post according to the key its selected from the dropdown.
      *
      * @return string
-     * @deprecated since Moodle 4.1
+     * @deprecated since PowerEduc 4.1
      * @see get_key()
-     * @todo Final deprecation on Moodle 4.5 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.5 MDL-72438
      */
     public function get_bulk_action_key() {
         debugging(__FUNCTION__ . " is deprecated and should no longer be used. Please use get_key() instead.", DEBUG_DEVELOPER);

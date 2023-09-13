@@ -24,7 +24,7 @@
 
 namespace core_h5p\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Displays the H5P Editor

@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 use core\output\checkbox_toggleall;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/tablelib.php');
 
@@ -50,7 +50,7 @@ class core_tag_manage_table extends table_sql {
         $perpage = optional_param('perpage', DEFAULT_PAGE_SIZE, PARAM_INT);
         $page = optional_param('page', 0, PARAM_INT);
         $filter = optional_param('filter', '', PARAM_NOTAGS);
-        $baseurl = new moodle_url('/tag/manage.php', array('tc' => $tagcollid,
+        $baseurl = new powereduc_url('/tag/manage.php', array('tc' => $tagcollid,
             'perpage' => $perpage, 'page' => $page, 'filter' => $filter));
 
         $checkboxall = new checkbox_toggleall('tags-manage', true, [
@@ -235,7 +235,7 @@ class core_tag_manage_table extends table_sql {
      */
     public function col_fullname($tag) {
         $params         = array('id' => $tag->owner);
-        $ownerlink      = new moodle_url('/user/view.php', $params);
+        $ownerlink      = new powereduc_url('/user/view.php', $params);
         $owner          = html_writer::link($ownerlink, fullname($tag));
         return $owner;
     }
@@ -293,10 +293,10 @@ class core_tag_manage_table extends table_sql {
         global $OUTPUT, $PAGE;
         $o = '';
         // Edit.
-        $url = new moodle_url('/tag/edit.php', array('id' => $tag->id, 'returnurl' => $PAGE->url->out_as_local_url()));
+        $url = new powereduc_url('/tag/edit.php', array('id' => $tag->id, 'returnurl' => $PAGE->url->out_as_local_url()));
         $o .= $OUTPUT->action_icon($url, new pix_icon('t/edit', get_string('edittag', 'tag')));
         // Delete.
-        $url = new moodle_url($this->baseurl, array('action' => 'delete',
+        $url = new powereduc_url($this->baseurl, array('action' => 'delete',
             'tagid' => $tag->id, 'sesskey' => sesskey()));
         $o .= $OUTPUT->action_icon($url, new pix_icon('t/delete', get_string('delete', 'tag')),
                 null, array('class' => 'action-icon tagdelete'));

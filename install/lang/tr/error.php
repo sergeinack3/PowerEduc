@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Veritabanı oluşturulamıyor.</p>
 <p>Belirtilen veritabanı yok ve verilen kullanıcının veritabanı oluşturmak için izni yok.</p>

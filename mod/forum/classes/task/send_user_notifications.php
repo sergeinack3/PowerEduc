@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file defines an adhoc task to send notifications.
@@ -24,7 +24,7 @@
 
 namespace mod_forum\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Adhoc task to send user forum notifications.
@@ -95,7 +95,7 @@ class send_user_notifications extends \core\task\adhoc_task {
 
     /**
      * Send out messages.
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function execute() {
         global $CFG;
@@ -120,7 +120,7 @@ class send_user_notifications extends \core\task\adhoc_task {
         $this->log_start("Sending messages to {$this->recipient->username} ({$this->recipient->id})");
         foreach ($this->courses as $course) {
             $coursecontext = \context_course::instance($course->id);
-            if (!$course->visible and !has_capability('moodle/course:viewhiddencourses', $coursecontext)) {
+            if (!$course->visible and !has_capability('powereduc/course:viewhiddencourses', $coursecontext)) {
                 // The course is hidden and the user does not have access to it.
                 // Permissions may have changed since it was queued.
                 continue;
@@ -181,7 +181,7 @@ class send_user_notifications extends \core\task\adhoc_task {
 
         if ($errorcount > 0 and $sentcount === 0) {
             // All messages errored. So fail.
-            throw new \moodle_exception('Error sending posts.');
+            throw new \powereduc_exception('Error sending posts.');
         } else if ($errorcount > 0) {
             // Requeue failed messages as a new task.
             $task = new send_user_notifications();
@@ -365,7 +365,7 @@ class send_user_notifications extends \core\task\adhoc_task {
                 'message' => $post->message,
             ]);
 
-        $contexturl = new \moodle_url('/mod/forum/discuss.php', ['d' => $discussion->id], "p{$post->id}");
+        $contexturl = new \powereduc_url('/mod/forum/discuss.php', ['d' => $discussion->id], "p{$post->id}");
         $eventdata->contexturl = $contexturl->out();
         $eventdata->contexturlname = $discussion->name;
         // User image.
@@ -448,11 +448,11 @@ class send_user_notifications extends \core\task\adhoc_task {
      */
     protected function get_message_headers($course, $forum, $discussion, $post, $a, $message) {
         $cleanforumname = str_replace('"', "'", strip_tags(format_string($forum->name)));
-        $viewurl = new \moodle_url('/mod/forum/view.php', ['f' => $forum->id]);
+        $viewurl = new \powereduc_url('/mod/forum/view.php', ['f' => $forum->id]);
 
         $headers = [
             // Headers to make emails easier to track.
-            'List-Id: "' . $cleanforumname . '" ' . generate_email_messageid('moodleforum' . $forum->id),
+            'List-Id: "' . $cleanforumname . '" ' . generate_email_messageid('powereducforum' . $forum->id),
             'List-Help: ' . $viewurl->out(),
             'Message-ID: ' . forum_get_email_message_id($post->id, $this->recipient->id),
             'X-Course-Id: ' . $course->id,
@@ -547,7 +547,7 @@ class send_user_notifications extends \core\task\adhoc_task {
      */
     protected function can_view_fullnames($course, $forum, $discussion, $post, $cm, $context) {
         if (!isset($this->viewfullnames[$forum->id])) {
-            $this->viewfullnames[$forum->id] = has_capability('moodle/site:viewfullnames', $context, $this->recipient->id);
+            $this->viewfullnames[$forum->id] = has_capability('powereduc/site:viewfullnames', $context, $this->recipient->id);
         }
 
         return $this->viewfullnames[$forum->id];

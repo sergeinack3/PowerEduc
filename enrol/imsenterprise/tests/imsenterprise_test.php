@@ -19,7 +19,7 @@ namespace enrol_imsenterprise;
 use enrol_imsenterprise_plugin;
 use enrol_imsenterprise\task\cron_task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/enrol/imsenterprise/locallib.php');

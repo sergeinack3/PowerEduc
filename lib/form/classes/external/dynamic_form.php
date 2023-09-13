@@ -21,7 +21,7 @@ use external_api;
 use external_function_parameters;
 use external_value;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/externallib.php');
 

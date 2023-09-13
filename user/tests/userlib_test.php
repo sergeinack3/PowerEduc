@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_user;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/user/lib.php');
@@ -26,7 +26,7 @@ require_once($CFG->dirroot.'/user/lib.php');
  *
  * @package    core_user
  * @category   test
- * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>
+ * @copyright  2013 Rajesh Taneja <rajesh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class userlib_test extends \advanced_testcase {
@@ -261,7 +261,7 @@ class userlib_test extends \advanced_testcase {
 
         $user = array(
             'username' => 'usernametest1',
-            'password' => 'Moodle2012!',
+            'password' => 'PowerEduc2012!',
             'idnumber' => 'idnumbertest1',
             'firstname' => 'First Name User Test 1',
             'lastname' => 'Last Name User Test 1',
@@ -383,7 +383,7 @@ class userlib_test extends \advanced_testcase {
             'username' => $username,
         ];
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage($expectmessage);
 
         user_create_user($user);
@@ -708,8 +708,8 @@ class userlib_test extends \advanced_testcase {
         $this->assertFalse(user_can_view_profile($user1, $course2));
         $this->assertFalse(user_can_view_profile($user1, $course1));
 
-        // Remove capability moodle/user:viewdetails in course 2.
-        assign_capability('moodle/user:viewdetails', CAP_PROHIBIT, $studentrole->id, $coursecontext);
+        // Remove capability powereduc/user:viewdetails in course 2.
+        assign_capability('powereduc/user:viewdetails', CAP_PROHIBIT, $studentrole->id, $coursecontext);
         // Set current user to user 1.
         $this->setUser($user1);
         // User 1 can see User 1's profile.
@@ -755,10 +755,10 @@ class userlib_test extends \advanced_testcase {
         // Test the user:viewalldetails cap check using the course creator role which, by default, can't see student profiles.
         $this->setUser($user7);
         $this->assertFalse(user_can_view_profile($user4));
-        assign_capability('moodle/user:viewalldetails', CAP_ALLOW, $coursecreatorrole->id, \context_system::instance()->id, true);
+        assign_capability('powereduc/user:viewalldetails', CAP_ALLOW, $coursecreatorrole->id, \context_system::instance()->id, true);
         reload_all_capabilities();
         $this->assertTrue(user_can_view_profile($user4));
-        unassign_capability('moodle/user:viewalldetails', $coursecreatorrole->id, $coursecontext->id);
+        unassign_capability('powereduc/user:viewalldetails', $coursecreatorrole->id, $coursecontext->id);
         reload_all_capabilities();
 
         $CFG->coursecontact = null;
@@ -777,7 +777,7 @@ class userlib_test extends \advanced_testcase {
 
         // Even with cap, still guests should not be allowed in.
         $guestrole = $DB->get_records_menu('role', array('shortname' => 'guest'), 'id', 'archetype, id');
-        assign_capability('moodle/user:viewdetails', CAP_ALLOW, $guestrole['guest'], \context_system::instance()->id, true);
+        assign_capability('powereduc/user:viewdetails', CAP_ALLOW, $guestrole['guest'], \context_system::instance()->id, true);
         reload_all_capabilities();
         foreach ($users as $user) {
             $this->assertFalse(user_can_view_profile($user));
@@ -812,19 +812,19 @@ class userlib_test extends \advanced_testcase {
 
         // Make sure viewalldetails and viewdetails are overridden to 'prevent' (i.e. can be overridden at a lower context).
         $systemcontext = \context_system::instance();
-        assign_capability('moodle/user:viewdetails', CAP_PREVENT, $managerrole->id, $systemcontext, true);
-        assign_capability('moodle/user:viewalldetails', CAP_PREVENT, $managerrole->id, $systemcontext, true);
+        assign_capability('powereduc/user:viewdetails', CAP_PREVENT, $managerrole->id, $systemcontext, true);
+        assign_capability('powereduc/user:viewalldetails', CAP_PREVENT, $managerrole->id, $systemcontext, true);
 
         // And override these to 'Allow' in a specific course.
         $course4context = \context_course::instance($course4->id);
-        assign_capability('moodle/user:viewalldetails', CAP_ALLOW, $managerrole->id, $course4context, true);
-        assign_capability('moodle/user:viewdetails', CAP_ALLOW, $managerrole->id, $course4context, true);
+        assign_capability('powereduc/user:viewalldetails', CAP_ALLOW, $managerrole->id, $course4context, true);
+        assign_capability('powereduc/user:viewdetails', CAP_ALLOW, $managerrole->id, $course4context, true);
 
         // The manager now shouldn't have viewdetails in the system or user context.
         $this->setUser($user9);
         $user1context = \context_user::instance($user1->id);
-        $this->assertFalse(has_capability('moodle/user:viewdetails', $systemcontext));
-        $this->assertFalse(has_capability('moodle/user:viewdetails', $user1context));
+        $this->assertFalse(has_capability('powereduc/user:viewdetails', $systemcontext));
+        $this->assertFalse(has_capability('powereduc/user:viewdetails', $user1context));
 
         // Confirm that user_can_view_profile() returns true for $user1 when called without $course param. It should find $course1.
         $this->assertTrue(user_can_view_profile($user1));
@@ -877,7 +877,7 @@ class userlib_test extends \advanced_testcase {
         $this->assertEquals($studentfullname, $result['fullname']);
 
         // Get exception for invalid required fields.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = user_get_user_details($student, $course1, array('wrongrequiredfield'));
     }
 

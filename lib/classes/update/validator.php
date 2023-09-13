@@ -33,7 +33,7 @@ use core_plugin_manager;
 use help_icon;
 use coding_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 if (!defined('T_ML_COMMENT')) {
     define('T_ML_COMMENT', T_COMMENT);

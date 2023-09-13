@@ -27,7 +27,7 @@ namespace core_h5p;
 
 use core_h5p\local\library\autoloader;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
 * Generator testcase for the core_grading generator.

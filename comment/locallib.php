@@ -22,7 +22,7 @@
  * @copyright 2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * comment_manager is helper class to manage moodle comments in admin page (Reports->Comments)
@@ -74,7 +74,7 @@ class comment_manager {
             // Set calculated fields
             $item->fullname = fullname($item);
             $item->time = userdate($item->timecreated);
-            $item->content = format_text($item->content, FORMAT_MOODLE, $formatoptions);
+            $item->content = format_text($item->content, FORMAT_POWEREDUC, $formatoptions);
             // Unset fields not related to the comment
             foreach (\core_user\fields::get_name_fields() as $namefield) {
                 unset($item->$namefield);

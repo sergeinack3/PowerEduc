@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qtype_ddwtos;
 
@@ -20,7 +20,7 @@ use question_display_options;
 use question_hint_with_parts;
 use question_state;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
@@ -361,9 +361,9 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         $dd = \test_question_maker::make_question('ddwtos');
         $dd->hints = array(
             new question_hint_with_parts(1, 'This is the first hint.',
-                    FORMAT_MOODLE, true, true),
+                    FORMAT_POWEREDUC, true, true),
             new question_hint_with_parts(2, 'This is the second hint.',
-                    FORMAT_MOODLE, true, true),
+                    FORMAT_POWEREDUC, true, true),
         );
         $dd->shufflechoices = false;
         $this->start_attempt_at_question($dd, 'interactive', 9);
@@ -517,9 +517,9 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         $dd = \test_question_maker::make_question('ddwtos');
         $dd->hints = array(
             new question_hint_with_parts(23, 'This is the first hint.',
-                    FORMAT_MOODLE, false, false),
+                    FORMAT_POWEREDUC, false, false),
             new question_hint_with_parts(24, 'This is the second hint.',
-                    FORMAT_MOODLE, true, true),
+                    FORMAT_POWEREDUC, true, true),
         );
         $dd->shufflechoices = false;
         $this->start_attempt_at_question($dd, 'interactive', 3);
@@ -573,9 +573,9 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         $dd = \test_question_maker::make_question('ddwtos');
         $dd->hints = array(
             new question_hint_with_parts(23, 'This is the first hint.',
-                    FORMAT_MOODLE, false, false),
+                    FORMAT_POWEREDUC, false, false),
             new question_hint_with_parts(24, 'This is the second hint.',
-                    FORMAT_MOODLE, true, true),
+                    FORMAT_POWEREDUC, true, true),
         );
         $dd->shufflechoices = false;
         $this->start_attempt_at_question($dd, 'interactive', 3);
@@ -628,8 +628,8 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         // Create a drag-and-drop question.
         $dd = \test_question_maker::make_question('ddwtos');
         $dd->hints = array(
-            new question_hint_with_parts(23, 'This is the first hint.', FORMAT_MOODLE, false, true),
-            new question_hint_with_parts(24, 'This is the second hint.', FORMAT_MOODLE, true, true),
+            new question_hint_with_parts(23, 'This is the first hint.', FORMAT_POWEREDUC, false, true),
+            new question_hint_with_parts(24, 'This is the second hint.', FORMAT_POWEREDUC, true, true),
         );
         $dd->shufflechoices = false;
         $this->start_attempt_at_question($dd, 'interactive', 3);

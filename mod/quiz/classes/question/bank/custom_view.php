@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines the custom question bank view used on the Edit quiz page.
  *
  * @package   mod_quiz
  * @category  question
- * @copyright 1999 onwards Martin Dougiamas and others {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas and others {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -51,7 +51,7 @@ class custom_view extends \core_question\local\bank\view {
     /**
      * Constructor.
      * @param \core_question\local\bank\question_edit_contexts $contexts
-     * @param \moodle_url $pageurl
+     * @param \powereduc_url $pageurl
      * @param \stdClass $course course settings
      * @param \stdClass $cm activity settings.
      * @param \stdClass $quiz quiz settings.
@@ -72,7 +72,7 @@ class custom_view extends \core_question\local\bank\view {
             'preview_action_column'
         ];
 
-        if (question_get_display_preference('qbshowtext', 0, PARAM_BOOL, new \moodle_url(''))) {
+        if (question_get_display_preference('qbshowtext', 0, PARAM_BOOL, new \powereduc_url(''))) {
             $corequestionbankcolumns[] = 'question_text_row';
         }
 
@@ -155,7 +155,7 @@ class custom_view extends \core_question\local\bank\view {
      * Question preview url.
      *
      * @param \stdClass $question
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function preview_question_url($question) {
         return quiz_question_preview_url($this->quiz, $question);
@@ -165,13 +165,13 @@ class custom_view extends \core_question\local\bank\view {
      * URL of add to quiz.
      *
      * @param $questionid
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function add_to_quiz_url($questionid) {
         $params = $this->baseurl->params();
         $params['addquestion'] = $questionid;
         $params['sesskey'] = sesskey();
-        return new \moodle_url('/mod/quiz/edit.php', $params);
+        return new \powereduc_url('/mod/quiz/edit.php', $params);
     }
 
     /**
@@ -196,7 +196,7 @@ class custom_view extends \core_question\local\bank\view {
         $cmoptions = new \stdClass();
         $cmoptions->hasattempts = !empty($this->quizhasattempts);
 
-        $canuseall = has_capability('moodle/question:useall', $catcontext);
+        $canuseall = has_capability('powereduc/question:useall', $catcontext);
 
         echo \html_writer::start_tag('div', ['class' => 'pt-2']);
         if ($canuseall) {

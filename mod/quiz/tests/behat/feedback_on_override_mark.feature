@@ -2,7 +2,7 @@
 Feature: Teachers see correct answers when overriding marks
   As a teacher
   In order to correct errors
-  I must be able to override the grades that Moodle gives.
+  I must be able to override the grades that PowerEduc gives.
 
   Background:
     Given the following "users" exist:

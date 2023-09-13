@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Public Profile -- a user's public profile page
@@ -94,7 +94,7 @@ if (!user_can_view_profile($user, null, $context)) {
 
 // Get the profile page.  Should always return something unless the database is broken.
 if (!$currentpage = my_get_page($userid, MY_PAGE_PUBLIC)) {
-    throw new \moodle_exception('mymoodlesetup');
+    throw new \powereduc_exception('mypowereducsetup');
 }
 
 $PAGE->set_context($context);
@@ -105,12 +105,12 @@ $PAGE->set_pagetype('user-profile');
 // Set up block editing capabilities.
 if (isguestuser()) {     // Guests can never edit their profile.
     $USER->editing = $edit = 0;  // Just in case.
-    $PAGE->set_blocks_editing_capability('moodle/my:configsyspages');  // unlikely :).
+    $PAGE->set_blocks_editing_capability('powereduc/my:configsyspages');  // unlikely :).
 } else {
     if ($currentuser) {
-        $PAGE->set_blocks_editing_capability('moodle/user:manageownblocks');
+        $PAGE->set_blocks_editing_capability('powereduc/user:manageownblocks');
     } else {
-        $PAGE->set_blocks_editing_capability('moodle/user:manageblocks');
+        $PAGE->set_blocks_editing_capability('powereduc/user:manageblocks');
     }
 }
 
@@ -140,9 +140,9 @@ if ($PAGE->user_allowed_editing()) {
     if ($reset !== null) {
         if (!is_null($userid)) {
             if (!$currentpage = my_reset_page($userid, MY_PAGE_PUBLIC, 'user-profile')) {
-                throw new \moodle_exception('reseterror', 'my');
+                throw new \powereduc_exception('reseterror', 'my');
             }
-            redirect(new moodle_url('/user/profile.php', array('id' => $userid)));
+            redirect(new powereduc_url('/user/profile.php', array('id' => $userid)));
         }
     } else if ($edit !== null) {             // Editing state was specified.
         $USER->editing = $edit;       // Change editing state.
@@ -157,7 +157,7 @@ if ($PAGE->user_allowed_editing()) {
             // For the page to display properly with the user context header the page blocks need to
             // be copied over to the user context.
             if (!$currentpage = my_copy_page($userid, MY_PAGE_PUBLIC, 'user-profile')) {
-                throw new \moodle_exception('mymoodlesetup');
+                throw new \powereduc_exception('mypowereducsetup');
             }
             $PAGE->set_context($usercontext);
             $PAGE->set_subpage($currentpage->id);
@@ -171,21 +171,21 @@ if ($PAGE->user_allowed_editing()) {
 
     $resetbutton = '';
     $resetstring = get_string('resetpage', 'my');
-    $reseturl = new moodle_url("$CFG->wwwroot/user/profile.php", array('edit' => 1, 'reset' => 1, 'id' => $userid));
+    $reseturl = new powereduc_url("$CFG->wwwroot/user/profile.php", array('edit' => 1, 'reset' => 1, 'id' => $userid));
 
     if (!$currentpage->userid) {
         // Viewing a system page -- let the user customise it.
-        $editstring = get_string('updatemymoodleon');
+        $editstring = get_string('updatemypowereducon');
         $params['edit'] = 1;
     } else if (empty($edit)) {
-        $editstring = get_string('updatemymoodleon');
+        $editstring = get_string('updatemypowereducon');
         $resetbutton = $OUTPUT->single_button($reseturl, $resetstring);
     } else {
-        $editstring = get_string('updatemymoodleoff');
+        $editstring = get_string('updatemypowereducoff');
         $resetbutton = $OUTPUT->single_button($reseturl, $resetstring);
     }
 
-    $url = new moodle_url("$CFG->wwwroot/user/profile.php", $params);
+    $url = new powereduc_url("$CFG->wwwroot/user/profile.php", $params);
     $button = '';
     if (!$PAGE->theme->haseditswitch) {
         $button = $OUTPUT->single_button($url, $editstring);
@@ -204,14 +204,14 @@ echo $OUTPUT->header();
 echo '<div class="userprofile">';
 
 $hiddenfields = [];
-if (!has_capability('moodle/user:viewhiddendetails', $usercontext)) {
+if (!has_capability('powereduc/user:viewhiddendetails', $usercontext)) {
     $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
 }
 if ($user->description && !isset($hiddenfields['description'])) {
     echo '<div class="description">';
     if (!empty($CFG->profilesforenrolledusersonly) && !$currentuser &&
         !$DB->record_exists('role_assignments', array('userid' => $user->id))) {
-        echo get_string('profilenotshown', 'moodle');
+        echo get_string('profilenotshown', 'powereduc');
     } else {
         $user->description = file_rewrite_pluginfile_urls($user->description, 'pluginfile.php', $usercontext->id, 'user',
                                                           'profile', null);

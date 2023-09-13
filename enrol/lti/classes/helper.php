@@ -24,7 +24,7 @@
 
 namespace enrol_lti;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * LTI enrolment plugin helper class.

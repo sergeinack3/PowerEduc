@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file is responsible for serving of yui Javascript and CSS
@@ -23,7 +23,7 @@
  */
 
 
-// disable moodle specific debug messages and any errors in output,
+// disable powereduc specific debug messages and any errors in output,
 // comment out when debugging or better look into error log!
 define('NO_DEBUG_DISPLAY', true);
 
@@ -101,7 +101,7 @@ while (count($parts)) {
         $revision = $yuipatchedversion[0];
         $rollupname = array_shift($bits);
 
-        if (strpos($rollupname, 'yui-moodlesimple') !== false) {
+        if (strpos($rollupname, 'yui-powereducsimple') !== false) {
             if (substr($rollupname, -3) === '.js') {
                 // Determine which version of this rollup should be used.
                 $filesuffix = '.js';
@@ -195,7 +195,7 @@ while (count($parts)) {
                 'dd-drag',
                 'dd-plugin',
 
-                // Cache is used by moodle-core-tooltip which we include everywhere.
+                // Cache is used by powereduc-core-tooltip which we include everywhere.
                 'cache-base',
             );
 
@@ -225,12 +225,12 @@ while (count($parts)) {
         continue;
     }
     if ($version === 'm') {
-        $version = 'moodle';
+        $version = 'powereduc';
     }
-    if ($version === 'moodle') {
+    if ($version === 'powereduc') {
         if (count($bits) <= 3) {
             // This is an invalid module load attempt.
-            $content .= "\n// Incorrect moodle module inclusion. Not enough component information in {$part}.\n";
+            $content .= "\n// Incorrect powereduc module inclusion. Not enough component information in {$part}.\n";
             continue;
         }
         $revision = (int)array_shift($bits);
@@ -277,7 +277,7 @@ while (count($parts)) {
     } else if ($version == 'gallery') {
         if (count($bits) <= 2) {
             // This is an invalid module load attempt.
-            $content .= "\n// Incorrect moodle module inclusion. Not enough component information in {$part}.\n";
+            $content .= "\n// Incorrect powereduc module inclusion. Not enough component information in {$part}.\n";
             continue;
         }
         $revision = (int)array_shift($bits);
@@ -324,7 +324,7 @@ while (count($parts)) {
     $sep = ($slasharguments ? '/' : '?file=');
 
     if ($mimetype === 'text/css') {
-        if ($version == 'moodle') {
+        if ($version == 'powereduc') {
             // Search for all images in the file and replace with an appropriate link to the yui_image.php script
             $imagebits = array(
                 $sep . $version,

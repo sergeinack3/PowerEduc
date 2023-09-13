@@ -15,7 +15,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // rootDSE is defined as the root of the directory data tree on a directory server.
 if (!defined('ROOTDSE')) {
@@ -153,7 +153,7 @@ function ldap_isgroupmember($ldapconnection, $userid, $group_dns, $member_attrib
                             array($member_attrib));
 
         if (!empty($search) && ldap_count_entries($ldapconnection, $search)) {
-            $info = ldap_get_entries_moodle($ldapconnection, $search);
+            $info = ldap_get_entries_powereduc($ldapconnection, $search);
             if (count($info) > 0 ) {
                 // User is member of group
                 $result = true;
@@ -179,7 +179,7 @@ function ldap_isgroupmember($ldapconnection, $userid, $group_dns, $member_attrib
  * @param boolean $start_tls whether to use LDAP with TLS (not to be confused with LDAP+SSL)
  * @return mixed connection result or false.
  */
-function ldap_connect_moodle($host_url, $ldap_version, $user_type, $bind_dn, $bind_pw, $opt_deref, &$debuginfo, $start_tls=false) {
+function ldap_connect_powereduc($host_url, $ldap_version, $user_type, $bind_dn, $bind_pw, $opt_deref, &$debuginfo, $start_tls=false) {
     if (empty($host_url) || empty($ldap_version) || empty($user_type)) {
         $debuginfo = 'No LDAP Host URL, Version or User Type specified in your LDAP settings';
         return false;
@@ -327,7 +327,7 @@ function ldap_normalise_objectclass($objectclass, $default = '*') {
  * @param mixed $searchresult A search result from ldap_search, ldap_list, etc.
  * @return array ldap-entries with lower-cased attributes as indexes
  */
-function ldap_get_entries_moodle($ldapconnection, $searchresult) {
+function ldap_get_entries_powereduc($ldapconnection, $searchresult) {
     if (empty($ldapconnection) || empty($searchresult)) {
         return array();
     }
@@ -489,7 +489,7 @@ function ldap_paged_results_supported($ldapversion, $ldapconnection = null) {
         return false;
     }
 
-    $entries = ldap_get_entries_moodle($ldapconnection, $sr);
+    $entries = ldap_get_entries_powereduc($ldapconnection, $sr);
     if (empty($entries)) {
         return false;
     }

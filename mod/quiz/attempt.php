@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This script displays a particular page of a quiz attempt that is in progress.
  *
  * @package   mod_quiz
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,9 +30,9 @@ if ($id = optional_param('id', 0, PARAM_INT)) {
     redirect($CFG->wwwroot . '/mod/quiz/startattempt.php?cmid=' . $id . '&sesskey=' . sesskey());
 } else if ($qid = optional_param('q', 0, PARAM_INT)) {
     if (!$cm = get_coursemodule_from_instance('quiz', $qid)) {
-        throw new \moodle_exception('invalidquizid', 'quiz');
+        throw new \powereduc_exception('invalidquizid', 'quiz');
     }
-    redirect(new moodle_url('/mod/quiz/startattempt.php',
+    redirect(new powereduc_url('/mod/quiz/startattempt.php',
             array('cmid' => $cm->id, 'sesskey' => sesskey())));
 }
 
@@ -57,7 +57,7 @@ if ($attemptobj->get_userid() != $USER->id) {
     if ($attemptobj->has_capability('mod/quiz:viewreports')) {
         redirect($attemptobj->review_url(null, $page));
     } else {
-        throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'notyourattempt');
+        throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'notyourattempt');
     }
 }
 
@@ -85,7 +85,7 @@ $accessmanager->setup_attempt_page($PAGE);
 $output = $PAGE->get_renderer('mod_quiz');
 $messages = $accessmanager->prevent_access();
 if (!$attemptobj->is_preview_user() && $messages) {
-    throw new \moodle_exception('attempterror', 'quiz', $attemptobj->view_url(),
+    throw new \powereduc_exception('attempterror', 'quiz', $attemptobj->view_url(),
             $output->access_messages($messages));
 }
 if ($accessmanager->is_preflight_check_required($attemptobj->get_attemptid())) {
@@ -95,7 +95,7 @@ if ($accessmanager->is_preflight_check_required($attemptobj->get_attemptid())) {
 // Set up auto-save if required.
 $autosaveperiod = get_config('quiz', 'autosaveperiod');
 if ($autosaveperiod) {
-    $PAGE->requires->yui_module('moodle-mod_quiz-autosave',
+    $PAGE->requires->yui_module('powereduc-mod_quiz-autosave',
             'M.mod_quiz.autosave.init', array($autosaveperiod));
 }
 
@@ -107,7 +107,7 @@ $slots = $attemptobj->get_slots($page);
 
 // Check.
 if (empty($slots)) {
-    throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noquestionsfound');
+    throw new powereduc_quiz_exception($attemptobj->get_quizobj(), 'noquestionsfound');
 }
 
 // Update attempt page, redirecting the user if $page is not valid.

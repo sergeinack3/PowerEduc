@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 if ($hassiteconfig) {
     $testurl = new moodle_url('/admin/tool/log/store/database/test_settings.php', array('sesskey' => sesskey()));

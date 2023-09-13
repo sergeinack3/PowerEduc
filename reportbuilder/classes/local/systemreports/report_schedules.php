@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -20,7 +20,7 @@ namespace core_reportbuilder\local\systemreports;
 
 use context;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use stdClass;
 use core_reportbuilder\permission;
@@ -40,7 +40,7 @@ use core_reportbuilder\output\schedule_name_editable;
  * Report schedules list
  *
  * @package     core_reportbuilder
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class report_schedules extends system_report {
@@ -278,7 +278,7 @@ class report_schedules extends system_report {
     protected function add_actions(): void {
         // Edit action.
         $this->add_action(new action(
-            new moodle_url('#'),
+            new powereduc_url('#'),
             new pix_icon('t/edit', ''),
             ['data-action' => 'schedule-edit', 'data-schedule-id' => ':id'],
             false,
@@ -287,7 +287,7 @@ class report_schedules extends system_report {
 
         // Send now action.
         $this->add_action((new action(
-            new moodle_url('#'),
+            new powereduc_url('#'),
             new pix_icon('t/email', ''),
             ['data-action' => 'schedule-send', 'data-schedule-id' => ':id', 'data-schedule-name' => ':name'],
             false,
@@ -305,7 +305,7 @@ class report_schedules extends system_report {
 
         // Delete action.
         $this->add_action((new action(
-            new moodle_url('#'),
+            new powereduc_url('#'),
             new pix_icon('t/delete', ''),
             ['data-action' => 'schedule-delete', 'data-schedule-id' => ':id', 'data-schedule-name' => ':name'],
             false,

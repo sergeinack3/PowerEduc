@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -21,13 +21,13 @@ namespace core_reportbuilder\event;
 use coding_exception;
 use core\event\base;
 use core_reportbuilder\local\models\report;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Report builder custom report viewed event class.
  *
  * @package     core_reportbuilder
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  * @property-read array $other {
@@ -101,9 +101,9 @@ class report_viewed extends base {
     /**
      * Returns relevant URL.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_url(): moodle_url {
-        return new moodle_url('/reportbuilder/view.php', ['id' => $this->objectid]);
+    public function get_url(): powereduc_url {
+        return new powereduc_url('/reportbuilder/view.php', ['id' => $this->objectid]);
     }
 }

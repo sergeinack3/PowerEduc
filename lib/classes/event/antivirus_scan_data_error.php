@@ -16,7 +16,7 @@
 
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 /**
  * Antivirus scan data error event
  *
@@ -42,7 +42,7 @@ class antivirus_scan_data_error extends \core\event\base {
      */
     public function get_description() {
         if (isset($this->other['incidentdetails'])) {
-            return format_text($this->other['incidentdetails'], FORMAT_MOODLE);
+            return format_text($this->other['incidentdetails'], FORMAT_POWEREDUC);
         } else {
             return get_string('dataerrordesc', 'antivirus');
         }

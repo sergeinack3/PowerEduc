@@ -1,6 +1,6 @@
 @core @javascript
 Feature: Override permissions on a context
-  In order to extend and restrict moodle features
+  In order to extend and restrict powereduc features
   As an admin or a teacher
   I need to allow/deny the existing capabilities at different levels
 

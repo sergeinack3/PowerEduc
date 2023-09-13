@@ -27,7 +27,7 @@ namespace tool_policy\form;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/lib/formslib.php');
 

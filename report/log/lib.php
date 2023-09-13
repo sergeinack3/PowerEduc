@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Public API of the log report.
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * This function extends the navigation with the report items
@@ -35,7 +35,7 @@ defined('MOODLE_INTERNAL') || die;
  */
 function report_log_extend_navigation_course($navigation, $course, $context) {
     if (has_capability('report/log:view', $context)) {
-        $url = new moodle_url('/report/log/index.php', array('id'=>$course->id));
+        $url = new powereduc_url('/report/log/index.php', array('id'=>$course->id));
         $navigation->add(get_string('pluginname', 'report_log'), $url, navigation_node::TYPE_SETTING, null, null, new pix_icon('i/report', ''));
     }
 }
@@ -65,11 +65,11 @@ function report_log_extend_navigation_user($navigation, $user, $course) {
     list($all, $today) = report_log_can_access_user_report($user, $course);
 
     if ($today) {
-        $url = new moodle_url('/report/log/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>'today'));
+        $url = new powereduc_url('/report/log/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>'today'));
         $navigation->add(get_string('todaylogs'), $url);
     }
     if ($all) {
-        $url = new moodle_url('/report/log/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>'all'));
+        $url = new powereduc_url('/report/log/user.php', array('id'=>$user->id, 'course'=>$course->id, 'mode'=>'all'));
         $navigation->add(get_string('alllogs'), $url);
     }
 }
@@ -93,13 +93,13 @@ function report_log_can_access_user_report($user, $course) {
         if ($course->showreports and (is_viewing($coursecontext, $USER) or is_enrolled($coursecontext, $USER))) {
             return array(true, true);
         }
-    } else if (has_capability('moodle/user:viewuseractivitiesreport', $personalcontext)) {
+    } else if (has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext)) {
         if ($course->showreports and (is_viewing($coursecontext, $user) or is_enrolled($coursecontext, $user))) {
             return array(true, true);
         }
     }
 
-    // Check if $USER shares group with $user (in case separated groups are enabled and 'moodle/site:accessallgroups' is disabled).
+    // Check if $USER shares group with $user (in case separated groups are enabled and 'powereduc/site:accessallgroups' is disabled).
     if (!groups_user_groups_visible($course, $user->id)) {
         return array(false, false);
     }
@@ -125,7 +125,7 @@ function report_log_can_access_user_report($user, $course) {
  */
 function report_log_extend_navigation_module($navigation, $cm) {
     if (has_capability('report/log:view', context_course::instance($cm->course))) {
-        $url = new moodle_url('/report/log/index.php', array('chooselog'=>'1','id'=>$cm->course,'modid'=>$cm->id));
+        $url = new powereduc_url('/report/log/index.php', array('chooselog'=>'1','id'=>$cm->course,'modid'=>$cm->id));
         $navigation->add(get_string('logs'), $url, navigation_node::TYPE_SETTING, null, 'logreport', new pix_icon('i/report', ''))
             ->set_show_in_secondary_navigation(false);
     }
@@ -168,7 +168,7 @@ function report_log_myprofile_navigation(core_user\output\myprofile\tree $tree, 
     list($all, $today) = report_log_can_access_user_report($user, $course);
     if ($today) {
         // Today's log.
-        $url = new moodle_url('/report/log/user.php',
+        $url = new powereduc_url('/report/log/user.php',
             array('id' => $user->id, 'course' => $course->id, 'mode' => 'today'));
         $node = new core_user\output\myprofile\node('reports', 'todayslogs', get_string('todaylogs'), null, $url);
         $tree->add_node($node);
@@ -176,7 +176,7 @@ function report_log_myprofile_navigation(core_user\output\myprofile\tree $tree, 
 
     if ($all) {
         // All logs.
-        $url = new moodle_url('/report/log/user.php',
+        $url = new powereduc_url('/report/log/user.php',
             array('id' => $user->id, 'course' => $course->id, 'mode' => 'all'));
         $node = new core_user\output\myprofile\node('reports', 'alllogs', get_string('alllogs'), null, $url);
         $tree->add_node($node);

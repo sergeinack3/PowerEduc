@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Podatkovne zbirke ni bilo mogoče ustvariti.</p>
 <p>Navedena podatkovna zbirka ne obstaja in navedeni uporabnik nima dovoljenja, da ustvari podatkovno zbirko.</p>

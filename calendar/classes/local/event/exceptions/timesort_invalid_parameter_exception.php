@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\exceptions;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Invalid timesort parameter exception.

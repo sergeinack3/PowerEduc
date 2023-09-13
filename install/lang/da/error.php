@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Kan ikke oprette databasen.</p> <p>Den specificerede database eksisterer ikke og brugeren har ikke tilladelse til at oprette den.</p> <p>Administrator bør verificere databasekonfigurationen.</p>';
 $string['cannotcreatelangdir'] = 'Kan ikke oprette sprogmappe';

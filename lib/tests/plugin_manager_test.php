@@ -20,7 +20,7 @@ use core_plugin_manager;
 use testable_core_plugin_manager;
 use testable_plugininfo_base;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/lib/tests/fixtures/testable_plugin_manager.php');

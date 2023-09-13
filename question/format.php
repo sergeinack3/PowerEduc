@@ -1,36 +1,36 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines the base class for question import and export formats.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionbank
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
  * Base class for question import and export formats.
  *
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qformat_default {
@@ -158,7 +158,7 @@ class qformat_default {
 
     /**
      * set the course class variable
-     * @param course object Moodle course variable
+     * @param course object PowerEduc course variable
      */
     public function setCourse($course) {
         $this->course = $course;
@@ -166,7 +166,7 @@ class qformat_default {
 
     /**
      * set an array of contexts.
-     * @param array $contexts Moodle course variable
+     * @param array $contexts PowerEduc course variable
      */
     public function setContexts($contexts) {
         $this->contexts = $contexts;
@@ -607,7 +607,7 @@ class qformat_default {
 
         if ($this->contextfromfile && $contextid !== false) {
             $context = context::instance_by_id($contextid);
-            require_capability('moodle/question:add', $context);
+            require_capability('powereduc/question:add', $context);
         } else {
             $context = context::instance_by_id($this->category->contextid);
         }
@@ -648,7 +648,7 @@ class qformat_default {
                     // This basically silently cleans up old errors. Not throwing an exception here.
                     continue;
                 }
-                require_capability('moodle/question:managecategory', $context);
+                require_capability('powereduc/question:managecategory', $context);
                 // Create the new category. This will create all the categories in the catpath,
                 // though only the final category will have any info added if available.
                 $category = new stdClass();
@@ -768,9 +768,9 @@ class qformat_default {
         $question->image = '';
         $question->usecase = 0;
         $question->multiplier = array();
-        $question->questiontextformat = FORMAT_MOODLE;
+        $question->questiontextformat = FORMAT_POWEREDUC;
         $question->generalfeedback = '';
-        $question->generalfeedbackformat = FORMAT_MOODLE;
+        $question->generalfeedbackformat = FORMAT_POWEREDUC;
         $question->answernumbering = 'abc';
         $question->penalty = 0.3333333;
         $question->length = 1;
@@ -843,7 +843,7 @@ class qformat_default {
     /**
      * Given the data known to define a question in
      * this format, this function converts it into a question
-     * object suitable for processing and insertion into Moodle.
+     * object suitable for processing and insertion into PowerEduc.
      *
      * If your format does not use blank lines to delimit questions
      * (e.g. an XML format) you must override 'readquestions' too
@@ -1029,7 +1029,7 @@ class qformat_default {
 
         // did we actually process anything
         if ($count==0) {
-            throw new \moodle_exception('noquestions', 'question', $continuepath);
+            throw new \powereduc_exception('noquestions', 'question', $continuepath);
         }
 
         // final pre-process on exported data
@@ -1066,7 +1066,7 @@ class qformat_default {
         global $DB;
 
         if (!$category = $DB->get_record('question_categories', array('id' => $id))) {
-            throw new \moodle_exception('cannotfindcategory', 'error', '', $id);
+            throw new \powereduc_exception('cannotfindcategory', 'error', '', $id);
         }
         $contextstring = $this->translator->context_to_string($category->contextid);
 
@@ -1188,7 +1188,7 @@ class qformat_based_on_xml extends qformat_default {
     }
 
     /**
-     * Return the array moodle is expecting
+     * Return the array powereduc is expecting
      * for an HTML text. No processing is done on $text.
      * qformat classes that want to process $text
      * for instance to import external images files

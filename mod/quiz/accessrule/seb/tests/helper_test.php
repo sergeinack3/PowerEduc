@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quizaccess_seb;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/test_helper_trait.php');
 
@@ -109,7 +109,7 @@ class helper_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user); // Log user in.
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage('Unsupported redirect detected, script execution terminated');
         \quizaccess_seb\helper::get_seb_config_content($quiz->cmid);
     }
@@ -128,7 +128,7 @@ class helper_test extends \advanced_testcase {
         $this->getDataGenerator()->enrol_user($user->id, $course->id);
         $this->setUser($user); // Log user in.
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage("No SEB config could be found for quiz with cmid: $quiz->cmid");
         \quizaccess_seb\helper::get_seb_config_content($quiz->cmid);
     }
@@ -148,7 +148,7 @@ class helper_test extends \advanced_testcase {
         $this->getDataGenerator()->enrol_user($user->id, $course->id);
         $this->setUser($user); // Log user in.
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $this->expectExceptionMessage("No SEB config could be found for quiz with cmid: $quiz->cmid");
         \quizaccess_seb\helper::get_seb_config_content($quiz->cmid);
     }
@@ -170,7 +170,7 @@ class helper_test extends \advanced_testcase {
 
         $config = \quizaccess_seb\helper::get_seb_config_content($quiz->cmid);
 
-        $url = new \moodle_url("/mod/quiz/view.php", ['id' => $quiz->cmid]);
+        $url = new \powereduc_url("/mod/quiz/view.php", ['id' => $quiz->cmid]);
 
         $this->assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             . "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"

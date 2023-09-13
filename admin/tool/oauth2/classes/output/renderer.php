@@ -32,7 +32,7 @@ use core\oauth2\issuer;
 use core\oauth2\api;
 use moodle_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Implements the plugin renderer

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Search area for mod_label activities.
@@ -24,7 +24,7 @@
 
 namespace mod_label\search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Search area for mod_label activities.
@@ -51,7 +51,7 @@ class activity extends \core_search\base_activity {
      * Overwritten as labels are displayed in-course.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         // Get correct URL to section that contains label, from course format.
@@ -68,10 +68,10 @@ class activity extends \core_search\base_activity {
      * Overwritten as labels are displayed in-course. Link to the course.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
-        return new \moodle_url('/course/view.php', array('id' => $doc->get('courseid')));
+        return new \powereduc_url('/course/view.php', array('id' => $doc->get('courseid')));
 
     }
 

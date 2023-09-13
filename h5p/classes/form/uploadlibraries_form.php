@@ -24,7 +24,7 @@
 
 namespace core_h5p\form;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Upload a zip or h5p content to update the content libraries.

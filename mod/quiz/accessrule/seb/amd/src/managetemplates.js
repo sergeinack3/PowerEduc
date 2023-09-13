@@ -28,11 +28,11 @@ define(
                     },
                     {
                         key:        'yes',
-                        component:  'moodle'
+                        component:  'powereduc'
                     },
                     {
                         key:        'no',
-                        component:  'moodle'
+                        component:  'powereduc'
                     }
                 ])
                 .then(function(s) {

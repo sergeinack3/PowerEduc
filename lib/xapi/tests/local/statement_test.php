@@ -39,7 +39,7 @@ use core_xapi\xapi_exception;
 use advanced_testcase;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Contains test cases for testing statement class.

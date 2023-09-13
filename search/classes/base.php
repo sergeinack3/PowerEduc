@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Search base class to be extended by search areas.
@@ -24,7 +24,7 @@
 
 namespace core_search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base search implementation.
@@ -108,7 +108,7 @@ abstract class base {
     }
 
     /**
-     * Returns the moodle component name.
+     * Returns the powereduc component name.
      *
      * It might be the plugin name (whole frankenstyle name) or the core subsystem name.
      *
@@ -149,7 +149,7 @@ abstract class base {
     /**
      * Returns the config var name.
      *
-     * It depends on whether it is a moodle subsystem or a plugin as plugin-related config should remain in their own scope.
+     * It depends on whether it is a powereduc subsystem or a plugin as plugin-related config should remain in their own scope.
      *
      * @access private
      * @return string Config var path including the plugin (or component) and the varname
@@ -255,12 +255,12 @@ abstract class base {
      * - Order the returned data by time modified in ascending order, as \core_search::manager will need to store the modified time
      *   of the last indexed document.
      *
-     * Since Moodle 3.4, subclasses should instead implement get_document_recordset, which has
+     * Since PowerEduc 3.4, subclasses should instead implement get_document_recordset, which has
      * an additional context parameter. This function continues to work for implementations which
      * haven't been updated, or where the context parameter is not required.
      *
      * @param int $modifiedfrom
-     * @return \moodle_recordset
+     * @return \powereduc_recordset
      */
     public function get_recordset_by_timestamp($modifiedfrom = 0) {
         $result = $this->get_document_recordset($modifiedfrom);
@@ -304,8 +304,8 @@ abstract class base {
      *
      * @param int $modifiedfrom Return only records modified after this date
      * @param \context|null $context Context (null means no context restriction)
-     * @return \moodle_recordset|null|false Recordset / null if no results / false if not supported
-     * @since Moodle 3.4
+     * @return \powereduc_recordset|null|false Recordset / null if no results / false if not supported
+     * @since PowerEduc 3.4
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         return false;
@@ -419,7 +419,7 @@ abstract class base {
      * Returns a url to the document, it might match self::get_context_url().
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     abstract public function get_doc_url(\core_search\document $doc);
 
@@ -427,7 +427,7 @@ abstract class base {
      * Returns a url to the document context.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     abstract public function get_context_url(\core_search\document $doc);
 

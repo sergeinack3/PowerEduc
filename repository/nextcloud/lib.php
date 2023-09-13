@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Nextcloud repository plugin library.
@@ -25,7 +25,7 @@
 use repository_nextcloud\issuer_management;
 use repository_nextcloud\ocs_client;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/repository/lib.php');
 require_once($CFG->libdir . '/webdavlib.php');
@@ -161,7 +161,7 @@ class repository_nextcloud extends repository {
         if ($this->systemoauthclient === false) {
             try {
                 $this->systemoauthclient = \core\oauth2\api::get_system_oauth_client($this->issuer);
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 $this->systemoauthclient = false;
             }
         }
@@ -181,7 +181,7 @@ class repository_nextcloud extends repository {
                     return null;
                 }
                 $this->systemocsclient = new ocs_client($systemoauth);
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 $this->systemocsclient = null;
             }
         }
@@ -230,7 +230,7 @@ class repository_nextcloud extends repository {
      *
      * @param string $reference relative path to the file.
      * @param string $title title of the file.
-     * @return array|bool returns either the moodle path to the file or false.
+     * @return array|bool returns either the powereduc path to the file or false.
      */
     public function get_file($reference, $title = '') {
         // Normal file.
@@ -282,7 +282,7 @@ class repository_nextcloud extends repository {
             return $ret;
         }
 
-        // Process WebDAV output and convert it into Moodle format.
+        // Process WebDAV output and convert it into PowerEduc format.
         $ret['list'] = $this->get_listing_convert_response($path, $ls);
         return $ret;
 
@@ -343,7 +343,7 @@ class repository_nextcloud extends repository {
 
     /**
      * Called when a file is selected as a "access control link".
-     * Invoked at MOODLE/repository/repository_ajax.php
+     * Invoked at POWEREDUC/repository/repository_ajax.php
      *
      * This is called at the point the reference files are being copied from the draft area to the real area.
      * What is done here is transfer ownership to the system user (by copying) then delete the intermediate share
@@ -358,7 +358,7 @@ class repository_nextcloud extends repository {
      * @throws \repository_nextcloud\configuration_exception
      * @throws \repository_nextcloud\request_exception
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @throws repository_exception
      */
     public function reference_file_selected($reference, $context, $component, $filearea, $itemid) {
@@ -406,7 +406,7 @@ class repository_nextcloud extends repository {
         // 4. Delete the share.
         $linkmanager->delete_share_dataowner_sysaccount($responsecreateshare['shareid']);
 
-        // Update the returned reference so that the stored_file in moodle points to the newly copied file.
+        // Update the returned reference so that the stored_file in powereduc points to the newly copied file.
         $filereturn = new stdClass();
         $filereturn->type = 'FILE_CONTROLLED_LINK';
         $filereturn->link = $createdfolder . $responsecreateshare['filetarget'];
@@ -429,7 +429,7 @@ class repository_nextcloud extends repository {
      * @throws \repository_nextcloud\configuration_exception
      * @throws \repository_nextcloud\request_exception
      * @throws coding_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function send_file($storedfile, $lifetime=null , $filter=0, $forcedownload=false, array $options = null) {
         $repositoryname = $this->get_name();
@@ -522,7 +522,7 @@ class repository_nextcloud extends repository {
 
         // Obtain the file from Nextcloud using a Bearer token authenticated connection because we cannot perform a redirect here.
         // The reason is that Nextcloud uses samesite cookie validation, i.e. a redirected request would not be authenticated.
-        // (Also the browser might use the session of a Nextcloud user that is different from the one that is known to Moodle.)
+        // (Also the browser might use the session of a Nextcloud user that is different from the one that is known to PowerEduc.)
         $filename = basename($filetarget);
         $tmppath = make_request_directory() . '/' . $filename;
         $this->dav->open();
@@ -580,7 +580,7 @@ class repository_nextcloud extends repository {
     /**
      * Get a cached user authenticated oauth client.
      *
-     * @param bool|moodle_url $overrideurl Use this url instead of the repo callback.
+     * @param bool|powereduc_url $overrideurl Use this url instead of the repo callback.
      * @return \core\oauth2\client
      */
     protected function get_user_oauth_client($overrideurl = false) {
@@ -590,7 +590,7 @@ class repository_nextcloud extends repository {
         if ($overrideurl) {
             $returnurl = $overrideurl;
         } else {
-            $returnurl = new moodle_url('/repository/repository_callback.php');
+            $returnurl = new powereduc_url('/repository/repository_callback.php');
             $returnurl->param('callback', 'yes');
             $returnurl->param('repo_id', $this->id);
             $returnurl->param('sesskey', sesskey());
@@ -658,20 +658,20 @@ class repository_nextcloud extends repository {
      * @throws required_capability_exception
      */
     public static function create($type, $userid, $context, $params, $readonly=0) {
-        require_capability('moodle/site:config', context_system::instance());
+        require_capability('powereduc/site:config', context_system::instance());
         return parent::create($type, $userid, $context, $params, $readonly);
     }
 
     /**
      * This method adds a select form and additional information to the settings form..
      *
-     * @param \moodleform $mform Moodle form (passed by reference)
+     * @param \powereducform $mform PowerEduc form (passed by reference)
      * @return bool|void
      * @throws coding_exception
      * @throws dml_exception
      */
     public static function instance_config_form($mform) {
-        if (!has_capability('moodle/site:config', context_system::instance())) {
+        if (!has_capability('powereduc/site:config', context_system::instance())) {
             $mform->addElement('static', null, '',  get_string('nopermissions', 'error', get_string('configplugin',
                 'repository_nextcloud')));
             return false;
@@ -691,7 +691,7 @@ class repository_nextcloud extends repository {
         }
 
         // Render the form.
-        $url = new \moodle_url('/admin/tool/oauth2/issuers.php');
+        $url = new \powereduc_url('/admin/tool/oauth2/issuers.php');
         $mform->addElement('static', null, '', get_string('oauth2serviceslink', 'repository_nextcloud', $url->out()));
 
         $mform->addElement('select', 'issuerid', get_string('chooseissuer', 'repository_nextcloud'), $types);
@@ -710,7 +710,7 @@ class repository_nextcloud extends repository {
         $mform->addElement('text', 'controlledlinkfoldername', get_string('foldername', 'repository_nextcloud'));
         $mform->addHelpButton('controlledlinkfoldername', 'foldername', 'repository_nextcloud');
         $mform->setType('controlledlinkfoldername', PARAM_TEXT);
-        $mform->setDefault('controlledlinkfoldername', 'Moodlefiles');
+        $mform->setDefault('controlledlinkfoldername', 'PowerEducfiles');
 
         $mform->addElement('static', null, '', get_string('fileoptions', 'repository_nextcloud'));
         $choices = [
@@ -757,7 +757,7 @@ class repository_nextcloud extends repository {
      * By default FILE_INTERNAL is supported. In case a system account is connected and an issuer exist,
      * FILE_CONTROLLED_LINK is supported.
      *
-     * FILE_INTERNAL - the file is uploaded/downloaded and stored directly within the Moodle file system.
+     * FILE_INTERNAL - the file is uploaded/downloaded and stored directly within the PowerEduc file system.
      * FILE_CONTROLLED_LINK - creates a copy of the file in Nextcloud from which private shares to permitted users will be
      * created. The file itself can not be changed any longer by the owner.
      *
@@ -781,11 +781,11 @@ class repository_nextcloud extends repository {
 
 
     /**
-     * Take the WebDAV `ls()' output and convert it into a format that Moodle's filepicker understands.
+     * Take the WebDAV `ls()' output and convert it into a format that PowerEduc's filepicker understands.
      *
      * @param string $dirpath Relative (urlencoded) path of the folder of interest.
      * @param array $ls Output by WebDAV
-     * @return array Moodle-formatted list of directory contents; ready for use as $ret['list'] in get_listings
+     * @return array PowerEduc-formatted list of directory contents; ready for use as $ret['list'] in get_listings
      */
     private function get_listing_convert_response($dirpath, $ls) {
         global $OUTPUT;
@@ -850,7 +850,7 @@ class repository_nextcloud extends repository {
         }
 
         $this->client = $this->get_user_oauth_client();
-        $url = new moodle_url($this->client->get_login_url());
+        $url = new powereduc_url($this->client->get_login_url());
         $state = $url->get_param('state') . '&reloadparent=true';
         $url->param('state', $state);
 
@@ -936,7 +936,7 @@ class repository_nextcloud extends repository {
      * Synchronize the external file if there is an update happened to it.
      *
      * If the file has been updated in the nextcloud instance, this method
-     * would take care of the file we copy into the moodle file pool.
+     * would take care of the file we copy into the powereduc file pool.
      *
      * The call to this method reaches from stored_file::sync_external_file()
      *

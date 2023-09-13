@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $ADMIN->add('editoratto', new admin_category('atto_collapse', new lang_string('pluginname', 'atto_collapse')));
 

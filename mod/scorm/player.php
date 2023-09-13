@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 // This page prints a particular instance of aicc/scorm package.
 
@@ -30,26 +30,26 @@ $displaymode = optional_param('display', '', PARAM_ALPHA);
 
 if (!empty($id)) {
     if (! $cm = get_coursemodule_from_id('scorm', $id, 0, true)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record("course", array("id" => $cm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $scorm = $DB->get_record("scorm", array("id" => $cm->instance))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 } else if (!empty($a)) {
     if (! $scorm = $DB->get_record("scorm", array("id" => $a))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record("course", array("id" => $scorm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $cm = get_coursemodule_from_instance("scorm", $scorm->id, $course->id, true)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 } else {
-    throw new \moodle_exception('missingparameter');
+    throw new \powereduc_exception('missingparameter');
 }
 
 // PARAM_RAW is used for $currentorg, validate it against records stored in the table.
@@ -69,7 +69,7 @@ if (!empty($scoid)) {
     $scoid = scorm_check_launchable_sco($scorm, $scoid);
 }
 
-$url = new moodle_url('/mod/scorm/player.php', array('scoid' => $scoid, 'cm' => $cm->id));
+$url = new powereduc_url('/mod/scorm/player.php', array('scoid' => $scoid, 'cm' => $cm->id));
 if ($mode !== 'normal') {
     $url->param('mode', $mode);
 }
@@ -114,7 +114,7 @@ if ($displaymode == 'popup') {
     $PAGE->set_title($pagetitle);
     $PAGE->set_heading($course->fullname);
 }
-if (!$cm->visible and !has_capability('moodle/course:viewhiddenactivities', context_module::instance($cm->id))) {
+if (!$cm->visible and !has_capability('powereduc/course:viewhiddenactivities', context_module::instance($cm->id))) {
     echo $OUTPUT->header();
     notice(get_string("activityiscurrentlyhidden"));
     echo $OUTPUT->footer();
@@ -201,8 +201,8 @@ echo $OUTPUT->header();
 
 $PAGE->requires->string_for_js('navigation', 'scorm');
 $PAGE->requires->string_for_js('toc', 'scorm');
-$PAGE->requires->string_for_js('hide', 'moodle');
-$PAGE->requires->string_for_js('show', 'moodle');
+$PAGE->requires->string_for_js('hide', 'powereduc');
+$PAGE->requires->string_for_js('show', 'powereduc');
 $PAGE->requires->string_for_js('popupsblocked', 'scorm');
 
 $name = false;
@@ -253,7 +253,7 @@ if ($result->prerequisites) {
         }
         $name = 'scorm_'.$name;
         echo html_writer::script('', $CFG->wwwroot.'/mod/scorm/player.js');
-        $url = new moodle_url($PAGE->url, array('scoid' => $sco->id, 'display' => 'popup', 'mode' => $mode));
+        $url = new powereduc_url($PAGE->url, array('scoid' => $sco->id, 'display' => 'popup', 'mode' => $mode));
         echo html_writer::script(
             js_writer::function_call('scorm_openpopup', Array($url->out(false),
                                                        $name, $scorm->options,

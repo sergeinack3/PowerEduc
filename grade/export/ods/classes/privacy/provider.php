@@ -24,7 +24,7 @@
 
 namespace gradeexport_ods\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for gradeexport_ods implementing null_provider.

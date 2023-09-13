@@ -26,7 +26,7 @@ namespace core\event;
 use core\event\base;
 use core_competency\user_evidence;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Evidence of prior learning created event class.

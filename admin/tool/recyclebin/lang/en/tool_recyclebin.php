@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['alertdeleted'] = '\'{$a->name}\' has been deleted.';
 $string['alertemptied'] = 'Recycle bin has been emptied.';

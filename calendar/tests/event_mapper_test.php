@@ -35,7 +35,7 @@ use core_calendar\local\event\entities\event_interface;
 use core_calendar\local\event\entities\action_event_interface;
 use core_calendar\local\event\proxies\proxy_interface;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/calendar/lib.php');

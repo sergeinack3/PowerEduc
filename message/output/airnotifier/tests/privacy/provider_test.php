@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,12 +17,12 @@
  * Base class for unit tests for message_airnotifier.
  *
  * @package    message_airnotifier
- * @copyright  2018 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2018 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace message_airnotifier\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\tests\provider_testcase;
 use message_airnotifier\privacy\provider;
@@ -31,7 +31,7 @@ use core_privacy\local\request\approved_userlist;
 /**
  * Unit tests for message\output\airnotifier\classes\privacy\provider.php
  *
- * @copyright  2018 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2018 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends provider_testcase {
@@ -53,7 +53,7 @@ class provider_test extends provider_testcase {
 
         // Add fake core device.
         $device = array(
-            'appid' => 'com.moodle.moodlemobile',
+            'appid' => 'com.powereduc.powereducmobile',
             'name' => 'occam',
             'model' => 'Nexus 4',
             'platform' => 'Android',
@@ -113,7 +113,7 @@ class provider_test extends provider_testcase {
 
         // First device.
         $data = $writer->get_data([get_string('privacy:subcontext', 'message_airnotifier'), 'Nexus 4_apuJih874kj']);
-        $this->assertEquals('com.moodle.moodlemobile', $data->appid);
+        $this->assertEquals('com.powereduc.powereducmobile', $data->appid);
 
         // Second device.
         $data = $writer->get_data([get_string('privacy:subcontext', 'message_airnotifier'), 'Nexus 4_bdu09Ikjjsu']);

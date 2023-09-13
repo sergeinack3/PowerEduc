@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file defines a class with "Number of errors" grading strategy logic
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../lib.php');        // Interface definition.
 require_once($CFG->libdir . '/gradelib.php'); // To handle float vs decimal issues.
@@ -235,13 +235,13 @@ class workshop_numerrors_strategy implements workshop_strategy {
     /**
      * Factory method returning an instance of an assessment form
      *
-     * @param moodle_url $actionurl URL of form handler, defaults to auto detect the current url
+     * @param powereduc_url $actionurl URL of form handler, defaults to auto detect the current url
      * @param string $mode          Mode to open the form in: preview/assessment
      * @param stdClass $assessment
      * @param bool $editable
      * @param array $options
      */
-    public function get_assessment_form(moodle_url $actionurl=null, $mode='preview', stdclass $assessment=null, $editable=true, $options=array()) {
+    public function get_assessment_form(powereduc_url $actionurl=null, $mode='preview', stdclass $assessment=null, $editable=true, $options=array()) {
         global $CFG;    // needed because the included files use it
         global $PAGE;
         global $DB;

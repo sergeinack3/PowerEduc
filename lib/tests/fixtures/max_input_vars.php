@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ defined('BEHAT_SITE_RUNNING') || die('Only available on Behat test server');
  * @copyright 2015 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_max_input_vars_form extends moodleform {
+class core_max_input_vars_form extends powereducform {
     /**
      * Form definition.
      */
@@ -93,7 +93,7 @@ $context = context_system::instance();
 $type = optional_param('type', '', PARAM_ALPHA);
 
 // Set up the page details.
-$PAGE->set_url(new moodle_url('/lib/tests/fixtures/max_input_vars.php'));
+$PAGE->set_url(new powereduc_url('/lib/tests/fixtures/max_input_vars.php'));
 $PAGE->set_context($context);
 
 if ($type) {

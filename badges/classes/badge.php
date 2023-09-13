@@ -26,7 +26,7 @@
 
 namespace core_badges;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/lib/badgeslib.php');
 

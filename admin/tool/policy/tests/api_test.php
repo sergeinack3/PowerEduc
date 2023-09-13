@@ -73,7 +73,7 @@ class api_test extends \advanced_testcase {
         $formdata->name = 'New terms & conditions';
         $formdata->revision = '*** Unit test 2 ***';
         $formdata->summary_editor['text'] = '<strong>Yet another summary</strong>';
-        $formdata->summary_editor['format'] = FORMAT_MOODLE;
+        $formdata->summary_editor['format'] = FORMAT_POWEREDUC;
         $formdata->content_editor['text'] = '<h3>Yet another test</h3>';
         $formdata->content_editor['format'] = FORMAT_HTML;
         $new = api::form_policydoc_update_new($formdata);

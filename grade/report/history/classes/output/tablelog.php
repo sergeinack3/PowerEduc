@@ -24,7 +24,7 @@
 
 namespace gradereport_history\output;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/tablelib.php');
 

@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class represents a grading form definition used in a particular area
@@ -355,7 +355,7 @@ abstract class gradingform_controller {
                 $record->status = self::DEFINITION_STATUS_DRAFT;
             }
             if (empty($record->descriptionformat)) {
-                $record->descriptionformat = FORMAT_MOODLE; // field can not be empty
+                $record->descriptionformat = FORMAT_POWEREDUC; // field can not be empty
             }
 
             $DB->insert_record('grading_definitions', $record);
@@ -831,7 +831,7 @@ abstract class gradingform_instance {
         $instance->itemid = $itemid;
         $instance->status = self::INSTANCE_STATUS_INCOMPLETE;
         $instance->timemodified = time();
-        $instance->feedbackformat = FORMAT_MOODLE;
+        $instance->feedbackformat = FORMAT_POWEREDUC;
         $instanceid = $DB->insert_record('grading_instances', $instance);
         return $instanceid;
     }

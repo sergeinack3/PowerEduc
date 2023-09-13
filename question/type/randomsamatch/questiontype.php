@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Question type class for the randomsamatch question type.
  *
  * @package    qtype_randomsamatch
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/type/questiontypebase.php');
 require_once($CFG->dirroot . '/question/type/questionbase.php');
@@ -35,7 +35,7 @@ require_once($CFG->dirroot . '/question/type/numerical/question.php');
  * TODO: Make sure short answer questions chosen by a randomsamatch question
  * can not also be used by a random question
  *
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_randomsamatch extends question_type {
@@ -183,7 +183,7 @@ class qtype_randomsamatch extends question_type {
     }
 
     /**
-     * Imports the question from Moodle XML format.
+     * Imports the question from PowerEduc XML format.
      *
      * @param array $xml structure containing the XML data
      * @param object $fromform question object to fill: ignored by this function (assumed to be null)
@@ -213,7 +213,7 @@ class qtype_randomsamatch extends question_type {
     }
 
     /**
-     * Exports the question to Moodle XML format.
+     * Exports the question to PowerEduc XML format.
      *
      * @param object $question question to be exported into XML format
      * @param qformat_xml $format format class exporting the question

@@ -35,7 +35,7 @@ use moodle_url;
 use tool_dataprivacy\api;
 use tool_dataprivacy\data_request;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class that processes an approved data request and prepares/deletes the user's data.

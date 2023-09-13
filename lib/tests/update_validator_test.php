@@ -18,7 +18,7 @@ namespace core;
 
 use testable_core_update_validator;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/fixtures/testable_update_validator.php');
 

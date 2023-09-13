@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,14 +16,14 @@
 
 /**
  * Return token
- * @package    moodlecore
- * @copyright  2011 Dongsheng Cai <dongsheng@moodle.com>
+ * @package    powereduccore
+ * @copyright  2011 Dongsheng Cai <dongsheng@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 define('AJAX_SCRIPT', true);
 define('REQUIRE_CORRECT_ACCESS', true);
-define('NO_MOODLE_COOKIES', true);
+define('NO_POWEREDUC_COOKIES', true);
 
 require_once(__DIR__ . '/../config.php');
 require_once($CFG->libdir . '/externallib.php');
@@ -32,7 +32,7 @@ require_once($CFG->libdir . '/externallib.php');
 header('Access-Control-Allow-Origin: *');
 
 if (!$CFG->enablewebservices) {
-    throw new moodle_exception('enablewsdescription', 'webservice');
+    throw new powereduc_exception('enablewsdescription', 'webservice');
 }
 
 // This script is used by the mobile app to check that the site is available and web services
@@ -50,7 +50,7 @@ echo $OUTPUT->header();
 
 $username = trim(core_text::strtolower($username));
 if (is_restored_user($username)) {
-    throw new moodle_exception('restoredaccountresetpassword', 'webservice');
+    throw new powereduc_exception('restoredaccountresetpassword', 'webservice');
 }
 
 $systemcontext = context_system::instance();
@@ -60,23 +60,23 @@ $user = authenticate_user_login($username, $password, false, $reason, false);
 if (!empty($user)) {
 
     // Cannot authenticate unless maintenance access is granted.
-    $hasmaintenanceaccess = has_capability('moodle/site:maintenanceaccess', $systemcontext, $user);
+    $hasmaintenanceaccess = has_capability('powereduc/site:maintenanceaccess', $systemcontext, $user);
     if (!empty($CFG->maintenance_enabled) and !$hasmaintenanceaccess) {
-        throw new moodle_exception('sitemaintenance', 'admin');
+        throw new powereduc_exception('sitemaintenance', 'admin');
     }
 
     if (isguestuser($user)) {
-        throw new moodle_exception('noguest');
+        throw new powereduc_exception('noguest');
     }
     if (empty($user->confirmed)) {
-        throw new moodle_exception('usernotconfirmed', 'moodle', '', $user->username);
+        throw new powereduc_exception('usernotconfirmed', 'powereduc', '', $user->username);
     }
     // check credential expiry
     $userauth = get_auth_plugin($user->auth);
     if (!empty($userauth->config->expiration) and $userauth->config->expiration == 1) {
         $days2expire = $userauth->password_expire($user->username);
         if (intval($days2expire) < 0 ) {
-            throw new moodle_exception('passwordisexpired', 'webservice');
+            throw new powereduc_exception('passwordisexpired', 'webservice');
         }
     }
 
@@ -90,7 +90,7 @@ if (!empty($user)) {
     $service = $DB->get_record('external_services', array('shortname' => $serviceshortname, 'enabled' => 1));
     if (empty($service)) {
         // will throw exception if no token found
-        throw new moodle_exception('servicenotavailable', 'webservice');
+        throw new powereduc_exception('servicenotavailable', 'webservice');
     }
 
     // Get an existing token or create a new one.
@@ -98,7 +98,7 @@ if (!empty($user)) {
     $privatetoken = $token->privatetoken;
     external_log_token_request($token);
 
-    $siteadmin = has_capability('moodle/site:config', $systemcontext, $USER->id);
+    $siteadmin = has_capability('powereduc/site:config', $systemcontext, $USER->id);
 
     $usertoken = new stdClass;
     $usertoken->token = $token->token;
@@ -110,5 +110,5 @@ if (!empty($user)) {
     }
     echo json_encode($usertoken);
 } else {
-    throw new moodle_exception('invalidlogin');
+    throw new powereduc_exception('invalidlogin');
 }

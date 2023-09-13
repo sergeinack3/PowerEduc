@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: MOODLE_INTERNAL is not verified here because we load this before setup.php!
+// NOTE: POWEREDUC_INTERNAL is not verified here because we load this before setup.php!
 
 require_once(__DIR__.'/data_generator.php');
 require_once(__DIR__.'/component_generator_base.php');

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package    core
@@ -26,7 +26,7 @@ require_once('../config.php');
 require_login();
 
 if (empty($CFG->usetags)) {
-    throw new \moodle_exception('tagsaredisabled', 'tag');
+    throw new \powereduc_exception('tagsaredisabled', 'tag');
 }
 
 $query     = optional_param('query', '', PARAM_RAW);
@@ -41,7 +41,7 @@ if ($tagcollid) {
     $params['tc'] = $tagcollid;
 }
 
-$PAGE->set_url(new moodle_url('/tag/search.php', $params));
+$PAGE->set_url(new powereduc_url('/tag/search.php', $params));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('standard');
 
@@ -49,8 +49,8 @@ $PAGE->set_title(get_string('tags', 'tag'));
 $PAGE->set_heading($SITE->fullname);
 
 $buttons = '';
-if (has_capability('moodle/tag:manage', context_system::instance())) {
-    $buttons .= $OUTPUT->single_button(new moodle_url('/tag/manage.php'),
+if (has_capability('powereduc/tag:manage', context_system::instance())) {
+    $buttons .= $OUTPUT->single_button(new powereduc_url('/tag/manage.php'),
             get_string('managetags', 'tag'), 'GET');
 }
 if ($PAGE->user_allowed_editing()) {

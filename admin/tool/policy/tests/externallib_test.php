@@ -19,7 +19,7 @@ namespace tool_policy;
 use externallib_advanced_testcase;
 use tool_mobile\external as external_mobile;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

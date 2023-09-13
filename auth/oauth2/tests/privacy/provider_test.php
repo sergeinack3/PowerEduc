@@ -23,7 +23,7 @@
  */
 namespace auth_oauth2\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use auth_oauth2\privacy\provider;
 use core_privacy\local\request\approved_contextlist;

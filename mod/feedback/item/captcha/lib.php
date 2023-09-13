@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') OR die('not allowed');
+defined('POWEREDUC_INTERNAL') OR die('not allowed');
 require_once($CFG->dirroot.'/mod/feedback/item/feedback_item_class.php');
 
 class feedback_item_captcha extends feedback_item_base {
@@ -23,7 +23,7 @@ class feedback_item_captcha extends feedback_item_base {
     public function build_editform($item, $feedback, $cm) {
         global $DB;
 
-        $editurl = new moodle_url('/mod/feedback/edit.php', array('id'=>$cm->id));
+        $editurl = new powereduc_url('/mod/feedback/edit.php', array('id'=>$cm->id));
 
         // There are no settings for recaptcha.
         if (isset($item->id) AND $item->id > 0) {
@@ -161,7 +161,7 @@ class feedback_item_captcha extends feedback_item_base {
     public function get_hasvalue() {
         global $CFG;
 
-        // Is recaptcha configured in moodle?
+        // Is recaptcha configured in powereduc?
         if (empty($CFG->recaptchaprivatekey) OR empty($CFG->recaptchapublickey)) {
             return 0;
         }

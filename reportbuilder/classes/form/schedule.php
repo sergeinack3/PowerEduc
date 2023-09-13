@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -21,7 +21,7 @@ namespace core_reportbuilder\form;
 use context;
 use core_user;
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use core\output\notification;
 use core_form\dynamic_form;
 use core_reportbuilder\manager;
@@ -35,7 +35,7 @@ use core_reportbuilder\local\report\base;
  * Schedule form
  *
  * @package     core_reportbuilder
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class schedule extends dynamic_form {
@@ -103,7 +103,7 @@ class schedule extends dynamic_form {
 
         // View report data as.
         $context = $this->get_context_for_dynamic_submission();
-        if (has_capability('moodle/reportbuilder:scheduleviewas', $context)) {
+        if (has_capability('powereduc/reportbuilder:scheduleviewas', $context)) {
             $mform->addElement('select', 'userviewas', get_string('scheduleviewas', 'core_reportbuilder'),
                 helper::get_viewas_options());
             $mform->setType('userviewas', PARAM_INT);
@@ -113,7 +113,7 @@ class schedule extends dynamic_form {
                 'multiple' => false,
                 'valuehtmlcallback' => function($userid) use ($context): string {
                     $user = core_user::get_user($userid);
-                    return fullname($user, has_capability('moodle/site:viewfullnames', $context));
+                    return fullname($user, has_capability('powereduc/site:viewfullnames', $context));
                 }
             ];
             $mform->addElement('autocomplete', 'user', get_string('user'), [], $options)->setHiddenLabel(true);
@@ -251,9 +251,9 @@ class schedule extends dynamic_form {
     /**
      * URL of the page using this form
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
-        return new moodle_url('/reportbuilder/edit.php', ['id' => $this->optional_param('reportid', 0, PARAM_INT)], 'schedules');
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
+        return new powereduc_url('/reportbuilder/edit.php', ['id' => $this->optional_param('reportid', 0, PARAM_INT)], 'schedules');
     }
 }

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for WS in tags
@@ -27,7 +27,7 @@ namespace core_tag\external;
 
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -85,7 +85,7 @@ class external_test extends externallib_advanced_testcase {
         $this->assertArrayNotHasKey('isstandard', $result['tags'][0]);
 
         // User with editing only capability can change description but not the tag name.
-        $roleid = $this->assignUserCapability('moodle/tag:edit', $context->id);
+        $roleid = $this->assignUserCapability('powereduc/tag:edit', $context->id);
         $result = \core_tag_external::update_tags(array($updatetag));
         $result = \external_api::clean_returnvalue(\core_tag_external::update_tags_returns(), $result);
         $this->assertEmpty($result['warnings']);
@@ -95,7 +95,7 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals($updatetag['id'], $result['tags'][0]['id']);
         $this->assertEquals($updatetag['description'], $result['tags'][0]['description']);
         $this->assertEquals($originaltag['rawname'], $result['tags'][0]['rawname']);
-        $this->assertArrayNotHasKey('flag', $result['tags'][0]); // 'Flag' is not available unless 'moodle/tag:manage' cap exists.
+        $this->assertArrayNotHasKey('flag', $result['tags'][0]); // 'Flag' is not available unless 'powereduc/tag:manage' cap exists.
         $this->assertEquals(0, $result['tags'][0]['official']);
         $this->assertEquals(0, $result['tags'][0]['isstandard']);
         $this->assertEquals($originaltag['rawname'], $DB->get_field('tag', 'rawname',
@@ -105,8 +105,8 @@ class external_test extends externallib_advanced_testcase {
 
         // User with editing and manage cap can also change the tag name,
         // make it standard and reset flag.
-        assign_capability('moodle/tag:manage', CAP_ALLOW, $roleid, $context->id);
-        $this->assertTrue(has_capability('moodle/tag:manage', $context));
+        assign_capability('powereduc/tag:manage', CAP_ALLOW, $roleid, $context->id);
+        $this->assertTrue(has_capability('powereduc/tag:manage', $context));
         $result = \core_tag_external::update_tags(array($updatetag));
         $result = \external_api::clean_returnvalue(\core_tag_external::update_tags_returns(), $result);
         $this->assertEmpty($result['warnings']);
@@ -166,7 +166,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             \core_external::update_inplace_editable('core_tag', 'tagname', $tag->id, 'new tag name');
             $this->fail('Exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('Sorry, but you do not currently have permissions to do that (Manage all tags).',
                     $e->getMessage());
         }

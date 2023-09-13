@@ -1,7 +1,7 @@
 {
-    "name": "moodle-qbank_editquestion-chooser",
+    "name": "powereduc-qbank_editquestion-chooser",
     "builds": {
-        "moodle-qbank_editquestion-chooser": {
+        "powereduc-qbank_editquestion-chooser": {
             "jsfiles": [
                 "chooser.js"
             ]

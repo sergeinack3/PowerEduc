@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -253,7 +253,7 @@ function grade_update($source, $courseid, $itemtype, $itemmodule, $iteminstance,
 
         $rawgrade       = false;
         $feedback       = false;
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $feedbackfiles = [];
         $usermodified   = $USER->id;
         $datesubmitted  = null;

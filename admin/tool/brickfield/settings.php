@@ -29,7 +29,7 @@ use tool_brickfield\analysis;
 use tool_brickfield\output\renderer;
 use tool_brickfield\registration;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $accessibilitydisabled = !accessibility::is_accessibility_enabled();
 

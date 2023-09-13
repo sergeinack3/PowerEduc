@@ -53,7 +53,7 @@ function mnet_get_public_key($uri, $application=null) {
     }
 
     if (empty($application)) {
-        $application = $DB->get_record('mnet_application', array('name'=>'moodle'));
+        $application = $DB->get_record('mnet_application', array('name'=>'powereduc'));
     }
 
     $params = [
@@ -93,7 +93,7 @@ function mnet_get_public_key($uri, $application=null) {
             if (defined('CURLPROXY_SOCKS5')) {
                 $extracurloptions[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
             } else {
-                throw new \moodle_exception( 'socksnotsupported', 'mnet');
+                throw new \powereduc_exception( 'socksnotsupported', 'mnet');
             }
         }
 
@@ -518,14 +518,14 @@ function mnet_get_peer_host ($mnethostid) {
  * before ultimately being directed to the original url.
  *
  * @param string $jumpurl the url which user should initially be directed to.
- *     This is a URL associated with a moodle networking peer when it
+ *     This is a URL associated with a powereduc networking peer when it
  *     is fulfiling a role as an identity provider (IDP). Different urls for
  *     different peers, the jumpurl is formed partly from the IDP's webroot, and
  *     partly from a predefined local path within that webwroot.
  *     The result of the user hitting this jump url is that they will be asked
  *     to login (at their identity provider (if they aren't already)), mnet
  *     will prepare the necessary authentication information, then redirect
- *     them back to somewhere at the content provider(CP) moodle (this moodle)
+ *     them back to somewhere at the content provider(CP) powereduc (this powereduc)
  * @param array $url array with 2 elements
  *     0 - context the url was taken from, possibly just the url, possibly href="url"
  *     1 - the destination url
@@ -540,7 +540,7 @@ function mnet_sso_apply_indirection ($jumpurl, $url) {
         if (isset($urlparts['path'])) {
             $path = $urlparts['path'];
             // if our wwwroot has a path component, need to strip that path from beginning of the
-            // 'localpart' to make it relative to moodle's wwwroot
+            // 'localpart' to make it relative to powereduc's wwwroot
             $wwwrootpath = parse_url($CFG->wwwroot, PHP_URL_PATH);
             if (!empty($wwwrootpath) && strpos($path, $wwwrootpath) === 0) {
                 $path = substr($path, strlen($wwwrootpath));
@@ -610,7 +610,7 @@ function mnet_debug($debugdata, $debuglevel=1) {
 }
 
 /**
- * Return an array of information about all moodle's profile fields
+ * Return an array of information about all powereduc's profile fields
  * which ones are optional, which ones are forced.
  * This is used as the basis of providing lists of profile fields to the administrator
  * to pick which fields to import/export over MNET
@@ -897,7 +897,7 @@ function mnet_fields_to_import(mnet_peer $peer) {
  */
 function _mnet_field_helper(mnet_peer $peer, $key) {
     $tmp = mnet_profile_field_options();
-    $defaults = explode(',', get_config('moodle', 'mnetprofile' . $key . 'fields'));
+    $defaults = explode(',', get_config('powereduc', 'mnetprofile' . $key . 'fields'));
     if ('1' === get_config('mnet', 'host' . $peer->id . $key . 'default')) {
         return array_merge($tmp['forced'], $defaults);
     }

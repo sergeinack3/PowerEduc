@@ -30,7 +30,7 @@ use tool_policy\output\user_agreement;
 use core_user;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/lib/tablelib.php');
@@ -593,7 +593,7 @@ class acceptances_table extends \table_sql {
         if ($this->is_downloading()) {
             return $row->note;
         } else {
-            return format_text($row->note, FORMAT_MOODLE);
+            return format_text($row->note, FORMAT_POWEREDUC);
         }
     }
 

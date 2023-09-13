@@ -23,7 +23,7 @@
  */
 namespace tool_dataprivacy\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;

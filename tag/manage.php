@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Managing tags, tag areas and tags collections
@@ -57,7 +57,7 @@ if ($filter !== '') {
 admin_externalpage_setup('managetags', '', $params, '', array('pagelayout' => 'report'));
 
 if (empty($CFG->usetags)) {
-    throw new \moodle_exception('tagsaredisabled', 'tag');
+    throw new \powereduc_exception('tagsaredisabled', 'tag');
 }
 
 $tagobject = null;
@@ -67,14 +67,14 @@ if ($tagid) {
 }
 $tagcoll = core_tag_collection::get_by_id($tagcollid);
 $tagarea = core_tag_area::get_by_id($tagareaid);
-$manageurl = new moodle_url('/tag/manage.php');
+$manageurl = new powereduc_url('/tag/manage.php');
 if ($tagcoll) {
     // We are inside a tag collection - add it to the breadcrumb.
     $PAGE->navbar->add(core_tag_collection::display_name($tagcoll),
-            new moodle_url($manageurl, array('tc' => $tagcoll->id)));
+            new powereduc_url($manageurl, array('tc' => $tagcoll->id)));
 }
 
-$PAGE->set_blocks_editing_capability('moodle/tag:editblocks');
+$PAGE->set_blocks_editing_capability('powereduc/tag:editblocks');
 
 $PAGE->set_primary_active_tab('siteadminnode');
 
@@ -192,7 +192,7 @@ if (!$tagcoll) {
 
     echo $OUTPUT->heading(get_string('tagcollections', 'core_tag') . $OUTPUT->help_icon('tagcollection', 'tag'), 3);
     echo html_writer::table($colltable);
-    $url = new moodle_url($manageurl, array('action' => 'colladd'));
+    $url = new powereduc_url($manageurl, array('action' => 'colladd'));
     echo html_writer::div(html_writer::link('#', get_string('addtagcoll', 'tag'), array('data-url' => $url)),
             'mdl-right addtagcoll');
 
@@ -215,12 +215,12 @@ $hiddenfields = [
 
 $otherfields = '';
 if ($filter !== '') {
-    $otherfields = html_writer::link(new moodle_url($PAGE->url, ['filter' => null]),
+    $otherfields = html_writer::link(new powereduc_url($PAGE->url, ['filter' => null]),
         get_string('resetfilter', 'tag'));
 }
 
 $data = [
-    'action' => new moodle_url('/tag/manage.php'),
+    'action' => new powereduc_url('/tag/manage.php'),
     'hiddenfields' => $hiddenfields,
     'inputname' => 'filter',
     'searchstring' => get_string('search'),
@@ -261,13 +261,13 @@ $totalcount = $table->totalcount;
 if ($perpage == SHOW_ALL_PAGE_SIZE) {
     echo html_writer::start_tag('div', array('id' => 'showall'));
     $params = array('perpage' => DEFAULT_PAGE_SIZE, 'page' => 0);
-    $url = new moodle_url($PAGE->url, $params);
+    $url = new powereduc_url($PAGE->url, $params);
     echo html_writer::link($url, get_string('showperpage', '', DEFAULT_PAGE_SIZE));
     echo html_writer::end_tag('div');
 } else if ($totalcount > 0 and $perpage < $totalcount) {
     echo html_writer::start_tag('div', array('id' => 'showall'));
     $params = array('perpage' => SHOW_ALL_PAGE_SIZE, 'page' => 0);
-    $url = new moodle_url($PAGE->url, $params);
+    $url = new powereduc_url($PAGE->url, $params);
     echo html_writer::link($url, get_string('showall', '', $totalcount));
     echo html_writer::end_tag('div');
 }

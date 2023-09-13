@@ -1,5 +1,5 @@
 {
-  "moodle-assignfeedback_editpdf-editor": {
+  "powereduc-assignfeedback_editpdf-editor": {
     "requires": [
         "base",
         "event",
@@ -11,11 +11,11 @@
         "event-resize",
         "transition",
         "querystring-stringify-simple",
-        "moodle-core-notification-dialog",
-        "moodle-core-notification-alert",
-        "moodle-core-notification-warning",
-        "moodle-core-notification-exception",
-        "moodle-core-notification-ajaxexception"
+        "powereduc-core-notification-dialog",
+        "powereduc-core-notification-alert",
+        "powereduc-core-notification-warning",
+        "powereduc-core-notification-exception",
+        "powereduc-core-notification-ajaxexception"
     ]
   }
 }

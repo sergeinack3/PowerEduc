@@ -32,7 +32,7 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/powerschool:managepages', $context);
 
-// $PAGE->set_url(new moodle_url('/local/powerschool/anneescolaireedit.php'));
+// $PAGE->set_url(new powereduc_url('/local/powerschool/anneescolaireedit.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Modifier un affecterprof');
 $PAGE->set_heading('Modifier un affecterprof');
@@ -102,10 +102,10 @@ $templatecontext = (object)[
     'affecterprof' => array_values($affecterprof),
     'professeur' => array_values($professeur),
     'specialite' => array_values($specialite),
-    'affecterprofedit' => new moodle_url('/local/powerschool/affecterprofedit.php'),
-    'affecterprofsupp'=> new moodle_url('/local/powerschool/affecterprof.php'),
-    'salle' => new moodle_url('/local/powerschool/salle.php'),
-    'courssemestre' => new moodle_url('/local/powerschool/affecterprofedi.php'),
+    'affecterprofedit' => new powereduc_url('/local/powerschool/affecterprofedit.php'),
+    'affecterprofsupp'=> new powereduc_url('/local/powerschool/affecterprof.php'),
+    'salle' => new powereduc_url('/local/powerschool/salle.php'),
+    'courssemestre' => new powereduc_url('/local/powerschool/affecterprofedi.php'),
     'root'=>$CFG->wwwroot,
     'id'=>$_GET["id"]
 ];

@@ -26,7 +26,7 @@ namespace core_blog;
 
 use blog_listing;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/blog/locallib.php');

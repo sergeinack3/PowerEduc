@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'cohort', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'cohort', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package    core_cohort
  * @subpackage cohort
@@ -93,5 +93,5 @@ $string['uploadcohorts_help'] = 'Cohorts may be uploaded via text file. The form
 * Required fieldname is name
 * Optional fieldnames are idnumber, description, descriptionformat, visible, context, category, category_id, category_idnumber, category_path';
 $string['visible'] = 'Visible';
-$string['visible_help'] = "Any cohort can be viewed by users who have 'moodle/cohort:view' capability in the cohort context.<br/>
+$string['visible_help'] = "Any cohort can be viewed by users who have 'powereduc/cohort:view' capability in the cohort context.<br/>
 Visible cohorts can also be viewed by users in the underlying courses.";

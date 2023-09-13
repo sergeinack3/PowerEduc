@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ const ELEMENT_SELECTOR = {
     participantAddButton: () => document.getElementsByName('bigbluebuttonbn_participant_selection_add')[0],
 };
 /**
- * Initialise the moodle form code.
+ * Initialise the powereduc form code.
  *
  * This will help hide or show items depending on the selection of the instance type.
  *

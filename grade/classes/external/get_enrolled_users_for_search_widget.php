@@ -24,7 +24,7 @@ use external_multiple_structure;
 use moodle_url;
 use core_user;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot.'/grade/lib.php');
 

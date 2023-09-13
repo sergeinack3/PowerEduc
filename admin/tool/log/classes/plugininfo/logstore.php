@@ -25,7 +25,7 @@ namespace tool_log\plugininfo;
 
 use core\plugininfo\base, moodle_url, part_of_admin_tree, admin_settingpage;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Plugin info class for logging store plugins.

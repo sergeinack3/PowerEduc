@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_question;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
  *
  * @package    core_question
  * @category   test
- * @copyright  2018 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2018 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_test extends \advanced_testcase {
@@ -47,7 +47,7 @@ class backup_test extends \advanced_testcase {
         // Do backup with default settings. MODE_IMPORT means it will just
         // create the directory and not zip it.
         $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id,
-                \backup::FORMAT_MOODLE, \backup::INTERACTIVE_NO, \backup::MODE_IMPORT,
+                \backup::FORMAT_POWEREDUC, \backup::INTERACTIVE_NO, \backup::MODE_IMPORT,
                 $USER->id);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();
@@ -242,13 +242,13 @@ class backup_test extends \advanced_testcase {
         $this->getDataGenerator()->enrol_user($user->id, $course->id, $teacherrole->id, 'manual');
 
         // Backup the course.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $USER->id);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();
         $results = $bc->get_results();
         $file = $results['backup_destination'];
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $filepath = $CFG->dataroot . '/temp/backup/' . $backupid;
         $file->extract_to_pathname($fp, $filepath);
         $bc->destroy();
@@ -299,13 +299,13 @@ class backup_test extends \advanced_testcase {
         quiz_add_quiz_question($question->id, $quiz);
 
         // Backup the course.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $USER->id);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();
         $results = $bc->get_results();
         $file = $results['backup_destination'];
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $filepath = $CFG->dataroot . '/temp/backup/' . $backupid;
         $file->extract_to_pathname($fp, $filepath);
         $bc->destroy();
@@ -356,13 +356,13 @@ class backup_test extends \advanced_testcase {
         quiz_add_quiz_question($question->id, $quiz);
 
         // Backup the course.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO, \backup::MODE_SAMESITE, $USER->id);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();
         $results = $bc->get_results();
         $file = $results['backup_destination'];
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $filepath = $CFG->dataroot . '/temp/backup/' . $backupid;
         $file->extract_to_pathname($fp, $filepath);
         $bc->destroy();

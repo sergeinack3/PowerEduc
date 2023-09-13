@@ -31,7 +31,7 @@ use external_single_structure;
 use external_value;
 use tool_brickfield\manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/externallib.php');
 
 /**

@@ -24,7 +24,7 @@
 
 namespace gradereport_singleview\local\ui;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use stdClass;
 /**
@@ -188,7 +188,7 @@ class finalgrade extends grade_attribute_format implements unique_value, be_disa
         }
 
         // Only update grades if there are no errors.
-        $gradeitem->update_final_grade($userid, $finalgrade, 'singleview', $feedback, FORMAT_MOODLE,
+        $gradeitem->update_final_grade($userid, $finalgrade, 'singleview', $feedback, FORMAT_POWEREDUC,
             null, null, true);
         return '';
     }

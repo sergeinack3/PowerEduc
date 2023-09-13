@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains helper classes for testing the question engine.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionengine
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once(__DIR__ . '/../lib.php');
@@ -113,7 +113,7 @@ abstract class question_test_helper {
      * Set up a form to create a question in $cat. This method also sets cat and contextid on $questiondata object.
      * @param object $cat the category
      * @param object $questiondata form initialisation requires question data.
-     * @return moodleform
+     * @return powereducform
      */
     public static function get_question_editing_form($cat, $questiondata) {
         $catcontext = context::instance_by_id($cat->contextid, MUST_EXIST);
@@ -401,9 +401,9 @@ class test_question_maker {
         $essay->attachments = 0;
         $essay->attachmentsrequired = 0;
         $essay->responsetemplate = '';
-        $essay->responsetemplateformat = FORMAT_MOODLE;
+        $essay->responsetemplateformat = FORMAT_POWEREDUC;
         $essay->graderinfo = '';
-        $essay->graderinfoformat = FORMAT_MOODLE;
+        $essay->graderinfoformat = FORMAT_POWEREDUC;
 
         return $essay;
     }
@@ -720,7 +720,7 @@ class question_no_pattern_expectation {
  * as integration tests. However, whether they are unit tests or not,
  * it works well to implement them in PHPUnit.
  *
- * Historically, tests like this were made because Moodle did not have anything
+ * Historically, tests like this were made because PowerEduc did not have anything
  * like Behat for end-to-end testing. Even though we do now have Behat, it makes
  * sense to keep these walk-through tests. They run massively faster than Behat
  * tests, which gives you a much faster feedback loop while doing development.
@@ -780,7 +780,7 @@ class question_no_pattern_expectation {
  *    and learned from the process, you should then just throw it away.
  *
  * c) The way check_current_output works is weird. When these tests were first written
- *    Moodle used SimpleTest for unit tests and check_current_output os written in a
+ *    PowerEduc used SimpleTest for unit tests and check_current_output os written in a
  *    style that made sense there. When we moved to PHPUnit, a quick and dirty
  *    conversion was done. That was a pragmatic move at the time, and we just have
  *    to live with the result. Sorry. (And: don't copy that style for new things.)
@@ -863,11 +863,11 @@ abstract class qbehaviour_walkthrough_test_base extends question_testcase {
         $this->quba->manual_grade($this->slot, $comment, $mark, $commentformat);
     }
 
-    protected function save_quba(moodle_database $db = null) {
+    protected function save_quba(powereduc_database $db = null) {
         question_engine::save_questions_usage_by_activity($this->quba, $db);
     }
 
-    protected function load_quba(moodle_database $db = null) {
+    protected function load_quba(powereduc_database $db = null) {
         $this->quba = question_engine::load_questions_usage_by_activity($this->quba->get_id(), $db);
     }
 
@@ -1327,7 +1327,7 @@ abstract class qbehaviour_walkthrough_test_base extends question_testcase {
 }
 
 /**
- * Simple class that implements the {@link moodle_recordset} API based on an
+ * Simple class that implements the {@link powereduc_recordset} API based on an
  * array of test data.
  *
  *  See the {@link question_attempt_step_db_test} class in
@@ -1337,7 +1337,7 @@ abstract class qbehaviour_walkthrough_test_base extends question_testcase {
  * @copyright  2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class question_test_recordset extends moodle_recordset {
+class question_test_recordset extends powereduc_recordset {
     protected $records;
 
     /**

@@ -25,7 +25,7 @@
 
 namespace tool_policy\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\output\mustache_template_finder;
 use plugin_renderer_base;

@@ -26,7 +26,7 @@ namespace core_customfield\event;
 
 use core_customfield\field_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Custom field created event class.

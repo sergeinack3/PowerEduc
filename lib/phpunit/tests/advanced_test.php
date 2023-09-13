@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -293,7 +293,7 @@ class advanced_test extends \advanced_testcase {
         try {
             $DB->get_record('pokus', array());
             $this->fail('Exception expected when accessing non existent table');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('dml_exception', $e);
         }
         $DB = $this->createMock(get_class($DB));
@@ -443,7 +443,7 @@ class advanced_test extends \advanced_testcase {
         // Any core message will do here.
         $message1 = new \core\message\message();
         $message1->courseid          = 1;
-        $message1->component         = 'moodle';
+        $message1->component         = 'powereduc';
         $message1->name              = 'instantmessage';
         $message1->userfrom          = $user1;
         $message1->userto            = $user2;
@@ -456,7 +456,7 @@ class advanced_test extends \advanced_testcase {
 
         $message2 = new \core\message\message();
         $message2->courseid          = 1;
-        $message2->component         = 'moodle';
+        $message2->component         = 'powereduc';
         $message2->name              = 'instantmessage';
         $message2->userfrom          = $user2;
         $message2->userto            = $user1;
@@ -537,11 +537,11 @@ class advanced_test extends \advanced_testcase {
         $this->assertDebuggingCalled('Attempt to send msg from a provider xxxx_yyyyy/instantmessage '.
             'that is inactive or not allowed for the user id='.$user1->id);
 
-        $message3->component = 'moodle';
+        $message3->component = 'powereduc';
         $message3->name      = 'yyyyyy';
 
         $this->assertFalse(message_send($message3));
-        $this->assertDebuggingCalled('Attempt to send msg from a provider moodle/yyyyyy '.
+        $this->assertDebuggingCalled('Attempt to send msg from a provider powereduc/yyyyyy '.
             'that is inactive or not allowed for the user id='.$user1->id);
 
         message_send($message1);
@@ -568,7 +568,7 @@ class advanced_test extends \advanced_testcase {
 
         $message = new \core\message\message();
         $message->courseid          = 1;
-        $message->component         = 'moodle';
+        $message->component         = 'powereduc';
         $message->name              = 'instantmessage';
         $message->userfrom          = get_admin();
         $message->userto            = get_admin();

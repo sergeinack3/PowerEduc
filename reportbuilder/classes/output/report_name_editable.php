@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -20,12 +20,12 @@ namespace core_reportbuilder\output;
 
 use core_external;
 use html_writer;
-use moodle_url;
+use powereduc_url;
 use core\output\inplace_editable;
 use core_reportbuilder\permission;
 use core_reportbuilder\local\models\report;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 require_once("{$CFG->libdir}/external/externallib.php");
@@ -34,7 +34,7 @@ require_once("{$CFG->libdir}/external/externallib.php");
  * Report name editable component
  *
  * @package     core_reportbuilder
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class report_name_editable extends inplace_editable {
@@ -54,8 +54,8 @@ class report_name_editable extends inplace_editable {
         $editable = permission::can_edit_report($report);
 
         $url = $editable
-            ? new moodle_url('/reportbuilder/edit.php', ['id' => $report->get('id')])
-            : new moodle_url('/reportbuilder/view.php', ['id' => $report->get('id')]);
+            ? new powereduc_url('/reportbuilder/edit.php', ['id' => $report->get('id')])
+            : new powereduc_url('/reportbuilder/view.php', ['id' => $report->get('id')]);
 
         $displayvalue = html_writer::link($url, $report->get_formatted_name());
 

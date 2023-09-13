@@ -19,7 +19,7 @@ namespace core_backup;
 use restore_controller_dbops;
 use restore_dbops;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;

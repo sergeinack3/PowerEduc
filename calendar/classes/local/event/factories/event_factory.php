@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\factories;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_calendar\local\event\exceptions\invalid_callback_exception;
 use core_calendar\local\event\entities\event_interface;

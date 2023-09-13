@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Assess a submission or view the single assessment
@@ -46,7 +46,7 @@ $cm         = get_coursemodule_from_instance('workshop', $workshop->id, $course-
 
 require_login($course, false, $cm);
 if (isguestuser()) {
-    throw new \moodle_exception('guestsarenotallowed');
+    throw new \powereduc_exception('guestsarenotallowed');
 }
 $workshop = new workshop($workshop, $cm, $course);
 
@@ -80,7 +80,7 @@ if ($assessmenteditable) {
     list($assessed, $notice) = $workshop->check_examples_assessed_before_assessment($assessment->reviewerid);
     if (!$assessed) {
         echo $output->header();
-        notice(get_string($notice, 'workshop'), new moodle_url('/mod/workshop/view.php', array('id' => $cm->id)));
+        notice(get_string($notice, 'workshop'), new powereduc_url('/mod/workshop/view.php', array('id' => $cm->id)));
         echo $output->footer();
         exit;
     }

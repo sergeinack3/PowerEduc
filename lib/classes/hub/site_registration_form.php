@@ -23,7 +23,7 @@
  */
 
 namespace core\hub;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context_course;
 use stdClass;
@@ -152,7 +152,7 @@ class site_registration_form extends \moodleform {
         $mform->setType('imageurl', PARAM_URL);
 
         $mform->addElement('checkbox', 'policyagreed', get_string('policyagreed', 'hub'),
-            get_string('policyagreeddesc', 'hub', HUB_MOODLEORGHUBURL . '/privacy'));
+            get_string('policyagreeddesc', 'hub', HUB_POWEREDUCORGHUBURL . '/privacy'));
         $mform->addRule('policyagreed', $strrequired, 'required', null, 'client');
 
         $mform->addElement('header', 'sitestats', get_string('sendfollowinginfo', 'hub'));

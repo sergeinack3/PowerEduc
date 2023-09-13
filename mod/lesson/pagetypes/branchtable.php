@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Branch Table
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
  /** Branch Table page */
 define("LESSON_PAGE_BRANCHTABLE",   "20");
@@ -64,7 +64,7 @@ class lesson_page_type_branchtable extends lesson_page {
                 $jumps[] = $this->get_jump_name($answer->jumpto);
             }
         } else {
-            // We get here is the lesson was created on a Moodle 1.9 site and
+            // We get here is the lesson was created on a PowerEduc 1.9 site and
             // the lesson contains question pages without any answers.
             $jumps[] = $this->get_jump_name($this->properties->nextpageid);
         }
@@ -84,7 +84,7 @@ class lesson_page_type_branchtable extends lesson_page {
 
         if (!$firstpage) {
             if (!$apageid = $DB->get_field("lesson_pages", "id", array("lessonid" => $lesson->id, "prevpageid" => 0))) {
-                throw new \moodle_exception('cannotfindfirstpage', 'lesson');
+                throw new \powereduc_exception('cannotfindfirstpage', 'lesson');
             }
             while (true) {
                 if ($apageid) {
@@ -129,8 +129,8 @@ class lesson_page_type_branchtable extends lesson_page {
             $params['pageid'] = $this->properties->id;
             $params['sesskey'] = sesskey();
             $params['jumpto'] = $answer->jumpto;
-            $url = new moodle_url('/mod/lesson/continue.php', $params);
-            $buttons[] = $renderer->single_button($url, strip_tags(format_text($answer->answer, FORMAT_MOODLE, $options)));
+            $url = new powereduc_url('/mod/lesson/continue.php', $params);
+            $buttons[] = $renderer->single_button($url, strip_tags(format_text($answer->answer, FORMAT_POWEREDUC, $options)));
             $i++;
         }
         // Set the orientation
@@ -261,7 +261,7 @@ class lesson_page_type_branchtable extends lesson_page {
 
         foreach ($answers as $answer) {
             $data = "<input type=\"button\" class=\"btn btn-secondary\" name=\"$answer->id\" " .
-                    "value=\"".s(strip_tags(format_text($answer->answer, FORMAT_MOODLE, $formattextdefoptions)))."\" " .
+                    "value=\"".s(strip_tags(format_text($answer->answer, FORMAT_POWEREDUC, $formattextdefoptions)))."\" " .
                     "disabled=\"disabled\"> ";
             $data .= get_string('jumpsto', 'lesson', $this->get_jump_name($answer->jumpto));
             $answerdata->answers[] = array($data, "");
@@ -281,7 +281,7 @@ class lesson_page_type_branchtable extends lesson_page {
     }
     public function add_page_link($previd) {
         global $PAGE, $CFG;
-        $addurl = new moodle_url('/mod/lesson/editpage.php', array('id'=>$PAGE->cm->id, 'pageid'=>$previd, 'qtype'=>LESSON_PAGE_BRANCHTABLE));
+        $addurl = new powereduc_url('/mod/lesson/editpage.php', array('id'=>$PAGE->cm->id, 'pageid'=>$previd, 'qtype'=>LESSON_PAGE_BRANCHTABLE));
         return array('addurl'=>$addurl, 'type'=>LESSON_PAGE_BRANCHTABLE, 'name'=>get_string('addabranchtable', 'lesson'));
     }
     protected function get_displayinmenublock() {

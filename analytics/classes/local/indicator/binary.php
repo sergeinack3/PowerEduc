@@ -24,7 +24,7 @@
 
 namespace core_analytics\local\indicator;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Abstract binary indicator.

@@ -23,7 +23,7 @@
  */
 
 namespace core_competency;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use coding_exception;
 

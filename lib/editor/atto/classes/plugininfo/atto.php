@@ -25,7 +25,7 @@ namespace editor_atto\plugininfo;
 
 use core\plugininfo\base;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 class atto extends base {

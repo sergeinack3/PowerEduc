@@ -24,7 +24,7 @@
 
 namespace core_analytics\local\analyser;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Abstract analyser in course basis.

@@ -23,7 +23,7 @@
  */
 
 namespace tool_dataprivacy\form;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_dataprivacy\api;
 use tool_dataprivacy\data_registry;

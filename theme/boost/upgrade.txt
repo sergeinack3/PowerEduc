@@ -11,7 +11,7 @@ information provided here is intended especially for theme designers.
   Call this and output it into your templates.
 * In order to view additional custom nodes, leverage the 'get_overflow_menu_data' which returns url_select if there are nodes available.
 * In order for existing themes to leverage the changes in the Boost theme, it is recommended to follow the guidelines in the 4.0 docs
-  https://docs.moodle.org/dev/Moodle_4.0_developer_update
+  https://docs.powereduc.org/dev/PowerEduc_4.0_developer_update
 
 === 3.7 ===
 
@@ -29,7 +29,7 @@ themes, which were mistakenly dropped when introducing the Boost theme.
 
 The Boost theme now uses Bootstrap 4 Stable (BS4S).
 
-We are trying to use as much BS4S classes in MDL Templates to reduce the amount of Moodle CSS.
+We are trying to use as much BS4S classes in MDL Templates to reduce the amount of PowerEduc CSS.
 
 The biggest changes are:
 
@@ -82,8 +82,8 @@ $font-size-base: 0.9375rem
 // Import All of Bootstrap.
 @import "bootstrap";
 
-// Import Core moodle CSS.
-@import "moodle";
+// Import Core powereduc CSS.
+@import "powereduc";
 
 // Space to use Bootstrap mixins and extends.
 .navbar {

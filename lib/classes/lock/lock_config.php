@@ -25,7 +25,7 @@
 
 namespace core\lock;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Lock configuration class, used to get an instance of the currently configured lock factory.

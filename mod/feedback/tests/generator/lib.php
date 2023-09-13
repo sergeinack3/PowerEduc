@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * mod_feedback data generator class.
@@ -59,7 +59,7 @@ class mod_feedback_generator extends testing_module_generator {
             $record->page_after_submit = 'This is page after submit';
         }
         if (!isset($record->page_after_submitformat)) {
-            $record->page_after_submitformat = FORMAT_MOODLE;
+            $record->page_after_submitformat = FORMAT_POWEREDUC;
         }
         if (!isset($record->publish_stats)) {
             $record->publish_stats = 0;

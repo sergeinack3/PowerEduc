@@ -64,7 +64,7 @@ class subscription implements \renderable, \templatable {
         $ms = get_config('tool_mobile');    // Get mobile settings.
 
         $data = $this->subscriptiondata;
-        $data['appsportalurl'] = \tool_mobile\api::MOODLE_APPS_PORTAL_URL;
+        $data['appsportalurl'] = \tool_mobile\api::POWEREDUC_APPS_PORTAL_URL;
 
         // First prepare messages that may come from the WS.
         if (!empty($data['messages'])) {

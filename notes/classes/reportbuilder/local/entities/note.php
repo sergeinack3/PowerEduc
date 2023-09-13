@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use core_reportbuilder\local\filters\{date, select, text};
 use core_reportbuilder\local\helpers\format;
 use core_reportbuilder\local\report\{column, filter};
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 require_once("{$CFG->dirroot}/notes/lib.php");
@@ -34,7 +34,7 @@ require_once("{$CFG->dirroot}/notes/lib.php");
  * Note entity
  *
  * @package     core_notes
- * @copyright   2022 Paul Holden <paulh@moodle.com>
+ * @copyright   2022 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class note extends base {

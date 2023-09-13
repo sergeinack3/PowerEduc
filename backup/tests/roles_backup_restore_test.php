@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff.
 global $CFG;
@@ -94,7 +94,7 @@ class roles_backup_restore_test extends advanced_testcase {
         // Do backup with default settings. MODE_IMPORT means it will just
         // create the directory and not zip it.
         $bc = new \backup_controller(backup::TYPE_1COURSE, $course->id,
-                backup::FORMAT_MOODLE, backup::INTERACTIVE_NO, backup::MODE_IMPORT,
+                backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO, backup::MODE_IMPORT,
                 $USER->id);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();

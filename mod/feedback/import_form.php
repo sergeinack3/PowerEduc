@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,13 +23,13 @@
  */
 
 //It must be included from a Moodle page
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden.');
 }
 
 require_once($CFG->libdir.'/formslib.php');
 
-class feedback_import_form extends moodleform {
+class feedback_import_form extends powereducform {
     public function definition() {
         global $CFG;
         $mform =& $this->_form;

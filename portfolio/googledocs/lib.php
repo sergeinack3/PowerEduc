@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Google Documents Portfolio Plugin
@@ -214,7 +214,7 @@ class portfolio_plugin_googledocs extends portfolio_plugin_push_base {
     public static function admin_config_form(&$mform) {
         $a = new stdClass;
         $a->docsurl = get_docs_url('Google_OAuth_2.0_setup');
-        $a->callbackurl = (new moodle_url(self::REDIRECTURL))->out(false);
+        $a->callbackurl = (new powereduc_url(self::REDIRECTURL))->out(false);
 
         $mform->addElement('static', null, '', get_string('oauthinfo', 'portfolio_googledocs', $a));
 
@@ -229,8 +229,8 @@ class portfolio_plugin_googledocs extends portfolio_plugin_push_base {
     }
 
     private function initialize_oauth() {
-        $redirecturi = new moodle_url(self::REDIRECTURL);
-        $returnurl = new moodle_url('/portfolio/add.php');
+        $redirecturi = new powereduc_url(self::REDIRECTURL);
+        $returnurl = new powereduc_url('/portfolio/add.php');
         $returnurl->param('postcontrol', 1);
         $returnurl->param('id', $this->exporter->get('id'));
         $returnurl->param('sesskey', sesskey());

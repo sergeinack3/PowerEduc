@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,12 +16,12 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/pagelib.php');
 require_once($CFG->libdir . '/blocklib.php');
-require_once($CFG->dirroot . '/blocks/moodleblock.class.php');
+require_once($CFG->dirroot . '/blocks/powereducblock.class.php');
 require_once(__DIR__ . '/fixtures/block_ablocktype.php');
 require_once(__DIR__ . '/fixtures/testable_block_manager.php');
 
@@ -40,7 +40,7 @@ class blocklib_test extends \advanced_testcase {
 
     protected function setUp(): void {
         parent::setUp();
-        $this->testpage = new \moodle_page();
+        $this->testpage = new \powereduc_page();
         $this->testpage->set_context(\context_system::instance());
         $this->testpage->set_pagetype('phpunit-block-test');
         $this->blockmanager = new \testable_block_manager($this->testpage);
@@ -209,11 +209,11 @@ class blocklib_test extends \advanced_testcase {
     }
 
     protected function get_a_page_and_block_manager($regions, $context, $pagetype, $subpage = '') {
-        $page = new \moodle_page;
+        $page = new \powereduc_page;
         $page->set_context($context);
         $page->set_pagetype($pagetype);
         $page->set_subpage($subpage);
-        $page->set_url(new \moodle_url('/'));
+        $page->set_url(new \powereduc_url('/'));
 
         $blockmanager = new \testable_block_manager($page);
         $blockmanager->add_regions($regions, false);

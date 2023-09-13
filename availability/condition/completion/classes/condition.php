@@ -30,7 +30,7 @@ use core_availability\info_module;
 use core_availability\info_section;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/completionlib.php');
 

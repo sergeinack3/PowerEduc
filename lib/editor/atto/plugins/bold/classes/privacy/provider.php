@@ -24,7 +24,7 @@
 
 namespace atto_bold\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_bold implementing null_provider.

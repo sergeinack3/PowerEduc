@@ -69,7 +69,7 @@ Feature: Test the module in group mode.
   I should only be able to select the group I belong on the main bigblue button page.
     Given the following "permission overrides" exist:
       | capability                  | permission | role           | contextlevel | reference |
-      | moodle/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
+      | powereduc/site:accessallgroups | Prevent    | editingteacher | Course       | C1        |
     When I am on the "RoomRecordings" "bigbluebuttonbn activity" page logged in as "teacher1"
     Then I should see "Separate groups: Group 1"
 

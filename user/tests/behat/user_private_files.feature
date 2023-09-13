@@ -1,6 +1,6 @@
 @core @core_user @_file_upload @javascript
-Feature: The private files page allows users to store files privately in moodle.
-  In order to store a private file in moodle
+Feature: The private files page allows users to store files privately in powereduc.
+  In order to store a private file in powereduc
   As an authenticated user
   I can upload the file to my private files area from the private files page
 

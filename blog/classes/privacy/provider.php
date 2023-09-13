@@ -24,7 +24,7 @@
  */
 
 namespace core_blog\privacy;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use blog_entry;
 use context;

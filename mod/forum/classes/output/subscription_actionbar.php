@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum\output;
 
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use url_select;
 use renderable;
@@ -26,14 +26,14 @@ use templatable;
  * Renders the subscribers page for this activity.
  *
  * @package   mod_forum
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class subscription_actionbar implements renderable, templatable {
     /** @var int course id */
     private $id;
 
-    /** @var moodle_url */
+    /** @var powereduc_url */
     private $currenturl;
 
     /** @var \stdClass  */
@@ -46,11 +46,11 @@ class subscription_actionbar implements renderable, templatable {
      * subscription_actionbar constructor.
      *
      * @param int $id The forum id.
-     * @param moodle_url $currenturl Current URL.
+     * @param powereduc_url $currenturl Current URL.
      * @param \stdClass $forum The forum object.
      * @param int $edit This argument decides to show view/manage subscribers view.
      */
-    public function __construct(int $id, moodle_url $currenturl, \stdClass $forum, int $edit) {
+    public function __construct(int $id, powereduc_url $currenturl, \stdClass $forum, int $edit) {
         $this->id = $id;
         $this->currenturl = $currenturl;
         $this->forum = $forum;
@@ -70,13 +70,13 @@ class subscription_actionbar implements renderable, templatable {
 
         $sesskey = sesskey();
         $modeset = \mod_forum\subscriptions::get_subscription_mode($this->forum);
-        $optionallink = new moodle_url('/mod/forum/subscribe.php',
+        $optionallink = new powereduc_url('/mod/forum/subscribe.php',
             ['id' => $this->id, 'mode' => FORUM_CHOOSESUBSCRIBE, 'sesskey' => $sesskey, 'edit' => $this->edit]);
-        $forcedlink = new moodle_url('/mod/forum/subscribe.php',
+        $forcedlink = new powereduc_url('/mod/forum/subscribe.php',
             ['id' => $this->id, 'mode' => FORUM_FORCESUBSCRIBE, 'sesskey' => $sesskey, 'edit' => $this->edit]);
-        $autolink = new moodle_url('/mod/forum/subscribe.php',
+        $autolink = new powereduc_url('/mod/forum/subscribe.php',
             ['id' => $this->id, 'mode' => FORUM_INITIALSUBSCRIBE, 'sesskey' => $sesskey, 'edit' => $this->edit]);
-        $disabledlink = new moodle_url('/mod/forum/subscribe.php',
+        $disabledlink = new powereduc_url('/mod/forum/subscribe.php',
             ['id' => $this->id, 'mode' => FORUM_DISALLOWSUBSCRIBE, 'sesskey' => $sesskey, 'edit' => $this->edit]);
 
         $menu = [
@@ -100,7 +100,7 @@ class subscription_actionbar implements renderable, templatable {
                 $set = get_string('subscriptiondisabled', 'forum');
                 break;
             default:
-                throw new \moodle_exception(get_string('invalidforcesubscribe', 'forum'));
+                throw new \powereduc_exception(get_string('invalidforcesubscribe', 'forum'));
         }
 
         $menu = array_filter($menu, function($key) use ($set) {
@@ -126,8 +126,8 @@ class subscription_actionbar implements renderable, templatable {
             return null;
         }
 
-        $viewlink = new moodle_url('/mod/forum/subscribers.php', ['id' => $this->id, 'edit' => 'off']);
-        $managelink = new moodle_url('/mod/forum/subscribers.php', ['id' => $this->id, 'edit' => 'on']);
+        $viewlink = new powereduc_url('/mod/forum/subscribers.php', ['id' => $this->id, 'edit' => 'off']);
+        $managelink = new powereduc_url('/mod/forum/subscribers.php', ['id' => $this->id, 'edit' => 'on']);
 
         $menu = [
             $viewlink->out(false) => get_string('forum:viewsubscribers', 'forum'),

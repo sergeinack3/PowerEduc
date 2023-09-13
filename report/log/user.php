@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Display user activity reports for a course (totals)
@@ -47,7 +47,7 @@ if ($courseid == SITEID) {
     $PAGE->set_context($personalcontext);
 }
 
-if ($USER->id != $user->id and has_capability('moodle/user:viewuseractivitiesreport', $personalcontext)
+if ($USER->id != $user->id and has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext)
         and !is_enrolled($coursecontext, $USER) and is_enrolled($coursecontext, $user)) {
     //TODO: do not require parents to be enrolled in courses - this is a hack!
     require_login();
@@ -59,7 +59,7 @@ if ($USER->id != $user->id and has_capability('moodle/user:viewuseractivitiesrep
 list($all, $today) = report_log_can_access_user_report($user, $course);
 
 if (!$today && !$all) {
-    throw new \moodle_exception('nocapability', 'report_log');
+    throw new \powereduc_exception('nocapability', 'report_log');
 }
 
 if ($mode === 'today') {
@@ -83,7 +83,7 @@ $PAGE->navbar->add(get_string('alllogs'));
 
 // Create the appropriate breadcrumb.
 $navigationnode = array(
-        'url' => new moodle_url('/report/log/user.php', array('id' => $user->id, 'course' => $course->id, 'mode' => $mode))
+        'url' => new powereduc_url('/report/log/user.php', array('id' => $user->id, 'course' => $course->id, 'mode' => $mode))
     );
 if ($mode === 'today') {
     $navigationnode['name'] = get_string('todaylogs');
@@ -93,7 +93,7 @@ if ($mode === 'today') {
 $PAGE->add_report_nodes($user->id, $navigationnode);
 
 if ($courseid == SITEID) {
-    $PAGE->set_heading(fullname($user, has_capability('moodle/site:viewfullnames', $PAGE->context)));
+    $PAGE->set_heading(fullname($user, has_capability('powereduc/site:viewfullnames', $PAGE->context)));
 } else {
     $PAGE->set_heading($course->fullname);
 }
@@ -106,15 +106,15 @@ $event->trigger();
 echo $OUTPUT->header();
 if ($courseid != SITEID) {
     $userheading = array(
-            'heading' => fullname($user, has_capability('moodle/site:viewfullnames', $PAGE->context)),
+            'heading' => fullname($user, has_capability('powereduc/site:viewfullnames', $PAGE->context)),
             'user' => $user,
             'usercontext' => $personalcontext,
         );
     echo $OUTPUT->context_header($userheading, 2);
     if ($mode === 'today') {
-        echo $OUTPUT->heading(get_string('todaylogs', 'moodle'), 2, 'main mt-4 mb-4');
+        echo $OUTPUT->heading(get_string('todaylogs', 'powereduc'), 2, 'main mt-4 mb-4');
     } else {
-        echo $OUTPUT->heading(get_string('alllogs', 'moodle'), 2, 'main mt-4 mb-4');
+        echo $OUTPUT->heading(get_string('alllogs', 'powereduc'), 2, 'main mt-4 mb-4');
     }
 }
 

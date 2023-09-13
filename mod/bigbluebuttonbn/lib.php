@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @author    Jesus Federico  (jesus [at] blindsidenetworks [dt] com)
  * @author    Fred Dixon  (ffdixon [at] blindsidenetworks [dt] com)
  */
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use core_calendar\action_factory;
 use core_calendar\local\event\entities\action_interface;
@@ -52,7 +52,7 @@ global $CFG;
  * @uses FEATURE_GROUPINGS
  * @uses FEATURE_GROUPMEMBERSONLY
  * @uses FEATURE_MOD_INTRO
- * @uses FEATURE_BACKUP_MOODLE2
+ * @uses FEATURE_BACKUP_POWEREDUC2
  * @uses FEATURE_COMPLETION_TRACKS_VIEWS
  * @uses FEATURE_COMPLETION_HAS_RULES
  * @uses FEATURE_GRADE_HAS_GRADE
@@ -68,7 +68,7 @@ function bigbluebuttonbn_supports($feature) {
         FEATURE_GROUPS => true,
         FEATURE_GROUPINGS => true,
         FEATURE_MOD_INTRO => true,
-        FEATURE_BACKUP_MOODLE2 => true,
+        FEATURE_BACKUP_POWEREDUC2 => true,
         FEATURE_COMPLETION_TRACKS_VIEWS => true,
         FEATURE_COMPLETION_HAS_RULES => true,
         FEATURE_GRADE_HAS_GRADE => false,
@@ -165,7 +165,7 @@ function bigbluebuttonbn_delete_instance($id) {
     try {
         $meeting = new meeting($instance);
         $meeting->end_meeting();
-    } catch (moodle_exception $e) {
+    } catch (powereduc_exception $e) {
         // Do not log any issue when testing.
         if (!(defined('PHPUNIT_TEST') && PHPUNIT_TEST) && !defined('BEHAT_SITE_RUNNING')) {
             debugging($e->getMessage(), DEBUG_DEVELOPER, $e->getTrace());
@@ -187,7 +187,7 @@ function bigbluebuttonbn_delete_instance($id) {
             $instance->set_group_id($groupid);
             $meeting = new meeting($instance);
             $meeting->end_meeting();
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             debugging($e->getMessage() . ' for group ' . $groupid, DEBUG_NORMAL, $e->getTrace());
         }
     }
@@ -267,7 +267,7 @@ function bigbluebuttonbn_get_completion_aggregation_state() {
  * @return string[]
  */
 function bigbluebuttonbn_get_extra_capabilities() {
-    return ['moodle/site:accessallgroups'];
+    return ['powereduc/site:accessallgroups'];
 }
 
 /**
@@ -307,7 +307,7 @@ function bigbluebuttonbn_reset_course_form_defaults(stdClass $course) {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  *
  * @param stdClass $data the data submitted from the reset course.
  * @return array status array
@@ -505,7 +505,7 @@ function mod_bigbluebuttonbn_core_calendar_provide_event_action(
         }
         // Get if the user can join.
         $meetinginfo = meeting::get_meeting_info_for_instance($instance);
-    } catch (moodle_exception $e) {
+    } catch (powereduc_exception $e) {
         debugging('Error - Cannot retrieve info from meeting ('.$instance->get_meeting_id().') ' . $e->getMessage());
         return null;
     }
@@ -521,11 +521,11 @@ function mod_bigbluebuttonbn_core_calendar_provide_event_action(
 
     // Action data.
     $string = get_string('view_room', 'bigbluebuttonbn');
-    $url = new moodle_url('/mod/bigbluebuttonbn/view.php', ['id' => $cm->id]);
+    $url = new powereduc_url('/mod/bigbluebuttonbn/view.php', ['id' => $cm->id]);
     if (groups_get_activity_groupmode($cm) == NOGROUPS) {
         // No groups mode.
         $string = get_string('view_conference_action_join', 'bigbluebuttonbn');
-        $url = new moodle_url('/mod/bigbluebuttonbn/bbb_view.php', [
+        $url = new powereduc_url('/mod/bigbluebuttonbn/bbb_view.php', [
                 'action' => 'join',
                 'id' => $cm->id,
                 'bn' => $bigbluebuttonbn->id,
@@ -565,7 +565,7 @@ function bigbluebuttonbn_extend_settings_navigation(settings_navigation $setting
     }
     // Don't add validate completion if user is not allowed to edit the activity.
     $context = context_module::instance($settingsnav->get_page()->cm->id);
-    if (!has_capability('moodle/course:manageactivities', $context, $USER->id)) {
+    if (!has_capability('powereduc/course:manageactivities', $context, $USER->id)) {
         return;
     }
     $completionvalidate = '#action=completion_validate&bigbluebuttonbn=' . $settingsnav->get_page()->cm->instance;
@@ -668,7 +668,7 @@ function bigbluebuttonbn_print_recent_mod_activity(stdClass $activity, int $cour
     $template = ['userpicture' => $userpicture,
         'submissiontimestamp' => $activity->timestamp,
         'modinfo' => $modinfo,
-        'userurl' => new moodle_url('/user/view.php', array('id' => $activity->user->id, 'course' => $courseid)),
+        'userurl' => new powereduc_url('/user/view.php', array('id' => $activity->user->id, 'course' => $courseid)),
         'fullname' => $activity->user->fullname];
     if (isset($activity->eventname)) {
         $template['eventname'] = $activity->eventname;
@@ -703,7 +703,7 @@ function bigbluebuttonbn_print_recent_activity(object $course, bool $viewfullnam
         if ($logs) {
             echo $OUTPUT->heading(get_string('new_bigblubuttonbn_activities', 'bigbluebuttonbn') . ':', 6);
             foreach ($logs as $log) {
-                $activityurl = new moodle_url('/mod/bigbluebuttonbn/index.php', ['id' => $course->id]);
+                $activityurl = new powereduc_url('/mod/bigbluebuttonbn/index.php', ['id' => $course->id]);
                 print_recent_activity_note($log->timecreated,
                     $log,
                     logger::get_printable_event_name($log) . ' - ' . $instance->get_meeting_name(),

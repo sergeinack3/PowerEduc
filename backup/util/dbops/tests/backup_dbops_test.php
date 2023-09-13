@@ -29,7 +29,7 @@ use backup_controller_dbops;
 use backup_controller_exception;
 use backup_dbops_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;
@@ -87,7 +87,7 @@ class backup_dbops_test extends \advanced_testcase {
         $dbman = $DB->get_manager(); // Going to use some database_manager services for testing
 
         // Instantiate non interactive backup_controller
-        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $this->assertTrue($bc instanceof backup_controller);
         // Calculate checksum
@@ -103,7 +103,7 @@ class backup_dbops_test extends \advanced_testcase {
         $this->assertEquals($recid, $recid2); // Same record in both save operations
 
         // Try incorrect checksum
-        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $checksum = $bc->calculate_checksum();
         try {
@@ -125,7 +125,7 @@ class backup_dbops_test extends \advanced_testcase {
         }
 
         // save and load controller (by backupid). Then compare
-        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $checksum = $bc->calculate_checksum(); // Calculate checksum
         $backupid = $bc->get_backupid();
@@ -181,17 +181,17 @@ class backup_dbops_test extends \advanced_testcase {
         $dbman = $DB->get_manager(); // Going to use some database_manager services for testing
 
         // A MODE_GENERAL controller - this should include files
-        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $this->assertEquals(backup_controller_dbops::backup_includes_files($bc->get_backupid()), 1);
 
         // A MODE_IMPORT controller - should not include files
-        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller4dbops(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_IMPORT, $this->userid);
         $this->assertEquals(backup_controller_dbops::backup_includes_files($bc->get_backupid()), 0);
 
         // A MODE_SAMESITE controller - should not include files
-        $bc = new mock_backup_controller4dbops(backup::TYPE_1COURSE, $this->courseid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller4dbops(backup::TYPE_1COURSE, $this->courseid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_SAMESITE, $this->userid);
         $this->assertEquals(backup_controller_dbops::backup_includes_files($bc->get_backupid()), 0);
     }

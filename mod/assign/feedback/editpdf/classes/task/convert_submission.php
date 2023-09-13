@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace assignfeedback_editpdf\task;
 
@@ -69,7 +69,7 @@ class convert_submission extends adhoc_task {
             // task would stop attempting to poll the conversion after a
             // configured number of attempts were made to poll it, see:
             //
-            // mod/assign/feedback/editpdf/classes/task/convert_submissions.php@MOODLE_400_STABLE
+            // mod/assign/feedback/editpdf/classes/task/convert_submissions.php@POWEREDUC_400_STABLE
             //
             // This means that currently this adhoc task, if it fails, will retry forever. But
             // the fail-delay mechanism will ensure that it eventually only tries once per day.
@@ -98,7 +98,7 @@ class convert_submission extends adhoc_task {
                     // settle on trying once per day due to the faildelay exponential backoff)
                     // however once the conversionattepmtlimit is re-implemented in MDL-75457 the
                     // task will eventually get dropped.
-                    throw new \moodle_exception('documentcombinationfailed');
+                    throw new \powereduc_exception('documentcombinationfailed');
             }
 
             document_services::get_page_images_for_attempt($assign, $userid, $data->submissionattempt, false);

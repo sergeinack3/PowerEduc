@@ -27,7 +27,7 @@ use core_privacy\local\metadata\collection;
 use block_comments\privacy\provider;
 use core_privacy\local\request\approved_userlist;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider test for block_comments.

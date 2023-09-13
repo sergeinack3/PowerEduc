@@ -27,7 +27,7 @@ use core\event\base;
 use core_competency\evidence;
 use core_competency\user_competency;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Evidence created event class.

@@ -25,7 +25,7 @@
 
 namespace core\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * URL rewriter interface

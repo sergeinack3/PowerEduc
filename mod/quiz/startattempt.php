@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This script deals with starting a new attempt at a quiz.
@@ -35,10 +35,10 @@ $forcenew = optional_param('forcenew', false, PARAM_BOOL); // Used to force a ne
 $page = optional_param('page', -1, PARAM_INT); // Page to jump to in the attempt.
 
 if (!$cm = get_coursemodule_from_id('quiz', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
-    throw new \moodle_exception("coursemisconf");
+    throw new \powereduc_exception("coursemisconf");
 }
 
 $quizobj = quiz::create($cm->instance, $USER->id);
@@ -57,7 +57,7 @@ if (!$quizobj->has_questions()) {
     if ($quizobj->has_capability('mod/quiz:manage')) {
         redirect($quizobj->edit_url());
     } else {
-        throw new \moodle_exception('cannotstartnoquestions', 'quiz', $quizobj->view_url());
+        throw new \powereduc_exception('cannotstartnoquestions', 'quiz', $quizobj->view_url());
     }
 }
 
@@ -72,7 +72,7 @@ list($currentattemptid, $attemptnumber, $lastattempt, $messages, $page) =
 // Check access.
 if (!$quizobj->is_preview_user() && $messages) {
     $output = $PAGE->get_renderer('mod_quiz');
-    throw new \moodle_exception('attempterror', 'quiz', $quizobj->view_url(),
+    throw new \powereduc_exception('attempterror', 'quiz', $quizobj->view_url(),
             $output->access_messages($messages));
 }
 

@@ -24,7 +24,7 @@
 
 namespace core_calendar\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/calendar/lib.php");
 require_once($CFG->libdir . "/filelib.php");

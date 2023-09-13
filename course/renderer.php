@@ -2579,7 +2579,7 @@ class coursecat_helper {
     public function get_category_formatted_description($coursecat, $options = null) {
         if ($coursecat->id && $coursecat->is_uservisible() && !empty($coursecat->description)) {
             if (!isset($coursecat->descriptionformat)) {
-                $descriptionformat = FORMAT_MOODLE;
+                $descriptionformat = FORMAT_POWEREDUC;
             } else {
                 $descriptionformat = $coursecat->descriptionformat;
             }

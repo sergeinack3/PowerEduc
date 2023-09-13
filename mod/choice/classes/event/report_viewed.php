@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  * The mod_choice report viewed event.
  *
  * @package mod_choice
- * @copyright 2013 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2013 Adrian Greeve <adrian@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_choice\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The mod_choice report viewed event class.
@@ -71,10 +71,10 @@ class report_viewed extends \core\event\base {
 
     /**
      * Returns relevant URL.
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_url() {
-        return new \moodle_url('/mod/choice/report.php', array('id' => $this->contextinstanceid));
+        return new \powereduc_url('/mod/choice/report.php', array('id' => $this->contextinstanceid));
     }
 
     /**
@@ -83,7 +83,7 @@ class report_viewed extends \core\event\base {
      * @return array of parameters to be passed to legacy add_to_log() function.
      */
     protected function get_legacy_logdata() {
-        $url = new \moodle_url('report.php', array('id' => $this->contextinstanceid));
+        $url = new \powereduc_url('report.php', array('id' => $this->contextinstanceid));
         return array($this->courseid, 'choice', 'report', $url->out(), $this->objectid, $this->contextinstanceid);
     }
 

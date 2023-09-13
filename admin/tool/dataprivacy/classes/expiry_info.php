@@ -25,7 +25,7 @@ namespace tool_dataprivacy;
 
 use core_privacy\manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Expiry Data.

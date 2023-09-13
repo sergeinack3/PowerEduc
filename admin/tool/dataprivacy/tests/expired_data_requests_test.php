@@ -18,7 +18,7 @@ namespace tool_dataprivacy;
 
 use data_privacy_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once('data_privacy_testcase.php');
 

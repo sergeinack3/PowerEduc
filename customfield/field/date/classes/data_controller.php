@@ -26,7 +26,7 @@ namespace customfield_date;
 
 use core_customfield\api;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class data

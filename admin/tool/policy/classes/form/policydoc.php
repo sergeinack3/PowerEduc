@@ -31,7 +31,7 @@ use moodleform;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Defines the form for editing a policy document version.

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Question behaviour type for deferred feedback with CBM behaviour.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../deferredfeedback/behaviourtype.php');
 
@@ -87,7 +87,7 @@ class qbehaviour_deferredcbm_type extends qbehaviour_deferredfeedback_type {
 
             $certainty = $qa->get_last_behaviour_var('certainty');
             if (is_null($certainty) || $certainty == -1) {
-                // Certainty -1 has never been used in standard Moodle, but is
+                // Certainty -1 has never been used in standard PowerEduc, but is
                 // used in Tony-Gardiner Medwin's patches to mean 'No idea' which
                 // we intend to implement: MDL-42077. In the mean time, avoid
                 // errors for people who have used TGM's patches.

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ $action = optional_param('action', 'view', PARAM_ALPHA); // The page action.
 $allowedactions = ['view', 'importzip', 'finishimport',
     'export', 'preview'];
 if (!in_array($action, $allowedactions)) {
-    throw new moodle_exception('invalidaccess');
+    throw new powereduc_exception('invalidaccess');
 }
 
 $context = $manager->get_context();
@@ -68,7 +68,7 @@ $context = $manager->get_context();
 require_login($course, false, $cm);
 require_capability('mod/data:managetemplates', $context);
 
-$url = new moodle_url('/mod/data/preset.php', array('d' => $data->id));
+$url = new powereduc_url('/mod/data/preset.php', array('d' => $data->id));
 
 $PAGE->add_body_class('mediumwidth');
 $PAGE->set_url($url);
@@ -88,7 +88,7 @@ $presets = $manager->get_available_presets();
 
 if ($action === 'export') {
     if (headers_sent()) {
-        throw new \moodle_exception('headersent');
+        throw new \powereduc_exception('headersent');
     }
 
     // Check if we should export a given preset or the current one.
@@ -126,7 +126,7 @@ if ($action == 'importzip') {
     }
     $importer->import(false);
     core\notification::success(get_string('importsuccess', 'mod_data'));
-    redirect(new moodle_url('/mod/data/field.php', ['id' => $cm->id]));
+    redirect(new powereduc_url('/mod/data/field.php', ['id' => $cm->id]));
     exit(0);
 }
 
@@ -138,7 +138,7 @@ if ($action === 'preview') {
     $preset = preset::create_from_fullname($manager, $fullname);
     // Validate if the user can view this preset.
     if (!$manager->can_view_preset($preset)) {
-        throw new \moodle_exception('cannotaccesspresentsother', manager::PLUGINNAME);
+        throw new \powereduc_exception('cannotaccesspresentsother', manager::PLUGINNAME);
     }
     $preview = new preset_preview($manager, $preset, $templatename);
     $preview->prepare_page($PAGE);
@@ -153,7 +153,7 @@ if ($action === 'preview') {
 
 if ($action === 'finishimport') {
     if (!confirm_sesskey()) {
-        throw new moodle_exception('invalidsesskey');
+        throw new powereduc_exception('invalidsesskey');
     }
     $overwritesettings = optional_param('overwritesettings', false, PARAM_BOOL);
     $importer = preset_importer::create_from_parameters($manager);
@@ -164,7 +164,7 @@ echo $OUTPUT->header();
 
 $actionbar = new \mod_data\output\action_bar($data->id, $url);
 echo $actionbar->get_presets_action_bar();
-$presets = new \mod_data\output\presets($manager, $presets, new \moodle_url('/mod/data/field.php'), true);
+$presets = new \mod_data\output\presets($manager, $presets, new \powereduc_url('/mod/data/field.php'), true);
 echo $renderer->render_presets($presets);
 
 echo $OUTPUT->footer();

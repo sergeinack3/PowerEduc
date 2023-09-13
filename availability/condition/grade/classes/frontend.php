@@ -24,7 +24,7 @@
 
 namespace availability_grade;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Front-end class.

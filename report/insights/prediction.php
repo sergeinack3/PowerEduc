@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * View an insight.
@@ -41,11 +41,11 @@ if ($context->contextlevel < CONTEXT_COURSE) {
 }
 
 $params = array('id' => $prediction->get_prediction_data()->id);
-$url = new \moodle_url('/report/insights/prediction.php', $params);
+$url = new \powereduc_url('/report/insights/prediction.php', $params);
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('report');
 
-$navurl = new \moodle_url('/report/insights/insights.php', array('contextid' => $context->id));
+$navurl = new \powereduc_url('/report/insights/insights.php', array('contextid' => $context->id));
 if ($context->contextlevel === CONTEXT_SYSTEM) {
     admin_externalpage_setup('reportinsights', '', null, '', array('pagelayout' => 'report'));
 } else if ($context->contextlevel === CONTEXT_USER) {

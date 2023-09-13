@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag_tag
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Represents one tag and also contains lots of useful tag-related methods as static functions.
@@ -383,7 +383,7 @@ class core_tag_tag {
      * @param int $fromctx context id where this tag cloud is displayed
      * @param int $ctx context id for tag view link
      * @param int $rec recursive argument for tag view link
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public static function make_url($tagcollid, $name, $exclusivemode = 0, $fromctx = 0, $ctx = 0, $rec = 1) {
         $coll = core_tag_collection::get_by_id($tagcollid);
@@ -405,7 +405,7 @@ class core_tag_tag {
         if (!$rec) {
             $params['rec'] = 0;
         }
-        return new moodle_url($url, $params);
+        return new powereduc_url($url, $params);
     }
 
     /**
@@ -415,7 +415,7 @@ class core_tag_tag {
      * @param int $fromctx context id where this tag cloud is displayed
      * @param int $ctx context id for tag view link
      * @param int $rec recursive argument for tag view link
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_view_url($exclusivemode = 0, $fromctx = 0, $ctx = 0, $rec = 1) {
         return static::make_url($this->record->tagcollid, $this->record->rawname,
@@ -1053,7 +1053,7 @@ class core_tag_tag {
             } else if ($existing = static::get_by_name($this->tagcollid, $name, 'id')) {
                 // Prevent the rename if a tag with that name already exists.
                 if ($existing->id != $this->id) {
-                    throw new moodle_exception('namesalreadybeeingused', 'core_tag');
+                    throw new powereduc_exception('namesalreadybeeingused', 'core_tag');
                 }
             }
             if (isset($data['rawname'])) {
@@ -1468,30 +1468,30 @@ class core_tag_tag {
         // Add a link for users to add/remove this from their interests.
         if (static::is_enabled('core', 'user') && core_tag_area::get_collection('core', 'user') == $this->tagcollid) {
             if (static::is_item_tagged_with('core', 'user', $USER->id, $this->name)) {
-                $url = new moodle_url('/tag/user.php', array('action' => 'removeinterest',
+                $url = new powereduc_url('/tag/user.php', array('action' => 'removeinterest',
                     'sesskey' => sesskey(), 'tag' => $this->rawname));
                 $links[] = html_writer::link($url, get_string('removetagfrommyinterests', 'tag', $tagname),
                         array('class' => 'removefrommyinterests'));
             } else {
-                $url = new moodle_url('/tag/user.php', array('action' => 'addinterest',
+                $url = new powereduc_url('/tag/user.php', array('action' => 'addinterest',
                     'sesskey' => sesskey(), 'tag' => $this->rawname));
                 $links[] = html_writer::link($url, get_string('addtagtomyinterests', 'tag', $tagname),
                         array('class' => 'addtomyinterests'));
             }
         }
 
-        // Flag as inappropriate link.  Only people with moodle/tag:flag capability.
-        if (has_capability('moodle/tag:flag', $systemcontext)) {
-            $url = new moodle_url('/tag/user.php', array('action' => 'flaginappropriate',
+        // Flag as inappropriate link.  Only people with powereduc/tag:flag capability.
+        if (has_capability('powereduc/tag:flag', $systemcontext)) {
+            $url = new powereduc_url('/tag/user.php', array('action' => 'flaginappropriate',
                 'sesskey' => sesskey(), 'id' => $this->id));
             $links[] = html_writer::link($url, get_string('flagasinappropriate', 'tag', $tagname),
                         array('class' => 'flagasinappropriate'));
         }
 
-        // Edit tag: Only people with moodle/tag:edit capability who either have it as an interest or can manage tags.
-        if (has_capability('moodle/tag:edit', $systemcontext) ||
-                has_capability('moodle/tag:manage', $systemcontext)) {
-            $url = new moodle_url('/tag/edit.php', array('id' => $this->id));
+        // Edit tag: Only people with powereduc/tag:edit capability who either have it as an interest or can manage tags.
+        if (has_capability('powereduc/tag:edit', $systemcontext) ||
+                has_capability('powereduc/tag:manage', $systemcontext)) {
+            $url = new powereduc_url('/tag/edit.php', array('id' => $this->id));
             $links[] = html_writer::link($url, get_string('edittag', 'tag'),
                         array('class' => 'edittag'));
         }

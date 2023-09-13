@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page displays a preview of a question
@@ -53,7 +53,7 @@ $returnurl = optional_param('returnurl', null, PARAM_RAW);
 $question = question_bank::load_question($id);
 
 if ($returnurl) {
-    $returnurl = new moodle_url($returnurl);
+    $returnurl = new powereduc_url($returnurl);
 }
 
 // Were we given a particular context to run the question in?
@@ -95,19 +95,19 @@ if ($previewid) {
     } catch (Exception $e) {
         // This may not seem like the right error message to display, but
         // actually from the user point of view, it makes sense.
-        throw new moodle_exception('submissionoutofsequencefriendlymessage', 'question',
+        throw new powereduc_exception('submissionoutofsequencefriendlymessage', 'question',
                 helper::question_preview_url($question->id, $options->behaviour,
                         $options->maxmark, $options, $options->variant, $context), null, $e);
     }
 
     if ($quba->get_owning_context()->instanceid != $USER->id) {
-        throw new moodle_exception('notyourpreview', 'question');
+        throw new powereduc_exception('notyourpreview', 'question');
     }
 
     $slot = $quba->get_first_question_number();
     $usedquestion = $quba->get_question($slot, false);
     if ($usedquestion->id != $question->id) {
-        throw new moodle_exception('questionidmismatch', 'question');
+        throw new powereduc_exception('questionidmismatch', 'question');
     }
     $question = $usedquestion;
     $options->variant = $quba->get_variant($slot);
@@ -198,7 +198,7 @@ if (data_submitted() && confirm_sesskey()) {
         }
 
     } catch (question_out_of_sequence_exception $e) {
-        throw new moodle_exception('submissionoutofsequencefriendlymessage', 'question', $actionurl);
+        throw new powereduc_exception('submissionoutofsequencefriendlymessage', 'question', $actionurl);
 
     } catch (Exception $e) {
         // This sucks, if we display our own custom error message, there is no way
@@ -207,7 +207,7 @@ if (data_submitted() && confirm_sesskey()) {
         if (!empty($e->debuginfo)) {
             $debuginfo = $e->debuginfo;
         }
-        throw new moodle_exception('errorprocessingresponses', 'question', $actionurl,
+        throw new powereduc_exception('errorprocessingresponses', 'question', $actionurl,
                 $e->getMessage(), $debuginfo);
     }
 }
@@ -304,7 +304,7 @@ if (!is_null($returnurl)) {
     $previewdata['redirect'] = true;
     $previewdata['redirecturl'] = $returnurl;
 }
-$closeurl = new moodle_url('/question/edit.php', ['courseid' => $COURSE->id]);
+$closeurl = new powereduc_url('/question/edit.php', ['courseid' => $COURSE->id]);
 echo $PAGE->get_renderer('qbank_previewquestion')->render_preview_page($previewdata);
 
 // Log the preview of this question.

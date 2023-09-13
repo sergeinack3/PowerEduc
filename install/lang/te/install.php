@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['admindirname'] = 'అడ్మిన్ డైరెక్టరీ';
 $string['availablelangs'] = 'అందుబాటులో ఉన్న భాషల జాబితా';

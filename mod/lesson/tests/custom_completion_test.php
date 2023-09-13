@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types = 1);
 
@@ -22,9 +22,9 @@ use advanced_testcase;
 use cm_info;
 use coding_exception;
 use mod_lesson\completion\custom_completion;
-use moodle_exception;
+use powereduc_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/completionlib.php');
@@ -33,7 +33,7 @@ require_once($CFG->libdir . '/completionlib.php');
  * Class for unit testing mod_lesson/custom_completion.
  *
  * @package   mod_lesson
- * @copyright 2021 Michael Hawkins <michaelh@moodle.com>
+ * @copyright 2021 Michael Hawkins <michaelh@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_completion_test extends advanced_testcase {
@@ -49,7 +49,7 @@ class custom_completion_test extends advanced_testcase {
                 'somenonexistentrule', COMPLETION_ENABLED, 3, null, coding_exception::class
             ],
             'Minimum time spent requirement not available' => [
-                'completionstatusrequired', COMPLETION_DISABLED, 3, null, moodle_exception::class
+                'completionstatusrequired', COMPLETION_DISABLED, 3, null, powereduc_exception::class
             ],
             'Minimum time spent required, user has not spent time in the lesson' => [
                 'completiontimespent', 30, false, COMPLETION_INCOMPLETE, null

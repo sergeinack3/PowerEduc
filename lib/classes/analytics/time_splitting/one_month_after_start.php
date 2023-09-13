@@ -24,7 +24,7 @@
 
 namespace core\analytics\time_splitting;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Time splitting method that generates predictions one month after the analysable start.

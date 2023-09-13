@@ -24,7 +24,7 @@
 
 namespace core_course\search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Search area for course sections (title and summary).

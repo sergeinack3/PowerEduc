@@ -1,42 +1,42 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The main mod_h5pactivity configuration form.
  *
  * @package     mod_h5pactivity
- * @copyright   2020 Ferran Recio <ferran@moodle.com>
+ * @copyright   2020 Ferran Recio <ferran@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use mod_h5pactivity\local\manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot.'/course/powereducform_mod.php');
 
 /**
  * Module instance settings form.
  *
  * @package    mod_h5pactivity
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_h5pactivity_mod_form extends moodleform_mod {
+class mod_h5pactivity_mod_form extends powereducform_mod {
 
     /**
      * Defines forms elements
@@ -77,7 +77,7 @@ class mod_h5pactivity_mod_form extends moodleform_mod {
         // Add a link to the Content Bank if the user can access.
         $course = $this->get_course();
         $coursecontext = context_course::instance($course->id);
-        if (has_capability('moodle/contentbank:access', $coursecontext)) {
+        if (has_capability('powereduc/contentbank:access', $coursecontext)) {
             $msg = null;
             $context = $this->get_context();
             if ($context instanceof \context_module) {
@@ -88,17 +88,17 @@ class mod_h5pactivity_mod_form extends moodleform_mod {
                     filename', false);
                 $file = reset($files);
                 if ($file && $file->get_reference() != null) {
-                    $referencedfile = \repository::get_moodle_file($file->get_reference());
+                    $referencedfile = \repository::get_powereduc_file($file->get_reference());
                     if ($referencedfile->get_component() == 'contentbank') {
                         // If the attached file is a referencedfile in the content bank, display a link to open this content.
-                        $url = new moodle_url('/contentbank/view.php', ['id' => $referencedfile->get_itemid()]);
+                        $url = new powereduc_url('/contentbank/view.php', ['id' => $referencedfile->get_itemid()]);
                         $msg = get_string('opencontentbank', 'mod_h5pactivity', $url->out());
                         $msg .= ' '.$OUTPUT->help_icon('contentbank', 'mod_h5pactivity');
                     }
                 }
             }
             if (!isset($msg)) {
-                $url = new moodle_url('/contentbank/index.php', ['contextid' => $coursecontext->id]);
+                $url = new powereduc_url('/contentbank/index.php', ['contextid' => $coursecontext->id]);
                 $msg = get_string('usecontentbank', 'mod_h5pactivity', $url->out());
                 $msg .= ' '.$OUTPUT->help_icon('contentbank', 'mod_h5pactivity');
             }
@@ -220,7 +220,7 @@ class mod_h5pactivity_mod_form extends moodleform_mod {
      * Allows modules to modify the data returned by form get_data().
      * This method is also called in the bulk activity completion form.
      *
-     * Only available on moodleform_mod.
+     * Only available on powereducform_mod.
      *
      * @param stdClass $data passed by reference
      */

@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
- * Moodle REST library
+ * PowerEduc REST library
  *
  * @package    webservice_rest
  * @copyright  2009 Jerome Mouneyrac
@@ -25,7 +25,7 @@
 
 
 /**
- * Moodle REST client
+ * PowerEduc REST client
  *
  * It has been implemented for unit testing purpose (all protocols have similar client)
  *
@@ -35,7 +35,7 @@
  */
 class webservice_rest_client {
 
-    /** @var moodle_url the REST server url */
+    /** @var powereduc_url the REST server url */
     private $serverurl;
 
     /** @var string token */
@@ -47,12 +47,12 @@ class webservice_rest_client {
     /**
      * Constructor
      *
-     * @param string $serverurl a Moodle URL
+     * @param string $serverurl a PowerEduc URL
      * @param string $token the token used to do the web service call
      * @param string $format returned value format: xml or json
      */
     public function __construct($serverurl, $token, $format = 'xml') {
-        $this->serverurl = new moodle_url($serverurl);
+        $this->serverurl = new powereduc_url($serverurl);
         $this->token = $token;
         $this->format = $format;
     }
@@ -77,8 +77,8 @@ class webservice_rest_client {
         global $DB, $CFG;
 
          if ($this->format == 'json') {
-             $formatparam = '&moodlewsrestformat=json';
-             $this->serverurl->param('moodlewsrestformat','json');
+             $formatparam = '&powereducwsrestformat=json';
+             $this->serverurl->param('powereducwsrestformat','json');
          } else {
              $formatparam = ''; //to keep retro compability with old server that only support xml (they don't expect this param)
          }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package   mod_data
  * @category  test
- * @copyright 2021 Shamim Rezaie <shamim@moodle.com>
+ * @copyright 2021 Shamim Rezaie <shamim@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,7 +34,7 @@ use core\activity_dates;
 /**
  * Class for unit testing mod_data\dates.
  *
- * @copyright 2021 Shamim Rezaie <shamim@moodle.com>
+ * @copyright 2021 Shamim Rezaie <shamim@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dates_test extends advanced_testcase {

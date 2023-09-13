@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Dropbox V2 API.
  *
- * @since       Moodle 3.2
+ * @since       PowerEduc 3.2
  * @package     repository_dropbox
  * @copyright   Andrew Nicols <andrew@nicols.co.uk>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -88,20 +88,20 @@ class dropbox extends client {
      * Return the constructed API endpoint URL.
      *
      * @param   string      $endpoint   The endpoint to be contacted
-     * @return  moodle_url              The constructed API URL
+     * @return  powereduc_url              The constructed API URL
      */
     protected function get_api_endpoint($endpoint) {
-        return new \moodle_url('https://api.dropboxapi.com/2/' . $endpoint);
+        return new \powereduc_url('https://api.dropboxapi.com/2/' . $endpoint);
     }
 
     /**
      * Return the constructed content endpoint URL.
      *
      * @param   string      $endpoint   The endpoint to be contacted
-     * @return  moodle_url              The constructed content URL
+     * @return  powereduc_url              The constructed content URL
      */
     protected function get_content_endpoint($endpoint) {
-        return new \moodle_url('https://api-content.dropbox.com/2/' . $endpoint);
+        return new \powereduc_url('https://api-content.dropbox.com/2/' . $endpoint);
     }
 
     /**
@@ -213,7 +213,7 @@ class dropbox extends client {
      * https://www.dropbox.com/developers/documentation/http/documentation#error-handling.
      *
      * @param   mixed      $data       The returned content.
-     * @throws  moodle_exception
+     * @throws  powereduc_exception
      */
     protected function check_and_handle_api_errors($data) {
         if (!is_array($this->info) or $this->info['http_code'] == 200) {

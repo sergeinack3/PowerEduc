@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access flickr pictures
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_flickr_public
  * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -32,7 +32,7 @@ require_once(__DIR__ . '/image.php');
  * You can set up a public account in admin page, so everyone can access
  * flickr photos from this plugin
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_flickr_public
  * @copyright  2009 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -216,7 +216,7 @@ class repository_flickr_public extends repository {
         return $this->print_login();
     }
 
-    public function license4moodle ($license_id) {
+    public function license4powereduc ($license_id) {
         $license = array(
             '0' => 'allrightsreserved',
             '1' => 'cc-nc-sa',
@@ -403,7 +403,7 @@ class repository_flickr_public extends repository {
                     'image_width' => $bestsize['width'],
                     'image_height' => $bestsize['height'],
                     'url' => 'http://www.flickr.com/photos/' . $p['owner'] . '/' . $p['id'],
-                    'license' => $this->license4moodle($p['license']),
+                    'license' => $this->license4powereduc($p['license']),
                     'author' => $p['owner'],
                 );
             }
@@ -487,7 +487,7 @@ class repository_flickr_public extends repository {
         }
         // Make sure the source image exists.
         if (!@getimagesize($source)) {
-            throw new moodle_exception('cannotdownload', 'repository');
+            throw new powereduc_exception('cannotdownload', 'repository');
         }
 
         if ($info['owner']['realname']) {
@@ -501,15 +501,15 @@ class repository_flickr_public extends repository {
         $path = $result['path'];
 
         if (!empty($this->usewatermarks)) {
-            $img = new moodle_image($path);
+            $img = new powereduc_image($path);
             $img->watermark($copyright, array(10,10), array('ttf'=>true, 'fontsize'=>12))->saveas($path);
         }
 
-        return array('path'=>$path, 'author'=>$info['owner']['realname'], 'license'=>$this->license4moodle($info['license']));
+        return array('path'=>$path, 'author'=>$info['owner']['realname'], 'license'=>$this->license4powereduc($info['license']));
     }
 
     /**
-     * Add Instance settings input to Moodle form
+     * Add Instance settings input to PowerEduc form
      * @param object $mform
      */
     public static function instance_config_form($mform) {
@@ -528,7 +528,7 @@ class repository_flickr_public extends repository {
     }
 
     /**
-     * Add Plugin settings input to Moodle form
+     * Add Plugin settings input to PowerEduc form
      * @param object $mform
      */
     public static function type_config_form($mform, $classname = 'repository') {
@@ -554,7 +554,7 @@ class repository_flickr_public extends repository {
     }
 
     /**
-     * is run when moodle administrator add the plugin
+     * is run when powereduc administrator add the plugin
      */
     public static function plugin_init() {
         //here we create a default instance for this type

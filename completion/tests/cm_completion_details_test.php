@@ -30,7 +30,7 @@ use advanced_testcase;
 use cm_info;
 use completion_info;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/completionlib.php');

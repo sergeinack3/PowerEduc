@@ -1,25 +1,25 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides the interface for grading essay questions
  *
  * @package mod_lesson
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
@@ -40,7 +40,7 @@ require_login($course, false, $cm);
 $context = context_module::instance($cm->id);
 require_capability('mod/lesson:grade', $context);
 
-$url = new moodle_url('/mod/lesson/essay.php', array('id'=>$id));
+$url = new powereduc_url('/mod/lesson/essay.php', array('id'=>$id));
 if ($mode !== 'display') {
     $url->param('mode', $mode);
 }
@@ -84,13 +84,13 @@ switch ($mode) {
         require_sesskey();
 
         if (empty($attempt)) {
-            throw new \moodle_exception('cannotfindattempt', 'lesson');
+            throw new \powereduc_exception('cannotfindattempt', 'lesson');
         }
         if (empty($user)) {
-            throw new \moodle_exception('cannotfinduser', 'lesson');
+            throw new \powereduc_exception('cannotfinduser', 'lesson');
         }
         if (empty($answer)) {
-            throw new \moodle_exception('cannotfindanswer', 'lesson');
+            throw new \powereduc_exception('cannotfindanswer', 'lesson');
         }
         break;
 
@@ -98,10 +98,10 @@ switch ($mode) {
         require_sesskey();
 
         if (empty($attempt)) {
-            throw new \moodle_exception('cannotfindattempt', 'lesson');
+            throw new \powereduc_exception('cannotfindattempt', 'lesson');
         }
         if (empty($user)) {
-            throw new \moodle_exception('cannotfinduser', 'lesson');
+            throw new \powereduc_exception('cannotfinduser', 'lesson');
         }
 
         $editoroptions = array('noclean' => true, 'maxfiles' => EDITOR_UNLIMITED_FILES,
@@ -116,7 +116,7 @@ switch ($mode) {
         }
         if ($form = $mform->get_data()) {
             if (!$grades = $DB->get_records('lesson_grades', array("lessonid"=>$lesson->id, "userid"=>$attempt->userid), 'completed', '*', $attempt->retry, 1)) {
-                throw new \moodle_exception('cannotfindgrade', 'lesson');
+                throw new \powereduc_exception('cannotfindgrade', 'lesson');
             }
 
             $essayinfo->graded = 1;
@@ -165,9 +165,9 @@ switch ($mode) {
             // update central gradebook
             lesson_update_grades($lesson, $grade->userid);
 
-            redirect(new moodle_url('/mod/lesson/essay.php', array('id'=>$cm->id)));
+            redirect(new powereduc_url('/mod/lesson/essay.php', array('id'=>$cm->id)));
         } else {
-            throw new \moodle_exception('invalidformdata');
+            throw new \powereduc_exception('invalidformdata');
         }
         break;
     case 'email':
@@ -178,7 +178,7 @@ switch ($mode) {
         if ($userid = optional_param('userid', 0, PARAM_INT)) {
             $queryadd = " AND userid = ?";
             if (! $users = $DB->get_records('user', array('id' => $userid))) {
-                throw new \moodle_exception('cannotfinduser', 'lesson');
+                throw new \powereduc_exception('cannotfinduser', 'lesson');
             }
         } else {
             $queryadd = '';
@@ -199,7 +199,7 @@ switch ($mode) {
                        ) ui ON u.id = ui.userid
                   JOIN ($esql) ue ON ue.id = u.id
                   ORDER BY $sort", $params)) {
-                throw new \moodle_exception('cannotfinduser', 'lesson');
+                throw new \powereduc_exception('cannotfinduser', 'lesson');
             }
         }
 
@@ -216,13 +216,13 @@ switch ($mode) {
             $params[] = $userid;
         }
         if (!$attempts = $DB->get_records_select('lesson_attempts', "pageid $usql".$queryadd, $params)) {
-            throw new \moodle_exception('nooneansweredthisquestion', 'lesson');
+            throw new \powereduc_exception('nooneansweredthisquestion', 'lesson');
         }
         // Get the answers
         list($answerUsql, $parameters) = $DB->get_in_or_equal(array_keys($pages));
         array_unshift($parameters, $lesson->id);
         if (!$answers = $DB->get_records_select('lesson_answers', "lessonid = ? AND pageid $answerUsql", $parameters, '', 'pageid, score')) {
-            throw new \moodle_exception('cannotfindanswer', 'lesson');
+            throw new \powereduc_exception('cannotfindanswer', 'lesson');
         }
 
         $userpicture = new user_picture($USER);
@@ -271,7 +271,7 @@ switch ($mode) {
                 $subject = get_string('essayemailsubject', 'lesson');
 
                 // Context url.
-                $contexturl = new moodle_url('/grade/report/user/index.php', array('id' => $course->id));
+                $contexturl = new powereduc_url('/grade/report/user/index.php', array('id' => $course->id));
 
                 $eventdata = new \core\message\message();
                 $eventdata->courseid         = $course->id;
@@ -303,7 +303,7 @@ switch ($mode) {
             }
         }
         $lesson->add_message(get_string('emailsuccess', 'lesson'), 'notifysuccess');
-        redirect(new moodle_url('/mod/lesson/essay.php', array('id'=>$cm->id)));
+        redirect(new powereduc_url('/mod/lesson/essay.php', array('id'=>$cm->id)));
         break;
     case 'display':  // Default view - get the necessary data
     default:
@@ -415,7 +415,7 @@ switch ($mode) {
                     $essayinfo = lesson_page_type_essay::extract_useranswer($essay->useranswer);
 
                     // link for each essay
-                    $url = new moodle_url('/mod/lesson/essay.php', array('id'=>$cm->id,'mode'=>'grade','attemptid'=>$essay->id,'sesskey'=>sesskey()));
+                    $url = new powereduc_url('/mod/lesson/essay.php', array('id'=>$cm->id,'mode'=>'grade','attemptid'=>$essay->id,'sesskey'=>sesskey()));
                     $linktitle = userdate($essay->timeseen, get_string('strftimedatetime')).' '.
                             format_string($pages[$essay->pageid]->title, true);
 
@@ -437,7 +437,7 @@ switch ($mode) {
                 }
             }
             // email link for this user
-            $url = new moodle_url('/mod/lesson/essay.php', array('id'=>$cm->id,'mode'=>'email','userid'=>$userid,'sesskey'=>sesskey()));
+            $url = new powereduc_url('/mod/lesson/essay.php', array('id'=>$cm->id,'mode'=>'email','userid'=>$userid,'sesskey'=>sesskey()));
             $emaillink = html_writer::link($url, get_string('emailgradedessays', 'lesson'));
 
             $table->data[] = array($OUTPUT->user_picture($users[$userid], array('courseid' => $course->id)) . $studentname,
@@ -445,7 +445,7 @@ switch ($mode) {
         }
 
         // email link for all users
-        $url = new moodle_url('/mod/lesson/essay.php', array('id'=>$cm->id,'mode'=>'email','sesskey'=>sesskey()));
+        $url = new powereduc_url('/mod/lesson/essay.php', array('id'=>$cm->id,'mode'=>'email','sesskey'=>sesskey()));
         $emailalllink = html_writer::link($url, get_string('emailallgradedessays', 'lesson'));
 
         $table->data[] = array(' ', ' ', ' ', $emailalllink);

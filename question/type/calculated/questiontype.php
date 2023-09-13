@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Question type class for the calculated question type.
  *
  * @package    qtype
  * @subpackage calculated
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/type/questiontypebase.php');
 require_once($CFG->dirroot . '/question/type/questionbase.php');
@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/question/type/numerical/question.php');
 /**
  * The calculated question type.
  *
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_calculated extends question_type {
@@ -380,7 +380,7 @@ class qtype_calculated extends question_type {
                 require("{$CFG->dirroot}/question/type/calculated/datasetitems.php");
                 break;
             default:
-                throw new \moodle_exception('invalidwizardpage', 'question');
+                throw new \powereduc_exception('invalidwizardpage', 'question');
                 break;
         }
     }
@@ -412,7 +412,7 @@ class qtype_calculated extends question_type {
                         "{$submiturl}?wizardnow=datasetitems", $question, $regenerate);
                 break;
             default:
-                throw new \moodle_exception('invalidwizardpage', 'question');
+                throw new \powereduc_exception('invalidwizardpage', 'question');
                 break;
         }
 
@@ -675,7 +675,7 @@ class qtype_calculated extends question_type {
                 $this->save_question_calculated($question, $form);
                 break;
             default:
-                throw new \moodle_exception('invalidwizardpage', 'question');
+                throw new \powereduc_exception('invalidwizardpage', 'question');
                 break;
         }
         return $question;
@@ -1032,7 +1032,7 @@ class qtype_calculated extends question_type {
             return sprintf("%.".$regs[4].'f', $nbr);
 
         } else {
-            throw new \moodle_exception('disterror', 'question', '', $regs[1]);
+            throw new \powereduc_exception('disterror', 'question', '', $regs[1]);
         }
         return '';
     }
@@ -1466,7 +1466,7 @@ class qtype_calculated extends question_type {
             $a = new stdClass();
             $a->id = $question->id;
             $a->item = $datasetitem;
-            throw new \moodle_exception('cannotgetdsfordependent', 'question', '', $a);
+            throw new \powereduc_exception('cannotgetdsfordependent', 'question', '', $a);
         }
         $dataset = Array();
         foreach ($dataitems as $id => $dataitem) {

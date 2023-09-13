@@ -1,6 +1,6 @@
 @javascript @theme_classic
 Feature: Welcome message on classic
-  To be welcome in moodle
+  To be welcome in powereduc
   As a User
   I need to see a welcome message on the first page
 

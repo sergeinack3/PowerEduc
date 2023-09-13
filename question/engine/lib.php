@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This defines the core classes of the Moodle question engine.
+ * This defines the core classes of the PowerEduc question engine.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionengine
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/filelib.php');
 require_once(__DIR__ . '/questionusage.php');
@@ -76,10 +76,10 @@ abstract class question_engine {
     /**
      * Load a {@link question_usage_by_activity} from the database, based on its id.
      * @param int $qubaid the id of the usage to load.
-     * @param moodle_database $db a database connectoin. Defaults to global $DB.
+     * @param powereduc_database $db a database connectoin. Defaults to global $DB.
      * @return question_usage_by_activity loaded from the database.
      */
-    public static function load_questions_usage_by_activity($qubaid, moodle_database $db = null) {
+    public static function load_questions_usage_by_activity($qubaid, powereduc_database $db = null) {
         $dm = new question_engine_data_mapper($db);
         return $dm->load_questions_usage_by_activity($qubaid);
     }
@@ -89,9 +89,9 @@ abstract class question_engine {
      * if the usage was newly created by {@link make_questions_usage_by_activity()}
      * or loaded from the database using {@link load_questions_usage_by_activity()}
      * @param question_usage_by_activity the usage to save.
-     * @param moodle_database $db a database connectoin. Defaults to global $DB.
+     * @param powereduc_database $db a database connectoin. Defaults to global $DB.
      */
-    public static function save_questions_usage_by_activity(question_usage_by_activity $quba, moodle_database $db = null) {
+    public static function save_questions_usage_by_activity(question_usage_by_activity $quba, powereduc_database $db = null) {
         $dm = new question_engine_data_mapper($db);
         $observer = $quba->get_observer();
         if ($observer instanceof question_engine_unit_of_work) {
@@ -587,7 +587,7 @@ class question_display_options {
     /**
      * Used in places like the question history table, to show a link to review
      * this question in a certain state. If blank, a link is not shown.
-     * @var moodle_url base URL for a review question script.
+     * @var powereduc_url base URL for a review question script.
      */
     public $questionreviewlink = null;
 
@@ -621,7 +621,7 @@ class question_display_options {
      *
      * If used, this array must contain an element courseid or cmid.
      *
-     * It shoudl also contain a parameter returnurl => moodle_url giving a
+     * It shoudl also contain a parameter returnurl => powereduc_url giving a
      * sensible URL to go back to when the editing form is submitted or cancelled.
      *
      * @var array url parameter for the edit link. id => questiosnid will be
@@ -728,7 +728,7 @@ abstract class question_flags {
         // probably makes it sufficiently difficult for malicious users to toggle
         // other users flags.
         if ($checksum != self::get_toggle_checksum($qubaid, $questionid, $qaid, $slot)) {
-            throw new moodle_exception('errorsavingflags', 'question');
+            throw new powereduc_exception('errorsavingflags', 'question');
         }
 
         $dm = new question_engine_data_mapper();
@@ -776,7 +776,7 @@ abstract class question_flags {
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class question_out_of_sequence_exception extends moodle_exception {
+class question_out_of_sequence_exception extends powereduc_exception {
     public function __construct($qubaid, $slot, $postdata) {
         if ($postdata == null) {
             $postdata = data_submitted();

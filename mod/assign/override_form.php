@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Settings form for overrides in the assign module.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 require_once($CFG->dirroot . '/mod/assign/mod_form.php');
@@ -35,7 +35,7 @@ require_once($CFG->dirroot . '/mod/assign/mod_form.php');
  * @copyright  2016 Ilya Tregubov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class assign_override_form extends moodleform {
+class assign_override_form extends powereducform {
 
     /** @var object course module object. */
     protected $cm;
@@ -63,7 +63,7 @@ class assign_override_form extends moodleform {
 
     /**
      * Constructor.
-     * @param moodle_url $submiturl the form action URL.
+     * @param powereduc_url $submiturl the form action URL.
      * @param object $cm course module object.
      * @param object $assign the assign settings object.
      * @param object $context the assign context.
@@ -99,7 +99,7 @@ class assign_override_form extends moodleform {
         $inrelativedatesmode = !empty($this->assign->get_course()->relativedatesmode);
 
         $assigngroupmode = groups_get_activity_groupmode($cm);
-        $accessallgroups = ($assigngroupmode == NOGROUPS) || has_capability('moodle/site:accessallgroups', $this->context);
+        $accessallgroups = ($assigngroupmode == NOGROUPS) || has_capability('powereduc/site:accessallgroups', $this->context);
 
         if ($this->groupmode) {
             $mform->addElement('header', 'override', get_string('groupoverrides', 'assign'));
@@ -121,8 +121,8 @@ class assign_override_form extends moodleform {
                 $groups = $accessallgroups ? groups_get_all_groups($cm->course) : groups_get_activity_allowed_groups($cm);
                 if (empty($groups)) {
                     // Generate an error.
-                    $link = new moodle_url('/mod/assign/overrides.php', array('cmid' => $cm->id));
-                    throw new \moodle_exception('groupsnone', 'assign', $link);
+                    $link = new powereduc_url('/mod/assign/overrides.php', array('cmid' => $cm->id));
+                    throw new \powereduc_exception('groupsnone', 'assign', $link);
                 }
 
                 $groupchoices = array();
@@ -181,8 +181,8 @@ class assign_override_form extends moodleform {
 
                 if (empty($users)) {
                     // Generate an error.
-                    $link = new moodle_url('/mod/assign/overrides.php', array('cmid' => $cm->id));
-                    throw new \moodle_exception('usersnone', 'assign', $link);
+                    $link = new powereduc_url('/mod/assign/overrides.php', array('cmid' => $cm->id));
+                    throw new \powereduc_exception('usersnone', 'assign', $link);
                 }
 
                 $userchoices = array();

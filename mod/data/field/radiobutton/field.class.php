@@ -4,9 +4,9 @@
 // NOTICE OF COPYRIGHT                                                   //
 //                                                                       //
 // Moodle - Modular Object-Oriented Dynamic Learning Environment         //
-//          http://moodle.org                                            //
+//          http://powereduc.org                                            //
 //                                                                       //
-// Copyright (C) 1999-onwards Moodle Pty Ltd  http://moodle.com          //
+// Copyright (C) 1999-onwards Moodle Pty Ltd  http://powereduc.com          //
 //                                                                       //
 // This program is free software; you can redistribute it and/or modify  //
 // it under the terms of the GNU General Public License as published by  //

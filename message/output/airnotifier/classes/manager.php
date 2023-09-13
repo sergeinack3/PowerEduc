@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,23 +19,23 @@
  *
  * @package    message_airnotifier
  * @category   external
- * @copyright  2012 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since Moodle 2.7
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Airnotifier helper manager class
  *
- * @copyright  2012 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class message_airnotifier_manager {
 
     /** @var string The Airnotifier public instance URL */
-    const AIRNOTIFIER_PUBLICURL = 'https://messages.moodle.net';
+    const AIRNOTIFIER_PUBLICURL = 'https://messages.powereduc.net';
 
     /**
      * Include the relevant javascript and language strings for the device
@@ -51,7 +51,7 @@ class message_airnotifier_manager {
         $config->pageparams = array();
 
         // Include toolboxes.
-        $PAGE->requires->yui_module('moodle-message_airnotifier-toolboxes', 'M.message.init_device_toolbox', array(array(
+        $PAGE->requires->yui_module('powereduc-message_airnotifier-toolboxes', 'M.message.init_device_toolbox', array(array(
                 'ajaxurl' => $config->resturl,
                 'config' => $config,
                 ))
@@ -59,7 +59,7 @@ class message_airnotifier_manager {
 
         // Required strings for the javascript.
         $PAGE->requires->strings_for_js(array('deletecheckdevicename'), 'message_airnotifier');
-        $PAGE->requires->strings_for_js(array('show', 'hide'), 'moodle');
+        $PAGE->requires->strings_for_js(array('show', 'hide'), 'powereduc');
 
         return true;
     }
@@ -227,7 +227,7 @@ class message_airnotifier_manager {
 
         $results = [];
         // Check Mobile services enabled.
-        $summary = html_writer::link((new moodle_url('/admin/settings.php', ['section' => 'mobilesettings'])),
+        $summary = html_writer::link((new powereduc_url('/admin/settings.php', ['section' => 'mobilesettings'])),
                 get_string('enablemobilewebservice', 'admin'));
         if (empty($CFG->enablewebservices) || empty($CFG->enablemobilewebservice)) {
             $results[] = new core\check\result(core\check\result::CRITICAL, $summary, get_string('enablewsdescription', 'webservice'));
@@ -254,7 +254,7 @@ class message_airnotifier_manager {
             }
         }
 
-        $summary = html_writer::link((new moodle_url('/admin/message.php')), get_string('enableprocessor', 'message_airnotifier'));
+        $summary = html_writer::link((new powereduc_url('/admin/message.php')), get_string('enableprocessor', 'message_airnotifier'));
         if ($enabled) {
             $results[] = new core\check\result(core\check\result::OK, $summary, get_string('enabled', 'admin'));
         } else {
@@ -263,7 +263,7 @@ class message_airnotifier_manager {
         }
 
         // Check Mobile notifications configuration is ok.
-        $summary = html_writer::link((new moodle_url('/admin/settings.php', ['section' => 'messagesettingairnotifier'])),
+        $summary = html_writer::link((new powereduc_url('/admin/settings.php', ['section' => 'messagesettingairnotifier'])),
             get_string('notificationsserverconfiguration', 'message_airnotifier'));
         if ($this->is_system_configured()) {
             $results[] = new core\check\result(core\check\result::OK, $summary, get_string('configured', 'message_airnotifier'));
@@ -276,7 +276,7 @@ class message_airnotifier_manager {
         if ($this->is_system_configured()) {
             foreach ($settingstocheck as $setting) {
                 if ($CFG->$setting != trim($CFG->$setting)) {
-                    $summary = html_writer::link((new moodle_url('/admin/settings.php', ['section' => 'messagesettingairnotifier'])),
+                    $summary = html_writer::link((new powereduc_url('/admin/settings.php', ['section' => 'messagesettingairnotifier'])),
                         get_string('notificationsserverconfiguration', 'message_airnotifier'));
 
                     $results[] = new core\check\result(core\check\result::ERROR, $summary,
@@ -305,7 +305,7 @@ class message_airnotifier_manager {
         }
 
         // Check access key by trying to create an invalid token.
-        $settingsurl = new moodle_url('/admin/settings.php', ['section' => 'messagesettingairnotifier']);
+        $settingsurl = new powereduc_url('/admin/settings.php', ['section' => 'messagesettingairnotifier']);
         $summary = html_writer::link($settingsurl, get_string('airnotifieraccesskey', 'message_airnotifier'));
         if (!empty($CFG->airnotifieraccesskey)) {
             $url = $CFG->airnotifierurl . ':' . $CFG->airnotifierport . '/tokens/testtoken';
@@ -344,7 +344,7 @@ class message_airnotifier_manager {
             }
         }
 
-        $summary = html_writer::link((new moodle_url('/admin/message.php')), get_string('managemessageoutputs', 'message'));
+        $summary = html_writer::link((new powereduc_url('/admin/message.php')), get_string('managemessageoutputs', 'message'));
         if ($providersconfigured == 0) {
             $results[] = new core\check\result(core\check\result::ERROR, $summary,
                 get_string('messageprovidersempty', 'message_airnotifier'));

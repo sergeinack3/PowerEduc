@@ -2,7 +2,7 @@
 Feature: Welcome message
   In order to welcome new or existing user
   As a user
-  I will see welcome message when I log into moodle
+  I will see welcome message when I log into powereduc
 
   Scenario: Log in and being redirected to course page
     Given the following "users" exist:

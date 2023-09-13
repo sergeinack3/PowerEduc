@@ -1,34 +1,34 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * The main workshop configuration form
  *
  * The UI mockup has been proposed in MDL-18688
- * It uses the standard core Moodle formslib. For more info about them, please
- * visit: http://docs.moodle.org/dev/lib/formslib.php
+ * It uses the standard core PowerEduc formslib. For more info about them, please
+ * visit: http://docs.powereduc.org/dev/lib/formslib.php
  *
  * @package    mod_workshop
  * @copyright  2009 David Mudrak <david.mudrak@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/course/moodleform_mod.php');
+require_once($CFG->dirroot . '/course/powereducform_mod.php');
 require_once(__DIR__ . '/locallib.php');
 require_once($CFG->libdir . '/filelib.php');
 
@@ -36,7 +36,7 @@ use core_grades\component_gradeitems;
 /**
  * Module settings form for Workshop instances
  */
-class mod_workshop_mod_form extends moodleform_mod {
+class mod_workshop_mod_form extends powereducform_mod {
 
     /** @var object the course this instance is part of */
     protected $course = null;
@@ -462,7 +462,7 @@ class mod_workshop_mod_form extends moodleform_mod {
         }
 
         // We need to do a custom completion validation because workshop grade items identifiers divert from standard.
-        // Refer to validation defined in moodleform_mod.php.
+        // Refer to validation defined in powereducform_mod.php.
         if (isset($data['completionpassgrade']) && $data['completionpassgrade'] &&
             isset($data['completiongradeitemnumber'])) {
             $itemnames = component_gradeitems::get_itemname_mapping_for_component('mod_workshop');

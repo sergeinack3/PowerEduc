@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the definition for the library class for PDF feedback plugin
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use \assignfeedback_editpdf\document_services;
 use \assignfeedback_editpdf\page_editor;
@@ -86,7 +86,7 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
         $gradestamps = $fs->get_area_files($asscontext->id, 'assignfeedback_editpdf', 'stamps', $grade->id, 'filename', false);
 
         // The system stamps are perpetual and always exist.
-        // They allow Moodle to serve a common URL for all users for any possible combination of stamps.
+        // They allow PowerEduc to serve a common URL for all users for any possible combination of stamps.
         // Files in the perpetual stamp filearea are within the system context, in itemid 0, and use the original stamps
         // contenthash as a folder name. This ensures that the combination of stamp filename, and stamp file content is
         // unique.
@@ -139,7 +139,7 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
             // Always serve the perpetual system stamp.
             // This ensures that the stamp is highly cached and reduces the hit on the application server.
             $gradestamp = $systemstamps[$systempathnamehash];
-            $url = moodle_url::make_pluginfile_url(
+            $url = powereduc_url::make_pluginfile_url(
                 $gradestamp->get_contextid(),
                 $gradestamp->get_component(),
                 $gradestamp->get_filearea(),
@@ -154,7 +154,7 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
         $url = false;
         $filename = '';
         if ($feedbackfile) {
-            $url = moodle_url::make_pluginfile_url(
+            $url = powereduc_url::make_pluginfile_url(
                 $this->assignment->get_context()->id,
                 'assignfeedback_editpdf',
                 document_services::FINAL_PDF_FILEAREA,
@@ -219,12 +219,12 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
      * Get form elements for grading form
      *
      * @param stdClass $grade
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $data
      * @param int $userid
      * @return bool true if elements were added to the form
      */
-    public function get_form_elements_for_user($grade, MoodleQuickForm $mform, stdClass $data, $userid) {
+    public function get_form_elements_for_user($grade, PowerEducQuickForm $mform, stdClass $data, $userid) {
         global $PAGE;
 
         $attempt = -1;
@@ -473,7 +473,7 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
      * Return the plugin configs for external functions.
      *
      * @return array the list of settings
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_config_for_external() {
         return (array) $this->get_config();

@@ -1,34 +1,34 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Event report renderer.
  *
  * @package    report_eventlist
- * @copyright  2014 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2014 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Renderer for event report.
  *
  * @package    report_eventlist
- * @copyright  2014 Adrian Greeve <adrian@moodle.com>
+ * @copyright  2014 Adrian Greeve <adrian@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class report_eventlist_renderer extends plugin_renderer_base {
@@ -54,7 +54,7 @@ class report_eventlist_renderer extends plugin_renderer_base {
         $html .= ob_get_contents();
         ob_end_clean();
 
-        $this->page->requires->yui_module('moodle-report_eventlist-eventfilter', 'Y.M.report_eventlist.EventFilter.init',
+        $this->page->requires->yui_module('powereduc-report_eventlist-eventfilter', 'Y.M.report_eventlist.EventFilter.init',
                 array(array('tabledata' => $tabledata)));
         $this->page->requires->strings_for_js(array(
             'eventname',
@@ -113,7 +113,7 @@ class report_eventlist_renderer extends plugin_renderer_base {
         }
 
         if (isset($eventinformation['parentclass'])) {
-            $url = new moodle_url('eventdetail.php', array('eventname' => $eventinformation['parentclass']));
+            $url = new powereduc_url('eventdetail.php', array('eventname' => $eventinformation['parentclass']));
             $html .= html_writer::tag('dt', get_string('parentevent', 'report_eventlist'));
             $html .= html_writer::tag('dd', html_writer::link($url, $eventinformation['parentclass']));
         }

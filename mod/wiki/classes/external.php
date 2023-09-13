@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Wiki module external API.
  *
  * @package    mod_wiki
  * @category   external
- * @copyright  2015 Dani Palou <dani@moodle.com>
+ * @copyright  2015 Dani Palou <dani@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/wiki/lib.php');
@@ -37,9 +37,9 @@ require_once($CFG->dirroot . '/mod/wiki/locallib.php');
  *
  * @package    mod_wiki
  * @category   external
- * @copyright  2015 Dani Palou <dani@moodle.com>
+ * @copyright  2015 Dani Palou <dani@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class mod_wiki_external extends external_api {
 
@@ -47,7 +47,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for get_wikis_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_wikis_by_courses_parameters() {
         return new external_function_parameters (
@@ -65,7 +65,7 @@ class mod_wiki_external extends external_api {
      *
      * @param array $courseids The courses IDs.
      * @return array Containing a list of warnings and a list of wikis.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_wikis_by_courses($courseids = array()) {
 
@@ -104,7 +104,7 @@ class mod_wiki_external extends external_api {
                 }
 
                 // Check additional permissions for returning optional private settings.
-                if (has_capability('moodle/course:manageactivities', $context)) {
+                if (has_capability('powereduc/course:manageactivities', $context)) {
                     $additionalfields = array('timecreated', 'timemodified');
                     $viewablefields = array_merge($viewablefields, $additionalfields);
                 }
@@ -130,7 +130,7 @@ class mod_wiki_external extends external_api {
      * Describes the get_wikis_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_wikis_by_courses_returns() {
 
@@ -163,7 +163,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for view_wiki.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_wiki_parameters() {
         return new external_function_parameters (
@@ -178,7 +178,7 @@ class mod_wiki_external extends external_api {
      *
      * @param int $wikiid The wiki instance ID.
      * @return array of warnings and status result.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_wiki($wikiid) {
 
@@ -190,7 +190,7 @@ class mod_wiki_external extends external_api {
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki($params['wikiid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
 
         // Permission validation.
@@ -201,7 +201,7 @@ class mod_wiki_external extends external_api {
         // Check if user can view this wiki.
         // We don't use wiki_user_can_view because it requires to have a valid subwiki for the user.
         if (!has_capability('mod/wiki:viewpage', $context)) {
-            throw new moodle_exception('cannotviewpage', 'wiki');
+            throw new powereduc_exception('cannotviewpage', 'wiki');
         }
 
         // Trigger course_module_viewed event and completion.
@@ -217,7 +217,7 @@ class mod_wiki_external extends external_api {
      * Describes the view_wiki return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_wiki_returns() {
         return new external_single_structure(
@@ -232,7 +232,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for view_page.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_page_parameters() {
         return new external_function_parameters (
@@ -247,8 +247,8 @@ class mod_wiki_external extends external_api {
      *
      * @param int $pageid The page ID.
      * @return array of warnings and status result.
-     * @since Moodle 3.1
-     * @throws moodle_exception if page is not valid.
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception if page is not valid.
      */
     public static function view_page($pageid) {
 
@@ -260,12 +260,12 @@ class mod_wiki_external extends external_api {
 
         // Get wiki page.
         if (!$page = wiki_get_page($params['pageid'])) {
-            throw new moodle_exception('incorrectpageid', 'wiki');
+            throw new powereduc_exception('incorrectpageid', 'wiki');
         }
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki_from_pageid($params['pageid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
 
         // Permission validation.
@@ -275,10 +275,10 @@ class mod_wiki_external extends external_api {
 
         // Check if user can view this wiki.
         if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
-            throw new moodle_exception('incorrectsubwikiid', 'wiki');
+            throw new powereduc_exception('incorrectsubwikiid', 'wiki');
         }
         if (!wiki_user_can_view($subwiki, $wiki)) {
-            throw new moodle_exception('cannotviewpage', 'wiki');
+            throw new powereduc_exception('cannotviewpage', 'wiki');
         }
 
         // Trigger page_viewed event and completion.
@@ -294,7 +294,7 @@ class mod_wiki_external extends external_api {
      * Describes the view_page return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function view_page_returns() {
         return new external_single_structure(
@@ -309,7 +309,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for get_subwikis.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwikis_parameters() {
         return new external_function_parameters (
@@ -324,7 +324,7 @@ class mod_wiki_external extends external_api {
      *
      * @param int $wikiid The wiki instance ID.
      * @return array Containing a list of warnings and a list of subwikis.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwikis($wikiid) {
         global $USER;
@@ -335,7 +335,7 @@ class mod_wiki_external extends external_api {
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki($params['wikiid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
 
         // Validate context and capabilities.
@@ -359,7 +359,7 @@ class mod_wiki_external extends external_api {
      * Describes the get_subwikis return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwikis_returns() {
         return new external_single_structure(
@@ -384,7 +384,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for get_subwiki_pages.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwiki_pages_parameters() {
         return new external_function_parameters (
@@ -415,7 +415,7 @@ class mod_wiki_external extends external_api {
      * @param int $userid The user ID. If not defined, use current user.
      * @param array $options Several options like sort by, sort direction, ...
      * @return array Containing a list of warnings and a list of pages.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwiki_pages($wikiid, $groupid = -1, $userid = 0, $options = array()) {
 
@@ -433,7 +433,7 @@ class mod_wiki_external extends external_api {
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki($params['wikiid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
         list($course, $cm) = get_course_and_cm_from_instance($wiki, 'wiki');
         $context = context_module::instance($cm->id);
@@ -446,7 +446,7 @@ class mod_wiki_external extends external_api {
         $subwiki = wiki_get_subwiki_by_group_and_user_with_validation($wiki, $groupid, $userid);
 
         if ($subwiki === false) {
-            throw new moodle_exception('cannotviewpage', 'wiki');
+            throw new powereduc_exception('cannotviewpage', 'wiki');
         } else if ($subwiki->id != -1) {
 
             // Set sort param.
@@ -519,7 +519,7 @@ class mod_wiki_external extends external_api {
      * Describes the get_subwiki_pages return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwiki_pages_returns() {
 
@@ -558,7 +558,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for get_page_contents.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_page_contents_parameters() {
         return new external_function_parameters (
@@ -573,7 +573,7 @@ class mod_wiki_external extends external_api {
      *
      * @param int $pageid The page ID.
      * @return array of warnings and page data.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_page_contents($pageid) {
 
@@ -586,12 +586,12 @@ class mod_wiki_external extends external_api {
 
         // Get wiki page.
         if (!$page = wiki_get_page($params['pageid'])) {
-            throw new moodle_exception('incorrectpageid', 'wiki');
+            throw new powereduc_exception('incorrectpageid', 'wiki');
         }
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki_from_pageid($params['pageid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
 
         // Permission validation.
@@ -601,10 +601,10 @@ class mod_wiki_external extends external_api {
 
         // Check if user can view this wiki.
         if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
-            throw new moodle_exception('incorrectsubwikiid', 'wiki');
+            throw new powereduc_exception('incorrectsubwikiid', 'wiki');
         }
         if (!wiki_user_can_view($subwiki, $wiki)) {
-            throw new moodle_exception('cannotviewpage', 'wiki');
+            throw new powereduc_exception('cannotviewpage', 'wiki');
         }
 
         $returnedpage = array();
@@ -643,7 +643,7 @@ class mod_wiki_external extends external_api {
      * Describes the get_page_contents return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_page_contents_returns() {
         return new external_single_structure(
@@ -674,7 +674,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for get_subwiki_files.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwiki_files_parameters() {
         return new external_function_parameters (
@@ -695,8 +695,8 @@ class mod_wiki_external extends external_api {
      * @param int $groupid The group ID. If not defined, use current group.
      * @param int $userid The user ID. If not defined, use current user.
      * @return array Containing a list of warnings and a list of files.
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function get_subwiki_files($wikiid, $groupid = -1, $userid = 0) {
 
@@ -713,7 +713,7 @@ class mod_wiki_external extends external_api {
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki($params['wikiid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
         list($course, $cm) = get_course_and_cm_from_instance($wiki, 'wiki');
         $context = context_module::instance($cm->id);
@@ -727,7 +727,7 @@ class mod_wiki_external extends external_api {
 
         // Get subwiki based on group and user.
         if ($subwiki === false) {
-            throw new moodle_exception('cannotviewfiles', 'wiki');
+            throw new powereduc_exception('cannotviewfiles', 'wiki');
         } else if ($subwiki->id != -1) {
             // The subwiki exists, let's get the files.
             $returnedfiles = external_util::get_area_files($context->id, 'mod_wiki', 'attachments', $subwiki->id);
@@ -743,7 +743,7 @@ class mod_wiki_external extends external_api {
      * Describes the get_subwiki_pages return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_subwiki_files_returns() {
 
@@ -763,7 +763,7 @@ class mod_wiki_external extends external_api {
      * @param int $groupid Group ID. If not defined, use current group.
      * @param int $userid User ID. If not defined, use current user.
      * @return array Array containing the courseid and userid.
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     protected static function determine_group_and_user($cm, $wiki, $groupid = -1, $userid = 0) {
         global $USER;
@@ -793,7 +793,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for get_page_for_editing.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_page_for_editing_parameters() {
         return new external_function_parameters (
@@ -812,7 +812,7 @@ class mod_wiki_external extends external_api {
      * @param string $section Section page title.
      * @param boolean $lockonly If true: Just renew lock and not return content.
      * @return array of warnings and page data.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_page_for_editing($pageid, $section = null, $lockonly = false) {
         global $USER;
@@ -829,17 +829,17 @@ class mod_wiki_external extends external_api {
 
         // Get wiki page.
         if (!$page = wiki_get_page($params['pageid'])) {
-            throw new moodle_exception('incorrectpageid', 'wiki');
+            throw new powereduc_exception('incorrectpageid', 'wiki');
         }
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki_from_pageid($params['pageid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
 
         // Get subwiki instance.
         if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
-            throw new moodle_exception('incorrectsubwikiid', 'wiki');
+            throw new powereduc_exception('incorrectsubwikiid', 'wiki');
         }
 
         // Permission validation.
@@ -848,16 +848,16 @@ class mod_wiki_external extends external_api {
         self::validate_context($context);
 
         if (!wiki_user_can_edit($subwiki)) {
-            throw new moodle_exception('cannoteditpage', 'wiki');
+            throw new powereduc_exception('cannoteditpage', 'wiki');
         }
 
         if (!wiki_set_lock($params['pageid'], $USER->id, $params['section'], true)) {
-            throw new moodle_exception('pageislocked', 'wiki');
+            throw new powereduc_exception('pageislocked', 'wiki');
         }
 
         $version = wiki_get_current_version($page->id);
         if (empty($version)) {
-            throw new moodle_exception('versionerror', 'wiki');
+            throw new powereduc_exception('versionerror', 'wiki');
         }
 
         $pagesection = array();
@@ -886,7 +886,7 @@ class mod_wiki_external extends external_api {
      * Describes the get_page_for_editing return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_page_for_editing_returns() {
         return new external_single_structure(
@@ -909,7 +909,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for new_page.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function new_page_parameters() {
         return new external_function_parameters (
@@ -940,7 +940,7 @@ class mod_wiki_external extends external_api {
      * @param int $userid Subwiki\'s user ID. Used if subwiki does not exists.
      * @param int $groupid Subwiki\'s group ID. Used if subwiki does not exists.
      * @return array of warnings and page data.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function new_page($title, $content, $contentformat = null, $subwikiid = null, $wikiid = null, $userid = null,
         $groupid = null) {
@@ -963,11 +963,11 @@ class mod_wiki_external extends external_api {
         // Get wiki and subwiki instances.
         if (!empty($params['subwikiid'])) {
             if (!$subwiki = wiki_get_subwiki($params['subwikiid'])) {
-                throw new moodle_exception('incorrectsubwikiid', 'wiki');
+                throw new powereduc_exception('incorrectsubwikiid', 'wiki');
             }
 
             if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
-                throw new moodle_exception('incorrectwikiid', 'wiki');
+                throw new powereduc_exception('incorrectwikiid', 'wiki');
             }
 
             // Permission validation.
@@ -977,7 +977,7 @@ class mod_wiki_external extends external_api {
 
         } else {
             if (!$wiki = wiki_get_wiki($params['wikiid'])) {
-                throw new moodle_exception('incorrectwikiid', 'wiki');
+                throw new powereduc_exception('incorrectwikiid', 'wiki');
             }
 
             // Permission validation.
@@ -993,28 +993,28 @@ class mod_wiki_external extends external_api {
 
             if ($subwiki === false) {
                 // User cannot view page.
-                throw new moodle_exception('cannoteditpage', 'wiki');
+                throw new powereduc_exception('cannoteditpage', 'wiki');
             } else if ($subwiki->id < 0) {
                 // Subwiki needed to check edit permissions.
                 if (!wiki_user_can_edit($subwiki)) {
-                    throw new moodle_exception('cannoteditpage', 'wiki');
+                    throw new powereduc_exception('cannoteditpage', 'wiki');
                 }
 
                 // Subwiki does not exists and it can be created.
                 $swid = wiki_add_subwiki($wiki->id, $groupid, $userid);
                 if (!$subwiki = wiki_get_subwiki($swid)) {
-                    throw new moodle_exception('incorrectsubwikiid', 'wiki');
+                    throw new powereduc_exception('incorrectsubwikiid', 'wiki');
                 }
             }
         }
 
         // Subwiki needed to check edit permissions.
         if (!wiki_user_can_edit($subwiki)) {
-            throw new moodle_exception('cannoteditpage', 'wiki');
+            throw new powereduc_exception('cannoteditpage', 'wiki');
         }
 
         if ($page = wiki_get_page_by_title($subwiki->id, $params['title'])) {
-            throw new moodle_exception('pageexists', 'wiki');
+            throw new powereduc_exception('pageexists', 'wiki');
         }
 
         // Ignore invalid formats and use default instead.
@@ -1030,14 +1030,14 @@ class mod_wiki_external extends external_api {
         $newpageid = wiki_create_page($subwiki->id, $params['title'], $params['contentformat'], $USER->id);
 
         if (!$page = wiki_get_page($newpageid)) {
-            throw new moodle_exception('incorrectpageid', 'wiki');
+            throw new powereduc_exception('incorrectpageid', 'wiki');
         }
 
         // Save content.
         $save = wiki_save_page($page, $params['content'], $USER->id);
 
         if (!$save) {
-            throw new moodle_exception('savingerror', 'wiki');
+            throw new powereduc_exception('savingerror', 'wiki');
         }
 
         $result = array();
@@ -1050,7 +1050,7 @@ class mod_wiki_external extends external_api {
      * Describes the new_page return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function new_page_returns() {
         return new external_single_structure(
@@ -1065,7 +1065,7 @@ class mod_wiki_external extends external_api {
      * Describes the parameters for edit_page.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function edit_page_parameters() {
         return new external_function_parameters (
@@ -1084,7 +1084,7 @@ class mod_wiki_external extends external_api {
      * @param string $content Page contents.
      * @param int $section Section to be edited.
      * @return array of warnings and page data.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function edit_page($pageid, $content, $section = null) {
         global $USER;
@@ -1100,17 +1100,17 @@ class mod_wiki_external extends external_api {
 
         // Get wiki page.
         if (!$page = wiki_get_page($params['pageid'])) {
-            throw new moodle_exception('incorrectpageid', 'wiki');
+            throw new powereduc_exception('incorrectpageid', 'wiki');
         }
 
         // Get wiki instance.
         if (!$wiki = wiki_get_wiki_from_pageid($params['pageid'])) {
-            throw new moodle_exception('incorrectwikiid', 'wiki');
+            throw new powereduc_exception('incorrectwikiid', 'wiki');
         }
 
         // Get subwiki instance.
         if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
-            throw new moodle_exception('incorrectsubwikiid', 'wiki');
+            throw new powereduc_exception('incorrectsubwikiid', 'wiki');
         }
 
         // Permission validation.
@@ -1119,11 +1119,11 @@ class mod_wiki_external extends external_api {
         self::validate_context($context);
 
         if (!wiki_user_can_edit($subwiki)) {
-            throw new moodle_exception('cannoteditpage', 'wiki');
+            throw new powereduc_exception('cannoteditpage', 'wiki');
         }
 
         if (wiki_is_page_section_locked($page->id, $USER->id, $params['section'])) {
-            throw new moodle_exception('pageislocked', 'wiki');
+            throw new powereduc_exception('pageislocked', 'wiki');
         }
 
         // Save content.
@@ -1131,7 +1131,7 @@ class mod_wiki_external extends external_api {
             $version = wiki_get_current_version($page->id);
             $content = wiki_parser_proxy::get_section($version->content, $version->contentformat, $params['section'], false);
             if (!$content) {
-                throw new moodle_exception('invalidsection', 'wiki');
+                throw new powereduc_exception('invalidsection', 'wiki');
             }
 
             $save = wiki_save_section($page, $params['section'], $params['content'], $USER->id);
@@ -1142,7 +1142,7 @@ class mod_wiki_external extends external_api {
         wiki_delete_locks($page->id, $USER->id, $params['section']);
 
         if (!$save) {
-            throw new moodle_exception('savingerror', 'wiki');
+            throw new powereduc_exception('savingerror', 'wiki');
         }
 
         $result = array();
@@ -1155,7 +1155,7 @@ class mod_wiki_external extends external_api {
      * Describes the edit_page return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function edit_page_returns() {
         return new external_single_structure(

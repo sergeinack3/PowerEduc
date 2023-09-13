@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
  *
  * @package    mod_choice
  * @category   test
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
 namespace mod_choice;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -37,7 +37,7 @@ require_once($CFG->dirroot . '/mod/choice/lib.php');
  *
  * @package    mod_choice
  * @category   test
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
@@ -71,7 +71,7 @@ class lib_test extends \externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_choice\event\course_module_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $url = new \moodle_url('/mod/choice/view.php', array('id' => $cm->id));
+        $url = new \powereduc_url('/mod/choice/view.php', array('id' => $cm->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
@@ -157,7 +157,7 @@ class lib_test extends \externallib_advanced_testcase {
         $optionids2 = array_keys($choicewithoptions2->option);
 
         // Make sure we cannot submit options from a different choice instance.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         choice_user_submit_response($optionids2[0], $choice1, $USER->id, $course, $cm);
     }
 
@@ -403,7 +403,7 @@ class lib_test extends \externallib_advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('viewchoices', 'choice'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -435,7 +435,7 @@ class lib_test extends \externallib_advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('viewchoices', 'choice'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -602,7 +602,7 @@ class lib_test extends \externallib_advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('viewchoices', 'choice'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -643,7 +643,7 @@ class lib_test extends \externallib_advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('viewchoices', 'choice'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -671,7 +671,7 @@ class lib_test extends \externallib_advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('viewchoices', 'choice'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -708,7 +708,7 @@ class lib_test extends \externallib_advanced_testcase {
         // Confirm the event was decorated.
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('viewchoices', 'choice'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -1183,7 +1183,7 @@ class lib_test extends \externallib_advanced_testcase {
         $this->assertNull(choice_user_submit_response($optionids[0], $choicewithoptions, $user2->id, $course, $cm));
 
         // Confirm that trying to save multiple options results in an exception.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         choice_user_submit_response([$optionids[1], $optionids[1]], $choicewithoptions, $user->id, $course, $cm);
     }
 
@@ -1234,7 +1234,7 @@ class lib_test extends \externallib_advanced_testcase {
         $this->assertNull(choice_user_submit_response([$optionids[0]], $choicewithoptions, $user->id, $course, $cm));
 
         // Confirm that removing all options from the response is not allowed via this method.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         choice_user_submit_response([], $choicewithoptions, $user->id, $course, $cm);
     }
 
@@ -1280,7 +1280,7 @@ class lib_test extends \externallib_advanced_testcase {
         $this->assertNull(choice_user_submit_response($optionids[1], $choicewithoptions, $user->id, $course, $cm));
 
         // Confirm that limits are respected by trying to save the same option as another user.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         choice_user_submit_response($optionids[1], $choicewithoptions, $user2->id, $course, $cm);
     }
 
@@ -1329,7 +1329,7 @@ class lib_test extends \externallib_advanced_testcase {
         $this->assertNull(choice_user_submit_response([$optionids[0], $optionids[1]], $choicewithoptions, $user->id, $course, $cm));
 
         // Confirm that limits are respected by trying to save the same option as another user.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         choice_user_submit_response($optionids[1], $choicewithoptions, $user2->id, $course, $cm);
     }
 
@@ -1343,7 +1343,7 @@ class lib_test extends \externallib_advanced_testcase {
         $user = self::getDataGenerator()->create_and_enrol($course, 'editingteacher');
         $roleid = self::getDataGenerator()->create_role();
         self::getDataGenerator()->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
         $generator = self::getDataGenerator()->get_plugin_generator('mod_choice');
         // Create an instance as a user without the calendar capabilities.
         $this->setUser($user);

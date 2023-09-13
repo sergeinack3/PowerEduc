@@ -23,7 +23,7 @@
  */
 namespace core_competency;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_competency\plan;
 use core_competency\url;
@@ -94,7 +94,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals($u2->id, $message->useridto);
         $this->assertTrue(strpos($message->fullmessage, 'Hello world!') !== false);
         $this->assertTrue(strpos($message->fullmessagehtml, 'Hello world!') !== false);
-        $this->assertEquals(FORMAT_MOODLE, $message->fullmessageformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $message->fullmessageformat);
         $this->assertEquals($expectedurl->out(false), $message->contexturl);
         $this->assertEquals($expectedurlname, $message->contexturlname);
         // Test customdata.
@@ -122,7 +122,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals($u1->id, $message->useridto);
         $this->assertTrue(strpos($message->fullmessage, 'Hello world!') !== false);
         $this->assertTrue(strpos($message->fullmessagehtml, 'Hello world!') !== false);
-        $this->assertEquals(FORMAT_MOODLE, $message->fullmessageformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $message->fullmessageformat);
         $this->assertEquals($expectedurl->out(false), $message->contexturl);
         $this->assertEquals($expectedurlname, $message->contexturlname);
 
@@ -142,7 +142,7 @@ class lib_test extends \advanced_testcase {
         $this->assertEquals($u1->id, $message->useridto);
         $this->assertTrue(strpos($message->fullmessage, 'Hello world!') !== false);
         $this->assertTrue(strpos($message->fullmessagehtml, 'Hello world!') !== false);
-        $this->assertEquals(FORMAT_MOODLE, $message->fullmessageformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $message->fullmessageformat);
         $this->assertEquals($expectedurl->out(false), $message->contexturl);
         $this->assertEquals($expectedurlname, $message->contexturlname);
 
@@ -293,7 +293,7 @@ class lib_test extends \advanced_testcase {
         $expectedurl = url::plan($p1->get('id'));
         $this->assertTrue(strpos($message->fullmessage, 'Hello world!') !== false);
         $this->assertTrue(strpos($message->fullmessagehtml, 'Hello world!') !== false);
-        $this->assertEquals(FORMAT_MOODLE, $message->fullmessageformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $message->fullmessageformat);
         $this->assertEquals($expectedurl->out(false), $message->contexturl);
         $this->assertEquals($expectedurlname, $message->contexturlname);
 

@@ -19,7 +19,7 @@ namespace gradereport_overview;
 use externallib_advanced_testcase;
 use gradereport_overview_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

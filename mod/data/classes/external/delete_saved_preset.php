@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ use core\notification;
 use mod_data\manager;
 use mod_data\preset;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -30,7 +30,7 @@ require_once($CFG->libdir . '/externallib.php');
  *
  * @package    mod_data
  * @since      Moodle 4.1
- * @copyright  2022 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2022 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class delete_saved_preset extends \external_api {
@@ -91,7 +91,7 @@ class delete_saved_preset extends \external_api {
                     ];
                     notification::error(get_string('cannotdeletepreset', 'mod_data'));
                 }
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 // The saved preset has not been deleted.
                 $warnings[] = [
                     'item' => $presetname,

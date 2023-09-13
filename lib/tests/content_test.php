@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package     core
  * @category    test
- * @copyright   2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright   2020 Michael Hawkins <michaelh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ namespace core;
  *
  * @package     core
  * @category    test
- * @copyright   2020 Michael Hawkins <michaelh@moodle.com>
+ * @copyright   2020 Michael Hawkins <michaelh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content_test extends \advanced_testcase {
@@ -61,7 +61,7 @@ class content_test extends \advanced_testcase {
         $this->assertFalse(content::can_export_context($course1context, $user));
 
         // Enable export in courses by default.
-        set_config('downloadcontentsitedefault', DOWNLOAD_COURSE_CONTENT_ENABLED, 'moodlecourse');
+        set_config('downloadcontentsitedefault', DOWNLOAD_COURSE_CONTENT_ENABLED, 'powereduccourse');
 
         // Confirm user now has permission to export in course1 only.
         $this->assertTrue(content::can_export_context($course1context, $user));
@@ -86,7 +86,7 @@ class content_test extends \advanced_testcase {
         $this->assertFalse(content::can_export_context($course2context, $user));
 
         // Disable export in courses by default.
-        set_config('downloadcontentsitedefault', DOWNLOAD_COURSE_CONTENT_DISABLED, 'moodlecourse');
+        set_config('downloadcontentsitedefault', DOWNLOAD_COURSE_CONTENT_DISABLED, 'powereduccourse');
 
         // Confirm user still has permission to export in course1 (still enabled at the course level).
         $this->assertTrue(content::can_export_context($course1context, $user));

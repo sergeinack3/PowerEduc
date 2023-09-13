@@ -26,7 +26,7 @@ namespace tool_licensemanager;
 
 use moodle_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * License manager helper class.

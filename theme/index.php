@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page provides the Administration -> ... -> Theme selector UI.
@@ -37,7 +37,7 @@ if (!empty($device)) {
     $devices = core_useragent::get_device_type_list();
     if (!in_array($device, $devices)) {
         // The provided device isn't a valid device throw an error.
-        throw new \moodle_exception('invaliddevicetype');
+        throw new \powereduc_exception('invaliddevicetype');
     }
 }
 
@@ -54,7 +54,7 @@ if ($reset and confirm_sesskey()) {
     echo $OUTPUT->header();
     echo $OUTPUT->heading(get_string('themesaved'));
     echo $OUTPUT->box_start();
-    echo format_text(get_string('choosereadme', 'theme_'.$theme->name), FORMAT_MOODLE);
+    echo format_text(get_string('choosereadme', 'theme_'.$theme->name), FORMAT_POWEREDUC);
     echo $OUTPUT->box_end();
     echo $OUTPUT->continue_button($CFG->wwwroot . '/theme/index.php');
     echo $OUTPUT->footer();
@@ -68,7 +68,7 @@ if ($reset and confirm_sesskey()) {
     $themename = core_useragent::get_device_type_cfg_var_name($device);
     set_config($themename, $theme->name);
 
-    $urlconfirm = new moodle_url('/theme/index.php', array('confirmation' => 1, 'choose' => $choose));
+    $urlconfirm = new powereduc_url('/theme/index.php', array('confirmation' => 1, 'choose' => $choose));
     redirect($urlconfirm);
 } else if ($device && !theme_is_device_locked($device) && $unsettheme && confirm_sesskey() && ($device != 'default')) {
     // Unset the theme and continue.
@@ -115,7 +115,7 @@ if (!empty($CFG->enabledevicedetection) && empty($device)) {
                 $strthemename = get_string('pluginname', 'theme_'.$themename);
                 // Link to the screenshot, now mandatory - the image path is hardcoded because we need image from other themes,
                 // not the current one.
-                $screenshoturl = new moodle_url('/theme/image.php',
+                $screenshoturl = new powereduc_url('/theme/image.php',
                     array('theme' => $themename, 'image' => 'screenshot', 'component' => 'theme'));
                 // Contents of the screenshot/preview cell.
                 $screenshotcell = html_writer::empty_tag('img', array('class' => 'img-fluid',
@@ -126,14 +126,14 @@ if (!empty($CFG->enabledevicedetection) && empty($device)) {
             // If not default device then show option to unset theme.
             if ($thedevice != 'default' && !$themelocked) {
                 $unsetthemestr = get_string('unsettheme', 'admin');
-                $unsetthemeurl = new moodle_url('/theme/index.php',
+                $unsetthemeurl = new powereduc_url('/theme/index.php',
                     array('device' => $thedevice, 'sesskey' => sesskey(), 'unsettheme' => true));
                 $unsetthemebutton = new single_button($unsetthemeurl, $unsetthemestr, 'get');
                 $unsetthemebutton = $OUTPUT->render($unsetthemebutton);
             }
         }
 
-        $deviceurl = new moodle_url('/theme/index.php', array('device' => $thedevice, 'sesskey' => sesskey()));
+        $deviceurl = new powereduc_url('/theme/index.php', array('device' => $thedevice, 'sesskey' => sesskey()));
 
         $select = '';
         if (!$themelocked) {
@@ -209,7 +209,7 @@ if (!empty($CFG->enabledevicedetection) && empty($device)) {
 
         // Link to the screenshot, now mandatory - the image path is hardcoded because we need image from other themes,
         // not the current one.
-        $screenshotpath = new moodle_url('/theme/image.php',
+        $screenshotpath = new powereduc_url('/theme/image.php',
             array('theme' => $themename, 'image' => 'screenshot', 'component' => 'theme'));
         // Contents of the first screenshot/preview cell.
         $row[] = html_writer::empty_tag('img', array('class' => 'img-fluid',
@@ -225,13 +225,13 @@ if (!empty($CFG->enabledevicedetection) && empty($device)) {
         if (!$themelocked) {
             if (($ischosentheme) && ($device != 'default')) {
                 $unsetthemestr = get_string('unsettheme', 'admin');
-                $unsetthemeurl = new moodle_url('/theme/index.php',
+                $unsetthemeurl = new powereduc_url('/theme/index.php',
                     array('device' => $device, 'unsettheme' => true, 'sesskey' => sesskey()));
                 $unsetbutton = new single_button($unsetthemeurl, $unsetthemestr, 'get');
                 $infocell .= $OUTPUT->render($unsetbutton);
             } else if ((!$ischosentheme)) {
                 $setthemestr = get_string('usetheme');
-                $setthemeurl = new moodle_url('/theme/index.php',
+                $setthemeurl = new powereduc_url('/theme/index.php',
                     array('device' => $device, 'choose' => $themename, 'sesskey' => sesskey()));
                 $setthemebutton = new single_button($setthemeurl, $setthemestr, 'get');
                 $infocell .= $OUTPUT->render($setthemebutton);
@@ -251,7 +251,7 @@ $params = array('sesskey' => sesskey(), 'reset' => 1);
 if (!empty($device)) {
     $params['device'] = $device;
 }
-echo $OUTPUT->single_button(new moodle_url('index.php', $params), get_string('themeresetcaches', 'admin'));
+echo $OUTPUT->single_button(new powereduc_url('index.php', $params), get_string('themeresetcaches', 'admin'));
 
 echo html_writer::table($table);
 

@@ -24,7 +24,7 @@
 
 namespace tool_lpimportcsv;
 
-defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') || die('Direct access to this script is forbidden.');
 
 use core_competency\api;
 use grade_scale;

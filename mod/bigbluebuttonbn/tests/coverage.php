@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,13 +22,13 @@
  * @author    Laurent David (laurent@call-learning.fr)
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class bbb_coverage information for the core subsystem.
  *
- * Note that we had to change the definition of this class due to a bug in local_moodlecheck
- * https://github.com/moodlehq/moodle-local_moodlecheck/issues/50
+ * Note that we had to change the definition of this class due to a bug in local_powereduccheck
+ * https://github.com/powereduchq/powereduc-local_powereduccheck/issues/50
  * @package   mod_bigbluebuttonbn
  * @copyright 2018 - present, Blindside Networks Inc
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

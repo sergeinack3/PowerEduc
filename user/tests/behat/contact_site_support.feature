@@ -1,6 +1,6 @@
 @core @core_user
 Feature: Contact site support method and availability can be customised
-  In order to effectively support people using my Moodle site
+  In order to effectively support people using my PowerEduc site
   As an admin
   I need to be able to configure the site support method and who has access to it
 

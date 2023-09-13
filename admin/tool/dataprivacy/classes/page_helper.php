@@ -26,7 +26,7 @@ namespace tool_dataprivacy;
 use context_system;
 use moodle_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Page helper.

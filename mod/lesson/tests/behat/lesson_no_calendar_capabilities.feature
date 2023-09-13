@@ -25,7 +25,7 @@ Feature: Lesson with no calendar capabilites
     And I am on the "Course 1" "permissions" page
     And I override the system permissions of "Teacher" role with:
       | capability | permission |
-      | moodle/calendar:manageentries | Prohibit |
+      | powereduc/calendar:manageentries | Prohibit |
     And I log out
 
   Scenario: Editing a lesson

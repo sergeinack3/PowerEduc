@@ -28,7 +28,7 @@ namespace tool_policy\test;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Provides some helper methods for unit-tests.

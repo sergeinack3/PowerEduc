@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * User navigation class.
@@ -89,7 +89,7 @@ class user_course_navigation implements renderable, templatable {
         $data->baseurl = $this->baseurl;
         $data->groupselector = '';
 
-        if (has_any_capability(array('moodle/competency:usercompetencyview', 'moodle/competency:coursecompetencymanage'),
+        if (has_any_capability(array('powereduc/competency:usercompetencyview', 'powereduc/competency:coursecompetencymanage'),
                 $context)) {
             $course = $DB->get_record('course', array('id' => $this->courseid));
             $currentgroup = groups_get_course_group($course, true);
@@ -100,19 +100,19 @@ class user_course_navigation implements renderable, templatable {
             // Fetch showactive.
             $defaultgradeshowactiveenrol = !empty($CFG->grade_report_showonlyactiveenrol);
             $showonlyactiveenrol = get_user_preferences('grade_report_showonlyactiveenrol', $defaultgradeshowactiveenrol);
-            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $context);
+            $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('powereduc/course:viewsuspendedusers', $context);
 
             // Fetch current active group.
             $groupmode = groups_get_course_groupmode($course);
 
-            $users = get_enrolled_users($context, 'moodle/competency:coursecompetencygradable', $currentgroup,
+            $users = get_enrolled_users($context, 'powereduc/competency:coursecompetencygradable', $currentgroup,
                                         'u.*', null, 0, 0, $showonlyactiveenrol);
 
             $data->users = array();
             foreach ($users as $user) {
                 $data->users[] = (object)[
                     'id' => $user->id,
-                    'fullname' => fullname($user, has_capability('moodle/site:viewfullnames', $context)),
+                    'fullname' => fullname($user, has_capability('powereduc/site:viewfullnames', $context)),
                     'selected' => $user->id == $this->userid
                 ];
             }

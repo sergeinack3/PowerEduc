@@ -23,7 +23,7 @@
  */
 namespace tool_capability;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/' . $CFG->admin . '/tool/capability/locallib.php');
 

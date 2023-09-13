@@ -25,7 +25,7 @@ namespace core\task;
 
 use core_h5p\factory;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A task to get the latest content types from the official H5P repository.

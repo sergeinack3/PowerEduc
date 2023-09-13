@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core_message;
 
 use core_message\tests\helper as testhelper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -29,7 +29,7 @@ require_once($CFG->dirroot . '/message/tests/messagelib_test.php');
  *
  * @package core_message
  * @category test
- * @copyright 2016 Mark Nelson <markn@moodle.com>
+ * @copyright 2016 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api_test extends messagelib_test {
@@ -449,7 +449,7 @@ class api_test extends messagelib_test {
     }
 
     /**
-     * Tests searching users as a user having the 'moodle/user:viewdetails' capability.
+     * Tests searching users as a user having the 'powereduc/user:viewdetails' capability.
      */
     public function test_message_search_users_with_cap() {
         $this->resetAfterTest();
@@ -482,7 +482,7 @@ class api_test extends messagelib_test {
 
         // Grant the authenticated user role the capability 'user:viewdetails' at site context.
         $authenticatedrole = $DB->get_record('role', ['shortname' => 'user'], '*', MUST_EXIST);
-        assign_capability('moodle/user:viewdetails', CAP_ALLOW, $authenticatedrole->id, \context_system::instance());
+        assign_capability('powereduc/user:viewdetails', CAP_ALLOW, $authenticatedrole->id, \context_system::instance());
 
         // Perform a search with $CFG->messagingallusers disabled.
         set_config('messagingallusers', 0);
@@ -517,7 +517,7 @@ class api_test extends messagelib_test {
         set_config('messaging', 0);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         api::message_search_users($user->id, 'User');
     }
 
@@ -961,7 +961,7 @@ class api_test extends messagelib_test {
         // Create some users.
         $user1 = self::getDataGenerator()->create_user();
         // Try to favourite a non-existent conversation.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         api::set_favourite_conversation(0, $user1->id);
     }
 
@@ -988,7 +988,7 @@ class api_test extends messagelib_test {
 
         // Try to favourite the first conversation as user 3, who is not a member.
         $conversationid1 = api::get_conversation_between_users([$user1->id, $user2->id]);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         api::set_favourite_conversation($conversationid1, $user3->id);
     }
 
@@ -1031,7 +1031,7 @@ class api_test extends messagelib_test {
         $this->assertCount(1, api::get_conversations($user1->id, 0, 20, null, true));
 
         // Try to favourite the same conversation again as user 1.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         api::unset_favourite_conversation($conversationid1, $user1->id);
     }
 
@@ -1052,7 +1052,7 @@ class api_test extends messagelib_test {
 
         // Now try to unfavourite the conversation as user 1.
         $conversationid1 = api::get_conversation_between_users([$user1->id, $user2->id]);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         api::unset_favourite_conversation($conversationid1, $user1->id);
     }
 
@@ -1064,7 +1064,7 @@ class api_test extends messagelib_test {
         $user1 = self::getDataGenerator()->create_user();
 
         // Now try to unfavourite the conversation as user 1.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         api::unset_favourite_conversation(0, $user1->id);
     }
 
@@ -1394,7 +1394,7 @@ class api_test extends messagelib_test {
         $this->assertCount(4, $conversations);
 
         // Verify an exception is thrown if an unrecognized type is specified.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $conversations = api::get_conversations($user1->id, 0, 20, 0);
     }
 
@@ -1776,7 +1776,7 @@ class api_test extends messagelib_test {
         // Consider first conversations is self-conversation.
         $this->assertEquals(2, $conversations[0]->membercount);
         $this->assertEquals($course1->shortname, $conversations[0]->subname);
-        $this->assertEquals('https://www.example.com/moodle/theme/image.php/_s/boost/core/1/g/g1', $conversations[0]->imageurl);
+        $this->assertEquals('https://www.example.com/powereduc/theme/image.php/_s/boost/core/1/g/g1', $conversations[0]->imageurl);
 
         // Now, disable the conversation linked to the group and verify it's no longer returned.
         $DB->set_field('message_conversations', 'enabled', 0, ['id' => $conversations[0]->id]);
@@ -3008,7 +3008,7 @@ class api_test extends messagelib_test {
 
         // Remove the capability to send a message.
         $roleids = $DB->get_records_menu('role', null, '', 'shortname, id');
-        unassign_capability('moodle/site:sendmessage', $roleids['user'],
+        unassign_capability('powereduc/site:sendmessage', $roleids['user'],
             \context_system::instance());
 
         // Check that we can not post a message without the capability.
@@ -3156,7 +3156,7 @@ class api_test extends messagelib_test {
         // Remove the messageanyuser capability from the course1 for teachers.
         $coursecontext = \context_course::instance($course1->id);
         $teacherrole = $DB->get_record('role', ['shortname' => 'editingteacher']);
-        assign_capability('moodle/site:messageanyuser', CAP_PROHIBIT, $teacherrole->id, $coursecontext->id);
+        assign_capability('powereduc/site:messageanyuser', CAP_PROHIBIT, $teacherrole->id, $coursecontext->id);
         $coursecontext->mark_dirty();
 
         // Check that we can't send user1 a message because they are not contacts.
@@ -3180,7 +3180,7 @@ class api_test extends messagelib_test {
 
     /**
      * Tests the user will be able to send a message even if they are blocked as the user
-     * has the capability 'moodle/site:messageanyuser'.
+     * has the capability 'powereduc/site:messageanyuser'.
      */
     public function test_can_send_message_even_if_blocked_with_message_any_user_cap() {
         global $DB;
@@ -3191,14 +3191,14 @@ class api_test extends messagelib_test {
         $user2 = self::getDataGenerator()->create_user();
 
         $authenticateduserrole = $DB->get_record('role', array('shortname' => 'user'));
-        assign_capability('moodle/site:messageanyuser', CAP_ALLOW, $authenticateduserrole->id, \context_system::instance(), true);
+        assign_capability('powereduc/site:messageanyuser', CAP_ALLOW, $authenticateduserrole->id, \context_system::instance(), true);
 
         $this->assertTrue(api::can_send_message($user2->id, $user1->id, true));
     }
 
     /**
      * Tests the user will be able to send a message even if they are blocked as the user
-     * has the capability 'moodle/site:readallmessages'.
+     * has the capability 'powereduc/site:readallmessages'.
      */
     public function test_can_send_message_even_if_blocked_with_read_all_message_cap() {
         global $DB;
@@ -3209,7 +3209,7 @@ class api_test extends messagelib_test {
         $user2 = self::getDataGenerator()->create_user();
 
         $authenticateduserrole = $DB->get_record('role', array('shortname' => 'user'));
-        assign_capability('moodle/site:readallmessages', CAP_ALLOW, $authenticateduserrole->id, \context_system::instance(), true);
+        assign_capability('powereduc/site:readallmessages', CAP_ALLOW, $authenticateduserrole->id, \context_system::instance(), true);
 
         $this->assertTrue(api::can_send_message($user2->id, $user1->id, true));
     }
@@ -3234,7 +3234,7 @@ class api_test extends messagelib_test {
 
     /**
      * Tests the user can always send a message even if they are blocked because they share a course and
-     * have the capability 'moodle/site:messageanyuser' at the course context.
+     * have the capability 'powereduc/site:messageanyuser' at the course context.
      */
     public function test_can_send_message_even_if_blocked_shared_course_with_message_any_user_cap() {
         global $DB;
@@ -3251,7 +3251,7 @@ class api_test extends messagelib_test {
         $this->getDataGenerator()->enrol_user($teacher->id, $course->id, $editingteacherrole->id);
         $this->getDataGenerator()->enrol_user($student->id, $course->id);
 
-        assign_capability('moodle/site:messageanyuser', CAP_ALLOW, $editingteacherrole->id,
+        assign_capability('powereduc/site:messageanyuser', CAP_ALLOW, $editingteacherrole->id,
             \context_course::instance($course->id), true);
 
         // Check that the second user can no longer send the first user a message.
@@ -3349,7 +3349,7 @@ class api_test extends messagelib_test {
 
         // Remove the capability to send a message.
         $roleids = $DB->get_records_menu('role', null, '', 'shortname, id');
-        unassign_capability('moodle/site:sendmessage', $roleids['user'], \context_system::instance());
+        unassign_capability('powereduc/site:sendmessage', $roleids['user'], \context_system::instance());
 
         // Verify that a user cannot send a message to either an individual or a group conversation.
         $this->assertFalse(api::can_send_message_to_conversation($user1->id, $ic1->id));
@@ -3401,7 +3401,7 @@ class api_test extends messagelib_test {
         // Assign the 'messageanyuser' capability to user1 at system context.
         $systemcontext = \context_system::instance();
         $authenticateduser = $DB->get_record('role', ['shortname' => 'user']);
-        assign_capability('moodle/site:messageanyuser', CAP_ALLOW, $authenticateduser->id, $systemcontext->id);
+        assign_capability('powereduc/site:messageanyuser', CAP_ALLOW, $authenticateduser->id, $systemcontext->id);
 
         // Check that user1 can now message user2 due to the capability, and that group conversations is again unaffected.
         $this->assertTrue(api::can_send_message_to_conversation($user1->id, $ic1->id));
@@ -4153,7 +4153,7 @@ class api_test extends messagelib_test {
         );
         $conversationid = $conversation->id;
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         api::add_members_to_conversation([$user3->id], $conversationid);
     }
 
@@ -4296,7 +4296,7 @@ class api_test extends messagelib_test {
         );
         $conversationid = $conversation->id;
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         api::remove_members_from_conversation([$user1->id], $conversationid);
     }
 
@@ -5047,7 +5047,7 @@ class api_test extends messagelib_test {
      * Test creating an invalid conversation.
      */
     public function test_create_conversation_invalid() {
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         api::create_conversation(3, [1, 2, 3]);
     }
 
@@ -5055,7 +5055,7 @@ class api_test extends messagelib_test {
      * Test creating an individual conversation with too many members.
      */
     public function test_create_conversation_individual_too_many_members() {
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         api::create_conversation(api::MESSAGE_CONVERSATION_TYPE_INDIVIDUAL, [1, 2, 3]);
     }
 
@@ -5383,7 +5383,7 @@ class api_test extends messagelib_test {
         // Send a message to an individual conversation.
         $sink = $this->redirectEvents();
         $messagessink = $this->redirectMessages();
-        $message1 = api::send_message_to_conversation($user1->id, $ic1->id, 'this is a message', FORMAT_MOODLE);
+        $message1 = api::send_message_to_conversation($user1->id, $ic1->id, 'this is a message', FORMAT_POWEREDUC);
         $events = $sink->get_events();
         $messages = $messagessink->get_messages();
         // Test customdata.
@@ -5433,7 +5433,7 @@ class api_test extends messagelib_test {
         // Send a message to a group conversation.
         $sink = $this->redirectEvents();
         $messagessink = $this->redirectMessages();
-        $message1 = api::send_message_to_conversation($user1->id, $gc2->id, 'message to the group', FORMAT_MOODLE);
+        $message1 = api::send_message_to_conversation($user1->id, $gc2->id, 'message to the group', FORMAT_POWEREDUC);
         $events = $sink->get_events();
         $messages = $messagessink->get_messages();
         // Verify the message returned.
@@ -5503,7 +5503,7 @@ class api_test extends messagelib_test {
         // Send a message to a group conversation.
         $messagessink = $this->redirectMessages();
         $message1 = api::send_message_to_conversation($user1->id, $conversations[0]->id,
-            'message to the group', FORMAT_MOODLE);
+            'message to the group', FORMAT_POWEREDUC);
         $messages = $messagessink->get_messages();
         // Verify the message returned.
         $this->assertInstanceOf(\stdClass::class, $message1);
@@ -5530,8 +5530,8 @@ class api_test extends messagelib_test {
         list($user1, $user2, $user3, $user4, $ic1, $ic2, $ic3,
             $gc1, $gc2, $gc3, $gc4, $gc5, $gc6) = $this->create_conversation_test_data();
 
-        $this->expectException(\moodle_exception::class);
-        api::send_message_to_conversation($user1->id, 0, 'test', FORMAT_MOODLE);
+        $this->expectException(\powereduc_exception::class);
+        api::send_message_to_conversation($user1->id, 0, 'test', FORMAT_POWEREDUC);
     }
 
     /**
@@ -5549,8 +5549,8 @@ class api_test extends messagelib_test {
         $this->getDataGenerator()->enrol_user($user3->id, $course->id);
         $this->getDataGenerator()->enrol_user($user4->id, $course->id);
 
-        $this->expectException(\moodle_exception::class);
-        api::send_message_to_conversation($user3->id, $ic1->id, 'test', FORMAT_MOODLE);
+        $this->expectException(\powereduc_exception::class);
+        api::send_message_to_conversation($user3->id, $ic1->id, 'test', FORMAT_POWEREDUC);
     }
 
     /**
@@ -5575,8 +5575,8 @@ class api_test extends messagelib_test {
         $this->assertNotEmpty(api::send_message_to_conversation($user1->id, $gc2->id, 'Hey guys', FORMAT_PLAIN));
 
         // User 2 cannot send a message to the conversation with user 1.
-        $this->expectException(\moodle_exception::class);
-        api::send_message_to_conversation($user2->id, $ic1->id, 'test', FORMAT_MOODLE);
+        $this->expectException(\powereduc_exception::class);
+        api::send_message_to_conversation($user2->id, $ic1->id, 'test', FORMAT_POWEREDUC);
     }
 
     /**
@@ -6297,7 +6297,7 @@ class api_test extends messagelib_test {
 
         // Allow Teacher can delete messages for all.
         $editingteacher = $DB->get_record('role', ['shortname' => 'editingteacher']);
-        assign_capability('moodle/site:deleteanymessage', CAP_ALLOW, $editingteacher->id, \context_system::instance());
+        assign_capability('powereduc/site:deleteanymessage', CAP_ALLOW, $editingteacher->id, \context_system::instance());
 
         // Set as the first user.
         $this->setUser($teacher);

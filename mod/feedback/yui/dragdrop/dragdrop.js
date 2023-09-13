@@ -1,4 +1,4 @@
-YUI.add('moodle-mod_feedback-dragdrop', function(Y) {
+YUI.add('powereduc-mod_feedback-dragdrop', function(Y) {
     var DRAGDROPNAME = 'mod_feedback_dragdrop';
     var CSS = {
         DRAGAREA: '#feedback_dragarea',
@@ -256,5 +256,5 @@ YUI.add('moodle-mod_feedback-dragdrop', function(Y) {
     }
 
 }, '@VERSION@', {
-    requires:['io', 'json-parse', 'dd-constrain', 'dd-proxy', 'dd-drop', 'dd-scroll', 'moodle-core-dragdrop', 'moodle-core-notification']
+    requires:['io', 'json-parse', 'dd-constrain', 'dd-proxy', 'dd-drop', 'dd-scroll', 'powereduc-core-dragdrop', 'powereduc-core-notification']
 });

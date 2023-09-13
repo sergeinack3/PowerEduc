@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ $sourcecourseid = optional_param('sourcecourseid', -1, PARAM_INT);
 
 $destinationinstance = instance::get_from_instanceid($destbn);
 if (!$destinationinstance) {
-    throw new moodle_exception('view_error_url_missing_parameters', plugin::COMPONENT);
+    throw new powereduc_exception('view_error_url_missing_parameters', plugin::COMPONENT);
 }
 
 $cm = $destinationinstance->get_cm();

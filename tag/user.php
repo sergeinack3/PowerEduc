@@ -8,15 +8,15 @@ $action = optional_param('action', '', PARAM_ALPHA);
 require_login();
 
 if (empty($CFG->usetags)) {
-    throw new \moodle_exception('tagdisabled');
+    throw new \powereduc_exception('tagdisabled');
 }
 
 if (isguestuser()) {
-    throw new \moodle_exception('noguest');
+    throw new \powereduc_exception('noguest');
 }
 
 if (!confirm_sesskey()) {
-    throw new \moodle_exception('sesskey');
+    throw new \powereduc_exception('sesskey');
 }
 
 $usercontext = context_user::instance($USER->id);
@@ -24,7 +24,7 @@ $usercontext = context_user::instance($USER->id);
 switch ($action) {
     case 'addinterest':
         if (!core_tag_tag::is_enabled('core', 'user')) {
-            throw new \moodle_exception('tagdisabled');
+            throw new \powereduc_exception('tagdisabled');
         }
         $tag = required_param('tag', PARAM_TAG);
         core_tag_tag::add_item_tag('core', 'user', $USER->id, $usercontext, $tag);
@@ -34,7 +34,7 @@ switch ($action) {
 
     case 'removeinterest':
         if (!core_tag_tag::is_enabled('core', 'user')) {
-            throw new \moodle_exception('tagdisabled');
+            throw new \powereduc_exception('tagdisabled');
         }
         $tag = required_param('tag', PARAM_TAG);
         core_tag_tag::remove_item_tag('core', 'user', $USER->id, $tag);
@@ -43,7 +43,7 @@ switch ($action) {
         break;
 
     case 'flaginappropriate':
-        require_capability('moodle/tag:flag', context_system::instance());
+        require_capability('powereduc/tag:flag', context_system::instance());
         $id = required_param('id', PARAM_INT);
         $tagobject = core_tag_tag::get($id, '*', MUST_EXIST);
         $tagobject->flag();
@@ -51,6 +51,6 @@ switch ($action) {
         break;
 
     default:
-        throw new \moodle_exception('unknowaction');
+        throw new \powereduc_exception('unknowaction');
         break;
 }

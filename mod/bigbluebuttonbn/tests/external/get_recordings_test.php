@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\test\testcase_helper_trait;
 use require_login_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');
@@ -151,7 +151,7 @@ class get_recordings_test extends \externallib_advanced_testcase {
             // Check users see or do not see recording dependings on their groups.
             foreach ($dataset['recordingsdata'] as $recordingdata) {
                 foreach ($recordingdata as $recording) {
-                    if (has_capability('moodle/course:update', $context)) {
+                    if (has_capability('powereduc/course:update', $context)) {
                         $this->assertStringContainsString('data-action=\"delete\"', $getrecordings['tabledata']['data'],
                             "User $user->username, should be able to delete the recording {$recording['name']}");
                         $this->assertStringContainsString('data-action=\"publish\"', $getrecordings['tabledata']['data'],

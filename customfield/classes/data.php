@@ -26,7 +26,7 @@ namespace core_customfield;
 
 use core\persistent;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class data
@@ -93,7 +93,7 @@ class data extends persistent {
                 'valueformat'    => [
                         'type'    => PARAM_INT,
                         'null'    => NULL_NOT_ALLOWED,
-                        'default' => FORMAT_MOODLE,
+                        'default' => FORMAT_POWEREDUC,
                         'optional' => true
                 ],
                 'contextid'      => [

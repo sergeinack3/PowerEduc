@@ -42,7 +42,7 @@ use tool_dataprivacy\local\helper;
 use tool_dataprivacy\task\process_data_request_task;
 use tool_dataprivacy\data_request;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class containing helper methods for processing data requests.

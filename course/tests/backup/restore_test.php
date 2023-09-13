@@ -21,7 +21,7 @@ use backup_controller;
 use restore_controller;
 use restore_dbops;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -48,7 +48,7 @@ class restore_test extends \advanced_testcase {
         $backuptempdir = make_backup_temp_directory('');
         $packer = get_file_packer('application/vnd.moodle.backup');
 
-        $bc = new backup_controller(backup::TYPE_1COURSE, $courseid, backup::FORMAT_MOODLE, backup::INTERACTIVE_NO,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $courseid, backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO,
             backup::MODE_GENERAL, $userid);
         $bc->execute_plan();
 
@@ -227,7 +227,7 @@ class restore_test extends \advanced_testcase {
         $startdate = mktime(12, 0, 0, 7, 1, 2016); // 01-Jul-2016.
 
         // Create two courses with different start dates,in each course create a chat that opens 1 week after the course start date.
-        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE,
+        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC,
             'startdate' => $startdate]);
         $chat1 = $dg->create_module('chat', ['name' => 'First', 'course' => $c1->id, 'chattime' => $c1->startdate + 1 * WEEKSECS]);
         $c2 = $dg->create_course(['shortname' => 'A', 'fullname' => 'B', 'summary' => 'C', 'summaryformat' => FORMAT_PLAIN,
@@ -240,7 +240,7 @@ class restore_test extends \advanced_testcase {
         $this->assertEquals('SN_1', $c2->shortname);
         $this->assertEquals('FN copy 1', $c2->fullname);
         $this->assertEquals('DESC', $c2->summary);
-        $this->assertEquals(FORMAT_MOODLE, $c2->summaryformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $c2->summaryformat);
         $this->assertEquals($startdate, $c2->startdate);
 
         // Now course c2 has two chats - one ('Second') was already there and one ('First') was restored from the backup.
@@ -263,7 +263,7 @@ class restore_test extends \advanced_testcase {
         $startdate = mktime(12, 0, 0, 7, 1, 2016); // 01-Jul-2016.
 
         // Create two courses with different start dates,in each course create a chat that opens 1 week after the course start date.
-        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE,
+        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC,
             'startdate' => $startdate]);
         $chat1 = $dg->create_module('chat', ['name' => 'First', 'course' => $c1->id, 'chattime' => $c1->startdate + 1 * WEEKSECS]);
         $c2 = $dg->create_course(['shortname' => 'A', 'fullname' => 'B', 'summary' => 'C', 'summaryformat' => FORMAT_PLAIN,
@@ -273,7 +273,7 @@ class restore_test extends \advanced_testcase {
 
         // The information is restored and the existing course settings is modified.
         $c2 = $this->async_restore_to_existing_course($backupid, $c2->id, 2, backup::TARGET_CURRENT_DELETING);
-        $this->assertEquals(FORMAT_MOODLE, $c2->summaryformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $c2->summaryformat);
 
         // Now course2 should have a new forum with the original forum deleted.
         $restoredchat1 = $DB->get_record('chat', ['name' => 'First', 'course' => $c2->id]);
@@ -376,7 +376,7 @@ class restore_test extends \advanced_testcase {
         $startdate = mktime(12, 0, 0, 7, 1, 2016); // 01-Jul-2016.
 
         $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'startdate' => $startdate,
-            'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE]);
+            'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC]);
         $backupid = $this->backup_course($c1->id);
 
         // The information is restored but adapted because names are already taken.
@@ -384,7 +384,7 @@ class restore_test extends \advanced_testcase {
         $this->assertEquals('SN_1', $c2->shortname);
         $this->assertEquals('FN copy 1', $c2->fullname);
         $this->assertEquals('DESC', $c2->summary);
-        $this->assertEquals(FORMAT_MOODLE, $c2->summaryformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $c2->summaryformat);
         $this->assertEquals($startdate, $c2->startdate);
     }
 
@@ -400,7 +400,7 @@ class restore_test extends \advanced_testcase {
         $startdate = mktime(12, 0, 0, 7, 1, 2016); // 01-Jul-2016.
 
         // Create two courses with different start dates,in each course create a chat that opens 1 week after the course start date.
-        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE,
+        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC,
             'startdate' => $startdate]);
         $chat1 = $dg->create_module('chat', ['name' => 'First', 'course' => $c1->id, 'chattime' => $c1->startdate + 1 * WEEKSECS]);
         $c2 = $dg->create_course(['shortname' => 'A', 'fullname' => 'B', 'summary' => 'C', 'summaryformat' => FORMAT_PLAIN,
@@ -413,7 +413,7 @@ class restore_test extends \advanced_testcase {
         $this->assertEquals('SN_1', $c2->shortname);
         $this->assertEquals('FN copy 1', $c2->fullname);
         $this->assertEquals('DESC', $c2->summary);
-        $this->assertEquals(FORMAT_MOODLE, $c2->summaryformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $c2->summaryformat);
         $this->assertEquals($startdate, $c2->startdate);
 
         // Now course c2 has two chats - one ('Second') was already there and one ('First') was restored from the backup.
@@ -436,7 +436,7 @@ class restore_test extends \advanced_testcase {
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 
-        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE]);
+        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC]);
         $c2 = $dg->create_course(['shortname' => 'A1', 'fullname' => 'B1', 'summary' => 'C1', 'summaryformat' => FORMAT_PLAIN]);
 
         // The shortname does not change.
@@ -445,7 +445,7 @@ class restore_test extends \advanced_testcase {
         $this->assertEquals($c2->shortname, $restored->shortname);
         $this->assertEquals('FN copy 1', $restored->fullname);
         $this->assertEquals('DESC', $restored->summary);
-        $this->assertEquals(FORMAT_MOODLE, $restored->summaryformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $restored->summaryformat);
     }
 
     public function test_restore_course_fullname_in_existing_course_without_permissions() {
@@ -460,7 +460,7 @@ class restore_test extends \advanced_testcase {
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 
-        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE]);
+        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC]);
         $c2 = $dg->create_course(['shortname' => 'A1', 'fullname' => 'B1', 'summary' => 'C1', 'summaryformat' => FORMAT_PLAIN]);
 
         // The fullname does not change.
@@ -469,7 +469,7 @@ class restore_test extends \advanced_testcase {
         $this->assertEquals('SN_1', $restored->shortname);
         $this->assertEquals($c2->fullname, $restored->fullname);
         $this->assertEquals('DESC', $restored->summary);
-        $this->assertEquals(FORMAT_MOODLE, $restored->summaryformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $restored->summaryformat);
     }
 
     public function test_restore_course_summary_in_existing_course_without_permissions() {
@@ -484,7 +484,7 @@ class restore_test extends \advanced_testcase {
         $dg->role_assign($manager->id, $u1->id);
         $dg->role_assign($roleid, $u1->id);
 
-        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE]);
+        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC]);
         $c2 = $dg->create_course(['shortname' => 'A1', 'fullname' => 'B1', 'summary' => 'C1', 'summaryformat' => FORMAT_PLAIN]);
 
         // The summary and format do not change.
@@ -511,7 +511,7 @@ class restore_test extends \advanced_testcase {
         // Create two courses with different start dates,in each course create a chat that opens 1 week after the course start date.
         $startdate1 = mktime(12, 0, 0, 7, 1, 2016); // 01-Jul-2016.
         $startdate2 = mktime(12, 0, 0, 1, 13, 2000); // 13-Jan-2000.
-        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_MOODLE,
+        $c1 = $dg->create_course(['shortname' => 'SN', 'fullname' => 'FN', 'summary' => 'DESC', 'summaryformat' => FORMAT_POWEREDUC,
             'startdate' => $startdate1]);
         $chat1 = $dg->create_module('chat', ['name' => 'First', 'course' => $c1->id, 'chattime' => $c1->startdate + 1 * WEEKSECS]);
         $c2 = $dg->create_course(['shortname' => 'A', 'fullname' => 'B', 'summary' => 'C', 'summaryformat' => FORMAT_PLAIN,
@@ -524,7 +524,7 @@ class restore_test extends \advanced_testcase {
         $this->assertEquals('SN_1', $restored->shortname);
         $this->assertEquals('FN copy 1', $restored->fullname);
         $this->assertEquals('DESC', $restored->summary);
-        $this->assertEquals(FORMAT_MOODLE, $restored->summaryformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $restored->summaryformat);
         $this->assertEquals($startdate2, $restored->startdate);
 
         // Now course c2 has two chats - one ('Second') was already there and one ('First') was restored from the backup.

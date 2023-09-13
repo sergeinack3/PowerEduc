@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * SCORM module external API
  *
  * @package    mod_scorm
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/scorm/lib.php');
@@ -37,9 +37,9 @@ require_once($CFG->dirroot . '/mod/scorm/locallib.php');
  *
  * @package    mod_scorm
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 class mod_scorm_external extends external_api {
 
@@ -47,7 +47,7 @@ class mod_scorm_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_scorm_parameters() {
         return new external_function_parameters(
@@ -62,8 +62,8 @@ class mod_scorm_external extends external_api {
      *
      * @param int $scormid the scorm instance id
      * @return array of warnings and status result
-     * @since Moodle 3.0
-     * @throws moodle_exception
+     * @since PowerEduc 3.0
+     * @throws powereduc_exception
      */
     public static function view_scorm($scormid) {
         global $DB, $CFG;
@@ -95,7 +95,7 @@ class mod_scorm_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_scorm_returns() {
         return new external_single_structure(
@@ -110,7 +110,7 @@ class mod_scorm_external extends external_api {
      * Describes the parameters for get_scorm_attempt_count.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_attempt_count_parameters() {
         return new external_function_parameters(
@@ -131,7 +131,7 @@ class mod_scorm_external extends external_api {
      * @param int $userid the user id
      * @param bool $ignoremissingcompletion ignores attempts that haven't reported a grade/completion
      * @return array of warnings and the attempts count
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_attempt_count($scormid, $userid, $ignoremissingcompletion = false) {
         global $USER, $DB;
@@ -172,7 +172,7 @@ class mod_scorm_external extends external_api {
      * Describes the get_scorm_attempt_count return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_attempt_count_returns() {
 
@@ -188,7 +188,7 @@ class mod_scorm_external extends external_api {
      * Describes the parameters for get_scorm_scoes.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_scoes_parameters() {
         return new external_function_parameters(
@@ -205,7 +205,7 @@ class mod_scorm_external extends external_api {
      * @param int $scormid the scorm id
      * @param string $organization the organization id
      * @return array warnings and the scoes data
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_scoes($scormid, $organization = '') {
         global $DB;
@@ -255,7 +255,7 @@ class mod_scorm_external extends external_api {
      * Describes the get_scorm_scoes return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_scoes_returns() {
 
@@ -294,7 +294,7 @@ class mod_scorm_external extends external_api {
      * Describes the parameters for get_scorm_user_data.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_user_data_parameters() {
         return new external_function_parameters(
@@ -311,8 +311,8 @@ class mod_scorm_external extends external_api {
      * @param int $scormid the scorm id
      * @param int $attempt the attempt number
      * @return array warnings and the scoes data
-     * @throws  moodle_exception
-     * @since Moodle 3.0
+     * @throws  powereduc_exception
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_user_data($scormid, $attempt) {
         global $CFG, $DB;
@@ -381,7 +381,7 @@ class mod_scorm_external extends external_api {
      * Describes the get_scorm_user_data return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_user_data_returns() {
 
@@ -419,7 +419,7 @@ class mod_scorm_external extends external_api {
      * Describes the parameters for insert_scorm_tracks.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function insert_scorm_tracks_parameters() {
         return new external_function_parameters(
@@ -447,8 +447,8 @@ class mod_scorm_external extends external_api {
      * @param string $attempt the attempt number
      * @param array $tracks the track records to be stored
      * @return array warnings and the scoes data
-     * @throws moodle_exception
-     * @since Moodle 3.0
+     * @throws powereduc_exception
+     * @since PowerEduc 3.0
      */
     public static function insert_scorm_tracks($scoid, $attempt, $tracks) {
         global $USER, $DB;
@@ -461,7 +461,7 @@ class mod_scorm_external extends external_api {
 
         $sco = scorm_get_sco($params['scoid'], SCO_ONLY);
         if (!$sco) {
-            throw new moodle_exception('cannotfindsco', 'scorm');
+            throw new powereduc_exception('cannotfindsco', 'scorm');
         }
 
         $scorm = $DB->get_record('scorm', array('id' => $sco->scorm), '*', MUST_EXIST);
@@ -504,7 +504,7 @@ class mod_scorm_external extends external_api {
      * Describes the insert_scorm_tracks return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function insert_scorm_tracks_returns() {
 
@@ -520,7 +520,7 @@ class mod_scorm_external extends external_api {
      * Describes the parameters for get_scorm_sco_tracks.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_sco_tracks_parameters() {
         return new external_function_parameters(
@@ -539,7 +539,7 @@ class mod_scorm_external extends external_api {
      * @param int $userid the user id
      * @param int $attempt the attempt number
      * @return array warnings and the scoes data
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_sco_tracks($scoid, $userid, $attempt = 0) {
         global $USER, $DB;
@@ -552,7 +552,7 @@ class mod_scorm_external extends external_api {
 
         $sco = scorm_get_sco($params['scoid'], SCO_ONLY);
         if (!$sco) {
-            throw new moodle_exception('cannotfindsco', 'scorm');
+            throw new powereduc_exception('cannotfindsco', 'scorm');
         }
 
         $scorm = $DB->get_record('scorm', array('id' => $sco->scorm), '*', MUST_EXIST);
@@ -609,7 +609,7 @@ class mod_scorm_external extends external_api {
      * Describes the get_scorm_sco_tracks return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorm_sco_tracks_returns() {
 
@@ -637,7 +637,7 @@ class mod_scorm_external extends external_api {
      * Describes the parameters for get_scorms_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorms_by_courses_parameters() {
         return new external_function_parameters (
@@ -655,7 +655,7 @@ class mod_scorm_external extends external_api {
      *
      * @param array $courseids the course ids
      * @return array the scorm details
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorms_by_courses($courseids = array()) {
         global $CFG;
@@ -707,7 +707,7 @@ class mod_scorm_external extends external_api {
                         if ($packagefile = $fs->get_file($context->id, 'mod_scorm', 'package', 0, '/', $scorm->reference)) {
                             $module['packagesize'] = $packagefile->get_filesize();
                             // Download URL.
-                            $module['packageurl'] = moodle_url::make_webservice_pluginfile_url(
+                            $module['packageurl'] = powereduc_url::make_webservice_pluginfile_url(
                                                     $context->id, 'mod_scorm', 'package', 0, '/', $scorm->reference)->out(false);
                         }
                     }
@@ -721,7 +721,7 @@ class mod_scorm_external extends external_api {
                                             'timeclose', 'scormtype', 'reference');
 
                     // Check additional permissions for returning optional private settings.
-                    if (has_capability('moodle/course:manageactivities', $context)) {
+                    if (has_capability('powereduc/course:manageactivities', $context)) {
                         $additionalfields = array('updatefreq', 'options', 'completionstatusrequired', 'completionscorerequired',
                                                   'completionstatusallscos', 'autocommit', 'timemodified');
                         $viewablefields = array_merge($viewablefields, $additionalfields);
@@ -746,7 +746,7 @@ class mod_scorm_external extends external_api {
      * Describes the get_scorms_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_scorms_by_courses_returns() {
 
@@ -816,7 +816,7 @@ class mod_scorm_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function launch_sco_parameters() {
         return new external_function_parameters(
@@ -833,8 +833,8 @@ class mod_scorm_external extends external_api {
      * @param int $scormid the SCORM instance id
      * @param int $scoid the SCO id
      * @return array of warnings and status result
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function launch_sco($scormid, $scoid = 0) {
         global $DB, $CFG;
@@ -859,7 +859,7 @@ class mod_scorm_external extends external_api {
         scorm_require_available($scorm);
 
         if (!empty($params['scoid']) and !($sco = scorm_get_sco($params['scoid'], SCO_ONLY))) {
-            throw new moodle_exception('cannotfindsco', 'scorm');
+            throw new powereduc_exception('cannotfindsco', 'scorm');
         }
 
         // Mark module viewed.
@@ -880,7 +880,7 @@ class mod_scorm_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function launch_sco_returns() {
         return new external_single_structure(
@@ -895,7 +895,7 @@ class mod_scorm_external extends external_api {
      * Describes the parameters for get_scorm_access_information.
      *
      * @return external_external_function_parameters
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_scorm_access_information_parameters() {
         return new external_function_parameters (
@@ -910,8 +910,8 @@ class mod_scorm_external extends external_api {
      *
      * @param int $scormid scorm instance id
      * @return array of warnings and the access information
-     * @since Moodle 3.7
-     * @throws  moodle_exception
+     * @since PowerEduc 3.7
+     * @throws  powereduc_exception
      */
     public static function get_scorm_access_information($scormid) {
         global $DB;
@@ -942,7 +942,7 @@ class mod_scorm_external extends external_api {
      * Describes the get_scorm_access_information return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_scorm_access_information_returns() {
 

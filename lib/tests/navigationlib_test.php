@@ -35,7 +35,7 @@ use pix_icon;
 use popup_action;
 use settings_navigation;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/navigationlib.php');

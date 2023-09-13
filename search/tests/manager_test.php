@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/fixtures/testable_core_search.php');
 require_once(__DIR__ . '/fixtures/mock_search_area.php');
@@ -98,7 +98,7 @@ class manager_test extends \advanced_testcase {
             $area->set_enabled($enablearea);
         }
 
-        $this->assertEquals(new \moodle_url($expected), \core_search\manager::get_course_search_url());
+        $this->assertEquals(new \powereduc_url($expected), \core_search\manager::get_course_search_url());
     }
 
     /**
@@ -231,7 +231,7 @@ class manager_test extends \advanced_testcase {
             $fakeareaid = \core_search\manager::generate_areaid('mod_unexisting', 'chihuaquita');
             $search->reset_config($fakeareaid);
             $this->fail('An exception should be triggered if the provided search area does not exist.');
-        } catch (\moodle_exception $ex) {
+        } catch (\powereduc_exception $ex) {
             $this->assertStringContainsString($fakeareaid . ' search area is not available.', $ex->getMessage());
         }
 
@@ -782,7 +782,7 @@ class manager_test extends \advanced_testcase {
         $generator = $this->getDataGenerator();
         $course1 = $generator->create_course();
         $context1 = \context_course::instance($course1->id);
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context1);
         $page->set_course($course1);
         $page->set_pagelayout('standard');
@@ -794,7 +794,7 @@ class manager_test extends \advanced_testcase {
         // yet supported, so both these blocks will be ignored).
         $course2 = $generator->create_course();
         $context2 = \context_course::instance($course2->id);
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context2);
         $page->set_course($course2);
         $page->set_pagelayout('standard');
@@ -804,7 +804,7 @@ class manager_test extends \advanced_testcase {
 
         $forum = $this->getDataGenerator()->create_module('forum', array('course' => $course2->id));
         $forumcontext = \context_module::instance($forum->cmid);
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($forumcontext);
         $page->set_course($course2);
         $page->set_pagelayout('standard');
@@ -815,7 +815,7 @@ class manager_test extends \advanced_testcase {
         // The third course has 2 HTML blocks.
         $course3 = $generator->create_course();
         $context3 = \context_course::instance($course3->id);
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_context($context3);
         $page->set_course($course3);
         $page->set_pagelayout('standard');
@@ -916,7 +916,7 @@ class manager_test extends \advanced_testcase {
 
         // Allow "Authenticated user" role to view the course without being enrolled in it.
         $userrole = $DB->get_record('role', ['shortname' => 'user'], '*', MUST_EXIST);
-        role_change_permission($userrole->id, $context, 'moodle/course:view', CAP_ALLOW);
+        role_change_permission($userrole->id, $context, 'powereduc/course:view', CAP_ALLOW);
 
         $usercontexts = $search->get_areas_user_accesses([$course->id])->usercontexts;
         $this->assertNotEmpty($usercontexts);
@@ -953,7 +953,7 @@ class manager_test extends \advanced_testcase {
         $course2ctx = \context_course::instance($course2->id);
         $forum2 = $this->getDataGenerator()->create_module('forum', array('course' => $course2->id));
         $forum2ctx = \context_module::instance($forum2->cmid);
-        assign_capability('moodle/course:view', CAP_ALLOW, $CFG->defaultuserroleid, $course2ctx->id);
+        assign_capability('powereduc/course:view', CAP_ALLOW, $CFG->defaultuserroleid, $course2ctx->id);
 
         // Course 3 allows guest access without password.
         $course3 = $this->getDataGenerator()->create_course((object)array(

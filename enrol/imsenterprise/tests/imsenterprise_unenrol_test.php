@@ -20,7 +20,7 @@ use core_course_category;
 use enrol_imsenterprise_plugin;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/enrol/imsenterprise/locallib.php');

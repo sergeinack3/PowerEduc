@@ -26,7 +26,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 0                   |
@@ -40,7 +40,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 0                   |
@@ -54,7 +54,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 1                   |
@@ -68,7 +68,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 1                   |
@@ -82,7 +82,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 5                   |
@@ -97,7 +97,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 5                   |
@@ -112,7 +112,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 6                   |
@@ -128,7 +128,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 2                   |
       | completionview | 1                   |
       | display        | 6                   |
@@ -145,7 +145,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 1                   |
       | completionview | 1                   |
       | display        | 0                   |
@@ -160,7 +160,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 1                   |
       | completionview | 1                   |
       | display        | 0                   |
@@ -177,7 +177,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 1                   |
       | completionview | 1                   |
       | display        | <display>           |
@@ -201,7 +201,7 @@ Feature: View activity completion information in the URL resource
       | idnumber       | Music history       |
       | name           | Music history       |
       | intro          | URL description     |
-      | externalurl    | https://moodle.org/ |
+      | externalurl    | https://powereduc.org/ |
       | completion     | 1                   |
       | completionview | 1                   |
       | display        | <display>           |

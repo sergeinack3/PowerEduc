@@ -18,7 +18,7 @@ namespace core_completion;
 
 use core_completion_bulkedit_form;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/completionlib.php');

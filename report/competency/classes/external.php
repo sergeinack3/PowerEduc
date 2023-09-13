@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external API for this report.
@@ -23,7 +23,7 @@
  */
 namespace report_competency;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -96,7 +96,7 @@ class external extends external_api {
         );
         $context = context_course::instance($params['courseid']);
         self::validate_context($context);
-        if (!is_enrolled($context, $params['userid'], 'moodle/competency:coursecompetencygradable')) {
+        if (!is_enrolled($context, $params['userid'], 'powereduc/competency:coursecompetencygradable')) {
             throw new coding_exception('invaliduser');
         }
 

@@ -24,7 +24,7 @@
  */
 namespace core_course;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_course\local\entity\content_item;
 use core_course\local\repository\content_item_readonly_repository;

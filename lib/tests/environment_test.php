@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ class environment_test extends \advanced_testcase {
         global $CFG;
         require_once($CFG->libdir.'/environmentlib.php');
 
-        $results = check_moodle_environment(normalize_version($CFG->release), ENV_SELECT_RELEASE);
+        $results = check_powereduc_environment(normalize_version($CFG->release), ENV_SELECT_RELEASE);
 
         // The first element of the results array contains the environment check status.
         $status = reset($results);
@@ -51,7 +51,7 @@ class environment_test extends \advanced_testcase {
         global $CFG;
         require_once($CFG->libdir.'/environmentlib.php');
 
-        $results = check_moodle_environment(normalize_version($CFG->release), ENV_SELECT_RELEASE);
+        $results = check_powereduc_environment(normalize_version($CFG->release), ENV_SELECT_RELEASE);
         // The second element of the results array contains the list of environment results.
         $environmentresults = end($results);
         return array_map(function($result) {
@@ -99,26 +99,26 @@ class environment_test extends \advanced_testcase {
         // Build a sample xmlised environment.xml.
         $xml = <<<END
 <COMPATIBILITY_MATRIX>
-    <MOODLE version="1.9">
+    <POWEREDUC version="1.9">
         <PHP_EXTENSIONS>
             <PHP_EXTENSION name="xsl" level="required" />
         </PHP_EXTENSIONS>
-    </MOODLE>
-    <MOODLE version="2.5">
+    </POWEREDUC>
+    <POWEREDUC version="2.5">
         <PHP_EXTENSIONS>
             <PHP_EXTENSION name="xsl" level="required" />
         </PHP_EXTENSIONS>
-    </MOODLE>
-    <MOODLE version="2.6">
+    </POWEREDUC>
+    <POWEREDUC version="2.6">
         <PHP_EXTENSIONS>
             <PHP_EXTENSION name="xsl" level="required" />
         </PHP_EXTENSIONS>
-    </MOODLE>
-    <MOODLE version="2.7">
+    </POWEREDUC>
+    <POWEREDUC version="2.7">
         <PHP_EXTENSIONS>
             <PHP_EXTENSION name="xsl" level="required" />
         </PHP_EXTENSIONS>
-    </MOODLE>
+    </POWEREDUC>
     <PLUGIN name="block_test">
         <PHP_EXTENSIONS>
             <PHP_EXTENSION name="xsl" level="required" />

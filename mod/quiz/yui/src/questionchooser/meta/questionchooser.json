@@ -1,8 +1,8 @@
 {
-    "moodle-mod_quiz-questionchooser": {
+    "powereduc-mod_quiz-questionchooser": {
         "requires": [
-            "moodle-core-chooserdialogue",
-            "moodle-mod_quiz-util",
+            "powereduc-core-chooserdialogue",
+            "powereduc-mod_quiz-util",
             "querystring-parse"
         ]
     }

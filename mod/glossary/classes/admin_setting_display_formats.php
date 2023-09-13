@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for glossary display formats management.
@@ -117,7 +117,7 @@ class mod_glossary_admin_setting_display_formats extends admin_setting {
         $table->align = array('left', 'center');
         foreach ($formats as $formatname => $format) {
             $editicon = html_writer::link(
-                new moodle_url(
+                new powereduc_url(
                     '/mod/glossary/formats.php',
                     array('id' => $format->id, 'mode' => 'edit')
                 ),
@@ -133,7 +133,7 @@ class mod_glossary_admin_setting_display_formats extends admin_setting {
             }
 
             $visibleicon = html_writer::link(
-                new moodle_url(
+                new powereduc_url(
                     '/mod/glossary/formats.php',
                     array('id' => $format->id, 'mode' => 'visible', 'sesskey' => sesskey())
                 ),

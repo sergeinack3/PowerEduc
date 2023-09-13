@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum\output;
 
 use renderable;
 use renderer_base;
 use templatable;
-use moodle_url;
+use powereduc_url;
 use help_icon;
 use mod_forum\local\entities\forum as forum_entity;
 
@@ -30,7 +30,7 @@ use mod_forum\local\entities\forum as forum_entity;
  * to the page action.
  *
  * @package mod_forum
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class forum_actionbar implements renderable, templatable {
@@ -89,7 +89,7 @@ class forum_actionbar implements renderable, templatable {
      */
     public function export_for_template(renderer_base $output): array {
         global $USER;
-        $actionurl = (new moodle_url('/mod/forum/search.php'))->out(false);
+        $actionurl = (new powereduc_url('/mod/forum/search.php'))->out(false);
         $helpicon = new help_icon('search', 'core');
         $hiddenfields = [
             (object) ['name' => 'id', 'value' => $this->course->id],
@@ -117,14 +117,14 @@ class forum_actionbar implements renderable, templatable {
             (!($this->forum->get_subscription_mode() === FORUM_DISALLOWSUBSCRIBE) || $canmanage);
         if ($cansubscribe) {
             $returnurl =
-                (new moodle_url('/mod/forum/view.php', ['id' => $this->forum->get_course_module_record()->id]))->out(false);
+                (new powereduc_url('/mod/forum/view.php', ['id' => $this->forum->get_course_module_record()->id]))->out(false);
             if (!\mod_forum\subscriptions::is_subscribed($USER->id, $forumobject, null, $this->forum->get_course_module_record())) {
-                $data['subscribetoforum'] = (new moodle_url(
+                $data['subscribetoforum'] = (new powereduc_url(
                     '/mod/forum/subscribe.php',
                     ['id' => $forumobject->id, 'sesskey' => sesskey(), 'returnurl' => $returnurl]
                     ))->out(false);
             } else {
-                $data['unsubscribefromforum'] = (new moodle_url(
+                $data['unsubscribefromforum'] = (new powereduc_url(
                     '/mod/forum/subscribe.php',
                     ['id' => $forumobject->id, 'sesskey' => sesskey(), 'returnurl' => $returnurl]
                 ))->out(false);

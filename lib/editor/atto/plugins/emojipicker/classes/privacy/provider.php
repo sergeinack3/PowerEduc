@@ -24,7 +24,7 @@
 
 namespace atto_emojipicker\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_emojipicker implementing null_provider.

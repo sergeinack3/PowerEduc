@@ -19,7 +19,7 @@ namespace core_group;
 use core_group_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -52,7 +52,7 @@ class externallib_test extends externallib_advanced_testcase {
         $group1['courseid'] = $course->id;
         $group1['name'] = 'Group Test 1';
         $group1['description'] = 'Group Test 1 description';
-        $group1['descriptionformat'] = FORMAT_MOODLE;
+        $group1['descriptionformat'] = FORMAT_POWEREDUC;
         $group1['enrolmentkey'] = 'Test group enrol secret phrase';
         $group1['idnumber'] = 'TEST1';
         $group2 = array();
@@ -133,7 +133,7 @@ class externallib_test extends externallib_advanced_testcase {
         $group1data['courseid'] = $course->id;
         $group1data['name'] = 'Group Test 1';
         $group1data['description'] = 'Group Test 1 description';
-        $group1data['descriptionformat'] = FORMAT_MOODLE;
+        $group1data['descriptionformat'] = FORMAT_POWEREDUC;
         $group1data['enrolmentkey'] = 'Test group enrol secret phrase';
         $group1data['idnumber'] = 'TEST1';
         $group2data = array();
@@ -211,7 +211,7 @@ class externallib_test extends externallib_advanced_testcase {
         $group1data['courseid'] = $course->id;
         $group1data['name'] = 'Group Test 1';
         $group1data['description'] = 'Group Test 1 description';
-        $group1data['descriptionformat'] = FORMAT_MOODLE;
+        $group1data['descriptionformat'] = FORMAT_POWEREDUC;
         $group1data['enrolmentkey'] = 'Test group enrol secret phrase';
         $group1data['idnumber'] = 'TEST1';
         $group2data = array();
@@ -276,7 +276,7 @@ class externallib_test extends externallib_advanced_testcase {
         $group1data['courseid'] = $course->id;
         $group1data['name'] = 'Group Test 1';
         $group1data['description'] = 'Group Test 1 description';
-        $group1data['descriptionformat'] = FORMAT_MOODLE;
+        $group1data['descriptionformat'] = FORMAT_POWEREDUC;
         $group1data['enrolmentkey'] = 'Test group enrol secret phrase';
         $group2data = array();
         $group2data['courseid'] = $course->id;
@@ -329,7 +329,7 @@ class externallib_test extends externallib_advanced_testcase {
         $grouping1data['courseid'] = $course->id;
         $grouping1data['name'] = 'Grouping 1 Test';
         $grouping1data['description'] = 'Grouping 1 Test description';
-        $grouping1data['descriptionformat'] = FORMAT_MOODLE;
+        $grouping1data['descriptionformat'] = FORMAT_POWEREDUC;
         $grouping1data['idnumber'] = 'TEST';
 
         $grouping1 = self::getDataGenerator()->create_grouping($grouping1data);
@@ -354,7 +354,7 @@ class externallib_test extends externallib_advanced_testcase {
         $grouping2data['courseid'] = $course->id;
         $grouping2data['name'] = 'Grouping 2 Test';
         $grouping2data['description'] = 'Grouping 2 Test description';
-        $grouping2data['descriptionformat'] = FORMAT_MOODLE;
+        $grouping2data['descriptionformat'] = FORMAT_POWEREDUC;
         $grouping2data['idnumber'] = 'TEST';
 
         $grouping2 = self::getDataGenerator()->create_grouping($grouping2data);
@@ -385,7 +385,7 @@ class externallib_test extends externallib_advanced_testcase {
         $groupingdata['courseid'] = $course->id;
         $groupingdata['name'] = 'Grouping Test';
         $groupingdata['description'] = 'Grouping Test description';
-        $groupingdata['descriptionformat'] = FORMAT_MOODLE;
+        $groupingdata['descriptionformat'] = FORMAT_POWEREDUC;
 
         $grouping = self::getDataGenerator()->create_grouping($groupingdata);
 
@@ -405,12 +405,12 @@ class externallib_test extends externallib_advanced_testcase {
         $group1data['courseid'] = $course->id;
         $group1data['name'] = 'Group Test 1';
         $group1data['description'] = 'Group Test 1 description';
-        $group1data['descriptionformat'] = FORMAT_MOODLE;
+        $group1data['descriptionformat'] = FORMAT_POWEREDUC;
         $group2data = array();
         $group2data['courseid'] = $course->id;
         $group2data['name'] = 'Group Test 2';
         $group2data['description'] = 'Group Test 2 description';
-        $group2data['descriptionformat'] = FORMAT_MOODLE;
+        $group2data['descriptionformat'] = FORMAT_POWEREDUC;
 
         $group1 = self::getDataGenerator()->create_group($group1data);
         $group2 = self::getDataGenerator()->create_group($group2data);
@@ -462,17 +462,17 @@ class externallib_test extends externallib_advanced_testcase {
         $groupingdata1['courseid'] = $course->id;
         $groupingdata1['name'] = 'Grouping Test';
         $groupingdata1['description'] = 'Grouping Test description';
-        $groupingdata1['descriptionformat'] = FORMAT_MOODLE;
+        $groupingdata1['descriptionformat'] = FORMAT_POWEREDUC;
         $groupingdata2 = array();
         $groupingdata2['courseid'] = $course->id;
         $groupingdata2['name'] = 'Grouping Test';
         $groupingdata2['description'] = 'Grouping Test description';
-        $groupingdata2['descriptionformat'] = FORMAT_MOODLE;
+        $groupingdata2['descriptionformat'] = FORMAT_POWEREDUC;
         $groupingdata3 = array();
         $groupingdata3['courseid'] = $course->id;
         $groupingdata3['name'] = 'Grouping Test';
         $groupingdata3['description'] = 'Grouping Test description';
-        $groupingdata3['descriptionformat'] = FORMAT_MOODLE;
+        $groupingdata3['descriptionformat'] = FORMAT_POWEREDUC;
 
         $grouping1 = self::getDataGenerator()->create_grouping($groupingdata1);
         $grouping2 = self::getDataGenerator()->create_grouping($groupingdata2);
@@ -554,7 +554,7 @@ class externallib_test extends externallib_advanced_testcase {
         $groupingdata['courseid'] = $course->id;
         $groupingdata['name'] = 'Grouping Test';
         $groupingdata['description'] = 'Grouping Test description';
-        $groupingdata['descriptionformat'] = FORMAT_MOODLE;
+        $groupingdata['descriptionformat'] = FORMAT_POWEREDUC;
 
         $grouping = self::getDataGenerator()->create_grouping($groupingdata);
         // Grouping only containing group1.

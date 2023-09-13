@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Nu se poate crea baza de date.</p>
 <p>Baza de date specificată nu există și utilizatorul dat nu are permisiunea de a crea baza de date.</p>

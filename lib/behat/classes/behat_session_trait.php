@@ -35,7 +35,7 @@ use Facebook\WebDriver\Exception\ScriptTimeoutException;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/component_named_replacement.php');
 require_once(__DIR__ . '/component_named_selector.php');

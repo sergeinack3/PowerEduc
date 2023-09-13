@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * IMS CP module main user interface
@@ -53,8 +53,8 @@ $PAGE->requires->js('/mod/imscp/dummyapi.js', true);
 
 $PAGE->requires->string_for_js('navigation', 'imscp');
 $PAGE->requires->string_for_js('toc', 'imscp');
-$PAGE->requires->string_for_js('hide', 'moodle');
-$PAGE->requires->string_for_js('show', 'moodle');
+$PAGE->requires->string_for_js('hide', 'powereduc');
+$PAGE->requires->string_for_js('show', 'powereduc');
 
 // TODO: find some better way to disable blocks and minimise footer - pagetype just for this does not seem like a good solution.
 // $PAGE->set_pagelayout('maxcontent'); ?

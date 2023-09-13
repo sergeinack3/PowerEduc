@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for forum events.
  *
  * @package    mod_forum
  * @category   test
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ namespace mod_forum\event;
  *
  * @package    mod_forum
  * @category   test
- * @copyright  2014 Dan Poltawski <dan@moodle.com>
+ * @copyright  2014 Dan Poltawski <dan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class events_test extends \advanced_testcase {
@@ -578,7 +578,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
         $expected = array($course->id, 'forum', 'view forum', "view.php?f={$forum->id}", $forum->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/view.php', array('f' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/view.php', array('f' => $forum->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 
@@ -678,7 +678,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
         $expected = array($course->id, 'forum', 'subscribe', "view.php?f={$forum->id}", $forum->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/subscribers.php', array('id' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/subscribers.php', array('id' => $forum->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 
@@ -778,7 +778,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
         $expected = array($course->id, 'forum', 'unsubscribe', "view.php?f={$forum->id}", $forum->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/subscribers.php', array('id' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/subscribers.php', array('id' => $forum->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 
@@ -869,7 +869,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
         $expected = array($course->id, 'forum', 'start tracking', "view.php?f={$forum->id}", $forum->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/view.php', array('f' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/view.php', array('f' => $forum->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 
@@ -960,7 +960,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
         $expected = array($course->id, 'forum', 'stop tracking', "view.php?f={$forum->id}", $forum->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/view.php', array('f' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/view.php', array('f' => $forum->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 
@@ -1319,7 +1319,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'forum', 'add post', "discuss.php?d={$discussion->id}#p{$post->id}",
             $forum->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id));
+        $url = new \powereduc_url('/mod/forum/discuss.php', array('d' => $discussion->id));
         $url->set_anchor('p'.$event->objectid);
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
@@ -1372,7 +1372,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'forum', 'add post', "view.php?f={$forum->id}#p{$post->id}",
             $forum->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/view.php', array('f' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/view.php', array('f' => $forum->id));
         $url->set_anchor('p'.$event->objectid);
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
@@ -1579,7 +1579,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals(\context_module::instance($forum->cmid), $event->get_context());
         $expected = array($course->id, 'forum', 'delete post', "discuss.php?d={$discussion->id}", $lastpost->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id));
+        $url = new \powereduc_url('/mod/forum/discuss.php', array('d' => $discussion->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
@@ -1600,7 +1600,7 @@ class events_test extends \advanced_testcase {
                 $expected = array($course->id, 'forum', 'delete discussion', "view.php?id={$forum->cmid}",
                     $forum->id, $forum->cmid);
                 $this->assertEventLegacyLogData($expected, $event);
-                $url = new \moodle_url('/mod/forum/view.php', array('id' => $forum->cmid));
+                $url = new \powereduc_url('/mod/forum/view.php', array('id' => $forum->cmid));
                 $this->assertEquals($url, $event->get_url());
                 $this->assertEventContextNotUsed($event);
                 $this->assertNotEmpty($event->get_name());
@@ -1612,7 +1612,7 @@ class events_test extends \advanced_testcase {
                 $this->assertEquals(\context_module::instance($forum->cmid), $event->get_context());
                 $expected = array($course->id, 'forum', 'delete post', "discuss.php?d={$discussion->id}", $post->id, $forum->cmid);
                 $this->assertEventLegacyLogData($expected, $event);
-                $url = new \moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id));
+                $url = new \powereduc_url('/mod/forum/discuss.php', array('d' => $discussion->id));
                 $this->assertEquals($url, $event->get_url());
                 $this->assertEventContextNotUsed($event);
                 $this->assertNotEmpty($event->get_name());
@@ -1664,7 +1664,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
         $expected = array($course->id, 'forum', 'delete post', "view.php?f={$forum->id}", $post->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/view.php', array('f' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/view.php', array('f' => $forum->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
 
@@ -1844,7 +1844,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'forum', 'update post', "discuss.php?d={$discussion->id}#p{$post->id}",
             $post->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id));
+        $url = new \powereduc_url('/mod/forum/discuss.php', array('d' => $discussion->id));
         $url->set_anchor('p'.$event->objectid);
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
@@ -1897,7 +1897,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'forum', 'update post', "view.php?f={$forum->id}#p{$post->id}",
             $post->id, $forum->cmid);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/mod/forum/view.php', array('f' => $forum->id));
+        $url = new \powereduc_url('/mod/forum/view.php', array('f' => $forum->id));
         $url->set_anchor('p'.$post->id);
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
@@ -1950,7 +1950,7 @@ class events_test extends \advanced_testcase {
         $context = \context_module::instance($cm->id);
         $this->assertEquals($context, $event->get_context());
 
-        $url = new \moodle_url('/mod/forum/subscribe.php', array(
+        $url = new \powereduc_url('/mod/forum/subscribe.php', array(
             'id' => $forum->id,
             'd' => $discussion->id
         ));
@@ -2277,7 +2277,7 @@ class events_test extends \advanced_testcase {
         $context = \context_module::instance($cm->id);
         $this->assertEquals($context, $event->get_context());
 
-        $url = new \moodle_url('/mod/forum/subscribe.php', array(
+        $url = new \powereduc_url('/mod/forum/subscribe.php', array(
             'id' => $forum->id,
             'd' => $discussion->id
         ));
@@ -2614,7 +2614,7 @@ class events_test extends \advanced_testcase {
         $post = $this->getDataGenerator()->get_plugin_generator('mod_forum')->create_post($record);
 
         // Set up the default page event to use this forum.
-        $PAGE = new \moodle_page();
+        $PAGE = new \powereduc_page();
         $cm = get_coursemodule_from_instance('forum', $discussion->forum);
         $context = \context_module::instance($cm->id);
         $PAGE->set_context($context);
@@ -2672,7 +2672,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
 
         // Now try with the context for a different module (quiz).
-        $PAGE = new \moodle_page();
+        $PAGE = new \powereduc_page();
         $cm = get_coursemodule_from_instance('quiz', $quiz->id);
         $quizcontext = \context_module::instance($cm->id);
         $PAGE->set_context($quizcontext);
@@ -2730,7 +2730,7 @@ class events_test extends \advanced_testcase {
         $this->assertEquals($context, $event->get_context());
 
         // Now try with the course context - the module context should still be used.
-        $PAGE = new \moodle_page();
+        $PAGE = new \powereduc_page();
         $coursecontext = \context_course::instance($course->id);
         $PAGE->set_context($coursecontext);
 

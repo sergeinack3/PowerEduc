@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use mod_bigbluebuttonbn\local\config;
 use mod_bigbluebuttonbn\local\helpers\files;
 use mod_bigbluebuttonbn\local\helpers\roles;
 use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
@@ -209,7 +209,7 @@ EOF;
      *
      * @param string $meetingid
      * @return array
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function parse_meetingid(string $meetingid): array {
         $result = preg_match(
@@ -219,7 +219,7 @@ EOF;
         );
 
         if ($result !== 1) {
-            throw new \moodle_exception("The supplied meeting id '{$meetingid}' is invalid found.");
+            throw new \powereduc_exception("The supplied meeting id '{$meetingid}' is invalid found.");
         }
 
         return $matches;
@@ -594,7 +594,7 @@ EOF;
         $context = $this->get_context();
         $inrightgroup =
             groups_group_visible($groupid, $this->get_course(), $this->get_cm());
-        $hascapability = has_capability('moodle/category:manage', $context)
+        $hascapability = has_capability('powereduc/category:manage', $context)
             || (has_capability('mod/bigbluebuttonbn:join', $context) && $inrightgroup);
         $canjoin = $this->get_type() != self::TYPE_RECORDING_ONLY && $hascapability; // Recording only cannot be joined ever.
         return $canjoin;
@@ -856,7 +856,7 @@ EOF;
     /**
      * Get the presentation data for internal use.
      *
-     * The URL returned for the presentation will be accessible through moodle with checks about user being logged in.
+     * The URL returned for the presentation will be accessible through powereduc with checks about user being logged in.
      *
      * @return array|null
      */
@@ -992,7 +992,7 @@ EOF;
             'originServerName' => $parsedurl['host'],
             'originServerUrl' => $CFG->wwwroot,
             'originServerCommonName' => '',
-            'originTag' => sprintf('moodle-mod_bigbluebuttonbn (%s)', get_config('mod_bigbluebuttonbn', 'version')),
+            'originTag' => sprintf('powereduc-mod_bigbluebuttonbn (%s)', get_config('mod_bigbluebuttonbn', 'version')),
         ];
     }
 
@@ -1008,19 +1008,19 @@ EOF;
     /**
      * Get the URL used to access the course that the instance is in.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_course_url(): moodle_url {
-        return new moodle_url('/course/view.php', ['id' => $this->get_course_id()]);
+    public function get_course_url(): powereduc_url {
+        return new powereduc_url('/course/view.php', ['id' => $this->get_course_id()]);
     }
 
     /**
      * Get the URL used to view the instance as a user.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_view_url(): moodle_url {
-        return new moodle_url('/mod/bigbluebuttonbn/view.php', [
+    public function get_view_url(): powereduc_url {
+        return new powereduc_url('/mod/bigbluebuttonbn/view.php', [
             'id' => $this->cm->id,
         ]);
     }
@@ -1028,10 +1028,10 @@ EOF;
     /**
      * Get the logout URL used to log out of the meeting.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_logout_url(): moodle_url {
-        return new moodle_url('/mod/bigbluebuttonbn/bbb_view.php', [
+    public function get_logout_url(): powereduc_url {
+        return new powereduc_url('/mod/bigbluebuttonbn/bbb_view.php', [
             'action' => 'logout',
             'id' => $this->cm->id,
             'courseid' => $this->cm->course // Used to find the course if ever the activity is deleted
@@ -1042,10 +1042,10 @@ EOF;
     /**
      * Get the URL that the remote server will use to notify that the recording is ready.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_record_ready_url(): moodle_url {
-        return new moodle_url('/mod/bigbluebuttonbn/bbb_broker.php', [
+    public function get_record_ready_url(): powereduc_url {
+        return new powereduc_url('/mod/bigbluebuttonbn/bbb_broker.php', [
             'action' => 'recording_ready',
             'bigbluebuttonbn' => $this->instancedata->id,
         ]);
@@ -1054,10 +1054,10 @@ EOF;
     /**
      * Get the URL that the remote server will use to notify of meeting events.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_meeting_event_notification_url(): moodle_url {
-        return new moodle_url('/mod/bigbluebuttonbn/bbb_broker.php', [
+    public function get_meeting_event_notification_url(): powereduc_url {
+        return new powereduc_url('/mod/bigbluebuttonbn/bbb_broker.php', [
             'action' => 'meeting_events',
             'bigbluebuttonbn' => $this->instancedata->id,
         ]);
@@ -1066,10 +1066,10 @@ EOF;
     /**
      * Get the URL used to join a meeting.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_join_url(): moodle_url {
-        return new moodle_url('/mod/bigbluebuttonbn/bbb_view.php', [
+    public function get_join_url(): powereduc_url {
+        return new powereduc_url('/mod/bigbluebuttonbn/bbb_view.php', [
             'action' => 'join',
             'id' => $this->cm->id,
             'bn' => $this->instancedata->id,
@@ -1079,10 +1079,10 @@ EOF;
     /**
      * Get the URL used for the import page.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_import_url(): moodle_url {
-        return new moodle_url('/mod/bigbluebuttonbn/import_view.php', [
+    public function get_import_url(): powereduc_url {
+        return new powereduc_url('/mod/bigbluebuttonbn/import_view.php', [
             'destbn' => $this->instancedata->id,
         ]);
     }
@@ -1162,7 +1162,7 @@ EOF;
         // Then validate group.
         $groupmode = groups_get_activity_groupmode($cm);
         if ($groupmode && $groupid) {
-            $accessallgroups = has_capability('moodle/site:accessallgroups', $context);
+            $accessallgroups = has_capability('powereduc/site:accessallgroups', $context);
             if ($accessallgroups || $groupmode == VISIBLEGROUPS) {
                 $allowedgroups = groups_get_all_groups($cm->course, 0, $cm->groupingid);
             } else {
@@ -1181,15 +1181,15 @@ EOF;
     /**
      * Get current guest link url
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public function get_guest_access_url(): moodle_url {
+    public function get_guest_access_url(): powereduc_url {
         $guestlinkuid = $this->get_instance_var('guestlinkuid');
         if (empty($guestlinkuid)) {
             $this->generate_guest_credentials();
             $guestlinkuid = $this->get_instance_var('guestlinkuid');
         }
-        return new moodle_url('/mod/bigbluebuttonbn/guest.php', ['uid' => $guestlinkuid]);
+        return new powereduc_url('/mod/bigbluebuttonbn/guest.php', ['uid' => $guestlinkuid]);
     }
 
     /**

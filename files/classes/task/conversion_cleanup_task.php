@@ -23,7 +23,7 @@
  */
 namespace core_files\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A scheduled task to clear up old conversion records.

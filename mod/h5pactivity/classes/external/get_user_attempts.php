@@ -1,31 +1,31 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This is the external method to return the information needed to list all enrolled user attempts.
  *
  * @package    mod_h5pactivity
- * @since      Moodle 3.11
- * @copyright  2020 Ilya Tregubov <ilya@moodle.com>
+ * @since      PowerEduc 3.11
+ * @copyright  2020 Ilya Tregubov <ilya@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_h5pactivity\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -40,14 +40,14 @@ use external_value;
 use external_multiple_structure;
 use external_single_structure;
 use external_warnings;
-use moodle_exception;
+use powereduc_exception;
 use context_module;
 use stdClass;
 
 /**
  * This is the external method to return the information needed to list all enrolled user attempts.
  *
- * @copyright  2020 Ilya Tregubov <ilya@moodle.com>
+ * @copyright  2020 Ilya Tregubov <ilya@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_user_attempts extends external_api {
@@ -76,7 +76,7 @@ class get_user_attempts extends external_api {
     /**
      * Return user attempts information in a h5p activity.
      *
-     * @throws  moodle_exception if the user cannot see the report
+     * @throws  powereduc_exception if the user cannot see the report
      * @param  int $h5pactivityid The h5p activity id
      * @param int $sortorder The sort order
      * @param int $page page number
@@ -113,7 +113,7 @@ class get_user_attempts extends external_api {
         $manager = manager::create_from_coursemodule($cm);
         $instance = $manager->get_instance();
         if (!$manager->can_view_all_attempts()) {
-            throw new moodle_exception('nopermissiontoviewattempts', 'error', '', null,
+            throw new powereduc_exception('nopermissiontoviewattempts', 'error', '', null,
                 'h5pactivity:reviewattempts required view attempts of all enrolled users.');
         }
 

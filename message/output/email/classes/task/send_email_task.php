@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,21 +18,21 @@
  * Contains the class responsible for sending emails as a digest.
  *
  * @package    message_email
- * @copyright  2019 Mark Nelson <markn@moodle.com>
+ * @copyright  2019 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace message_email\task;
 
 use core\task\scheduled_task;
-use moodle_recordset;
+use powereduc_recordset;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class responsible for sending emails as a digest.
  *
  * @package    message_email
- * @copyright  2019 Mark Nelson <markn@moodle.com>
+ * @copyright  2019 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class send_email_task extends scheduled_task {
@@ -106,9 +106,9 @@ class send_email_task extends scheduled_task {
     /**
      * Returns an array of users in the given conversation.
      *
-     * @return moodle_recordset A moodle_recordset instance.
+     * @return powereduc_recordset A powereduc_recordset instance.
      */
-    private function get_unique_users() : moodle_recordset {
+    private function get_unique_users() : powereduc_recordset {
         global $DB;
 
         $subsql = 'SELECT DISTINCT(useridto) as id
@@ -126,9 +126,9 @@ class send_email_task extends scheduled_task {
      * Returns an array of unique conversations that require processing.
      *
      * @param int $userid The ID of the user we are sending a digest to.
-     * @return moodle_recordset A moodle_recordset instance.
+     * @return powereduc_recordset A powereduc_recordset instance.
      */
-    private function get_conversations_for_user(int $userid) : moodle_recordset {
+    private function get_conversations_for_user(int $userid) : powereduc_recordset {
         global $DB;
 
         // We shouldn't be joining directly on the group table as group
@@ -156,9 +156,9 @@ class send_email_task extends scheduled_task {
      *
      * @param int $conversationid
      * @param int $userid
-     * @return moodle_recordset A moodle_recordset instance.
+     * @return powereduc_recordset A powereduc_recordset instance.
      */
-    protected function get_users_messages_for_conversation(int $conversationid, int $userid) : moodle_recordset {
+    protected function get_users_messages_for_conversation(int $conversationid, int $userid) : powereduc_recordset {
         global $DB;
 
         $userfieldsapi = \core_user\fields::for_userpic();

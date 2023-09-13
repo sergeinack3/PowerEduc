@@ -24,7 +24,7 @@
  * @since      Moodle 3.3
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->dirroot/my/lib.php");

@@ -26,7 +26,7 @@ namespace core_backup;
 use restore_decode_rule;
 use restore_decode_rule_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;

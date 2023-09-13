@@ -1,5 +1,5 @@
 @qformat @qformat_xml
-Feature: Test importing questions from Moodle XML format.
+Feature: Test importing questions from PowerEduc XML format.
   In order to reuse questions
   As an teacher
   I need to be able to import them in XML format.
@@ -16,7 +16,7 @@ Feature: Test importing questions from Moodle XML format.
       | teacher | C1     | editingteacher |
 
   @javascript @_file_upload
-  Scenario: import some true/false questions from Moodle XML format
+  Scenario: import some true/false questions from PowerEduc XML format
     When I am on the "Course 1" "core_question > course question import" page logged in as "teacher"
     And I set the field "id_format_xml" to "1"
     And I upload "question/format/xml/tests/fixtures/truefalse.xml" file to "Import" filemanager
@@ -26,8 +26,8 @@ Feature: Test importing questions from Moodle XML format.
     And I should see "is an acronym for Modular Object-Oriented Dynamic Learning Education"
     And I should see "is an acronym for Modular Object-Oriented Dynamic Learning Environment"
     When I press "Continue"
-    Then I should see "Moodle acronym (False)"
-    Then I should see "Moodle acronym (True)"
+    Then I should see "PowerEduc acronym (False)"
+    Then I should see "PowerEduc acronym (True)"
 
     # Now export again.
     When I am on the "Course 1" "core_question > course question export" page logged in as "teacher"
@@ -37,7 +37,7 @@ Feature: Test importing questions from Moodle XML format.
     Then following "click here" should download between "57100" and "58150" bytes
 
   @javascript @_file_upload
-  Scenario: import some multiple choice questions from Moodle XML format
+  Scenario: import some multiple choice questions from PowerEduc XML format
     When I am on the "Course 1" "core_question > course question import" page logged in as "teacher"
     And I set the field "id_format_xml" to "1"
     And I upload "question/format/xml/tests/fixtures/multichoice.xml" file to "Import" filemanager
@@ -49,7 +49,7 @@ Feature: Test importing questions from Moodle XML format.
     Then I should see "Greeting"
 
   @javascript @_file_upload
-  Scenario: import some multi-answer questions from Moodle XML format
+  Scenario: import some multi-answer questions from PowerEduc XML format
     When I am on the "Course 1" "core_question > course question import" page logged in as "teacher"
     And I set the field "id_format_xml" to "1"
     And I upload "question/format/xml/tests/fixtures/multianswer.xml" file to "Import" filemanager
@@ -61,7 +61,7 @@ Feature: Test importing questions from Moodle XML format.
     Then I should see "cloze with images"
 
   @javascript @_file_upload
-  Scenario: import some questions with legacy-style images from Moodle XML format
+  Scenario: import some questions with legacy-style images from PowerEduc XML format
     When I am on the "Course 1" "core_question > course question import" page logged in as "teacher"
     And I set the field "id_format_xml" to "1"
     And I upload "question/format/xml/tests/fixtures/sample_questions_with_old_image_tag.xml" file to "Import" filemanager

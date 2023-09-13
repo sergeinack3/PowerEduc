@@ -24,7 +24,7 @@
 
 namespace mlbackend_php;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use Phpml\Preprocessing\Normalizer;
 use Phpml\CrossValidation\RandomSplit;

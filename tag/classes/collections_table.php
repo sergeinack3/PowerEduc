@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag_collections_table
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Table with the list of tag collections for "Manage tags" page.
@@ -35,7 +35,7 @@ class core_tag_collections_table extends html_table {
 
     /**
      * Constructor
-     * @param string|moodle_url $pageurl
+     * @param string|powereduc_url $pageurl
      */
     public function __construct($pageurl) {
         global $OUTPUT;
@@ -58,7 +58,7 @@ class core_tag_collections_table extends html_table {
         foreach ($tagcolls as $tagcoll) {
             $actions = '';
             $name = core_tag_collection::display_name($tagcoll);
-            $url = new moodle_url($pageurl, array('sesskey' => sesskey(), 'tc' => $tagcoll->id));
+            $url = new powereduc_url($pageurl, array('sesskey' => sesskey(), 'tc' => $tagcoll->id));
             if (!$tagcoll->isdefault) {
                 // Move up.
                 if ($idx > 1) {

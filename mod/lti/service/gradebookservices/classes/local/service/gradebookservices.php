@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains a class definition for the LTI Gradebook Services
@@ -31,9 +31,9 @@ use ltiservice_gradebookservices\local\resources\results;
 use ltiservice_gradebookservices\local\resources\scores;
 use mod_lti\local\ltiservice\resource_base;
 use mod_lti\local\ltiservice\service_base;
-use moodle_url;
+use powereduc_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
@@ -129,7 +129,7 @@ class gradebookservices extends service_base {
     /**
      * Adds form elements for gradebook sync add/edit page.
      *
-     * @param \MoodleQuickForm $mform Moodle quickform object definition
+     * @param \PowerEducQuickForm $mform PowerEduc quickform object definition
      */
     public function get_configuration_options(&$mform) {
 
@@ -426,7 +426,7 @@ class gradebookservices extends service_base {
      * @param int $userid User ID
      *
      * @throws \Exception
-     * @deprecated since Moodle 3.7 MDL-62599 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.7 MDL-62599 - please do not use this function any more.
      * @see gradebookservices::save_grade_item($gradeitem, $score, $userid)
      */
     public static function save_score($gradeitem, $score, $userid) {
@@ -468,7 +468,7 @@ class gradebookservices extends service_base {
                 $timemodified = time();
             }
         }
-        $feedbackformat = FORMAT_MOODLE;
+        $feedbackformat = FORMAT_POWEREDUC;
         $feedback = null;
         if (!empty($score->comment)) {
             $feedback = $score->comment;
@@ -670,12 +670,12 @@ class gradebookservices extends service_base {
      * @param object $ltiinstance The lti instance to which the grade item is coupled to
      * @param string|null $resourceid The resourceid to apply to the lineitem. If empty string which will be stored as null.
      * @param string|null $tag The tag to apply to the lineitem. If empty string which will be stored as null.
-     * @param moodle_url|null $subreviewurl The submission review target link URL
+     * @param powereduc_url|null $subreviewurl The submission review target link URL
      * @param string|null $subreviewparams The submission review custom parameters.
      *
      */
     public static function update_coupled_gradebookservices(object $ltiinstance,
-            ?string $resourceid, ?string $tag, ?\moodle_url $subreviewurl, ?string $subreviewparams) : void {
+            ?string $resourceid, ?string $tag, ?\powereduc_url $subreviewurl, ?string $subreviewparams) : void {
         global $DB;
 
         if ($ltiinstance && $ltiinstance->typeid) {
@@ -716,7 +716,7 @@ class gradebookservices extends service_base {
      */
     public function instance_added(object $lti): void {
         self::update_coupled_gradebookservices($lti, $lti->lineitemresourceid ?? null, $lti->lineitemtag ?? null,
-            isset($lti->lineitemsubreviewurl) ? new moodle_url($lti->lineitemsubreviewurl) : null,
+            isset($lti->lineitemsubreviewurl) ? new powereduc_url($lti->lineitemsubreviewurl) : null,
             $lti->lineitemsubreviewparams ?? null);
     }
 
@@ -727,7 +727,7 @@ class gradebookservices extends service_base {
      */
     public function instance_updated(object $lti): void {
         self::update_coupled_gradebookservices($lti, $lti->lineitemresourceid ?? null, $lti->lineitemtag ?? null,
-            isset($lti->lineitemsubreviewurl) ? new moodle_url($lti->lineitemsubreviewurl) : null,
+            isset($lti->lineitemsubreviewurl) ? new powereduc_url($lti->lineitemsubreviewurl) : null,
             $lti->lineitemsubreviewparams ?? null);
     }
 

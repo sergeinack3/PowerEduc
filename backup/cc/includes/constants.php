@@ -20,7 +20,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 // GENERAL PARAMETERS ************************************************************************************************* //
 define('ROOT_DEEP', 2);
@@ -68,14 +68,14 @@ define('CC_TYPE_WEBCONTENT', 'webcontent');
 define('CC_TYPE_ASSOCIATED_CONTENT', 'associatedcontent/imscc_xmlv1p0/learning-application-resource');
 define('CC_TYPE_EMPTY', '');
 
-// MOODLE RESOURCES TYPE ********************************************************************************************** //
-define('MOODLE_TYPE_FORUM', 'forum');
-define('MOODLE_TYPE_QUIZ', 'quiz');
-define('MOODLE_TYPE_QUESTION_BANK', 'question_bank');
-define('MOODLE_TYPE_RESOURCE', 'resource');
-define('MOODLE_TYPE_LABEL', 'label');
-define('MOODLE_TYPE_BASICLTI', 'basiclti');
-define('MOODLE_TYPE_LTI', 'lti');
+// POWEREDUC RESOURCES TYPE ********************************************************************************************** //
+define('POWEREDUC_TYPE_FORUM', 'forum');
+define('POWEREDUC_TYPE_QUIZ', 'quiz');
+define('POWEREDUC_TYPE_QUESTION_BANK', 'question_bank');
+define('POWEREDUC_TYPE_RESOURCE', 'resource');
+define('POWEREDUC_TYPE_LABEL', 'label');
+define('POWEREDUC_TYPE_BASICLTI', 'basiclti');
+define('POWEREDUC_TYPE_LTI', 'lti');
 
 // UNKNOWN TYPE ******************************************************************************************************* //
 define('TYPE_UNKNOWN', '[UNKNOWN]');
@@ -88,11 +88,11 @@ define('CC_QUIZ_MULTIPLE_RESPONSE', 'cc.multiple_response.v0p1');
 define('CC_QUIZ_PATTERN_MACHT', 'cc.pattern_match.v0p1');
 define('CC_QUIZ_ESSAY', 'cc.essay.v0p1');
 
-//MOODLE QUESTIONS TYPES ********************************************************************************************** //
-define('MOODLE_QUIZ_MULTIPLE_CHOICE', 'multichoice');
-define('MOODLE_QUIZ_TRUE_FALSE', 'truefalse');
-define('MOODLE_QUIZ_MULTIANSWER', 'multianswer');
-define('MOODLE_QUIZ_MULTIPLE_RESPONSE', 'multichoice');
-define('MOODLE_QUIZ_MACHT', 'match');
-define('MOODLE_QUIZ_ESSAY', 'essay');
-define('MOODLE_QUIZ_SHORTANSWER', 'shortanswer');
+//POWEREDUC QUESTIONS TYPES ********************************************************************************************** //
+define('POWEREDUC_QUIZ_MULTIPLE_CHOICE', 'multichoice');
+define('POWEREDUC_QUIZ_TRUE_FALSE', 'truefalse');
+define('POWEREDUC_QUIZ_MULTIANSWER', 'multianswer');
+define('POWEREDUC_QUIZ_MULTIPLE_RESPONSE', 'multichoice');
+define('POWEREDUC_QUIZ_MACHT', 'match');
+define('POWEREDUC_QUIZ_ESSAY', 'essay');
+define('POWEREDUC_QUIZ_SHORTANSWER', 'shortanswer');

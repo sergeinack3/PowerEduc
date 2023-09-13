@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ if (!$PAGE->has_secondary_navigation()) {
 }
 
 if (!$folders = get_all_instances_in_course('folder', $course)) {
-    notice(get_string('thereareno', 'moodle', $strfolders), "$CFG->wwwroot/course/view.php?id=$course->id");
+    notice(get_string('thereareno', 'powereduc', $strfolders), "$CFG->wwwroot/course/view.php?id=$course->id");
     exit;
 }
 

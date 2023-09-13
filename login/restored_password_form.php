@@ -35,7 +35,7 @@
 // part of each plugin, but now now. See MDL-20846
 // for the rationale for this implementation.
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once $CFG->libdir.'/formslib.php';
 

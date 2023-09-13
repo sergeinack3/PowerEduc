@@ -29,7 +29,7 @@ use core_xapi\local\statement;
 use core_xapi\xapi_exception;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class handler handles basic xapi statements.

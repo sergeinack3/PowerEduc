@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core_message\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/message/tests/messagelib_test.php');
  *
  * @package core_message
  * @category test
- * @copyright 2018 Mark Nelson <markn@moodle.com>
+ * @copyright 2018 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class migrate_message_data_test extends \advanced_testcase {
@@ -286,7 +286,7 @@ class migrate_message_data_test extends \advanced_testcase {
         $this->assertCount(1, $messages);
 
         $message = reset($messages);
-        $this->assertEquals(FORMAT_MOODLE, $message->fullmessageformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $message->fullmessageformat);
     }
 
     /**
@@ -314,7 +314,7 @@ class migrate_message_data_test extends \advanced_testcase {
         $this->assertCount(1, $notifications);
 
         $notification = reset($notifications);
-        $this->assertEquals(FORMAT_MOODLE, $notification->fullmessageformat);
+        $this->assertEquals(FORMAT_POWEREDUC, $notification->fullmessageformat);
     }
 
     /**
@@ -385,7 +385,7 @@ class migrate_message_data_test extends \advanced_testcase {
             $tabledata->contexturlname = 'google';
         } else {
             $tabledata->eventtype = 'instantmessage';
-            $tabledata->component = 'moodle';
+            $tabledata->component = 'powereduc';
             $tabledata->notification = 0;
         }
 

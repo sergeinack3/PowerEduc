@@ -26,7 +26,7 @@ namespace tool_policy\event;
 
 use core\event\base;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Event acceptance_updated

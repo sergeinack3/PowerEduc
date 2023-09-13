@@ -193,12 +193,12 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
             var data = {
                 'class': 'resource',
                 'action': 'DELETE',
-                'id': Y.Moodle.mod_quiz.util.slot.getId(element)
+                'id': Y.PowerEduc.mod_quiz.util.slot.getId(element)
             };
             this.send_request(data, spinner, function(response) {
                 if (response.deleted) {
                     // Actually remove the element.
-                    Y.Moodle.mod_quiz.util.slot.remove(element);
+                    Y.PowerEduc.mod_quiz.util.slot.remove(element);
                     this.reorganise_edit_page();
                     if (M.core.actionmenu && M.core.actionmenu.instance) {
                         M.core.actionmenu.instance.hideMenu(ev);
@@ -272,9 +272,9 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
         var ids = '';
         var slots = [];
         Y.all(SELECTOR.SELECTMULTIPLECHECKBOX + ':checked').each(function(node) {
-            var slot = Y.Moodle.mod_quiz.util.slot.getSlotFromComponent(node);
+            var slot = Y.PowerEduc.mod_quiz.util.slot.getSlotFromComponent(node);
             ids += ids === '' ? '' : ',';
-            ids += Y.Moodle.mod_quiz.util.slot.getId(slot);
+            ids += Y.PowerEduc.mod_quiz.util.slot.getId(slot);
             slots.push(slot);
         });
         var element = Y.one('div.mod-quiz-edit-content');
@@ -304,7 +304,7 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
                 if (response.deleted) {
                     // Actually remove the element.
                     Y.all(SELECTOR.SELECTMULTIPLECHECKBOX + ':checked').each(function(node) {
-                        Y.Moodle.mod_quiz.util.slot.remove(node.ancestor('li.activity'));
+                        Y.PowerEduc.mod_quiz.util.slot.remove(node.ancestor('li.activity'));
                     });
                     // Update the page numbers and sections.
                     this.reorganise_edit_page();
@@ -340,7 +340,7 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
             data = {
                 'class': 'resource',
                 'field': 'getmaxmark',
-                'id': Y.Moodle.mod_quiz.util.slot.getId(activity)
+                'id': Y.PowerEduc.mod_quiz.util.slot.getId(activity)
             };
 
         // Prevent the default actions.
@@ -359,7 +359,7 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
             // Create the editor and submit button.
             var editform = Y.Node.create('<form action="#" />');
             var editinstructions = Y.Node.create('<span class="' + CSS.EDITINSTRUCTIONS + '" id="id_editinstructions" />')
-                .set('innerHTML', M.util.get_string('edittitleinstructions', 'moodle'));
+                .set('innerHTML', M.util.get_string('edittitleinstructions', 'powereduc'));
             var editor = Y.Node.create('<input name="maxmark" type="text" class="' + CSS.TITLEEDITOR + '" />').setAttrs({
                 'value': maxmarktext,
                 'autocomplete': 'off',
@@ -413,7 +413,7 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
                 'class': 'resource',
                 'field': 'updatemaxmark',
                 'maxmark': newmaxmark,
-                'id': Y.Moodle.mod_quiz.util.slot.getId(activity)
+                'id': Y.PowerEduc.mod_quiz.util.slot.getId(activity)
             };
             this.send_request(data, spinner, function(response) {
                 if (response.instancemaxmark) {
@@ -498,17 +498,17 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
         var data = {
             'class': 'resource',
             'field': 'updatepagebreak',
-            'id':    Y.Moodle.mod_quiz.util.slot.getId(nextactivity),
+            'id':    Y.PowerEduc.mod_quiz.util.slot.getId(nextactivity),
             'value': value
         };
 
         this.send_request(data, spinner, function(response) {
             if (response.slots) {
                 if (action === 'addpagebreak') {
-                    Y.Moodle.mod_quiz.util.page.add(activity);
+                    Y.PowerEduc.mod_quiz.util.page.add(activity);
                 } else {
-                    var page = activity.next(Y.Moodle.mod_quiz.util.page.SELECTORS.PAGE);
-                    Y.Moodle.mod_quiz.util.page.remove(page, true);
+                    var page = activity.next(Y.PowerEduc.mod_quiz.util.page.SELECTORS.PAGE);
+                    Y.PowerEduc.mod_quiz.util.page.remove(page, true);
                 }
                 this.reorganise_edit_page();
             }
@@ -537,13 +537,13 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
         var data = {
             'class': 'resource',
             'field': 'updatedependency',
-            'id':    Y.Moodle.mod_quiz.util.slot.getId(activity),
+            'id':    Y.PowerEduc.mod_quiz.util.slot.getId(activity),
             'value': action === 'adddependency' ? 1 : 0
         };
 
         this.send_request(data, spinner, function(response) {
             if (response.hasOwnProperty('requireprevious')) {
-                Y.Moodle.mod_quiz.util.slot.updateDependencyIcon(activity, response.requireprevious);
+                Y.PowerEduc.mod_quiz.util.slot.updateDependencyIcon(activity, response.requireprevious);
             }
         });
 
@@ -557,11 +557,11 @@ Y.extend(RESOURCETOOLBOX, TOOLBOX, {
      * @method reorganise_edit_page
      */
     reorganise_edit_page: function() {
-        Y.Moodle.mod_quiz.util.slot.reorderSlots();
-        Y.Moodle.mod_quiz.util.slot.reorderPageBreaks();
-        Y.Moodle.mod_quiz.util.page.reorderPages();
-        Y.Moodle.mod_quiz.util.slot.updateOneSlotSections();
-        Y.Moodle.mod_quiz.util.slot.updateAllDependencyIcons();
+        Y.PowerEduc.mod_quiz.util.slot.reorderSlots();
+        Y.PowerEduc.mod_quiz.util.slot.reorderPageBreaks();
+        Y.PowerEduc.mod_quiz.util.page.reorderPages();
+        Y.PowerEduc.mod_quiz.util.slot.updateOneSlotSections();
+        Y.PowerEduc.mod_quiz.util.slot.updateAllDependencyIcons();
     },
 
     NAME: 'mod_quiz-resource-toolbox',

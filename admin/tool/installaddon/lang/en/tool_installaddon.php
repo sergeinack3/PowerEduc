@@ -24,7 +24,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['acknowledgement'] = 'Acknowledgement';
 $string['acknowledgementtext'] = 'I understand that it is my responsibility to have full backups of this site prior to installing additional plugins. I accept and understand that plugins (especially but not only those originating in unofficial sources) may contain security holes, can make the site unavailable, or cause private data leaks or loss.';

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -158,7 +158,7 @@ trait testcase_helper_trait {
         }
         try {
             $this->getDataGenerator()->get_plugin_generator('mod_bigbluebuttonbn')->reset_mock();
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->markTestSkipped(
                 'Cannot connect to the mock server for this test. Make sure that TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER points
                 to an active Mock server'

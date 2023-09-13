@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 /**
  * Classes representing JS event handlers, used by output components.
  *
- * Please see http://docs.moodle.org/en/Developement:How_Moodle_outputs_HTML
+ * Please see http://docs.powereduc.org/en/Developement:How_Moodle_outputs_HTML
  * for an overview.
  *
  * @package core
@@ -26,7 +26,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helper class used by other components that involve an action on the page (URL or JS).
@@ -115,7 +115,7 @@ class confirm_action extends component_action {
     public function __construct($message, $callback = null, $continuelabel = null, $cancellabel = null) {
         if ($callback !== null) {
             debugging('The callback argument to new confirm_action() has been deprecated.' .
-                    ' If you need to use a callback, please write Javascript to use moodle-core-notification-confirmation ' .
+                    ' If you need to use a callback, please write Javascript to use powereduc-core-notification-confirmation ' .
                     'and attach to the provided events.',
                     DEBUG_DEVELOPER);
         }
@@ -164,7 +164,7 @@ class popup_action extends component_action {
      * Constructor
      *
      * @param string $event DOM event
-     * @param moodle_url|string $url A moodle_url object, required if no jsfunction is given
+     * @param powereduc_url|string $url A powereduc_url object, required if no jsfunction is given
      * @param string $name The JS function to call for the popup (default 'popup')
      * @param array  $params An array of popup parameters
      */
@@ -172,7 +172,7 @@ class popup_action extends component_action {
         global $CFG;
         $this->name = $name;
 
-        $url = new moodle_url($url);
+        $url = new powereduc_url($url);
 
         if ($this->name) {
             $_name = $this->name;

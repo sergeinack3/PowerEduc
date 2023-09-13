@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,13 +22,13 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden!');
 }
 require_once($CFG->libdir . '/formslib.php');
 
 
-class data_existing_preset_form extends moodleform {
+class data_existing_preset_form extends powereducform {
     public function definition() {
         $this->_form->addElement('header', 'presets', get_string('usestandard', 'data'));
         $this->_form->addHelpButton('presets', 'usestandard', 'data');
@@ -55,7 +55,7 @@ class data_existing_preset_form extends moodleform {
  *             form (\mod_data\form\import_presets)
  * @todo MDL-75189 This will be deleted in Moodle 4.5.
  */
-class data_import_preset_zip_form extends moodleform {
+class data_import_preset_zip_form extends powereducform {
     /**
      * Form definition
      *
@@ -82,7 +82,7 @@ class data_import_preset_zip_form extends moodleform {
     }
 }
 
-class data_export_form extends moodleform {
+class data_export_form extends powereducform {
     public function definition() {
         $this->_form->addElement('header', 'exportheading', get_string('exportaszip', 'data'));
         $this->_form->addElement('hidden', 'd');
@@ -93,7 +93,7 @@ class data_export_form extends moodleform {
     }
 }
 
-class data_save_preset_form extends moodleform {
+class data_save_preset_form extends powereducform {
     public function definition() {
         $this->_form->addElement('header', 'exportheading', get_string('saveaspreset', 'data'));
         $this->_form->addElement('hidden', 'd');

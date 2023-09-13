@@ -1,26 +1,26 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum;
 
 use mod_forum_tests_cron_trait;
 use mod_forum_tests_generator_trait;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once(__DIR__ . '/cron_trait.php');
 require_once(__DIR__ . '/generator_trait.php');
@@ -62,7 +62,7 @@ class maildigest_test extends \advanced_testcase {
         $messages = $this->mailsink->get_messages();
         $this->assertEquals(0, count($messages));
 
-        // Tell Moodle that we've not sent any digest messages out recently.
+        // Tell PowerEduc that we've not sent any digest messages out recently.
         $CFG->digestmailtimelast = 0;
 
         // And set the digest sending time to a negative number - this has
@@ -184,7 +184,7 @@ class maildigest_test extends \advanced_testcase {
         $this->assertFalse($currentsetting);
 
         // Try with an invalid value.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         forum_set_user_maildigest($forum1, 42, $user);
     }
 
@@ -424,7 +424,7 @@ class maildigest_test extends \advanced_testcase {
         $forum1 = $userhelper->forums->forum1;
         $posts = [];
         assign_capability(
-            'moodle/site:viewfullnames',
+            'powereduc/site:viewfullnames',
             CAP_ALLOW,
             $DB->get_field('role', 'id', ['shortname' => 'student']),
             \context_course::instance($course1->id)

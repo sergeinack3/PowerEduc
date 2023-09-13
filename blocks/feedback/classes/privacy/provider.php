@@ -24,7 +24,7 @@
 
 namespace block_feedback\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_feedback implementing null_provider.

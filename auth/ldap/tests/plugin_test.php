@@ -96,7 +96,7 @@ class plugin_test extends \advanced_testcase {
         $o = array();
         $o['objectClass'] = array('dcObject', 'organizationalUnit');
         $o['dc']         = 'moodletest';
-        $o['ou']         = 'MOODLETEST';
+        $o['ou']         = 'POWEREDUCTEST';
         if (!ldap_add($connection, 'dc=moodletest,'.TEST_AUTH_LDAP_DOMAIN, $o)) {
             $this->markTestSkipped('Can not create test LDAP container.');
         }
@@ -438,7 +438,7 @@ class plugin_test extends \advanced_testcase {
         $o = array();
         $o['objectClass'] = array('dcObject', 'organizationalUnit');
         $o['dc']         = 'moodletest';
-        $o['ou']         = 'MOODLETEST';
+        $o['ou']         = 'POWEREDUCTEST';
         if (!ldap_add($connection, 'dc=moodletest,'.TEST_AUTH_LDAP_DOMAIN, $o)) {
             $this->markTestSkipped('Can not create test LDAP container.');
         }

@@ -23,7 +23,7 @@
  */
 
 namespace core_competency;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use lang_string;
 use core_competency\template;

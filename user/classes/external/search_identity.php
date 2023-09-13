@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of PowerEduc - https://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace core_user\external;
 
@@ -21,7 +21,7 @@ namespace core_user\external;
  *
  * @package     core_user
  * @category    external
- * @copyright   2021 David Mudrák <david@moodle.com>
+ * @copyright   2021 David Mudrák <david@powereduc.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class search_identity extends \external_api {
@@ -54,9 +54,9 @@ class search_identity extends \external_api {
         // Validate context.
         $context = \context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/user:viewalldetails', $context);
+        require_capability('powereduc/user:viewalldetails', $context);
 
-        $hasviewfullnames = has_capability('moodle/site:viewfullnames', $context);
+        $hasviewfullnames = has_capability('powereduc/site:viewfullnames', $context);
 
         $fields = \core_user\fields::for_name()->with_identity($context, false);
         $extrafields = $fields->get_required_fields([\core_user\fields::PURPOSE_IDENTITY]);

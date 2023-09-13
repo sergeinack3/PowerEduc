@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Back-end code for handling data about quizzes and the current user's attempt.
@@ -25,20 +25,20 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_quiz\question\bank\qbank_helper;
 
 
 /**
  * Class for quiz exceptions. Just saves a couple of arguments on the
- * constructor for a moodle_exception.
+ * constructor for a powereduc_exception.
  *
  * @copyright 2008 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since     Moodle 2.0
+ * @since     PowerEduc 2.0
  */
-class moodle_quiz_exception extends moodle_exception {
+class powereduc_quiz_exception extends powereduc_exception {
     /**
      * Constructor.
      *
@@ -68,7 +68,7 @@ class moodle_quiz_exception extends moodle_exception {
  *
  * @copyright  2008 Tim Hunt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.0
+ * @since      PowerEduc 2.0
  */
 class quiz {
     /** @var stdClass the course settings from the database. */
@@ -304,7 +304,7 @@ class quiz {
      * @return bool true if only active users should be shown.
      */
     public function show_only_active_users() {
-        return !has_capability('moodle/course:viewsuspendedusers', $this->get_context());
+        return !has_capability('powereduc/course:viewsuspendedusers', $this->get_context());
     }
 
     /**
@@ -336,7 +336,7 @@ class quiz {
         $questions = array();
         foreach ($questionids as $id) {
             if (!array_key_exists($id, $this->questions)) {
-                throw new moodle_exception('cannotstartmissingquestion', 'quiz', $this->view_url());
+                throw new powereduc_exception('cannotstartmissingquestion', 'quiz', $this->view_url());
             }
             $questions[$id] = $this->questions[$id];
             $this->ensure_question_loaded($id);
@@ -433,14 +433,14 @@ class quiz {
      * Get the URL to start/continue an attempt.
      *
      * @param int $page page in the attempt to start on (optional).
-     * @return moodle_url the URL of this quiz's edit page. Needs to be POSTed to with a cmid parameter.
+     * @return powereduc_url the URL of this quiz's edit page. Needs to be POSTed to with a cmid parameter.
      */
     public function start_attempt_url($page = 0) {
         $params = array('cmid' => $this->cm->id, 'sesskey' => sesskey());
         if ($page) {
             $params['page'] = $page;
         }
-        return new moodle_url('/mod/quiz/startattempt.php', $params);
+        return new powereduc_url('/mod/quiz/startattempt.php', $params);
     }
 
     /**
@@ -448,7 +448,7 @@ class quiz {
      * @return string the URL of the review of that attempt.
      */
     public function review_url($attemptid) {
-        return new moodle_url('/mod/quiz/review.php', array('attempt' => $attemptid, 'cmid' => $this->get_cmid()));
+        return new powereduc_url('/mod/quiz/review.php', array('attempt' => $attemptid, 'cmid' => $this->get_cmid()));
     }
 
     /**
@@ -456,7 +456,7 @@ class quiz {
      * @return string the URL of the review of that attempt.
      */
     public function summary_url($attemptid) {
-        return new moodle_url('/mod/quiz/summary.php', array('attempt' => $attemptid, 'cmid' => $this->get_cmid()));
+        return new powereduc_url('/mod/quiz/summary.php', array('attempt' => $attemptid, 'cmid' => $this->get_cmid()));
     }
 
     // Bits of content =========================================================
@@ -523,7 +523,7 @@ class quiz {
      */
     protected function ensure_question_loaded($id) {
         if (isset($this->questions[$id]->_partiallyloaded)) {
-            throw new moodle_quiz_exception($this, 'questionnotloaded', $id);
+            throw new powereduc_quiz_exception($this, 'questionnotloaded', $id);
         }
     }
 
@@ -534,7 +534,7 @@ class quiz {
      *      setting this flag to true will make the function to return all the
      *      possible question types in the random questions category.
      * @return array a sorted array including the different question types.
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     public function get_all_question_types_used($includepotential = false) {
         $questiontypes = array();
@@ -585,7 +585,7 @@ class quiz {
  *
  * @copyright  2008 Tim Hunt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.0
+ * @since      PowerEduc 2.0
  */
 class quiz_attempt {
 
@@ -978,7 +978,7 @@ class quiz_attempt {
         }
 
         $cm = $this->get_cm();
-        if ($this->has_capability('moodle/site:accessallgroups') ||
+        if ($this->has_capability('powereduc/site:accessallgroups') ||
                 groups_get_activity_groupmode($cm) != SEPARATEGROUPS) {
             return true;
         }
@@ -1173,7 +1173,7 @@ class quiz_attempt {
      *
      * @param bool $reviewing true for review page, else attempt page.
      * @param int $slot which question is being displayed.
-     * @param moodle_url $thispageurl to return to after the editing form is
+     * @param powereduc_url $thispageurl to return to after the editing form is
      *      submitted or cancelled. If null, no edit link will be generated.
      *
      * @return question_display_options the render options for this user on this
@@ -1466,7 +1466,7 @@ class quiz_attempt {
      *
      * @param int $slot the number used to identify this question within this attempt.
      * @return string the question type name.
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     public function get_question_type_name($slot) {
         return $this->quba->get_question($slot, false)->get_type_name();
@@ -1594,17 +1594,17 @@ class quiz_attempt {
     }
 
     /**
-     * @return moodle_url the URL of this quiz's summary page.
+     * @return powereduc_url the URL of this quiz's summary page.
      */
     public function summary_url() {
-        return new moodle_url('/mod/quiz/summary.php', array('attempt' => $this->attempt->id, 'cmid' => $this->get_cmid()));
+        return new powereduc_url('/mod/quiz/summary.php', array('attempt' => $this->attempt->id, 'cmid' => $this->get_cmid()));
     }
 
     /**
-     * @return moodle_url the URL of this quiz's summary page.
+     * @return powereduc_url the URL of this quiz's summary page.
      */
     public function processattempt_url() {
-        return new moodle_url('/mod/quiz/processattempt.php');
+        return new powereduc_url('/mod/quiz/processattempt.php');
     }
 
     /**
@@ -1705,7 +1705,7 @@ class quiz_attempt {
     public function restart_preview_button() {
         global $OUTPUT;
         if ($this->is_preview() && $this->is_preview_user()) {
-            return $OUTPUT->single_button(new moodle_url(
+            return $OUTPUT->single_button(new powereduc_url(
                     $this->start_attempt_url(), array('forcenew' => true)),
                     get_string('startnewpreview', 'quiz'));
         } else {
@@ -1720,7 +1720,7 @@ class quiz_attempt {
      * @param int $slot identifies the question in the attempt.
      * @param bool $reviewing is the being printed on an attempt or a review page.
      * @param mod_quiz_renderer $renderer the quiz renderer.
-     * @param moodle_url $thispageurl the URL of the page this question is being printed on.
+     * @param powereduc_url $thispageurl the URL of the page this question is being printed on.
      * @return string HTML for the question in its current state.
      */
     public function render_question($slot, $reviewing, mod_quiz_renderer $renderer, $thispageurl = null) {
@@ -1745,7 +1745,7 @@ class quiz_attempt {
      *
      * @param int $slot identifies the question in the attempt.
      * @param bool $reviewing is the being printed on an attempt or a review page.
-     * @param moodle_url $thispageurl the URL of the page this question is being printed on.
+     * @param powereduc_url $thispageurl the URL of the page this question is being printed on.
      * @param mod_quiz_renderer $renderer the quiz renderer.
      * @param int|null $seq the seq number of the past state to display.
      * @return string HTML fragment.
@@ -1833,7 +1833,7 @@ class quiz_attempt {
      * @param int $seq the seq number of the past state to display.
      * @param bool $reviewing is the being printed on an attempt or a review page.
      * @param mod_quiz_renderer $renderer the quiz renderer.
-     * @param moodle_url $thispageurl the URL of the page this question is being printed on.
+     * @param powereduc_url $thispageurl the URL of the page this question is being printed on.
      * @return string HTML for the question in its current state.
      */
     public function render_question_at_step($slot, $seq, $reviewing,
@@ -1913,15 +1913,15 @@ class quiz_attempt {
      *
      * The {@link mod_quiz_links_to_other_attempts} object returned contains an
      * array with keys that are the attempt number, 1, 2, 3.
-     * The array values are either a {@link moodle_url} with the attempt parameter
+     * The array values are either a {@link powereduc_url} with the attempt parameter
      * updated to point to the attempt id of the other attempt, or null corresponding
      * to the current attempt number.
      *
-     * @param moodle_url $url a URL.
-     * @return mod_quiz_links_to_other_attempts|bool containing array int => null|moodle_url.
+     * @param powereduc_url $url a URL.
+     * @return mod_quiz_links_to_other_attempts|bool containing array int => null|powereduc_url.
      *      False if none.
      */
-    public function links_to_other_attempts(moodle_url $url) {
+    public function links_to_other_attempts(powereduc_url $url) {
         $attempts = quiz_get_user_attempts($this->get_quiz()->id, $this->attempt->userid, 'all');
         if (count($attempts) <= 1) {
             return false;
@@ -1932,7 +1932,7 @@ class quiz_attempt {
             if ($at->id == $this->attempt->id) {
                 $links->links[$at->attempt] = null;
             } else {
-                $links->links[$at->attempt] = new moodle_url($url, array('attempt' => $at->id));
+                $links->links[$at->attempt] = new powereduc_url($url, array('attempt' => $at->id));
             }
         }
         return $links;
@@ -1945,16 +1945,16 @@ class quiz_attempt {
      *
      * The {@link mod_quiz_links_to_other_attempts} object returned contains an
      * array with keys that are the redo number, 1, 2, 3.
-     * The array values are either a {@link moodle_url} with the slot parameter
+     * The array values are either a {@link powereduc_url} with the slot parameter
      * updated to point to the slot that has that redo of this question; or null
      * corresponding to the redo identified by $slot.
      *
      * @param int $slot identifies a question in this attempt.
-     * @param moodle_url $baseurl the base URL to modify to generate each link.
-     * @return mod_quiz_links_to_other_attempts|null containing array int => null|moodle_url,
+     * @param powereduc_url $baseurl the base URL to modify to generate each link.
+     * @return mod_quiz_links_to_other_attempts|null containing array int => null|powereduc_url,
      *      or null if the question in this slot has not been redone.
      */
-    public function links_to_other_redos($slot, moodle_url $baseurl) {
+    public function links_to_other_redos($slot, powereduc_url $baseurl) {
         $originalslot = $this->get_original_slot($slot);
 
         $qas = $this->all_question_attempts_originally_in_slot($originalslot);
@@ -1968,7 +1968,7 @@ class quiz_attempt {
             if ($qa->get_slot() == $slot) {
                 $links->links[$index] = null;
             } else {
-                $url = new moodle_url($baseurl, array('slot' => $qa->get_slot()));
+                $url = new powereduc_url($baseurl, array('slot' => $qa->get_slot()));
                 $links->links[$index] = new action_link($url, $index,
                         new popup_action('click', $url, 'reviewquestion',
                                 array('width' => 450, 'height' => 650)),
@@ -1985,7 +1985,7 @@ class quiz_attempt {
      * Check this attempt, to see if there are any state transitions that should
      * happen automatically. This function will update the attempt checkstatetime.
      * @param int $timestamp the timestamp that should be stored as the modified
-     * @param bool $studentisonline is the student currently interacting with Moodle?
+     * @param bool $studentisonline is the student currently interacting with PowerEduc?
      */
     public function handle_if_time_expired($timestamp, $studentisonline) {
 
@@ -2179,7 +2179,7 @@ class quiz_attempt {
      *      POST request are stored to be graded, before the attempt is finished.
      * @param ?int $timefinish if set, use this as the finish time for the attempt.
      *      (otherwise use $timestamp as the finish time as well).
-     * @param bool $studentisonline is the student currently interacting with Moodle?
+     * @param bool $studentisonline is the student currently interacting with PowerEduc?
      */
     public function process_finish($timestamp, $processsubmitted, $timefinish = null, $studentisonline = false) {
         global $DB;
@@ -2238,7 +2238,7 @@ class quiz_attempt {
      * Mark this attempt as now overdue.
      *
      * @param int $timestamp the time to deem as now.
-     * @param bool $studentisonline is the student currently interacting with Moodle?
+     * @param bool $studentisonline is the student currently interacting with PowerEduc?
      */
     public function process_going_overdue($timestamp, $studentisonline) {
         global $DB;
@@ -2262,7 +2262,7 @@ class quiz_attempt {
      * Mark this attempt as abandoned.
      *
      * @param int $timestamp the time to deem as now.
-     * @param bool $studentisonline is the student currently interacting with Moodle?
+     * @param bool $studentisonline is the student currently interacting with PowerEduc?
      */
     public function process_abandon($timestamp, $studentisonline) {
         global $DB;
@@ -2283,7 +2283,7 @@ class quiz_attempt {
      *
      * @param string $eventclass the event class name.
      * @param int $timestamp the timestamp to include in the event.
-     * @param bool $studentisonline is the student currently interacting with Moodle?
+     * @param bool $studentisonline is the student currently interacting with PowerEduc?
      */
     protected function fire_state_transition_event($eventclass, $timestamp, $studentisonline) {
         global $USER;
@@ -2320,7 +2320,7 @@ class quiz_attempt {
      *      if null, then an intelligent default will be chosen.
      * @param int $thispage the page we are currently on. Links to questions on this
      *      page will just be a fragment #q123. -1 to disable this.
-     * @return moodle_url The requested URL.
+     * @return powereduc_url The requested URL.
      */
     protected function page_and_question_url($script, $slot, $page, $showall, $thispage) {
 
@@ -2357,10 +2357,10 @@ class quiz_attempt {
 
         // Work out the correct start to the URL.
         if ($thispage == $page) {
-            return new moodle_url($fragment);
+            return new powereduc_url($fragment);
 
         } else {
-            $url = new moodle_url('/mod/quiz/' . $script . '.php' . $fragment,
+            $url = new powereduc_url('/mod/quiz/' . $script . '.php' . $fragment,
                     array('attempt' => $this->attempt->id, 'cmid' => $this->get_cmid()));
             if ($page == 0 && $showall != $defaultshowall) {
                 $url->param('showall', (int) $showall);
@@ -2379,7 +2379,7 @@ class quiz_attempt {
      * @param  bool $timeup true if form was submitted by timer.
      * @param  int $thispage current page number.
      * @return string the attempt state once the data has been processed.
-     * @since  Moodle 3.1
+     * @since  PowerEduc 3.1
      */
     public function process_attempt($timenow, $finishattempt, $timeup, $thispage) {
         global $DB;
@@ -2438,7 +2438,7 @@ class quiz_attempt {
                     $this->process_submitted_actions($timenow, $becomingoverdue);
                     $this->fire_attempt_updated_event();
                 } catch (question_out_of_sequence_exception $e) {
-                    throw new moodle_exception('submissionoutofsequencefriendlymessage', 'question',
+                    throw new powereduc_exception('submissionoutofsequencefriendlymessage', 'question',
                             $this->attempt_url(null, $thispage));
 
                 } catch (Exception $e) {
@@ -2448,7 +2448,7 @@ class quiz_attempt {
                     if (!empty($e->debuginfo)) {
                         $debuginfo = $e->debuginfo;
                     }
-                    throw new moodle_exception('errorprocessingresponses', 'question',
+                    throw new powereduc_exception('errorprocessingresponses', 'question',
                             $this->attempt_url(null, $thispage), $e->getMessage(), $debuginfo);
                 }
 
@@ -2487,7 +2487,7 @@ class quiz_attempt {
             }
 
         } catch (question_out_of_sequence_exception $e) {
-            throw new moodle_exception('submissionoutofsequencefriendlymessage', 'question',
+            throw new powereduc_exception('submissionoutofsequencefriendlymessage', 'question',
                     $this->attempt_url(null, $thispage));
 
         } catch (Exception $e) {
@@ -2497,7 +2497,7 @@ class quiz_attempt {
             if (!empty($e->debuginfo)) {
                 $debuginfo = $e->debuginfo;
             }
-            throw new moodle_exception('errorprocessingresponses', 'question',
+            throw new powereduc_exception('errorprocessingresponses', 'question',
                     $this->attempt_url(null, $thispage), $e->getMessage(), $debuginfo);
         }
 
@@ -2516,7 +2516,7 @@ class quiz_attempt {
      * @param int $page page number.
      * @param bool $allownext in case of a sequential navigation, can we go to next page ?
      * @return boolean false is an out of sequence access, true otherwise.
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public function check_page_access(int $page, bool $allownext = true): bool {
         if ($this->get_navigation_method() != QUIZ_NAVMETHOD_SEQ) {
@@ -2534,7 +2534,7 @@ class quiz_attempt {
      *
      * @param  int $page page number.
      * @return boolean true if everything was ok, false otherwise (out of sequence access).
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public function set_currentpage($page) {
         global $DB;
@@ -2549,7 +2549,7 @@ class quiz_attempt {
     /**
      * Trigger the attempt_viewed event.
      *
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public function fire_attempt_viewed_event() {
         $params = array(
@@ -2637,7 +2637,7 @@ class quiz_attempt {
     /**
      * Trigger the attempt_summary_viewed event.
      *
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public function fire_attempt_summary_viewed_event() {
 
@@ -2658,7 +2658,7 @@ class quiz_attempt {
     /**
      * Trigger the attempt_reviewed event.
      *
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public function fire_attempt_reviewed_event() {
 
@@ -2702,7 +2702,7 @@ class quiz_attempt {
      *
      * @param int $time time stamp.
      * @return boolean false if the field is not updated because web services aren't being used.
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function set_offline_modified_time($time) {
         // Update the timemodifiedoffline field only if web services are being used.
@@ -2736,7 +2736,7 @@ class quiz_attempt {
  *
  * @copyright  2015 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.9
+ * @since      PowerEduc 2.9
  */
 class quiz_nav_section_heading implements renderable {
     /** @var string the heading text. */
@@ -2757,7 +2757,7 @@ class quiz_nav_section_heading implements renderable {
  *
  * @copyright  2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.1
+ * @since      PowerEduc 2.1
  */
 class quiz_nav_question_button implements renderable {
     /** @var string id="..." to add to the HTML for this button. */
@@ -2774,7 +2774,7 @@ class quiz_nav_question_button implements renderable {
     public $currentpage;
     /** @var bool true if this question has been flagged. */
     public $flagged;
-    /** @var moodle_url the link this button goes to, or null if there should not be a link. */
+    /** @var powereduc_url the link this button goes to, or null if there should not be a link. */
     public $url;
     /** @var int QUIZ_NAVMETHOD_FREE or QUIZ_NAVMETHOD_SEQ. */
     public $navmethod;
@@ -2787,7 +2787,7 @@ class quiz_nav_question_button implements renderable {
  *
  * @copyright  2008 Tim Hunt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.0
+ * @since      PowerEduc 2.0
  */
 abstract class quiz_nav_panel_base {
     /** @var quiz_attempt */
@@ -2885,7 +2885,7 @@ abstract class quiz_nav_panel_base {
         if (!$this->attemptobj->is_own_preview()) {
             return '';
         }
-        return $output->restart_preview_button(new moodle_url(
+        return $output->restart_preview_button(new powereduc_url(
                 $this->attemptobj->start_attempt_url(), array('forcenew' => true)));
     }
 
@@ -2927,7 +2927,7 @@ abstract class quiz_nav_panel_base {
  *
  * @copyright  2008 Tim Hunt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.0
+ * @since      PowerEduc 2.0
  */
 class quiz_attempt_nav_panel extends quiz_nav_panel_base {
     public function get_question_url($slot) {
@@ -2960,7 +2960,7 @@ class quiz_attempt_nav_panel extends quiz_nav_panel_base {
  *
  * @copyright  2008 Tim Hunt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 2.0
+ * @since      PowerEduc 2.0
  */
 class quiz_review_nav_panel extends quiz_nav_panel_base {
     public function get_question_url($slot) {

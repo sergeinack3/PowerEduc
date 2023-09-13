@@ -24,7 +24,7 @@
 
 namespace gradereport_singleview\local\ui;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Simple interface implemented to add behaviour that an element can be checked to see

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ namespace core\external;
 
 use external_api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/lib/tests/fixtures/testeable_dynamic_tab.php');
  *
  * @package     core
  * @covers      \core\external\dynamic_tabs_get_content
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dynamic_tabs_get_content_test extends \externallib_advanced_testcase {

@@ -23,7 +23,7 @@
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 if ($hassiteconfig) {
     $ADMIN->add('root', new admin_externalpage('tool_admin_presets',

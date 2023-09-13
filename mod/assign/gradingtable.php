@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the definition for the grading table which subclassses easy_table
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/tablelib.php');
 require_once($CFG->libdir.'/gradelib.php');
@@ -112,7 +112,7 @@ class assign_grading_table extends table_sql implements renderable {
         $this->output = $PAGE->get_renderer('mod_assign');
 
         $urlparams = array('action' => 'grading', 'id' => $assignment->get_course_module()->id);
-        $url = new moodle_url($CFG->wwwroot . '/mod/assign/view.php', $urlparams);
+        $url = new powereduc_url($CFG->wwwroot . '/mod/assign/view.php', $urlparams);
         $this->define_baseurl($url);
 
         // Do some business - then set the sql.
@@ -693,7 +693,7 @@ class assign_grading_table extends table_sql implements renderable {
             // Only enrolled users could be assigned as potential markers.
             $markers = get_enrolled_users($this->assignment->get_context(), 'mod/assign:grade', 0, 'u.*', $sort);
             $markerlist[0] = get_string('choosemarker', 'assign');
-            $viewfullnames = has_capability('moodle/site:viewfullnames', $this->assignment->get_context());
+            $viewfullnames = has_capability('powereduc/site:viewfullnames', $this->assignment->get_context());
             foreach ($markers as $marker) {
                 $markerlist[$marker->id] = fullname($marker, $viewfullnames);
             }
@@ -705,7 +705,7 @@ class assign_grading_table extends table_sql implements renderable {
         if ($this->is_downloading()) {
             if (isset($markers[$row->allocatedmarker])) {
                 return fullname($markers[$row->allocatedmarker],
-                        has_capability('moodle/site:viewfullnames', $this->assignment->get_context()));
+                        has_capability('powereduc/site:viewfullnames', $this->assignment->get_context()));
             } else {
                 return '';
             }
@@ -889,7 +889,7 @@ class assign_grading_table extends table_sql implements renderable {
     public function col_fullname($row) {
         if (!$this->is_downloading()) {
             $courseid = $this->assignment->get_course()->id;
-            $link = new moodle_url('/user/view.php', array('id' => $row->id, 'course' => $courseid));
+            $link = new powereduc_url('/user/view.php', array('id' => $row->id, 'course' => $courseid));
             $fullname = $this->output->action_link($link, $this->assignment->fullname($row));
         } else {
             $fullname = $this->assignment->fullname($row);
@@ -997,7 +997,7 @@ class assign_grading_table extends table_sql implements renderable {
                 $urlparams['userid'] = $row->userid;
             }
 
-            $url = new moodle_url('/mod/assign/view.php', $urlparams);
+            $url = new powereduc_url('/mod/assign/view.php', $urlparams);
             $link = '<a href="' . $url . '" class="btn btn-primary">' . get_string('gradeverb') . '</a>';
             $grade .= $link . $separator;
         }
@@ -1246,7 +1246,7 @@ class assign_grading_table extends table_sql implements renderable {
         } else {
             $urlparams['userid'] = $row->userid;
         }
-        $url = new moodle_url('/mod/assign/view.php', $urlparams);
+        $url = new powereduc_url('/mod/assign/view.php', $urlparams);
         $noimage = null;
 
         if (!$row->grade) {
@@ -1289,7 +1289,7 @@ class assign_grading_table extends table_sql implements renderable {
                                        'action' => 'lock',
                                        'sesskey' => sesskey(),
                                        'page' => $this->currpage);
-                    $url = new moodle_url('/mod/assign/view.php', $urlparams);
+                    $url = new powereduc_url('/mod/assign/view.php', $urlparams);
 
                     $description = get_string('preventsubmissionsshort', 'assign');
                     $actions['lock'] = new action_menu_link_secondary(
@@ -1303,7 +1303,7 @@ class assign_grading_table extends table_sql implements renderable {
                                        'action' => 'unlock',
                                        'sesskey' => sesskey(),
                                        'page' => $this->currpage);
-                    $url = new moodle_url('/mod/assign/view.php', $urlparams);
+                    $url = new powereduc_url('/mod/assign/view.php', $urlparams);
                     $description = get_string('allowsubmissionsshort', 'assign');
                     $actions['unlock'] = new action_menu_link_secondary(
                         $url,
@@ -1321,7 +1321,7 @@ class assign_grading_table extends table_sql implements renderable {
                                    'action' => 'editsubmission',
                                    'sesskey' => sesskey(),
                                    'page' => $this->currpage);
-                $url = new moodle_url('/mod/assign/view.php', $urlparams);
+                $url = new powereduc_url('/mod/assign/view.php', $urlparams);
                 $description = get_string('editsubmission', 'assign');
                 $actions['editsubmission'] = new action_menu_link_secondary(
                     $url,
@@ -1337,7 +1337,7 @@ class assign_grading_table extends table_sql implements renderable {
                                    'action' => 'removesubmissionconfirm',
                                    'sesskey' => sesskey(),
                                    'page' => $this->currpage);
-                $url = new moodle_url('/mod/assign/view.php', $urlparams);
+                $url = new powereduc_url('/mod/assign/view.php', $urlparams);
                 $description = get_string('removesubmission', 'assign');
                 $actions['removesubmission'] = new action_menu_link_secondary(
                     $url,
@@ -1354,7 +1354,7 @@ class assign_grading_table extends table_sql implements renderable {
                                 'action' => 'grantextension',
                                 'sesskey' => sesskey(),
                                 'page' => $this->currpage);
-             $url = new moodle_url('/mod/assign/view.php', $urlparams);
+             $url = new powereduc_url('/mod/assign/view.php', $urlparams);
              $description = get_string('grantextension', 'assign');
              $actions['grantextension'] = new action_menu_link_secondary(
                  $url,
@@ -1369,7 +1369,7 @@ class assign_grading_table extends table_sql implements renderable {
                                'action' => 'reverttodraft',
                                'sesskey' => sesskey(),
                                'page' => $this->currpage);
-            $url = new moodle_url('/mod/assign/view.php', $urlparams);
+            $url = new powereduc_url('/mod/assign/view.php', $urlparams);
             $description = get_string('reverttodraftshort', 'assign');
             $actions['reverttodraft'] = new action_menu_link_secondary(
                 $url,
@@ -1387,7 +1387,7 @@ class assign_grading_table extends table_sql implements renderable {
                                'action' => 'submitotherforgrading',
                                'sesskey' => sesskey(),
                                'page' => $this->currpage);
-            $url = new moodle_url('/mod/assign/view.php', $urlparams);
+            $url = new powereduc_url('/mod/assign/view.php', $urlparams);
             $description = get_string('submitforgrading', 'assign');
             $actions['submitforgrading'] = new action_menu_link_secondary(
                 $url,
@@ -1408,7 +1408,7 @@ class assign_grading_table extends table_sql implements renderable {
                                'action' => 'addattempt',
                                'sesskey' => sesskey(),
                                'page' => $this->currpage);
-            $url = new moodle_url('/mod/assign/view.php', $urlparams);
+            $url = new powereduc_url('/mod/assign/view.php', $urlparams);
             $description = get_string('addattempt', 'assign');
             $actions['addattempt'] = new action_menu_link_secondary(
                 $url,
@@ -1463,7 +1463,7 @@ class assign_grading_table extends table_sql implements renderable {
                                                      'action' => 'viewplugin' . $plugin->get_subtype(),
                                                      'returnaction' => $returnaction,
                                                      'returnparams' => http_build_query($returnparams));
-            $url = new moodle_url('/mod/assign/view.php', $urlparams);
+            $url = new powereduc_url('/mod/assign/view.php', $urlparams);
             $link = $this->output->action_link($url, $icon);
             $separator = $this->output->spacer(array(), true);
         }
@@ -1637,7 +1637,7 @@ class assign_grading_table extends table_sql implements renderable {
     public function can_view_all_grades() {
         $context = $this->assignment->get_course_context();
         return has_capability('gradereport/grader:view', $context) &&
-               has_capability('moodle/grade:viewall', $context);
+               has_capability('powereduc/grade:viewall', $context);
     }
 
     /**

@@ -24,7 +24,7 @@ use core_reportbuilder\manager;
 use core_reportbuilder\local\filters\user;
 use core_user;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once("{$CFG->dirroot}/reportbuilder/tests/helpers.php");

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -78,12 +78,12 @@ abstract class restore_date_testcase extends advanced_testcase {
         // Do backup with default settings.
         set_config('backup_general_users', 1, 'backup');
         $bc = new backup_controller(backup::TYPE_1COURSE, $course->id,
-            backup::FORMAT_MOODLE, backup::INTERACTIVE_NO, backup::MODE_GENERAL,
+            backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO, backup::MODE_GENERAL,
             $USER->id);
         $bc->execute_plan();
         $results = $bc->get_results();
         $file = $results['backup_destination'];
-        $fp = get_file_packer('application/vnd.moodle.backup');
+        $fp = get_file_packer('application/vnd.powereduc.backup');
         $filepath = $CFG->dataroot . '/temp/backup/test-restore-course';
         $file->extract_to_pathname($fp, $filepath);
         $bc->destroy();

@@ -122,7 +122,7 @@ if (!async_helper::is_async_pending($id, 'course', 'backup')) {
     // This needs to refactored into the renderer and seperated out.
 
     if (!($bc = backup_ui::load_controller($backupid))) {
-        $bc = new backup_controller($type, $id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller($type, $id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_YES, $backupmode, $USER->id, backup::RELEASESESSION_YES);
         // The backup id did not relate to a valid controller so we made a new controller.
         // Now we need to reset the backup id to match the new controller.

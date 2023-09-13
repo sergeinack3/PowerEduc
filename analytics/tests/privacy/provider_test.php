@@ -29,7 +29,7 @@ use core_privacy\local\request\writer;
 use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\approved_userlist;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../fixtures/test_indicator_max.php');
 require_once(__DIR__ . '/../fixtures/test_indicator_min.php');

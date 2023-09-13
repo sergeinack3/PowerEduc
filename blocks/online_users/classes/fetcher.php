@@ -24,7 +24,7 @@
 
 namespace block_online_users;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class used to list and count online users

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** UPGRADE_LOG_NORMAL = 0 */
 define('UPGRADE_LOG_NORMAL', 0);
@@ -41,7 +41,7 @@ define('UPGRADE_LOG_ERROR',  2);
  * @copyright  2009 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class upgrade_exception extends moodle_exception {
+class upgrade_exception extends powereduc_exception {
     function __construct($plugin, $version, $debuginfo=NULL) {
         global $CFG;
         $a = (object)array('plugin'=>$plugin, 'version'=>$version);
@@ -57,10 +57,10 @@ class upgrade_exception extends moodle_exception {
  * @copyright  2009 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class downgrade_exception extends moodle_exception {
+class downgrade_exception extends powereduc_exception {
     function __construct($plugin, $oldversion, $newversion) {
         global $CFG;
-        $plugin = is_null($plugin) ? 'moodle' : $plugin;
+        $plugin = is_null($plugin) ? 'powereduc' : $plugin;
         $a = (object)array('plugin'=>$plugin, 'oldversion'=>$oldversion, 'newversion'=>$newversion);
         parent::__construct('cannotdowngrade', 'debug', "$CFG->wwwroot/$CFG->admin/index.php", $a);
     }
@@ -72,27 +72,27 @@ class downgrade_exception extends moodle_exception {
  * @copyright  2009 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class upgrade_requires_exception extends moodle_exception {
-    function __construct($plugin, $pluginversion, $currentmoodle, $requiremoodle) {
+class upgrade_requires_exception extends powereduc_exception {
+    function __construct($plugin, $pluginversion, $currentpowereduc, $requirepowereduc) {
         global $CFG;
         $a = new stdClass();
         $a->pluginname     = $plugin;
         $a->pluginversion  = $pluginversion;
-        $a->currentmoodle  = $currentmoodle;
-        $a->requiremoodle  = $requiremoodle;
+        $a->currentpowereduc  = $currentpowereduc;
+        $a->requirepowereduc  = $requirepowereduc;
         parent::__construct('pluginrequirementsnotmet', 'error', "$CFG->wwwroot/$CFG->admin/index.php", $a);
     }
 }
 
 /**
- * Exception thrown when attempting to install a plugin that declares incompatibility with moodle version
+ * Exception thrown when attempting to install a plugin that declares incompatibility with powereduc version
  *
  * @package    core
  * @subpackage upgrade
  * @copyright  2019 Peter Burnett <peterburnett@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class plugin_incompatible_exception extends moodle_exception {
+class plugin_incompatible_exception extends powereduc_exception {
     /**
      * Constructor function for exception
      *
@@ -104,7 +104,7 @@ class plugin_incompatible_exception extends moodle_exception {
         $a = new stdClass();
         $a->pluginname      = $plugin;
         $a->pluginversion   = $pluginversion;
-        $a->moodleversion   = $CFG->branch;
+        $a->powereducversion   = $CFG->branch;
 
         parent::__construct('pluginunsupported', 'error', "$CFG->wwwroot/$CFG->admin/index.php", $a);
     }
@@ -116,7 +116,7 @@ class plugin_incompatible_exception extends moodle_exception {
  * @copyright  2009 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class plugin_defective_exception extends moodle_exception {
+class plugin_defective_exception extends powereduc_exception {
     function __construct($plugin, $details) {
         global $CFG;
         parent::__construct('detectedbrokenplugin', 'error', "$CFG->wwwroot/$CFG->admin/index.php", $plugin, $details);
@@ -133,7 +133,7 @@ class plugin_defective_exception extends moodle_exception {
  * @copyright  2009 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class plugin_misplaced_exception extends moodle_exception {
+class plugin_misplaced_exception extends powereduc_exception {
     /**
      * Constructor.
      * @param string $component the component from version.php
@@ -290,7 +290,7 @@ function upgrade_set_timeout($max_execution_time=300) {
             $upgraderunning = 0;
         } else {
             // web upgrade not running or aborted
-            throw new \moodle_exception('upgradetimedout', 'admin', "$CFG->wwwroot/$CFG->admin/");
+            throw new \powereduc_exception('upgradetimedout', 'admin', "$CFG->wwwroot/$CFG->admin/");
         }
     }
 
@@ -385,7 +385,7 @@ function upgrade_mod_savepoint($result, $version, $modname, $allowabort=true) {
     $dbversion = $DB->get_field('config_plugins', 'value', array('plugin'=>$component, 'name'=>'version'));
 
     if (!$module = $DB->get_record('modules', array('name'=>$modname))) {
-        throw new \moodle_exception('modulenotexist', 'debug', '', $modname);
+        throw new \powereduc_exception('modulenotexist', 'debug', '', $modname);
     }
 
     if ($dbversion >= $version) {
@@ -431,7 +431,7 @@ function upgrade_block_savepoint($result, $version, $blockname, $allowabort=true
     $dbversion = $DB->get_field('config_plugins', 'value', array('plugin'=>$component, 'name'=>'version'));
 
     if (!$block = $DB->get_record('block', array('name'=>$blockname))) {
-        throw new \moodle_exception('blocknotexist', 'debug', '', $blockname);
+        throw new \powereduc_exception('blocknotexist', 'debug', '', $blockname);
     }
 
     if ($dbversion >= $version) {
@@ -531,7 +531,7 @@ function upgrade_stale_php_files_present(): bool {
         '/message/classes/output/messagearea/contact.php',
         // Removed in 3.9.
         '/course/classes/output/modchooser_item.php',
-        '/course/yui/build/moodle-course-modchooser/moodle-course-modchooser-min.js',
+        '/course/yui/build/powereduc-course-modchooser/powereduc-course-modchooser-min.js',
         '/course/yui/src/modchooser/js/modchooser.js',
         '/h5p/classes/autoloader.php',
         '/lib/adodb/readme.txt',
@@ -557,9 +557,9 @@ function upgrade_stale_php_files_present(): bool {
         '/lib/medialib.php',
         '/lib/password_compat/lib/password.php',
         // Removed in 3.5.
-        '/lib/dml/mssql_native_moodle_database.php',
-        '/lib/dml/mssql_native_moodle_recordset.php',
-        '/lib/dml/mssql_native_moodle_temptables.php',
+        '/lib/dml/mssql_native_powereduc_database.php',
+        '/lib/dml/mssql_native_powereduc_recordset.php',
+        '/lib/dml/mssql_native_powereduc_temptables.php',
         // Removed in 3.4.
         '/auth/README.txt',
         '/calendar/set.php',
@@ -567,7 +567,7 @@ function upgrade_stale_php_files_present(): bool {
         '/enrol/yui/rolemanager/assets/skins/sam/rolemanager.css',
         // Removed in 3.3.
         '/badges/backpackconnect.php',
-        '/calendar/yui/src/info/assets/skins/sam/moodle-calendar-info.css',
+        '/calendar/yui/src/info/assets/skins/sam/powereduc-calendar-info.css',
         '/competency/classes/external/exporter.php',
         '/mod/forum/forum.js',
         '/user/pixgroup.php',
@@ -628,7 +628,7 @@ function upgrade_stale_php_files_present(): bool {
  * After upgrading a module, block, or generic plugin, various parts of the system need to be
  * informed.
  *
- * @param string $component Frankenstyle component or 'moodle' for core
+ * @param string $component Frankenstyle component or 'powereduc' for core
  * @param string $messageplug Set to the name of a message plugin if this is one
  * @param bool $coreinstall Set to true if this is the core install
  */
@@ -655,7 +655,7 @@ function upgrade_component_updated(string $component, string $messageplug = '',
         message_update_processors($messageplug);
         core_upgrade_time::record_detail('message_update_processors');
     }
-    if ($component !== 'moodle') {
+    if ($component !== 'powereduc') {
         // This one is not run for core upgrades.
         upgrade_plugin_mnet_functions($component);
         core_upgrade_time::record_detail('upgrade_plugin_mnet_functions');
@@ -724,7 +724,7 @@ function upgrade_plugins($type, $startcallback, $endcallback, $verbose) {
             }
         }
 
-        // Throw exception if plugin is incompatible with moodle version.
+        // Throw exception if plugin is incompatible with powereduc version.
         if (!empty($plugin->incompatible)) {
             if ($CFG->branch >= $plugin->incompatible) {
                 throw new plugin_incompatible_exception($component, $plugin->version);
@@ -971,7 +971,7 @@ function upgrade_plugins_modules($startcallback, $endcallback, $verbose) {
 function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
     global $CFG, $DB;
 
-    require_once($CFG->dirroot.'/blocks/moodleblock.class.php');
+    require_once($CFG->dirroot.'/blocks/powereducblock.class.php');
 
     $blocktitles   = array(); // we do not want duplicate titles
 
@@ -1156,7 +1156,7 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
 /**
  * Log_display description function used during install and upgrade.
  *
- * @param string $component name of component (moodle, mod_assignment, etc.)
+ * @param string $component name of component (powereduc, mod_assignment, etc.)
  * @return void
  */
 function log_update_descriptions($component) {
@@ -1213,7 +1213,7 @@ function log_update_descriptions($component) {
 
 /**
  * Web service discovery function used during install and upgrade.
- * @param string $component name of component (moodle, mod_assignment, etc.)
+ * @param string $component name of component (powereduc, mod_assignment, etc.)
  * @return void
  */
 function external_update_descriptions($component) {
@@ -1353,7 +1353,7 @@ function external_update_descriptions($component) {
         //if shortname is not a PARAM_ALPHANUMEXT, fail (tested here for service update and creation)
         if (isset($service['shortname']) and
                 (clean_param($service['shortname'], PARAM_ALPHANUMEXT) != $service['shortname'])) {
-            throw new moodle_exception('installserviceshortnameerror', 'webservice', '', $service['shortname']);
+            throw new powereduc_exception('installserviceshortnameerror', 'webservice', '', $service['shortname']);
         }
         if ($dbservice->shortname != $service['shortname']) {
             //check that shortname is unique
@@ -1361,7 +1361,7 @@ function external_update_descriptions($component) {
                 $existingservice = $DB->get_record('external_services',
                         array('shortname' => $service['shortname']));
                 if (!empty($existingservice)) {
-                    throw new moodle_exception('installexistingserviceshortnameerror', 'webservice', '', $service['shortname']);
+                    throw new powereduc_exception('installexistingserviceshortnameerror', 'webservice', '', $service['shortname']);
                 }
             }
             $dbservice->shortname = $service['shortname'];
@@ -1394,7 +1394,7 @@ function external_update_descriptions($component) {
             $existingservice = $DB->get_record('external_services',
                     array('shortname' => $service['shortname']));
             if (!empty($existingservice)) {
-                throw new moodle_exception('installserviceshortnameerror', 'webservice');
+                throw new powereduc_exception('installserviceshortnameerror', 'webservice');
             }
         }
 
@@ -1660,7 +1660,7 @@ function print_upgrade_separator() {
  */
 function print_upgrade_part_start($plugin, $installation, $verbose) {
     global $OUTPUT;
-    if (empty($plugin) or $plugin == 'moodle') {
+    if (empty($plugin) or $plugin == 'powereduc') {
         upgrade_started($installation); // does not store upgrade running flag yet
         if ($verbose) {
             echo $OUTPUT->heading(get_string('coresystem'));
@@ -1673,13 +1673,13 @@ function print_upgrade_part_start($plugin, $installation, $verbose) {
     }
     core_upgrade_time::record_start($installation);
     if ($installation) {
-        if (empty($plugin) or $plugin == 'moodle') {
+        if (empty($plugin) or $plugin == 'powereduc') {
             // no need to log - log table not yet there ;-)
         } else {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Starting plugin installation');
         }
     } else {
-        if (empty($plugin) or $plugin == 'moodle') {
+        if (empty($plugin) or $plugin == 'powereduc') {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Starting core upgrade');
         } else {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Starting plugin upgrade');
@@ -1696,13 +1696,13 @@ function print_upgrade_part_end($plugin, $installation, $verbose) {
     global $OUTPUT;
     upgrade_started();
     if ($installation) {
-        if (empty($plugin) or $plugin == 'moodle') {
+        if (empty($plugin) or $plugin == 'powereduc') {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Core installed');
         } else {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Plugin installed');
         }
     } else {
-        if (empty($plugin) or $plugin == 'moodle') {
+        if (empty($plugin) or $plugin == 'powereduc') {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Core upgraded');
         } else {
             upgrade_log(UPGRADE_LOG_NORMAL, $plugin, 'Plugin upgraded');
@@ -1793,7 +1793,7 @@ function upgrade_themes() {
 }
 
 /**
- * Install core moodle tables and initialize
+ * Install core powereduc tables and initialize
  * @param float $version target version
  * @param bool $verbose
  * @return void, may throw exception
@@ -1819,7 +1819,7 @@ function install_core($version, $verbose) {
 
     try {
         core_php_time_limit::raise(600);
-        print_upgrade_part_start('moodle', true, $verbose); // does not store upgrade running flag
+        print_upgrade_part_start('powereduc', true, $verbose); // does not store upgrade running flag
 
         $DB->get_manager()->install_from_xmldb_file("$CFG->libdir/db/install.xml");
         core_upgrade_time::record_detail('install.xml');
@@ -1836,7 +1836,7 @@ function install_core($version, $verbose) {
         upgrade_main_savepoint(true, $version, false);
 
         // Continue with the installation
-        upgrade_component_updated('moodle', '', true);
+        upgrade_component_updated('powereduc', '', true);
 
         // Write default settings unconditionally
         admin_apply_default_settings(NULL, true);
@@ -1856,7 +1856,7 @@ function install_core($version, $verbose) {
 }
 
 /**
- * Upgrade moodle core
+ * Upgrade powereduc core
  * @param float $version target version
  * @param bool $verbose
  * @return void, may throw exception
@@ -1876,7 +1876,7 @@ function upgrade_core($version, $verbose) {
         // Upgrade current language pack if we can
         upgrade_language_pack();
 
-        print_upgrade_part_start('moodle', false, $verbose);
+        print_upgrade_part_start('powereduc', false, $verbose);
 
         // Pre-upgrade scripts for local hack workarounds.
         $preupgradefile = "$CFG->dirroot/local/preupgrade.php";
@@ -1900,7 +1900,7 @@ function upgrade_core($version, $verbose) {
         $COURSE = clone($SITE);
 
         // perform all other component upgrade routines
-        upgrade_component_updated('moodle');
+        upgrade_component_updated('powereduc');
         // Update core definitions.
         cache_helper::update_definitions(true);
         core_upgrade_time::record_detail('cache_helper::update_definitions');
@@ -1922,7 +1922,7 @@ function upgrade_core($version, $verbose) {
         $syscontext->mark_dirty();
         core_upgrade_time::record_detail('context_system::mark_dirty');
 
-        print_upgrade_part_end('moodle', false, $verbose);
+        print_upgrade_part_end('powereduc', false, $verbose);
     } catch (Exception $ex) {
         upgrade_handle_exception($ex);
     } catch (Throwable $ex) {
@@ -1932,7 +1932,7 @@ function upgrade_core($version, $verbose) {
 }
 
 /**
- * Upgrade/install other parts of moodle
+ * Upgrade/install other parts of powereduc
  * @param bool $verbose
  * @return void, may throw exception
  */
@@ -2087,30 +2087,30 @@ function upgrade_plugin_mnet_functions($component) {
             $functionreflect = null; // slightly different ways to get this depending on whether it's a class method or a function
             if (!empty($dataobject->classname)) {
                 if (!class_exists($dataobject->classname)) {
-                    throw new moodle_exception('installnosuchmethod', 'mnet', '', (object)array('method' => $dataobject->functionname, 'class' => $dataobject->classname));
+                    throw new powereduc_exception('installnosuchmethod', 'mnet', '', (object)array('method' => $dataobject->functionname, 'class' => $dataobject->classname));
                 }
                 $key = $dataobject->filename . '|' . $dataobject->classname;
                 if (!array_key_exists($key, $cachedclasses)) { // look to see if we've already got a reflection object
                     try {
                         $cachedclasses[$key] = new ReflectionClass($dataobject->classname);
                     } catch (ReflectionException $e) { // catch these and rethrow them to something more helpful
-                        throw new moodle_exception('installreflectionclasserror', 'mnet', '', (object)array('method' => $dataobject->functionname, 'class' => $dataobject->classname, 'error' => $e->getMessage()));
+                        throw new powereduc_exception('installreflectionclasserror', 'mnet', '', (object)array('method' => $dataobject->functionname, 'class' => $dataobject->classname, 'error' => $e->getMessage()));
                     }
                 }
                 $r =& $cachedclasses[$key];
                 if (!$r->hasMethod($dataobject->functionname)) {
-                    throw new moodle_exception('installnosuchmethod', 'mnet', '', (object)array('method' => $dataobject->functionname, 'class' => $dataobject->classname));
+                    throw new powereduc_exception('installnosuchmethod', 'mnet', '', (object)array('method' => $dataobject->functionname, 'class' => $dataobject->classname));
                 }
                 $functionreflect = $r->getMethod($dataobject->functionname);
                 $dataobject->static = (int)$functionreflect->isStatic();
             } else {
                 if (!function_exists($dataobject->functionname)) {
-                    throw new moodle_exception('installnosuchfunction', 'mnet', '', (object)array('method' => $dataobject->functionname, 'file' => $dataobject->filename));
+                    throw new powereduc_exception('installnosuchfunction', 'mnet', '', (object)array('method' => $dataobject->functionname, 'file' => $dataobject->filename));
                 }
                 try {
                     $functionreflect = new ReflectionFunction($dataobject->functionname);
                 } catch (ReflectionException $e) { // catch these and rethrow them to something more helpful
-                    throw new moodle_exception('installreflectionfunctionerror', 'mnet', '', (object)array('method' => $dataobject->functionname, '' => $dataobject->filename, 'error' => $e->getMessage()));
+                    throw new powereduc_exception('installreflectionfunctionerror', 'mnet', '', (object)array('method' => $dataobject->functionname, '' => $dataobject->filename, 'error' => $e->getMessage()));
                 }
             }
             $dataobject->profile =  serialize(admin_mnet_method_profile($functionreflect));
@@ -2543,7 +2543,7 @@ function check_upgrade_key($upgradekeyhash) {
             if (!$PAGE->headerprinted) {
                 $PAGE->set_title(get_string('upgradekeyreq', 'admin'));
                 $output = $PAGE->get_renderer('core', 'admin');
-                echo $output->upgradekey_form_page(new moodle_url('/admin/index.php', array('cache' => 0)));
+                echo $output->upgradekey_form_page(new powereduc_url('/admin/index.php', array('cache' => 0)));
                 die();
             } else {
                 // This should not happen.
@@ -2561,8 +2561,8 @@ function check_upgrade_key($upgradekeyhash) {
  * @param array $installable list of \core\update\remote_info
  * @param bool $confirmed false: display the validation screen, true: proceed installation
  * @param string $heading validation screen heading
- * @param moodle_url|string|null $continue URL to proceed with installation at the validation screen
- * @param moodle_url|string|null $return URL to go back on cancelling at the validation screen
+ * @param powereduc_url|string|null $continue URL to proceed with installation at the validation screen
+ * @param powereduc_url|string|null $return URL to go back on cancelling at the validation screen
  */
 function upgrade_install_plugins(array $installable, $confirmed, $heading='', $continue=null, $return=null) {
     global $CFG, $PAGE;
@@ -2584,14 +2584,14 @@ function upgrade_install_plugins(array $installable, $confirmed, $heading='', $c
     if ($confirmed) {
         // Installation confirmed at the validation results page.
         if (!$pluginman->install_plugins($installable, true, true)) {
-            throw new moodle_exception('install_plugins_failed', 'core_plugin', $return);
+            throw new powereduc_exception('install_plugins_failed', 'core_plugin', $return);
         }
 
         // Always redirect to admin/index.php to perform the database upgrade.
         // Do not throw away the existing $PAGE->url parameters such as
         // confirmupgrade or confirmrelease if $PAGE->url is a superset of the
         // URL we must go to.
-        $mustgoto = new moodle_url('/admin/index.php', array('cache' => 0, 'confirmplugincheck' => 0));
+        $mustgoto = new powereduc_url('/admin/index.php', array('cache' => 0, 'confirmplugincheck' => 0));
         if ($mustgoto->compare($PAGE->url, URL_MATCH_PARAMS)) {
             redirect($PAGE->url);
         } else {

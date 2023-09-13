@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External notes functions unit tests
@@ -28,7 +28,7 @@ namespace core_notes;
 use core_notes_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -50,8 +50,8 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $contextid = \context_course::instance($course->id)->id;
-        $roleid = $this->assignUserCapability('moodle/notes:manage', $contextid);
-        $this->assignUserCapability('moodle/course:view', $contextid, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/notes:manage', $contextid);
+        $this->assignUserCapability('powereduc/course:view', $contextid, $roleid);
 
         // Create test note data.
         $note1 = array();
@@ -76,7 +76,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($creatednotes[0]['clientnoteid'], $note1['clientnoteid']);
 
         // Call without required capability.
-        $this->unassignUserCapability('moodle/notes:manage', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/notes:manage', $contextid, $roleid);
         $this->expectException('\required_capability_exception');
         $creatednotes = core_notes_external::create_notes($notes);
     }
@@ -91,8 +91,8 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $contextid = \context_course::instance($course->id)->id;
-        $roleid = $this->assignUserCapability('moodle/notes:manage', $contextid);
-        $this->assignUserCapability('moodle/course:view', $contextid, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/notes:manage', $contextid);
+        $this->assignUserCapability('powereduc/course:view', $contextid, $roleid);
 
         // Create test note data.
         $cnote = array();
@@ -127,7 +127,7 @@ class externallib_test extends externallib_advanced_testcase {
         $creatednotes = \external_api::clean_returnvalue(core_notes_external::create_notes_returns(), $creatednotes);
         $dnotes3 = array($creatednotes[0]['noteid']);
 
-        $this->unassignUserCapability('moodle/notes:manage', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/notes:manage', $contextid, $roleid);
         $this->expectException('\required_capability_exception');
         $deletednotes = core_notes_external::delete_notes($dnotes3);
         $deletednotes = \external_api::clean_returnvalue(core_notes_external::delete_notes_returns(), $deletednotes);
@@ -143,9 +143,9 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $contextid = \context_course::instance($course->id)->id;
-        $roleid = $this->assignUserCapability('moodle/notes:manage', $contextid);
-        $this->assignUserCapability('moodle/notes:view', $contextid, $roleid);
-        $this->assignUserCapability('moodle/course:view', $contextid, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/notes:manage', $contextid);
+        $this->assignUserCapability('powereduc/notes:view', $contextid, $roleid);
+        $this->assignUserCapability('powereduc/course:view', $contextid, $roleid);
 
         // Create test note data.
         $cnote = array();
@@ -168,7 +168,7 @@ class externallib_test extends externallib_advanced_testcase {
         $getnotes = core_notes_external::get_notes($gnotes);
         $getnotes = \external_api::clean_returnvalue(core_notes_external::get_notes_returns(), $getnotes);
 
-        $this->unassignUserCapability('moodle/notes:manage', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/notes:manage', $contextid, $roleid);
         // Confirm that base note data was retrieved correctly.
         $this->assertEquals($cnote['userid'], $getnotes["notes"][0]["userid"]);
         $this->assertEquals($cnote['text'], $getnotes["notes"][0]["text"]);
@@ -182,7 +182,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals("Note does not exist", $getnotes["warnings"][0]["message"]);
 
         // Call without required capability.
-        $this->unassignUserCapability('moodle/notes:view', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/notes:view', $contextid, $roleid);
         $this->expectException('\required_capability_exception');
         $creatednotes = core_notes_external::get_notes($gnotes);
     }
@@ -197,8 +197,8 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Set the required capabilities by the external function.
         $contextid = \context_course::instance($course->id)->id;
-        $roleid = $this->assignUserCapability('moodle/notes:manage', $contextid);
-        $this->assignUserCapability('moodle/course:view', $contextid, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/notes:manage', $contextid);
+        $this->assignUserCapability('powereduc/course:view', $contextid, $roleid);
 
         // Create test note data.
         $note1 = array();
@@ -238,7 +238,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Call without required capability.
         $creatednotes = core_notes_external::create_notes($notes1);
         $creatednotes = \external_api::clean_returnvalue(core_notes_external::create_notes_returns(), $creatednotes);
-        $this->unassignUserCapability('moodle/notes:manage', $contextid, $roleid);
+        $this->unassignUserCapability('powereduc/notes:manage', $contextid, $roleid);
         $this->expectException('\required_capability_exception');
         $note2 = array();
         $note2["id"] = $creatednotes[0]['noteid'];
@@ -463,14 +463,14 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             core_notes_external::view_notes(0);
             $this->fail('Exception expected due to invalid permissions at system level.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
         try {
             core_notes_external::view_notes($course->id, $student->id + 100);
             $this->fail('Exception expected due to invalid user id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invaliduser', $e->errorcode);
         }
     }

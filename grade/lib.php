@@ -307,7 +307,7 @@ class graded_users_iterator {
                     $grades[$grade_item->id] = new grade_grade($grade_records[$grade_item->id], false);
                 } else {
                     $feedbacks[$grade_item->id]->feedback       = '';
-                    $feedbacks[$grade_item->id]->feedbackformat = FORMAT_MOODLE;
+                    $feedbacks[$grade_item->id]->feedbackformat = FORMAT_POWEREDUC;
                     $grades[$grade_item->id] =
                         new grade_grade(array('userid'=>$user->id, 'itemid'=>$grade_item->id), false);
                 }

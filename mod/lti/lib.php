@@ -1,34 +1,34 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 //
-// This file is part of BasicLTI4Moodle
+// This file is part of BasicLTI4PowerEduc
 //
-// BasicLTI4Moodle is an IMS BasicLTI (Basic Learning Tools for Interoperability)
-// consumer for Moodle 1.9 and Moodle 2.0. BasicLTI is a IMS Standard that allows web
+// BasicLTI4PowerEduc is an IMS BasicLTI (Basic Learning Tools for Interoperability)
+// consumer for PowerEduc 1.9 and PowerEduc 2.0. BasicLTI is a IMS Standard that allows web
 // based learning tools to be easily integrated in LMS as native ones. The IMS BasicLTI
 // specification is part of the IMS standard Common Cartridge 1.1 Sakai and other main LMS
 // are already supporting or going to support BasicLTI. This project Implements the consumer
-// for Moodle. Moodle is a Free Open source Learning Management System by Martin Dougiamas.
-// BasicLTI4Moodle is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
+// for PowerEduc. PowerEduc is a Free Open source Learning Management System by Martin Dougiamas.
+// BasicLTI4PowerEduc is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
 // at the GESSI research group at UPC.
-// SimpleLTI consumer for Moodle is an implementation of the early specification of LTI
+// SimpleLTI consumer for PowerEduc is an implementation of the early specification of LTI
 // by Charles Severance (Dr Chuck) htp://dr-chuck.com , developed by Jordi Piguillem in a
 // Google Summer of Code 2008 project co-mentored by Charles Severance and Marc Alier.
 //
-// BasicLTI4Moodle is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
+// BasicLTI4PowerEduc is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
 // of the Universitat Politecnica de Catalunya http://www.upc.edu
 // Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier @ upc.edu.
 
@@ -46,7 +46,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * List of features supported in URL module
@@ -62,7 +62,7 @@ function lti_supports($feature) {
         case FEATURE_COMPLETION_TRACKS_VIEWS:
         case FEATURE_GRADE_HAS_GRADE:
         case FEATURE_GRADE_OUTCOMES:
-        case FEATURE_BACKUP_MOODLE2:
+        case FEATURE_BACKUP_POWEREDUC2:
         case FEATURE_SHOW_DESCRIPTION:
             return true;
         case FEATURE_MOD_PURPOSE:
@@ -330,7 +330,7 @@ function mod_lti_get_all_content_items(\core_course\local\entity\content_item $d
         } else {
             $type->icon = html_writer::empty_tag('img', array('src' => $ltitype->icon, 'alt' => $ltitype->name, 'class' => 'icon'));
         }
-        $type->link = new moodle_url('/course/modedit.php', array('add' => 'lti', 'return' => 0, 'typeid' => $ltitype->id));
+        $type->link = new powereduc_url('/course/modedit.php', array('add' => 'lti', 'return' => 0, 'typeid' => $ltitype->id));
 
         $types[] = new \core_course\local\entity\content_item(
             $type->id + 1,
@@ -386,20 +386,20 @@ function lti_get_coursemodule_info($coursemodule) {
     if (lti_request_is_using_ssl() &&
         (!empty($lti->secureicon) || (isset($toolconfig['secureicon']) && !empty($toolconfig['secureicon'])))) {
         if (!empty($lti->secureicon)) {
-            $info->iconurl = new moodle_url($lti->secureicon);
+            $info->iconurl = new powereduc_url($lti->secureicon);
         } else {
-            $info->iconurl = new moodle_url($toolconfig['secureicon']);
+            $info->iconurl = new powereduc_url($toolconfig['secureicon']);
         }
     } else if (!empty($lti->icon)) {
-        $info->iconurl = new moodle_url($lti->icon);
+        $info->iconurl = new powereduc_url($lti->icon);
     } else if (isset($toolconfig['icon']) && !empty($toolconfig['icon'])) {
-        $info->iconurl = new moodle_url($toolconfig['icon']);
+        $info->iconurl = new powereduc_url($toolconfig['icon']);
     }
 
     // Does the link open in a new window?
     $launchcontainer = lti_get_launch_container($lti, $toolconfig);
     if ($launchcontainer == LTI_LAUNCH_CONTAINER_WINDOW) {
-        $launchurl = new moodle_url('/mod/lti/launch.php', array('id' => $coursemodule->id));
+        $launchurl = new powereduc_url('/mod/lti/launch.php', array('id' => $coursemodule->id));
         $info->onclick = "window.open('" . $launchurl->out(false) . "', 'lti-".$coursemodule->id."'); return false;";
     }
 
@@ -416,7 +416,7 @@ function lti_get_coursemodule_info($coursemodule) {
  * $return->info = a short text description
  *
  * @return null
- * @TODO: implement this moodle function (if needed)
+ * @TODO: implement this powereduc function (if needed)
  **/
 function lti_user_outline($course, $user, $mod, $basiclti) {
     return null;
@@ -427,7 +427,7 @@ function lti_user_outline($course, $user, $mod, $basiclti) {
  * a given particular instance of this module, for user activity reports.
  *
  * @return boolean
- * @TODO: implement this moodle function (if needed)
+ * @TODO: implement this powereduc function (if needed)
  **/
 function lti_user_complete($course, $user, $mod, $basiclti) {
     return true;
@@ -440,14 +440,14 @@ function lti_user_complete($course, $user, $mod, $basiclti) {
  *
  * @uses $CFG
  * @return boolean
- * @TODO: implement this moodle function
+ * @TODO: implement this powereduc function
  **/
 function lti_print_recent_activity($course, $isteacher, $timestart) {
     return false;  //  True if anything was printed, otherwise false.
 }
 
 /**
- * Function to be run periodically according to the moodle cron
+ * Function to be run periodically according to the powereduc cron
  * This function searches for things that need to be done, such
  * as sending out mail, toggling flags etc ...
  *
@@ -471,14 +471,14 @@ function lti_cron () {
  * @param int $basicltiid ID of an instance of this module
  * @return mixed Null or object with an array of grades and with the maximum grade
  *
- * @TODO: implement this moodle function (if needed)
+ * @TODO: implement this powereduc function (if needed)
  **/
 function lti_grades($basicltiid) {
     return null;
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function lti_scale_used() {
     throw new coding_exception('lti_scale_used() can not be used anymore. Plugins can implement ' .
@@ -643,7 +643,7 @@ function lti_get_view_actions() {
  * @param  stdClass $course     course object
  * @param  stdClass $cm         course module object
  * @param  stdClass $context    context object
- * @since Moodle 3.0
+ * @since PowerEduc 3.0
  */
 function lti_view($lti, $course, $cm, $context) {
 
@@ -671,7 +671,7 @@ function lti_view($lti, $course, $cm, $context) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function lti_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER;
@@ -760,7 +760,7 @@ function mod_lti_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/lti/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/lti/view.php', ['id' => $cm->id]),
         1,
         true
     );

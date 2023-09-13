@@ -28,7 +28,7 @@ use moodleform;
 use tool_licensemanager\helper;
 use tool_licensemanager\manager;
 
-defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') || die('Direct access to this script is forbidden.');
 
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');

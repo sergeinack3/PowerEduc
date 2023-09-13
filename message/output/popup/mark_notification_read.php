@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,9 +36,9 @@ $notification = $DB->get_record('notifications', array('id' => $notificationid))
 
 // If the redirect URL after filtering is empty, or it was never passed, then redirect to the notification page.
 if (!empty($notification->contexturl)) {
-    $redirecturl = new moodle_url($notification->contexturl);
+    $redirecturl = new powereduc_url($notification->contexturl);
 } else {
-    $redirecturl = new moodle_url('/message/output/popup/notifications.php', ['notificationid' => $notificationid]);
+    $redirecturl = new powereduc_url('/message/output/popup/notifications.php', ['notificationid' => $notificationid]);
 }
 
 // Check notification belongs to this user.

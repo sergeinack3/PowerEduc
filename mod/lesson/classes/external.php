@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Lesson external API
  *
  * @package    mod_lesson
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/lesson/locallib.php');
@@ -36,9 +36,9 @@ use mod_lesson\external\lesson_summary_exporter;
  *
  * @package    mod_lesson
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 class mod_lesson_external extends external_api {
 
@@ -89,7 +89,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_lessons_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_lessons_by_courses_parameters() {
         return new external_function_parameters (
@@ -107,7 +107,7 @@ class mod_lesson_external extends external_api {
      *
      * @param array $courseids Array of course ids
      * @return array of lessons details
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_lessons_by_courses($courseids = array()) {
         global $PAGE;
@@ -159,7 +159,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_lessons_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_lessons_by_courses_returns() {
         return new external_single_structure(
@@ -177,7 +177,7 @@ class mod_lesson_external extends external_api {
      *
      * @param int $lessonid lesson instance id
      * @return array array containing the lesson, course, context and course module objects
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     protected static function validate_lesson($lessonid) {
         global $DB, $USER;
@@ -202,7 +202,7 @@ class mod_lesson_external extends external_api {
      * @param  array   $params request parameters
      * @param  boolean $return whether to return the errors or throw exceptions
      * @return array          the errors (if return set to true)
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     protected static function validate_attempt(lesson $lesson, $params, $return = false) {
         global $USER, $CFG;
@@ -218,7 +218,7 @@ class mod_lesson_external extends external_api {
         if ($timerestriction = $lesson->get_time_restriction_status()) {
             $error = ["$timerestriction->reason" => userdate($timerestriction->time)];
             if (!$return) {
-                throw new moodle_exception(key($error), 'lesson', '', current($error));
+                throw new powereduc_exception(key($error), 'lesson', '', current($error));
             }
             $errors[key($error)] = current($error);
         }
@@ -227,7 +227,7 @@ class mod_lesson_external extends external_api {
         if ($passwordrestriction = $lesson->get_password_restriction_status($params['password'])) {
             $error = ["passwordprotectedlesson" => external_format_string($lesson->name, $lesson->context->id)];
             if (!$return) {
-                throw new moodle_exception(key($error), 'lesson', '', current($error));
+                throw new powereduc_exception(key($error), 'lesson', '', current($error));
             }
             $errors[key($error)] = current($error);
         }
@@ -237,7 +237,7 @@ class mod_lesson_external extends external_api {
             $errorhtmllist = implode(get_string('and', 'lesson') . ', ', $dependenciesrestriction->errors);
             $error = ["completethefollowingconditions" => $dependenciesrestriction->dependentlesson->name . $errorhtmllist];
             if (!$return) {
-                throw new moodle_exception(key($error), 'lesson', '', current($error));
+                throw new powereduc_exception(key($error), 'lesson', '', current($error));
             }
             $errors[key($error)] = current($error);
         }
@@ -252,7 +252,7 @@ class mod_lesson_external extends external_api {
             if (!$lessonfirstpageid) {
                 $error = ["lessonnotready2" => null];
                 if (!$return) {
-                    throw new moodle_exception(key($error), 'lesson');
+                    throw new powereduc_exception(key($error), 'lesson');
                 }
                 $errors[key($error)] = current($error);
             }
@@ -266,7 +266,7 @@ class mod_lesson_external extends external_api {
                 if ($lesson->left_during_timed_session($attemptscount) && $lesson->timelimit && !$lesson->retake) {
                     $error = ["leftduringtimednoretake" => null];
                     if (!$return) {
-                        throw new moodle_exception(key($error), 'lesson');
+                        throw new powereduc_exception(key($error), 'lesson');
                     }
                     $errors[key($error)] = current($error);
                 }
@@ -274,7 +274,7 @@ class mod_lesson_external extends external_api {
                 // The user finished the lesson and no retakes are allowed.
                 $error = ["noretake" => null];
                 if (!$return) {
-                    throw new moodle_exception(key($error), 'lesson');
+                    throw new powereduc_exception(key($error), 'lesson');
                 }
                 $errors[key($error)] = current($error);
             }
@@ -282,7 +282,7 @@ class mod_lesson_external extends external_api {
             if (!$timers = $lesson->get_user_timers($USER->id, 'starttime DESC', '*', 0, 1)) {
                 $error = ["cannotfindtimer" => null];
                 if (!$return) {
-                    throw new moodle_exception(key($error), 'lesson');
+                    throw new powereduc_exception(key($error), 'lesson');
                 }
                 $errors[key($error)] = current($error);
             } else {
@@ -290,7 +290,7 @@ class mod_lesson_external extends external_api {
                 if (!$lesson->check_time($timer)) {
                     $error = ["eolstudentoutoftime" => null];
                     if (!$return) {
-                        throw new moodle_exception(key($error), 'lesson');
+                        throw new powereduc_exception(key($error), 'lesson');
                     }
                     $errors[key($error)] = current($error);
                 }
@@ -317,7 +317,7 @@ class mod_lesson_external extends external_api {
                     if (!isset($USER->modattempts[$lesson->id])) {
                         $error = ["studentoutoftimeforreview" => null];
                         if (!$return) {
-                            throw new moodle_exception(key($error), 'lesson');
+                            throw new powereduc_exception(key($error), 'lesson');
                         }
                         $errors[key($error)] = current($error);
                     }
@@ -332,7 +332,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_lesson_access_information.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_lesson_access_information_parameters() {
         return new external_function_parameters (
@@ -347,8 +347,8 @@ class mod_lesson_external extends external_api {
      *
      * @param int $lessonid lesson instance id
      * @return array of warnings and the access information
-     * @since Moodle 3.3
-     * @throws  moodle_exception
+     * @since PowerEduc 3.3
+     * @throws  powereduc_exception
      */
     public static function get_lesson_access_information($lessonid) {
         global $DB, $USER;
@@ -396,7 +396,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_lesson_access_information return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_lesson_access_information_returns() {
         return new external_single_structure(
@@ -428,7 +428,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for view_lesson.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function view_lesson_parameters() {
         return new external_function_parameters (
@@ -445,8 +445,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonid lesson instance id
      * @param string $password optional password (the lesson may be protected)
      * @return array of warnings and status result
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function view_lesson($lessonid, $password = '') {
         global $DB;
@@ -470,7 +470,7 @@ class mod_lesson_external extends external_api {
      * Describes the view_lesson return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function view_lesson_returns() {
         return new external_single_structure(
@@ -488,8 +488,8 @@ class mod_lesson_external extends external_api {
      * @param stdClass $course course object
      * @param stdClass $cm cm object
      * @param stdClass $context context object
-     * @throws moodle_exception
-     * @since Moodle 3.3
+     * @throws powereduc_exception
+     * @since PowerEduc 3.3
      */
     protected static function check_can_view_user_data($userid, $course, $cm, $context) {
         $user = core_user::get_user($userid, '*', MUST_EXIST);
@@ -497,7 +497,7 @@ class mod_lesson_external extends external_api {
         // Check permissions and that if users share group (if groups enabled).
         require_capability('mod/lesson:viewreports', $context);
         if (!groups_user_groups_visible($course, $user->id, $cm)) {
-            throw new moodle_exception('notingroup');
+            throw new powereduc_exception('notingroup');
         }
     }
 
@@ -505,7 +505,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_questions_attempts.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_questions_attempts_parameters() {
         return new external_function_parameters (
@@ -528,8 +528,8 @@ class mod_lesson_external extends external_api {
      * @param int $pageid only fetch attempts at the given page
      * @param int $userid only fetch attempts of the given user
      * @return array of warnings and page attempts
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_questions_attempts($lessonid, $attempt, $correct = false, $pageid = null, $userid = null) {
         global $DB, $USER;
@@ -566,7 +566,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_questions_attempts return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_questions_attempts_returns() {
         return new external_single_structure(
@@ -596,7 +596,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_user_grade.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_grade_parameters() {
         return new external_function_parameters (
@@ -613,8 +613,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonid lesson instance id
      * @param int $userid only fetch grades of this user
      * @return array of warnings and page attempts
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_user_grade($lessonid, $userid = null) {
         global $CFG, $USER;
@@ -666,7 +666,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_user_grade return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_grade_returns() {
         return new external_single_structure(
@@ -683,7 +683,7 @@ class mod_lesson_external extends external_api {
      *
      * @param  int $required if the structure is required or optional
      * @return external_single_structure the structure
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     protected static function get_user_attempt_grade_structure($required = VALUE_REQUIRED) {
         $data = array(
@@ -704,7 +704,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_user_attempt_grade.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_attempt_grade_parameters() {
         return new external_function_parameters (
@@ -723,8 +723,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonattempt lesson attempt number
      * @param int $userid only fetch attempts of the given user
      * @return array of warnings and page attempts
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_user_attempt_grade($lessonid, $lessonattempt, $userid = null) {
         global $CFG, $USER;
@@ -760,7 +760,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_user_attempt_grade return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_attempt_grade_returns() {
         return new external_single_structure(
@@ -775,7 +775,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_content_pages_viewed.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_content_pages_viewed_parameters() {
         return new external_function_parameters (
@@ -794,8 +794,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonattempt lesson attempt number
      * @param int $userid only fetch attempts of the given user
      * @return array of warnings and page attempts
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_content_pages_viewed($lessonid, $lessonattempt, $userid = null) {
         global $USER;
@@ -832,7 +832,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_content_pages_viewed return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_content_pages_viewed_returns() {
         return new external_single_structure(
@@ -861,7 +861,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_user_timers.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_timers_parameters() {
         return new external_function_parameters (
@@ -878,8 +878,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonid lesson instance id
      * @param int $userid only fetch timers of the given user
      * @return array of warnings and timers
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_user_timers($lessonid, $userid = null) {
         global $USER;
@@ -915,7 +915,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_user_timers return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_timers_returns() {
         return new external_single_structure(
@@ -943,7 +943,7 @@ class mod_lesson_external extends external_api {
      * Describes the external structure for a lesson page.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     protected static function get_page_structure($required = VALUE_REQUIRED) {
         return new external_single_structure(
@@ -975,7 +975,7 @@ class mod_lesson_external extends external_api {
      * @param lesson_page $page the lesson page
      * @param bool $returncontents whether to return the page title and contents
      * @return stdClass          the fields matching the external page structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     protected static function get_page_fields(lesson_page $page, $returncontents = false) {
         $lesson = $page->lesson;
@@ -1009,7 +1009,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_pages.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_pages_parameters() {
         return new external_function_parameters (
@@ -1026,8 +1026,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonid lesson instance id
      * @param string $password optional password (the lesson may be protected)
      * @return array of warnings and status result
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_pages($lessonid, $password = '') {
 
@@ -1082,7 +1082,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_pages return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_pages_returns() {
         return new external_single_structure(
@@ -1092,7 +1092,7 @@ class mod_lesson_external extends external_api {
                         array(
                             'page' => self::get_page_structure(),
                             'answerids' => new external_multiple_structure(
-                                new external_value(PARAM_INT, 'Answer id'), 'List of answers ids (empty for content pages in  Moodle 1.9)'
+                                new external_value(PARAM_INT, 'Answer id'), 'List of answers ids (empty for content pages in  PowerEduc 1.9)'
                             ),
                             'jumps' => new external_multiple_structure(
                                 new external_value(PARAM_INT, 'Page to jump id'), 'List of possible page jumps'
@@ -1112,7 +1112,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for launch_attempt.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function launch_attempt_parameters() {
         return new external_function_parameters (
@@ -1130,7 +1130,7 @@ class mod_lesson_external extends external_api {
      *
      * @param  lesson $lesson lesson instance
      * @return array          messages formatted
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     protected static function format_lesson_messages($lesson) {
         $messages = array();
@@ -1147,7 +1147,7 @@ class mod_lesson_external extends external_api {
      * Return a external structure representing messages.
      *
      * @return external_multiple_structure messages structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     protected static function external_messages() {
         return new external_multiple_structure(
@@ -1169,8 +1169,8 @@ class mod_lesson_external extends external_api {
      * @param int $pageid page id to continue from (only when continuing an attempt)
      * @param bool $review if we want to review just after finishing
      * @return array of warnings and status result
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function launch_attempt($lessonid, $password = '', $pageid = 0, $review = false) {
         global $CFG, $USER;
@@ -1199,11 +1199,11 @@ class mod_lesson_external extends external_api {
             }
         } else {
             if ($params['pageid'] == LESSON_EOL) {
-                throw new moodle_exception('endoflesson', 'lesson');
+                throw new powereduc_exception('endoflesson', 'lesson');
             }
             $timer = $lesson->update_timer(true, true);
             if (!$lesson->check_time($timer)) {
-                throw new moodle_exception('eolstudentoutoftime', 'lesson');
+                throw new powereduc_exception('eolstudentoutoftime', 'lesson');
             }
         }
         $messages = self::format_lesson_messages($lesson);
@@ -1220,7 +1220,7 @@ class mod_lesson_external extends external_api {
      * Describes the launch_attempt return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function launch_attempt_returns() {
         return new external_single_structure(
@@ -1235,7 +1235,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_page_data.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_page_data_parameters() {
         return new external_function_parameters (
@@ -1260,8 +1260,8 @@ class mod_lesson_external extends external_api {
      * @param bool $review if we want to review just after finishing (1 hour margin)
      * @param bool $returncontents if we must return the complete page contents once rendered
      * @return array of warnings and status result
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_page_data($lessonid, $pageid,  $password = '', $review = false, $returncontents = false) {
         global $PAGE, $USER;
@@ -1364,7 +1364,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_page_data return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_page_data_returns() {
         return new external_single_structure(
@@ -1407,7 +1407,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for process_page.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function process_page_parameters() {
         return new external_function_parameters (
@@ -1438,8 +1438,8 @@ class mod_lesson_external extends external_api {
      * @param string $password optional password (the lesson may be protected)
      * @param bool $review if we want to review just after finishing (1 hour margin)
      * @return array of warnings and status result
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function process_page($lessonid, $pageid,  $data, $password = '', $review = false) {
         global $USER;
@@ -1518,7 +1518,7 @@ class mod_lesson_external extends external_api {
      * Describes the process_page return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function process_page_returns() {
         return new external_single_structure(
@@ -1549,7 +1549,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for finish_attempt.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function finish_attempt_parameters() {
         return new external_function_parameters (
@@ -1571,8 +1571,8 @@ class mod_lesson_external extends external_api {
      * @param bool $outoftime optional if the user run out of time
      * @param bool $review if we want to review just after finishing (1 hour margin)
      * @return array of warnings and information about the finished attempt
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function finish_attempt($lessonid, $password = '', $outoftime = false, $review = false) {
 
@@ -1598,7 +1598,7 @@ class mod_lesson_external extends external_api {
         // Check if there are more errors.
         if (!empty($validation)) {
             reset($validation);
-            throw new moodle_exception(key($validation), 'lesson', '', current($validation));   // Throw first error.
+            throw new powereduc_exception(key($validation), 'lesson', '', current($validation));   // Throw first error.
         }
 
         // Set out of time to normal (it is the only existing mode).
@@ -1640,7 +1640,7 @@ class mod_lesson_external extends external_api {
      * Describes the finish_attempt return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function finish_attempt_returns() {
         return new external_single_structure(
@@ -1664,7 +1664,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_attempts_overview.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_attempts_overview_parameters() {
         return new external_function_parameters (
@@ -1682,8 +1682,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonid lesson instance id
      * @param int $groupid group id, 0 means that the function will determine the user group
      * @return array of warnings and status result
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_attempts_overview($lessonid, $groupid = 0) {
 
@@ -1698,7 +1698,7 @@ class mod_lesson_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -1706,7 +1706,7 @@ class mod_lesson_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0 -> all groups).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -1729,7 +1729,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_attempts_overview return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_attempts_overview_returns() {
         return new external_single_structure(
@@ -1776,7 +1776,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_user_attempt.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_attempt_parameters() {
         return new external_function_parameters (
@@ -1795,8 +1795,8 @@ class mod_lesson_external extends external_api {
      * @param int $userid the user id
      * @param int $lessonattempt the attempt number
      * @return array of warnings and page attempts
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_user_attempt($lessonid, $userid, $lessonattempt) {
         global $USER;
@@ -1839,7 +1839,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_user_attempt return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_user_attempt_returns() {
         return new external_single_structure(
@@ -1862,7 +1862,7 @@ class mod_lesson_external extends external_api {
                                         'User answers',
                                         VALUE_OPTIONAL
                                     ),
-                                ), 'Answer data (empty in content pages created in Moodle 1.x).', VALUE_OPTIONAL
+                                ), 'Answer data (empty in content pages created in PowerEduc 1.x).', VALUE_OPTIONAL
                             )
                         )
                     )
@@ -1884,7 +1884,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_pages_possible_jumps.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_pages_possible_jumps_parameters() {
         return new external_function_parameters (
@@ -1901,8 +1901,8 @@ class mod_lesson_external extends external_api {
      *
      * @param int $lessonid lesson instance id
      * @return array of warnings and possible jumps
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_pages_possible_jumps($lessonid) {
         global $USER;
@@ -1955,7 +1955,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_pages_possible_jumps return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_pages_possible_jumps_returns() {
         return new external_single_structure(
@@ -1979,7 +1979,7 @@ class mod_lesson_external extends external_api {
      * Describes the parameters for get_lesson.
      *
      * @return external_function_parameters
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_lesson_parameters() {
         return new external_function_parameters (
@@ -1996,8 +1996,8 @@ class mod_lesson_external extends external_api {
      * @param int $lessonid lesson instance id
      * @param string $password optional password (the lesson may be protected)
      * @return array of warnings and status result
-     * @since Moodle 3.3
-     * @throws moodle_exception
+     * @since PowerEduc 3.3
+     * @throws powereduc_exception
      */
     public static function get_lesson($lessonid, $password = '') {
         global $PAGE;
@@ -2021,7 +2021,7 @@ class mod_lesson_external extends external_api {
      * Describes the get_lesson return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public static function get_lesson_returns() {
         return new external_single_structure(

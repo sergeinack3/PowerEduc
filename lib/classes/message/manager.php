@@ -26,7 +26,7 @@
 
 namespace core\message;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class used for various messaging related stuff.

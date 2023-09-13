@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * Contains standard functions for message_popup.
  *
  * @package   message_popup
- * @copyright 2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright 2016 Ryan Wyllie <ryan@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Renders the popup.
@@ -44,13 +44,13 @@ function message_popup_render_navbar_output(\renderer_base $renderer) {
     $enabled = \core_message\api::is_processor_enabled("popup");
     if ($enabled) {
         $unreadcount = \message_popup\api::count_unread_popup_notifications($USER->id);
-        $caneditownmessageprofile = has_capability('moodle/user:editownmessageprofile', context_system::instance());
-        $preferencesurl = $caneditownmessageprofile ? new moodle_url('/message/notificationpreferences.php') : null;
+        $caneditownmessageprofile = has_capability('powereduc/user:editownmessageprofile', context_system::instance());
+        $preferencesurl = $caneditownmessageprofile ? new powereduc_url('/message/notificationpreferences.php') : null;
         $context = [
             'userid' => $USER->id,
             'unreadcount' => $unreadcount,
             'urls' => [
-                'seeall' => (new moodle_url('/message/output/popup/notifications.php'))->out(),
+                'seeall' => (new powereduc_url('/message/output/popup/notifications.php'))->out(),
                 'preferences' => $preferencesurl ? $preferencesurl->out() : null,
             ],
         ];

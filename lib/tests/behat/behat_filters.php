@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Note: You cannot use MOODLE_INTERNAL test here, or include files which do so.
+// Note: You cannot use POWEREDUC_INTERNAL test here, or include files which do so.
 // This file is required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../behat/behat_base.php');

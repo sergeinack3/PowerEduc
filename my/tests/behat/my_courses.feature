@@ -33,7 +33,7 @@ Feature: Run tests over my courses.
   Scenario: User without capability to browse courses cannot see any link
     Given the following "permission overrides" exist:
       | capability                     | permission | role | contextlevel | reference |
-      | moodle/category:viewcourselist | Prevent    | user | System       |           |
+      | powereduc/category:viewcourselist | Prevent    | user | System       |           |
     Given I am on the "My courses" page logged in as "user1"
     Then "Course management options" "link" should not exist
 
@@ -41,7 +41,7 @@ Feature: Run tests over my courses.
   Scenario: User with creating a course permission can see the Create course link only
     Given the following "permission overrides" exist:
       | capability           | permission | role  | contextlevel | reference |
-      | moodle/course:create | Allow      | role1 | Category     | cata      |
+      | powereduc/course:create | Allow      | role1 | Category     | cata      |
     When I am on the "My courses" page logged in as "user1"
     Then "Course management options" "link" should exist
     And I click on "Course management options" "link"
@@ -56,7 +56,7 @@ Feature: Run tests over my courses.
   Scenario: User with managing a category permission can see the Manage course link only
     Given the following "permission overrides" exist:
       | capability             | permission | role  | contextlevel | reference |
-      | moodle/category:manage | Allow      | role1 | Category     | cata      |
+      | powereduc/category:manage | Allow      | role1 | Category     | cata      |
     When I am on the "My courses" page logged in as "user1"
     Then "Course management options" "link" should exist
     And I click on "Course management options" "link"
@@ -70,8 +70,8 @@ Feature: Run tests over my courses.
   Scenario: User with both creating a course and managing a category permission can see both links
     Given the following "permission overrides" exist:
       | capability             | permission | role  | contextlevel | reference |
-      | moodle/course:create   | Allow      | role1 | Category     | cata      |
-      | moodle/category:manage | Allow      | role1 | Category     | cata      |
+      | powereduc/course:create   | Allow      | role1 | Category     | cata      |
+      | powereduc/category:manage | Allow      | role1 | Category     | cata      |
     When I am on the "My courses" page logged in as "user1"
     Then "Course management options" "link" should exist
     And I click on "Course management options" "link"
@@ -116,7 +116,7 @@ Feature: Run tests over my courses.
   Scenario: User with creating a course permission can't see the Request course link
     Given the following "permission overrides" exist:
       | capability            | permission | role  | contextlevel | reference |
-      | moodle/course:request | Allow      | user  | System       |           |
+      | powereduc/course:request | Allow      | user  | System       |           |
     When I am on the "My courses" page logged in as "admin"
     And I click on "Course management options" "link"
     And I should see "New course"
@@ -126,7 +126,7 @@ Feature: Run tests over my courses.
   Scenario: User without creating a course but with course request permission could see the Request course link
     Given the following "permission overrides" exist:
       | capability            | permission | role  | contextlevel | reference |
-      | moodle/course:request | Allow      | user  | System       |           |
+      | powereduc/course:request | Allow      | user  | System       |           |
     When I am on the "My courses" page logged in as "user1"
     And I click on "Course management options" "link"
     And I should not see "New course"

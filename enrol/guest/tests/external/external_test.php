@@ -28,7 +28,7 @@ namespace enrol_guest\external;
 use enrol_guest_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

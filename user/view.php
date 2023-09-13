@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Display profile for a particular user
@@ -38,7 +38,7 @@ if (empty($id)) {
     $id = $USER->id;
 }
 
-if ($courseid == SITEID) {   // Since Moodle 2.0 all site-level profiles are shown by profile.php.
+if ($courseid == SITEID) {   // Since PowerEduc 2.0 all site-level profiles are shown by profile.php.
     redirect($CFG->wwwroot.'/user/profile.php?id='.$id);  // Immediate redirect.
 }
 
@@ -55,7 +55,7 @@ $usercontext   = context_user::instance($user->id, IGNORE_MISSING);
 // Check we are not trying to view guest's profile.
 if (isguestuser($user)) {
     // Can not view profile of guest - thre is nothing to see there.
-    throw new \moodle_exception('invaliduserid');
+    throw new \powereduc_exception('invaliduserid');
 }
 
 $PAGE->set_context($coursecontext);
@@ -78,9 +78,9 @@ if (!empty($CFG->forceloginforprofiles)) {
 $PAGE->set_course($course);
 $PAGE->set_pagetype('course-view-' . $course->format);  // To get the blocks exactly like the course.
 $PAGE->add_body_class('path-user');                     // So we can style it independently.
-$PAGE->set_other_editing_capability('moodle/course:manageactivities');
+$PAGE->set_other_editing_capability('powereduc/course:manageactivities');
 
-// Set the Moodle docs path explicitly because the default behaviour
+// Set the PowerEduc docs path explicitly because the default behaviour
 // of inhereting the pagetype will lead to an incorrect docs location.
 $PAGE->set_docs_path('user/profile');
 
@@ -88,7 +88,7 @@ $isparent = false;
 
 if (!$currentuser and !$user->deleted
   and $DB->record_exists('role_assignments', array('userid' => $USER->id, 'contextid' => $usercontext->id))
-  and has_capability('moodle/user:viewdetails', $usercontext)) {
+  and has_capability('powereduc/user:viewdetails', $usercontext)) {
     // TODO: very ugly hack - do not force "parents" to enrol into course their child is enrolled in,
     //       this way they may access the profile where they get overview of grades and child activity in course,
     //       please note this is just a guess!
@@ -105,7 +105,7 @@ $strpersonalprofile = get_string('personalprofile');
 $strparticipants = get_string("participants");
 $struser = get_string("user");
 
-$fullname = fullname($user, has_capability('moodle/site:viewfullnames', $coursecontext));
+$fullname = fullname($user, has_capability('powereduc/site:viewfullnames', $coursecontext));
 
 // Now test the actual capabilities and enrolment in course.
 if ($currentuser) {
@@ -128,14 +128,14 @@ if ($currentuser) {
 
     // Check to see if the user can see this user's profile.
     if (!user_can_view_profile($user, $course, $usercontext) && !$isparent) {
-        throw new \moodle_exception('cannotviewprofile');
+        throw new \powereduc_exception('cannotviewprofile');
     }
 
     if (!is_enrolled($coursecontext, $user->id)) {
         // TODO: the only potential problem is that managers and inspectors might post in forum, but the link
-        //       to profile would not work - maybe a new capability - moodle/user:freely_acessile_profile_for_anybody
+        //       to profile would not work - maybe a new capability - powereduc/user:freely_acessile_profile_for_anybody
         //       or test for course:inspect capability.
-        if (has_capability('moodle/role:assign', $coursecontext)) {
+        if (has_capability('powereduc/role:assign', $coursecontext)) {
             $PAGE->navbar->add($fullname);
             $notice = get_string('notenrolled', '', $fullname);
         } else {
@@ -185,7 +185,7 @@ echo $OUTPUT->context_header($headerinfo, 2);
 
 if ($user->deleted) {
     echo $OUTPUT->heading(get_string('userdeleted'));
-    if (!has_capability('moodle/user:update', $coursecontext)) {
+    if (!has_capability('powereduc/user:update', $coursecontext)) {
         echo $OUTPUT->footer();
         die;
     }
@@ -196,13 +196,13 @@ if ($user->deleted) {
 profile_view($user, $coursecontext, $course);
 
 $hiddenfields = [];
-if (!has_capability('moodle/user:viewhiddendetails', $coursecontext)) {
+if (!has_capability('powereduc/user:viewhiddendetails', $coursecontext)) {
     $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
 }
 if ($user->description && !isset($hiddenfields['description'])) {
     echo '<div class="description">';
     if (!empty($CFG->profilesforenrolledusersonly) && !$DB->record_exists('role_assignments', array('userid' => $id))) {
-        echo get_string('profilenotshown', 'moodle');
+        echo get_string('profilenotshown', 'powereduc');
     } else {
         if ($courseid == SITEID) {
             $user->description = file_rewrite_pluginfile_urls($user->description, 'pluginfile.php', $usercontext->id, 'user', 'profile', null);

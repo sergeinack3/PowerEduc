@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -87,10 +87,10 @@ XPATH
      *
      * @param string $endpoint
      * @param array $params
-     * @return moodle_url
+     * @return powereduc_url
      */
-    public static function get_mocked_server_url(string $endpoint = '', array $params = []): moodle_url {
-        return new moodle_url(TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER . '/' . $endpoint, $params);
+    public static function get_mocked_server_url(string $endpoint = '', array $params = []): powereduc_url {
+        return new powereduc_url(TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER . '/' . $endpoint, $params);
     }
 
     /**
@@ -113,10 +113,10 @@ XPATH
      * | None so far!      |                                                              |
      *
      * @param string $page name of the page, with the component name removed e.g. 'Admin notification'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_url(string $page): moodle_url {
+    protected function resolve_page_url(string $page): powereduc_url {
         throw new Exception("Unrecognised page type '{$page}'.");
     }
 
@@ -129,14 +129,14 @@ XPATH
      *
      * @param string $type identifies which type of page this is, e.g. 'Indez'.
      * @param string $identifier identifies the particular page, e.g. 'Mathematics 101'.
-     * @return moodle_url the corresponding URL.
+     * @return powereduc_url the corresponding URL.
      * @throws Exception with a meaningful error message if the specified page cannot be found.
      */
-    protected function resolve_page_instance_url(string $type, string $identifier): moodle_url {
+    protected function resolve_page_instance_url(string $type, string $identifier): powereduc_url {
         switch ($type) {
             case 'Index':
                 $this->get_course_id($identifier);
-                return new moodle_url('/mod/bigbluebuttonbn/index.php', [
+                return new powereduc_url('/mod/bigbluebuttonbn/index.php', [
                     'id' => $this->get_course_id($identifier),
                 ]);
             case 'BigblueButtonBN Guest':
@@ -213,7 +213,7 @@ XPATH
         }
     }
     /**
-     * Send all events received for this meeting back to moodle
+     * Send all events received for this meeting back to powereduc
      *
      * @Given /^the BigBlueButtonBN activity "(?P<element_string>(?:[^"]|\\")*)" has sent recording all its events$/
      * @param string $instancename

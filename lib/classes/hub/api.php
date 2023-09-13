@@ -23,7 +23,7 @@
  */
 
 namespace core\hub;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use moodle_exception;
 use curl;
@@ -86,7 +86,7 @@ class api {
             ] + $data;
 
         $curl = new curl();
-        $serverurl = HUB_MOODLEORGHUBURL . "/local/hub/webservice/webservices.php";
+        $serverurl = HUB_POWEREDUCORGHUBURL . "/local/hub/webservice/webservices.php";
         $query = http_build_query($params, '', '&');
         $curloutput = @json_decode($curl->post($serverurl, $query), true);
         $info = $curl->get_info();
@@ -159,7 +159,7 @@ class api {
      */
     public static function get_hub_info() {
         $info = self::call('hub_get_info', [], true);
-        $info['imgurl'] = new moodle_url(HUB_MOODLEORGHUBURL . '/local/hub/webservice/download.php',
+        $info['imgurl'] = new moodle_url(HUB_POWEREDUCORGHUBURL . '/local/hub/webservice/download.php',
             ['filetype' => self::HUB_HUBSCREENSHOT_FILE_TYPE]);
         return $info;
     }

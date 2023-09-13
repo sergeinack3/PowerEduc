@@ -27,7 +27,7 @@ namespace core_xapi\local\statement;
 use advanced_testcase;
 use core_xapi\xapi_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Contains test cases for testing statement base class.

@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This contains functions and classes that will be used by scripts in wiki module
@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/wiki/lib.php');
 require_once($CFG->dirroot . '/mod/wiki/parser/parser.php');
@@ -828,12 +828,12 @@ function wiki_user_can_view($subwiki, $wiki = null) {
                 // User must have:
                 //      mod/wiki:managewiki capability
                 // or
-                //      moodle/site:accessallgroups capability
+                //      powereduc/site:accessallgroups capability
                 // and
                 //      mod/wiki:viewpage capability
                 $view = has_capability('mod/wiki:viewpage', $context);
                 $manage = has_capability('mod/wiki:managewiki', $context);
-                $access = has_capability('moodle/site:accessallgroups', $context);
+                $access = has_capability('powereduc/site:accessallgroups', $context);
                 return ($manage || $access) && $view;
             }
         } else {
@@ -918,11 +918,11 @@ function wiki_user_can_edit($subwiki) {
                 // User must have:
                 //      mod/wiki:managewiki capability
                 // and
-                //      moodle/site:accessallgroups capability
+                //      powereduc/site:accessallgroups capability
                 // and
                 //      mod/wiki:editpage capability
                 $manage = has_capability('mod/wiki:managewiki', $context);
-                $access = has_capability('moodle/site:accessallgroups', $context);
+                $access = has_capability('powereduc/site:accessallgroups', $context);
                 $edit = has_capability('mod/wiki:editpage', $context);
                 return $manage && $access && $edit;
             }
@@ -937,11 +937,11 @@ function wiki_user_can_edit($subwiki) {
                 // User must have:
                 //      mod/wiki:managewiki capability
                 // and
-                //      moodle/site:accessallgroups capability
+                //      powereduc/site:accessallgroups capability
                 // and
                 //      mod/wiki:editpage capability
                 $manage = has_capability('mod/wiki:managewiki', $context);
-                $access = has_capability('moodle/site:accessallgroups', $context);
+                $access = has_capability('powereduc/site:accessallgroups', $context);
                 $edit = has_capability('mod/wiki:editpage', $context);
                 return $manage && $access && $edit;
             }
@@ -1429,7 +1429,7 @@ function wiki_print_edit_form_default_fields($format, $pageid, $version = -1, $u
     //attachments
     require_once($CFG->dirroot . '/lib/form/filemanager.php');
 
-    $filemanager = new MoodleQuickForm_filemanager('attachments', get_string('wikiattachments', 'wiki'), array('id' => 'attachments'), array('subdirs' => false, 'maxfiles' => 99, 'maxbytes' => $CFG->maxbytes));
+    $filemanager = new PowerEducQuickForm_filemanager('attachments', get_string('wikiattachments', 'wiki'), array('id' => 'attachments'), array('subdirs' => false, 'maxfiles' => 99, 'maxbytes' => $CFG->maxbytes));
 
     $value = file_get_submitted_draft_itemid('attachments');
     if (!empty($value) && !$upload) {
@@ -1517,7 +1517,7 @@ function wiki_build_tree($page, $node, &$keys) {
         }
         array_push($keys, $key);
         $l = wiki_parser_link($p);
-        $link = new moodle_url('/mod/wiki/view.php', array('pageid' => $p->id));
+        $link = new powereduc_url('/mod/wiki/view.php', array('pageid' => $p->id));
         // navigation_node::get_content will format the title for us
         $nodeaux = $node->add($p->title, $link, null, null, null, $icon);
         if ($l['new']) {
@@ -1563,7 +1563,7 @@ function wiki_get_updated_pages_by_subwiki($swid) {
  * @param context $context Wiki's context.
  * @param integer|stdClass $user A user id or object. By default (null) checks the permissions of the current user.
  * @return bool True if user can create pages, false otherwise.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function wiki_can_create_pages($context, $user = null) {
     return has_capability('mod/wiki:createpage', $context, $user);
@@ -1577,7 +1577,7 @@ function wiki_can_create_pages($context, $user = null) {
  * @param int $groupid Group ID.
  * @param int $userid  User ID.
  * @return object      Subwiki instance.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function wiki_get_possible_subwiki_by_group($wikiid, $groupid, $userid = 0) {
     if (!$subwiki = wiki_get_subwiki_by_group($wikiid, $groupid, $userid)) {
@@ -1598,7 +1598,7 @@ function wiki_get_possible_subwiki_by_group($wikiid, $groupid, $userid = 0) {
  * @param  cm_info|stdClass $cm    Optional. The course module object.
  * @param  context_module $context Optional. Context of wiki module.
  * @return array                   List of subwikis.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function wiki_get_visible_subwikis($wiki, $cm = null, $context = null) {
     global $USER;
@@ -1644,7 +1644,7 @@ function wiki_get_visible_subwikis($wiki, $cm = null, $context = null) {
     } else {
         if ($wiki->wikimode == 'collaborative') {
             // 1 subwiki per group.
-            $aag = has_capability('moodle/site:accessallgroups', $context);
+            $aag = has_capability('powereduc/site:accessallgroups', $context);
             if ($aag || $groupmode == VISIBLEGROUPS) {
                 // User can see all groups.
                 $allowedgroups = groups_get_all_groups($cm->course, 0, $cm->groupingid);
@@ -1702,8 +1702,8 @@ function wiki_get_visible_subwikis($wiki, $cm = null, $context = null) {
  * @param int $userid User ID. 0 means the subwiki doesn't use users.
  * @return stdClass Subwiki. If it doesn't exists in DB yet it'll have id -1. If the user can't view the
  *                  subwiki this function will return false.
- * @since  Moodle 3.1
- * @throws moodle_exception
+ * @since  PowerEduc 3.1
+ * @throws powereduc_exception
  */
 function wiki_get_subwiki_by_group_and_user_with_validation($wiki, $groupid, $userid) {
     global $USER, $DB;
@@ -1720,7 +1720,7 @@ function wiki_get_subwiki_by_group_and_user_with_validation($wiki, $groupid, $us
 
         // Validate that groupid is valid.
         if ($groupid != 0 && !groups_group_exists($groupid)) {
-            throw new moodle_exception('cannotfindgroup', 'error');
+            throw new powereduc_exception('cannotfindgroup', 'error');
         }
 
         // Valid data but subwiki not found. We'll simulate a subwiki object to check if the user would be able to see it
@@ -1837,7 +1837,7 @@ function mod_wiki_get_tagged_pages($tag, $exclusivemode = false, $fromctx = 0, $
             context_helper::preload_from_record($item);
             $modinfo = get_fast_modinfo($item->courseid);
             $cm = $modinfo->get_cm($item->cmid);
-            $pageurl = new moodle_url('/mod/wiki/view.php', array('pageid' => $item->id));
+            $pageurl = new powereduc_url('/mod/wiki/view.php', array('pageid' => $item->id));
             $pagename = format_string($item->title, true, array('context' => context_module::instance($item->cmid)));
             $pagename = html_writer::link($pageurl, $pagename);
             $courseurl = course_get_url($item->courseid, $cm->sectionnum);

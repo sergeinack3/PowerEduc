@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -25,7 +25,7 @@ use core_reportbuilder\local\helpers\database;
  * Column group concatenation distinct aggregation type
  *
  * @package     core_reportbuilder
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class groupconcatdistinct extends groupconcat {
@@ -70,7 +70,7 @@ class groupconcatdistinct extends groupconcat {
         $fieldsort = database::sql_group_concat_sort($field);
 
         // Postgres handles group concatenation differently in that it requires the expression to be cast to char, so we can't
-        // simply pass "DISTINCT {$field}" to the {@see \moodle_database::sql_group_concat} method in all cases.
+        // simply pass "DISTINCT {$field}" to the {@see \powereduc_database::sql_group_concat} method in all cases.
         if ($DB->get_dbfamily() === 'postgres') {
             $field = $DB->sql_cast_to_char($field);
             if ($fieldsort !== '') {

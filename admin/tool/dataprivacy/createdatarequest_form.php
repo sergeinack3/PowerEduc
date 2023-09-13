@@ -26,7 +26,7 @@ use tool_dataprivacy\api;
 use tool_dataprivacy\data_request;
 use tool_dataprivacy\local\helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/formslib.php');
 

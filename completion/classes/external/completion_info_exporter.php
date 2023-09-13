@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace core_completion\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use renderer_base;
 

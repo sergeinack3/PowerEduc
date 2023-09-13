@@ -25,7 +25,7 @@ namespace enrol_lti\privacy;
 
 use enrol_lti\privacy\provider;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider tests class.

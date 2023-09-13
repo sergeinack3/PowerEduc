@@ -30,7 +30,7 @@ namespace tool_dataprivacy;
 use coding_exception;
 use core\persistent;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Data registry business logic methods. Mostly internal stuff.

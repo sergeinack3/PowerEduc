@@ -24,7 +24,7 @@
 
 namespace core\analytics\time_splitting;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * 10 parts time splitting method.

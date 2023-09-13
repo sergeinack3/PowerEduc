@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 namespace core_message\search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Search area for sent messages.
@@ -39,7 +39,7 @@ class message_sent extends base_message {
      *
      * @param int $modifiedfrom
      * @param \context|null $context Optional context to restrict scope of returned results
-     * @return moodle_recordset|null Recordset (or null if no results)
+     * @return powereduc_recordset|null Recordset (or null if no results)
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         return $this->get_document_recordset_helper($modifiedfrom, $context, 'useridfrom');

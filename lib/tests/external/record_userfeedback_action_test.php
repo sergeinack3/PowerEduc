@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
  *
  * @package    core
  * @category   test
- * @copyright  2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use externallib_advanced_testcase;
 use context_system;
@@ -37,7 +37,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
 /**
  * Class record_userfeedback_action_testcase
  *
- * @copyright  2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \core\external\record_userfeedback_action
  */

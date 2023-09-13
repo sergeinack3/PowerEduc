@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    mod_data
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 2.9
  */
@@ -33,7 +33,7 @@ $functions = array(
             no courses are provided then all the database instances the user has access to will be returned.',
         'type' => 'read',
         'capabilities' => 'mod/data:viewentry',
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_view_database' => array(
         'classname'     => 'mod_data_external',
@@ -41,7 +41,7 @@ $functions = array(
         'description'   => 'Simulate the view.php web interface data: trigger events, completion, etc...',
         'type'          => 'write',
         'capabilities'  => 'mod/data:viewentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_get_data_access_information' => array(
         'classname'     => 'mod_data_external',
@@ -49,7 +49,7 @@ $functions = array(
         'description'   => 'Return access information for a given database.',
         'type'          => 'read',
         'capabilities'  => 'mod/data:viewentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_get_entries' => array(
         'classname'     => 'mod_data_external',
@@ -57,7 +57,7 @@ $functions = array(
         'description'   => 'Return the complete list of entries of the given database.',
         'type'          => 'read',
         'capabilities'  => 'mod/data:viewentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_get_entry' => array(
         'classname'     => 'mod_data_external',
@@ -65,7 +65,7 @@ $functions = array(
         'description'   => 'Return one entry record from the database, including contents optionally.',
         'type'          => 'read',
         'capabilities'  => 'mod/data:viewentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_get_fields' => array(
         'classname'     => 'mod_data_external',
@@ -73,7 +73,7 @@ $functions = array(
         'description'   => 'Return the list of configured fields for the given database.',
         'type'          => 'read',
         'capabilities'  => 'mod/data:viewentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_search_entries' => array(
         'classname'     => 'mod_data_external',
@@ -81,7 +81,7 @@ $functions = array(
         'description'   => 'Search for entries in the given database.',
         'type'          => 'read',
         'capabilities'  => 'mod/data:viewentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_approve_entry' => array(
         'classname'     => 'mod_data_external',
@@ -89,7 +89,7 @@ $functions = array(
         'description'   => 'Approves or unapproves an entry.',
         'type'          => 'write',
         'capabilities'  => 'mod/data:approve',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_delete_entry' => array(
         'classname'     => 'mod_data_external',
@@ -97,7 +97,7 @@ $functions = array(
         'description'   => 'Deletes an entry.',
         'type'          => 'write',
         'capabilities'  => 'mod/data:manageentries',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_add_entry' => array(
         'classname'     => 'mod_data_external',
@@ -105,7 +105,7 @@ $functions = array(
         'description'   => 'Adds a new entry.',
         'type'          => 'write',
         'capabilities'  => 'mod/data:writeentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_update_entry' => array(
         'classname'     => 'mod_data_external',
@@ -113,7 +113,7 @@ $functions = array(
         'description'   => 'Updates an existing entry.',
         'type'          => 'write',
         'capabilities'  => 'mod/data:writeentry',
-        'services'      => array(MOODLE_OFFICIAL_MOBILE_SERVICE)
+        'services'      => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE)
     ),
     'mod_data_delete_saved_preset' => array(
         'classname'     => 'mod_data\external\delete_saved_preset',

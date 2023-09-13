@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Contains class used to return information to display for the message area.
  *
  * @package    core_message
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,14 +26,14 @@ namespace core_message;
 
 use core_favourites\local\entity\favourite;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/lib/messagelib.php');
 
 /**
  * Class used to return information to display for the message area.
  *
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api {
@@ -211,7 +211,7 @@ class api {
 
         // Check if messaging is enabled.
         if (empty($CFG->messaging)) {
-            throw new \moodle_exception('disabled', 'message');
+            throw new \powereduc_exception('disabled', 'message');
         }
 
         require_once($CFG->dirroot . '/user/lib.php');
@@ -467,7 +467,7 @@ class api {
      * @param bool $mergeself whether to include self-conversations (true) or ONLY private conversations (false)
      *             when private conversations are requested.
      * @return array the array of conversations
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function get_conversations($userid, $limitfrom = 0, $limitnum = 20, int $type = null,
             bool $favourites = null, bool $mergeself = false) {
@@ -475,7 +475,7 @@ class api {
 
         if (!is_null($type) && !in_array($type, [self::MESSAGE_CONVERSATION_TYPE_INDIVIDUAL,
                 self::MESSAGE_CONVERSATION_TYPE_GROUP, self::MESSAGE_CONVERSATION_TYPE_SELF])) {
-            throw new \moodle_exception("Invalid value ($type) for type param, please see api constants.");
+            throw new \powereduc_exception("Invalid value ($type) for type param, please see api constants.");
         }
 
         self::lazy_create_self_conversation($userid);
@@ -775,7 +775,7 @@ class api {
             // Add the most recent message information.
             $conv->messages = [];
             // Add if the user has to allow delete messages for all users in the conversation.
-            $conv->candeletemessagesforallusers = has_capability('moodle/site:deleteanymessage',  $contexttodeletemessageforall);
+            $conv->candeletemessagesforallusers = has_capability('powereduc/site:deleteanymessage',  $contexttodeletemessageforall);
             if ($conversation->smallmessage) {
                 $msg = new \stdClass();
                 $msg->id = $conversation->messageid;
@@ -853,9 +853,9 @@ class api {
         global $USER, $DB;
 
         $systemcontext = \context_system::instance();
-        $canreadallmessages = has_capability('moodle/site:readallmessages', $systemcontext);
+        $canreadallmessages = has_capability('powereduc/site:readallmessages', $systemcontext);
         if (($USER->id != $userid) && !$canreadallmessages) {
-            throw new \moodle_exception('You do not have permission to perform this action.');
+            throw new \powereduc_exception('You do not have permission to perform this action.');
         }
 
         $conversation = $DB->get_record('message_conversations', ['id' => $conversationid]);
@@ -878,7 +878,7 @@ class api {
         );
 
         if (!$isconversationmember && !$canreadallmessages) {
-            throw new \moodle_exception('You do not have permission to view this conversation.');
+            throw new \powereduc_exception('You do not have permission to view this conversation.');
         }
 
         $members = self::get_conversation_members(
@@ -956,7 +956,7 @@ class api {
             'ismuted' => $ismuted,
             'members' => $members,
             'messages' => $messages['messages'],
-            'candeletemessagesforallusers' => has_capability('moodle/site:deleteanymessage', $deleteallcontext)
+            'candeletemessagesforallusers' => has_capability('powereduc/site:deleteanymessage', $deleteallcontext)
         ];
     }
 
@@ -966,13 +966,13 @@ class api {
      * @param int $conversationid the id of the conversation to mark as a favourite.
      * @param int $userid the id of the user to whom the favourite belongs.
      * @return favourite the favourite object.
-     * @throws \moodle_exception if the user or conversation don't exist.
+     * @throws \powereduc_exception if the user or conversation don't exist.
      */
     public static function set_favourite_conversation(int $conversationid, int $userid) : favourite {
         global $DB;
 
         if (!self::is_user_in_conversation($userid, $conversationid)) {
-            throw new \moodle_exception("Conversation doesn't exist or user is not a member");
+            throw new \powereduc_exception("Conversation doesn't exist or user is not a member");
         }
         // Get the context for this conversation.
         $conversation = $DB->get_record('message_conversations', ['id' => $conversationid]);
@@ -999,7 +999,7 @@ class api {
      *
      * @param int $conversationid the id of the conversation to unset as a favourite.
      * @param int $userid the id to whom the favourite belongs.
-     * @throws \moodle_exception if the favourite does not exist for the user.
+     * @throws \powereduc_exception if the favourite does not exist for the user.
      */
     public static function unset_favourite_conversation(int $conversationid, int $userid) {
         global $DB;
@@ -1250,7 +1250,7 @@ class api {
 
         $systemcontext = \context_system::instance();
 
-        if (has_capability('moodle/site:deleteanymessage', $systemcontext)) {
+        if (has_capability('powereduc/site:deleteanymessage', $systemcontext)) {
             return true;
         }
 
@@ -1258,7 +1258,7 @@ class api {
             return false;
         }
 
-        if (has_capability('moodle/site:deleteownmessage', $systemcontext) &&
+        if (has_capability('powereduc/site:deleteownmessage', $systemcontext) &&
                 $USER->id == $userid) {
             return true;
         }
@@ -1356,7 +1356,7 @@ class api {
 
         $systemcontext = \context_system::instance();
 
-        if (has_capability('moodle/site:readallmessages', $systemcontext)) {
+        if (has_capability('powereduc/site:readallmessages', $systemcontext)) {
             return true;
         }
 
@@ -1624,11 +1624,11 @@ class api {
     public static function can_send_message(int $recipientid, int $senderid, bool $evenifblocked = false) : bool {
         $systemcontext = \context_system::instance();
 
-        if (!has_capability('moodle/site:sendmessage', $systemcontext, $senderid)) {
+        if (!has_capability('powereduc/site:sendmessage', $systemcontext, $senderid)) {
             return false;
         }
 
-        if (has_capability('moodle/site:readallmessages', $systemcontext, $senderid)) {
+        if (has_capability('powereduc/site:readallmessages', $systemcontext, $senderid)) {
             return true;
         }
 
@@ -1643,13 +1643,13 @@ class api {
      * @param int $userid the id of the user on which the checks will be applied.
      * @param int $conversationid the id of the conversation we wish to check.
      * @return bool true if the user can send a message to the conversation, false otherwise.
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public static function can_send_message_to_conversation(int $userid, int $conversationid) : bool {
         global $DB;
 
         $systemcontext = \context_system::instance();
-        if (!has_capability('moodle/site:sendmessage', $systemcontext, $userid)) {
+        if (!has_capability('powereduc/site:sendmessage', $systemcontext, $userid)) {
             return false;
         }
 
@@ -1673,7 +1673,7 @@ class api {
 
             return self::can_contact_user($otheruser->id, $userid);
         } else {
-            throw new \moodle_exception("Invalid conversation type '$conversation->type'.");
+            throw new \powereduc_exception("Invalid conversation type '$conversation->type'.");
         }
     }
 
@@ -1689,19 +1689,19 @@ class api {
      * @param int $format the format of the message to send.
      * @return \stdClass the message created.
      * @throws \coding_exception
-     * @throws \moodle_exception if the user is not permitted to send a message to the conversation.
+     * @throws \powereduc_exception if the user is not permitted to send a message to the conversation.
      */
     public static function send_message_to_conversation(int $userid, int $conversationid, string $message,
                                                         int $format) : \stdClass {
         global $DB, $PAGE;
 
         if (!self::can_send_message_to_conversation($userid, $conversationid)) {
-            throw new \moodle_exception("User $userid cannot send a message to conversation $conversationid");
+            throw new \powereduc_exception("User $userid cannot send a message to conversation $conversationid");
         }
 
         $eventdata = new \core\message\message();
         $eventdata->courseid         = 1;
-        $eventdata->component        = 'moodle';
+        $eventdata->component        = 'powereduc';
         $eventdata->name             = 'instantmessage';
         $eventdata->userfrom         = \core_user::get_user($userid);
         $eventdata->convid           = $conversationid;
@@ -1759,7 +1759,7 @@ class api {
         $messageid = message_send($eventdata);
 
         if (!$messageid) {
-            throw new \moodle_exception('messageundeliveredbynotificationsettings', 'moodle');
+            throw new \powereduc_exception('messageundeliveredbynotificationsettings', 'powereduc');
         }
 
         $messagerecord = $DB->get_record('messages', ['id' => $messageid], 'id, useridfrom, fullmessage,
@@ -1922,7 +1922,7 @@ class api {
                 }
                 $processor->available = 1;
             } else {
-                throw new \moodle_exception('errorcallingprocessor', 'message');
+                throw new \powereduc_exception('errorcallingprocessor', 'message');
             }
         } else {
             $processor->available = 0;
@@ -2037,7 +2037,7 @@ class api {
 
         $conversationid = $DB->get_field('messages', 'conversationid', ['id' => $messageid], MUST_EXIST);
 
-        if (has_capability('moodle/site:deleteanymessage', $systemcontext)) {
+        if (has_capability('powereduc/site:deleteanymessage', $systemcontext)) {
             return true;
         }
 
@@ -2045,7 +2045,7 @@ class api {
             return false;
         }
 
-        if (has_capability('moodle/site:deleteownmessage', $systemcontext) &&
+        if (has_capability('powereduc/site:deleteownmessage', $systemcontext) &&
                 $USER->id == $userid) {
             return true;
         }
@@ -2173,20 +2173,20 @@ class api {
         ];
 
         if (!in_array($type, $validtypes)) {
-            throw new \moodle_exception('An invalid conversation type was specified.');
+            throw new \powereduc_exception('An invalid conversation type was specified.');
         }
 
         // Sanity check.
         if ($type == self::MESSAGE_CONVERSATION_TYPE_INDIVIDUAL) {
             if (count($userids) > 2) {
-                throw new \moodle_exception('An individual conversation can not have more than two users.');
+                throw new \powereduc_exception('An individual conversation can not have more than two users.');
             }
             if ($userids[0] == $userids[1]) {
-                throw new \moodle_exception('Trying to create an individual conversation instead of a self conversation.');
+                throw new \powereduc_exception('Trying to create an individual conversation instead of a self conversation.');
             }
         } else if ($type == self::MESSAGE_CONVERSATION_TYPE_SELF) {
             if (count($userids) != 1) {
-                throw new \moodle_exception('A self conversation can not have more than one user.');
+                throw new \powereduc_exception('A self conversation can not have more than one user.');
             }
         }
 
@@ -2245,7 +2245,7 @@ class api {
         }
 
         // We need to check they have the capability to create the conversation.
-        return has_capability('moodle/course:creategroupconversations', $context, $userid);
+        return has_capability('powereduc/course:creategroupconversations', $context, $userid);
     }
 
     /**
@@ -2293,7 +2293,7 @@ class api {
         $userfrom = \core_user::get_user($userid);
         $userfromfullname = fullname($userfrom);
         $userto = \core_user::get_user($requesteduserid);
-        $url = new \moodle_url('/message/index.php', ['view' => 'contactrequests']);
+        $url = new \powereduc_url('/message/index.php', ['view' => 'contactrequests']);
 
         $subject = get_string_manager()->get_string('messagecontactrequestsubject', 'core_message', (object) [
             'sitename' => format_string($SITE->fullname, true, ['context' => \context_system::instance()]),
@@ -2307,7 +2307,7 @@ class api {
 
         $message = new \core\message\message();
         $message->courseid = SITEID;
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'messagecontactrequests';
         $message->notification = 1;
         $message->userfrom = $userfrom;
@@ -2324,8 +2324,8 @@ class api {
         $message->customdata = [
             'notificationiconurl' => $userpicture->get_url($PAGE)->out(false),
             'actionbuttons' => [
-                'accept' => get_string_manager()->get_string('accept', 'moodle', null, $userto->lang),
-                'reject' => get_string_manager()->get_string('reject', 'moodle', null, $userto->lang),
+                'accept' => get_string_manager()->get_string('accept', 'powereduc', null, $userto->lang),
+                'reject' => get_string_manager()->get_string('reject', 'powereduc', null, $userto->lang),
             ],
         ];
 
@@ -2621,7 +2621,7 @@ class api {
      * @return bool true if recipient hasn't blocked sender and sender can contact to recipient, false otherwise.
      */
     protected static function can_contact_user(int $recipientid, int $senderid, bool $evenifblocked = false) : bool {
-        if (has_capability('moodle/site:messageanyuser', \context_system::instance(), $senderid) ||
+        if (has_capability('powereduc/site:messageanyuser', \context_system::instance(), $senderid) ||
             $recipientid == $senderid) {
             // The sender has the ability to contact any user across the entire site or themselves.
             return true;
@@ -2675,7 +2675,7 @@ class api {
 
             foreach ($sharedcourses as $course) {
                 // Note: enrol_get_shared_courses will preload any shared context.
-                if (has_capability('moodle/site:messageanyuser', \context_course::instance($course->id), $senderid)) {
+                if (has_capability('powereduc/site:messageanyuser', \context_course::instance($course->id), $senderid)) {
                     $cancontact = true;
                     break;
                 }
@@ -2692,7 +2692,7 @@ class api {
      * @param int $convid The conversation id. Must exists.
      * @throws \dml_missing_record_exception If convid conversation doesn't exist
      * @throws \dml_exception If there is a database error
-     * @throws \moodle_exception If trying to add a member(s) to a non-group conversation
+     * @throws \powereduc_exception If trying to add a member(s) to a non-group conversation
      */
     public static function add_members_to_conversation(array $userids, int $convid) {
         global $DB;
@@ -2701,7 +2701,7 @@ class api {
 
         // We can only add members to a group conversation.
         if ($conversation->type != self::MESSAGE_CONVERSATION_TYPE_GROUP) {
-            throw new \moodle_exception('You can not add members to a non-group conversation.');
+            throw new \powereduc_exception('You can not add members to a non-group conversation.');
         }
 
         // Be sure we are not trying to add a non existing user to the conversation. Work only with existing users.
@@ -2733,7 +2733,7 @@ class api {
      * @param array $userids The user ids to remove from conversation members.
      * @param int $convid The conversation id. Must exists.
      * @throws \dml_exception
-     * @throws \moodle_exception If trying to remove a member(s) from a non-group conversation
+     * @throws \powereduc_exception If trying to remove a member(s) from a non-group conversation
      */
     public static function remove_members_from_conversation(array $userids, int $convid) {
         global $DB;
@@ -2741,7 +2741,7 @@ class api {
         $conversation = $DB->get_record('message_conversations', ['id' => $convid], '*', MUST_EXIST);
 
         if ($conversation->type != self::MESSAGE_CONVERSATION_TYPE_GROUP) {
-            throw new \moodle_exception('You can not remove members from a non-group conversation.');
+            throw new \powereduc_exception('You can not remove members from a non-group conversation.');
         }
 
         list($useridcondition, $params) = $DB->get_in_or_equal($userids, SQL_PARAMS_NAMED);
@@ -3046,11 +3046,11 @@ class api {
         $conversation = $DB->get_record_sql($sql, ['messageid' => $messageid]);
 
         if (!empty($conversation->contextid)) {
-            return has_capability('moodle/site:deleteanymessage',
+            return has_capability('powereduc/site:deleteanymessage',
                 \context::instance_by_id($conversation->contextid), $userid);
         }
 
-        return has_capability('moodle/site:deleteanymessage', \context_system::instance(), $userid);
+        return has_capability('powereduc/site:deleteanymessage', \context_system::instance(), $userid);
     }
     /**
      * Delete a message for all users.

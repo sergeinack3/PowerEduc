@@ -9,7 +9,7 @@ Feature: To be able to see and save user message preferences as admin
       | student1 | Student   | 1        | student1@emample.com |
     And the following "user preferences" exist:
       | user      | preference                                        | value |
-      | student1  | message_provider_moodle_instantmessage_enabled    | email |
+      | student1  | message_provider_powereduc_instantmessage_enabled    | email |
 
   @javascript
   Scenario: As an admin I can view and edit message preferences for a user

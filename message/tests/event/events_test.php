@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
  *
  * @package core_message
  * @category test
- * @copyright 2014 Mark Nelson <markn@moodle.com>
+ * @copyright 2014 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_message\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -36,7 +36,7 @@ require_once($CFG->dirroot . '/message/tests/messagelib_test.php');
  *
  * @package core_message
  * @category test
- * @copyright 2014 Mark Nelson <markn@moodle.com>
+ * @copyright 2014 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class events_test extends \core_message\messagelib_test {
@@ -74,7 +74,7 @@ class events_test extends \core_message\messagelib_test {
         $expected = array(SITEID, 'message', 'add contact', 'index.php?user1=' . $user->id .
             '&amp;user2=2', $user->id);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
+        $url = new \powereduc_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -105,7 +105,7 @@ class events_test extends \core_message\messagelib_test {
         $expected = array(SITEID, 'message', 'remove contact', 'index.php?user1=' . $user->id .
             '&amp;user2=2', $user->id);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
+        $url = new \powereduc_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -197,7 +197,7 @@ class events_test extends \core_message\messagelib_test {
         $this->assertEquals(\context_system::instance(), $event->get_context());
         $expected = array(SITEID, 'message', 'write', 'index.php?user=1&id=2&history=1#m3', 1);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
+        $url = new \powereduc_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals(3, $event->objectid);
         $this->assertEquals(4, $event->other['courseid']);
@@ -234,7 +234,7 @@ class events_test extends \core_message\messagelib_test {
         $this->assertEquals(\context_system::instance(), $event->get_context());
         $expected = array(SITEID, 'message', 'write', 'index.php?user=1&id=2&history=1#m3', 1);
         $this->assertEventLegacyLogData($expected, $event);
-        $url = new \moodle_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
+        $url = new \powereduc_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals(3, $event->objectid);
         $this->assertEquals(4, $event->other['courseid']);
@@ -267,7 +267,7 @@ class events_test extends \core_message\messagelib_test {
         // Check that the event data is valid.
         $this->assertInstanceOf('\core\event\group_message_sent', $event);
         $this->assertEquals(\context_system::instance(), $event->get_context());
-        $url = new \moodle_url('/message/index.php');
+        $url = new \powereduc_url('/message/index.php');
         $this->assertEquals($url, $event->get_url());
         $this->assertEquals(3, $event->objectid);
         $this->assertEquals(4, $event->other['courseid']);
@@ -328,7 +328,7 @@ class events_test extends \core_message\messagelib_test {
         // Check that the event data is valid.
         $this->assertInstanceOf('\core\event\group_message_sent', $event);
         $this->assertEquals(\context_system::instance(), $event->get_context());
-        $this->assertEquals(new \moodle_url('/message/index.php'), $event->get_url());
+        $this->assertEquals(new \powereduc_url('/message/index.php'), $event->get_url());
         $this->assertEquals(1, $event->userid);
         $this->assertEquals(2, $event->other['conversationid']);
         $this->assertEquals(3, $event->objectid);
@@ -363,7 +363,7 @@ class events_test extends \core_message\messagelib_test {
         $this->assertEquals(\context_user::instance($user1->id), $event->get_context());
         $this->assertEquals($mua->id, $event->objectid);
         $this->assertEquals($messageid, $event->other['messageid']);
-        $url = new \moodle_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
+        $url = new \powereduc_url('/message/index.php', array('user1' => $event->userid, 'user2' => $event->relateduserid));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -524,7 +524,7 @@ class events_test extends \core_message\messagelib_test {
         $this->assertEquals($user2->id, $event->relateduserid);
         $this->assertEquals(\context_system::instance(), $event->get_context());
         $this->assertEquals($course->id, $event->other['courseid']);
-        $url = new \moodle_url('/message/output/popup/notifications.php', array('notificationid' => $event->objectid));
+        $url = new \powereduc_url('/message/output/popup/notifications.php', array('notificationid' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -571,7 +571,7 @@ class events_test extends \core_message\messagelib_test {
         $this->assertEquals($user2->id, $event->userid);
         $this->assertEquals($user1->id, $event->relateduserid);
         $this->assertEquals(\context_user::instance($user2->id), $event->get_context());
-        $url = new \moodle_url('/message/output/popup/notifications.php', array('notificationid' => $event->objectid));
+        $url = new \powereduc_url('/message/output/popup/notifications.php', array('notificationid' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
     }
 }

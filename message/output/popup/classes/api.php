@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,18 +18,18 @@
  * Contains class used to return information to display for the message popup.
  *
  * @package    message_popup
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace message_popup;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class used to return information to display for the message popup.
  *
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class api {
@@ -41,7 +41,7 @@ class api {
      * @param int $limit limit the number of result returned
      * @param int $offset offset the result set by this amount
      * @return array notification records
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @since 3.2
      */
     public static function get_popup_notifications($useridto = 0, $sort = 'DESC', $limit = 0, $offset = 0) {
@@ -49,7 +49,7 @@ class api {
 
         $sort = strtoupper($sort);
         if ($sort != 'DESC' && $sort != 'ASC') {
-            throw new \moodle_exception('invalid parameter: sort: must be "DESC" or "ASC"');
+            throw new \powereduc_exception('invalid parameter: sort: must be "DESC" or "ASC"');
         }
 
         if (empty($useridto)) {

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Table log for displaying logs.
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Table log class for displaying logs.
@@ -91,7 +91,7 @@ class report_log_table_log extends table_sql {
     /**
      * Generate the course column.
      *
-     * @deprecated since Moodle 2.9 MDL-48595 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.9 MDL-48595 - please do not use this function any more.
      */
     public function col_course($event) {
         throw new coding_exception('col_course() can not be used any more, there is no such column.');
@@ -103,7 +103,7 @@ class report_log_table_log extends table_sql {
      * This function is useful because, in the unlikely case that the user is
      * not already loaded in $this->userfullnames it will fetch it from db.
      *
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      * @param int $userid
      * @return string|false
      */
@@ -127,7 +127,7 @@ class report_log_table_log extends table_sql {
         $userfieldsapi = \core_user\fields::for_name();
         $fields = $userfieldsapi->get_sql('', false, '', '', false)->selects;
         if ($user = \core_user::get_user($userid, $fields)) {
-            $this->userfullnames[$userid] = fullname($user, has_capability('moodle/site:viewfullnames', $this->get_context()));
+            $this->userfullnames[$userid] = fullname($user, has_capability('powereduc/site:viewfullnames', $this->get_context()));
         } else {
             $this->userfullnames[$userid] = false;
         }
@@ -175,9 +175,9 @@ class report_log_table_log extends table_sql {
                 if ($event->courseid) {
                     $params['course'] = $event->courseid;
                 }
-                $a->realusername = html_writer::link(new moodle_url('/user/view.php', $params), $a->realusername);
+                $a->realusername = html_writer::link(new powereduc_url('/user/view.php', $params), $a->realusername);
                 $params['id'] = $event->userid;
-                $a->asusername = html_writer::link(new moodle_url('/user/view.php', $params), $a->asusername);
+                $a->asusername = html_writer::link(new powereduc_url('/user/view.php', $params), $a->asusername);
             }
             $username = get_string('eventloggedas', 'report_log', $a);
 
@@ -187,7 +187,7 @@ class report_log_table_log extends table_sql {
                 if ($event->courseid) {
                     $params['course'] = $event->courseid;
                 }
-                $username = html_writer::link(new moodle_url('/user/view.php', $params), $username);
+                $username = html_writer::link(new powereduc_url('/user/view.php', $params), $username);
             }
         } else {
             $username = '-';
@@ -209,7 +209,7 @@ class report_log_table_log extends table_sql {
                 if ($event->courseid) {
                     $params['course'] = $event->courseid;
                 }
-                $username = html_writer::link(new moodle_url('/user/view.php', $params), $username);
+                $username = html_writer::link(new powereduc_url('/user/view.php', $params), $username);
             }
         } else {
             $username = '-';
@@ -324,7 +324,7 @@ class report_log_table_log extends table_sql {
         $ip = $logextra['ip'];
 
         if (empty($this->download)) {
-            $url = new moodle_url("/iplookup/index.php?ip={$ip}&user={$event->userid}");
+            $url = new powereduc_url("/iplookup/index.php?ip={$ip}&user={$event->userid}");
             $ip = $this->action_link($url, $ip, 'ip');
         }
         return $ip;
@@ -333,13 +333,13 @@ class report_log_table_log extends table_sql {
     /**
      * Method to create a link with popup action.
      *
-     * @param moodle_url $url The url to open.
+     * @param powereduc_url $url The url to open.
      * @param string $text Anchor text for the link.
      * @param string $name Name of the popup window.
      *
      * @return string html to use.
      */
-    protected function action_link(moodle_url $url, $text, $name = 'popup') {
+    protected function action_link(powereduc_url $url, $text, $name = 'popup') {
         global $OUTPUT;
         $link = new action_link($url, $text, new popup_action('click', $url, $name, array('height' => 440, 'width' => 700)));
         return $OUTPUT->render($link);
@@ -510,7 +510,7 @@ class report_log_table_log extends table_sql {
             } else {
                 $context = context_course::instance($this->filterparams->courseid);
             }
-            if (!has_capability('moodle/site:viewanonymousevents', $context)) {
+            if (!has_capability('powereduc/site:viewanonymousevents', $context)) {
                 $joins[] = "anonymous = 0";
             }
         }
@@ -550,7 +550,7 @@ class report_log_table_log extends table_sql {
      * This will update $this->userfullnames and $this->courseshortnames array with userfullname and courseshortname (with link),
      * which will be used to render logs in table.
      *
-     * @deprecated since Moodle 2.9 MDL-48595 - please do not use this function any more.
+     * @deprecated since PowerEduc 2.9 MDL-48595 - please do not use this function any more.
      */
     public function update_users_and_courses_used() {
         throw new coding_exception('update_users_and_courses_used() can not be used any more, please use update_users_used() instead.');
@@ -562,7 +562,7 @@ class report_log_table_log extends table_sql {
      * This will update $this->userfullnames array with userfullname,
      * which will be used to render logs in table.
      *
-     * @since   Moodle 2.9
+     * @since   PowerEduc 2.9
      * @return  void
      */
     protected function update_users_used() {
@@ -595,7 +595,7 @@ class report_log_table_log extends table_sql {
                     " FROM {user} WHERE id " . $usql,
                     $uparams);
             foreach ($users as $userid => $user) {
-                $this->userfullnames[$userid] = fullname($user, has_capability('moodle/site:viewfullnames', $this->get_context()));
+                $this->userfullnames[$userid] = fullname($user, has_capability('powereduc/site:viewfullnames', $this->get_context()));
                 unset($userids[$userid]);
             }
 

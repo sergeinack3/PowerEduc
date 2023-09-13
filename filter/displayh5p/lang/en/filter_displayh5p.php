@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 $string['allowedsourceslist'] = 'Allowed sources';
 $string['allowedsourceslistdesc'] = 'A list of URLs from which users can embed H5P content. If none are specified, all URLs will remain as links and not be displayed as embedded H5P content.

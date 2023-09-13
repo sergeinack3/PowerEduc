@@ -24,7 +24,7 @@
 
 namespace fileconverter_unoconv\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider implementation for fileconverter_unoconv.

@@ -28,8 +28,8 @@ Feature: Add preconfigured tools via teacher interface
     And I expand all fieldsets
     Then the field "Tool URL" matches value "http://www.example.com/lti/provider.php"
     And the field "Secure tool URL" matches value "https://www.example.com/lti/provider.php"
-    And the field "Icon URL" matches value "http://download.moodle.org/unittest/test.jpg"
-    And the field "Secure icon URL" matches value "https://download.moodle.org/unittest/test.jpg"
+    And the field "Icon URL" matches value "http://download.powereduc.org/unittest/test.jpg"
+    And the field "Secure icon URL" matches value "https://download.powereduc.org/unittest/test.jpg"
 
   @javascript @_switch_window
   Scenario: Add a preconfigured tool from a cartridge
@@ -48,8 +48,8 @@ Feature: Add preconfigured tools via teacher interface
     And I follow "Edit preconfigured tool"
     And I switch to "edit_tool" window
     Then the field "Tool URL" matches value "http://www.example.com/lti/provider.php"
-    And the field "Icon URL" matches value "http://download.moodle.org/unittest/test.jpg"
-    And the field "Secure icon URL" matches value "https://download.moodle.org/unittest/test.jpg"
+    And the field "Icon URL" matches value "http://download.powereduc.org/unittest/test.jpg"
+    And the field "Secure icon URL" matches value "https://download.powereduc.org/unittest/test.jpg"
     And I press "Cancel"
     And I switch to the main window
     And I press "Save and return to course"

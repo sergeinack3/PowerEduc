@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ use core_message\tests\helper as testhelper;
 use core_message_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -333,7 +333,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Unset the required capabilities by the external function.
         $contextid = \context_system::instance()->id;
         $userrole = $DB->get_record('role', array('shortname' => 'user'));
-        $this->unassignUserCapability('moodle/site:sendmessage', $contextid, $userrole->id);
+        $this->unassignUserCapability('powereduc/site:sendmessage', $contextid, $userrole->id);
 
         // Create test message data.
         $message1 = array();
@@ -372,7 +372,7 @@ class externallib_test extends externallib_advanced_testcase {
         $message1['clientmsgid'] = 4;
         $messages = array($message1);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::send_instant_messages($messages);
     }
 
@@ -536,7 +536,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_contact_requests($user1->id);
     }
 
@@ -655,7 +655,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_received_contact_requests_count($user1->id);
     }
 
@@ -735,7 +735,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::create_contact_request($user1->id, $user2->id);
     }
 
@@ -808,7 +808,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::confirm_contact_request($user1->id, $user2->id);
     }
 
@@ -873,7 +873,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::decline_contact_request($user1->id, $user2->id);
     }
 
@@ -952,7 +952,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::mute_conversations($user1->id, [$conversation->id]);
     }
 
@@ -1032,7 +1032,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::unmute_conversations($user1->id, [$user2->id]);
     }
 
@@ -1103,7 +1103,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         $authenticateduser = $DB->get_record('role', array('shortname' => 'user'));
-        assign_capability('moodle/site:messageanyuser', CAP_ALLOW, $authenticateduser->id, \context_system::instance(), true);
+        assign_capability('powereduc/site:messageanyuser', CAP_ALLOW, $authenticateduser->id, \context_system::instance(), true);
 
         // Blocking a user.
         $return = core_message_external::block_user($user1->id, $user2->id);
@@ -1131,7 +1131,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::block_user($user1->id, $user2->id);
     }
 
@@ -1202,7 +1202,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::unblock_user($user1->id, $user2->id);
     }
 
@@ -1287,7 +1287,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($user5->id, $result['id']);
 
         // Empty query, will throw an exception.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $results = core_message_external::search_contacts('');
     }
 
@@ -1307,12 +1307,12 @@ class externallib_test extends externallib_advanced_testcase {
         $course = self::getDataGenerator()->create_course();
 
         // Send a message from one user to another.
-        $im1 = message_post_message($user1, $user2, 'some random text 1', FORMAT_MOODLE);
-        $im2 = message_post_message($user1, $user3, 'some random text 2', FORMAT_MOODLE);
-        $im3 = message_post_message($user2, $user3, 'some random text 3', FORMAT_MOODLE);
-        $im4 = message_post_message($user3, $user2, 'some random text 4', FORMAT_MOODLE);
-        $im5 = message_post_message($user3, $user1, 'some random text 5', FORMAT_MOODLE);
-        $im6 = message_post_message($user1, $user2, 'some random text 6', FORMAT_MOODLE);
+        $im1 = message_post_message($user1, $user2, 'some random text 1', FORMAT_POWEREDUC);
+        $im2 = message_post_message($user1, $user3, 'some random text 2', FORMAT_POWEREDUC);
+        $im3 = message_post_message($user2, $user3, 'some random text 3', FORMAT_POWEREDUC);
+        $im4 = message_post_message($user3, $user2, 'some random text 4', FORMAT_POWEREDUC);
+        $im5 = message_post_message($user3, $user1, 'some random text 5', FORMAT_POWEREDUC);
+        $im6 = message_post_message($user1, $user2, 'some random text 6', FORMAT_POWEREDUC);
 
         // Mark a message as read by user2.
         $message = $DB->get_record('messages', ['id' => $im6]);
@@ -1375,7 +1375,7 @@ class externallib_test extends externallib_advanced_testcase {
         $eventdata = new \core\message\message();
         $eventdata->courseid          = $course->id;
         $eventdata->notification      = 1;
-        $eventdata->modulename        = 'moodle';
+        $eventdata->modulename        = 'powereduc';
         $eventdata->component         = 'enrol_paypal';
         $eventdata->name              = 'paypal_enrolment';
         $eventdata->userfrom          = get_admin();
@@ -1402,7 +1402,7 @@ class externallib_test extends externallib_advanced_testcase {
         $message->fullmessagehtml   = markdown_to_html($message->fullmessage);
         $message->smallmessage      = $message->subject;
         $message->contexturlname    = $course->fullname;
-        $message->contexturl        = (string)new \moodle_url('/course/view.php', array('id' => $course->id));
+        $message->contexturl        = (string)new \powereduc_url('/course/view.php', array('id' => $course->id));
         message_send($message);
 
         $message = new \core\message\message();
@@ -1418,14 +1418,14 @@ class externallib_test extends externallib_advanced_testcase {
         $message->fullmessagehtml   = markdown_to_html($message->fullmessage);
         $message->smallmessage      = $message->subject;
         $message->contexturlname    = $course->fullname;
-        $message->contexturl        = (string)new \moodle_url('/course/view.php', array('id' => $course->id));
+        $message->contexturl        = (string)new \powereduc_url('/course/view.php', array('id' => $course->id));
         message_send($message);
 
         $userfrom = \core_user::get_noreply_user();
         $userfrom->maildisplay = true;
         $eventdata = new \core\message\message();
         $eventdata->courseid          = $course->id;
-        $eventdata->component         = 'moodle';
+        $eventdata->component         = 'powereduc';
         $eventdata->name              = 'badgecreatornotice';
         $eventdata->userfrom          = $userfrom;
         $eventdata->userto            = $user1;
@@ -1501,7 +1501,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $messages = core_message_external::get_messages(0, $user1->id, 'conversations', MESSAGE_GET_UNREAD, true, 0, 0);
             $this->fail('Exception expected due messaging disabled.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('disabled', $e->errorcode);
         }
 
@@ -1511,7 +1511,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $messages = core_message_external::get_messages(0, 0, 'conversations', MESSAGE_GET_UNREAD, true, 0, 0);
             $this->fail('Exception expected due invalid users.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('accessdenied', $e->errorcode);
         }
 
@@ -1519,7 +1519,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $messages = core_message_external::get_messages(2500, 0, 'conversations', MESSAGE_GET_UNREAD, true, 0, 0);
             $this->fail('Exception expected due invalid users.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invaliduser', $e->errorcode);
         }
 
@@ -1528,7 +1528,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $messages = core_message_external::get_messages(0, $user1->id, 'conversations', MESSAGE_GET_UNREAD, true, 0, 0);
             $this->fail('Exception expected due invalid user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('accessdenied', $e->errorcode);
         }
 
@@ -1784,10 +1784,10 @@ class externallib_test extends externallib_advanced_testcase {
         \core_message\api::add_contact($user1->id, $user3->id);
 
         // User user1 does not interchange messages with user3.
-        $m1to2 = message_post_message($user1, $user2, 'some random text 1', FORMAT_MOODLE);
-        $m2to3 = message_post_message($user2, $user3, 'some random text 3', FORMAT_MOODLE);
-        $m3to2 = message_post_message($user3, $user2, 'some random text 4', FORMAT_MOODLE);
-        $m3to4 = message_post_message($user3, $user4, 'some random text 4', FORMAT_MOODLE);
+        $m1to2 = message_post_message($user1, $user2, 'some random text 1', FORMAT_POWEREDUC);
+        $m2to3 = message_post_message($user2, $user3, 'some random text 3', FORMAT_POWEREDUC);
+        $m3to2 = message_post_message($user3, $user2, 'some random text 4', FORMAT_POWEREDUC);
+        $m3to4 = message_post_message($user3, $user4, 'some random text 4', FORMAT_POWEREDUC);
 
         // Retrieve all messages sent by user2 (they are currently unread).
         $lastmessages = message_get_messages($user1->id, $user2->id, 0, MESSAGE_GET_UNREAD);
@@ -1809,7 +1809,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $messageid = core_message_external::delete_message($m2to3, $user3->id, false);
             $this->fail('Exception expected due invalid messageid.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('You do not have permission to delete this message', $e->errorcode);
         }
 
@@ -1844,7 +1844,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $result = core_message_external::delete_message($m1to2, -1, false);
             $this->fail('Exception expected due invalid user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invaliduser', $e->errorcode);
         }
 
@@ -1853,7 +1853,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $result = core_message_external::delete_message($m1to2, $user2->id, false);
             $this->fail('Exception expected due invalid user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('userdeleted', $e->errorcode);
         }
 
@@ -1871,7 +1871,7 @@ class externallib_test extends externallib_advanced_testcase {
     public function test_mark_all_notifications_as_read_invalid_user_exception() {
         $this->resetAfterTest(true);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::mark_all_notifications_as_read(-2132131, 0);
     }
 
@@ -1882,7 +1882,7 @@ class externallib_test extends externallib_advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $this->setUser($user);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::mark_all_notifications_as_read($sender->id, 0);
     }
 
@@ -1892,7 +1892,7 @@ class externallib_test extends externallib_advanced_testcase {
         $sender = $this->getDataGenerator()->create_user();
 
         $this->setUser($sender);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::mark_all_notifications_as_read($sender->id, 99999);
     }
 
@@ -2019,7 +2019,7 @@ class externallib_test extends externallib_advanced_testcase {
         $otheruser = self::getDataGenerator()->create_user();
         $this->setUser($user);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $prefs = core_message_external::get_user_notification_preferences($otheruser->id);
     }
 
@@ -2352,7 +2352,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * Tests searching users as another user having the 'moodle/user:viewdetails' capability.
+     * Tests searching users as another user having the 'powereduc/user:viewdetails' capability.
      */
     public function test_message_search_users_with_cap() {
         $this->resetAfterTest();
@@ -2385,7 +2385,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Grant the authenticated user role the capability 'user:viewdetails' at site context.
         $authenticatedrole = $DB->get_record('role', ['shortname' => 'user'], '*', MUST_EXIST);
-        assign_capability('moodle/user:viewdetails', CAP_ALLOW, $authenticatedrole->id, \context_system::instance());
+        assign_capability('powereduc/user:viewdetails', CAP_ALLOW, $authenticatedrole->id, \context_system::instance());
 
         // Perform a search with $CFG->messagingallusers disabled.
         set_config('messagingallusers', 0);
@@ -2409,7 +2409,7 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * Tests searching users as another user without the 'moodle/user:viewdetails' capability.
+     * Tests searching users as another user without the 'powereduc/user:viewdetails' capability.
      */
     public function test_message_search_users_without_cap() {
         $this->resetAfterTest();
@@ -2422,7 +2422,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::message_search_users($user2->id, 'User');
         $this->assertDebuggingCalled();
     }
@@ -2443,7 +2443,7 @@ class externallib_test extends externallib_advanced_testcase {
         set_config('messaging', 0);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::message_search_users($user->id, 'User');
     }
 
@@ -2577,7 +2577,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::data_for_messagearea_search_messages($user2->id, 'Search');
     }
 
@@ -2599,7 +2599,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::data_for_messagearea_search_messages($user->id, 'Search');
     }
 
@@ -2748,7 +2748,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         // Perform the WS call and ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_user_contacts($user2->id);
     }
 
@@ -2770,7 +2770,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Perform the WS call and ensure we are shown that it is disabled.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_user_contacts($user->id);
     }
 
@@ -3010,7 +3010,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_conversation_messages($user2->id, $conversation->id);
     }
 
@@ -3064,7 +3064,7 @@ class externallib_test extends externallib_advanced_testcase {
         set_config('messaging', 0);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_conversation_messages($user1->id, $conversation->id);
     }
 
@@ -3086,7 +3086,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $conversationid = \core_message\api::get_conversation_between_users([$user1->id, $user2->id]);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::mark_all_conversation_messages_as_read(-2132131, $conversationid);
     }
 
@@ -3110,7 +3110,7 @@ class externallib_test extends externallib_advanced_testcase {
         $conversationid = \core_message\api::get_conversation_between_users([$user1->id, $user2->id]);
 
         // User 3 is not in the conversation.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::mark_all_conversation_messages_as_read($user3->id, $conversationid);
     }
 
@@ -3134,7 +3134,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Can't mark the messages as read for user 2.
         $this->setUser($user1);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::mark_all_conversation_messages_as_read($user2->id, $conversationid);
     }
 
@@ -3284,7 +3284,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_unread_conversations_count($user2->id);
     }
 
@@ -3419,7 +3419,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user3);
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::delete_conversations_by_id($user1->id, [$conversationid]);
     }
 
@@ -3451,7 +3451,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::delete_conversations_by_id($user1->id, [$conversationid]);
     }
 
@@ -3490,7 +3490,7 @@ class externallib_test extends externallib_advanced_testcase {
         set_config('messagingallusers', true);
 
         // Set a couple of preferences to test.
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'email', $user);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'email', $user);
         set_user_preference('message_blocknoncontacts', \core_message\api::MESSAGE_PRIVACY_SITE, $user);
 
         $prefs = core_message_external::get_user_message_preferences();
@@ -3505,7 +3505,7 @@ class externallib_test extends externallib_advanced_testcase {
         $found = false;
         foreach ($prefs['preferences']['components'] as $component) {
             foreach ($component['notifications'] as $prefdata) {
-                if ($prefdata['preferencekey'] != 'message_provider_moodle_instantmessage') {
+                if ($prefdata['preferencekey'] != 'message_provider_powereduc_instantmessage') {
                     continue;
                 }
                 foreach ($prefdata['processors'] as $processor) {
@@ -3529,7 +3529,7 @@ class externallib_test extends externallib_advanced_testcase {
         $otheruser = self::getDataGenerator()->create_user();
         $this->setUser($user);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $prefs = core_message_external::get_user_message_preferences($otheruser->id);
     }
 
@@ -3615,7 +3615,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Try to favourite conversation 1 for user 2, as user3.
         $conversation1 = \core_message\api::get_conversation_between_users([$user1->id, $user2->id]);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $result = core_message_external::set_favourite_conversations($user2->id, [$conversation1]);
     }
 
@@ -3644,7 +3644,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Try to favourite conversation 1 as user 3.
         $conversation1 = \core_message\api::get_conversation_between_users([$user1->id, $user2->id]);
         $conversation2 = \core_message\api::get_conversation_between_users([$user1->id, $user3->id]);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $result = core_message_external::set_favourite_conversations($user3->id, [$conversation1]);
     }
 
@@ -3658,7 +3658,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         // Try to favourite a non-existent conversation.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $result = core_message_external::set_favourite_conversations($user1->id, [0]);
     }
 
@@ -3739,7 +3739,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Try to unfavourite conversation 1 for user 2, as user3.
         $conversation1 = \core_message\api::get_conversation_between_users([$user1->id, $user2->id]);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $result = core_message_external::unset_favourite_conversations($user2->id, [$conversation1]);
     }
 
@@ -3753,7 +3753,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user1);
 
         // Try to unfavourite a non-existent conversation.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $result = core_message_external::unset_favourite_conversations($user1->id, [0]);
     }
 
@@ -4010,7 +4010,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertCount(4, $conversations);
 
         // Verify an exception is thrown if an unrecognized type is specified.
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         core_message_external::get_conversations($user1->id, 0, 20, 0);
     }
 
@@ -4450,7 +4450,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $CFG->messaging = 0;
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_conversation_members(1, 2);
     }
 
@@ -4465,7 +4465,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($user2);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_conversation_members($user1->id, 2);
     }
 
@@ -4665,7 +4665,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($user3);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::get_conversation_members($user3->id, $conversationid);
     }
 
@@ -4693,11 +4693,11 @@ class externallib_test extends externallib_advanced_testcase {
         $messages = [
             [
                 'text' => 'a message from user 1',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
             [
                 'text' => 'another message from user 1',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
         ];
         // Redirect messages.
@@ -4745,11 +4745,11 @@ class externallib_test extends externallib_advanced_testcase {
         $messages = [
             [
                 'text' => 'a message from user 1 to group conv',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
             [
                 'text' => 'another message from user 1 to group conv',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
         ];
         // Redirect messages.
@@ -4790,14 +4790,14 @@ class externallib_test extends externallib_advanced_testcase {
         $messages = [
             [
                 'text' => 'a message from user 1',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
             [
                 'text' => 'another message from user 1',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
         ];
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $writtenmessages = core_message_external::send_messages_to_conversation(0, $messages);
     }
 
@@ -4825,14 +4825,14 @@ class externallib_test extends externallib_advanced_testcase {
         $messages = [
             [
                 'text' => 'a message from user 1 to group conv',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
             [
                 'text' => 'another message from user 1 to group conv',
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
         ];
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $writtenmessages = core_message_external::send_messages_to_conversation($gc1->id, $messages);
     }
 
@@ -4860,11 +4860,11 @@ class externallib_test extends externallib_advanced_testcase {
         $messages = [
             [
                 'text' => str_repeat("M", \core_message\api::MESSAGE_MAX_LENGTH + 100),
-                'textformat' => FORMAT_MOODLE
+                'textformat' => FORMAT_POWEREDUC
             ],
         ];
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $writtenmessages = core_message_external::send_messages_to_conversation($gc2->id, $messages);
     }
 
@@ -4890,7 +4890,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->setUser($user1);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $conv = core_message_external::get_conversation($user1->id, $conversationid + 1);
         \external_api::clean_returnvalue(core_message_external::get_conversation_returns(), $conv);
     }
@@ -5697,7 +5697,7 @@ class externallib_test extends externallib_advanced_testcase {
         // User1 deletes the first message for all users of group conversation.
         // First, we have to allow user1 (Teacher) can delete messages for all users.
         $editingteacher = $DB->get_record('role', ['shortname' => 'editingteacher']);
-        assign_capability('moodle/site:deleteanymessage', CAP_ALLOW, $editingteacher->id, \context_system::instance());
+        assign_capability('powereduc/site:deleteanymessage', CAP_ALLOW, $editingteacher->id, \context_system::instance());
 
         $this->setUser($user1);
 
@@ -5745,7 +5745,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->messaging = 0;
 
         // Ensure an exception is thrown.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_message_external::delete_message_for_all_users($messageid, $user1->id);
     }
 
@@ -5764,7 +5764,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser($user2);
 
         // Try as user2 to delete a message for all users without permission to do it.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage('You do not have permission to delete this message for everyone.');
         core_message_external::delete_message_for_all_users($messageid, $user2->id);
     }
@@ -5785,14 +5785,14 @@ class externallib_test extends externallib_advanced_testcase {
 
         // First, we have to allow user1 (Teacher) can delete messages for all users.
         $editingteacher = $DB->get_record('role', ['shortname' => 'editingteacher']);
-        assign_capability('moodle/site:deleteanymessage', CAP_ALLOW, $editingteacher->id, \context_system::instance());
+        assign_capability('powereduc/site:deleteanymessage', CAP_ALLOW, $editingteacher->id, \context_system::instance());
 
         $this->setUser($user1);
 
         // Try as user1 to delete a private message for all users on individual conversation.
         // User1 should not delete message for all users in a private conversations despite being a teacher.
         // Because is a teacher in a course and not in a system context.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage('You do not have permission to delete this message for everyone.');
         core_message_external::delete_message_for_all_users($messageid, $user1->id);
     }

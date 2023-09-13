@@ -27,7 +27,7 @@ namespace tool_brickfield\local\tool;
 
 use tool_brickfield\accessibility;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 require_once($CFG->libdir . '/pdflib.php');
 
 /**

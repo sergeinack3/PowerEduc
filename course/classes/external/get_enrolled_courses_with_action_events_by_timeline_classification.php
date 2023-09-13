@@ -16,7 +16,7 @@
 
 namespace core_course\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context_user;
 use core_calendar_external;

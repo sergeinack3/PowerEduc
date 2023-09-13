@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_assign;
 
@@ -20,7 +20,7 @@ use core_user_external;
 use mod_assign_external;
 use mod_assign_testable_assign;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -50,7 +50,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $coursedata['idnumber'] = 'idnumbercourse';
         $coursedata['fullname'] = 'Lightwork Course';
         $coursedata['summary'] = 'Lightwork Course description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course = self::getDataGenerator()->create_course($coursedata);
 
         $assigndata['course'] = $course->id;
@@ -66,7 +66,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
 
         // Create a teacher and give them capabilities.
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/course:viewparticipants', $context->id, 3);
+        $roleid = $this->assignUserCapability('powereduc/course:viewparticipants', $context->id, 3);
         $context = \context_module::instance($assign->cmid);
         $this->assignUserCapability('mod/assign:viewgrades', $context->id, $roleid);
 
@@ -164,7 +164,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
             'fullname' => '<b>Lightwork Course 1</b>',      // Adding tags here to check that external_format_string works.
             'shortname' => '<b>Lightwork Course 1</b>',     // Adding tags here to check that external_format_string works.
             'summary' => 'Lightwork Course 1 description',
-            'summaryformat' => FORMAT_MOODLE,
+            'summaryformat' => FORMAT_POWEREDUC,
             'category' => $category->id
         ));
 
@@ -173,7 +173,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
             'idnumber' => 'idnumbercourse2',
             'fullname' => 'Lightwork Course 2',
             'summary' => 'Lightwork Course 2 description',
-            'summaryformat' => FORMAT_MOODLE,
+            'summaryformat' => FORMAT_POWEREDUC,
             'category' => $category->id
         ));
 
@@ -207,7 +207,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
 
         // Create the user and give them capabilities.
         $context = \context_course::instance($course1->id);
-        $roleid = $this->assignUserCapability('moodle/course:view', $context->id);
+        $roleid = $this->assignUserCapability('powereduc/course:view', $context->id);
         $context = \context_module::instance($assign1->cmid);
         $this->assignUserCapability('mod/assign:view', $context->id, $roleid);
 
@@ -460,7 +460,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $coursedata['idnumber'] = 'idnumbercourse1';
         $coursedata['fullname'] = 'Lightwork Course 1';
         $coursedata['summary'] = 'Lightwork Course 1 description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course1 = self::getDataGenerator()->create_course($coursedata);
 
         $assigndata['course'] = $course1->id;
@@ -686,7 +686,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $coursedata['idnumber'] = 'idnumbercourse';
         $coursedata['fullname'] = 'Lightwork Course';
         $coursedata['summary'] = 'Lightwork Course description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course = self::getDataGenerator()->create_course($coursedata);
 
         $assigndata['course'] = $course->id;
@@ -702,7 +702,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
 
         // Create a teacher and give them capabilities.
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/course:viewparticipants', $context->id, 3);
+        $roleid = $this->assignUserCapability('powereduc/course:viewparticipants', $context->id, 3);
         $context = \context_module::instance($assign->cmid);
         $this->assignUserCapability('mod/assign:grade', $context->id, $roleid);
 
@@ -757,7 +757,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $coursedata['idnumber'] = 'idnumbercourse';
         $coursedata['fullname'] = 'Lightwork Course';
         $coursedata['summary'] = 'Lightwork Course description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course = self::getDataGenerator()->create_course($coursedata);
 
         $assigndata['course'] = $course->id;
@@ -773,7 +773,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
 
         // Create a teacher and give them capabilities.
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/course:viewparticipants', $context->id, 3);
+        $roleid = $this->assignUserCapability('powereduc/course:viewparticipants', $context->id, 3);
         $context = \context_module::instance($assign->cmid);
         $this->assignUserCapability('mod/assign:revealidentities', $context->id, $roleid);
 
@@ -843,7 +843,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -862,9 +862,9 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $notices = array();
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $assign->save_submission($data, $notices);
     }
 
@@ -904,7 +904,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -929,7 +929,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $notices = array();
         $assign->save_submission($data, $notices);
     }
@@ -969,7 +969,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 
@@ -1695,7 +1695,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $coursedata['idnumber'] = 'idnumbercourse';
         $coursedata['fullname'] = 'Lightwork Course';
         $coursedata['summary'] = 'Lightwork Course description';
-        $coursedata['summaryformat'] = FORMAT_MOODLE;
+        $coursedata['summaryformat'] = FORMAT_POWEREDUC;
         $course = self::getDataGenerator()->create_course($coursedata);
 
         $assigndata['course'] = $course->id;
@@ -1711,7 +1711,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
 
         // Create a teacher and give them capabilities.
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/course:viewparticipants', $context->id, 3);
+        $roleid = $this->assignUserCapability('powereduc/course:viewparticipants', $context->id, 3);
         $context = \context_module::instance($assign->cmid);
         $this->assignUserCapability('mod/assign:grade', $context->id, $roleid);
 
@@ -1844,8 +1844,8 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_assign\event\grading_table_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodleurl = new \moodle_url('/mod/assign/view.php', array('id' => $cm->id));
-        $this->assertEquals($moodleurl, $event->get_url());
+        $powereducurl = new \powereduc_url('/mod/assign/view.php', array('id' => $cm->id));
+        $this->assertEquals($powereducurl, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
     }
@@ -1944,7 +1944,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         try {
             mod_assign_external::view_submission_status(0);
             $this->fail('Exception expected due to invalid mod_assign instance id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invalidrecord', $e->errorcode);
         }
 
@@ -1954,7 +1954,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         try {
             mod_assign_external::view_submission_status($assign->id);
             $this->fail('Exception expected due to not enrolled user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -1975,8 +1975,8 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_assign\event\submission_status_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodleurl = new \moodle_url('/mod/assign/view.php', array('id' => $cm->id));
-        $this->assertEquals($moodleurl, $event->get_url());
+        $powereducurl = new \powereduc_url('/mod/assign/view.php', array('id' => $cm->id));
+        $this->assertEquals($powereducurl, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -1989,7 +1989,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         try {
             mod_assign_external::view_submission_status($assign->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
     }
@@ -2133,7 +2133,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         // Should return all participants if we grant accessallgroups capability to the normal teacher role.
         $context = \context_course::instance($assign->get_instance()->course);
         $teacherrole = $DB->get_record('role', array('shortname' => 'teacher'));
-        assign_capability('moodle/site:accessallgroups', CAP_ALLOW, $teacherrole->id, $context->id, true);
+        assign_capability('powereduc/site:accessallgroups', CAP_ALLOW, $teacherrole->id, $context->id, true);
         accesslib_clear_all_caches_for_unit_testing();
 
         $result = mod_assign_external::get_submission_status($assign->get_instance()->id);
@@ -2475,7 +2475,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
      */
     public function test_get_participant_no_assignment() {
         $this->resetAfterTest(true);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_assign_external::get_participant('-1', '-1', false);
     }
 
@@ -2540,7 +2540,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
 
         $this->setUser($teacher);
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $result = mod_assign_external::get_participant($assign->id, $student->id, false);
         $result = \external_api::clean_returnvalue(mod_assign_external::get_participant_returns(), $result);
     }
@@ -2606,7 +2606,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Student submission text',
-            'format' => FORMAT_MOODLE
+            'format' => FORMAT_POWEREDUC
         );
 
         $notices = array();
@@ -2694,7 +2694,7 @@ class externallib_test extends \mod_assign\externallib_advanced_testcase {
         $data->onlinetext_editor = array(
             'itemid' => file_get_unused_draft_itemid(),
             'text' => 'Submission text',
-            'format' => FORMAT_MOODLE);
+            'format' => FORMAT_POWEREDUC);
         $plugin = $assign->get_submission_plugin_by_type('onlinetext');
         $plugin->save($submission, $data);
 

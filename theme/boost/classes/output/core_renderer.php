@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace theme_boost\output;
 
-use moodle_url;
+use powereduc_url;
 use html_writer;
 use get_string;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
- * Renderers to align Moodle's HTML with that expected by Bootstrap
+ * Renderers to align PowerEduc's HTML with that expected by Bootstrap
  *
  * @package    theme_boost
  * @copyright  2012 Bas Brands, www.basbrands.nl
@@ -34,11 +34,11 @@ class core_renderer extends \core_renderer {
     /**
      * Returns HTML to display a "Turn editing on/off" button in a form.
      *
-     * @param moodle_url $url The URL + params to send through when clicking the button
+     * @param powereduc_url $url The URL + params to send through when clicking the button
      * @param string $method
      * @return string HTML the button
      */
-    public function edit_button(moodle_url $url, string $method = 'post') {
+    public function edit_button(powereduc_url $url, string $method = 'post') {
         if ($this->page->theme->haseditswitch) {
             return;
         }
@@ -116,12 +116,12 @@ class core_renderer extends \core_renderer {
                 $imagedata = $this->user_picture($user, array('size' => 100));
 
                 // Check to see if we should be displaying a message button.
-                if (!empty($CFG->messaging) && has_capability('moodle/site:sendmessage', $context)) {
+                if (!empty($CFG->messaging) && has_capability('powereduc/site:sendmessage', $context)) {
                     $userbuttons = array(
                         'messages' => array(
                             'buttontype' => 'message',
                             'title' => get_string('message', 'message'),
-                            'url' => new moodle_url('/message/index.php', array('id' => $user->id)),
+                            'url' => new powereduc_url('/message/index.php', array('id' => $user->id)),
                             'image' => 'message',
                             'linkattributes' => \core_message\helper::messageuser_link_params($user->id),
                             'page' => $this->page
@@ -136,7 +136,7 @@ class core_renderer extends \core_renderer {
                         $userbuttons['togglecontact'] = array(
                                 'buttontype' => 'togglecontact',
                                 'title' => get_string($contacttitle, 'message'),
-                                'url' => new moodle_url('/message/index.php', array(
+                                'url' => new powereduc_url('/message/index.php', array(
                                         'user1' => $USER->id,
                                         'user2' => $user->id,
                                         $contacturlaction => $user->id,
@@ -148,7 +148,7 @@ class core_renderer extends \core_renderer {
                             );
                     }
 
-                    $this->page->requires->string_for_js('changesmadereallygoaway', 'moodle');
+                    $this->page->requires->string_for_js('changesmadereallygoaway', 'powereduc');
                 }
             } else {
                 $heading = null;
@@ -218,7 +218,7 @@ class core_renderer extends \core_renderer {
                     if ($button['buttontype'] === 'message') {
                         \core_message\helper::messageuser_requirejs();
                     }
-                    $image = $this->pix_icon($button['formattedimage'], $button['title'], 'moodle', array(
+                    $image = $this->pix_icon($button['formattedimage'], $button['title'], 'powereduc', array(
                         'class' => 'iconsmall',
                         'role' => 'presentation'
                     ));

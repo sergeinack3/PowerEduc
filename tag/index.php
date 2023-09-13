@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -29,7 +29,7 @@ require_once($CFG->dirroot . '/blog/lib.php');
 require_login();
 
 if (empty($CFG->usetags)) {
-    throw new \moodle_exception('tagsaredisabled', 'tag');
+    throw new \powereduc_exception('tagsaredisabled', 'tag');
 }
 
 $tagid       = optional_param('id', 0, PARAM_INT); // tag id
@@ -52,13 +52,13 @@ if ($tagname) {
         $tags = core_tag_tag::guess_by_name($tagname, '*');
         if (count($tags) > 1) {
             // This tag was found in more than one collection, redirect to search.
-            redirect(new moodle_url('/tag/search.php', array('query' => $tagname)));
+            redirect(new powereduc_url('/tag/search.php', array('query' => $tagname)));
         } else if (count($tags) == 1) {
             $tag = reset($tags);
         }
     } else {
         if (!$tag = core_tag_tag::get_by_name($tagcollid, $tagname, '*')) {
-            redirect(new moodle_url('/tag/search.php', array('tc' => $tagcollid, 'query' => $tagname)));
+            redirect(new powereduc_url('/tag/search.php', array('tc' => $tagcollid, 'query' => $tagname)));
         }
     }
 } else if ($tagid) {
@@ -66,7 +66,7 @@ if ($tagname) {
 }
 unset($tagid);
 if (empty($tag)) {
-    redirect(new moodle_url('/tag/search.php'));
+    redirect(new powereduc_url('/tag/search.php'));
 }
 
 if ($ctx && ($context = context::instance_by_id($ctx, IGNORE_MISSING)) && $context->contextlevel >= CONTEXT_COURSE) {
@@ -85,11 +85,11 @@ $PAGE->set_subpage($tag->id);
 $tagnode = $PAGE->navigation->find('tags', null);
 $tagnode->make_active();
 $PAGE->set_pagelayout('standard');
-$PAGE->set_blocks_editing_capability('moodle/tag:editblocks');
+$PAGE->set_blocks_editing_capability('powereduc/tag:editblocks');
 
 $buttons = '';
-if (has_capability('moodle/tag:manage', context_system::instance())) {
-    $buttons .= $OUTPUT->single_button(new moodle_url('/tag/manage.php'),
+if (has_capability('powereduc/tag:manage', context_system::instance())) {
+    $buttons .= $OUTPUT->single_button(new powereduc_url('/tag/manage.php'),
             get_string('managetags', 'tag'), 'GET');
 }
 if ($PAGE->user_allowed_editing()) {

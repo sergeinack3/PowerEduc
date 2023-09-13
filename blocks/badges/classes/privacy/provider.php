@@ -24,7 +24,7 @@
 
 namespace block_badges\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_badges implementing null_provider.

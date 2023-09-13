@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_user\form;
 
 use context;
 use core_form\dynamic_form;
-use moodle_url;
+use powereduc_url;
 use profile_define_base;
 
 /**
@@ -72,7 +72,7 @@ class profile_field_form extends dynamic_form {
 
 
     /**
-     * Perform some moodle validation.
+     * Perform some powereduc validation.
      * @param array $data
      * @param array $files
      * @return array
@@ -103,7 +103,7 @@ class profile_field_form extends dynamic_form {
      * Checks if current user has access to this form, otherwise throws exception
      */
     protected function check_access_for_dynamic_submission(): void {
-        require_capability('moodle/site:config', $this->get_context_for_dynamic_submission());
+        require_capability('powereduc/site:config', $this->get_context_for_dynamic_submission());
     }
 
     /**
@@ -140,12 +140,12 @@ class profile_field_form extends dynamic_form {
     /**
      * Returns url to set in $PAGE->set_url() when form is being rendered or submitted via AJAX
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
         $id = $this->optional_param('id', 0, PARAM_INT);
         $datatype = $this->optional_param('datatype', 'text', PARAM_PLUGIN);
-        return new moodle_url('/user/profile/index.php',
+        return new powereduc_url('/user/profile/index.php',
             ['action' => 'editfield', 'id' => $id, 'datatype' => $id ? null : $datatype]);
     }
 
@@ -172,7 +172,7 @@ class profile_field_form extends dynamic_form {
                 $this->fieldrecord->categoryid = $this->optional_param('categoryid', 0, PARAM_INT);
             }
             if (!\core_component::get_component_directory('profilefield_'.$this->fieldrecord->datatype)) {
-                throw new \moodle_exception('fieldnotfound', 'customfield');
+                throw new \powereduc_exception('fieldnotfound', 'customfield');
             }
         }
 

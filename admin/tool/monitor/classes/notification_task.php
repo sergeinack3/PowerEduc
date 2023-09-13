@@ -24,7 +24,7 @@
 
 namespace tool_monitor;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Adhock class, used to send notifications to users.

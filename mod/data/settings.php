@@ -1,6 +1,6 @@
 <?php
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
     if (empty($CFG->enablerssfeeds)) {

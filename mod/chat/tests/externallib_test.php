@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace mod_chat;
 use externallib_advanced_testcase;
 use mod_chat_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  *
  * @package    mod_chat
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
@@ -165,7 +165,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_chat_external::view_chat(0);
             $this->fail('Exception expected due to invalid mod_chat instance id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invalidrecord', $e->errorcode);
         }
 
@@ -175,7 +175,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_chat_external::view_chat($chat->id);
             $this->fail('Exception expected due to not enrolled user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -196,8 +196,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_chat\event\course_module_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodlechat = new \moodle_url('/mod/chat/view.php', array('id' => $cm->id));
-        $this->assertEquals($moodlechat, $event->get_url());
+        $powereducchat = new \powereduc_url('/mod/chat/view.php', array('id' => $cm->id));
+        $this->assertEquals($powereducchat, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -209,7 +209,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_chat_external::view_chat($chat->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
     }
@@ -333,7 +333,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->getDataGenerator()->enrol_user($user->id, $course->id, $studentrole->id);
         $this->setUser($user);
         // Students don't have permissions.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_chat_external::get_sessions($chat->id);
     }
 

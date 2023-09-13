@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,22 +29,22 @@ require_once("lib.php");
 $id = required_param('id', PARAM_INT);
 $action = optional_param('action', false, PARAM_ALPHA);
 
-$url = new moodle_url('/mod/feedback/export.php', array('id'=>$id));
+$url = new powereduc_url('/mod/feedback/export.php', array('id'=>$id));
 if ($action !== false) {
     $url->param('action', $action);
 }
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('feedback', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 $context = context_module::instance($cm->id);
@@ -55,7 +55,7 @@ require_capability('mod/feedback:edititems', $context);
 
 if ($action == 'exportfile') {
     if (!$exportdata = feedback_get_xml_data($feedback->id)) {
-        throw new \moodle_exception('nodata');
+        throw new \powereduc_exception('nodata');
     }
     @feedback_send_xml_data($exportdata, 'feedback_'.$feedback->id.'.xml');
     exit;

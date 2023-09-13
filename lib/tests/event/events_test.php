@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
  *
  * @package   core
  * @category  test
- * @copyright 2014 Mark Nelson <markn@moodle.com>
+ * @copyright 2014 Mark Nelson <markn@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/../fixtures/event_fixtures.php');
 
@@ -53,7 +53,7 @@ class events_test extends \advanced_testcase {
         // Check that the event data is valid.
         $this->assertInstanceOf('\core\event\course_category_created', $event);
         $this->assertEquals(\context_coursecat::instance($category->id), $event->get_context());
-        $url = new \moodle_url('/course/management.php', array('categoryid' => $event->objectid));
+        $url = new \powereduc_url('/course/management.php', array('categoryid' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $expected = array(SITEID, 'category', 'add', 'editcategory.php?id=' . $category->id, $category->id);
         $this->assertEventLegacyLogData($expected, $event);
@@ -80,7 +80,7 @@ class events_test extends \advanced_testcase {
         // Check that the event data is valid.
         $this->assertInstanceOf('\core\event\course_category_updated', $event);
         $this->assertEquals(\context_coursecat::instance($category->id), $event->get_context());
-        $url = new \moodle_url('/course/editcategory.php', array('id' => $event->objectid));
+        $url = new \powereduc_url('/course/editcategory.php', array('id' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
         $expected = array(SITEID, 'category', 'update', 'editcategory.php?id=' . $category->id, $category->id);
         $this->assertEventLegacyLogData($expected, $event);
@@ -154,7 +154,7 @@ class events_test extends \advanced_testcase {
     /**
      * Test the email failed event.
      *
-     * It's not possible to use the moodle API to simulate the failure of sending
+     * It's not possible to use the powereduc API to simulate the failure of sending
      * an email, so here we simply create the event and trigger it.
      */
     public function test_email_failed() {
@@ -287,7 +287,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, "course", "recent", "recent.php?id=$course->id", $course->id);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/course/recent.php', array('id' => $course->id));
+        $url = new \powereduc_url('/course/recent.php', array('id' => $course->id));
         $this->assertEquals($url, $event->get_url());
         $event->get_name();
     }

@@ -25,7 +25,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\navigation\views\primary;
 use core\navigation\views\secondary;
@@ -554,7 +554,7 @@ class moodle_page {
     protected function magic_get_context() {
         global $CFG;
         if (is_null($this->_context)) {
-            if (CLI_SCRIPT or NO_MOODLE_COOKIES) {
+            if (CLI_SCRIPT or NO_POWEREDUC_COOKIES) {
                 // Cli scripts work in system context, do not annoy devs with debug info.
                 // Very few scripts do not use cookies, we can safely use system as default context there.
             } else if (AJAX_SCRIPT && $CFG->debugdeveloper) {

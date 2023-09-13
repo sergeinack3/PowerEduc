@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * End of cluster
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
  /** End of Cluster page */
 define("LESSON_PAGE_ENDOFCLUSTER",   "31");
@@ -62,7 +62,7 @@ class lesson_page_type_endofcluster extends lesson_page {
             $nextpageid = $this->properties->nextpageid;
         }
         if ($redirect) {
-            redirect(new moodle_url('/mod/lesson/view.php', array('id' => $PAGE->cm->id, 'pageid' => $nextpageid)));
+            redirect(new powereduc_url('/mod/lesson/view.php', array('id' => $PAGE->cm->id, 'pageid' => $nextpageid)));
             die;
         }
         return $nextpageid;
@@ -87,7 +87,7 @@ class lesson_page_type_endofcluster extends lesson_page {
     public function add_page_link($previd) {
         global $PAGE, $CFG;
         if ($previd != 0) {
-            $addurl = new moodle_url('/mod/lesson/editpage.php', array('id'=>$PAGE->cm->id, 'pageid'=>$previd, 'sesskey'=>sesskey(), 'qtype'=>LESSON_PAGE_ENDOFCLUSTER));
+            $addurl = new powereduc_url('/mod/lesson/editpage.php', array('id'=>$PAGE->cm->id, 'pageid'=>$previd, 'sesskey'=>sesskey(), 'qtype'=>LESSON_PAGE_ENDOFCLUSTER));
             return array('addurl'=>$addurl, 'type'=>LESSON_PAGE_ENDOFCLUSTER, 'name'=>get_string('addendofcluster', 'lesson'));
         }
         return false;
@@ -138,7 +138,7 @@ class lesson_add_page_form_endofcluster extends lesson_add_page_form_base {
 
         // the new page is not the first page (end of cluster always comes after an existing page)
         if (!$page = $DB->get_record("lesson_pages", array("id" => $pageid))) {
-            throw new \moodle_exception('cannotfindpages', 'lesson');
+            throw new \powereduc_exception('cannotfindpages', 'lesson');
         }
 
         // could put code in here to check if the user really can insert an end of cluster

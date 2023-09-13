@@ -23,7 +23,7 @@
  */
 namespace tool_dataprivacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class containing helper methods for processing data requests.

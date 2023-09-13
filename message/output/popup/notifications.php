@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * View a user's notifications.
  *
  * @package    message_popup
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ $offset = optional_param('offset', 0, PARAM_INT);
 $limit = optional_param('limit', 0, PARAM_INT);
 $userid = $USER->id;
 
-$url = new moodle_url('/message/output/popup/notifications.php');
+$url = new powereduc_url('/message/output/popup/notifications.php');
 $url->param('id', $notificationid);
 
 $PAGE->set_url($url);
@@ -37,11 +37,11 @@ $PAGE->set_url($url);
 require_login();
 
 if (isguestuser()) {
-    throw new \moodle_exception('guestnoeditmessage', 'message');
+    throw new \powereduc_exception('guestnoeditmessage', 'message');
 }
 
 if (!$user = $DB->get_record('user', ['id' => $userid])) {
-    throw new \moodle_exception('invaliduserid');
+    throw new \powereduc_exception('invaliduserid');
 }
 
 $personalcontext = context_user::instance($user->id);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,12 +24,12 @@
  *
  * @package    core
  * @subpackage questionbank
- * @copyright  1999 onwards Martin Dougiamas and others {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas and others {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/engine/lib.php');
 require_once($CFG->dirroot . '/question/type/questiontypebase.php');
@@ -168,7 +168,7 @@ function question_context_has_any_questions($context): bool {
     } else if (is_numeric($context)) {
         $contextid = $context;
     } else {
-        throw new moodle_exception('invalidcontextinhasanyquestions', 'question');
+        throw new powereduc_exception('invalidcontextinhasanyquestions', 'question');
     }
     $sql = 'SELECT qbe.*
               FROM {question_bank_entries} qbe
@@ -1278,7 +1278,7 @@ function question_make_default_categories($contexts): object {
             $category = question_get_default_category($context->id);
         }
         $thispreferredness = $preferredlevels[$context->contextlevel];
-        if (has_any_capability(array('moodle/question:usemine', 'moodle/question:useall'), $context)) {
+        if (has_any_capability(array('powereduc/question:usemine', 'powereduc/question:useall'), $context)) {
             $thispreferredness += 10;
         }
         if ($thispreferredness > $preferredness) {
@@ -1473,10 +1473,10 @@ function question_has_capability_on($questionorid, $cap, $notused = -1): bool {
     $capabilitieswithallandmine = ['edit' => 1, 'view' => 1, 'use' => 1, 'move' => 1, 'tag' => 1, 'comment' => 1];
 
     if (!isset($capabilitieswithallandmine[$cap])) {
-        return has_capability('moodle/question:' . $cap, $context);
+        return has_capability('powereduc/question:' . $cap, $context);
     } else {
-        return has_capability('moodle/question:' . $cap . 'all', $context) ||
-            ($question->createdby == $USER->id && has_capability('moodle/question:' . $cap . 'mine', $context));
+        return has_capability('powereduc/question:' . $cap . 'all', $context) ||
+            ($question->createdby == $USER->id && has_capability('powereduc/question:' . $cap . 'mine', $context));
     }
 }
 
@@ -1489,7 +1489,7 @@ function question_has_capability_on($questionorid, $cap, $notused = -1): bool {
  */
 function question_require_capability_on($question, $cap): bool {
     if (!question_has_capability_on($question, $cap)) {
-        throw new moodle_exception('nopermissions', '', '', $cap);
+        throw new powereduc_exception('nopermissions', '', '', $cap);
     }
     return true;
 }
@@ -1552,12 +1552,12 @@ function question_extend_settings_navigation(navigation_node $navigationnode, $c
     }
 
     $questionnode = $navigationnode->add(get_string('questionbank', 'question'),
-            new moodle_url($baseurl, $params), navigation_node::TYPE_CONTAINER, null, 'questionbank');
+            new powereduc_url($baseurl, $params), navigation_node::TYPE_CONTAINER, null, 'questionbank');
 
     $corenavigations = [
             'questions' => [
                     'title' => get_string('questions', 'question'),
-                    'url' => new moodle_url($baseurl)
+                    'url' => new powereduc_url($baseurl)
             ],
             'categories' => [],
             'import' => [],
@@ -1615,7 +1615,7 @@ function question_extend_settings_navigation(navigation_node $navigationnode, $c
     $contexts = new core_question\local\bank\question_edit_contexts($context);
     foreach ($corenavigations as $key => $corenavigation) {
         if ($contexts->have_one_edit_tab_cap($key)) {
-            $questionnode->add($corenavigation['title'], new moodle_url(
+            $questionnode->add($corenavigation['title'], new powereduc_url(
                     $corenavigation['url'], $params), navigation_node::TYPE_SETTING, null, $key);
         }
     }
@@ -1626,7 +1626,7 @@ function question_extend_settings_navigation(navigation_node $navigationnode, $c
                 continue;
             }
         }
-        $questionnode->add($pluginnavigation['title'], new moodle_url(
+        $questionnode->add($pluginnavigation['title'], new powereduc_url(
                 $pluginnavigation['url'], $params), navigation_node::TYPE_SETTING, null, $key);
     }
 
@@ -1640,19 +1640,19 @@ function question_extend_settings_navigation(navigation_node $navigationnode, $c
  */
 function question_get_question_capabilities(): array {
     return [
-        'moodle/question:add',
-        'moodle/question:editmine',
-        'moodle/question:editall',
-        'moodle/question:viewmine',
-        'moodle/question:viewall',
-        'moodle/question:usemine',
-        'moodle/question:useall',
-        'moodle/question:movemine',
-        'moodle/question:moveall',
-        'moodle/question:tagmine',
-        'moodle/question:tagall',
-        'moodle/question:commentmine',
-        'moodle/question:commentall',
+        'powereduc/question:add',
+        'powereduc/question:editmine',
+        'powereduc/question:editall',
+        'powereduc/question:viewmine',
+        'powereduc/question:viewall',
+        'powereduc/question:usemine',
+        'powereduc/question:useall',
+        'powereduc/question:movemine',
+        'powereduc/question:moveall',
+        'powereduc/question:tagmine',
+        'powereduc/question:tagall',
+        'powereduc/question:commentmine',
+        'powereduc/question:commentall',
     ];
 }
 
@@ -1663,8 +1663,8 @@ function question_get_question_capabilities(): array {
  */
 function question_get_all_capabilities(): array {
     $caps = question_get_question_capabilities();
-    $caps[] = 'moodle/question:managecategory';
-    $caps[] = 'moodle/question:flag';
+    $caps[] = 'powereduc/question:managecategory';
+    $caps[] = 'powereduc/question:flag';
     return $caps;
 }
 
@@ -1800,10 +1800,10 @@ function question_pluginfile($course, $context, $component, $filearea, $args, $f
 
         if (!$qformat->exportpreprocess()) {
             send_file_not_found();
-            throw new moodle_exception('exporterror', 'question', $thispageurl->out());
+            throw new powereduc_exception('exporterror', 'question', $thispageurl->out());
         }
 
-        // Export data to moodle file pool.
+        // Export data to powereduc file pool.
         if (!$content = $qformat->exportprocess()) {
             send_file_not_found();
         }
@@ -2097,7 +2097,7 @@ function is_latest(string $version, string $questionbankentryid) : bool {
  *      be picked randomly.
  * @param object $context context to run the preview in (affects things like
  *      filter settings, theme, lang, etc.) Defaults to $PAGE->context.
- * @return moodle_url the URL.
+ * @return powereduc_url the URL.
  * @deprecated since Moodle 4.0
  * @see qbank_previewquestion\helper::question_preview_url()
  * @todo Final deprecation on Moodle 4.4 MDL-72438
@@ -2151,7 +2151,7 @@ function question_hash($question) {
  * @param string $withcategories
  * @param string $withcontexts
  * @param string $filename
- * @return moodle_url export file url
+ * @return powereduc_url export file url
  * @deprecated since Moodle 4.0 MDL-71573
  * @see qbank_exportquestions\exportquestions_helper
  * @todo Final deprecation on Moodle 4.4 MDL-72438
@@ -2171,7 +2171,7 @@ function question_make_export_url($contextid, $categoryid, $format, $withcategor
  * @param stdClass|question_definition $question the question definition as obtained from
  *      question_bank::load_question_data() or question_bank::make_question().
  *      (Only ->id and ->contextid are used.)
- * @return moodle_url the requested URL.
+ * @return powereduc_url the requested URL.
  * @deprecated since Moodle 4.0
  * @see \qbank_exporttoxml\helper::question_get_export_single_question_url()
  * @todo Final deprecation on Moodle 4.4 MDL-72438

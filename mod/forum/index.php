@@ -1,23 +1,23 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_forum
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ require_once($CFG->libdir . '/rsslib.php');
 $id = optional_param('id', 0, PARAM_INT);                   // Course id
 $subscribe = optional_param('subscribe', null, PARAM_INT);  // Subscribe/Unsubscribe all forums
 
-$url = new moodle_url('/mod/forum/index.php', array('id' => $id));
+$url = new powereduc_url('/mod/forum/index.php', array('id' => $id));
 if ($subscribe !== null) {
     require_sesskey();
     $url->param('subscribe', $subscribe);
@@ -39,7 +39,7 @@ $PAGE->set_secondary_active_tab('coursehome');
 
 if ($id) {
     if (!$course = $DB->get_record('course', array('id' => $id))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
 } else {
     $course = get_site();
@@ -175,7 +175,7 @@ if (!is_null($subscribe)) {
     if (isguestuser() or !$showsubscriptioncolumns) {
         // There should not be any links leading to this place, just redirect.
         redirect(
-                new moodle_url('/mod/forum/index.php', array('id' => $id)),
+                new powereduc_url('/mod/forum/index.php', array('id' => $id)),
                 get_string('subscribeenrolledonly', 'forum'),
                 null,
                 \core\output\notification::NOTIFY_ERROR
@@ -197,7 +197,7 @@ if (!is_null($subscribe)) {
         }
         if (!\mod_forum\subscriptions::is_forcesubscribed($forum)) {
             $subscribed = \mod_forum\subscriptions::is_subscribed($USER->id, $forum, null, $cm);
-            $canmanageactivities = has_capability('moodle/course:manageactivities', $coursecontext, $USER->id);
+            $canmanageactivities = has_capability('powereduc/course:manageactivities', $coursecontext, $USER->id);
             if (($canmanageactivities || \mod_forum\subscriptions::is_subscribable($forum)) && $subscribe && !$subscribed && $cansub) {
                 \mod_forum\subscriptions::subscribe_user($USER->id, $forum, $modcontext, true);
             } else if (!$subscribe && $subscribed) {
@@ -205,7 +205,7 @@ if (!is_null($subscribe)) {
             }
         }
     }
-    $returnto = forum_go_back_to(new moodle_url('/mod/forum/index.php', array('id' => $course->id)));
+    $returnto = forum_go_back_to(new powereduc_url('/mod/forum/index.php', array('id' => $course->id)));
     $shortname = format_string($course->shortname, true, array('context' => context_course::instance($course->id)));
     if ($subscribe) {
         redirect(
@@ -254,7 +254,7 @@ if ($generalforums) {
                 } else if ($forum->trackingtype === FORUM_TRACKING_OFF || ($USER->trackforums == 0)) {
                     $trackedlink = '-';
                 } else {
-                    $aurl = new moodle_url('/mod/forum/settracking.php', array(
+                    $aurl = new powereduc_url('/mod/forum/settracking.php', array(
                             'id' => $forum->id,
                             'sesskey' => sesskey(),
                         ));
@@ -385,7 +385,7 @@ if ($course->id != SITEID) {    // Only real courses have learning forums
                     } else if ($forum->trackingtype === FORUM_TRACKING_OFF || ($USER->trackforums == 0)) {
                         $trackedlink = '-';
                     } else {
-                        $aurl = new moodle_url('/mod/forum/settracking.php', array('id' => $forum->id));
+                        $aurl = new powereduc_url('/mod/forum/settracking.php', array('id' => $forum->id));
                         if (!isset($untracked[$forum->id])) {
                             $trackedlink = $OUTPUT->single_button($aurl, $stryes, 'post', array('title' => $strnotrackforum));
                         } else {
@@ -465,7 +465,7 @@ if (!isguestuser() && isloggedin() && $showsubscriptioncolumns) {
     // Show the subscribe all options only to non-guest, enrolled users.
     echo $OUTPUT->box_start('subscription');
 
-    $subscriptionlink = new moodle_url('/mod/forum/index.php', [
+    $subscriptionlink = new powereduc_url('/mod/forum/index.php', [
         'id'        => $course->id,
         'sesskey'   => sesskey(),
     ]);

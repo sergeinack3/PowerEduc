@@ -25,7 +25,7 @@
  */
 namespace core_grades\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 use core_privacy\tests\provider_testcase;
@@ -214,7 +214,7 @@ class provider_test extends provider_testcase {
         $gi2a->update_final_grade($u2->id, 10, 'test');
 
         // User 3 is set as modifier.
-        $gi1a->update_final_grade($u1->id, 1, 'test', '', FORMAT_MOODLE, $u3->id);
+        $gi1a->update_final_grade($u1->id, 1, 'test', '', FORMAT_POWEREDUC, $u3->id);
 
         // User 4 is set as modifier, and creates history..
         $this->setUser($u4);
@@ -377,7 +377,7 @@ class provider_test extends provider_testcase {
         $gi2a->update_final_grade($u2->id, 10, 'test');
 
         // User 3 is set as modifier.
-        $gi1a->update_final_grade($u1->id, 1, 'test', '', FORMAT_MOODLE, $u3->id);
+        $gi1a->update_final_grade($u1->id, 1, 'test', '', FORMAT_POWEREDUC, $u3->id);
 
         // User 4 is set as modifier, and creates history..
         $this->setUser($u4);
@@ -465,7 +465,7 @@ class provider_test extends provider_testcase {
         $this->add_feedback_file_to_copy();
 
         $grades['feedback'] = 'Nice feedback!';
-        $grades['feedbackformat'] = FORMAT_MOODLE;
+        $grades['feedbackformat'] = FORMAT_POWEREDUC;
         $grades['feedbackfiles'] = [
             'contextid' => 1,
             'component' => 'test',

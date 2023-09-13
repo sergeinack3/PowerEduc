@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Renderers for outputting parts of the question bank.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -96,9 +96,9 @@ class core_question_bank_renderer extends plugin_renderer_base {
      *
      * @param renderable $qbankchooser The chooser.
      * @return string
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @see \qbank_editquestion\output\renderer
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public function render_qbank_chooser(renderable $qbankchooser) {
         debugging('Function render_qbank_chooser is deprecated,
@@ -174,7 +174,7 @@ class core_question_bank_renderer extends plugin_renderer_base {
      * @param object $course The course that will be displayed
      * @param array $hiddenparams Any hidden parameters to add to the form
      * @return string The composed HTML for the questionbank chooser
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public function qbank_chooser($real, $fake, $course, $hiddenparams) {
         debugging('Method core_question_bank_renderer::qbank_chooser() is deprecated, ' .
@@ -187,7 +187,7 @@ class core_question_bank_renderer extends plugin_renderer_base {
      *
      * @param array $types A set of question types as used by the qbank_chooser_module function
      * @return string The composed HTML for the module
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     protected function qbank_chooser_types($types) {
         debugging('Method core_question_bank_renderer::qbank_chooser_types() is deprecated, ' .
@@ -202,7 +202,7 @@ class core_question_bank_renderer extends plugin_renderer_base {
      * If the module contains subtypes in the types option, then these will also be displayed.
      * @param array $classes Additional classes to add to the encompassing div element
      * @return string The composed HTML for the question type
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     protected function qbank_chooser_qtype($qtype, $classes = array()) {
         debugging('Method core_question_bank_renderer::qbank_chooser_qtype() is deprecated, ' .
@@ -216,7 +216,7 @@ class core_question_bank_renderer extends plugin_renderer_base {
      * @param string $title The language string identifier
      * @param string $identifier The component identifier
      * @return string The composed HTML for the title
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     protected function qbank_chooser_title($title, $identifier = null) {
         debugging('Method core_question_bank_renderer::qbank_chooser_title() is deprecated, ' .

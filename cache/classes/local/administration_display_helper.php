@@ -30,7 +30,7 @@
 
 namespace core_cache\local;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 use cache_store, cache_factory, cache_config_writer, cache_helper;
 
 /**

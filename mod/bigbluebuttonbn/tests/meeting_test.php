@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -357,7 +357,7 @@ class meeting_test extends \advanced_testcase {
      */
     protected function join_meeting(string $url) {
         $curl = new \curl();
-        $url = new \moodle_url($url);
+        $url = new \powereduc_url($url);
         $curl->get($url->out_omit_querystring(), $url->params());
     }
 

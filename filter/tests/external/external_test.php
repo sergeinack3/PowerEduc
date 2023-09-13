@@ -29,7 +29,7 @@ namespace core_filters\external;
 use externallib_advanced_testcase;
 use core_filters\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

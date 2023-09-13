@@ -25,7 +25,7 @@
 namespace core\update;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Thin wrapper for data structures returned by {@link api::get_plugin_info()}

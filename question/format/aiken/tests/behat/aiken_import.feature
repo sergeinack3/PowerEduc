@@ -23,6 +23,6 @@ Feature: Test importing questions from Aiken format.
     When I press "id_submitbutton"
     Then I should see "Parsing questions from import file."
     And I should see "Importing 2 questions from file"
-    And I should see "The Moodle project was started by:"
+    And I should see "The PowerEduc project was started by:"
     And I press "Continue"
-    And I should see "The Moodle project was started by:"
+    And I should see "The PowerEduc project was started by:"

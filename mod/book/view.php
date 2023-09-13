@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -109,8 +109,8 @@ if (!$chapterid) {
     $PAGE->set_url('/mod/book/view.php', ['id' => $id, 'chapterid' => $chapterid]);
     // The chapter doesnt exist or it is hidden for students.
     if (!$chapter or ($chapter->hidden and !$viewhidden)) {
-        $courseurl = new moodle_url('/course/view.php', ['id' => $course->id]);
-        throw new moodle_exception('errorchapter', 'mod_book', $courseurl);
+        $courseurl = new powereduc_url('/course/view.php', ['id' => $course->id]);
+        throw new powereduc_exception('errorchapter', 'mod_book', $courseurl);
     }
     // Add the Book TOC block.
     book_add_fake_block($chapters, $chapter, $book, $cm, $edit);

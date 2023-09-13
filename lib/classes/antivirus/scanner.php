@@ -24,7 +24,7 @@
 
 namespace core\antivirus;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->dirroot . '/iplookup/lib.php');
 
 /**

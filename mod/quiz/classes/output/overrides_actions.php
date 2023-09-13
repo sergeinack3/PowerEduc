@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_quiz\output;
 
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use templatable;
@@ -30,7 +30,7 @@ use url_select;
  * overrides tab.
  *
  * @package mod_quiz
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class overrides_actions implements renderable, templatable {
@@ -68,7 +68,7 @@ class overrides_actions implements renderable, templatable {
      * @return \single_button the button, ready to reander.
      */
     public function create_add_button(\renderer_base $output): \single_button {
-        $addoverrideurl = new moodle_url('/mod/quiz/overrideedit.php',
+        $addoverrideurl = new powereduc_url('/mod/quiz/overrideedit.php',
                 ['cmid' => $this->cmid, 'action' => 'add' . $this->mode]);
 
         if ($this->mode === 'group') {
@@ -90,8 +90,8 @@ class overrides_actions implements renderable, templatable {
         $templatecontext = [];
 
         // Build the navigation drop-down.
-        $useroverridesurl = new moodle_url('/mod/quiz/overrides.php', ['cmid' => $this->cmid, 'mode' => 'user']);
-        $groupoverridesurl = new moodle_url('/mod/quiz/overrides.php', ['cmid' => $this->cmid, 'mode' => 'group']);
+        $useroverridesurl = new powereduc_url('/mod/quiz/overrides.php', ['cmid' => $this->cmid, 'mode' => 'user']);
+        $groupoverridesurl = new powereduc_url('/mod/quiz/overrides.php', ['cmid' => $this->cmid, 'mode' => 'group']);
 
         $menu = [
             $useroverridesurl->out(false) => get_string('useroverrides', 'quiz'),

@@ -16,7 +16,7 @@
 
 namespace enrol_lti\local\ltiadvantage\repository;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../lti_advantage_testcase.php');
 

@@ -23,7 +23,7 @@
  */
 namespace core_enrol\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_enrol\privacy\provider;
 use core_privacy\local\request\approved_contextlist;

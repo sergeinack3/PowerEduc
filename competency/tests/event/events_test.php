@@ -20,7 +20,7 @@ use core_competency\api;
 use core_competency\plan;
 use core_competency\url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/comment/lib.php');
 

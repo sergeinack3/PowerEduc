@@ -26,7 +26,7 @@ namespace core_backup;
 
 use backup_cron_automated_helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/helper/backup_cron_helper.class.php');

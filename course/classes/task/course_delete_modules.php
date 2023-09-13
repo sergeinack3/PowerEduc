@@ -24,7 +24,7 @@
 
 namespace core_course\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 /**
  * Class handling course module deletion.
  *

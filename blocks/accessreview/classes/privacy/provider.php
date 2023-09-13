@@ -26,7 +26,7 @@ namespace block_accessreview\privacy;
 
 use \core_privacy\local\metadata\collection;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The accessreview block stores a user preference data.

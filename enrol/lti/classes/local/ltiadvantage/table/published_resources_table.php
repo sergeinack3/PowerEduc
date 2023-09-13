@@ -18,7 +18,7 @@ namespace enrol_lti\local\ltiadvantage\table;
 
 use enrol_lti\helper;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 

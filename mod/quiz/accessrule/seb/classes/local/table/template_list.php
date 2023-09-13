@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Templates table.
@@ -29,7 +29,7 @@ use quizaccess_seb\helper;
 use quizaccess_seb\template;
 use quizaccess_seb\template_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/tablelib.php');
 
@@ -88,7 +88,7 @@ class template_list extends \flexible_table {
      */
     protected function col_name(template $data) : string {
         return \html_writer::link(
-            new \moodle_url(template_controller::get_base_url(), [
+            new \powereduc_url(template_controller::get_base_url(), [
                 'id' => $data->get('id'),
                 'action' => template_controller::ACTION_EDIT,
             ]),
@@ -136,7 +136,7 @@ class template_list extends \flexible_table {
         $actions = [];
 
         $actions[] = helper::format_icon_link(
-            new \moodle_url(template_controller::get_base_url(), [
+            new \powereduc_url(template_controller::get_base_url(), [
                 'id'        => $data->get('id'),
                 'action'    => template_controller::ACTION_EDIT,
             ]),
@@ -145,7 +145,7 @@ class template_list extends \flexible_table {
         );
 
         $actions[] = helper::format_icon_link(
-            new \moodle_url(template_controller::get_base_url(), [
+            new \powereduc_url(template_controller::get_base_url(), [
                 'id'        => $data->get('id'),
                 'action'    => template_controller::ACTION_DELETE,
                 'sesskey'   => sesskey(),

@@ -26,7 +26,7 @@
 
 namespace core_h5p;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * H5P factory class stub for testing purposes.

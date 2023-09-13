@@ -24,7 +24,7 @@
 
 namespace core_analytics\local\analysis;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Keeps track of the analysis results.

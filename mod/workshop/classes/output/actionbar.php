@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_workshop\output;
 
-use moodle_url;
+use powereduc_url;
 use renderer_base;
 use url_select;
 use renderable;
@@ -26,14 +26,14 @@ use templatable;
  * Output the rendered elements for the tertiary nav for page action.
  *
  * @package   mod_workshop
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class actionbar implements renderable, templatable {
     /**
      * The current url.
      *
-     * @var moodle_url $currenturl
+     * @var powereduc_url $currenturl
      */
     private $currenturl;
 
@@ -46,10 +46,10 @@ class actionbar implements renderable, templatable {
     /**
      * actionbar constructor.
      *
-     * @param moodle_url $currenturl The current URL.
+     * @param powereduc_url $currenturl The current URL.
      * @param \workshop $workshop The workshop object.
      */
-    public function __construct(moodle_url $currenturl, \workshop $workshop) {
+    public function __construct(powereduc_url $currenturl, \workshop $workshop) {
         $this->currenturl = $currenturl;
         $this->workshop = $workshop;
     }

@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cliincorrectvalueerror'] = 'Kosa, thamani isiyo sahihi "{$a-> thamani}" kwa "{$a-> chaguo}"';
 $string['cliincorrectvalueretry'] = 'Thamani isiyo sahihi, tafadhali Jaribu tena';

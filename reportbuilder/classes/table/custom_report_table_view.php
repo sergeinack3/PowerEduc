@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
 namespace core_reportbuilder\table;
 
-use moodle_url;
+use powereduc_url;
 
 /**
  * Custom report view dynamic table class
  *
  * @package     core_reportbuilder
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_report_table_view extends custom_report_table {
@@ -66,7 +66,7 @@ class custom_report_table_view extends custom_report_table {
         if (!$this->is_downloading()) {
             return $OUTPUT->download_dataformat_selector(
                 get_string('downloadas', 'table'),
-                new moodle_url('/reportbuilder/download.php'),
+                new powereduc_url('/reportbuilder/download.php'),
                 'download',
                 ['id' => $this->persistent->get('id')]
             );

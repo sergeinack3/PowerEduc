@@ -29,7 +29,7 @@
 
 namespace core_backup\copy;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');

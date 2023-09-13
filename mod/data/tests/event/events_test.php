@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package mod_data
  * @category test
- * @copyright 2014 Mark Nelson <markn@moodle.com>
+ * @copyright 2014 Mark Nelson <markn@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -71,7 +71,7 @@ class events_test extends \advanced_testcase {
             $field->field->id, $field->field->id, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/field.php', array('d' => $data->id));
+        $url = new \powereduc_url('/mod/data/field.php', array('d' => $data->id));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -111,7 +111,7 @@ class events_test extends \advanced_testcase {
             $field->field->id, $field->field->id, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/field.php', array('d' => $data->id));
+        $url = new \powereduc_url('/mod/data/field.php', array('d' => $data->id));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -150,7 +150,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'data', 'fields delete', 'field.php?d=' . $data->id, $field->field->name, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/field.php', array('d' => $data->id));
+        $url = new \powereduc_url('/mod/data/field.php', array('d' => $data->id));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -180,7 +180,7 @@ class events_test extends \advanced_testcase {
             $data->id, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/view.php', array('d' => $data->id, 'rid' => $recordid));
+        $url = new \powereduc_url('/mod/data/view.php', array('d' => $data->id, 'rid' => $recordid));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -222,7 +222,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'data', 'update', 'view.php?d=' . $data->id . '&amp;rid=1', $data->id, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/view.php', array('d' => $data->id, 'rid' => $event->objectid));
+        $url = new \powereduc_url('/mod/data/view.php', array('d' => $data->id, 'rid' => $event->objectid));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -273,7 +273,7 @@ class events_test extends \advanced_testcase {
         $expected = array($course->id, 'data', 'record delete', 'view.php?id=' . $data->cmid, $data->id, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/view.php', array('d' => $data->id));
+        $url = new \powereduc_url('/mod/data/view.php', array('d' => $data->id));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -315,7 +315,7 @@ class events_test extends \advanced_testcase {
             $data->id, $data->id, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/templates.php', array('d' => $data->id));
+        $url = new \powereduc_url('/mod/data/templates.php', array('d' => $data->id));
         $this->assertEquals($url, $event->get_url());
     }
 
@@ -357,7 +357,7 @@ class events_test extends \advanced_testcase {
             $data->id, $data->id, $data->cmid);
         $this->assertEventLegacyLogData($expected, $event);
         $this->assertEventContextNotUsed($event);
-        $url = new \moodle_url('/mod/data/templates.php', array('d' => $data->id));
+        $url = new \powereduc_url('/mod/data/templates.php', array('d' => $data->id));
         $this->assertEquals($url, $event->get_url());
     }
 }

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -61,7 +61,7 @@ if ($courseid AND $courseid != SITEID) {
 }
 
 if (!$feedbackcompletion->can_complete()) {
-    throw new \moodle_exception('error');
+    throw new \powereduc_exception('error');
 }
 
 $PAGE->navbar->add(get_string('feedback:complete', 'feedback'));
@@ -117,7 +117,7 @@ if ($feedbackcompletion->is_empty()) {
         }
         if (!$PAGE->has_secondary_navigation() && $feedbackcompletion->can_view_analysis()) {
             echo '<p class="text-center">';
-            $analysisurl = new moodle_url('/mod/feedback/analysis.php', array('id' => $cm->id, 'courseid' => $courseid));
+            $analysisurl = new powereduc_url('/mod/feedback/analysis.php', array('id' => $cm->id, 'courseid' => $courseid));
             echo html_writer::link($analysisurl, get_string('completed_feedbacks', 'feedback'));
             echo '</p>';
         }

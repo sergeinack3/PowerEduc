@@ -1,6 +1,6 @@
 @core @core_user
 Feature: Both first name and surname are always available for every user
-  In order to easily identify and display users on Moodle pages
+  In order to easily identify and display users on PowerEduc pages
   As any user
   I need to rely on both first name and surname are always available
 

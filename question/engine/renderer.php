@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Renderers for outputting parts of the question engine.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionengine
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -48,9 +48,9 @@ class core_question_renderer extends plugin_renderer_base {
      *      Must be a course or category context.
      * @param bool $showlabel if true, show the word 'Preview' after the icon.
      *      If false, just show the icon.
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @see qbank_previewquestion\output\renderer
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public function question_preview_link($questionid, context $context, $showlabel) {
          debugging('Function question_preview_link() has been deprecated and moved to qbank_previewquestion plugin,
@@ -342,11 +342,11 @@ class core_question_renderer extends plugin_renderer_base {
         }
 
         $params = $options->editquestionparams;
-        if ($params['returnurl'] instanceof moodle_url) {
+        if ($params['returnurl'] instanceof powereduc_url) {
             $params['returnurl'] = $params['returnurl']->out_as_local_url(false);
         }
         $params['id'] = $qa->get_question_id();
-        $editurl = new moodle_url('/question/bank/editquestion/question.php', $params);
+        $editurl = new powereduc_url('/question/bank/editquestion/question.php', $params);
 
         return html_writer::tag('div', html_writer::link(
                 $editurl, $this->pix_icon('t/edit', get_string('edit'), '', array('class' => 'iconsmall')) .
@@ -451,7 +451,7 @@ class core_question_renderer extends plugin_renderer_base {
             if ($stepno == $qa->get_num_steps()) {
                 $rowclass = 'current';
             } else if (!empty($options->questionreviewlink)) {
-                $url = new moodle_url($options->questionreviewlink,
+                $url = new powereduc_url($options->questionreviewlink,
                         array('slot' => $qa->get_slot(), 'step' => $i));
                 $stepno = $this->output->action_link($url, $stepno,
                         new popup_action('click', $url, 'reviewquestion',
@@ -491,7 +491,7 @@ class core_question_renderer extends plugin_renderer_base {
     protected function action_author(question_attempt_step $step, question_display_options $options): string {
         if ($options->userinfoinhistory && $step->get_user_id() != $options->userinfoinhistory) {
             return html_writer::link(
-                    new moodle_url('/user/view.php', ['id' => $step->get_user_id(), 'course' => $this->page->course->id]),
+                    new powereduc_url('/user/view.php', ['id' => $step->get_user_id(), 'course' => $this->page->course->id]),
                     $step->get_user_fullname(), ['class' => 'd-table-cell']);
         } else {
             return '';

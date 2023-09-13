@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace mod_data\output;
 
 use data_portfolio_caller;
 use mod_data\manager;
-use moodle_url;
+use powereduc_url;
 use portfolio_add_button;
 use templatable;
 use renderable;
@@ -27,7 +27,7 @@ use renderable;
  * Renderable class for the action bar elements in the view pages in the database activity.
  *
  * @package    mod_data
- * @copyright  2021 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2021 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class view_action_bar implements templatable, renderable {
@@ -81,7 +81,7 @@ class view_action_bar implements templatable, renderable {
             $actionsselect = new \action_menu();
             $actionsselect->set_menu_trigger(get_string('actions'), 'btn btn-secondary');
 
-            $importentrieslink = new moodle_url('/mod/data/import.php', ['d' => $this->id, 'backto' => $PAGE->url->out(false)]);
+            $importentrieslink = new powereduc_url('/mod/data/import.php', ['d' => $this->id, 'backto' => $PAGE->url->out(false)]);
             $actionsselect->add(new \action_menu_link(
                 $importentrieslink,
                 null,
@@ -96,7 +96,7 @@ class view_action_bar implements templatable, renderable {
                 $actionsselect = new \action_menu();
                 $actionsselect->set_menu_trigger(get_string('actions'), 'btn btn-secondary');
             }
-            $exportentrieslink = new moodle_url('/mod/data/export.php', ['d' => $this->id, 'backto' => $PAGE->url->out(false)]);
+            $exportentrieslink = new powereduc_url('/mod/data/export.php', ['d' => $this->id, 'backto' => $PAGE->url->out(false)]);
             $actionsselect->add(new \action_menu_link(
                 $exportentrieslink,
                 null,
@@ -123,7 +123,7 @@ class view_action_bar implements templatable, renderable {
                     // No plain HTML.
                     $button->set_formats([PORTFOLIO_FORMAT_RICHHTML, PORTFOLIO_FORMAT_LEAP2A]);
                 }
-                $exporturl = $button->to_html(PORTFOLIO_ADD_MOODLE_URL);
+                $exporturl = $button->to_html(PORTFOLIO_ADD_POWEREDUC_URL);
                 if (!is_null($exporturl)) {
                     if (!$actionsselect) {
                         $actionsselect = new \action_menu();

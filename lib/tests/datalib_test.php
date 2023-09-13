@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ class datalib_test extends \advanced_testcase {
             'department' => 'Department of user 1',
             'institution' => 'Institution of user 1',
             'description' => 'This is a description for user 1',
-            'descriptionformat' => FORMAT_MOODLE,
+            'descriptionformat' => FORMAT_POWEREDUC,
             'city' => 'Perth',
             'country' => 'AU'
             );
@@ -70,7 +70,7 @@ class datalib_test extends \advanced_testcase {
             'department' => 'Department of user 2',
             'institution' => 'Institution of user 2',
             'description' => 'This is a description for user 2',
-            'descriptionformat' => FORMAT_MOODLE,
+            'descriptionformat' => FORMAT_POWEREDUC,
             'city' => 'Perth',
             'country' => 'AU'
             );
@@ -429,28 +429,28 @@ class datalib_test extends \advanced_testcase {
         try {
             get_coursemodule_from_id('folder', -11, 0, false, MUST_EXIST);
             $this->fail('dml_missing_record_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('dml_missing_record_exception', $e);
         }
 
         try {
             get_coursemodule_from_id('', -11, 0, false, MUST_EXIST);
             $this->fail('dml_missing_record_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('dml_missing_record_exception', $e);
         }
 
         try {
             get_coursemodule_from_id('a b', $folder1a->cmid, 0, false, MUST_EXIST);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         try {
             get_coursemodule_from_id('abc', $folder1a->cmid, 0, false, MUST_EXIST);
             $this->fail('dml_read_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('dml_read_exception', $e);
         }
     }
@@ -493,28 +493,28 @@ class datalib_test extends \advanced_testcase {
         try {
             get_coursemodule_from_instance('folder', -11, 0, false, MUST_EXIST);
             $this->fail('dml_missing_record_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('dml_missing_record_exception', $e);
         }
 
         try {
             get_coursemodule_from_instance('a b', $folder1a->cmid, 0, false, MUST_EXIST);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         try {
             get_coursemodule_from_instance('', $folder1a->cmid, 0, false, MUST_EXIST);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         try {
             get_coursemodule_from_instance('abc', $folder1a->cmid, 0, false, MUST_EXIST);
             $this->fail('dml_read_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('dml_read_exception', $e);
         }
     }
@@ -576,14 +576,14 @@ class datalib_test extends \advanced_testcase {
         try {
             get_coursemodules_in_course('a b', $course1->id);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         try {
             get_coursemodules_in_course('abc', $course1->id);
             $this->fail('dml_read_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('dml_read_exception', $e);
         }
     }
@@ -631,14 +631,14 @@ class datalib_test extends \advanced_testcase {
         try {
             get_all_instances_in_courses('a b', array($course1->id => $course1, $course2->id => $course2));
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         try {
             get_all_instances_in_courses('', array($course1->id => $course1, $course2->id => $course2));
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }
@@ -684,14 +684,14 @@ class datalib_test extends \advanced_testcase {
         try {
             get_all_instances_in_course('a b', $course1);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
 
         try {
             get_all_instances_in_course('', $course1);
             $this->fail('coding_exception expected');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf('coding_exception', $e);
         }
     }

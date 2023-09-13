@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace theme_boost;
 
@@ -192,11 +192,11 @@ class boostnavbar_test extends \advanced_testcase {
         // Unfortunate hack needed because people use global $PAGE around the place.
         $PAGE->set_url('/');
         $course = $this->getDataGenerator()->create_course();
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_course($course);
-        $page->set_url(new \moodle_url('/course/view.php', array('id' => $course->id)));
+        $page->set_url(new \powereduc_url('/course/view.php', array('id' => $course->id)));
         // A dummy url to use. We don't care where it's pointing to.
-        $url = new \moodle_url('/');
+        $url = new \powereduc_url('/');
         foreach ($setup as $key => $value) {
             $page->navbar->add($key, $value['hasaction'] ? $url : null,
                 $value['issection'] ? \navigation_node::TYPE_SECTION : null);
@@ -235,40 +235,40 @@ class boostnavbar_test extends \advanced_testcase {
         global $CFG;
 
         return [
-            'Breadcrumb items with identical text and action url (actions of same type moodle_url).' => [
+            'Breadcrumb items with identical text and action url (actions of same type powereduc_url).' => [
                 [
                     [
                         'text' => 'Node 1',
-                        'action' => new \moodle_url('/page1.php')
+                        'action' => new \powereduc_url('/page1.php')
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 4',
-                        'action' => new \moodle_url('/page4.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page4.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                 ],
                 ['Home', 'Node 1', 'Node 4', 'Node 2']
             ],
-            'Breadcrumb items with identical text and action url (actions of different type moodle_url/text).' => [
+            'Breadcrumb items with identical text and action url (actions of different type powereduc_url/text).' => [
                 [
                     [
                         'text' => 'Node 1',
-                        'action' => new \moodle_url('/page1.php')
+                        'action' => new \powereduc_url('/page1.php')
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 4',
-                        'action' => new \moodle_url('/page4.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page4.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 2',
@@ -277,23 +277,23 @@ class boostnavbar_test extends \advanced_testcase {
                 ],
                 ['Home', 'Node 1', 'Node 4', 'Node 2']
             ],
-            'Breadcrumb items with identical text and action url (actions of different type moodle_url/action_link).' => [
+            'Breadcrumb items with identical text and action url (actions of different type powereduc_url/action_link).' => [
                 [
                     [
                         'text' => 'Node 1',
-                        'action' => new \moodle_url('/page1.php')
+                        'action' => new \powereduc_url('/page1.php')
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 4',
-                        'action' => new \moodle_url('/page4.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page4.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \action_link(new \moodle_url('/page2.php', ['id' => 1]), 'Action link')
+                        'action' => new \action_link(new \powereduc_url('/page2.php', ['id' => 1]), 'Action link')
                     ],
                 ],
                 ['Home', 'Node 1', 'Node 4', 'Node 2']
@@ -302,19 +302,19 @@ class boostnavbar_test extends \advanced_testcase {
                 [
                     [
                         'text' => 'Node 1',
-                        'action' => new \moodle_url('/page1.php')
+                        'action' => new \powereduc_url('/page1.php')
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 2])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 2])
                     ],
                     [
                         'text' => 'Node 4',
-                        'action' => new \moodle_url('/page4.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page4.php', ['id' => 1])
                     ],
                 ],
                 ['Home', 'Node 1', 'Node 2', 'Node 2', 'Node 4']
@@ -323,19 +323,19 @@ class boostnavbar_test extends \advanced_testcase {
                 [
                     [
                         'text' => 'Node 1',
-                        'action' => new \moodle_url('/page1.php')
+                        'action' => new \powereduc_url('/page1.php')
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 3',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 4',
-                        'action' => new \moodle_url('/page4.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page4.php', ['id' => 1])
                     ],
                 ],
                 ['Home', 'Node 1', 'Node 2', 'Node 3', 'Node 4']
@@ -344,19 +344,19 @@ class boostnavbar_test extends \advanced_testcase {
                 [
                     [
                         'text' => 'Node 1',
-                        'action' => new \moodle_url('/page1.php')
+                        'action' => new \powereduc_url('/page1.php')
                     ],
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page2.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 3',
-                        'action' => new \moodle_url('/page3.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page3.php', ['id' => 1])
                     ],
                     [
                         'text' => 'Node 4',
-                        'action' => new \moodle_url('/page4.php', ['id' => 1])
+                        'action' => new \powereduc_url('/page4.php', ['id' => 1])
                     ],
                 ],
                 ['Home', 'Node 1', 'Node 2', 'Node 3', 'Node 4']
@@ -373,7 +373,7 @@ class boostnavbar_test extends \advanced_testcase {
      */
     public function test_remove_duplicate_items(array $navbarnodes, array $expected) {
         $this->resetAfterTest();
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_url('/');
 
         // Add the navbar nodes.
@@ -420,13 +420,13 @@ class boostnavbar_test extends \advanced_testcase {
                 [
                     [
                         'text' => 'Node 1',
-                        'action' => new \moodle_url('/page1.php')
+                        'action' => new \powereduc_url('/page1.php')
                     ],
                 ],
                 [
-                    'Node 1' => new \moodle_url('/page1.php'),
-                    'Node 2' => new \moodle_url('/page2.php'),
-                    'Node 3' => new \moodle_url('/page1.php'),
+                    'Node 1' => new \powereduc_url('/page1.php'),
+                    'Node 2' => new \powereduc_url('/page2.php'),
+                    'Node 3' => new \powereduc_url('/page1.php'),
                 ],
                 ['Node 2', 'Node 3']
             ],
@@ -435,13 +435,13 @@ class boostnavbar_test extends \advanced_testcase {
                 [
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php')
+                        'action' => new \powereduc_url('/page2.php')
                     ],
                 ],
                 [
-                    'Node 1' => new \moodle_url('/page1.php'),
-                    'Node 2' => new \moodle_url('/page2.php'),
-                    'Node 3' => new \moodle_url('/page1.php'),
+                    'Node 1' => new \powereduc_url('/page1.php'),
+                    'Node 2' => new \powereduc_url('/page2.php'),
+                    'Node 3' => new \powereduc_url('/page1.php'),
                 ],
                 ['Home', 'Node 1', 'Node 3']
             ],
@@ -450,17 +450,17 @@ class boostnavbar_test extends \advanced_testcase {
                 [
                     [
                         'text' => 'Node 2',
-                        'action' => new \moodle_url('/page2.php')
+                        'action' => new \powereduc_url('/page2.php')
                     ],
                     [
                         'text' => 'Node 3',
-                        'action' => new \moodle_url('/page3.php')
+                        'action' => new \powereduc_url('/page3.php')
                     ],
                 ],
                 [
-                    'Node 1' => new \moodle_url('/page1.php'),
+                    'Node 1' => new \powereduc_url('/page1.php'),
                     'Node 2' => "{$CFG->wwwroot}/page2.php",
-                    'Node 3' => new \action_link(new \moodle_url('/page3.php'), 'Action link'),
+                    'Node 3' => new \action_link(new \powereduc_url('/page3.php'), 'Action link'),
                 ],
                 ['Home', 'Node 1']
             ],
@@ -469,13 +469,13 @@ class boostnavbar_test extends \advanced_testcase {
                 [
                     [
                         'text' => 'Node 4',
-                        'action' => new \moodle_url('/page4.php')
+                        'action' => new \powereduc_url('/page4.php')
                     ],
                 ],
                 [
-                    'Node 1' => new \moodle_url('/page1.php'),
-                    'Node 2' => new \moodle_url('/page2.php'),
-                    'Node 3' => new \moodle_url('/page1.php'),
+                    'Node 1' => new \powereduc_url('/page1.php'),
+                    'Node 2' => new \powereduc_url('/page2.php'),
+                    'Node 3' => new \powereduc_url('/page1.php'),
                 ],
                 ['Home', 'Node 1', 'Node 2', 'Node 3']
             ],
@@ -498,7 +498,7 @@ class boostnavbar_test extends \advanced_testcase {
         // Unfortunate hack needed because people use global $PAGE around the place.
         $PAGE->set_url('/');
         $this->resetAfterTest();
-        $page = new \moodle_page();
+        $page = new \powereduc_page();
         $page->set_url('/');
 
         switch ($navmenu) {

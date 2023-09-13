@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\local\config;
 use mod_bigbluebuttonbn\local\exceptions\bigbluebutton_exception;
 use mod_bigbluebuttonbn\local\exceptions\server_not_available_exception;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
@@ -410,11 +410,11 @@ class bigbluebutton_proxy extends proxy_base {
      */
     public static function get_server_not_available_url(instance $instance): string {
         if ($instance->is_admin()) {
-            return new moodle_url('/admin/settings.php', ['section' => 'modsettingbigbluebuttonbn']);
+            return new powereduc_url('/admin/settings.php', ['section' => 'modsettingbigbluebuttonbn']);
         } else if ($instance->is_moderator()) {
-            return new moodle_url('/course/view.php', ['id' => $instance->get_course_id()]);
+            return new powereduc_url('/course/view.php', ['id' => $instance->get_course_id()]);
         } else {
-            return new moodle_url('/course/view.php', ['id' => $instance->get_course_id()]);
+            return new powereduc_url('/course/view.php', ['id' => $instance->get_course_id()]);
         }
     }
 

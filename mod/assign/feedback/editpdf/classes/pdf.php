@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library code for manipulating PDFs
@@ -25,7 +25,7 @@
 namespace assignfeedback_editpdf;
 use setasign\Fpdi\TcpdfFpdi;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir.'/pdflib.php');
@@ -563,7 +563,7 @@ class pdf extends TcpdfFpdi {
     /**
      * Generate an image of the specified page in the PDF
      * @param int $pageno the page to generate the image of
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws \coding_exception
      * @return string the filename of the generated image
      */
@@ -590,7 +590,7 @@ class pdf extends TcpdfFpdi {
                 $fullerror .= htmlspecialchars($result, ENT_COMPAT) . "\n\n";
                 $fullerror .= get_string('output', 'assignfeedback_editpdf')."\n";
                 $fullerror .= htmlspecialchars(implode("\n", $output), ENT_COMPAT) . '</pre>';
-                throw new \moodle_exception('errorgenerateimage', 'assignfeedback_editpdf', '', $fullerror);
+                throw new \powereduc_exception('errorgenerateimage', 'assignfeedback_editpdf', '', $fullerror);
             }
         }
 
@@ -853,7 +853,7 @@ class pdf extends TcpdfFpdi {
         $pdf->set_image_folder($testimagefolder);
         try {
             $pdf->get_image(0);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $ret->status = self::GSPATH_ERROR;
             $ret->message = $e->getMessage();
         }

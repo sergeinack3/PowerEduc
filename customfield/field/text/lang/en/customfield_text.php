@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['displaysize'] = 'Form input size';
 $string['errorconfigdisplaysize'] = 'The form input size must be between 1 and 200 characters.';

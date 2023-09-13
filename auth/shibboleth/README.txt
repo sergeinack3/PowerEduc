@@ -280,13 +280,13 @@ just before the <MetadataProvider> element.
 --
 <Notify
     Channel="back"
-    Location="https://#YOUR_MOODLE_HOSTNAME#/moodle/auth/shibboleth/logout.php" />
+    Location="https://#YOUR_POWEREDUC_HOSTNAME#/moodle/auth/shibboleth/logout.php" />
 --
 
 Then restart the Shibboleth daemon and check the log file for errors. If there
 were no errors, you can test the logout feature by accessing Moodle,
 authenticating via Shibboleth and the access the URL:
-#YOUR_MOODLE_HOSTNAME#/Shibboleth.sso/Logout (assuming you have a standard
+#YOUR_POWEREDUC_HOSTNAME#/Shibboleth.sso/Logout (assuming you have a standard
 Shibboleth installation). If everything worked well, you should see a Shibboleth
 page saying that you were successfully logged out and if you go back to Moodle
 you also should be logged out from Moodle.

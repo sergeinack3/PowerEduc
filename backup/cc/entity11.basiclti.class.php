@@ -21,7 +21,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 class cc11_basiclti extends entities11 {
 
@@ -31,8 +31,8 @@ class cc11_basiclti extends entities11 {
 
         $response = '';
 
-        if (!empty(cc2moodle::$instances['instances'][MOODLE_TYPE_BASICLTI])) {
-            foreach (cc2moodle::$instances['instances'][MOODLE_TYPE_BASICLTI] as $instance) {
+        if (!empty(cc2moodle::$instances['instances'][POWEREDUC_TYPE_BASICLTI])) {
+            foreach (cc2moodle::$instances['instances'][POWEREDUC_TYPE_BASICLTI] as $instance) {
                 $response .= $this->create_node_course_modules_mod_basiclti($instance);
             }
         }

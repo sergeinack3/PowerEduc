@@ -26,7 +26,7 @@
 
 namespace antivirus_testable;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Testable antivirus plugin.

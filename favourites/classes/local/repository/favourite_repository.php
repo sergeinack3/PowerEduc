@@ -23,7 +23,7 @@
 namespace core_favourites\local\repository;
 use \core_favourites\local\entity\favourite;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class favourite_repository.

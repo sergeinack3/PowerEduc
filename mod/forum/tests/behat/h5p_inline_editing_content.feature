@@ -28,8 +28,8 @@ Feature: Inline editing H5P content in mod_forum
     # Override this capability to let teachers and students to Turn editing on.
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/course:update       | Allow      | teacher        | System       |           |
-      | moodle/course:update       | Allow      | student        | System       |           |
+      | powereduc/course:update       | Allow      | teacher        | System       |           |
+      | powereduc/course:update       | Allow      | student        | System       |           |
 
   @javascript @repository_contentbank
   Scenario: Edit H5P content from a forum intro using copy to content bank file

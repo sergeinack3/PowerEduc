@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Collects information and methods about feedback completion (either complete.php or show_entries.php)
@@ -713,19 +713,19 @@ class mod_feedback_completion extends mod_feedback_structure {
 
         if ($this->form->is_cancelled()) {
             // Form was cancelled - return to the course page.
-            $urltogo = new moodle_url('/mod/feedback/view.php', ['id' => $this->get_cm()->id]);
+            $urltogo = new powereduc_url('/mod/feedback/view.php', ['id' => $this->get_cm()->id]);
         } else if ($this->form->is_submitted() &&
                 ($this->form->is_validated() || $gopreviouspage)) {
             // Form was submitted (skip validation for "Previous page" button).
             $data = $this->form->get_submitted_data();
             if (!isset($SESSION->feedback->is_started) OR !$SESSION->feedback->is_started == true) {
-                throw new \moodle_exception('error', '', $CFG->wwwroot.'/course/view.php?id='.$this->courseid);
+                throw new \powereduc_exception('error', '', $CFG->wwwroot.'/course/view.php?id='.$this->courseid);
             }
             $this->save_response_tmp($data);
             if (!empty($data->savevalues) || !empty($data->gonextpage)) {
                 if (($nextpage = $this->get_next_page($gopage)) !== null) {
                     if ($PAGE->has_set_url()) {
-                        $urltogo = new moodle_url($PAGE->url, array('gopage' => $nextpage));
+                        $urltogo = new powereduc_url($PAGE->url, array('gopage' => $nextpage));
                     }
                     $this->jumpto = $nextpage;
                 } else {
@@ -738,7 +738,7 @@ class mod_feedback_completion extends mod_feedback_structure {
             } else if (!empty($gopreviouspage)) {
                 $prevpage = intval($this->get_previous_page($gopage));
                 if ($PAGE->has_set_url()) {
-                    $urltogo = new moodle_url($PAGE->url, array('gopage' => $prevpage));
+                    $urltogo = new powereduc_url($PAGE->url, array('gopage' => $prevpage));
                 }
                 $this->jumpto = $prevpage;
             }

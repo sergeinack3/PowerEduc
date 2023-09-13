@@ -24,7 +24,7 @@
 
 namespace availability_grade;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Callbacks handling grade changes (to clear cache).

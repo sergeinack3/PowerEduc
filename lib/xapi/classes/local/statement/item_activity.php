@@ -28,7 +28,7 @@ use core_xapi\xapi_exception;
 use core_xapi\iri;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class that implements a xAPI activity compatible with xAPI object.

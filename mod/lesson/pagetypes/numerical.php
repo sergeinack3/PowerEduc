@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Numerical
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** Numerical question type */
 define("LESSON_PAGE_NUMERICAL",     "8");
@@ -51,7 +51,7 @@ class lesson_page_type_numerical extends lesson_page {
     }
     public function display($renderer, $attempt) {
         global $USER, $PAGE;
-        $mform = new lesson_display_answer_form_numerical(new moodle_url('/mod/lesson/continue.php'),
+        $mform = new lesson_display_answer_form_numerical(new powereduc_url('/mod/lesson/continue.php'),
             array('contents' => $this->get_contents(), 'lessonid' => $this->lesson->id));
         $data = new stdClass;
         $data->id = $PAGE->cm->id;
@@ -114,7 +114,7 @@ class lesson_page_type_numerical extends lesson_page {
     public function check_answer() {
         $result = parent::check_answer();
 
-        $mform = new lesson_display_answer_form_numerical(new moodle_url('/mod/lesson/continue.php'),
+        $mform = new lesson_display_answer_form_numerical(new powereduc_url('/mod/lesson/continue.php'),
             array('contents' => $this->get_contents()));
         $data = $mform->get_data();
         require_sesskey();
@@ -436,7 +436,7 @@ class lesson_add_page_form_numerical extends lesson_add_page_form_base {
     }
 }
 
-class lesson_display_answer_form_numerical extends moodleform {
+class lesson_display_answer_form_numerical extends powereducform {
 
     public function definition() {
         global $USER, $OUTPUT;

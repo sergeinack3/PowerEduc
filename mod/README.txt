@@ -1,7 +1,7 @@
 ACTIVITY MODULES
 ----------------
 
-These are main modules in Moodle, allowing various activities.
+These are main modules in PowerEduc, allowing various activities.
 
 
 Each of these modules contains a number of expected components:
@@ -38,5 +38,5 @@ Each of these modules contains a number of expected components:
 
 If you are a developer and interested in developing new Modules see:
 
-   Moodle Documentation:  http://moodle.org/doc
-   Moodle Community:      http://moodle.org/community
+   PowerEduc Documentation:  http://powereduc.org/doc
+   PowerEduc Community:      http://powereduc.org/community

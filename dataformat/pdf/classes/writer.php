@@ -24,7 +24,7 @@
 
 namespace dataformat_pdf;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * pdf data format writer

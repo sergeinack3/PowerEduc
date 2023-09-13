@@ -24,7 +24,7 @@
 
 namespace core_h5p\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use renderable;
 use templatable;

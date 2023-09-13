@@ -23,7 +23,7 @@
  */
 
 namespace core_blog;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir .'/externallib.php');
 require_once($CFG->dirroot .'/blog/lib.php');

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file receives a registration request along with the registration token and returns a client_id.
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define('NO_DEBUG_DISPLAY', true);
-define('NO_MOODLE_COOKIES', true);
+define('NO_POWEREDUC_COOKIES', true);
 
 use mod_lti\local\ltiopenid\registration_helper;
 use mod_lti\local\ltiopenid\registration_exception;
@@ -35,7 +35,7 @@ $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' or ($_SERVER['REQUEST_METHOD'] === 'GET')) {
     $doregister = $_SERVER['REQUEST_METHOD'] === 'POST';
     // Retrieve registration token from Bearer Authorization header.
-    $authheader = moodle\mod\lti\OAuthUtil::get_headers()['Authorization'] ?? '';
+    $authheader = powereduc\mod\lti\OAuthUtil::get_headers()['Authorization'] ?? '';
     if (!($authheader && substr($authheader, 0, 7) == 'Bearer ')) {
         $message = 'missing_registration_token';
         $code = 401;

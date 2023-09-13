@@ -1,5 +1,5 @@
 {
-  "moodle-question-searchform": {
+  "powereduc-question-searchform": {
     "requires": [
         "base",
         "node"

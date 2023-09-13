@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -20,7 +20,7 @@ namespace core_reportbuilder\local\systemreports;
 
 use html_writer;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use pix_icon;
 use stdClass;
 use core_reportbuilder\datasource;
@@ -43,7 +43,7 @@ use core_reportbuilder\permission;
  * Reports list
  *
  * @package     core_reportbuilder
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class reports_list extends system_report {
@@ -239,7 +239,7 @@ class reports_list extends system_report {
     protected function add_actions(): void {
         // Edit content action.
         $this->add_action((new action(
-            new moodle_url('/reportbuilder/edit.php', ['id' => ':id']),
+            new powereduc_url('/reportbuilder/edit.php', ['id' => ':id']),
             new pix_icon('t/right', ''),
             [],
             false,
@@ -252,7 +252,7 @@ class reports_list extends system_report {
 
         // Edit details action.
         $this->add_action((new action(
-            new moodle_url('#'),
+            new powereduc_url('#'),
             new pix_icon('t/edit', ''),
             ['data-action' => 'report-edit', 'data-report-id' => ':id'],
             false,
@@ -265,7 +265,7 @@ class reports_list extends system_report {
 
         // Preview action.
         $this->add_action((new action(
-            new moodle_url('/reportbuilder/view.php', ['id' => ':id']),
+            new powereduc_url('/reportbuilder/view.php', ['id' => ':id']),
             new pix_icon('i/search', ''),
             [],
             false,
@@ -279,7 +279,7 @@ class reports_list extends system_report {
 
         // Delete action.
         $this->add_action((new action(
-            new moodle_url('#'),
+            new powereduc_url('#'),
             new pix_icon('t/delete', ''),
             ['data-action' => 'report-delete', 'data-report-id' => ':id', 'data-report-name' => ':name'],
             false,

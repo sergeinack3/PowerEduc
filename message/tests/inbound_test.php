@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace core_message;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once(__DIR__ . '/fixtures/inbound_fixtures.php');
 
 /**
@@ -51,7 +51,7 @@ class inbound_test extends \advanced_testcase {
         $CFG->messageinbound_enabled = true;
 
         // Must be no longer than 15 characters.
-        $CFG->messageinbound_mailbox = 'moodlemoodle123';
+        $CFG->messageinbound_mailbox = 'powereducpowereduc123';
     }
 
     /**
@@ -93,7 +93,7 @@ class inbound_test extends \advanced_testcase {
         $this->assertFalse(\core\message\inbound\manager::is_enabled());
 
         // Check that the mailbox entry on it's own does not enable Inbound Message handling.
-        $CFG->messageinbound_mailbox = 'moodlemoodle123';
+        $CFG->messageinbound_mailbox = 'powereducpowereduc123';
         $CFG->messageinbound_domain = null;
         $this->assertFalse(\core\message\inbound\manager::is_enabled());
 
@@ -109,11 +109,11 @@ class inbound_test extends \advanced_testcase {
 
         // And that an invalid domain does not.
         $CFG->messageinbound_domain = '';
-        $CFG->messageinbound_mailbox = 'moodlemoodle123';
+        $CFG->messageinbound_mailbox = 'powereducpowereduc123';
         $this->assertFalse(\core\message\inbound\manager::is_enabled());
 
         // Finally a test that ensures that all settings correct enables the system.
-        $CFG->messageinbound_mailbox = 'moodlemoodle123';
+        $CFG->messageinbound_mailbox = 'powereducpowereduc123';
         $CFG->messageinbound_domain = 'example.com';
         $CFG->messageinbound_enabled = true;
 

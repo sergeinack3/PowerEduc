@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Capability manager for the forum.
  *
  * @package    mod_forum
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_forum\local\managers;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_forum\local\data_mappers\legacy\forum as legacy_forum_data_mapper;
 use mod_forum\local\data_mappers\legacy\discussion as legacy_discussion_data_mapper;
@@ -36,7 +36,7 @@ use mod_forum\subscriptions;
 use context;
 use context_system;
 use stdClass;
-use moodle_exception;
+use powereduc_exception;
 
 require_once($CFG->dirroot . '/mod/forum/lib.php');
 
@@ -45,7 +45,7 @@ require_once($CFG->dirroot . '/mod/forum/lib.php');
  *
  * Defines all the business rules for what a user can and can't do in the forum.
  *
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class capability {
@@ -160,7 +160,7 @@ class capability {
      * @return bool
      */
     public function can_access_all_groups(stdClass $user) : bool {
-        return has_capability('moodle/site:accessallgroups', $this->get_context(), $user);
+        return has_capability('powereduc/site:accessallgroups', $this->get_context(), $user);
     }
 
     /**
@@ -448,7 +448,7 @@ class capability {
                 break;
             case 'single':
                 if ($discussion->is_first_post($post)) {
-                    return has_capability('moodle/course:manageactivities', $context, $user);
+                    return has_capability('powereduc/course:manageactivities', $context, $user);
                 }
                 break;
         }
@@ -464,7 +464,7 @@ class capability {
      * @param post_entity $post The post the user wants to delete
      * @param bool $hasreplies Whether the post has replies
      * @return bool
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function validate_delete_post(stdClass $user, discussion_entity $discussion, post_entity $post,
             bool $hasreplies = false) : void {
@@ -474,7 +474,7 @@ class capability {
 
         if ($forum->get_type() == 'single' && $discussion->is_first_post($post)) {
             // Do not allow deleting of first post in single simple type.
-            throw new moodle_exception('cannotdeletepost', 'forum');
+            throw new powereduc_exception('cannotdeletepost', 'forum');
         }
 
         $context = $this->get_context();
@@ -484,15 +484,15 @@ class capability {
         if (!($ownpost && $ineditingtime && has_capability('mod/forum:deleteownpost', $context, $user) ||
                 has_capability('mod/forum:deleteanypost', $context, $user))) {
 
-            throw new moodle_exception('cannotdeletepost', 'forum');
+            throw new powereduc_exception('cannotdeletepost', 'forum');
         }
 
         if ($post->get_total_score()) {
-            throw new moodle_exception('couldnotdeleteratings', 'rating');
+            throw new powereduc_exception('couldnotdeleteratings', 'rating');
         }
 
         if ($hasreplies && !has_capability('mod/forum:deleteanypost', $context, $user)) {
-            throw new moodle_exception('couldnotdeletereplies', 'forum');
+            throw new powereduc_exception('couldnotdeletereplies', 'forum');
         }
     }
 
@@ -512,7 +512,7 @@ class capability {
         try {
             $this->validate_delete_post($user, $discussion, $post, $hasreplies);
             return true;
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             return false;
         }
     }
@@ -660,7 +660,7 @@ class capability {
      * @return bool
      */
     public function can_manage_forum(stdClass $user) {
-        return has_capability('moodle/course:manageactivities', $this->get_context(), $user);
+        return has_capability('powereduc/course:manageactivities', $this->get_context(), $user);
     }
 
     /**
@@ -670,7 +670,7 @@ class capability {
      * @return bool
      */
     public function can_manage_tags(stdClass $user) : bool {
-        return has_capability('moodle/tag:manage', context_system::instance(), $user);
+        return has_capability('powereduc/tag:manage', context_system::instance(), $user);
     }
 
     /**

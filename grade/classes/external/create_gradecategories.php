@@ -23,7 +23,7 @@ use external_single_structure;
 use external_multiple_structure;
 use external_warnings;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->libdir/gradelib.php");

@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * H5P activity manager class
  *
  * @package    mod_h5pactivity
- * @since      Moodle 3.9
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ use mod_h5pactivity\local\report\attempts;
 use mod_h5pactivity\local\report\results;
 use context_module;
 use cm_info;
-use moodle_recordset;
+use powereduc_recordset;
 use core_user;
 use stdClass;
 use core\dml\sql_join;
@@ -40,8 +40,8 @@ use mod_h5pactivity\event\course_module_viewed;
  * Class manager for H5P activity
  *
  * @package    mod_h5pactivity
- * @since      Moodle 3.9
- * @copyright  2020 Ferran Recio <ferran@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manager {
@@ -330,7 +330,7 @@ class manager {
      * Note that, in general, the active list has the same effect as checking for "mod/h5pactivity:submit"
      * but submit capability cannot be used because is a write capability and does not apply to frozen contexts.
      *
-     * @since Moodle 3.11
+     * @since PowerEduc 3.11
      * @param bool $allpotentialusers if true, the join will return all active users, not only the ones with attempts.
      * @param int|bool $currentgroup False if groups not used, 0 for all groups, group id (int) to filter by specific group
      * @return sql_join the active users attempts join
@@ -343,7 +343,7 @@ class manager {
 
         // Ensure user can view users from all groups.
         if ($currentgroup === 0 && $coursemodule->effectivegroupmode == SEPARATEGROUPS
-                && !has_capability('moodle/site:accessallgroups', $context)) {
+                && !has_capability('powereduc/site:accessallgroups', $context)) {
 
             return new sql_join('', '1=2', [], true);
         }

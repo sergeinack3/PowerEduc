@@ -23,7 +23,7 @@
 
 use core_user\output\myprofile\tree;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Add nodes to myprofile page.

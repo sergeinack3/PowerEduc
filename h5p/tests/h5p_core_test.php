@@ -27,7 +27,7 @@ namespace core_h5p;
 
 use core_h5p\local\library\autoloader;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Test class covering the H5PFileStorage interface implementation.

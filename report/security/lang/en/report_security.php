@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Lang strings
@@ -82,7 +82,7 @@ $string['check_guestrole_error'] = 'The guest role "{$a}" is incorrectly defined
 $string['check_guestrole_name'] = 'Guest role';
 $string['check_guestrole_notset'] = 'Guest role is not set.';
 $string['check_guestrole_ok'] = 'Guest role definition is OK.';
-$string['check_nodemodules_details'] = '<p>The directory <code>{$a->path}</code> contains Node.js modules and their dependencies, typically installed by the NPM utility. These modules may be needed for local Moodle development, such as for using the grunt framework. They are not needed to run a Moodle site in production and they can contain potentially dangerous code exposing your site to remote attacks.</p><p>It is strongly recommended to remove the directory if the site is available via a public URL, or at least prohibit web access to it in your webserver configuration.</p>';
+$string['check_nodemodules_details'] = '<p>The directory <code>{$a->path}</code> contains Node.js modules and their dependencies, typically installed by the NPM utility. These modules may be needed for local PowerEduc development, such as for using the grunt framework. They are not needed to run a PowerEduc site in production and they can contain potentially dangerous code exposing your site to remote attacks.</p><p>It is strongly recommended to remove the directory if the site is available via a public URL, or at least prohibit web access to it in your webserver configuration.</p>';
 $string['check_nodemodules_info'] = 'The node_modules directory should not be present on public sites.';
 $string['check_nodemodules_name'] = 'Node.js modules directory';
 $string['check_openprofiles_details'] = 'Open user profiles can be abused by spammers. It is recommended that either <code>Force users to log in for profiles</code> or <code>Force users to log in</code> are enabled.';
@@ -130,7 +130,7 @@ $string['check_unsecuredataroot_error'] = 'Your dataroot directory <code>{$a}</c
 $string['check_unsecuredataroot_name'] = 'Insecure dataroot';
 $string['check_unsecuredataroot_ok'] = 'Dataroot directory must not be accessible via the web.';
 $string['check_unsecuredataroot_warning'] = 'Your dataroot directory <code>{$a}</code> is in the wrong location and might be exposed to the web.';
-$string['check_vendordir_details'] = '<p>The directory <code>{$a->path}</code> contains various third-party libraries and their dependencies, typically installed by the PHP Composer. These libraries may be needed for local Moodle development, such as for installing the PHPUnit framework. They are not needed to run a Moodle site in production and they can contain potentially dangerous code exposing your site to remote attacks.</p><p>It is strongly recommended to remove the directory if the site is available via a public URL, or at least prohibit web access to it in your webserver configuration.</p>';
+$string['check_vendordir_details'] = '<p>The directory <code>{$a->path}</code> contains various third-party libraries and their dependencies, typically installed by the PHP Composer. These libraries may be needed for local PowerEduc development, such as for installing the PHPUnit framework. They are not needed to run a PowerEduc site in production and they can contain potentially dangerous code exposing your site to remote attacks.</p><p>It is strongly recommended to remove the directory if the site is available via a public URL, or at least prohibit web access to it in your webserver configuration.</p>';
 $string['check_vendordir_info'] = 'The vendor directory should not be present on public sites.';
 $string['check_vendordir_name'] = 'Vendor directory';
 $string['check_webcron_details'] = '<p>Running the cron from a web browser can expose privileged information to anonymous users. It is recommended to only run the cron from the command line or set a cron password for remote access.</p>';
@@ -144,7 +144,7 @@ $string['security:view'] = 'View security report';
 $string['timewarning'] = 'Data processing may take a long time, please be patient...';
 $string['privacy:metadata'] = 'The Security overview plugin does not store any personal data.';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['check_mediafilterswf_details'] = '<p>Automatic swf embedding is very dangerous - any registered user may launch an XSS attack against other server users. Please disable it on production servers.</p>';
 $string['check_mediafilterswf_error'] = 'Flash media filter is enabled - this is very dangerous for the majority of servers.';
 $string['check_mediafilterswf_name'] = 'Enabled .swf media filter';

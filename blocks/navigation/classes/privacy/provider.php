@@ -24,7 +24,7 @@
 
 namespace block_navigation\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_navigation implementing null_provider.

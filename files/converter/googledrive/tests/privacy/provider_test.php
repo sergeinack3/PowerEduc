@@ -23,7 +23,7 @@
  */
 namespace fileconverter_googledrive\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\tests\provider_testcase;
 

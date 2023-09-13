@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the \core_payment\local\local\callback\service_provider interface.
@@ -20,7 +20,7 @@
  * Plugins should implement this if they use payment subsystem.
  *
  * @package core_payment
- * @copyright 2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright 2020 Shamim Rezaie <shamim@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@ namespace core_payment\local\callback;
 /**
  * The service_provider interface for plugins to provide callbacks which are needed by the payment subsystem.
  *
- * @copyright  2020 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Shamim Rezaie <shamim@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 interface service_provider {
@@ -49,9 +49,9 @@ interface service_provider {
      *
      * @param string $paymentarea Payment area
      * @param int $itemid An identifier that is known to the plugin
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    public static function get_success_url(string $paymentarea, int $itemid): \moodle_url;
+    public static function get_success_url(string $paymentarea, int $itemid): \powereduc_url;
 
     /**
      * Callback function that delivers what the user paid for to them.

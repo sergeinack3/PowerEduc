@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\data_access;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_calendar\local\event\entities\action_event_interface;
 use core_calendar\local\event\entities\event_interface;

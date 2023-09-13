@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['chooselanguagesub'] = 'Wähle eine Sprache, die du während der Installation verwenden möchtest. Die ausgewählte Sprache wird nach der Installation als Standardsprache der Instanz benutzt, aber du darfst die Sprache jederzeit ändern.';
 $string['environmentsub2'] = 'Jede Moodle-Version hat Mindestvoraussetzungen für der PHP-Version und für verbindliche PHP-Extensions. Vor einer Installation oder einer Aktualisierung wird eine vollständige Prüfung durchgeführt. Bitte frage den Server-Administrator, wenn du mit der Installation einer neuen Version oder mit der Aktivierung von PHP-Extensions nicht weiterkommst.';

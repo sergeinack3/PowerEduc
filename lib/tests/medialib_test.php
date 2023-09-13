@@ -19,7 +19,7 @@ namespace core;
 use core_media_manager;
 use media_test_plugin;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once(__DIR__ . '/fixtures/testable_core_media_player.php');
 
 /**

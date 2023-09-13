@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -90,7 +90,7 @@ class component_test extends advanced_testcase {
                 continue;
             }
             $file = $item->getFilename();
-            if ($file === 'moodle.php') {
+            if ($file === 'powereduc.php') {
                 // Do not add new lang strings unless really necessary!!!
                 continue;
             }
@@ -249,13 +249,13 @@ class component_test extends advanced_testcase {
     public function test_normalize_componentname() {
         // Moodle core.
         $this->assertSame('core', core_component::normalize_componentname('core'));
-        $this->assertSame('core', core_component::normalize_componentname('moodle'));
+        $this->assertSame('core', core_component::normalize_componentname('powereduc'));
         $this->assertSame('core', core_component::normalize_componentname(''));
 
         // Moodle core subsystems.
         $this->assertSame('core_admin', core_component::normalize_componentname('admin'));
         $this->assertSame('core_admin', core_component::normalize_componentname('core_admin'));
-        $this->assertSame('core_admin', core_component::normalize_componentname('moodle_admin'));
+        $this->assertSame('core_admin', core_component::normalize_componentname('powereduc_admin'));
 
         // Activity modules and their subplugins.
         $this->assertSame('mod_workshop', core_component::normalize_componentname('workshop'));
@@ -287,13 +287,13 @@ class component_test extends advanced_testcase {
     public function test_normalize_component() {
         // Moodle core.
         $this->assertSame(array('core', null), core_component::normalize_component('core'));
-        $this->assertSame(array('core', null), core_component::normalize_component('moodle'));
+        $this->assertSame(array('core', null), core_component::normalize_component('powereduc'));
         $this->assertSame(array('core', null), core_component::normalize_component(''));
 
         // Moodle core subsystems.
         $this->assertSame(array('core', 'admin'), core_component::normalize_component('admin'));
         $this->assertSame(array('core', 'admin'), core_component::normalize_component('core_admin'));
-        $this->assertSame(array('core', 'admin'), core_component::normalize_component('moodle_admin'));
+        $this->assertSame(array('core', 'admin'), core_component::normalize_component('powereduc_admin'));
 
         // Activity modules and their subplugins.
         $this->assertSame(array('mod', 'workshop'), core_component::normalize_component('workshop'));
@@ -326,12 +326,12 @@ class component_test extends advanced_testcase {
         // Moodle core.
         $this->assertSame(array('core', null), normalize_component('core'));
         $this->assertSame(array('core', null), normalize_component(''));
-        $this->assertSame(array('core', null), normalize_component('moodle'));
+        $this->assertSame(array('core', null), normalize_component('powereduc'));
 
         // Moodle core subsystems.
         $this->assertSame(array('core', 'admin'), normalize_component('admin'));
         $this->assertSame(array('core', 'admin'), normalize_component('core_admin'));
-        $this->assertSame(array('core', 'admin'), normalize_component('moodle_admin'));
+        $this->assertSame(array('core', 'admin'), normalize_component('powereduc_admin'));
 
         // Activity modules and their subplugins.
         $this->assertSame(array('mod', 'workshop'), normalize_component('workshop'));
@@ -496,7 +496,7 @@ class component_test extends advanced_testcase {
         // Core as a component works, the function can normalise the component name.
         $this->assertCount(7, core_component::get_component_classes_in_namespace('core', 'update'));
         $this->assertCount(7, core_component::get_component_classes_in_namespace('', 'update'));
-        $this->assertCount(7, core_component::get_component_classes_in_namespace('moodle', 'update'));
+        $this->assertCount(7, core_component::get_component_classes_in_namespace('powereduc', 'update'));
 
         // Multiple levels.
         $this->assertCount(5, core_component::get_component_classes_in_namespace('core_user', '\\output\\myprofile\\'));

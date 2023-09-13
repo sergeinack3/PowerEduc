@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** INSTALL_WELCOME = 0 */
 define('INSTALL_WELCOME',       0);
@@ -185,7 +185,7 @@ function install_db_validate($database, $dbhost, $dbuser, $dbpass, $dbname, $pre
     try {
         try {
             $database->connect($dbhost, $dbuser, $dbpass, $dbname, $prefix, $dboptions);
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             // let's try to create new database
             if ($database->create_database($dbhost, $dbuser, $dbpass, $dbname, $dboptions)) {
                 $database->connect($dbhost, $dbuser, $dbpass, $dbname, $prefix, $dboptions);
@@ -227,7 +227,7 @@ function install_db_validate($database, $dbhost, $dbuser, $dbpass, $dbname, $pre
  *
  * Uses PHP_EOL for generating proper end of lines for the given platform.
  *
- * @param moodle_database $database database instance
+ * @param powereduc_database $database database instance
  * @param object $cfg copy of $CFG
  * @return string
  */
@@ -409,8 +409,8 @@ function install_print_footer($config, $reload=false) {
     echo '</fieldset><div id="nav_buttons" class="mb-3 w-100 d-flex">'.$first.$next.'</div>';
 
     $homelink  = '<div class="sitelink">'.
-       '<a title="Moodle '. $CFG->target_release .'" href="http://docs.moodle.org/en/Administrator_documentation" onclick="this.target=\'_blank\'">'.
-       '<img src="pix/moodlelogo.png" alt="'.get_string('moodlelogo').'" /></a></div>';
+       '<a title="Moodle '. $CFG->target_release .'" href="http://docs.powereduc.org/en/Administrator_documentation" onclick="this.target=\'_blank\'">'.
+       '<img src="pix/powereduclogo.png" alt="'.get_string('powereduclogo').'" /></a></div>';
 
     echo '</form></div>';
     echo '<div id="page-footer">'.$homelink.'</div>';
@@ -457,7 +457,7 @@ function install_cli_database(array $options, $interactive) {
     }
 
     // test environment first
-    list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+    list($envstatus, $environment_results) = check_powereduc_environment(normalize_version($release), ENV_SELECT_RELEASE);
     if (!$envstatus) {
         $errors = environment_get_errors($environment_results);
         cli_heading(get_string('environment', 'admin'));

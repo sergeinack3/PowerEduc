@@ -22,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Generates the files required by JMeter.
@@ -150,7 +150,7 @@ class tool_generator_testplan_backend extends tool_generator_backend {
         );
 
         $placeholders = array(
-            '{{MOODLEVERSION_PLACEHOLDER}}',
+            '{{POWEREDUCVERSION_PLACEHOLDER}}',
             '{{USERS_PLACEHOLDER}}',
             '{{LOOPS_PLACEHOLDER}}',
             '{{RAMPUP_PLACEHOLDER}}',

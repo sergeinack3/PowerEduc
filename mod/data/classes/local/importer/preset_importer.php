@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ use html_writer;
  * Abstract class used for data preset importers
  *
  * @package    mod_data
- * @copyright  2022 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2022 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class preset_importer {
@@ -154,7 +154,7 @@ abstract class preset_importer {
             }
 
             if (empty($fileobj)) {
-                throw new \moodle_exception('invalidpreset', 'data', '', $this->directory);
+                throw new \powereduc_exception('invalidpreset', 'data', '', $this->directory);
             }
         }
 
@@ -350,7 +350,7 @@ abstract class preset_importer {
                 $preservedfieldid = optional_param("field_$newid", -1, PARAM_INT);
 
                 if (array_key_exists($preservedfieldid, $preservedfields)) {
-                    throw new \moodle_exception('notinjectivemap', 'data');
+                    throw new \powereduc_exception('notinjectivemap', 'data');
                 }
 
                 if ($preservedfieldid == -1) {
@@ -430,7 +430,7 @@ abstract class preset_importer {
         } else {
             notification::error(get_string('cannotapplypreset', 'mod_data'));
         }
-        $backurl = new \moodle_url('/mod/data/field.php', ['d' => $instance->id]);
+        $backurl = new \powereduc_url('/mod/data/field.php', ['d' => $instance->id]);
         redirect($backurl);
     }
 
@@ -439,7 +439,7 @@ abstract class preset_importer {
      *
      * @param manager $manager the current database manager
      * @return preset_importer the relevant preset_importer instance
-     * @throws \moodle_exception when the file provided as parameter (POST or GET) does not exist
+     * @throws \powereduc_exception when the file provided as parameter (POST or GET) does not exist
      */
     public static function create_from_parameters(manager $manager): preset_importer {
 
@@ -462,7 +462,7 @@ abstract class preset_importer {
         global $CFG;
 
         if (!$pluginordirectory) {
-            throw new \moodle_exception('emptypresetname', 'mod_data');
+            throw new \powereduc_exception('emptypresetname', 'mod_data');
         }
         try {
             $presetdir = $CFG->tempdir . '/forms/' . $pluginordirectory;
@@ -471,8 +471,8 @@ abstract class preset_importer {
             } else {
                 return new preset_existing_importer($manager, $pluginordirectory);
             }
-        } catch (\moodle_exception $e) {
-            throw new \moodle_exception('errorpresetnotfound', 'mod_data', '', $pluginordirectory);
+        } catch (\powereduc_exception $e) {
+            throw new \powereduc_exception('errorpresetnotfound', 'mod_data', '', $pluginordirectory);
         }
     }
 

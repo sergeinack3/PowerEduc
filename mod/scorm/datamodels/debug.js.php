@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 echo html_writer::start_tag('script');
 ?>
@@ -69,12 +69,12 @@ function setLoggingActive (flag) {
 // toggle the logging
 function toggleLog () {
     if (getLoggingActive() == "A") {
-        AppendToLog("Moodle Logging Deactivated", 0);
+        AppendToLog("PowerEduc Logging Deactivated", 0);
         setLoggingActive('N');
         logButton.innerHTML = '-><?php echo addslashes_js(get_string('scormloggingoff', 'scorm')); ?>';
     } else {
         setLoggingActive('A');
-        AppendToLog("Moodle Logging Activated", 0);
+        AppendToLog("PowerEduc Logging Activated", 0);
         logButton.innerHTML = '<?php echo addslashes_js(get_string('scormloggingon', 'scorm')); ?>';
         logPopUpWindow.focus();
     }
@@ -723,7 +723,7 @@ function AppendToLog(s, rc) {
     s = '<div ' + sStyle + ' id="<?php echo $scorm->version; ?>">' + now.toGMTString() + ': ' + s + '<\/div>';
     UpdateLog(s);
     // switch colours for a new section of work
-    if (s.match(/Commit|Loaded|Initialize|Terminate|Finish|Moodle SCORM|Moodle Logging/)) {
+    if (s.match(/Commit|Loaded|Initialize|Terminate|Finish|PowerEduc SCORM|PowerEduc Logging/)) {
         logRow++;
     }
 }

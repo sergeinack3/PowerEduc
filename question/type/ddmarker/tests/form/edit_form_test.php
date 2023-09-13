@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qtype_ddmarker\form;
 
 use qtype_ddmarker_edit_form;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
@@ -59,7 +59,7 @@ class edit_form_test extends \advanced_testcase {
         $fakequestion->formoptions->repeatelements = true;
         $fakequestion->inputs = null;
 
-        $form = new qtype_ddmarker_edit_form(new \moodle_url('/'), $fakequestion, $category,
+        $form = new qtype_ddmarker_edit_form(new \powereduc_url('/'), $fakequestion, $category,
                 new \core_question\local\bank\question_edit_contexts($syscontext));
 
         return [$form, $category];

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,18 +24,18 @@
 
 require('../../../config.php');
 
-$PAGE->set_url(new moodle_url('/message/output/airnotifier/requestaccesskey.php'));
+$PAGE->set_url(new powereduc_url('/message/output/airnotifier/requestaccesskey.php'));
 $PAGE->set_context(context_system::instance());
 
 require_login();
 require_sesskey();
-require_capability('moodle/site:config', context_system::instance());
+require_capability('powereduc/site:config', context_system::instance());
 
 $strheading = get_string('requestaccesskey', 'message_airnotifier');
 $PAGE->navbar->add(get_string('administrationsite'));
 $PAGE->navbar->add(get_string('plugins', 'admin'));
 $PAGE->navbar->add(get_string('messageoutputs', 'message'));
-$returl = new moodle_url('/admin/settings.php', array('section' => 'messagesettingairnotifier'));
+$returl = new powereduc_url('/admin/settings.php', array('section' => 'messagesettingairnotifier'));
 $PAGE->navbar->add(get_string('pluginname', 'message_airnotifier'), $returl);
 $PAGE->navbar->add($strheading);
 
@@ -82,7 +82,7 @@ if ($key = $manager->request_accesskey()) {
         $warnings[] = [
             'msg' => get_string('mobilenotificationsdisabledwarning', 'tool_mobile'),
             'linkmsg' => get_string('enableprocessor', 'message_airnotifier'),
-            'linkurl' => new moodle_url('/admin/message.php'),
+            'linkurl' => new powereduc_url('/admin/message.php'),
         ];
     }
 
@@ -91,7 +91,7 @@ if ($key = $manager->request_accesskey()) {
         $warnings[] = [
             'msg' => get_string('mobilenotconfiguredwarning', 'admin'),
             'linkmsg' => get_string('enablemobilewebservice', 'admin'),
-            'linkurl' => new moodle_url('/admin/settings.php', ['section' => 'mobilesettings']),
+            'linkurl' => new powereduc_url('/admin/settings.php', ['section' => 'mobilesettings']),
         ];
     }
 } else {

@@ -24,7 +24,7 @@
 
 namespace core_course\analytics\target;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * No recent accesses.

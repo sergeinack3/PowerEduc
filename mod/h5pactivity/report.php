@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Prints an instance of mod_h5pactivity.
  *
  * @package     mod_h5pactivity
- * @copyright   2020 Ferran Recio <ferran@moodle.com>
+ * @copyright   2020 Ferran Recio <ferran@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -49,7 +49,7 @@ $manager = manager::create_from_coursemodule($cm);
 
 $report = $manager->get_report($userid, $attemptid, $currentgroup);
 if (!$report) {
-    throw new \moodle_exception('permissiondenied');
+    throw new \powereduc_exception('permissiondenied');
 }
 
 $user = $report->get_user();
@@ -96,12 +96,12 @@ if ($manager->can_view_all_attempts()) {
     // - Individual attempt details.
     $nav = [get_string('attempts', 'mod_h5pactivity'), null];
     if ($user) {
-        $nav[1] = new moodle_url('/mod/h5pactivity/report.php', ['a' => $cm->instance]);
+        $nav[1] = new powereduc_url('/mod/h5pactivity/report.php', ['a' => $cm->instance]);
         $navbar[] = $nav;
 
         $nav = [fullname($user), null];
         if ($attempt) {
-            $nav[1] = new moodle_url('/mod/h5pactivity/report.php', ['a' => $cm->instance, 'userid' => $user->id]);
+            $nav[1] = new powereduc_url('/mod/h5pactivity/report.php', ['a' => $cm->instance, 'userid' => $user->id]);
         }
     }
     $navbar[] = $nav;
@@ -111,7 +111,7 @@ if ($manager->can_view_all_attempts()) {
     // - Individual attempt details.
     $nav = [get_string('myattempts', 'mod_h5pactivity'), null];
     if ($attempt) {
-        $nav[1] = new moodle_url('/mod/h5pactivity/report.php', ['a' => $cm->instance]);
+        $nav[1] = new powereduc_url('/mod/h5pactivity/report.php', ['a' => $cm->instance]);
     }
     $navbar[] = $nav;
 

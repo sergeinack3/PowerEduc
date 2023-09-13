@@ -29,7 +29,7 @@
  * @subpackage admin
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /// Add required files
 /**
@@ -328,8 +328,8 @@ function load_environment_xml($env_select=ENV_SELECT_NEWER) {
 function get_list_of_environment_versions($contents) {
     $versions = array();
 
-    if (isset($contents['COMPATIBILITY_MATRIX']['#']['MOODLE'])) {
-        foreach ($contents['COMPATIBILITY_MATRIX']['#']['MOODLE'] as $version) {
+    if (isset($contents['COMPATIBILITY_MATRIX']['#']['POWEREDUC'])) {
+        foreach ($contents['COMPATIBILITY_MATRIX']['#']['POWEREDUC'] as $version) {
             $versions[] = $version['@']['version'];
         }
     }
@@ -423,7 +423,7 @@ function get_environment_for_version($version, $env_select) {
 /// We now we have it. Extract from full contents.
     $fl_arr = array_flip($versions);
 
-    return $contents['COMPATIBILITY_MATRIX']['#']['MOODLE'][$fl_arr[$version]];
+    return $contents['COMPATIBILITY_MATRIX']['#']['POWEREDUC'][$fl_arr[$version]];
 }
 
 /**

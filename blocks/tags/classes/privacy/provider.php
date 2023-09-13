@@ -24,7 +24,7 @@
 
 namespace block_tags\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_tags implementing null_provider.

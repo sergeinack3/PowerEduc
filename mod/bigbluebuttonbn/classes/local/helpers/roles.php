@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ class roles {
             $groupmode = groups_get_activity_groupmode($cm);
 
         }
-        if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($groupmode == SEPARATEGROUPS && !has_capability('powereduc/site:accessallgroups', $context)) {
             global $USER;
             $groups = groups_get_all_groups($course->id, $USER->id);
             $users = [];
@@ -120,7 +120,7 @@ class roles {
     public static function has_capability_in_course(int $courseid, string $capability) {
         global $DB;
         if (empty($courseid) || $DB->record_exists('course', ['id' => $courseid])) {
-            return has_capability('moodle/site:config', \context_system::instance());
+            return has_capability('powereduc/site:config', \context_system::instance());
         }
 
         $coursecontext = context_course::instance($courseid);
@@ -337,7 +337,7 @@ class roles {
     public static function is_moderator(context $context, array $participantlist, ?int $userid = null): bool {
         global $USER;
         // If an admin, then also a moderator.
-        if (has_capability('moodle/site:config', $context)) {
+        if (has_capability('powereduc/site:config', $context)) {
             return true;
         }
         if (!is_array($participantlist)) {

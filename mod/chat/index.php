@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ $id = required_param('id', PARAM_INT);   // Course.
 $PAGE->set_url('/mod/chat/index.php', array('id' => $id));
 
 if (! $course = $DB->get_record('course', array('id' => $id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_course_login($course);
@@ -48,7 +48,7 @@ echo $OUTPUT->heading($strchats, 2);
 
 // Get all the appropriate data.
 if (! $chats = get_all_instances_in_course('chat', $course)) {
-    notice(get_string('thereareno', 'moodle', $strchats), "../../course/view.php?id=$course->id");
+    notice(get_string('thereareno', 'powereduc', $strchats), "../../course/view.php?id=$course->id");
     die();
 }
 

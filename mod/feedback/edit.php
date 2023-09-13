@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ feedback_init_feedback_session();
 $id = required_param('id', PARAM_INT);
 
 if (($formdata = data_submitted()) AND !confirm_sesskey()) {
-    throw new \moodle_exception('invalidsesskey');
+    throw new \powereduc_exception('invalidsesskey');
 }
 
 $switchitemrequired = optional_param('switchitemrequired', false, PARAM_INT);
@@ -43,7 +43,7 @@ require_login($course, false, $cm);
 require_capability('mod/feedback:edititems', $context);
 $feedback = $PAGE->activityrecord;
 $feedbackstructure = new mod_feedback_structure($feedback, $cm);
-$url = new moodle_url('/mod/feedback/edit.php', ['id' => $cm->id]);
+$url = new powereduc_url('/mod/feedback/edit.php', ['id' => $cm->id]);
 
 if ($switchitemrequired) {
     require_sesskey();
@@ -98,7 +98,7 @@ if (count($feedbackitems) > 1) {
            'move_item',
            'position',
         ), 'feedback');
-    $PAGE->requires->yui_module('moodle-mod_feedback-dragdrop', 'M.mod_feedback.init_dragdrop',
+    $PAGE->requires->yui_module('powereduc-mod_feedback-dragdrop', 'M.mod_feedback.init_dragdrop',
             array(array('cmid' => $cm->id)));
 }
 

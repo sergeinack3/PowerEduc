@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'tool_profiling', language 'en', branch 'MOODLE_22_STABLE'
+ * Strings for component 'tool_profiling', language 'en', branch 'POWEREDUC_22_STABLE'
  *
  * @package    tool
  * @subpackage profiling
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['calls'] = 'Function calls';
 $string['cannotfindanyrunforurl'] = 'Sorry, cannot find any profiling run for the \'{$a}\' URL';

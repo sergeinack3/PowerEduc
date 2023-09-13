@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Forum posts search area
@@ -24,7 +24,7 @@
 
 namespace mod_forum\search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/forum/lib.php');
 
@@ -57,7 +57,7 @@ class post extends \core_search\base_mod {
      *
      * @param int $modifiedfrom timestamp
      * @param \context|null $context Optional context to restrict scope of returned results
-     * @return moodle_recordset|null Recordset (or null if no results)
+     * @return powereduc_recordset|null Recordset (or null if no results)
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;
@@ -227,23 +227,23 @@ class post extends \core_search\base_mod {
      * Link to the forum post discussion
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         // The post is already in static cache, we fetch it in self::search_access.
         $post = $this->get_post($doc->get('itemid'));
-        return new \moodle_url('/mod/forum/discuss.php', array('d' => $post->discussion));
+        return new \powereduc_url('/mod/forum/discuss.php', array('d' => $post->discussion));
     }
 
     /**
      * Link to the forum.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
         $contextmodule = \context::instance_by_id($doc->get('contextid'));
-        return new \moodle_url('/mod/forum/view.php', array('id' => $contextmodule->instanceid));
+        return new \powereduc_url('/mod/forum/view.php', array('id' => $contextmodule->instanceid));
     }
 
     /**

@@ -18,7 +18,7 @@ namespace core_calendar;
 
 use core_calendar\local\event\container;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/helpers.php');
 

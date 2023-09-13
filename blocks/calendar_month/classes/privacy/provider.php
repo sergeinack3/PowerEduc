@@ -24,7 +24,7 @@
 
 namespace block_calendar_month\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_calendar_month implementing null_provider.

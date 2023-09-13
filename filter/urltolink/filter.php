@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class filter_urltolink extends moodle_text_filter {
 
@@ -151,7 +151,7 @@ class filter_urltolink extends moodle_text_filter {
 
         if (get_config('filter_urltolink', 'embedimages')) {
             // now try to inject the images, this code was originally in the mediapluing filter
-            // this may be useful only if somebody relies on the fact the links in FORMAT_MOODLE get converted
+            // this may be useful only if somebody relies on the fact the links in FORMAT_POWEREDUC get converted
             // to URLs which in turn change to real images
             $search = '/<a href="([^"]+\.(jpg|png|gif))" class="_blanktarget">([^>]*)<\/a>/is';
             $text = preg_replace_callback($search, 'filter_urltolink_img_callback', $text);
@@ -163,7 +163,7 @@ class filter_urltolink extends moodle_text_filter {
 /**
  * Change links to images into embedded images.
  *
- * This plugin is intended for automatic conversion of image URLs when FORMAT_MOODLE used.
+ * This plugin is intended for automatic conversion of image URLs when FORMAT_POWEREDUC used.
  *
  * @param  $link
  * @return string

@@ -24,7 +24,7 @@
 
 namespace filter_activitynames\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_activitynames implementing null_provider.

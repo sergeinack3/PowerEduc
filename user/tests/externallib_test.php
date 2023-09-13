@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * User external PHPunit tests
@@ -21,7 +21,7 @@
  * @category   external
  * @copyright  2012 Jerome Mouneyrac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 2.4
+ * @since PowerEduc 2.4
  */
 
 namespace core_user;
@@ -30,7 +30,7 @@ use core_files_external;
 use core_user_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -62,7 +62,7 @@ class externallib_test extends externallib_advanced_testcase {
             'department' => 'Department of user 1',
             'institution' => 'Institution of user 1',
             'description' => 'This is a description for user 1',
-            'descriptionformat' => FORMAT_MOODLE,
+            'descriptionformat' => FORMAT_POWEREDUC,
             'city' => 'Perth',
             'country' => 'AU'
             );
@@ -81,7 +81,7 @@ class externallib_test extends externallib_advanced_testcase {
         $generatedusers[$user2->id] = $user2;
 
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/user:viewdetails', $context->id);
+        $roleid = $this->assignUserCapability('powereduc/user:viewdetails', $context->id);
 
         // Enrol the users in the course.
         $this->getDataGenerator()->enrol_user($user1->id, $course->id, $roleid);
@@ -167,11 +167,11 @@ class externallib_test extends externallib_advanced_testcase {
 
             // Call the external function.
             $result = core_user_external::get_users($searchparams);
-            $this->fail('Expecting \'keyalreadyset\' moodle_exception to be thrown.');
-        } catch (\moodle_exception $e) {
+            $this->fail('Expecting \'keyalreadyset\' powereduc_exception to be thrown.');
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('keyalreadyset', $e->errorcode);
         } catch (\Exception $e) {
-            $this->fail('Expecting \'keyalreadyset\' moodle_exception to be thrown.');
+            $this->fail('Expecting \'keyalreadyset\' powereduc_exception to be thrown.');
         }
     }
 
@@ -196,7 +196,7 @@ class externallib_test extends externallib_advanced_testcase {
             'department' => 'Department of user 1',
             'institution' => 'Institution of user 1',
             'description' => 'This is a description for user 1',
-            'descriptionformat' => FORMAT_MOODLE,
+            'descriptionformat' => FORMAT_POWEREDUC,
             'city' => 'Perth',
             'country' => 'AU',
         );
@@ -214,7 +214,7 @@ class externallib_test extends externallib_advanced_testcase {
         $generatedusers[$user2->id] = $user2;
 
         $context = \context_course::instance($course->id);
-        $roleid = $this->assignUserCapability('moodle/user:viewdetails', $context->id);
+        $roleid = $this->assignUserCapability('powereduc/user:viewdetails', $context->id);
 
         // Enrol the users in the course.
         $this->getDataGenerator()->enrol_user($user1->id, $course->id, $roleid, 'manual');
@@ -336,7 +336,7 @@ class externallib_test extends externallib_advanced_testcase {
             'department' => 'Department of user 1',
             'institution' => 'Institution of user 1',
             'description' => 'This is a description for user 1',
-            'descriptionformat' => FORMAT_MOODLE,
+            'descriptionformat' => FORMAT_POWEREDUC,
             'city' => 'Perth',
             'country' => 'AU'
         );
@@ -367,7 +367,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->resetAfterTest(true);
 
-        $data = $this->get_course_user_profiles_setup('moodle/user:viewdetails');
+        $data = $this->get_course_user_profiles_setup('powereduc/user:viewdetails');
 
         // Call the external function.
         $enrolledusers = core_user_external::get_course_user_profiles(array(
@@ -387,7 +387,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $this->resetAfterTest(true);
 
-        $data = $this->get_course_user_profiles_setup('moodle/user:viewdetails');
+        $data = $this->get_course_user_profiles_setup('powereduc/user:viewdetails');
 
         // Do the same call as admin to receive all possible fields.
         $this->setAdminUser();
@@ -432,7 +432,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         $user1 = array(
             'username' => 'usernametest1',
-            'password' => 'Moodle2012!',
+            'password' => 'PowerEduc2012!',
             'idnumber' => 'idnumbertest1',
             'firstname' => 'First Name User Test 1',
             'lastname' => 'Last Name User Test 1',
@@ -469,8 +469,8 @@ class externallib_test extends externallib_advanced_testcase {
         );
 
         $context = \context_system::instance();
-        $roleid = $this->assignUserCapability('moodle/user:create', $context->id);
-        $this->assignUserCapability('moodle/user:editprofile', $context->id, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/user:create', $context->id);
+        $this->assignUserCapability('powereduc/user:editprofile', $context->id, $roleid);
 
         // Call the external function.
         $createdusers = core_user_external::create_users(array($user1, $user2));
@@ -516,7 +516,7 @@ class externallib_test extends externallib_advanced_testcase {
         }
 
         // Call without required capability
-        $this->unassignUserCapability('moodle/user:create', $context->id, $roleid);
+        $this->unassignUserCapability('powereduc/user:create', $context->id, $roleid);
         $this->expectException('required_capability_exception');
         core_user_external::create_users(array($user1));
     }
@@ -616,7 +616,7 @@ class externallib_test extends externallib_advanced_testcase {
         global $USER, $CFG, $DB;
 
         $this->resetAfterTest(true);
-        $this->assignUserCapability('moodle/user:create', SYSCONTEXTID);
+        $this->assignUserCapability('powereduc/user:create', SYSCONTEXTID);
 
         $this->expectException('invalid_parameter_exception');
         $this->expectExceptionMessage($expectmessage);
@@ -699,7 +699,7 @@ class externallib_test extends externallib_advanced_testcase {
                 array('userid1' => $user1->id, 'userid2' => $user2->id)));
 
         $context = \context_system::instance();
-        $roleid = $this->assignUserCapability('moodle/user:delete', $context->id);
+        $roleid = $this->assignUserCapability('powereduc/user:delete', $context->id);
 
         // Call the external function.
         core_user_external::delete_users(array($user1->id, $user2->id));
@@ -709,7 +709,7 @@ class externallib_test extends externallib_advanced_testcase {
                 array('userid1' => $user1->id, 'userid2' => $user2->id)));
 
         // Call without required capability.
-        $this->unassignUserCapability('moodle/user:delete', $context->id, $roleid);
+        $this->unassignUserCapability('powereduc/user:delete', $context->id, $roleid);
         $this->expectException('required_capability_exception');
         core_user_external::delete_users(array($user1->id, $user2->id));
     }
@@ -744,7 +744,7 @@ class externallib_test extends externallib_advanced_testcase {
         $user1 = array(
             'id' => $user1->id,
             'username' => 'usernametest1',
-            'password' => 'Moodle2012!',
+            'password' => 'PowerEduc2012!',
             'idnumber' => 'idnumbertest1',
             'firstname' => 'First Name User Test 1',
             'lastname' => 'Last Name User Test 1',
@@ -773,8 +773,8 @@ class externallib_test extends externallib_advanced_testcase {
         );
 
         $context = \context_system::instance();
-        $roleid = $this->assignUserCapability('moodle/user:update', $context->id);
-        $this->assignUserCapability('moodle/user:editprofile', $context->id, $roleid);
+        $roleid = $this->assignUserCapability('powereduc/user:update', $context->id);
+        $this->assignUserCapability('powereduc/user:editprofile', $context->id, $roleid);
 
         // Check we can't update deleted users, guest users, site admin.
         $user2 = $user3 = $user4 = $user1;
@@ -878,7 +878,7 @@ class externallib_test extends externallib_advanced_testcase {
                 $returnvalue['warnings'][0]['message']);
 
         // Call without required capability.
-        $this->unassignUserCapability('moodle/user:update', $context->id, $roleid);
+        $this->unassignUserCapability('powereduc/user:update', $context->id, $roleid);
         $this->expectException('required_capability_exception');
         core_user_external::update_users(array($user1));
     }
@@ -977,7 +977,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
 
         $context = \context_system::instance();
-        $roleid = $this->assignUserCapability('moodle/user:manageownfiles', $context->id);
+        $roleid = $this->assignUserCapability('powereduc/user:manageownfiles', $context->id);
 
         $context = \context_user::instance($USER->id);
         $contextid = $context->id;
@@ -1022,7 +1022,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
 
         $device = array(
-                'appid' => 'com.moodle.moodlemobile',
+                'appid' => 'com.powereduc.powereducmobile',
                 'name' => 'occam',
                 'model' => 'Nexus 4',
                 'platform' => 'Android',
@@ -1075,7 +1075,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->resetAfterTest(true);
 
         $device = array(
-                'appid' => 'com.moodle.moodlemobile',
+                'appid' => 'com.powereduc.powereducmobile',
                 'name' => 'occam',
                 'model' => 'Nexus 4',
                 'platform' => 'Android',
@@ -1246,7 +1246,7 @@ class externallib_test extends externallib_advanced_testcase {
         $CFG->disableuserimages = true;
 
         $this->setAdminUser();
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_user_external::update_picture(0);
     }
 
@@ -1443,7 +1443,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals('nositepolicy', $result['warnings'][0]['warningcode']);
 
         // Set a policy issue.
-        $CFG->sitepolicy = 'https://moodle.org';
+        $CFG->sitepolicy = 'https://powereduc.org';
         $this->assertEquals(0, $USER->policyagreed);
 
         $result = core_user_external::agree_site_policy();
@@ -1468,11 +1468,11 @@ class externallib_test extends externallib_advanced_testcase {
         $USER->lastname = '';
         try {
             $result = core_user_external::agree_site_policy();
-            $this->fail('Expecting \'usernotfullysetup\' moodle_exception to be thrown');
-        } catch (\moodle_exception $e) {
+            $this->fail('Expecting \'usernotfullysetup\' powereduc_exception to be thrown');
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('usernotfullysetup', $e->errorcode);
         } catch (\Exception $e) {
-            $this->fail('Expecting \'usernotfullysetup\' moodle_exception to be thrown.');
+            $this->fail('Expecting \'usernotfullysetup\' powereduc_exception to be thrown.');
         }
     }
 

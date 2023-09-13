@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page handles editing and creation of quiz overrides
@@ -38,10 +38,10 @@ $override = null;
 if ($overrideid) {
 
     if (! $override = $DB->get_record('quiz_overrides', array('id' => $overrideid))) {
-        throw new \moodle_exception('invalidoverrideid', 'quiz');
+        throw new \powereduc_exception('invalidoverrideid', 'quiz');
     }
     if (! $quiz = $DB->get_record('quiz', array('id' => $override->quiz))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     list($course, $cm) = get_course_and_cm_from_instance($quiz, 'quiz');
 
@@ -50,11 +50,11 @@ if ($overrideid) {
     $quiz = $DB->get_record('quiz', array('id' => $cm->instance), '*', MUST_EXIST);
 
 } else {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 $course = $DB->get_record('course', array('id'=>$cm->course), '*', MUST_EXIST);
 
-$url = new moodle_url('/mod/quiz/overrideedit.php');
+$url = new powereduc_url('/mod/quiz/overrideedit.php');
 if ($action) {
     $url->param('action', $action);
 }
@@ -82,11 +82,11 @@ if ($overrideid) {
 
     if ($override->groupid) {
         if (!groups_group_visible($override->groupid, $course, $cm)) {
-            throw new \moodle_exception('invalidoverrideid', 'quiz');
+            throw new \powereduc_exception('invalidoverrideid', 'quiz');
         }
     } else {
         if (!groups_user_groups_visible($course, $override->userid, $cm)) {
-            throw new \moodle_exception('invalidoverrideid', 'quiz');
+            throw new \powereduc_exception('invalidoverrideid', 'quiz');
         }
     }
 } else {
@@ -113,7 +113,7 @@ if ($action === 'duplicate') {
 // True if group-based override.
 $groupmode = !empty($data->groupid) || ($action === 'addgroup' && empty($overrideid));
 
-$overridelisturl = new moodle_url('/mod/quiz/overrides.php', array('cmid'=>$cm->id));
+$overridelisturl = new powereduc_url('/mod/quiz/overrides.php', array('cmid'=>$cm->id));
 if (!$groupmode) {
     $overridelisturl->param('mode', 'user');
 }

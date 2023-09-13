@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Fallback page of /mod/quiz/edit.php add random question dialog,
@@ -43,21 +43,21 @@ $scrollpos = optional_param('scrollpos', 0, PARAM_INT);
 
 // Get the course object and related bits.
 if (!$course = $DB->get_record('course', array('id' => $quiz->course))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 // You need mod/quiz:manage in addition to question capabilities to access this page.
-// You also need the moodle/question:useall capability somewhere.
+// You also need the powereduc/question:useall capability somewhere.
 require_capability('mod/quiz:manage', $contexts->lowest());
-if (!$contexts->having_cap('moodle/question:useall')) {
-    throw new \moodle_exception('nopermissions', '', '', 'use');
+if (!$contexts->having_cap('powereduc/question:useall')) {
+    throw new \powereduc_exception('nopermissions', '', '', 'use');
 }
 
 $PAGE->set_url($thispageurl);
 
 if ($returnurl) {
-    $returnurl = new moodle_url($returnurl);
+    $returnurl = new powereduc_url($returnurl);
 } else {
-    $returnurl = new moodle_url('/mod/quiz/edit.php', array('cmid' => $cmid));
+    $returnurl = new powereduc_url('/mod/quiz/edit.php', array('cmid' => $cmid));
 }
 if ($scrollpos) {
     $returnurl->param('scrollpos', $scrollpos);
@@ -73,9 +73,9 @@ $qcobject = new question_category_object(
     $defaultcategoryobj->id,
     $defaultcategory,
     null,
-    $contexts->having_cap('moodle/question:add'));
+    $contexts->having_cap('powereduc/question:add'));
 
-$mform = new quiz_add_random_form(new moodle_url('/mod/quiz/addrandom.php'),
+$mform = new quiz_add_random_form(new powereduc_url('/mod/quiz/addrandom.php'),
                 array('contexts' => $contexts, 'cat' => $pagevars['cat']));
 
 if ($mform->is_cancelled()) {
@@ -125,14 +125,14 @@ $mform->set_data(array(
 ));
 
 // Setup $PAGE.
-$streditingquiz = get_string('editinga', 'moodle', get_string('modulename', 'quiz'));
+$streditingquiz = get_string('editinga', 'powereduc', get_string('modulename', 'quiz'));
 $PAGE->navbar->add($streditingquiz);
 $PAGE->set_title($streditingquiz);
 $PAGE->set_heading($course->fullname);
 echo $OUTPUT->header();
 
 if (!$quizname = $DB->get_field($cm->modname, 'name', array('id' => $cm->instance))) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
 }
 
 echo $OUTPUT->heading(get_string('addrandomquestiontoquiz', 'quiz', $quizname), 2);

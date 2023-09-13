@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace message_airnotifier;
 use externallib_advanced_testcase;
 use message_airnotifier_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -82,8 +82,8 @@ class externallib_test extends externallib_advanced_testcase {
 
         self::setUser($user1);
 
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'airnotifier', $user1);
-        set_user_preference('message_provider_moodle_instantmessage_enabled', 'airnotifier', $user2);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'airnotifier', $user1);
+        set_user_preference('message_provider_powereduc_instantmessage_enabled', 'airnotifier', $user2);
 
         $params = array($user1->id, $user2->id, $user3->id);
 
@@ -111,7 +111,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(2, count($preferences['warnings']));
 
         // Now, remove one user1 preference (the user still has one preference for airnotifier).
-        unset_user_preference('message_provider_moodle_instantmessage_enabled', $user1);
+        unset_user_preference('message_provider_powereduc_instantmessage_enabled', $user1);
         $preferences = message_airnotifier_external::are_notification_preferences_configured($params);
         $preferences = \external_api::clean_returnvalue($returnsdescription, $preferences);
         $this->assertEquals($expected, $preferences['users']);
@@ -174,7 +174,7 @@ class externallib_test extends externallib_advanced_testcase {
 
         // Add fake core device.
         $device = array(
-            'appid' => 'com.moodle.moodlemobile',
+            'appid' => 'com.powereduc.powereducmobile',
             'name' => 'occam',
             'model' => 'Nexus 4',
             'platform' => 'Android',

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,20 +22,20 @@ $PAGE->set_url('/mod/feedback/item/captcha/print_captcha.php', array('id'=>$id))
 
 if ($id) {
     if (! $cm = get_coursemodule_from_id('feedback', $id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
 
     if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 }
 
 if (!isset($SESSION->feedback->item->captcha)) {
-    throw new \moodle_exception('captchanotset', 'feedback');
+    throw new \powereduc_exception('captchanotset', 'feedback');
 }
 
 $height = 40;

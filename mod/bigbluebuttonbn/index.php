@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ if (empty($instances)) {
         get_string('index_error_noinstances', plugin::COMPONENT),
         notification::ERROR
     );
-    redirect(new moodle_url('/course/view.php', ['id' => $course->id]));
+    redirect(new powereduc_url('/course/view.php', ['id' => $course->id]));
 }
 
 echo $OUTPUT->header();

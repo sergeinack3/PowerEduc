@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'user', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'user', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   core_user
  * @copyright 2018 Adrian Greeve <adriangreeve.com>
@@ -23,8 +23,8 @@
  */
 
 $string['countparticipantsfound'] = '{$a} participants found';
-$string['moodlenetprofile'] = 'MoodleNet profile ID';
-$string['moodlenetprofile_help'] = 'Your MoodleNet profile ID links your MoodleNet profile with this site.';
+$string['powereducnetprofile'] = 'MoodleNet profile ID';
+$string['powereducnetprofile_help'] = 'Your MoodleNet profile ID links your MoodleNet profile with this site.';
 $string['placeholdertype'] = 'Type...';
 $string['privacy:courserequestpath'] = 'Requested courses';
 $string['privacy:descriptionpath'] = 'Profile description';
@@ -34,7 +34,7 @@ $string['privacy:lastaccesspath'] = 'Last access to courses';
 $string['privacy:metadata:address'] = 'The address of the user.';
 $string['privacy:metadata:aim'] = 'The AIM identifier of the user';
 $string['privacy:metadata:alternatename'] = 'An alternative name for the user.';
-$string['privacy:metadata:appid'] = 'The app ID, usually something like com.moodle.moodlemobile';
+$string['privacy:metadata:appid'] = 'The app ID, usually something like com.powereduc.powereducmobile';
 $string['privacy:metadata:auth'] = 'The authentication plugin used for this user record.';
 $string['privacy:metadata:autosubscribe'] = 'A preference as to if the user should be auto-subscribed to forums the user posts in.';
 $string['privacy:metadata:calendartype'] = 'A user preference for the type of calendar to use.';
@@ -78,7 +78,7 @@ $string['privacy:metadata:maildisplay'] = 'A preference for the user about displ
 $string['privacy:metadata:middlename'] = 'The middle name of the user';
 $string['privacy:metadata:mnethostid'] = 'An identifier for the MNet host if used';
 $string['privacy:metadata:model'] = 'The device name, occam or iPhone etc..';
-$string['privacy:metadata:moodlenetprofile'] = 'The MoodleNet profile for the user';
+$string['privacy:metadata:powereducnetprofile'] = 'The MoodleNet profile for the user';
 $string['privacy:metadata:msn'] = 'The MSN identifier of the user';
 $string['privacy:metadata:my_pages'] = 'User pages - dashboard and profile. This table does not contain personal data and only used to link dashboard blocks to users';
 $string['privacy:metadata:my_pages:name'] = 'Page name';

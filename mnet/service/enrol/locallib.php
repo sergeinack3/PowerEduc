@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides various useful functionality to plugins that offer or use this MNet service
@@ -23,11 +23,11 @@
  *
  * @package    mnetservice
  * @subpackage enrol
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/user/selector/lib.php');
 
@@ -193,7 +193,7 @@ class mnetservice_enrol {
                 $course->shortname      = substr($remote['shortname'], 0, 100);
                 $course->idnumber       = substr($remote['idnumber'], 0, 100);
                 $course->summary        = $remote['summary'];
-                $course->summaryformat  = empty($remote['summaryformat']) ? FORMAT_MOODLE : (int)$remote['summaryformat'];
+                $course->summaryformat  = empty($remote['summaryformat']) ? FORMAT_POWEREDUC : (int)$remote['summaryformat'];
                 $course->startdate      = (int)$remote['startdate'];
                 $course->roleid         = (int)$remote['defaultroleid'];
                 $course->rolename       = substr($remote['defaultrolename'], 0, 255);
@@ -437,7 +437,7 @@ class mnetservice_enrol {
     }
 
     /**
-     * Prepares error messages returned by our XML-RPC requests to be send as debug info to {@see \moodle_exception()}
+     * Prepares error messages returned by our XML-RPC requests to be send as debug info to {@see \powereduc_exception()}
      *
      * MNet client-side methods in this class return request error as serialized array.
      *
@@ -543,7 +543,7 @@ class mnetservice_enrol_potential_users_selector extends user_selector_base {
     /**
      * Find our users who could be enrolled into the remote course
      *
-     * Our users must have 'moodle/site:mnetlogintoremote' capability assigned.
+     * Our users must have 'powereduc/site:mnetlogintoremote' capability assigned.
      * Remote users, guests, deleted and not confirmed users are not returned.
      *
      * @param string $search
@@ -553,7 +553,7 @@ class mnetservice_enrol_potential_users_selector extends user_selector_base {
         global $CFG, $DB;
 
         $systemcontext = context_system::instance();
-        $userids = get_users_by_capability($systemcontext, 'moodle/site:mnetlogintoremote', 'u.id');
+        $userids = get_users_by_capability($systemcontext, 'powereduc/site:mnetlogintoremote', 'u.id');
 
         if (empty($userids)) {
             return array();

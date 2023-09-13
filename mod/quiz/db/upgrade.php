@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Upgrade script for the quiz module.
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Quiz module upgrade function.
@@ -32,7 +32,7 @@ function xmldb_quiz_upgrade($oldversion) {
     global $CFG, $DB;
     $dbman = $DB->get_manager();
 
-    // Automatically generated Moodle v3.9.0 release upgrade line.
+    // Automatically generated PowerEduc v3.9.0 release upgrade line.
     // Put any upgrade step following this.
 
     if ($oldversion < 2020061501) {
@@ -62,7 +62,7 @@ function xmldb_quiz_upgrade($oldversion) {
                 "INNER JOIN {modules} m ON m.id = cm.module " .
                 "WHERE m.name = :name AND q.completionpass = :completionpass";
 
-            /** @var moodle_recordset $records */
+            /** @var powereduc_recordset $records */
             $records = $DB->get_recordset_sql($sql, ['name' => 'quiz', 'completionpass' => 1], 0, 1000);
             while ($records->valid()) {
                 $quizmodule = null;
@@ -157,10 +157,10 @@ function xmldb_quiz_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2022020300, 'quiz');
     }
 
-    // Automatically generated Moodle v4.0.0 release upgrade line.
+    // Automatically generated PowerEduc v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
-    // Automatically generated Moodle v4.1.0 release upgrade line.
+    // Automatically generated PowerEduc v4.1.0 release upgrade line.
     // Put any upgrade step following this.
 
     return true;

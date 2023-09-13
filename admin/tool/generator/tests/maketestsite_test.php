@@ -26,7 +26,7 @@ namespace tool_generator;
 
 use tool_generator_site_backend;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Unit test for the site generator

@@ -22,7 +22,7 @@
  * @package auth_email
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/authlib.php');
 

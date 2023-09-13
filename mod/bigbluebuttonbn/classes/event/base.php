@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace mod_bigbluebuttonbn\event;
 
 use coding_exception;
-use moodle_url;
+use powereduc_url;
 
 /**
  * The mod_bigbluebuttonbn abstract base event class. Most mod_bigbluebuttonbn events can extend this class.
@@ -75,10 +75,10 @@ abstract class base extends \core\event\base {
     /**
      * Returns relevant URL.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public function get_url() {
-        return new moodle_url('/mod/bigbluebuttonbn/view.php', ['id' => $this->contextinstanceid]);
+        return new powereduc_url('/mod/bigbluebuttonbn/view.php', ['id' => $this->contextinstanceid]);
     }
 
     /**

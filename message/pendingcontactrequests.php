@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * This is a placeholder file for a legacy implementation.
  *
  * @package    core
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Disable moodle specific debug messages since we're just redirecting.
+// Disable powereduc specific debug messages since we're just redirecting.
 define('NO_DEBUG_DISPLAY', true);
 require('../config.php');
 

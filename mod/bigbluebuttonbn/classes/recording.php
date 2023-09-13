@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ use context_course;
 use context_module;
 use core\persistent;
 use mod_bigbluebuttonbn\local\proxy\recording_proxy;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
@@ -216,7 +216,7 @@ class recording extends persistent {
         $selects = [];
         $params = [];
         if ($groupmode) {
-            $accessallgroups = has_capability('moodle/site:accessallgroups', $context) || $groupmode == VISIBLEGROUPS;
+            $accessallgroups = has_capability('powereduc/site:accessallgroups', $context) || $groupmode == VISIBLEGROUPS;
             if ($accessallgroups) {
                 if ($context instanceof context_module) {
                     $allowedgroups = groups_get_all_groups($courseid, 0, $groupingid);
@@ -571,7 +571,7 @@ class recording extends persistent {
         if ($playbacks = $this->metadata_get('playbacks')) {
             return array_map(function (array $playback): array {
                 $clone = array_merge([], $playback);
-                $clone['url'] = new moodle_url('/mod/bigbluebuttonbn/bbb_view.php', [
+                $clone['url'] = new powereduc_url('/mod/bigbluebuttonbn/bbb_view.php', [
                     'action' => 'play',
                     'bn' => $this->raw_get('bigbluebuttonbnid'),
                     'rid' => $this->get('id'),

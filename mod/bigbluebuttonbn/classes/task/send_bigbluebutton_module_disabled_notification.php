@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ use mod_bigbluebuttonbn\local\config;
  * re-enabling it.
  *
  * @package   mod_bigbluebuttonbn
- * @copyright 2022 Mihail Geshoski <mihail@moodle.com>
+ * @copyright 2022 Mihail Geshoski <mihail@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class send_bigbluebutton_module_disabled_notification extends adhoc_task {
@@ -40,12 +40,12 @@ class send_bigbluebutton_module_disabled_notification extends adhoc_task {
      */
     public function execute(): void {
         $message = new message();
-        $message->component = 'moodle';
+        $message->component = 'powereduc';
         $message->name = 'notices';
         $message->userfrom = \core_user::get_noreply_user();
         $message->userto = get_admin();
         $message->notification = 1;
-        $message->contexturl = (new \moodle_url('/admin/modules.php'))->out(false);
+        $message->contexturl = (new \powereduc_url('/admin/modules.php'))->out(false);
         $message->contexturlname = get_string('modsettings', 'admin');
         $message->subject = get_string('bigbluebuttondisablednotification_subject', 'mod_bigbluebuttonbn');
         $message->fullmessageformat = FORMAT_HTML;

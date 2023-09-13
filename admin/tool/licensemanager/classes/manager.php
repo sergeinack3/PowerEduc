@@ -28,7 +28,7 @@ use tool_licensemanager\form\edit_license;
 use license_manager;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * License manager, main controller for tool_licensemanager.

@@ -24,7 +24,7 @@
 
 namespace core_course\analytics\target;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base class for targets whose analysable is a course using user enrolments as samples.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ $deletesession = optional_param('deletesession', 0, PARAM_BOOL);
 $confirmdelete = optional_param('confirmdelete', 0, PARAM_BOOL);
 $showall      = optional_param('show_all', 0, PARAM_BOOL);
 
-$url = new moodle_url('/mod/chat/report.php', array('id' => $id));
+$url = new powereduc_url('/mod/chat/report.php', array('id' => $id));
 if ($start !== 0) {
     $url->param('start', $start);
 }
@@ -42,13 +42,13 @@ if ($confirmdelete !== 0) {
 $PAGE->set_url($url);
 
 if (! $cm = get_coursemodule_from_id('chat', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 if (! $chat = $DB->get_record('chat', array('id' => $cm->instance))) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 if (! $course = $DB->get_record('course', array('id' => $chat->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 $context = context_module::instance($cm->id);
@@ -82,7 +82,7 @@ $strdeletesession = get_string('deletesession', 'chat');
 $navlinks = array();
 
 $canexportsess = has_capability('mod/chat:exportsession', $context);
-$canviewfullnames = has_capability('moodle/site:viewfullnames', $context);
+$canviewfullnames = has_capability('powereduc/site:viewfullnames', $context);
 
 $PAGE->activityheader->set_attrs([
     'title' => '',

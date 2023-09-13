@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/fixtures/testable_core_search.php');
 require_once(__DIR__ . '/fixtures/mock_block_area.php');
@@ -216,10 +216,10 @@ class base_block_test extends \advanced_testcase {
     /**
      * Utility function to convert recordset to array for testing.
      *
-     * @param moodle_recordset $rs Recordset to convert
+     * @param powereduc_recordset $rs Recordset to convert
      * @return array Array indexed by number (0, 1, 2, ...)
      */
-    protected static function recordset_to_indexed_array(\moodle_recordset $rs) {
+    protected static function recordset_to_indexed_array(\powereduc_recordset $rs) {
         $results = [];
         foreach ($rs as $rec) {
             $results[] = $rec;
@@ -267,7 +267,7 @@ class base_block_test extends \advanced_testcase {
         // Get document URL.
         $area = new \block_mockblock\search\area();
         $doc = $this->get_doc($course->id, $blockid);
-        $expected = new \moodle_url('/course/view.php', ['id' => $course->id], 'inst' . $blockid);
+        $expected = new \powereduc_url('/course/view.php', ['id' => $course->id], 'inst' . $blockid);
         $this->assertEquals($expected, $area->get_doc_url($doc));
         $this->assertEquals($expected, $area->get_context_url($doc));
 
@@ -280,7 +280,7 @@ class base_block_test extends \advanced_testcase {
 
         // Get document URL.
         $doc2 = $this->get_doc($course->id, $block2id);
-        $expected = new \moodle_url('/', ['redirect' => 0], 'inst' . $block2id);
+        $expected = new \powereduc_url('/', ['redirect' => 0], 'inst' . $block2id);
         $this->assertEquals($expected, $area->get_doc_url($doc2));
         $this->assertEquals($expected, $area->get_context_url($doc2));
 
@@ -296,7 +296,7 @@ class base_block_test extends \advanced_testcase {
         $doc3 = $this->get_doc($course->id, $block3id);
         $this->assertDebuggingCalledCount(2, [$debugmessage, $debugmessage]);
 
-        $expected = new \moodle_url('/mod/page/view.php', ['id' => $page->cmid], 'inst' . $block3id);
+        $expected = new \powereduc_url('/mod/page/view.php', ['id' => $page->cmid], 'inst' . $block3id);
         $this->assertEquals($expected, $area->get_doc_url($doc3));
         $this->assertDebuggingCalled($debugmessage);
         $this->assertEquals($expected, $area->get_context_url($doc3));
@@ -309,7 +309,7 @@ class base_block_test extends \advanced_testcase {
 
         // Get document URL.
         $doc = $this->get_doc($course->id, $block4id);
-        $expected = new \moodle_url('/course/view.php', ['id' => $course->id], 'inst' . $block4id);
+        $expected = new \powereduc_url('/course/view.php', ['id' => $course->id], 'inst' . $block4id);
         $this->assertEquals($expected, $area->get_doc_url($doc));
         $this->assertEquals($expected, $area->get_context_url($doc));
 
@@ -319,7 +319,7 @@ class base_block_test extends \advanced_testcase {
 
         // Get document URL.
         $doc = $this->get_doc($course->id, $block5id);
-        $expected = new \moodle_url('/course/view.php', ['id' => $course->id], 'inst' . $block5id);
+        $expected = new \powereduc_url('/course/view.php', ['id' => $course->id], 'inst' . $block5id);
         $this->assertEquals($expected, $area->get_doc_url($doc));
         $this->assertEquals($expected, $area->get_context_url($doc));
     }
@@ -454,6 +454,6 @@ class base_block_test extends \advanced_testcase {
         $result = $baseblock->get_doc_icon($document);
 
         $this->assertEquals('e/anchor', $result->get_name());
-        $this->assertEquals('moodle', $result->get_component());
+        $this->assertEquals('powereduc', $result->get_component());
     }
 }

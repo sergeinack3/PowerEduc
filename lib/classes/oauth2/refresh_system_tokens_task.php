@@ -28,7 +28,7 @@ use \core\task\scheduled_task;
 use core_user;
 use moodle_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Task to refresh system tokens regularly. Admins are notified in case an authorisation expires.

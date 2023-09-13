@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for report completion events.
@@ -46,7 +46,7 @@ class events_test extends \advanced_testcase {
     /**
      * Test the report viewed event.
      *
-     * It's not possible to use the moodle API to simulate the viewing of log report, so here we
+     * It's not possible to use the powereduc API to simulate the viewing of log report, so here we
      * simply create the event and trigger it.
      */
     public function test_report_viewed() {
@@ -63,7 +63,7 @@ class events_test extends \advanced_testcase {
 
         $this->assertInstanceOf('\report_completion\event\report_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $url = new \moodle_url('/report/completion/index.php', array('course' => $course->id));
+        $url = new \powereduc_url('/report/completion/index.php', array('course' => $course->id));
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
@@ -71,7 +71,7 @@ class events_test extends \advanced_testcase {
     /**
      * Test the user report viewed event.
      *
-     * It's not possible to use the moodle API to simulate the viewing of log report, so here we
+     * It's not possible to use the powereduc API to simulate the viewing of log report, so here we
      * simply create the event and trigger it.
      */
     public function test_user_report_viewed() {
@@ -89,7 +89,7 @@ class events_test extends \advanced_testcase {
         $this->assertInstanceOf('\report_completion\event\user_report_viewed', $event);
         $this->assertEquals($context, $event->get_context());
         $this->assertEquals(3, $event->relateduserid);
-        $this->assertEquals(new \moodle_url('/report/completion/user.php', array('id' => 3, 'course' => $course->id)),
+        $this->assertEquals(new \powereduc_url('/report/completion/user.php', array('id' => 3, 'course' => $course->id)),
                 $event->get_url());
         $expected = array($course->id, 'course', 'report completion', "report/completion/user.php?id=3&course=$course->id",
                 $course->id);

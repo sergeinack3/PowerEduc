@@ -20,7 +20,7 @@ use file_archive;
 use file_progress;
 use zip_archive;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/filestorage/file_progress.php');

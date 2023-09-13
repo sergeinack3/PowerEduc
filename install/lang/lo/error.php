@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>ບໍ່ສາມາດສ້າງຖານຂໍ້ມູນໄດ້.</p>
 <p>ຖານຂໍ້ມູນທີ່ລະບຸນັ້ນບໍ່ມີຢູ່ ແລະ ຜູ້ໃຊ້ທີ່ໃຫ້ມາບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ສ້າງຖານຂໍ້ມູນ. </p>

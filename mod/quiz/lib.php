@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions for the quiz module.
@@ -21,12 +21,12 @@
  * Functions that are only called by the quiz module itself are in {@link locallib.php}
  *
  * @package    mod_quiz
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_quiz\question\bank\custom_view;
 use core_question\statistics\questions\all_calculated_for_qubaid_condition;
@@ -493,7 +493,7 @@ function quiz_user_outline($course, $user, $mod, $quiz) {
     $result = new stdClass();
     // If the user can't see hidden grades, don't return that information.
     $gitem = grade_item::fetch(array('id' => $grades->items[0]->id));
-    if (!$gitem->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+    if (!$gitem->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
         $result->info = get_string('gradenoun') . ': ' . $grade->str_long_grade;
     } else {
         $result->info = get_string('gradenoun') . ': ' . get_string('hidden', 'grades');
@@ -524,7 +524,7 @@ function quiz_user_complete($course, $user, $mod, $quiz) {
         $grade = reset($grades->items[0]->grades);
         // If the user can't see hidden grades, don't return that information.
         $gitem = grade_item::fetch(array('id' => $grades->items[0]->id));
-        if (!$gitem->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$gitem->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             echo $OUTPUT->container(get_string('gradenoun').': '.$grade->str_long_grade);
             if ($grade->str_feedback) {
                 echo $OUTPUT->container(get_string('feedback').': '.$grade->str_feedback);
@@ -552,7 +552,7 @@ function quiz_user_complete($course, $user, $mod, $quiz) {
                         $gitem->hidden = true;
                     }
                 }
-                if (!$gitem->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+                if (!$gitem->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
                     echo quiz_format_grade($quiz, $attempt->sumgrades) . '/' . quiz_format_grade($quiz, $quiz->sumgrades);
                 } else {
                     echo get_string('hidden', 'grades');
@@ -580,7 +580,7 @@ function quiz_get_user_attempts($quizids, $userid, $status = 'finished', $includ
     global $DB, $CFG;
     // TODO MDL-33071 it is very annoying to have to included all of locallib.php
     // just to get the quiz_attempt::FINISHED constants, but I will try to sort
-    // that out properly for Moodle 2.4. For now, I will just do a quick fix for
+    // that out properly for PowerEduc 2.4. For now, I will just do a quick fix for
     // MDL-33048.
     require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 
@@ -935,8 +935,8 @@ function quiz_get_recent_mod_activity(&$activities, &$index, $timestart,
     }
 
     $context         = context_module::instance($cm->id);
-    $accessallgroups = has_capability('moodle/site:accessallgroups', $context);
-    $viewfullnames   = has_capability('moodle/site:viewfullnames', $context);
+    $accessallgroups = has_capability('powereduc/site:accessallgroups', $context);
+    $viewfullnames   = has_capability('powereduc/site:viewfullnames', $context);
     $grader          = has_capability('mod/quiz:viewreports', $context);
     $groupmode       = groups_get_activity_groupmode($cm, $course);
 
@@ -1598,7 +1598,7 @@ function quiz_reset_userdata($data) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function quiz_print_overview() {
     throw new coding_exception('quiz_print_overview() can not be used any more and is obsolete.');
@@ -1682,7 +1682,7 @@ function quiz_supports($feature) {
         case FEATURE_COMPLETION_HAS_RULES:      return true;
         case FEATURE_GRADE_HAS_GRADE:           return true;
         case FEATURE_GRADE_OUTCOMES:            return true;
-        case FEATURE_BACKUP_MOODLE2:            return true;
+        case FEATURE_BACKUP_POWEREDUC2:            return true;
         case FEATURE_SHOW_DESCRIPTION:          return true;
         case FEATURE_CONTROLS_GRADE_VISIBILITY: return true;
         case FEATURE_USES_QUESTIONS:            return true;
@@ -1731,7 +1731,7 @@ function quiz_extend_settings_navigation(settings_navigation $settings, navigati
     }
 
     if (has_any_capability(['mod/quiz:manageoverrides', 'mod/quiz:viewoverrides'], $settings->get_page()->cm->context)) {
-        $url = new moodle_url('/mod/quiz/overrides.php', ['cmid' => $settings->get_page()->cm->id, 'mode' => 'user']);
+        $url = new powereduc_url('/mod/quiz/overrides.php', ['cmid' => $settings->get_page()->cm->id, 'mode' => 'user']);
         $node = navigation_node::create(get_string('overrides', 'quiz'),
                     $url, navigation_node::TYPE_SETTING, null, 'mod_quiz_useroverrides');
         $settingsoverride = $quiznode->add_node($node, $beforekey);
@@ -1739,13 +1739,13 @@ function quiz_extend_settings_navigation(settings_navigation $settings, navigati
 
     if (has_capability('mod/quiz:manage', $settings->get_page()->cm->context)) {
         $node = navigation_node::create(get_string('questions', 'quiz'),
-            new moodle_url('/mod/quiz/edit.php', array('cmid' => $settings->get_page()->cm->id)),
+            new powereduc_url('/mod/quiz/edit.php', array('cmid' => $settings->get_page()->cm->id)),
             navigation_node::TYPE_SETTING, null, 'mod_quiz_edit', new pix_icon('t/edit', ''));
         $quiznode->add_node($node, $beforekey);
     }
 
     if (has_capability('mod/quiz:preview', $settings->get_page()->cm->context)) {
-        $url = new moodle_url('/mod/quiz/startattempt.php',
+        $url = new powereduc_url('/mod/quiz/startattempt.php',
                 array('cmid' => $settings->get_page()->cm->id, 'sesskey' => sesskey()));
         $node = navigation_node::create(get_string('preview', 'quiz'), $url,
                 navigation_node::TYPE_SETTING, null, 'mod_quiz_preview',
@@ -1760,14 +1760,14 @@ function quiz_extend_settings_navigation(settings_navigation $settings, navigati
         require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');
         $reportlist = quiz_report_list($settings->get_page()->cm->context);
 
-        $url = new moodle_url('/mod/quiz/report.php',
+        $url = new powereduc_url('/mod/quiz/report.php',
                 array('id' => $settings->get_page()->cm->id, 'mode' => reset($reportlist)));
         $reportnode = $quiznode->add_node(navigation_node::create(get_string('results', 'quiz'), $url,
                 navigation_node::TYPE_SETTING,
                 null, 'quiz_report', new pix_icon('i/report', '')));
 
         foreach ($reportlist as $report) {
-            $url = new moodle_url('/mod/quiz/report.php', ['id' => $settings->get_page()->cm->id, 'mode' => $report]);
+            $url = new powereduc_url('/mod/quiz/report.php', ['id' => $settings->get_page()->cm->id, 'mode' => $report]);
             $reportnode->add_node(navigation_node::create(get_string($report, 'quiz_'.$report), $url,
                     navigation_node::TYPE_SETTING,
                     null, 'quiz_report_' . $report, new pix_icon('i/item', '')));
@@ -1911,7 +1911,7 @@ function quiz_get_navigation_options() {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function quiz_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER, $CFG;
@@ -2054,7 +2054,7 @@ function mod_quiz_core_calendar_provide_event_action(calendar_event $event,
     }
 
     $name = get_string('attemptquiznow', 'quiz');
-    $url = new \moodle_url('/mod/quiz/view.php', [
+    $url = new \powereduc_url('/mod/quiz/view.php', [
         'id' => $cm->id
     ]);
     $itemcount = 1;
@@ -2236,7 +2236,7 @@ function mod_quiz_get_completion_active_rule_descriptions($cm) {
  *     [1506741172, 'The date must be before this date']
  * ]
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event The calendar event to get the time range for
  * @param stdClass $quiz The module instance to get the range from
  * @return array
@@ -2279,7 +2279,7 @@ function mod_quiz_core_calendar_get_valid_event_timestart_range(\calendar_event 
  * It will set the timeopen or timeclose value of the quiz instance
  * according to the type of event provided.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event A quiz activity calendar event
  * @param \stdClass $quiz A quiz activity instance
  */
@@ -2320,7 +2320,7 @@ function mod_quiz_core_calendar_event_timestart_updated(\calendar_event $event, 
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 
@@ -2430,7 +2430,7 @@ function mod_quiz_output_fragment_add_random_question_form($args) {
     ];
 
     $form = new quiz_add_random_form(
-        new \moodle_url('/mod/quiz/addrandom.php'),
+        new \powereduc_url('/mod/quiz/addrandom.php'),
         $formoptions,
         'post',
         '',

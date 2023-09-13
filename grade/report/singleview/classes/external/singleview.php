@@ -30,7 +30,7 @@ use moodle_url;
 use restricted_context_exception;
 use grade_tree;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot.'/course/externallib.php');
 require_once($CFG->dirroot.'/grade/lib.php');

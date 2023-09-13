@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Calculated question definition class.
@@ -24,7 +24,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/type/questionbase.php');
 require_once($CFG->dirroot . '/question/type/numerical/question.php');
@@ -244,7 +244,7 @@ class qtype_calculated_dataset_loader {
             $a = new stdClass();
             $a->id = $this->questionid;
             $a->item = $itemnumber;
-            throw new moodle_exception('cannotgetdsfordependent', 'question', '', $a);
+            throw new powereduc_exception('cannotgetdsfordependent', 'question', '', $a);
         }
 
         return $this->load_values($itemnumber);
@@ -317,7 +317,7 @@ class qtype_calculated_variable_substituter {
                 $a = new stdClass();
                 $a->name = '{' . $name . '}';
                 $a->value = $value;
-                throw new moodle_exception('notvalidnumber', 'qtype_calculated', '', $a);
+                throw new powereduc_exception('notvalidnumber', 'qtype_calculated', '', $a);
             }
 
             $this->search[] = '{' . $name . '}';
@@ -426,12 +426,12 @@ class qtype_calculated_variable_substituter {
     public function calculate($expression) {
         // Make sure no malicious code is present in the expression. Refer MDL-46148 for details.
         if ($error = qtype_calculated_find_formula_errors($expression)) {
-            throw new moodle_exception('illegalformulasyntax', 'qtype_calculated', '', $error);
+            throw new powereduc_exception('illegalformulasyntax', 'qtype_calculated', '', $error);
         }
         $expression = $this->substitute_values_for_eval($expression);
         if ($datasets = question_bank::get_qtype('calculated')->find_dataset_names($expression)) {
             // Some placeholders were not substituted.
-            throw new moodle_exception('illegalformulasyntax', 'qtype_calculated', '',
+            throw new powereduc_exception('illegalformulasyntax', 'qtype_calculated', '',
                 '{' . reset($datasets) . '}');
         }
         return $this->calculate_raw($expression);
@@ -455,7 +455,7 @@ class qtype_calculated_variable_substituter {
             // which is much better.
         }
         // In either case of an invalid $expression, we end here.
-        throw new moodle_exception('illegalformulasyntax', 'qtype_calculated', '', $expression);
+        throw new powereduc_exception('illegalformulasyntax', 'qtype_calculated', '', $expression);
     }
 
     /**

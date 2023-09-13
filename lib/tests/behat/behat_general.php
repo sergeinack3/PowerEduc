@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../behat/behat_base.php');
 
@@ -53,7 +53,7 @@ class behat_general extends behat_base {
      * @var string used by {@link switch_to_window()} and
      * {@link switch_to_the_main_window()} to work-around a Chrome browser issue.
      */
-    const MAIN_WINDOW_NAME = '__moodle_behat_main_window_name';
+    const MAIN_WINDOW_NAME = '__powereduc_behat_main_window_name';
 
     /**
      * @var string when we want to check whether or not a new page has loaded,
@@ -112,7 +112,7 @@ class behat_general extends behat_base {
     public function i_wait_to_be_redirected() {
 
         // Xpath and processes based on core_renderer::redirect_message(), core_renderer::$metarefreshtag and
-        // moodle_page::$periodicrefreshdelay possible values.
+        // powereduc_page::$periodicrefreshdelay possible values.
         if (!$metarefresh = $this->getSession()->getPage()->find('xpath', "//head/descendant::meta[@http-equiv='refresh']")) {
             // We don't fail the scenario if no redirection with message is found to avoid race condition false failures.
             return true;
@@ -2177,10 +2177,10 @@ EOF;
      *
      * @When I visit :localurl
      *
-     * @param string|moodle_url $localurl The URL relative to the behat_wwwroot to visit.
+     * @param string|powereduc_url $localurl The URL relative to the behat_wwwroot to visit.
      */
     public function i_visit($localurl): void {
-        $localurl = new moodle_url($localurl);
+        $localurl = new powereduc_url($localurl);
         $this->getSession()->visit($this->locate_path($localurl->out_as_local_url(false)));
     }
 

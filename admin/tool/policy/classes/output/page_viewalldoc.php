@@ -27,7 +27,7 @@ namespace tool_policy\output;
 
 use moodle_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/filelib.php");
 

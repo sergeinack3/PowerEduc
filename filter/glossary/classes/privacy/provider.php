@@ -24,7 +24,7 @@
 
 namespace filter_glossary\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_glossary implementing null_provider.

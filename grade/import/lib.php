@@ -74,7 +74,7 @@ function grade_import_commit($courseid, $importcode, $importfeedback=true, $verb
                 // insert each individual grade to this new grade item
                 foreach ($grades as $grade) {
                     if (!$gradeitem->update_final_grade($grade->userid, $grade->finalgrade, 'import',
-                        $grade->feedback, FORMAT_MOODLE, null, null, true)) {
+                        $grade->feedback, FORMAT_POWEREDUC, null, null, true)) {
                         $failed = true;
                         break 2;
                     }
@@ -121,7 +121,7 @@ function grade_import_commit($courseid, $importcode, $importfeedback=true, $verb
                         $grade->finalgrade = false;
                     }
                     if (!$gradeitem->update_final_grade($grade->userid, $grade->finalgrade, 'import',
-                            $grade->feedback, FORMAT_MOODLE, null, null, true)) {
+                            $grade->feedback, FORMAT_POWEREDUC, null, null, true)) {
                         $errordata = new stdClass();
                         $errordata->itemname = $gradeitem->itemname;
                         $errordata->userid = $grade->userid;

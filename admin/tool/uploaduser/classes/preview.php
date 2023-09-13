@@ -24,7 +24,7 @@
 
 namespace tool_uploaduser;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_uploaduser\local\field_value_validators;
 

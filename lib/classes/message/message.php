@@ -25,7 +25,7 @@
 
 namespace core\message;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * New messaging class.
@@ -37,7 +37,7 @@ defined('MOODLE_INTERNAL') || die();
  *  userto object|int The message recipient. This is mandatory for NOTIFICACIONS and 1:1 personal messages.
  *  subject string The message subject
  *  fullmessage string The full message in a given format
- *  fullmessageformat int The format if the full message (FORMAT_MOODLE, FORMAT_HTML, ..)
+ *  fullmessageformat int The format if the full message (FORMAT_POWEREDUC, FORMAT_HTML, ..)
  *  fullmessagehtml string The full version (the message processor will choose with one to use)
  *  smallmessage string The small version of the message
  *

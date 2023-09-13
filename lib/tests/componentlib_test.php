@@ -29,7 +29,7 @@ use component_installer;
 use lang_installer;
 use lang_installer_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir.'/componentlib.class.php');

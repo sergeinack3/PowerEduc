@@ -23,7 +23,7 @@
  */
 
 // Prevent direct access to this file
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden.');
 }
 

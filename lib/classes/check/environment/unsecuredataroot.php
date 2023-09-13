@@ -26,7 +26,7 @@
 
 namespace core\check\environment;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\check\result;
 

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ $mode = 'addtemplate'; // Define the mode for this page, only 1 mode available.
 $tags = optional_param_array('tags', [], PARAM_TAGLIST);
 $redirectbackto = optional_param('backto', '', PARAM_LOCALURL); // The location to redirect back.
 
-$url = new moodle_url('/mod/data/edit.php');
+$url = new powereduc_url('/mod/data/edit.php');
 
 $record = null;
 
@@ -93,11 +93,11 @@ if (!has_capability('mod/data:manageentries', $context)) {
     if ($rid) {
         // User is editing an existing record.
         if (!data_user_can_manage_entry($record, $data, $context)) {
-            throw new \moodle_exception('noaccess', 'data');
+            throw new \powereduc_exception('noaccess', 'data');
         }
     } else if (!data_user_can_add_entry($data, $currentgroup, $groupmode, $context)) {
         // User is trying to create a new record.
-        throw new \moodle_exception('noaccess', 'data');
+        throw new \powereduc_exception('noaccess', 'data');
     }
 }
 
@@ -161,7 +161,7 @@ if ($datarecord && confirm_sesskey()) {
                 // User has clicked "Save and add another". Reset all of the fields.
                 $datarecord = null;
             } else {
-                $viewurl = new moodle_url('/mod/data/view.php', [
+                $viewurl = new powereduc_url('/mod/data/view.php', [
                     'd' => $data->id,
                     'rid' => $recordid,
                 ]);
@@ -194,7 +194,7 @@ $template = $manager->get_template($mode);
 echo $template->parse_add_entry($processeddata, $rid, $datarecord);
 
 if (empty($redirectbackto)) {
-    $redirectbackto = new \moodle_url('/mod/data/view.php', ['id' => $cm->id]);
+    $redirectbackto = new \powereduc_url('/mod/data/view.php', ['id' => $cm->id]);
 }
 
 $actionbuttons = html_writer::link(
@@ -231,6 +231,6 @@ foreach ($possiblefields as $field) {
 
 // Finish the page.
 if (empty($possiblefields)) {
-    throw new \moodle_exception('nofieldindatabase', 'data');
+    throw new \powereduc_exception('nofieldindatabase', 'data');
 }
 echo $OUTPUT->footer();

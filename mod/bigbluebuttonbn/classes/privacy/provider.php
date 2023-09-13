@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -237,7 +237,7 @@ class provider implements
     /**
      * Loop and export from a recordset.
      *
-     * @param \moodle_recordset $recordset The recordset.
+     * @param \powereduc_recordset $recordset The recordset.
      * @param string $splitkey The record key to determine when to export.
      * @param mixed $initial The initial data to reduce from.
      * @param callable $reducer The function to return the dataset, receives current dataset, and the current record.
@@ -245,7 +245,7 @@ class provider implements
      * @return void
      */
     protected static function recordset_loop_and_export(
-        \moodle_recordset $recordset,
+        \powereduc_recordset $recordset,
         $splitkey,
         $initial,
         callable $reducer,

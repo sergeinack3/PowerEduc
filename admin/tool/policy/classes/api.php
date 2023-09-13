@@ -35,7 +35,7 @@ use tool_policy\event\acceptance_created;
 use tool_policy\event\acceptance_updated;
 use user_picture;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Provides the API of the policies plugin.

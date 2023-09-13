@@ -33,7 +33,7 @@ use pix_icon;
 use html_writer;
 use gradereport_singleview;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * The screen with a list of users.

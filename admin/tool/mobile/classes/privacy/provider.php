@@ -21,7 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_mobile\privacy;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 use core_privacy\local\request\writer;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\contextlist;

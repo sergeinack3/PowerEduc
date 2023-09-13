@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Reports implementation
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once(__DIR__.'/lib.php');
 require_once($CFG->dirroot.'/lib/statslib.php');
@@ -34,7 +34,7 @@ function report_stats_mode_menu($course, $mode, $time, $url) {
     $reportoptions = stats_get_report_options($course->id, $mode);
     $timeoptions = report_stats_timeoptions($mode);
     if (empty($timeoptions)) {
-        throw new \moodle_exception('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
+        throw new \powereduc_exception('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
     }
     */
 
@@ -45,7 +45,7 @@ function report_stats_mode_menu($course, $mode, $time, $url) {
         $options[STATS_MODE_RANKED] = get_string('reports');
     }
     $popupurl = $url."?course=$course->id&time=$time";
-    $select = new single_select(new moodle_url($popupurl), 'mode', $options, $mode, null);
+    $select = new single_select(new powereduc_url($popupurl), 'mode', $options, $mode, null);
     $select->set_label(get_string('reports'), array('class' => 'accesshide'));
     $select->formid = 'switchmode';
     return $OUTPUT->render($select);
@@ -106,7 +106,7 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
         if (has_capability('report/stats:view', $context)) {
             if (isset($c->visible) && $c->visible <= 0) {
                 // For hidden courses, require visibility check.
-                if (!has_capability('moodle/course:viewhiddencourses', $context)) {
+                if (!has_capability('powereduc/course:viewhiddencourses', $context)) {
                     continue;
                 }
             }
@@ -119,7 +119,7 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
     $reportoptions = stats_get_report_options($course->id, $mode);
     $timeoptions = report_stats_timeoptions($mode);
     if (empty($timeoptions)) {
-        throw new \moodle_exception('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
+        throw new \powereduc_exception('nostatstodisplay', '', $CFG->wwwroot.'/course/view.php?id='.$course->id);
     }
 
     $users = array();
@@ -148,7 +148,7 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
         $sql .= " ORDER BY {$sort}";
 
         if (!$us = $DB->get_records_sql($sql, array_merge($param->params, $moreparams))) {
-            throw new \moodle_exception('nousers');
+            throw new \powereduc_exception('nousers');
         }
         foreach ($us as $u) {
             $users[$u->id] = fullname($u, true);
@@ -188,7 +188,7 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
     //  - If the mode is not detailed OR a valid user has been selected.
     if (!empty($report) && !empty($time) && ($mode !== STATS_MODE_DETAILED || !empty($userid))) {
         if ($report == STATS_REPORT_LOGINS && $course->id != SITEID) {
-            throw new \moodle_exception('reportnotavailable');
+            throw new \powereduc_exception('reportnotavailable');
         }
 
         $param = stats_get_parameters($time, $report, $course->id, $mode, $roleid);
@@ -254,7 +254,7 @@ function report_stats_report($course, $report, $mode, $user, $roleid, $time) {
                 case 'monthly': $period = get_string('month', 'form'); break;
                 default : $period = '';
             }
-            $table->head = array(get_string('periodending','moodle',$period));
+            $table->head = array(get_string('periodending','powereduc',$period));
             if (empty($param->crosstab)) {
                 $table->head[] = $param->line1;
                 if (!empty($param->line2)) {

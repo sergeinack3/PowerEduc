@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class textarea_texteditor extends texteditor {
     public function supported_by_browser() {
@@ -33,14 +33,14 @@ class textarea_texteditor extends texteditor {
 
     public function get_supported_formats() {
         return array(FORMAT_HTML     => FORMAT_HTML,
-                     FORMAT_MOODLE   => FORMAT_MOODLE,
+                     FORMAT_POWEREDUC   => FORMAT_POWEREDUC,
                      FORMAT_PLAIN    => FORMAT_PLAIN,
                      FORMAT_MARKDOWN => FORMAT_MARKDOWN,
                     );
     }
 
     public function get_preferred_format() {
-        return FORMAT_MOODLE;
+        return FORMAT_POWEREDUC;
     }
 
     public function supports_repositories() {

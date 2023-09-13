@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -27,7 +27,7 @@
  *              to a draft area in separate requests. If it is 0, a new draftid will be generated.
  *
  * @package    core_webservice
- * @copyright  2011 Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright  2011 Dongsheng Cai <dongsheng@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,9 +37,9 @@
 define('AJAX_SCRIPT', true);
 
 /**
- * NO_MOODLE_COOKIES - we don't want any cookie
+ * NO_POWEREDUC_COOKIES - we don't want any cookie
  */
-define('NO_MOODLE_COOKIES', true);
+define('NO_POWEREDUC_COOKIES', true);
 
 require_once(__DIR__ . '/../config.php');
 require_once($CFG->dirroot . '/webservice/lib.php');
@@ -72,28 +72,28 @@ foreach ($_FILES as $fieldname=>$uploaded_file) {
     if (!empty($_FILES[$fieldname]['error'])) {
         switch ($_FILES[$fieldname]['error']) {
         case UPLOAD_ERR_INI_SIZE:
-            throw new moodle_exception('upload_error_ini_size', 'repository_upload');
+            throw new powereduc_exception('upload_error_ini_size', 'repository_upload');
             break;
         case UPLOAD_ERR_FORM_SIZE:
-            throw new moodle_exception('upload_error_form_size', 'repository_upload');
+            throw new powereduc_exception('upload_error_form_size', 'repository_upload');
             break;
         case UPLOAD_ERR_PARTIAL:
-            throw new moodle_exception('upload_error_partial', 'repository_upload');
+            throw new powereduc_exception('upload_error_partial', 'repository_upload');
             break;
         case UPLOAD_ERR_NO_FILE:
-            throw new moodle_exception('upload_error_no_file', 'repository_upload');
+            throw new powereduc_exception('upload_error_no_file', 'repository_upload');
             break;
         case UPLOAD_ERR_NO_TMP_DIR:
-            throw new moodle_exception('upload_error_no_tmp_dir', 'repository_upload');
+            throw new powereduc_exception('upload_error_no_tmp_dir', 'repository_upload');
             break;
         case UPLOAD_ERR_CANT_WRITE:
-            throw new moodle_exception('upload_error_cant_write', 'repository_upload');
+            throw new powereduc_exception('upload_error_cant_write', 'repository_upload');
             break;
         case UPLOAD_ERR_EXTENSION:
-            throw new moodle_exception('upload_error_extension', 'repository_upload');
+            throw new powereduc_exception('upload_error_extension', 'repository_upload');
             break;
         default:
-            throw new moodle_exception('nofile');
+            throw new powereduc_exception('nofile');
         }
     }
 

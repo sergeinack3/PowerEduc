@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -20,7 +20,7 @@ namespace core_reportbuilder\external;
 
 use advanced_testcase;
 use core_reportbuilder_generator;
-use moodle_url;
+use powereduc_url;
 use core_reportbuilder\local\helpers\user_filter_manager;
 use core_reportbuilder\local\filters\text;
 use core_user\reportbuilder\datasource\users;
@@ -30,7 +30,7 @@ use core_user\reportbuilder\datasource\users;
  *
  * @package     core_reportbuilder
  * @covers      \core_reportbuilder\external\custom_report_exporter
- * @copyright   2022 Paul Holden <paulh@moodle.com>
+ * @copyright   2022 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_report_exporter_test extends advanced_testcase {
@@ -47,7 +47,7 @@ class custom_report_exporter_test extends advanced_testcase {
         $generator = $this->getDataGenerator()->get_plugin_generator('core_reportbuilder');
         $report = $generator->create_report(['name' => 'My report', 'source' => users::class, 'default' => false]);
 
-        $PAGE->set_url(new moodle_url('/'));
+        $PAGE->set_url(new powereduc_url('/'));
 
         $exporter = new custom_report_exporter($report, [], true);
         $export = $exporter->export($PAGE->get_renderer('core_reportbuilder'));
@@ -78,7 +78,7 @@ class custom_report_exporter_test extends advanced_testcase {
         $generator = $this->getDataGenerator()->get_plugin_generator('core_reportbuilder');
         $report = $generator->create_report(['name' => 'My report', 'source' => users::class, 'default' => false]);
 
-        $PAGE->set_url(new moodle_url('/'));
+        $PAGE->set_url(new powereduc_url('/'));
 
         $exporter = new custom_report_exporter($report, ['pagesize' => 10], false);
         $export = $exporter->export($PAGE->get_renderer('core_reportbuilder'));
@@ -110,7 +110,7 @@ class custom_report_exporter_test extends advanced_testcase {
         $report = $generator->create_report(['name' => 'My report', 'source' => users::class, 'default' => false]);
         $generator->create_filter(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:email']);
 
-        $PAGE->set_url(new moodle_url('/'));
+        $PAGE->set_url(new powereduc_url('/'));
 
         $exporter = new custom_report_exporter($report, ['pagesize' => 10], false);
         $export = $exporter->export($PAGE->get_renderer('core_reportbuilder'));
@@ -140,7 +140,7 @@ class custom_report_exporter_test extends advanced_testcase {
         // Apply filter.
         user_filter_manager::set($report->get('id'), ['user:email_operator' => text::IS_NOT_EMPTY]);
 
-        $PAGE->set_url(new moodle_url('/'));
+        $PAGE->set_url(new powereduc_url('/'));
 
         $exporter = new custom_report_exporter($report, ['pagesize' => 10], false);
         $export = $exporter->export($PAGE->get_renderer('core_reportbuilder'));

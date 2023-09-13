@@ -24,7 +24,7 @@
 namespace core_favourites\local\service;
 use \core_favourites\local\repository\favourite_repository_interface;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class service, providing an single API for interacting with the favourites subsystem, for all favourites of a specific component.

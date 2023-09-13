@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Custom auto-complete adapter to load users from the assignment list_participants webservice.
  *
  * @module     mod_assign/participants_selector
- * @copyright  2015 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2015 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['core/ajax', 'jquery', 'core/templates'], function(ajax, $, templates) {

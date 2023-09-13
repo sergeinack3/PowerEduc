@@ -14,7 +14,7 @@ instructions:
 
 3) Start the server like this (from the Unix command line):
 
-   cd moodle/mod/chat
+   cd powereduc/mod/chat
    php chatd.php --start &
 
 4) Go to a chat room in Moodle and open it as normal.

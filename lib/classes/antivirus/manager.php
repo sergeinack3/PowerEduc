@@ -24,7 +24,7 @@
 
 namespace core\antivirus;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class used for various antivirus related stuff.
@@ -291,7 +291,7 @@ class manager {
 
         // If there is no messages, and a virus is found, we should generate one, then send it.
         if (empty($messages)) {
-            $antivirus->message_admins($antivirus->get_scanning_notice(), FORMAT_MOODLE, 'infected');
+            $antivirus->message_admins($antivirus->get_scanning_notice(), FORMAT_POWEREDUC, 'infected');
             $messages = $antivirus->get_messages();
         }
 
@@ -307,7 +307,7 @@ class manager {
             // Now update the message to the detailed version, and format.
             $message->name = 'infected';
             $message->fullmessagehtml = $incidentdetails;
-            $message->fullmessageformat = FORMAT_MOODLE;
+            $message->fullmessageformat = FORMAT_POWEREDUC;
             $message->fullmessage = format_text_email($incidentdetails, $message->fullmessageformat);
 
             // Now we must check if message is going to a real account.

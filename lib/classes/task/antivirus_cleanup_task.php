@@ -25,7 +25,7 @@
 
 namespace core\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Clean up task for core antivirus

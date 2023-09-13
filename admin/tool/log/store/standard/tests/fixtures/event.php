@@ -24,7 +24,7 @@
 
 namespace logstore_standard\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 class unittest_executed extends \core\event\base {

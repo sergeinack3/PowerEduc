@@ -1,25 +1,25 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Imports lesson pages
  *
  * @package mod_lesson
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
@@ -72,13 +72,13 @@ if ($data = $mform->get_data()) {
     $realfilename = $mform->get_new_filename('questionfile');
     $importfile = make_request_directory() . "/{$realfilename}";
     if (!$result = $mform->save_file('questionfile', $importfile, true)) {
-        throw new moodle_exception('uploadproblem');
+        throw new powereduc_exception('uploadproblem');
     }
 
     $formatclass = 'qformat_'.$data->format;
     $formatclassfile = $CFG->dirroot.'/question/format/'.$data->format.'/format.php';
     if (!is_readable($formatclassfile)) {
-        throw new \moodle_exception('unknowformat', '', '', $data->format);
+        throw new \powereduc_exception('unknowformat', '', '', $data->format);
     }
     require_once($formatclassfile);
     $format = new $formatclass();
@@ -87,17 +87,17 @@ if ($data = $mform->get_data()) {
 
     // Do anything before that we need to
     if (! $format->importpreprocess()) {
-                throw new \moodle_exception('preprocesserror', 'lesson');
+                throw new \powereduc_exception('preprocesserror', 'lesson');
             }
 
     // Process the uploaded file
     if (! $format->importprocess($importfile, $lesson, $pageid)) {
-                throw new \moodle_exception('processerror', 'lesson');
+                throw new \powereduc_exception('processerror', 'lesson');
             }
 
     // In case anything needs to be done after
     if (! $format->importpostprocess()) {
-                throw new \moodle_exception('postprocesserror', 'lesson');
+                throw new \powereduc_exception('postprocesserror', 'lesson');
             }
 
             echo "<hr>";

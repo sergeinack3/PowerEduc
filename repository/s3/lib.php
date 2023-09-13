@@ -1,24 +1,24 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access s3 files
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_s3
  * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -34,7 +34,7 @@ if (!defined('CURL_SSLVERSION_TLSv1')) {
 /**
  * This is a repository class used to browse Amazon S3 content.
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_s3
  * @copyright  2009 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -106,7 +106,7 @@ class repository_s3 extends repository {
     public function get_listing($path = '', $page = '') {
         global $CFG, $OUTPUT;
         if (empty($this->access_key)) {
-            throw new moodle_exception('needaccesskey', 'repository_s3');
+            throw new powereduc_exception('needaccesskey', 'repository_s3');
         }
 
         $list = array();
@@ -131,7 +131,7 @@ class repository_s3 extends repository {
             try {
                 $buckets = $this->s->listBuckets();
             } catch (S3Exception $e) {
-                throw new moodle_exception(
+                throw new powereduc_exception(
                     'errorwhilecommunicatingwith',
                     'repository',
                     '',
@@ -156,7 +156,7 @@ class repository_s3 extends repository {
             try {
                 $contents = $this->s->getBucket($bucket, $uri, null, null, '/', true);
             } catch (S3Exception $e) {
-                throw new moodle_exception(
+                throw new powereduc_exception(
                     'errorwhilecommunicatingwith',
                     'repository',
                     '',
@@ -225,10 +225,10 @@ class repository_s3 extends repository {
     }
 
     /**
-     * Download S3 files to moodle
+     * Download S3 files to powereduc
      *
      * @param string $filepath
-     * @param string $file The file path in moodle
+     * @param string $file The file path in powereduc
      * @return array The local stored path
      */
     public function get_file($filepath, $file = '') {
@@ -237,7 +237,7 @@ class repository_s3 extends repository {
         try {
             $this->s->getObject($bucket, $uri, $path);
         } catch (S3Exception $e) {
-            throw new moodle_exception(
+            throw new powereduc_exception(
                 'errorwhilecommunicatingwith',
                 'repository',
                 '',

@@ -13,7 +13,7 @@ Feature: Reset all personalised pages to default
     And I log in as "admin"
     And I set the following system permissions of "Authenticated user" role:
       | block/myprofile:addinstance | Allow |
-      | moodle/block:edit | Allow |
+      | powereduc/block:edit | Allow |
     And I log out
 
     And I log in as "student1"

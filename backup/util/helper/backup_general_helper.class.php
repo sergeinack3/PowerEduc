@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Non instantiable helper class providing general helper methods for backup/restore
@@ -315,7 +315,7 @@ abstract class backup_general_helper extends backup_helper {
         require_once($CFG->dirroot . '/backup/util/helper/convert_helper.class.php');
 
         if (convert_helper::detect_moodle2_format($tempdir)) {
-            return backup::FORMAT_MOODLE;
+            return backup::FORMAT_POWEREDUC;
         }
 
         // see if a converter can identify the format

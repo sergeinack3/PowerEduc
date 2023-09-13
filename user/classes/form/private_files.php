@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_user\form;
 
 use html_writer;
-use moodle_url;
+use powereduc_url;
 
 /**
  * Manage user private area files form
@@ -46,7 +46,7 @@ class private_files extends \core_form\dynamic_form {
                     'used' => display_size($fileareainfo['filesize_without_references']),
                     'total' => display_size($maxareabytes, 0)
                 ];
-                $quotamsg = get_string('quotausage', 'moodle', $a);
+                $quotamsg = get_string('quotausage', 'powereduc', $a);
                 $notification = new \core\output\notification($quotamsg, \core\output\notification::NOTIFY_INFO);
                 $mform->addElement('static', 'areabytes', '', $OUTPUT->render($notification));
             }
@@ -54,9 +54,9 @@ class private_files extends \core_form\dynamic_form {
 
         $mform->addElement('filemanager', 'files_filemanager', get_string('files'), null, $options);
         if ($link = $this->get_emaillink()) {
-            $emaillink = html_writer::link(new moodle_url('mailto:' . $link), $link);
+            $emaillink = html_writer::link(new powereduc_url('mailto:' . $link), $link);
             $mform->addElement('static', 'emailaddress', '',
-                get_string('emailtoprivatefiles', 'moodle', $emaillink));
+                get_string('emailtoprivatefiles', 'powereduc', $emaillink));
         }
         $mform->setType('returnurl', PARAM_LOCALURL);
 
@@ -109,7 +109,7 @@ class private_files extends \core_form\dynamic_form {
      * by calling $this->optional_param()
      */
     protected function check_access_for_dynamic_submission(): void {
-        require_capability('moodle/user:manageownfiles', $this->get_context_for_dynamic_submission());
+        require_capability('powereduc/user:manageownfiles', $this->get_context_for_dynamic_submission());
     }
 
     /**
@@ -136,7 +136,7 @@ class private_files extends \core_form\dynamic_form {
 
         $maxbytes = $CFG->userquota;
         $maxareabytes = $CFG->userquota;
-        if (has_capability('moodle/user:ignoreuserquota', $this->get_context_for_dynamic_submission())) {
+        if (has_capability('powereduc/user:ignoreuserquota', $this->get_context_for_dynamic_submission())) {
             $maxbytes = USER_CAN_IGNORE_FILE_SIZE_LIMITS;
             $maxareabytes = FILE_AREA_MAX_BYTES_UNLIMITED;
         }
@@ -184,9 +184,9 @@ class private_files extends \core_form\dynamic_form {
      * If the form has arguments (such as 'id' of the element being edited), the URL should
      * also have respective argument.
      *
-     * @return \moodle_url
+     * @return \powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): \moodle_url {
-        return new moodle_url('/user/files.php');
+    protected function get_page_url_for_dynamic_submission(): \powereduc_url {
+        return new powereduc_url('/user/files.php');
     }
 }

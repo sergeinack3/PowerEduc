@@ -24,7 +24,7 @@
  */
 namespace core\check;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A check object returns a result object

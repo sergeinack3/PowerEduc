@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Module to message a user from their profile page.
  *
  * @module     core_message/message_user_button
- * @copyright  2019 Mark Nelson <markn@moodle.com>
+ * @copyright  2019 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define(['jquery', 'core/custom_interaction_events', 'core_message/message_drawer_helper', 'core/templates'],

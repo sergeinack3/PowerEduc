@@ -24,7 +24,7 @@
 
 namespace tool_dataprivacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use lang_string;
 use core\persistent;
@@ -69,7 +69,7 @@ class data_request extends persistent {
             'commentsformat' => [
                 'choices' => [
                     FORMAT_HTML,
-                    FORMAT_MOODLE,
+                    FORMAT_POWEREDUC,
                     FORMAT_PLAIN,
                     FORMAT_MARKDOWN
                 ],
@@ -116,7 +116,7 @@ class data_request extends persistent {
             'dpocommentformat' => [
                 'choices' => [
                     FORMAT_HTML,
-                    FORMAT_MOODLE,
+                    FORMAT_POWEREDUC,
                     FORMAT_PLAIN,
                     FORMAT_MARKDOWN
                 ],

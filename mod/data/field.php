@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ if ($cancel) {
     $mode = 'list';
 }
 
-$url = new moodle_url('/mod/data/field.php');
+$url = new powereduc_url('/mod/data/field.php');
 if ($fid !== 0) {
     $url->param('fid', $fid);
 }
@@ -252,7 +252,7 @@ switch ($mode) {
     case 'usepreset':
         $importer = preset_importer::create_from_parameters($manager);
         if (!$importer->needs_mapping() || $action == 'notmapping') {
-            $backurl = new moodle_url('/mod/data/field.php', ['id' => $cm->id]);
+            $backurl = new powereduc_url('/mod/data/field.php', ['id' => $cm->id]);
             if ($importer->import(false)) {
                 notification::success(get_string('importsuccess', 'mod_data'));
             } else {
@@ -340,17 +340,17 @@ if (($mode == 'new') && (!empty($newtype))) { // Adding a new field.
 
         $field = data_get_field($fieldrecord, $data);
 
-        $baseurl = new moodle_url('/mod/data/field.php', array(
+        $baseurl = new powereduc_url('/mod/data/field.php', array(
             'd'         => $data->id,
             'fid'       => $field->field->id,
             'sesskey'   => sesskey(),
         ));
 
-        $displayurl = new moodle_url($baseurl, array(
+        $displayurl = new powereduc_url($baseurl, array(
             'mode'      => 'display',
         ));
 
-        $deleteurl = new moodle_url($baseurl, array(
+        $deleteurl = new powereduc_url($baseurl, array(
             'mode'      => 'delete',
         ));
 

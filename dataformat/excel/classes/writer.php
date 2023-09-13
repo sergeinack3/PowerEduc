@@ -24,7 +24,7 @@
 
 namespace dataformat_excel;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Excel data format writer

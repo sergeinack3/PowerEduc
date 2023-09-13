@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Privacy Subsystem implementation for mod_assignment.
  *
  * @package    mod_assignment
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ use core_privacy\local\request\helper;
 use core_privacy\local\request\approved_userlist;
 use core_privacy\local\request\userlist;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/assignment/lib.php');
@@ -41,7 +41,7 @@ require_once($CFG->dirroot . '/mod/assignment/lib.php');
 /**
  * Implementation of the privacy subsystem plugin provider for mod_assignment.
  *
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements

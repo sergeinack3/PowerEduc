@@ -25,7 +25,7 @@ use core_reportbuilder_generator;
 use core_reportbuilder_testcase;
 use core_reportbuilder\local\filters\{boolean_select, date, select, text};
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once("{$CFG->dirroot}/reportbuilder/tests/helpers.php");

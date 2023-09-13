@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Infected file report
@@ -24,7 +24,7 @@
  */
 namespace report_infectedfiles\table;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/tablelib.php');
 
@@ -41,12 +41,12 @@ class infectedfiles_table extends \table_sql implements \renderable {
      * Table constructor
      *
      * @param int $uniqueid table id
-     * @param \moodle_url $url page url
+     * @param \powereduc_url $url page url
      * @param int $page current page
      * @param int $perpage number or record per page
      * @throws \coding_exception
      */
-    public function __construct($uniqueid, \moodle_url $url, $page = 0, $perpage = 30) {
+    public function __construct($uniqueid, \powereduc_url $url, $page = 0, $perpage = 30) {
         parent::__construct($uniqueid);
 
         $this->set_attribute('class', 'report_infectedfiles');
@@ -83,9 +83,9 @@ class infectedfiles_table extends \table_sql implements \renderable {
     /**
      * Define table configuration
      *
-     * @param \moodle_url $url
+     * @param \powereduc_url $url
      */
-    protected function define_table_configs(\moodle_url $url) {
+    protected function define_table_configs(\powereduc_url $url) {
         // Set table url.
         $this->define_baseurl($url);
 
@@ -151,7 +151,7 @@ class infectedfiles_table extends \table_sql implements \renderable {
     protected function col_author($row) : string {
         // Get user fullname from ID.
         $user = \core_user::get_user($row->userid);
-        $url = new \moodle_url('/user/profile.php', ['id' => $row->userid]);
+        $url = new \powereduc_url('/user/profile.php', ['id' => $row->userid]);
         return \html_writer::link($url, fullname($user));
     }
 
@@ -171,7 +171,7 @@ class infectedfiles_table extends \table_sql implements \renderable {
      * @param \stdClass $row an incident record.
      * @return string content of action column.
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     protected function col_actions($row) : string {
         global $OUTPUT;
@@ -183,11 +183,11 @@ class infectedfiles_table extends \table_sql implements \renderable {
             return '';
         }
         $links = '';
-        $managefilepage = new \moodle_url('/report/infectedfiles/index.php');
+        $managefilepage = new \powereduc_url('/report/infectedfiles/index.php');
 
         // Download.
         $downloadparams = ['file' => $fileid, 'action' => 'download', 'sesskey' => sesskey()];
-        $downloadurl = new \moodle_url($managefilepage, $downloadparams);
+        $downloadurl = new \powereduc_url($managefilepage, $downloadparams);
 
         $downloadconfirm = new \confirm_action(get_string('confirmdownload', 'report_infectedfiles'));
         $links .= $OUTPUT->action_icon(
@@ -198,7 +198,7 @@ class infectedfiles_table extends \table_sql implements \renderable {
 
         // Delete.
         $deleteparams = ['file' => $fileid, 'action' => 'delete', 'sesskey' => sesskey()];
-        $deleteurl = new \moodle_url($managefilepage, $deleteparams);
+        $deleteurl = new \powereduc_url($managefilepage, $deleteparams);
         $deleteconfirm = new \confirm_action(get_string('confirmdelete', 'report_infectedfiles'));
         $links .= $OUTPUT->action_icon(
             $deleteurl,
@@ -227,13 +227,13 @@ class infectedfiles_table extends \table_sql implements \renderable {
      * @param string $downloadhelpbutton help button
      * @return void
      * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     public function display($pagesize, $useinitialsbar, $downloadhelpbutton='') {
         global $OUTPUT;
         // Output the table, and then display buttons.
         $this->out($pagesize, $useinitialsbar, $downloadhelpbutton);
-        $managefilepage = new \moodle_url('/report/infectedfiles/index.php');
+        $managefilepage = new \powereduc_url('/report/infectedfiles/index.php');
 
         // If there are no rows, dont bother rendering extra buttons.
         if (empty($this->rawdata)) {
@@ -242,7 +242,7 @@ class infectedfiles_table extends \table_sql implements \renderable {
 
         // Delete All.
         $deleteallparams = ['action' => 'deleteall', 'sesskey' => sesskey()];
-        $deleteallurl = new \moodle_url($managefilepage, $deleteallparams);
+        $deleteallurl = new \powereduc_url($managefilepage, $deleteallparams);
         $deletebutton = new \single_button($deleteallurl, get_string('deleteall'), 'post', true);
         $deletebutton->add_confirm_action(get_string('confirmdeleteall', 'report_infectedfiles'));
         echo $OUTPUT->render($deletebutton);
@@ -251,7 +251,7 @@ class infectedfiles_table extends \table_sql implements \renderable {
 
         // Download All.
         $downloadallparams = ['action' => 'downloadall', 'sesskey' => sesskey()];
-        $downloadallurl = new \moodle_url($managefilepage, $downloadallparams);
+        $downloadallurl = new \powereduc_url($managefilepage, $downloadallparams);
         $downloadbutton = new \single_button($downloadallurl, get_string('downloadall'), 'post', true);
         $downloadbutton->add_confirm_action(get_string('confirmdownloadall', 'report_infectedfiles'));
         echo $OUTPUT->render($downloadbutton);

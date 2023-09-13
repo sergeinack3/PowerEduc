@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Player that embeds Vimeo links.
@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class media_vimeo_plugin extends core_media_player_external {
-    protected function embed_external(moodle_url $url, $name, $width, $height, $options) {
+    protected function embed_external(powereduc_url $url, $name, $width, $height, $options) {
         $videoid = $this->get_video_id();
         $info = s($name);
 

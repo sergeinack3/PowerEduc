@@ -30,7 +30,7 @@ use dml_missing_record_exception;
 use lang_string;
 use xmldb_table;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Persistent testcase.
@@ -124,7 +124,7 @@ class persistent_test extends advanced_testcase {
                 'null' => NULL_NOT_ALLOWED
             ),
             'descriptionformat' => array(
-                'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                'choices' => array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN),
                 'type' => PARAM_INT,
                 'default' => FORMAT_HTML,
                 'null' => NULL_NOT_ALLOWED
@@ -707,7 +707,7 @@ class core_testable_persistent extends persistent {
                 'default' => ''
             ),
             'descriptionformat' => array(
-                'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                'choices' => array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN),
                 'type' => PARAM_INT,
                 'default' => FORMAT_HTML
             ),

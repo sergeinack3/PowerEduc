@@ -21,7 +21,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 class cc_resource extends entities {
 
@@ -32,8 +32,8 @@ class cc_resource extends entities {
         $response = '';
         $sheet_mod_resource = cc2moodle::loadsheet(SHEET_COURSE_SECTIONS_SECTION_MODS_MOD_RESOURCE);
 
-        if (!empty(cc2moodle::$instances['instances'][MOODLE_TYPE_RESOURCE])) {
-            foreach (cc2moodle::$instances['instances'][MOODLE_TYPE_RESOURCE] as $instance) {
+        if (!empty(cc2moodle::$instances['instances'][POWEREDUC_TYPE_RESOURCE])) {
+            foreach (cc2moodle::$instances['instances'][POWEREDUC_TYPE_RESOURCE] as $instance) {
                 $response .= $this->create_node_course_modules_mod_resource($sheet_mod_resource, $instance);
             }
         }

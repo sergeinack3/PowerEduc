@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for the quizaccess_seb plugin.
@@ -25,7 +25,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['addtemplate'] = 'Add new template';
 $string['allowedbrowserkeysdistinct'] = 'The keys must all be different.';
@@ -158,7 +158,7 @@ The available options are:
 * Yes – Upload my own config
 <br/>You can upload your own Safe Exam Browser configuration file. All manual settings and the use of templates will be disabled.
 * Yes – Use SEB client config
-<br/>No configurations of Safe Exam Browser are on the Moodle side. The quiz can be attempted with any configuration of Safe Exam Browser.';
+<br/>No configurations of Safe Exam Browser are on the PowerEduc side. The quiz can be attempted with any configuration of Safe Exam Browser.';
 $string['seb_showkeyboardlayout'] = 'Show keyboard layout';
 $string['seb_showkeyboardlayout_help'] = 'If enabled, the current keyboard layout is shown in the SEB task bar. It allows you to switch to other keyboard layouts, which have been enabled in the operating system.';
 $string['seb_showreloadbutton'] = 'Show reload button';

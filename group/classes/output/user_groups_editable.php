@@ -29,7 +29,7 @@ use core_user;
 use core_external;
 use coding_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/group/lib.php');
 

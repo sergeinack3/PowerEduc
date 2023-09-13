@@ -24,7 +24,7 @@
 
 namespace tool_usertours\local\filter;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_usertours\tour;
 use context;

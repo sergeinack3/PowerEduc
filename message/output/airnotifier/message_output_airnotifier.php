@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    message_airnotifier
  * @category   external
- * @copyright  2012 Jerome Mouneyrac <jerome@moodle.com>
+ * @copyright  2012 Jerome Mouneyrac <jerome@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since Moodle 2.7
  */
@@ -81,7 +81,7 @@ class message_output_airnotifier extends message_output {
         $extra->usertoid = $eventdata->userto->id;
         unset($extra->userto);
 
-        $extra->processor       = 'moodle';
+        $extra->processor       = 'powereduc';
         $extra->site            = $siteid;
         $extra->date            = (!empty($eventdata->timecreated)) ? $eventdata->timecreated : time();
         $extra->notification    = (!empty($eventdata->notification)) ? 1 : 0;

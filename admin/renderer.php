@@ -2223,13 +2223,13 @@ class core_admin_renderer extends plugin_renderer_base {
         );
 
         $out .= html_writer::link(
-            HUB_MOODLEORGHUBURL,
+            HUB_POWEREDUCORGHUBURL,
             $this->output->pix_icon('i/stats', '').' '.get_string('registerwithmoodleorginfostats', 'core_hub'),
             ['class' => 'btn btn-link', 'role' => 'opener', 'target' => '_href']
         );
 
         $out .= html_writer::link(
-            HUB_MOODLEORGHUBURL.'/sites',
+            HUB_POWEREDUCORGHUBURL.'/sites',
             $this->output->pix_icon('i/location', '').' '.get_string('registerwithmoodleorginfosites', 'core_hub'),
             ['class' => 'btn btn-link', 'role' => 'opener', 'target' => '_href']
         );

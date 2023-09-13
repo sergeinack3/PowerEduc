@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ use navigation_node;
 use ReflectionClass;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/mod/bigbluebuttonbn/lib.php');
 
@@ -407,7 +407,7 @@ class lib_test extends \advanced_testcase {
      */
     public function test_bigbluebuttonbn_get_extra_capabilities() {
         $this->resetAfterTest();
-        $this->assertEquals(['moodle/site:accessallgroups'], bigbluebuttonbn_get_extra_capabilities());
+        $this->assertEquals(['powereduc/site:accessallgroups'], bigbluebuttonbn_get_extra_capabilities());
     }
 
     /**

@@ -24,7 +24,7 @@
 namespace tool_dataprivacy;
 use dml_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class that represents an expired context.

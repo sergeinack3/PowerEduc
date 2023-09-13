@@ -25,7 +25,7 @@
 
 namespace block_rss_client\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Renderer for RSS Client block

@@ -84,7 +84,7 @@ if ($options['courseid']) {
 }
 
 cli_heading('Performing backup...');
-$bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+$bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
                             backup::INTERACTIVE_YES, backup::MODE_GENERAL, $admin->id);
 // Set the default filename.
 $format = $bc->get_format();

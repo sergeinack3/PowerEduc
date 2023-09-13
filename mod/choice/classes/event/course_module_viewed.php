@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  * The mod_choice course module viewed event.
  *
  * @package mod_choice
- * @copyright 2013 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2013 Adrian Greeve <adrian@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_choice\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The mod_choice course module viewed event class.

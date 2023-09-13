@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains a class definition for the Tool Settings service
@@ -26,13 +26,13 @@
 
 namespace ltiservice_toolsettings\local\service;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A service implementing Tool Settings.
  *
  * @package    ltiservice_toolsettings
- * @since      Moodle 2.8
+ * @since      PowerEduc 2.8
  * @copyright  2014 Vital Source Technologies http://vitalsource.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -167,7 +167,7 @@ class toolsettings extends \mod_lti\local\ltiservice\service_base {
     /**
      * Adds form elements for membership add/edit page.
      *
-     * @param \MoodleQuickForm $mform
+     * @param \PowerEducQuickForm $mform
      */
     public function get_configuration_options(&$mform) {
         $elementname = $this->get_component_id();

@@ -24,7 +24,7 @@
 
 namespace tinymce_wrap\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tinymce_wrap implementing null_provider.

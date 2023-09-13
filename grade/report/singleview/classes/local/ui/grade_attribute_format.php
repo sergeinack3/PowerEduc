@@ -26,7 +26,7 @@ namespace gradereport_singleview\local\ui;
 
 use grade_grade;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Abstract class for a form element representing something about a grade_grade.

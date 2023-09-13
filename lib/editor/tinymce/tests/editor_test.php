@@ -28,7 +28,7 @@ namespace editor_tinymce;
 use editor_tinymce_plugin;
 use tinymce_texteditor;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * TinyMCE tests.

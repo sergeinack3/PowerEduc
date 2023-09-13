@@ -24,7 +24,7 @@
 
 namespace enrol_flatfile\task;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Simple task to run sync enrolments.

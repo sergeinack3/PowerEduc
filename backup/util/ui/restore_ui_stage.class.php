@@ -373,7 +373,7 @@ class restore_ui_stage_confirm extends restore_ui_independent_stage implements f
             // Unknown format - we can't do anything here.
             return $renderer->backup_details_unknown($prevstageurl);
 
-        } else if ($format !== backup::FORMAT_MOODLE) {
+        } else if ($format !== backup::FORMAT_POWEREDUC) {
             // Non-standard format to be converted.
             $details = array('format' => $format, 'type' => backup::TYPE_1COURSE); // todo type to be returned by a converter
             return $renderer->backup_details_nonstandard($nextstageurl, $details);
@@ -506,7 +506,7 @@ class restore_ui_stage_destination extends restore_ui_independent_stage {
 
         $format = backup_general_helper::detect_backup_format($this->filepath);
 
-        if ($format === backup::FORMAT_MOODLE) {
+        if ($format === backup::FORMAT_POWEREDUC) {
             // Standard Moodle 2 format, let use get the type of the backup.
             $details = backup_general_helper::get_backup_information($this->filepath);
             if ($details->type === backup::TYPE_1COURSE) {

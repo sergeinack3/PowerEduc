@@ -16,7 +16,7 @@
 
 use auth_lti\local\ltiadvantage\entity\user_migration_claim;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/authlib.php');
 require_once($CFG->libdir.'/accesslib.php');

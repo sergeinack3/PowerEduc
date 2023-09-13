@@ -24,7 +24,7 @@
 
 namespace core_calendar\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use \core_calendar\local\event\container;
 use \core_course\external\course_summary_exporter;

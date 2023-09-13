@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Display user activity reports for a course (totals)
@@ -45,7 +45,7 @@ if ($courseid == SITEID) {
     $PAGE->set_context($personalcontext);
 }
 
-if ($USER->id != $user->id and has_capability('moodle/user:viewuseractivitiesreport', $personalcontext)
+if ($USER->id != $user->id and has_capability('powereduc/user:viewuseractivitiesreport', $personalcontext)
         and !is_enrolled($coursecontext, $USER) and is_enrolled($coursecontext, $user)) {
     //TODO: do not require parents to be enrolled in courses - this is a hack!
     require_login();
@@ -56,7 +56,7 @@ if ($USER->id != $user->id and has_capability('moodle/user:viewuseractivitiesrep
 $PAGE->set_url('/report/outline/user.php', array('id'=>$userid, 'course'=>$courseid, 'mode'=>$mode));
 
 if (!report_outline_can_access_user_report($user, $course)) {
-    throw new \moodle_exception('nocapability', 'report_outline');
+    throw new \powereduc_exception('nocapability', 'report_outline');
 }
 
 $stractivityreport = get_string('activityreport');
@@ -69,7 +69,7 @@ $PAGE->set_title("$course->shortname: $stractivityreport");
 
 // Create the appropriate breadcrumb.
 $navigationnode = array(
-        'url' => new moodle_url('/report/outline/user.php', array('id' => $user->id, 'course' => $course->id, 'mode' => $mode))
+        'url' => new powereduc_url('/report/outline/user.php', array('id' => $user->id, 'course' => $course->id, 'mode' => $mode))
     );
 if ($mode === 'complete') {
     $navigationnode['name'] = get_string('completereport');
@@ -91,7 +91,7 @@ $event->trigger();
 
 echo $OUTPUT->header();
 if ($courseid != SITEID) {
-    $backurl = new moodle_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
+    $backurl = new powereduc_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
     echo $OUTPUT->single_button($backurl, get_string('back'), 'get', ['class' => 'mb-3']);
     echo $OUTPUT->context_header(
             array(
@@ -100,9 +100,9 @@ if ($courseid != SITEID) {
             'usercontext' => $personalcontext
         ), 2);
     if ($mode === 'outline') {
-        echo $OUTPUT->heading(get_string('outlinereport', 'moodle'), 2, 'main mt-4 mb-4');
+        echo $OUTPUT->heading(get_string('outlinereport', 'powereduc'), 2, 'main mt-4 mb-4');
     } else {
-        echo $OUTPUT->heading(get_string('completereport', 'moodle'), 2, 'main mt-4 mb-4');
+        echo $OUTPUT->heading(get_string('completereport', 'powereduc'), 2, 'main mt-4 mb-4');
     }
 }
 

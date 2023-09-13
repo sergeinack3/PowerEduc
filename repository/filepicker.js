@@ -1,5 +1,5 @@
-// YUI3 File Picker module for moodle
-// Author: Dongsheng Cai <dongsheng@moodle.com>
+// YUI3 File Picker module for powereduc
+// Author: Dongsheng Cai <dongsheng@powereduc.com>
 
 /**
  *
@@ -45,7 +45,7 @@
  * this.logindata, cached login form
  */
 
-YUI.add('moodle-core_filepicker', function(Y) {
+YUI.add('powereduc-core_filepicker', function(Y) {
     /** help function to extract width/height style as a number, not as a string */
     Y.Node.prototype.getStylePx = function(attr) {
         var style = this.getStyle(attr);
@@ -344,8 +344,8 @@ YUI.add('moodle-core_filepicker', function(Y) {
                 .setAttribute('data-action', 'toggle')
                 .setAttribute('data-toggle', 'slave')
                 .setAttribute('data-togglegroup', 'file-selections')
-                .setAttribute('data-toggle-selectall', M.util.get_string('selectall', 'moodle'))
-                .setAttribute('data-toggle-deselectall', M.util.get_string('deselectall', 'moodle'));
+                .setAttribute('data-toggle-selectall', M.util.get_string('selectall', 'powereduc'))
+                .setAttribute('data-toggle-deselectall', M.util.get_string('deselectall', 'powereduc'));
 
             var checkboxLabel = Y.Node.create('<label>')
                 .setHTML("Select file '" + o.data.fullname + "'")
@@ -372,9 +372,9 @@ YUI.add('moodle-core_filepicker', function(Y) {
         /** initialize table view */
         var initialize_table_view = function() {
             var cols = [
-                {key: "displayname", label: M.util.get_string('name', 'moodle'), allowHTML: true, formatter: formatTitle,
+                {key: "displayname", label: M.util.get_string('name', 'powereduc'), allowHTML: true, formatter: formatTitle,
                     sortable: true, sortFn: sortFoldersFirst},
-                {key: "datemodified", label: M.util.get_string('lastmodified', 'moodle'), allowHTML: true, formatter: formatValue,
+                {key: "datemodified", label: M.util.get_string('lastmodified', 'powereduc'), allowHTML: true, formatter: formatValue,
                     sortable: true, sortFn: sortFoldersFirst},
                 {key: "size", label: M.util.get_string('size', 'repository'), allowHTML: true, formatter: formatValue,
                     sortable: true, sortFn: sortFoldersFirst},
@@ -681,7 +681,7 @@ M.core_filepicker.init = function(Y, options) {
                             data = Y.JSON.parse(o.responseText);
                         } catch(e) {
                             if (o && o.status && o.status > 0) {
-                                Y.use('moodle-core-notification-exception', function() {
+                                Y.use('powereduc-core-notification-exception', function() {
                                     return new M.core.exception(e);
                                 });
                                 return;
@@ -689,7 +689,7 @@ M.core_filepicker.init = function(Y, options) {
                         }
                         // error checking
                         if (data && data.error) {
-                            Y.use('moodle-core-notification-ajaxexception', function () {
+                            Y.use('powereduc-core-notification-ajaxexception', function () {
                                 return new M.core.ajaxException(data);
                             });
                             this.fpnode.one('.fp-content').setContent('');
@@ -840,10 +840,10 @@ M.core_filepicker.init = function(Y, options) {
         },
         /** displays message in a popup */
         print_msg: function(msg, type) {
-            var header = M.util.get_string('error', 'moodle');
+            var header = M.util.get_string('error', 'powereduc');
             if (type != 'error') {
                 type = 'info'; // one of only two types excepted
-                header = M.util.get_string('info', 'moodle');
+                header = M.util.get_string('info', 'powereduc');
             }
             if (!this.msg_dlg) {
                 this.msg_dlg_node = Y.Node.create(M.core_filepicker.templates.message);

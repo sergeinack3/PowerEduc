@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p> డేటాబేస్ను సృష్టించలేరు. </ p>
 <p> పేర్కొన్న డేటాబేస్ ఉనికిలో లేదు మరియు ఇచ్చిన యూజర్కు డాటాబేస్ను సృష్టించడానికి అనుమతి లేదు. </ p>

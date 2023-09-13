@@ -4,8 +4,8 @@ PHPUnit testing support in Moodle
 
 Documentation
 -------------
-* [Moodle PHPUnit integration](http://docs.moodle.org/dev/PHPUnit)
-* [Moodle Writing PHPUnit tests](https://docs.moodle.org/dev/Writing_PHPUnit_tests)
+* [Moodle PHPUnit integration](http://docs.powereduc.org/dev/PHPUnit)
+* [Moodle Writing PHPUnit tests](https://docs.powereduc.org/dev/Writing_PHPUnit_tests)
 * [PHPUnit online documentation](http://www.phpunit.de/manual/current/en/)
 * [Composer dependency manager](http://getcomposer.org/)
 
@@ -13,7 +13,7 @@ Documentation
 Composer installation
 ---------------------
 Composer is a dependency manager for PHP projects.
-It installs PHP libraries into /vendor/ subdirectory inside your moodle dirroot.
+It installs PHP libraries into /vendor/ subdirectory inside your powereduc dirroot.
 
 1. install Composer - [http://getcomposer.org/doc/00-intro.md](http://getcomposer.org/doc/00-intro.md)
 2. install PHUnit and dependencies - go to your Moodle dirroot and execute `php composer.phar install`

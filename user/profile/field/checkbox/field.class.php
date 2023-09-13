@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'profilefield_checkbox', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'profilefield_checkbox', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   profilefield_checkbox
  * @copyright  2008 onwards Shane Elliot {@link http://pukunui.com}
@@ -32,7 +32,7 @@ class profile_field_checkbox extends profile_field_base {
 
     /**
      * Add elements for editing the profile field value.
-     * @param moodleform $mform
+     * @param powereducform $mform
      */
     public function edit_field_add($mform) {
         // Create the form field.
@@ -41,7 +41,7 @@ class profile_field_checkbox extends profile_field_base {
             $checkbox->setChecked(true);
         }
         $mform->setType($this->inputname, PARAM_BOOL);
-        if ($this->is_required() and !has_capability('moodle/user:update', context_system::instance())) {
+        if ($this->is_required() and !has_capability('powereduc/user:update', context_system::instance())) {
             $mform->addRule($this->inputname, get_string('required'), 'nonzero', null, 'client');
         }
     }
@@ -63,7 +63,7 @@ class profile_field_checkbox extends profile_field_base {
      * This will be used for validating the data submitted by a user.
      *
      * @return array the param type and null property
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_field_properties() {
         return array(PARAM_BOOL, NULL_NOT_ALLOWED);

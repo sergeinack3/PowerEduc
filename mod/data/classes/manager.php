@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use mod_data_renderer;
 use mod_data\event\course_module_viewed;
 use mod_data\event\template_viewed;
 use mod_data\event\template_updated;
-use moodle_page;
+use powereduc_page;
 use core_component;
 use stdClass;
 
@@ -32,7 +32,7 @@ use stdClass;
  * Class manager for database activity
  *
  * @package    mod_data
- * @copyright  2022 Ferran Recio <ferran@moodle.com>
+ * @copyright  2022 Ferran Recio <ferran@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manager {
@@ -160,10 +160,10 @@ class manager {
     /**
      * Return the current module renderer.
      *
-     * @param moodle_page|null $page the current page
+     * @param powereduc_page|null $page the current page
      * @return mod_data_renderer the module renderer
      */
-    public function get_renderer(?moodle_page $page = null): mod_data_renderer {
+    public function get_renderer(?powereduc_page $page = null): mod_data_renderer {
         global $PAGE;
         $page = $page ?? $PAGE;
         return $page->get_renderer(self::PLUGINNAME);
@@ -279,7 +279,7 @@ class manager {
      * Some possible options:
      * - search: string with the current searching text.
      * - page: integer repesenting the current pagination page numbre (if any)
-     * - baseurl: a moodle_url object to the current page.
+     * - baseurl: a powereduc_url object to the current page.
      *
      * @param string $templatename
      * @param array $options extra display options array

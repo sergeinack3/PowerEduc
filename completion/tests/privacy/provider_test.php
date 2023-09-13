@@ -24,7 +24,7 @@
  */
 namespace core_completion\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

@@ -30,7 +30,7 @@ use IMSGlobal\LTI\ToolProvider\ToolConsumer;
 use IMSGlobal\LTI\ToolProvider\ToolProvider;
 use IMSGlobal\LTI\ToolProvider\User;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/local/ltiadvantage/lti_advantage_testcase.php');
 

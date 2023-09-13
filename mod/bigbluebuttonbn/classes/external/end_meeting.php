@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use mod_bigbluebuttonbn\logger;
 use mod_bigbluebuttonbn\meeting;
 use restricted_context_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -61,7 +61,7 @@ class end_meeting extends external_api {
      * @param int $groupid the groupid (either 0 or the groupid)
      * @return array (empty array for now)
      * @throws \invalid_parameter_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws restricted_context_exception
      */
     public static function execute(
@@ -80,7 +80,7 @@ class end_meeting extends external_api {
         // Fetch the session, features, and profile.
         $instance = instance::get_from_instanceid($bigbluebuttonbnid);
         if (empty($instance)) {
-            throw new \moodle_exception('Unknown Instance');
+            throw new \powereduc_exception('Unknown Instance');
         }
         if (!groups_group_visible($groupid, $instance->get_course(), $instance->get_cm())) {
             throw new restricted_context_exception();

@@ -28,7 +28,7 @@ namespace core_form\privacy;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\writer;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Implements the privacy API for the core_form subsystem.

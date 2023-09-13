@@ -23,7 +23,7 @@
  *
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Object to encapsulate the writing of leap2a.

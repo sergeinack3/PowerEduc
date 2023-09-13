@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** Display folder contents on a separate page */
 define('FOLDER_DISPLAY_PAGE', 0);
@@ -44,7 +44,7 @@ function folder_supports($feature) {
         case FEATURE_COMPLETION_TRACKS_VIEWS: return true;
         case FEATURE_GRADE_HAS_GRADE:         return false;
         case FEATURE_GRADE_OUTCOMES:          return false;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_MOD_PURPOSE:             return MOD_PURPOSE_CONTENT;
 
@@ -53,7 +53,7 @@ function folder_supports($feature) {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  * @param $data the data submitted from the reset course.
  * @return array status array
  */
@@ -417,7 +417,7 @@ function folder_get_coursemodule_info($cm) {
         $fdata->forcedownload = $folder->forcedownload;
         if ($cm->showdescription && strlen(trim($folder->intro))) {
             $fdata->intro = $folder->intro;
-            if ($folder->introformat != FORMAT_MOODLE) {
+            if ($folder->introformat != FORMAT_POWEREDUC) {
                 $fdata->introformat = $folder->introformat;
             }
         }
@@ -468,7 +468,7 @@ function folder_cm_info_view(cm_info $cm) {
             $folder->intro = '';
         }
         if (empty($folder->introformat)) {
-            $folder->introformat = FORMAT_MOODLE;
+            $folder->introformat = FORMAT_POWEREDUC;
         }
         // display folder
         $renderer = $PAGE->get_renderer('mod_folder');
@@ -611,7 +611,7 @@ function folder_get_recent_mod_activity(&$activities, &$index, $timestart, $cour
             'user' => core_user::get_user($file->get_userid()),
         ];
 
-        $url = moodle_url::make_pluginfile_url(
+        $url = powereduc_url::make_pluginfile_url(
             $file->get_contextid(),
             'mod_folder',
             'content',
@@ -625,7 +625,7 @@ function folder_get_recent_mod_activity(&$activities, &$index, $timestart, $cour
             $image = $url->out(false, array('preview' => 'tinyicon', 'oid' => $file->get_timemodified()));
             $image = html_writer::empty_tag('img', array('src' => $image));
         } else {
-            $image = $OUTPUT->pix_icon(file_file_icon($file, 24), $file->get_filename(), 'moodle');
+            $image = $OUTPUT->pix_icon(file_file_icon($file, 24), $file->get_filename(), 'powereduc');
         }
 
         $tmpactivity->content = (object) [
@@ -666,7 +666,7 @@ function folder_print_recent_mod_activity($activity, $courseid, $detail, $modnam
 
     // Show the uploader.
     $fullname = fullname($activity->user, $viewfullnames);
-    $userurl = new moodle_url('/user/view.php');
+    $userurl = new powereduc_url('/user/view.php');
     $userurl->params(['id' => $activity->user->id, 'course' => $courseid]);
     $by = new stdClass();
     $by->name = html_writer::link($userurl, $fullname);
@@ -759,7 +759,7 @@ function folder_print_recent_activity($course, $viewfullnames, $timestart) {
     foreach ($newfiles as $file) {
         $filename = $file->get_filename();
         $contextid = $file->get_contextid();
-        $url = moodle_url::make_pluginfile_url(
+        $url = powereduc_url::make_pluginfile_url(
             $contextid,
             'mod_folder',
             'content',
@@ -835,7 +835,7 @@ function mod_folder_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/folder/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/folder/view.php', ['id' => $cm->id]),
         1,
         true
     );

@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\value_objects;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface for a description value object.

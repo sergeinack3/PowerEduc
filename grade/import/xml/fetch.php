@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-define('NO_MOODLE_COOKIES', true); // session not used here
+define('NO_POWEREDUC_COOKIES', true); // session not used here
 require_once '../../../config.php';
 
 $id = required_param('id', PARAM_INT); // course id

@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ This directory is the recommended place for local customisations.
 Wherever possible, customisations should be written using one
 of the standard plug-in points like modules, blocks, auth plugins, themes, etc.
 
-See also http://docs.moodle.org/dev/Local_customisation for more
+See also http://docs.powereduc.org/dev/Local_customisation for more
 information.
 
 
@@ -50,7 +50,7 @@ Local plugins
 Local plugins are used in cases when no standard plugin fits, examples are:
 * event consumers communicating with external systems
 * custom definitions of web services and external functions
-* applications that extend moodle at the system level (hub server, amos server, etc.)
+* applications that extend powereduc at the system level (hub server, amos server, etc.)
 * new database tables used in core hacks (discouraged)
 * new capability definitions used in core hacks
 * custom admin settings
@@ -130,7 +130,7 @@ $ADMIN->add('tweaks', new admin_externalpage('nicehackery', 'Tweak something',
 Or if you want a new standard settings page for the plugin, inside the local
 plugins category:
 <?php
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 if ($hassiteconfig) { // needs this condition or there is error on login page
     $settings = new admin_settingpage('local_thisplugin', 'This plugin');
@@ -244,10 +244,10 @@ for installation and upgrade.
 
 Sample /local/defaults.php file content:
 <?php
-$defaults['moodle']['forcelogin'] = 1;  // new default for $CFG->forcelogin
+$defaults['powereduc']['forcelogin'] = 1;  // new default for $CFG->forcelogin
 $defaults['scorm']['maxgrade'] = 20;    // default for get_config('scorm', 'maxgrade')
-$defaults['moodlecourse']['numsections'] = 11;
-$defaults['moodle']['hiddenuserfields'] = array('city', 'country');
+$defaults['powereduccourse']['numsections'] = 11;
+$defaults['powereduc']['hiddenuserfields'] = array('city', 'country');
 
 First bracket contains string from column plugin of config_plugins table.
 Second bracket is the name of setting. In the admin settings UI the plugin and
@@ -293,11 +293,11 @@ Moodle supports other type of local customisation of standard language
 packs. If you want to create your own language pack based on another
 language create new dataroot directory with "_local" suffix, for example
 following file with content changes string "Login" to "Sign in":
-moodledata/lang/en_local
+powereducdata/lang/en_local
 <?php
   $string['login'] = 'Sign in';
 
-See also http://docs.moodle.org/en/Language_editing
+See also http://docs.powereduc.org/en/Language_editing
 
 
 Custom script injection
@@ -311,5 +311,5 @@ with the same structure as dirroot. Please note this hack only affects
 files that actually include the config.php!
 
 Examples:
-* disable one specific moodle page without code modification
+* disable one specific powereduc page without code modification
 * alter page parameters on the fly

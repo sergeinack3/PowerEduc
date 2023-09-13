@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_quiz;
 
@@ -20,7 +20,7 @@ use question_engine;
 use quiz;
 use quiz_attempt;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
@@ -59,7 +59,7 @@ class attempt_walkthrough_from_csv_test extends \advanced_testcase {
     public function test_walkthrough_from_csv($quizsettings, $csvdata) {
 
         // CSV data files for these tests were generated using :
-        // https://github.com/jamiepratt/moodle-quiz-tools/tree/master/responsegenerator
+        // https://github.com/jamiepratt/powereduc-quiz-tools/tree/master/responsegenerator
 
         $this->create_quiz_simulate_attempts_and_check_results($quizsettings, $csvdata);
     }

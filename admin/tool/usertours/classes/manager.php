@@ -24,7 +24,7 @@
 
 namespace tool_usertours;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_usertours\local\forms;
 use tool_usertours\local\table;

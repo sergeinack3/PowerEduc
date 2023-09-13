@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the definition for the library class for file submission plugin
@@ -24,7 +24,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // File areas for file submission assignment.
 define('ASSIGNSUBMISSION_FILE_MAXSUMMARYFILES', 5);
@@ -61,10 +61,10 @@ class assign_submission_file extends assign_submission_plugin {
     /**
      * Get the default setting for file submission plugin
      *
-     * @param MoodleQuickForm $mform The form to add elements to
+     * @param PowerEducQuickForm $mform The form to add elements to
      * @return void
      */
-    public function get_settings(MoodleQuickForm $mform) {
+    public function get_settings(PowerEducQuickForm $mform) {
         global $CFG, $COURSE;
 
         if ($this->assignment->has_instance()) {
@@ -160,11 +160,11 @@ class assign_submission_file extends assign_submission_plugin {
      * Add elements to submission form
      *
      * @param mixed $submission stdClass|null
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      * @param stdClass $data
      * @return bool
      */
-    public function get_form_elements($submission, MoodleQuickForm $mform, stdClass $data) {
+    public function get_form_elements($submission, PowerEducQuickForm $mform, stdClass $data) {
         global $OUTPUT;
 
         if ($this->get_config('maxfilesubmissions') <= 0) {
@@ -396,7 +396,7 @@ class assign_submission_file extends assign_submission_plugin {
 
 
     /**
-     * Return true if this plugin can upgrade an old Moodle 2.2 assignment of this type
+     * Return true if this plugin can upgrade an old PowerEduc 2.2 assignment of this type
      * and version.
      *
      * @param string $type
@@ -611,7 +611,7 @@ class assign_submission_file extends assign_submission_plugin {
      * Return the plugin configs for external functions.
      *
      * @return array the list of settings
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_config_for_external() {
         global $CFG;

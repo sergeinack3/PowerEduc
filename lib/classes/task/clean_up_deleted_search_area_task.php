@@ -24,7 +24,7 @@
 
 namespace core\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class that cleans up data related to deleted search area.

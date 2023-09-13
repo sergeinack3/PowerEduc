@@ -18,7 +18,7 @@ namespace core_backup;
 
 use backup;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
@@ -234,20 +234,20 @@ class copy_helper_test extends \advanced_testcase {
         \backup_controller::load_controller($copies[4]['backupid'])->set_status(backup::STATUS_FINISHED_ERR);
 
         // Create some backup/restore controllers that are unrelated to course copies.
-        $bc = new \backup_controller(backup::TYPE_1COURSE, 1, backup::FORMAT_MOODLE, backup::INTERACTIVE_NO, backup::MODE_ASYNC,
+        $bc = new \backup_controller(backup::TYPE_1COURSE, 1, backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO, backup::MODE_ASYNC,
                 2, backup::RELEASESESSION_YES);
         $rc = new \restore_controller('restore-test-1729', 1, backup::INTERACTIVE_NO, backup::MODE_ASYNC, 1, 2);
         $rc->save_controller();
         $unrelatedvanillacontrollers = ['backupid' => $bc->get_backupid(), 'restoreid' => $rc->get_restoreid()];
 
-        $bc = new \backup_controller(backup::TYPE_1COURSE, 1, backup::FORMAT_MOODLE, backup::INTERACTIVE_NO, backup::MODE_ASYNC,
+        $bc = new \backup_controller(backup::TYPE_1COURSE, 1, backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO, backup::MODE_ASYNC,
                 2, backup::RELEASESESSION_YES);
         $rc = new \restore_controller('restore-test-1729', 1, backup::INTERACTIVE_NO, backup::MODE_ASYNC, 1, 2);
         $bc->set_status(backup::STATUS_FINISHED_OK);
         $rc->set_status(backup::STATUS_FINISHED_OK);
         $unrelatedfinishedcontrollers = ['backupid' => $bc->get_backupid(), 'restoreid' => $rc->get_restoreid()];
 
-        $bc = new \backup_controller(backup::TYPE_1COURSE, 1, backup::FORMAT_MOODLE, backup::INTERACTIVE_NO, backup::MODE_ASYNC,
+        $bc = new \backup_controller(backup::TYPE_1COURSE, 1, backup::FORMAT_POWEREDUC, backup::INTERACTIVE_NO, backup::MODE_ASYNC,
                 2, backup::RELEASESESSION_YES);
         $rc = new \restore_controller('restore-test-1729', 1, backup::INTERACTIVE_NO, backup::MODE_ASYNC, 1, 2);
         $bc->set_status(backup::STATUS_FINISHED_ERR);

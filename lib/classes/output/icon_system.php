@@ -28,7 +28,7 @@ namespace core\output;
 use renderer_base;
 use pix_icon;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class allowing different systems for mapping and rendering icons.

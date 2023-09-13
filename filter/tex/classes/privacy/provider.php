@@ -24,7 +24,7 @@
 
 namespace filter_tex\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_tex implementing null_provider.

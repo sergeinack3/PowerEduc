@@ -24,7 +24,7 @@
 
 namespace dataformat_ods;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * ODS data format writer

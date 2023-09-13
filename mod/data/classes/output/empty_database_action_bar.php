@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 namespace mod_data\output;
 
 use mod_data\manager;
-use moodle_url;
+use powereduc_url;
 use templatable;
 use renderable;
 
@@ -25,7 +25,7 @@ use renderable;
  * Renderable class for the action bar elements for an empty database activity.
  *
  * @package    mod_data
- * @copyright  2022 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2022 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class empty_database_action_bar implements templatable, renderable {
@@ -58,7 +58,7 @@ class empty_database_action_bar implements templatable, renderable {
         if (has_capability('mod/data:manageentries', $PAGE->context)) {
             $params = ['d' => $instance->id, 'backto' => $PAGE->url->out(false)];
 
-            $importentrieslink = new moodle_url('/mod/data/import.php', $params);
+            $importentrieslink = new powereduc_url('/mod/data/import.php', $params);
             $importentriesbutton = new \single_button($importentrieslink,
                 get_string('importentries', 'mod_data'), 'get', false);
             $data['importentriesbutton'] = $importentriesbutton->export_for_template($output);

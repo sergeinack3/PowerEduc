@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Menu profile field.
@@ -77,7 +77,7 @@ class profile_field_menu extends profile_field_base {
     /**
      * Create the code snippet for this field instance
      * Overwrites the base class method
-     * @param moodleform $mform Moodle form instance
+     * @param powereducform $mform PowerEduc form instance
      */
     public function edit_field_add($mform) {
         $mform->addElement('select', $this->inputname, format_string($this->field->name), $this->options);
@@ -86,7 +86,7 @@ class profile_field_menu extends profile_field_base {
     /**
      * Set the default value for this field instance
      * Overwrites the base class method.
-     * @param moodleform $mform Moodle form instance
+     * @param powereducform $mform PowerEduc form instance
      */
     public function edit_field_set_default($mform) {
         $key = $this->field->defaultdata;
@@ -126,13 +126,13 @@ class profile_field_menu extends profile_field_base {
 
     /**
      * HardFreeze the field if locked.
-     * @param moodleform $mform instance of the moodleform class
+     * @param powereducform $mform instance of the powereducform class
      */
     public function edit_field_set_locked($mform) {
         if (!$mform->elementExists($this->inputname)) {
             return;
         }
-        if ($this->is_locked() and !has_capability('moodle/user:update', context_system::instance())) {
+        if ($this->is_locked() and !has_capability('powereduc/user:update', context_system::instance())) {
             $mform->hardFreeze($this->inputname);
             $mform->setConstant($this->inputname, format_string($this->datakey));
         }
@@ -163,7 +163,7 @@ class profile_field_menu extends profile_field_base {
      * This will be used for validating the data submitted by a user.
      *
      * @return array the param type and null property
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      */
     public function get_field_properties() {
         return array(PARAM_TEXT, NULL_NOT_ALLOWED);

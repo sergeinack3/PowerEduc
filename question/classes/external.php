@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /**
@@ -20,11 +20,11 @@
  *
  * @package    core_question
  * @category   external
- * @copyright  2016 Pau Ferrer <pau@moodle.com>
+ * @copyright  2016 Pau Ferrer <pau@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 require_once($CFG->dirroot . '/question/engine/lib.php');
@@ -36,9 +36,9 @@ require_once($CFG->libdir . '/questionlib.php');
  *
  * @package    core_question
  * @category   external
- * @copyright  2016 Pau Ferrer <pau@moodle.com>
+ * @copyright  2016 Pau Ferrer <pau@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 class core_question_external extends external_api {
 
@@ -46,7 +46,7 @@ class core_question_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function update_flag_parameters() {
         return new external_function_parameters(
@@ -73,7 +73,7 @@ class core_question_external extends external_api {
      *      corresponding to the last three arguments and the users username.
      * @param bool $newstate the new state of the flag. true = flagged.
      * @return array (success infos and fail infos)
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function update_flag($qubaid, $questionid, $qaid, $slot, $checksum, $newstate) {
         global $CFG, $DB;
@@ -106,7 +106,7 @@ class core_question_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function update_flag_returns() {
         return new external_single_structure(
@@ -121,9 +121,9 @@ class core_question_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters.
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @see \qbank_tagquestion\external\qbank_tagquestion_external
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public static function submit_tags_form_parameters() {
         return new external_function_parameters([
@@ -140,9 +140,9 @@ class core_question_external extends external_api {
      * @param int $contextid The editing context id.
      * @param string $formdata The question tag form data in a URI encoded param string
      * @return array The created or modified question tag
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @see \qbank_tagquestion\external\qbank_tagquestion_external
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public static function submit_tags_form($questionid, $contextid, $formdata) {
         global $DB, $CFG;
@@ -166,7 +166,7 @@ class core_question_external extends external_api {
                 FROM {question} q
                 JOIN {question_categories} qc ON qc.id = q.category
                 WHERE q.id = ?', [$questionid])) {
-            throw new \moodle_exception('questiondoesnotexist', 'question');
+            throw new \powereduc_exception('questiondoesnotexist', 'question');
         }
 
         require_once($CFG->libdir . '/questionlib.php');
@@ -212,9 +212,9 @@ class core_question_external extends external_api {
     /**
      * Returns description of method result value.
      *
-     * @deprecated since Moodle 4.0
+     * @deprecated since PowerEduc 4.0
      * @see \qbank_tagquestion\external\qbank_tagquestion_external
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public static function  submit_tags_form_returns() {
         return new external_single_structure([
@@ -226,7 +226,7 @@ class core_question_external extends external_api {
      * Marking the method as deprecated.
      *
      * @return bool
-     * @todo Final deprecation on Moodle 4.4 MDL-72438
+     * @todo Final deprecation on PowerEduc 4.4 MDL-72438
      */
     public static function submit_tags_form_is_deprecated() {
         return true;
@@ -302,7 +302,7 @@ class core_question_external extends external_api {
         $categorycontext = \context::instance_by_id($categorycontextid);
         $editcontexts = new \core_question\local\bank\question_edit_contexts($categorycontext);
         // The user must be able to view all questions in the category that they are requesting.
-        $editcontexts->require_cap('moodle/question:viewall');
+        $editcontexts->require_cap('powereduc/question:viewall');
 
         $loader = new \core_question\local\bank\random_question_loader(new qubaid_list([]));
         // Only load the properties we require from the DB.

@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Page for editing questions.
  *
  * @package    qbank_editquestion
- * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -41,7 +41,7 @@ $scrollpos = optional_param('scrollpos', 0, PARAM_INT);
 
 \core_question\local\bank\helper::require_plugin_enabled('qbank_editquestion');
 
-$url = new moodle_url('/question/bank/editquestion/question.php');
+$url = new powereduc_url('/question/bank/editquestion/question.php');
 if ($id !== 0) {
     $url->param('id', $id);
 }
@@ -78,9 +78,9 @@ if ($scrollpos) {
 $PAGE->set_url($url);
 
 if ($cmid) {
-    $questionbankurl = new moodle_url('/question/edit.php', array('cmid' => $cmid));
+    $questionbankurl = new powereduc_url('/question/edit.php', array('cmid' => $cmid));
 } else {
-    $questionbankurl = new moodle_url('/question/edit.php', array('courseid' => $courseid));
+    $questionbankurl = new powereduc_url('/question/edit.php', array('courseid' => $courseid));
 }
 navigation_node::override_active_url($questionbankurl);
 
@@ -88,7 +88,7 @@ if ($originalreturnurl) {
     if (strpos($originalreturnurl, '/') !== 0) {
         throw new coding_exception("returnurl must be a local URL starting with '/'. $originalreturnurl was given.");
     }
-    $returnurl = new moodle_url($originalreturnurl);
+    $returnurl = new powereduc_url($originalreturnurl);
 } else {
     $returnurl = $questionbankurl;
 }
@@ -106,7 +106,7 @@ if ($cmid) {
     $module = null;
     $cm = null;
 } else {
-    throw new moodle_exception('missingcourseorcmid', 'question');
+    throw new powereduc_exception('missingcourseorcmid', 'question');
 }
 $contexts = new core_question\local\bank\question_edit_contexts($thiscontext);
 $PAGE->set_pagelayout('admin');
@@ -117,7 +117,7 @@ if (optional_param('addcancel', false, PARAM_BOOL)) {
 
 if ($id) {
     if (!$question = $DB->get_record('question', array('id' => $id))) {
-        throw new moodle_exception('questiondoesnotexist', 'question', $returnurl);
+        throw new powereduc_exception('questiondoesnotexist', 'question', $returnurl);
     }
     // We can use $COURSE here because it's been initialised as part of the
     // require_login above. Passing it as the third parameter tells the function
@@ -132,18 +132,18 @@ if ($id) {
 
     // Check that users are allowed to create this question type at the moment.
     if (!question_bank::qtype_enabled($qtype)) {
-        throw new moodle_exception('cannotenable', 'question', $returnurl, $qtype);
+        throw new powereduc_exception('cannotenable', 'question', $returnurl, $qtype);
     }
 
 } else if ($categoryid) {
     // Category, but no qtype. They probably came from the addquestion.php
     // script without choosing a question type. Send them back.
-    $addurl = new moodle_url('/question/bank/editquestion/addquestion.php', $url->params());
+    $addurl = new powereduc_url('/question/bank/editquestion/addquestion.php', $url->params());
     $addurl->param('validationerror', 1);
     redirect($addurl);
 
 } else {
-    throw new moodle_exception('notenoughdatatoeditaquestion', 'question', $returnurl);
+    throw new powereduc_exception('notenoughdatatoeditaquestion', 'question', $returnurl);
 }
 
 $qtypeobj = question_bank::get_qtype($question->qtype);
@@ -153,7 +153,7 @@ if (isset($question->categoryobject)) {
 } else {
     // Validate the question category.
     if (!$category = $DB->get_record('question_categories', array('id' => $question->category))) {
-        throw new moodle_exception('categorydoesnotexist', 'question', $returnurl);
+        throw new powereduc_exception('categorydoesnotexist', 'question', $returnurl);
     }
 }
 
@@ -162,7 +162,7 @@ $question->formoptions = new stdClass();
 
 $categorycontext = context::instance_by_id($category->contextid);
 $question->contextid = $category->contextid;
-$addpermission = has_capability('moodle/question:add', $categorycontext);
+$addpermission = has_capability('powereduc/question:add', $categorycontext);
 
 if ($id) {
     $question->formoptions->canedit = question_has_capability_on($question, 'edit');
@@ -189,7 +189,7 @@ if ($id) {
     $question->formoptions->cansaveasnew = false;
     $question->formoptions->repeatelements = true;
     $formeditable = true;
-    require_capability('moodle/question:add', $categorycontext);
+    require_capability('powereduc/question:add', $categorycontext);
 }
 $question->formoptions->mustbeusable = (bool) $appendqnumstring;
 
@@ -281,9 +281,9 @@ if ($mform->is_cancelled()) {
     if (!empty($question->id)) {
         question_require_capability_on($question, 'edit');
     } else {
-        require_capability('moodle/question:add', context::instance_by_id($contextid));
+        require_capability('powereduc/question:add', context::instance_by_id($contextid));
         if (!empty($fromform->makecopy) && !$question->formoptions->cansaveasnew) {
-            throw new moodle_exception('nopermissions', '', '', 'edit');
+            throw new powereduc_exception('nopermissions', '', '', 'edit');
         }
     }
 
@@ -342,7 +342,7 @@ if ($mform->is_cancelled()) {
         }
         $nexturlparams['id'] = $question->id;
         $nexturlparams['wizardnow'] = $fromform->wizard;
-        $nexturl = new moodle_url($url, $nexturlparams);
+        $nexturl = new powereduc_url($url, $nexturlparams);
         if ($cmid) {
             $nexturl->param('cmid', $cmid);
         } else {

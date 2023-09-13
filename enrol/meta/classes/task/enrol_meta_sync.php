@@ -25,7 +25,7 @@
 
 namespace enrol_meta\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Meta sync enrolments task.

@@ -1,6 +1,6 @@
 languageCode:           "en"
 title:                  "Moodle Component Library"
-baseURL:                "http://MOODLEROOT/"
+baseURL:                "http://POWEREDUCROOT/"
 enableInlineShortcodes:  true
 pygmentsUseClasses: true
 
@@ -60,7 +60,7 @@ layoutDir:              "./admin/tool/componentlibrary/hugo/site/layouts"
 staticDir:              "./admin/tool/componentlibrary/content/static"
 
 params:
-  moodleroot:           "MOODLEROOT"
+  moodleroot:           "POWEREDUCROOT"
 
   current_version:      "4.6.0"
   current_ruby_version: "4.6.0"

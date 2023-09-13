@@ -26,7 +26,7 @@ use enrol_lti\data_connector;
 use enrol_lti\local\ltiadvantage\repository\resource_link_repository;
 use IMSGlobal\LTI\ToolProvider\ToolConsumer;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * LTI enrolment plugin class.

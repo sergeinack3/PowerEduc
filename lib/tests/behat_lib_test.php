@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -80,17 +80,17 @@ class behat_lib_test extends advanced_testcase {
     public function url_provider() {
         return [
             // Tests for common ports.
-            ['http://behat.moodle.org', true, ['behat.moodle.org', 80, '']],
-            ['https://behat.moodle.org', true, ['behat.moodle.org', 443, '']],
+            ['http://behat.powereduc.org', true, ['behat.powereduc.org', 80, '']],
+            ['https://behat.powereduc.org', true, ['behat.powereduc.org', 443, '']],
 
             // Test for custom port.
-            ['http://behat.moodle.org:8080', true, ['behat.moodle.org', 8080, '']],
+            ['http://behat.powereduc.org:8080', true, ['behat.powereduc.org', 8080, '']],
 
             // Test for url with path.
-            ['http://behat.moodle.org/behat', true, ['behat.moodle.org', 80, '/behat']],
+            ['http://behat.powereduc.org/behat', true, ['behat.powereduc.org', 80, '/behat']],
 
             // Test for url that does not match with environment.
-            ['http://behat.moodle.org', false, ['moodle.org', 80, '']],
+            ['http://behat.powereduc.org', false, ['powereduc.org', 80, '']],
         ];
     }
 }

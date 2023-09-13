@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Behat search-related step definitions.
@@ -23,11 +23,11 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// NOTE: no MOODLE_INTERNAL used, this file may be required by behat before including /config.php.
+// NOTE: no POWEREDUC_INTERNAL used, this file may be required by behat before including /config.php.
 require_once(__DIR__ . '/../../../lib/behat/behat_base.php');
 
 use Behat\Gherkin\Node\TableNode as TableNode;
-use Moodle\BehatExtension\Exception\SkippedException;
+use PowerEduc\BehatExtension\Exception\SkippedException;
 
 /**
  * Behat search-related step definitions.
@@ -142,7 +142,7 @@ class behat_search extends behat_base {
      * Updates the global search index to take account of any added activities.
      *
      * @Given /^I update the global search index$/
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function i_update_the_global_search_index() {
         \core_search\manager::instance()->index(false);

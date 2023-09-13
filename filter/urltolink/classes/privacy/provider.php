@@ -24,7 +24,7 @@
 
 namespace filter_urltolink\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_urltolink implementing null_provider.

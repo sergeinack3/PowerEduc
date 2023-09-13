@@ -18,7 +18,7 @@ namespace core_calendar;
 
 use core_calendar\local\event\strategies\raw_event_retrieval_strategy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/calendar/tests/helpers.php');

@@ -27,7 +27,7 @@ namespace core\event;
 use core\event\base;
 use core_competency\user_competency_plan;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * User competency plan viewed event class.

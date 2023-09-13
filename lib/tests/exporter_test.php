@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 /**
@@ -159,7 +159,7 @@ class exporter_test extends \advanced_testcase {
         \filter_manager::reset_caches();
 
         $data = [
-            'stringA' => '__Watch out:__ https://moodle.org @@PLUGINFILE@@/test.pdf',
+            'stringA' => '__Watch out:__ https://powereduc.org @@PLUGINFILE@@/test.pdf',
             'stringAformat' => FORMAT_MARKDOWN,
             'intB' => 1
         ];
@@ -169,8 +169,8 @@ class exporter_test extends \advanced_testcase {
         $exporter = new core_testable_exporter($data, ['context' => $syscontext] + $this->validrelated);
         $result = $exporter->export($output);
 
-        $youtube = 'https://moodle.org';
-        $fileurl = (new \moodle_url('/webservice/pluginfile.php/' . $syscontext->id . '/test/area/9/test.pdf'))->out(false);
+        $youtube = 'https://powereduc.org';
+        $fileurl = (new \powereduc_url('/webservice/pluginfile.php/' . $syscontext->id . '/test/area/9/test.pdf'))->out(false);
         $expected = "<p><strong>Watch out:</strong> $youtube $fileurl</p>\n";
         $this->assertEquals($expected, $result->stringA);
         $this->assertEquals(FORMAT_HTML, $result->stringAformat);
@@ -178,8 +178,8 @@ class exporter_test extends \advanced_testcase {
         // Export simulated in the course context where the filter is enabled.
         $exporter = new core_testable_exporter($data, ['context' => $coursecontext] + $this->validrelated);
         $result = $exporter->export($output);
-        $youtube = '<a href="https://moodle.org" class="_blanktarget">https://moodle.org</a>';
-        $fileurl = (new \moodle_url('/webservice/pluginfile.php/' . $coursecontext->id . '/test/area/9/test.pdf'))->out(false);
+        $youtube = '<a href="https://powereduc.org" class="_blanktarget">https://powereduc.org</a>';
+        $fileurl = (new \powereduc_url('/webservice/pluginfile.php/' . $coursecontext->id . '/test/area/9/test.pdf'))->out(false);
         $expected = "<p><strong>Watch out:</strong> $youtube <a href=\"$fileurl\" class=\"_blanktarget\">$fileurl</a></p>\n";
         $this->assertEquals($expected, $result->stringA);
         $this->assertEquals(FORMAT_HTML, $result->stringAformat);

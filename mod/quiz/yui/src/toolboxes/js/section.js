@@ -4,7 +4,7 @@
  * This class is responsible for managing AJAX interactions with sections
  * when adding, editing, removing section headings.
  *
- * @module moodle-mod_quiz-toolboxes
+ * @module powereduc-mod_quiz-toolboxes
  * @namespace M.mod_quiz.toolboxes
  */
 
@@ -168,7 +168,7 @@ Y.extend(SECTIONTOOLBOX, TOOLBOX, {
             // Create the editor and submit button.
             var editform = Y.Node.create('<form action="#" />');
             var editinstructions = Y.Node.create('<span class="' + CSS.EDITINSTRUCTIONS + '" id="id_editinstructions" />')
-                .set('innerHTML', M.util.get_string('edittitleinstructions', 'moodle'));
+                .set('innerHTML', M.util.get_string('edittitleinstructions', 'powereduc'));
             var editor = Y.Node.create('<input name="section" type="text" />').setAttrs({
                 'value': oldtext,
                 'autocomplete': 'off',

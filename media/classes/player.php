@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base class for media players.
@@ -163,9 +163,9 @@ abstract class core_media_player {
     /**
      * Given a list of URLs, returns a reduced array containing only those URLs
      * which are supported by this player. (Empty if none.)
-     * @param array $urls Array of moodle_url
+     * @param array $urls Array of powereduc_url
      * @param array $options Options (same as will be passed to embed)
-     * @return array Array of supported moodle_url
+     * @return array Array of supported powereduc_url
      */
     public function list_supported_urls(array $urls, array $options = array()) {
         $extensions = $this->get_supported_extensions();
@@ -183,7 +183,7 @@ abstract class core_media_player {
      * Obtains suitable name for media. Uses specified name if there is one,
      * otherwise makes one up.
      * @param string $name User-specified name ('' if none)
-     * @param array $urls Array of moodle_url used to make up name
+     * @param array $urls Array of powereduc_url used to make up name
      * @return string Name
      */
     protected function get_name($name, $urls) {
@@ -236,7 +236,7 @@ abstract class core_media_player {
      * is not to provide a way for plugins to look for content to embed on the
      * page. The {@link self::embed()} method is meant to be used for that.
      *
-     * @param moodle_page $page The page we are going to add requirements to.
+     * @param powereduc_page $page The page we are going to add requirements to.
      * @since Moodle 3.2
      */
     public function setup($page) {

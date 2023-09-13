@@ -34,12 +34,12 @@ require_login();
 $context = context_system::instance();
 // require_capability('local/powerschool:managepages', $context);
 
-$PAGE->set_url(new moodle_url('/local/powerschool/tranche.php'));
+$PAGE->set_url(new powereduc_url('/local/powerschool/tranche.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Enregistrer une '.get_string('tranche', 'local_powerschool'));
 $PAGE->set_heading('Enregistrer une '.get_string('tranche', 'local_powerschool'));
 
-$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new moodle_url('/local/powerschool/configurationmini.php'));
+$PAGE->navbar->add(get_string('configurationminini', 'local_powerschool'),  new powereduc_url('/local/powerschool/configurationmini.php'));
 $PAGE->navbar->add(get_string('tranche', 'local_powerschool'), $managementurl);
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
 // $PAGE->requires->js_call_amd('local_powerschool/confirmsupp');
@@ -86,40 +86,40 @@ $tranche = $DB->get_records_sql($sql);
 
 $templatecontext = (object)[
     'tranche' => array_values($tranche),
-    'trancheedit' => new moodle_url('/local/powerschool/trancheedit.php'),
-    'tranchesupp'=> new moodle_url('/local/powerschool/tranche.php'),
-    'cycle' => new moodle_url('/local/powerschool/cycle.php'),
+    'trancheedit' => new powereduc_url('/local/powerschool/trancheedit.php'),
+    'tranchesupp'=> new powereduc_url('/local/powerschool/tranche.php'),
+    'cycle' => new powereduc_url('/local/powerschool/cycle.php'),
 ];
 
 $menumini = (object)[
-    'affecterprof' => new moodle_url('/local/powerschool/affecterprof.php'),
-    'configurerpaie' => new moodle_url('/local/powerschool/configurerpaiement.php'),
-    'coursspecialite' => new moodle_url('/local/powerschool/coursspecialite.php'),
-    'salleele' => new moodle_url('/local/powerschool/salleele.php'),
-    'tranche' => new moodle_url('/local/powerschool/tranche.php'),
-    'confinot' => new moodle_url('/local/powerschool/configurationnote.php'),
-    'logo' => new moodle_url('/local/powerschool/logo.php'),
-    'message' => new moodle_url('/local/powerschool/message.php'),
+    'affecterprof' => new powereduc_url('/local/powerschool/affecterprof.php'),
+    'configurerpaie' => new powereduc_url('/local/powerschool/configurerpaiement.php'),
+    'coursspecialite' => new powereduc_url('/local/powerschool/coursspecialite.php'),
+    'salleele' => new powereduc_url('/local/powerschool/salleele.php'),
+    'tranche' => new powereduc_url('/local/powerschool/tranche.php'),
+    'confinot' => new powereduc_url('/local/powerschool/configurationnote.php'),
+    'logo' => new powereduc_url('/local/powerschool/logo.php'),
+    'message' => new powereduc_url('/local/powerschool/message.php'),
 
 
 ];
 
 
 // $menu = (object)[
-//     'annee' => new moodle_url('/local/powerschool/anneescolaire.php'),
-//     'campus' => new moodle_url('/local/powerschool/campus.php'),
-//     'semestre' => new moodle_url('/local/powerschool/semestre.php'),
-//     'salle' => new moodle_url('/local/powerschool/salle.php'),
-//     'filiere' => new moodle_url('/local/powerschool/filiere.php'),
-//     'specialite' => new moodle_url('/local/powerschool/specialite.php'),
-//     'cycle' => new moodle_url('/local/powerschool/cycle.php'),
-//     'modepayement' => new moodle_url('/local/powerschool/modepayement.php'),
-//     'matiere' => new moodle_url('/local/powerschool/matiere.php'),
-//     'seance' => new moodle_url('/local/powerschool/seance.php'),
-//     'inscription' => new moodle_url('/local/powerschool/inscription.php'),
-//     'enseigner' => new moodle_url('/local/powerschool/enseigner.php'),
-//     'paiement' => new moodle_url('/local/powerschool/paiement.php'),
-//     'bulletin' => new moodle_url('/local/powerschool/bulletin.php'),
+//     'annee' => new powereduc_url('/local/powerschool/anneescolaire.php'),
+//     'campus' => new powereduc_url('/local/powerschool/campus.php'),
+//     'semestre' => new powereduc_url('/local/powerschool/semestre.php'),
+//     'salle' => new powereduc_url('/local/powerschool/salle.php'),
+//     'filiere' => new powereduc_url('/local/powerschool/filiere.php'),
+//     'specialite' => new powereduc_url('/local/powerschool/specialite.php'),
+//     'cycle' => new powereduc_url('/local/powerschool/cycle.php'),
+//     'modepayement' => new powereduc_url('/local/powerschool/modepayement.php'),
+//     'matiere' => new powereduc_url('/local/powerschool/matiere.php'),
+//     'seance' => new powereduc_url('/local/powerschool/seance.php'),
+//     'inscription' => new powereduc_url('/local/powerschool/inscription.php'),
+//     'enseigner' => new powereduc_url('/local/powerschool/enseigner.php'),
+//     'paiement' => new powereduc_url('/local/powerschool/paiement.php'),
+//     'bulletin' => new powereduc_url('/local/powerschool/bulletin.php'),
 // ];
 
 

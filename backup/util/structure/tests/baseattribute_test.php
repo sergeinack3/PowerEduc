@@ -18,7 +18,7 @@ namespace core_backup;
 
 use mock_base_attribute;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 require_once(__DIR__.'/fixtures/structure_fixtures.php');

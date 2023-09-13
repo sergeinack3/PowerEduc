@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,9 +28,9 @@ use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\local\helpers\roles;
 use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
-require_once($CFG->dirroot . '/course/moodleform_mod.php');
+require_once($CFG->dirroot . '/course/powereducform_mod.php');
 
 /**
  * Moodle class for mod_form.
@@ -38,13 +38,13 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
  * @copyright 2010 onwards, Blindside Networks Inc
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
+class mod_bigbluebuttonbn_mod_form extends powereducform_mod {
 
     /**
      * Define (add) particular settings this activity can have.
      *
      * @return void
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function definition(): void {
         global $CFG, $DB, $PAGE;
@@ -53,7 +53,7 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
         // Validates if the BigBlueButton server is running.
         $serverversion = bigbluebutton_proxy::get_server_version();
         if (is_null($serverversion)) {
-            throw new moodle_exception('general_error_unable_connect',
+            throw new powereduc_exception('general_error_unable_connect',
                 'bigbluebuttonbn',
                 $CFG->wwwroot . '/admin/settings.php?section=modsettingbigbluebuttonbn',
                 \mod_bigbluebuttonbn\local\config::get('server_url')
@@ -107,7 +107,7 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
      * Get instance type profile.
      *
      * @return array|array[]
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_instance_type_profiles() {
         // Add profile data here instead of passing it by parameters.
@@ -127,7 +127,7 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
             );
             // If still none is allowed, fail and return.
             if (empty($instancetyperofiles)) {
-                throw new moodle_exception('general_error_not_allowed_to_create_instances', 'bigbluebuttonbn',
+                throw new powereduc_exception('general_error_not_allowed_to_create_instances', 'bigbluebuttonbn',
                     $CFG->wwwroot . '/admin/settings.php?section=modsettingbigbluebuttonbn');
             }
         }
@@ -263,7 +263,7 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
      * Allows module to modify the data returned by form get_data().
      * This method is also called in the bulk activity completion form.
      *
-     * Only available on moodleform_mod.
+     * Only available on powereducform_mod.
      *
      * @param stdClass $data the form data to be modified.
      */
@@ -576,15 +576,15 @@ class mod_bigbluebuttonbn_mod_form extends moodleform_mod {
         $mform->setExpanded('permissions');
         $mform->addElement('hidden', 'participants', json_encode($participantlist));
         $mform->setType('participants', PARAM_TEXT);
-        $selectiontype = new single_select(new moodle_url(qualified_me()),
+        $selectiontype = new single_select(new powereduc_url(qualified_me()),
             'bigbluebuttonbn_participant_selection_type',
             $participantselection['type_options'],
             $participantselection['type_selected']);
-        $selectionparticipants = new single_select(new moodle_url(qualified_me()),
+        $selectionparticipants = new single_select(new powereduc_url(qualified_me()),
             'bigbluebuttonbn_participant_selection',
             $participantselection['options'],
             $participantselection['selected']);
-        $action = new single_button(new moodle_url(qualified_me()),
+        $action = new single_button(new powereduc_url(qualified_me()),
             get_string('mod_form_field_participant_list_action_add', 'bigbluebuttonbn'),
             'post',
             false,

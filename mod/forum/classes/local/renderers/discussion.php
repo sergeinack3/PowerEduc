@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Discussion renderer.
  *
  * @package    mod_forum
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_forum\local\renderers;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_forum\local\entities\discussion as discussion_entity;
 use mod_forum\local\entities\forum as forum_entity;
@@ -42,9 +42,9 @@ use core\output\notification;
 use context;
 use context_module;
 use html_writer;
-use moodle_exception;
-use moodle_page;
-use moodle_url;
+use powereduc_exception;
+use powereduc_page;
+use powereduc_url;
 use rating_manager;
 use renderer_base;
 use single_button;
@@ -58,7 +58,7 @@ require_once($CFG->dirroot . '/mod/forum/locallib.php');
 /**
  * Discussion renderer class.
  *
- * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2019 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class discussion {
@@ -76,7 +76,7 @@ class discussion {
     private $renderer;
     /** @var posts_renderer $postsrenderer A posts renderer */
     private $postsrenderer;
-    /** @var moodle_page $page The page this discussion is being rendered for */
+    /** @var powereduc_page $page The page this discussion is being rendered for */
     private $page;
     /** @var legacy_data_mapper_factory $legacydatamapperfactory Legacy data mapper factory */
     private $legacydatamapperfactory;
@@ -92,7 +92,7 @@ class discussion {
     private $capabilitymanager;
     /** @var rating_manager $ratingmanager Rating manager */
     private $ratingmanager;
-    /** @var moodle_url $baseurl The base URL for the discussion */
+    /** @var powereduc_url $baseurl The base URL for the discussion */
     private $baseurl;
     /** @var array $notifications List of HTML notifications to display */
     private $notifications;
@@ -109,7 +109,7 @@ class discussion {
      * @param int $displaymode The display mode to render the discussion in
      * @param renderer_base $renderer Renderer base
      * @param posts_renderer $postsrenderer A posts renderer
-     * @param moodle_page $page The page this discussion is being rendered for
+     * @param powereduc_page $page The page this discussion is being rendered for
      * @param legacy_data_mapper_factory $legacydatamapperfactory Legacy data mapper factory
      * @param exporter_factory $exporterfactory Exporter factory
      * @param vault_factory $vaultfactory Vault factory
@@ -118,7 +118,7 @@ class discussion {
      * @param capability_manager $capabilitymanager Capability manager
      * @param rating_manager $ratingmanager Rating manager
      * @param sorter_entity $exportedpostsorter Sorter for the exported posts
-     * @param moodle_url $baseurl The base URL for the discussion
+     * @param powereduc_url $baseurl The base URL for the discussion
      * @param array $notifications List of HTML notifications to display
      * @param callable|null $postprocessfortemplate Post processing for template callback
      */
@@ -128,7 +128,7 @@ class discussion {
         int $displaymode,
         renderer_base $renderer,
         posts_renderer $postsrenderer,
-        moodle_page $page,
+        powereduc_page $page,
         legacy_data_mapper_factory $legacydatamapperfactory,
         exporter_factory $exporterfactory,
         vault_factory $vaultfactory,
@@ -137,7 +137,7 @@ class discussion {
         capability_manager $capabilitymanager,
         rating_manager $ratingmanager,
         sorter_entity $exportedpostsorter,
-        moodle_url $baseurl,
+        powereduc_url $baseurl,
         array $notifications = [],
         callable $postprocessfortemplate = null
     ) {
@@ -189,7 +189,7 @@ class discussion {
 
         // Make sure we can render.
         if (!$capabilitymanager->can_view_discussions($user)) {
-            throw new moodle_exception('noviewdiscussionspermission', 'mod_forum');
+            throw new powereduc_exception('noviewdiscussionspermission', 'mod_forum');
         }
 
         $posts = array_merge([$firstpost], array_values($replies));

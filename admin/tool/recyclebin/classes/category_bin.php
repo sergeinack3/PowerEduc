@@ -24,7 +24,7 @@
 
 namespace tool_recyclebin;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 define('TOOL_RECYCLEBIN_COURSECAT_BIN_FILEAREA', 'recyclebin_coursecat');
 
@@ -115,7 +115,7 @@ class category_bin extends base_bin {
         // setting here via $CFG->forced_plugin_settings, so it won't interfere other operations.
         // See MDL-65218 and MDL-35773 for more information.
         // This hack will be removed once recycle bin switches to use its own backup mode, with
-        // own preferences and 100% separate from MOODLE_AUTOMATED.
+        // own preferences and 100% separate from POWEREDUC_AUTOMATED.
         // TODO: Remove this as part of MDL-65228.
         $CFG->forced_plugin_settings['backup'] = ['backup_auto_storage' => 0, 'backup_auto_files' => 1];
 
@@ -124,7 +124,7 @@ class category_bin extends base_bin {
         $controller = new \backup_controller(
             \backup::TYPE_1COURSE,
             $course->id,
-            \backup::FORMAT_MOODLE,
+            \backup::FORMAT_POWEREDUC,
             \backup::INTERACTIVE_NO,
             \backup::MODE_AUTOMATED,
             $user->id
@@ -249,7 +249,7 @@ class category_bin extends base_bin {
         // so it won't interfere other operations.
         // See MDL-65218 and MDL-35773 for more information.
         // This hack will be removed once recycle bin switches to use its own backup mode, with
-        // own preferences and 100% separate from MOODLE_AUTOMATED.
+        // own preferences and 100% separate from POWEREDUC_AUTOMATED.
         // TODO: Remove this as part of MDL-65228.
         $CFG->forced_plugin_settings['restore'] = ['restore_general_users' => 1, 'restore_general_groups' => 1];
 

@@ -24,7 +24,7 @@
 
 namespace tool_langimport\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The tool_langimport langpack imported event class.

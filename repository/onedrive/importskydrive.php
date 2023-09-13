@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Import files from skydrive.
  *
  * @package    repository_onedrive
- * @copyright  2017 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2017 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ $PAGE->set_heading($strheading);
 
 require_login();
 
-require_capability('moodle/site:config', context_system::instance());
+require_capability('powereduc/site:config', context_system::instance());
 
 $confirm = optional_param('confirm', false, PARAM_BOOL);
 
@@ -43,14 +43,14 @@ if ($confirm) {
 
     if (repository_onedrive::import_skydrive_files()) {
         $mesg = get_string('skydrivefilesimported', 'repository_onedrive');
-        redirect(new moodle_url('/admin/repository.php'), $mesg, null, \core\output\notification::NOTIFY_SUCCESS);
+        redirect(new powereduc_url('/admin/repository.php'), $mesg, null, \core\output\notification::NOTIFY_SUCCESS);
     } else {
         $mesg = get_string('skydrivefilesnotimported', 'repository_onedrive');
-        redirect(new moodle_url('/admin/repository.php'), $mesg, null, \core\output\notification::NOTIFY_ERROR);
+        redirect(new powereduc_url('/admin/repository.php'), $mesg, null, \core\output\notification::NOTIFY_ERROR);
     }
 } else {
-    $continueurl = new moodle_url('/repository/onedrive/importskydrive.php', ['confirm' => true]);
-    $cancelurl = new moodle_url('/admin/repository.php');
+    $continueurl = new powereduc_url('/repository/onedrive/importskydrive.php', ['confirm' => true]);
+    $cancelurl = new powereduc_url('/admin/repository.php');
     echo $OUTPUT->header();
     echo $OUTPUT->confirm(get_string('confirmimportskydrive', 'repository_onedrive'), $continueurl, $cancelurl);
     echo $OUTPUT->footer();

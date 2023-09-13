@@ -160,7 +160,7 @@ class restore_controller extends base_controller {
         $this->format = backup_general_helper::detect_backup_format($tempdir);
 
         // If format is not moodle2, set to conversion needed
-        if ($this->format !== backup::FORMAT_MOODLE) {
+        if ($this->format !== backup::FORMAT_POWEREDUC) {
             $this->set_status(backup::STATUS_REQUIRE_CONV);
 
         // Else, format is moodle2, load plan, apply security and set status based on interactivity
@@ -510,7 +510,7 @@ class restore_controller extends base_controller {
     }
 
     /**
-     * Converts from current format to backup::MOODLE format
+     * Converts from current format to backup::POWEREDUC format
      */
     public function convert() {
         global $CFG;
@@ -537,7 +537,7 @@ class restore_controller extends base_controller {
         $this->log('backup format conversion successful', backup::LOG_INFO);
 
         // If no exceptions were thrown, then we are in the proper format
-        $this->format = backup::FORMAT_MOODLE;
+        $this->format = backup::FORMAT_POWEREDUC;
 
         // Load plan, apply security and set status based on interactivity
         $this->load_plan();
@@ -568,7 +568,7 @@ class restore_controller extends base_controller {
         $this->progress->start_progress('Prepare Copy');
 
         // If no exceptions were thrown, then we are in the proper format.
-        $this->format = backup::FORMAT_MOODLE;
+        $this->format = backup::FORMAT_POWEREDUC;
 
         // Load plan, apply security and set status based on interactivity.
         $this->load_plan();

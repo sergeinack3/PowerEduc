@@ -1,42 +1,42 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Forum summary report filters renderable.
  *
  * @package    forumreport_summary
- * @copyright  2019 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2019 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace forumreport_summary\output;
 
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use stdClass;
 use templatable;
 use forumreport_summary;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Forum summary report filters renderable.
  *
- * @copyright  2019 Michael Hawkins <michaelh@moodle.com>
+ * @copyright  2019 Michael Hawkins <michaelh@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filters implements renderable, templatable {
@@ -57,9 +57,9 @@ class filters implements renderable, templatable {
     protected $courseid;
 
     /**
-     * Moodle URL used as the form action on the generate button.
+     * PowerEduc URL used as the form action on the generate button.
      *
-     * @var moodle_url $actionurl
+     * @var powereduc_url $actionurl
      */
     protected $actionurl;
 
@@ -108,11 +108,11 @@ class filters implements renderable, templatable {
      *
      * @param stdClass $course The course object.
      * @param array $cms Array of course module objects.
-     * @param moodle_url $actionurl The form action URL.
+     * @param powereduc_url $actionurl The form action URL.
      * @param array $filterdata (optional) Associative array of data that has been set on available filters, if any,
      *                                     in the format filtertype => [values]
      */
-    public function __construct(stdClass $course, array $cms, moodle_url $actionurl, array $filterdata = []) {
+    public function __construct(stdClass $course, array $cms, powereduc_url $actionurl, array $filterdata = []) {
         $this->cms = $cms;
         $this->courseid = $course->id;
         $this->actionurl = $actionurl;
@@ -162,7 +162,7 @@ class filters implements renderable, templatable {
 
                 // Fetch for the current cm's forum.
                 $context = \context_module::instance($cm->id);
-                $aag = has_capability('moodle/site:accessallgroups', $context);
+                $aag = has_capability('powereduc/site:accessallgroups', $context);
 
                 if ($groupmode == VISIBLEGROUPS || $aag) {
                     $allgroups = true;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  *
  * @package    mod_feedback
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.3
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -40,7 +40,7 @@ use mod_feedback\external\feedback_completed_exporter;
  *
  * @package    mod_feedback
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.3
  */
@@ -149,7 +149,7 @@ class mod_feedback_external extends external_api {
      * @param int $feedbackid feedback instance id
      * @param int $courseid courseid course where user completes the feedback (for site feedbacks only)
      * @return array containing the feedback, feedback course, context, course module and the course where is being completed.
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since  Moodle 3.3
      */
     protected static function validate_feedback($feedbackid, $courseid = 0) {
@@ -170,7 +170,7 @@ class mod_feedback_external extends external_api {
 
             $feedbackcompletion = new mod_feedback_completion($feedback, $cm, $courseid);
             if (!$feedbackcompletion->check_course_is_mapped()) {
-                throw new moodle_exception('cannotaccess', 'mod_feedback');
+                throw new powereduc_exception('cannotaccess', 'mod_feedback');
             }
         }
 
@@ -184,7 +184,7 @@ class mod_feedback_external extends external_api {
      * @param  stdClass   $course   course where user completes the feedback (for site feedbacks only)
      * @param  stdClass   $cm       course module
      * @param  stdClass   $context  context object
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @return mod_feedback_completion feedback completion instance
      * @since  Moodle 3.3
      */
@@ -196,15 +196,15 @@ class mod_feedback_external extends external_api {
         }
 
         if (!$feedbackcompletion->is_open()) {
-            throw new moodle_exception('feedback_is_not_open', 'feedback');
+            throw new powereduc_exception('feedback_is_not_open', 'feedback');
         }
 
         if ($feedbackcompletion->is_empty()) {
-            throw new moodle_exception('no_items_available_yet', 'feedback');
+            throw new powereduc_exception('no_items_available_yet', 'feedback');
         }
 
         if ($checksubmit && !$feedbackcompletion->can_submit()) {
-            throw new moodle_exception('this_feedback_is_already_submitted', 'feedback');
+            throw new powereduc_exception('this_feedback_is_already_submitted', 'feedback');
         }
         return $feedbackcompletion;
     }
@@ -232,7 +232,7 @@ class mod_feedback_external extends external_api {
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and the access information
      * @since Moodle 3.3
-     * @throws  moodle_exception
+     * @throws  powereduc_exception
      */
     public static function get_feedback_access_information($feedbackid, $courseid = 0) {
         global $PAGE;
@@ -317,7 +317,7 @@ class mod_feedback_external extends external_api {
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and status result
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_feedback($feedbackid, $moduleviewed = false, $courseid = 0) {
 
@@ -333,7 +333,7 @@ class mod_feedback_external extends external_api {
         $feedbackcompletion->trigger_module_viewed();
         if ($params['moduleviewed']) {
             if (!$feedbackcompletion->is_open()) {
-                throw new moodle_exception('feedback_is_not_open', 'feedback');
+                throw new powereduc_exception('feedback_is_not_open', 'feedback');
             }
             // Mark activity viewed for completion-tracking.
             $feedbackcompletion->set_module_viewed();
@@ -384,7 +384,7 @@ class mod_feedback_external extends external_api {
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and status result
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_current_completed_tmp($feedbackid, $courseid = 0) {
         global $PAGE;
@@ -404,7 +404,7 @@ class mod_feedback_external extends external_api {
                 'warnings' => $warnings,
             );
         }
-        throw new moodle_exception('not_started', 'feedback');
+        throw new powereduc_exception('not_started', 'feedback');
     }
 
     /**
@@ -804,7 +804,7 @@ class mod_feedback_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -812,7 +812,7 @@ class mod_feedback_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0 -> all groups).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -1074,7 +1074,7 @@ class mod_feedback_external extends external_api {
         $completioncourseid = $feedbackcompletion->get_courseid();
 
         if ($feedback->anonymous != FEEDBACK_ANONYMOUS_NO || $feedback->course == SITEID) {
-            throw new moodle_exception('anonymous', 'feedback');
+            throw new powereduc_exception('anonymous', 'feedback');
         }
 
         // Check permissions.
@@ -1084,7 +1084,7 @@ class mod_feedback_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -1092,7 +1092,7 @@ class mod_feedback_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0 -> all groups).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -1183,7 +1183,7 @@ class mod_feedback_external extends external_api {
      * @param int $perpage the number of records to return per page
      * @param int $courseid course where user completes the feedback (for site feedbacks only)
      * @return array of warnings and users attemps and responses
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @since Moodle 3.3
      */
     public static function get_responses_analysis($feedbackid, $groupid = 0, $page = 0, $perpage = 0, $courseid = 0) {
@@ -1203,7 +1203,7 @@ class mod_feedback_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -1211,7 +1211,7 @@ class mod_feedback_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0 -> all groups).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -1305,7 +1305,7 @@ class mod_feedback_external extends external_api {
      * @param int $feedbackid feedback instance id
      * @return array of warnings and the last completed record
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_last_completed($feedbackid, $courseid = 0) {
         global $PAGE;
@@ -1319,7 +1319,7 @@ class mod_feedback_external extends external_api {
         $feedbackcompletion = new mod_feedback_completion($feedback, $cm, $completioncourse->id);
 
         if ($feedbackcompletion->is_anonymous()) {
-             throw new moodle_exception('anonymous', 'feedback');
+             throw new powereduc_exception('anonymous', 'feedback');
         }
         if ($completed = $feedbackcompletion->find_last_completed()) {
             $exporter = new feedback_completed_exporter($completed);
@@ -1328,7 +1328,7 @@ class mod_feedback_external extends external_api {
                 'warnings' => $warnings,
             );
         }
-        throw new moodle_exception('not_completed_yet', 'feedback');
+        throw new powereduc_exception('not_completed_yet', 'feedback');
     }
 
     /**

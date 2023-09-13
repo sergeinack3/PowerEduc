@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the ingest manager for the assignfeedback_editpdf plugin
@@ -166,7 +166,7 @@ EOD;
 
         // Capability checks.
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         $files = array();
@@ -278,7 +278,7 @@ EOD;
 
         // Capability checks.
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermissiontoaccesspage', 'error');
+            throw new \powereduc_exception('nopermissiontoaccesspage', 'error');
         }
 
         $grade = $assignment->get_user_grade($userid, true, $attemptnumber);
@@ -363,7 +363,7 @@ EOD;
         $assignment = self::get_assignment_from_param($assignment);
 
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         // When in readonly we can return the number of images in the DB because they should already exist,
@@ -400,7 +400,7 @@ EOD;
         $assignment = self::get_assignment_from_param($assignment);
 
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         // Need to generate the page images - first get a combined pdf.
@@ -408,7 +408,7 @@ EOD;
 
         $status = $document->get_status();
         if ($status === combined_document::STATUS_FAILED) {
-            throw new \moodle_exception('Could not generate combined pdf.');
+            throw new \powereduc_exception('Could not generate combined pdf.');
         } else if ($status === combined_document::STATUS_PENDING_INPUT) {
             // The conversion is still in progress.
             return [];
@@ -442,7 +442,7 @@ EOD;
         for ($i = 0; $i < $pagecount; $i++) {
             try {
                 if (empty($images[$i])) {
-                    throw new \moodle_exception('error image');
+                    throw new \powereduc_exception('error image');
                 }
                 $image = $images[$i];
                 if (!$resetrotation) {
@@ -455,8 +455,8 @@ EOD;
                         imagepng($content, $filepath);
                     }
                 }
-            } catch (\moodle_exception $e) {
-                // We catch only moodle_exception here as other exceptions indicate issue with setup not the pdf.
+            } catch (\powereduc_exception $e) {
+                // We catch only powereduc_exception here as other exceptions indicate issue with setup not the pdf.
                 $image = pdf::get_error_image($tmpdir, $i);
             }
             $record->filename = basename($image);
@@ -503,7 +503,7 @@ EOD;
         $assignment = self::get_assignment_from_param($assignment);
 
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         if ($assignment->get_instance()->teamsubmission) {
@@ -586,7 +586,7 @@ EOD;
             if ($readonly) {
                 // This should never happen, there should be a version of the pages available
                 // whenever we are requesting the readonly version.
-                throw new \moodle_exception('Could not find readonly pages for grade ' . $grade->id);
+                throw new \powereduc_exception('Could not find readonly pages for grade ' . $grade->id);
             }
             $pages = self::generate_page_images_for_attempt($assignment, $userid, $attemptnumber, $resetrotation);
         }
@@ -649,10 +649,10 @@ EOD;
         $assignment = self::get_assignment_from_param($assignment);
 
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
         if (!$assignment->can_grade()) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         // Need to generate the page images - first get a combined pdf.
@@ -660,7 +660,7 @@ EOD;
 
         $status = $document->get_status();
         if ($status === combined_document::STATUS_FAILED) {
-            throw new \moodle_exception('Could not generate combined pdf.');
+            throw new \powereduc_exception('Could not generate combined pdf.');
         } else if ($status === combined_document::STATUS_PENDING_INPUT) {
             // The conversion is still in progress.
             return false;
@@ -818,7 +818,7 @@ EOD;
         $assignment = self::get_assignment_from_param($assignment);
 
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         $grade = $assignment->get_user_grade($userid, true, $attemptnumber);
@@ -854,10 +854,10 @@ EOD;
         $assignment = self::get_assignment_from_param($assignment);
 
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
         if (!$assignment->can_grade()) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         $grade = $assignment->get_user_grade($userid, true, $attemptnumber);
@@ -943,7 +943,7 @@ EOD;
      * @return null|\stored_file return rotated File
      * @throws \coding_exception
      * @throws \file_exception
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws \stored_file_creation_exception
      */
     public static function rotate_page($assignment, $userid, $attemptnumber, $index, $rotateleft) {
@@ -951,7 +951,7 @@ EOD;
         $grade = $assignment->get_user_grade($userid, true, $attemptnumber);
         // Check permission.
         if (!$assignment->can_view_submission($userid)) {
-            throw new \moodle_exception('nopermission');
+            throw new \powereduc_exception('nopermission');
         }
 
         $filearea = self::PAGE_IMAGE_FILEAREA;

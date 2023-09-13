@@ -25,7 +25,7 @@
 
 namespace core\lock;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Lock factory for use during installation.

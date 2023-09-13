@@ -2,7 +2,7 @@
 /**
  * Drag and Drop for Quiz sections and slots.
  *
- * @module moodle-mod-quiz-dragdrop
+ * @module powereduc-mod-quiz-dragdrop
  */
 
 var CSS = {

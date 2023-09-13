@@ -25,7 +25,7 @@ namespace core_calendar\local\event\forms;
 
 use context_system;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/lib/formslib.php');
 

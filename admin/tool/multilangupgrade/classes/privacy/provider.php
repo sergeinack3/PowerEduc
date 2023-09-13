@@ -24,7 +24,7 @@
 
 namespace tool_multilangupgrade\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tool_multilangupgrade implementing null_provider.

@@ -26,7 +26,7 @@ Feature: In a lesson activity, a teacher can duplicate a lesson page
       | private_files | System       | 1         | my-index        | side-post     |
     And I log in as "teacher1"
     And I follow "Manage private files"
-    And I upload "mod/lesson/tests/fixtures/moodle_logo.jpg" file to "Files" filemanager
+    And I upload "mod/lesson/tests/fixtures/powereduc_logo.jpg" file to "Files" filemanager
     And I click on "Save changes" "button"
 
   @javascript @_file_upload
@@ -45,7 +45,7 @@ Feature: In a lesson activity, a teacher can duplicate a lesson page
     And I click on "Insert or edit image" "button" in the "[data-fieldtype=editor]" "css_element"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodle_logo.jpg" "link"
+    And I click on "powereduc_logo.jpg" "link"
     And I click on "Select this file" "button"
     And I set the field "Describe this image for someone who cannot see it" to "It's the logo"
     And I click on "Save image" "button"
@@ -57,7 +57,7 @@ Feature: In a lesson activity, a teacher can duplicate a lesson page
     And I press "Save page"
     When I follow "Update page: First page name"
     And I should see "First page name"
-    Then "//*[contains(@id, 'id_contents_editor')]//img[contains(@src, 'moodle_logo.jpg')]" "xpath_element" should exist
+    Then "//*[contains(@id, 'id_contents_editor')]//img[contains(@src, 'powereduc_logo.jpg')]" "xpath_element" should exist
 
   @javascript @_file_upload
   Scenario: Duplicate question page with image in answer.
@@ -81,7 +81,7 @@ Feature: In a lesson activity, a teacher can duplicate a lesson page
     And I click on "Insert or edit image" "button" in the "//*[@id='id_answer_editor_0']/ancestor::*[@data-fieldtype='editor']" "xpath_element"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodle_logo.jpg" "link"
+    And I click on "powereduc_logo.jpg" "link"
     And I click on "Select this file" "button"
     And I set the field "Describe this image for someone who cannot see it" to "It's the logo"
     And I click on "Save image" "button"
@@ -94,7 +94,7 @@ Feature: In a lesson activity, a teacher can duplicate a lesson page
     When I follow "Update page: True false with an image in the answer"
     And I should see "True false with an image in the answer"
     And I should see "Select the picture"
-    Then "//*[contains(@id, 'id_answer_editor_0')]//img[contains(@src, 'moodle_logo.jpg')]" "xpath_element" should exist
+    Then "//*[contains(@id, 'id_answer_editor_0')]//img[contains(@src, 'powereduc_logo.jpg')]" "xpath_element" should exist
 
   @javascript @_file_upload
   Scenario: Duplicate question page with image in feedback.
@@ -118,7 +118,7 @@ Feature: In a lesson activity, a teacher can duplicate a lesson page
     And I click on "Insert or edit image" "button" in the "//*[@id='id_response_editor_0']/ancestor::*[@data-fieldtype='editor']" "xpath_element"
     And I click on "Browse repositories..." "button"
     And I click on "Private files" "link" in the ".fp-repo-area" "css_element"
-    And I click on "moodle_logo.jpg" "link"
+    And I click on "powereduc_logo.jpg" "link"
     And I click on "Select this file" "button"
     And I set the field "Describe this image for someone who cannot see it" to "It's the logo"
     And I click on "Save image" "button"
@@ -131,4 +131,4 @@ Feature: In a lesson activity, a teacher can duplicate a lesson page
     When I follow "Update page: True false with an image in the feedback"
     And I should see "True false with an image in the feedback"
     And I should see "Select the picture"
-    Then "//*[contains(@id, 'id_response_editor_0')]//img[contains(@src, 'moodle_logo.jpg')]" "xpath_element" should exist
+    Then "//*[contains(@id, 'id_response_editor_0')]//img[contains(@src, 'powereduc_logo.jpg')]" "xpath_element" should exist

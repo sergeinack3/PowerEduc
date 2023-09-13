@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-define('NO_MOODLE_COOKIES', true); // Session not used here.
+define('NO_POWEREDUC_COOKIES', true); // Session not used here.
 
 require_once('../../../config.php');
 require_once($CFG->dirroot.'/mod/chat/lib.php');
@@ -23,18 +23,18 @@ $chatsid = required_param('chat_sid', PARAM_ALPHANUM);
 $chatid   = required_param('chat_id', PARAM_INT);
 
 if (!$chatuser = $DB->get_record('chat_users', array('sid' => $chatsid))) {
-    throw new \moodle_exception('notlogged', 'chat');
+    throw new \powereduc_exception('notlogged', 'chat');
 }
 if (!$chat = $DB->get_record('chat', array('id' => $chatid))) {
-    throw new \moodle_exception('invalidid', 'chat');
+    throw new \powereduc_exception('invalidid', 'chat');
 }
 
 if (!$course = $DB->get_record('course', array('id' => $chat->course))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 $PAGE->set_url('/mod/chat/gui_header_js/chatinput.php', array('chat_sid' => $chatsid, 'chat_id' => $chatid));

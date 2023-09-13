@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use external_value;
 use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -74,7 +74,7 @@ class completion_validate extends external_api {
 
             // Get list with all the users enrolled in the course.
             [$sort, $sqlparams] = users_order_by_sql('u');
-            if (has_capability('moodle/course:update', $context)) {
+            if (has_capability('powereduc/course:update', $context)) {
                 $users = get_enrolled_users($context, 'mod/bigbluebuttonbn:view', 0, 'u.*', $sort);
                 foreach ($users as $user) {
                     // Enqueue a task for processing the completion.

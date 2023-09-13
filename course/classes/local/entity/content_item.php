@@ -24,7 +24,7 @@
  */
 namespace core_course\local\entity;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The content_item class.

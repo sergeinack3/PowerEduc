@@ -25,7 +25,7 @@
 
 namespace core_h5p;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_h5p\local\library\autoloader;
 use Moodle\H5PContentValidator as content_validator;

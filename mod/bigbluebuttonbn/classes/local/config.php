@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,20 +31,20 @@ use mod_bigbluebuttonbn\recording;
 class config {
 
     /** @var string Default bigbluebutton server url */
-    public const DEFAULT_SERVER_URL = 'https://test-moodle.blindsidenetworks.com/bigbluebutton/';
+    public const DEFAULT_SERVER_URL = 'https://test-powereduc.blindsidenetworks.com/bigbluebutton/';
 
     /** @var string Default bigbluebutton server shared secret */
     public const DEFAULT_SHARED_SECRET = '0b21fcaf34673a8c3ec8ed877d76ae34';
 
     /** @var string Default bigbluebutton data processing agreement url */
-    public const DEFAULT_DPA_URL = 'https://blindsidenetworks.com/dpa-moodle-free-tier';
+    public const DEFAULT_DPA_URL = 'https://blindsidenetworks.com/dpa-powereduc-free-tier';
 
     /**
-     * Returns moodle version.
+     * Returns powereduc version.
      *
      * @return string
      */
-    protected static function get_moodle_version_major(): string {
+    protected static function get_powereduc_version_major(): string {
         global $CFG;
         $versionarray = explode('.', $CFG->version);
         return $versionarray[0];
@@ -171,7 +171,7 @@ class config {
      */
     public static function get_options(): array {
         return [
-            'version_major' => self::get_moodle_version_major(),
+            'version_major' => self::get_powereduc_version_major(),
             'voicebridge_editable' => self::get('voicebridge_editable'),
             'importrecordings_enabled' => self::get('importrecordings_enabled'),
             'importrecordings_from_deleted_enabled' => self::get('importrecordings_from_deleted_enabled'),

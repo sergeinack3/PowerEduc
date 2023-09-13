@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qtype_gapselect;
 
@@ -21,7 +21,7 @@ use question_bank;
 use question_hint_with_parts;
 use question_possible_response;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
@@ -139,7 +139,7 @@ class question_type_test extends \question_testcase {
     <name>
       <text>A select missing words question</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Put these in order: [[1]], [[2]], [[3]].</text>
     </questiontext>
     <generalfeedback>
@@ -171,11 +171,11 @@ class question_type_test extends \question_testcase {
       <text>Gamma</text>
       <group>1</group>
     </selectoption>
-    <hint format="moodle_auto_format">
+    <hint format="powereduc_auto_format">
       <text>Try again.</text>
       <shownumcorrect />
     </hint>
-    <hint format="moodle_auto_format">
+    <hint format="powereduc_auto_format">
       <text>These are the first three letters of the Greek alphabet.</text>
       <shownumcorrect />
       <clearwrong />
@@ -191,7 +191,7 @@ class question_type_test extends \question_testcase {
         $expectedq->qtype = 'gapselect';
         $expectedq->name = 'A select missing words question';
         $expectedq->questiontext = 'Put these in order: [[1]], [[2]], [[3]].';
-        $expectedq->questiontextformat = FORMAT_MOODLE;
+        $expectedq->questiontextformat = FORMAT_POWEREDUC;
         $expectedq->generalfeedback = 'The answer is Alpha, Beta, Gamma.';
         $expectedq->defaultmark = 3;
         $expectedq->length = 1;
@@ -199,13 +199,13 @@ class question_type_test extends \question_testcase {
 
         $expectedq->shuffleanswers = 1;
         $expectedq->correctfeedback = array('text' => '<p>Your answer is correct.</p>',
-                'format' => FORMAT_MOODLE);
+                'format' => FORMAT_POWEREDUC);
         $expectedq->partiallycorrectfeedback = array(
                 'text' => '<p>Your answer is partially correct.</p>',
-                'format' => FORMAT_MOODLE);
+                'format' => FORMAT_POWEREDUC);
         $expectedq->shownumcorrect = true;
         $expectedq->incorrectfeedback = array('text' => '<p>Your answer is incorrect.</p>',
-                'format' => FORMAT_MOODLE);
+                'format' => FORMAT_POWEREDUC);
 
         $expectedq->choices = array(
             array('answer' => 'Alpha', 'choicegroup' => 1),
@@ -214,9 +214,9 @@ class question_type_test extends \question_testcase {
         );
 
         $expectedq->hint = array(
-                array('text' => 'Try again.', 'format' => FORMAT_MOODLE),
+                array('text' => 'Try again.', 'format' => FORMAT_POWEREDUC),
                 array('text' => 'These are the first three letters of the Greek alphabet.',
-                        'format' => FORMAT_MOODLE));
+                        'format' => FORMAT_POWEREDUC));
         $expectedq->hintshownumcorrect = array(true, true);
         $expectedq->hintclearwrong = array(false, true);
         $this->assert(new \question_check_specified_fields_expectation($expectedq), $q);
@@ -231,9 +231,9 @@ class question_type_test extends \question_testcase {
         $qdata->qtype = 'gapselect';
         $qdata->name = 'A select missing words question';
         $qdata->questiontext = 'Put these in order: [[1]], [[2]], [[3]].';
-        $qdata->questiontextformat = FORMAT_MOODLE;
+        $qdata->questiontextformat = FORMAT_POWEREDUC;
         $qdata->generalfeedback = 'The answer is Alpha, Beta, Gamma.';
-        $qdata->generalfeedbackformat = FORMAT_MOODLE;
+        $qdata->generalfeedbackformat = FORMAT_POWEREDUC;
         $qdata->defaultmark = 3;
         $qdata->length = 1;
         $qdata->penalty = 0.3333333;
@@ -242,24 +242,24 @@ class question_type_test extends \question_testcase {
         $qdata->options = new \stdClass();
         $qdata->options->shuffleanswers = 1;
         $qdata->options->correctfeedback = '<p>Your answer is correct.</p>';
-        $qdata->options->correctfeedbackformat = FORMAT_MOODLE;
+        $qdata->options->correctfeedbackformat = FORMAT_POWEREDUC;
         $qdata->options->partiallycorrectfeedback = '<p>Your answer is partially correct.</p>';
-                $qdata->options->partiallycorrectfeedbackformat = FORMAT_MOODLE;
+                $qdata->options->partiallycorrectfeedbackformat = FORMAT_POWEREDUC;
         $qdata->options->shownumcorrect = true;
         $qdata->options->incorrectfeedback = '<p>Your answer is incorrect.</p>';
-        $qdata->options->incorrectfeedbackformat = FORMAT_MOODLE;
+        $qdata->options->incorrectfeedbackformat = FORMAT_POWEREDUC;
 
         $qdata->options->answers = array(
-            13 => new question_answer(13, 'Alpha', 0, '1', FORMAT_MOODLE),
-            14 => new question_answer(14, 'Beta', 0, '1', FORMAT_MOODLE),
-            15 => new question_answer(15, 'Gamma', 0, '1', FORMAT_MOODLE),
+            13 => new question_answer(13, 'Alpha', 0, '1', FORMAT_POWEREDUC),
+            14 => new question_answer(14, 'Beta', 0, '1', FORMAT_POWEREDUC),
+            15 => new question_answer(15, 'Gamma', 0, '1', FORMAT_POWEREDUC),
         );
 
         $qdata->hints = array(
-            1 => new question_hint_with_parts(1, 'Try again.', FORMAT_MOODLE, true, false),
+            1 => new question_hint_with_parts(1, 'Try again.', FORMAT_POWEREDUC, true, false),
             2 => new question_hint_with_parts(2,
                     'These are the first three letters of the Greek alphabet.',
-                    FORMAT_MOODLE, true, true),
+                    FORMAT_POWEREDUC, true, true),
         );
 
         $exporter = new \qformat_xml();
@@ -270,10 +270,10 @@ class question_type_test extends \question_testcase {
     <name>
       <text>A select missing words question</text>
     </name>
-    <questiontext format="moodle_auto_format">
+    <questiontext format="powereduc_auto_format">
       <text>Put these in order: [[1]], [[2]], [[3]].</text>
     </questiontext>
-    <generalfeedback format="moodle_auto_format">
+    <generalfeedback format="powereduc_auto_format">
       <text>The answer is Alpha, Beta, Gamma.</text>
     </generalfeedback>
     <defaultgrade>3</defaultgrade>
@@ -281,13 +281,13 @@ class question_type_test extends \question_testcase {
     <hidden>0</hidden>
     <idnumber></idnumber>
     <shuffleanswers>1</shuffleanswers>
-    <correctfeedback format="moodle_auto_format">
+    <correctfeedback format="powereduc_auto_format">
       <text><![CDATA[<p>Your answer is correct.</p>]]></text>
     </correctfeedback>
-    <partiallycorrectfeedback format="moodle_auto_format">
+    <partiallycorrectfeedback format="powereduc_auto_format">
       <text><![CDATA[<p>Your answer is partially correct.</p>]]></text>
     </partiallycorrectfeedback>
-    <incorrectfeedback format="moodle_auto_format">
+    <incorrectfeedback format="powereduc_auto_format">
       <text><![CDATA[<p>Your answer is incorrect.</p>]]></text>
     </incorrectfeedback>
     <shownumcorrect/>
@@ -303,11 +303,11 @@ class question_type_test extends \question_testcase {
       <text>Gamma</text>
       <group>1</group>
     </selectoption>
-    <hint format="moodle_auto_format">
+    <hint format="powereduc_auto_format">
       <text>Try again.</text>
       <shownumcorrect/>
     </hint>
-    <hint format="moodle_auto_format">
+    <hint format="powereduc_auto_format">
       <text>These are the first three letters of the Greek alphabet.</text>
       <shownumcorrect/>
       <clearwrong/>

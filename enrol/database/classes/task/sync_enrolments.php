@@ -23,7 +23,7 @@
 
 namespace enrol_database\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class sync_enrolments

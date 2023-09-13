@@ -42,7 +42,7 @@ use core_competency\user_evidence;
 use core_competency\user_evidence_competency;
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/grade/grade_scale.php');

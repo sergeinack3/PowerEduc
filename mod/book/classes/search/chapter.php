@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 namespace mod_book\search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Search area for mod_book chapters.
@@ -44,7 +44,7 @@ class chapter extends \core_search\base_mod {
      *
      * @param int $modifiedfrom
      * @param \context|null $context Optional context to restrict scope of returned results
-     * @return moodle_recordset|null Recordset (or null if no results)
+     * @return powereduc_recordset|null Recordset (or null if no results)
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;
@@ -148,23 +148,23 @@ class chapter extends \core_search\base_mod {
      * Returns a url to the chapter.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_doc_url(\core_search\document $doc) {
         $contextmodule = \context::instance_by_id($doc->get('contextid'));
         $params = array('id' => $contextmodule->instanceid, 'chapterid' => $doc->get('itemid'));
-        return new \moodle_url('/mod/book/view.php', $params);
+        return new \powereduc_url('/mod/book/view.php', $params);
     }
 
     /**
      * Returns a url to the book.
      *
      * @param \core_search\document $doc
-     * @return \moodle_url
+     * @return \powereduc_url
      */
     public function get_context_url(\core_search\document $doc) {
         $contextmodule = \context::instance_by_id($doc->get('contextid'));
-        return new \moodle_url('/mod/book/view.php', array('id' => $contextmodule->instanceid));
+        return new \powereduc_url('/mod/book/view.php', array('id' => $contextmodule->instanceid));
     }
 
     /**

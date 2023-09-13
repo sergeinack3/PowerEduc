@@ -20,7 +20,7 @@ use core_course_category;
 use core_course_list_element;
 use course_capability_assignment;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/course/lib.php');

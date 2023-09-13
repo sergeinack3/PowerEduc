@@ -24,7 +24,7 @@
 
 namespace tool_recyclebin\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tool_recyclebin implementing null_provider.

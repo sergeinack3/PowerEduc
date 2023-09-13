@@ -24,7 +24,7 @@
 
 namespace tool_monitor\output\managesubs;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/tablelib.php');
 

@@ -1,30 +1,30 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Provides an interface for a tool type in the Moodle server.
+ * Provides an interface for a tool type in the PowerEduc server.
  *
  * @module     mod_lti/tool_type
- * @copyright  2015 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2015 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      3.1
  */
 define(['core/ajax', 'core/notification'], function(ajax, notification) {
     return {
         /**
-         * Get a list of tool types from Moodle for the given
+         * Get a list of tool types from PowerEduc for the given
          * search args.
          *
          * See also:
@@ -49,7 +49,7 @@ define(['core/ajax', 'core/notification'], function(ajax, notification) {
         },
 
         /**
-         * Create a tool type in Moodle.
+         * Create a tool type in PowerEduc.
          *
          * The promise will fail if the URL is not a cartridge, so you must handle the fail result.
          *
@@ -73,7 +73,7 @@ define(['core/ajax', 'core/notification'], function(ajax, notification) {
         },
 
         /**
-         * Update a tool type in Moodle.
+         * Update a tool type in PowerEduc.
          *
          * See also:
          * mod/lti/classes/external.php update_tool_type_parameters()
@@ -97,7 +97,7 @@ define(['core/ajax', 'core/notification'], function(ajax, notification) {
         },
 
         /**
-         * Delete a tool type from Moodle.
+         * Delete a tool type from PowerEduc.
          *
          * @method delete
          * @public
@@ -120,7 +120,7 @@ define(['core/ajax', 'core/notification'], function(ajax, notification) {
         },
 
         /**
-         * Get a list of tool types from Moodle for the given
+         * Get a list of tool types from PowerEduc for the given
          * tool proxy id.
          *
          * @method query

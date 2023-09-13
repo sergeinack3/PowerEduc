@@ -24,7 +24,7 @@
  */
 
 namespace core_block\privacy;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context;
 use context_block;

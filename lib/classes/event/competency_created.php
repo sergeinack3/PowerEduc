@@ -27,7 +27,7 @@ namespace core\event;
 use core\event\base;
 use core_competency\competency;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Competency created event class.

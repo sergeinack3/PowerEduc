@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides the {@link mod_workshop_portfolio_caller} class.
@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 require_once($CFG->libdir . '/portfolio/caller.php');
 
 /**
@@ -181,7 +181,7 @@ class mod_workshop_portfolio_caller extends portfolio_module_caller_base {
 
         $html .= $this->export_header($workshopsubmission);
         $content = $this->export_content($workshopsubmission);
-        // Get rid of the JS relics left by moodleforms.
+        // Get rid of the JS relics left by powereducforms.
         $content = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $content);
         $html .= $content;
 
@@ -449,7 +449,7 @@ class mod_workshop_portfolio_caller extends portfolio_module_caller_base {
      */
     public function get_return_url() {
 
-        $returnurl = new moodle_url('/mod/workshop/submission.php', ['cmid' => $this->cm->id, 'id' => $this->submissionid]);
+        $returnurl = new powereduc_url('/mod/workshop/submission.php', ['cmid' => $this->cm->id, 'id' => $this->submissionid]);
         return $returnurl->out();
     }
 

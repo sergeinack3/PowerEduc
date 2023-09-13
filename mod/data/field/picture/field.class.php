@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -202,12 +202,12 @@ class data_field_picture extends data_field_base {
             // Thumbnails are already converted to the correct width and height.
             $width = '';
             $height = '';
-            $url = new moodle_url('/mod/data/view.php', ['d' => $this->field->dataid, 'rid' => $recordid]);
+            $url = new powereduc_url('/mod/data/view.php', ['d' => $this->field->dataid, 'rid' => $recordid]);
         } else {
             $filename = $content->content;
             $url = null;
         }
-        $imgurl = moodle_url::make_pluginfile_url($this->context->id, 'mod_data', 'content', $content->id, '/', $filename);
+        $imgurl = powereduc_url::make_pluginfile_url($this->context->id, 'mod_data', 'content', $content->id, '/', $filename);
 
         if (!$url) {
             $url = $imgurl;
@@ -286,7 +286,7 @@ class data_field_picture extends data_field_base {
                     }
 
                     if ($file->get_imageinfo() === false) {
-                        $url = new moodle_url('/mod/data/edit.php', array('d' => $this->field->dataid));
+                        $url = new powereduc_url('/mod/data/edit.php', array('d' => $this->field->dataid));
                         redirect($url, get_string('invalidfiletype', 'error', $file->get_filename()));
                     }
                     $content->content = $file->get_filename();

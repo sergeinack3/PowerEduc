@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ namespace mod_feedback;
 
 use mod_feedback_completion;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/mod/feedback/lib.php');
 
@@ -192,7 +192,7 @@ class lib_test extends \advanced_testcase {
 
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('answerquestions', 'feedback'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -228,7 +228,7 @@ class lib_test extends \advanced_testcase {
         $actionevent = mod_feedback_core_calendar_provide_event_action($event, $factory, $user->id);
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('answerquestions', 'feedback'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -303,7 +303,7 @@ class lib_test extends \advanced_testcase {
 
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('answerquestions', 'feedback'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -341,7 +341,7 @@ class lib_test extends \advanced_testcase {
 
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('answerquestions', 'feedback'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertFalse($actionevent->is_actionable());
     }
@@ -364,7 +364,7 @@ class lib_test extends \advanced_testcase {
 
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('answerquestions', 'feedback'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -401,7 +401,7 @@ class lib_test extends \advanced_testcase {
 
         $this->assertInstanceOf('\core_calendar\local\event\value_objects\action', $actionevent);
         $this->assertEquals(get_string('answerquestions', 'feedback'), $actionevent->get_name());
-        $this->assertInstanceOf('moodle_url', $actionevent->get_url());
+        $this->assertInstanceOf('powereduc_url', $actionevent->get_url());
         $this->assertEquals(1, $actionevent->get_item_count());
         $this->assertTrue($actionevent->is_actionable());
     }
@@ -1059,8 +1059,8 @@ class lib_test extends \advanced_testcase {
             'visible' => 1
         ]);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
-        assign_capability('moodle/course:manageactivities', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/course:manageactivities', CAP_PROHIBIT, $roleid, $context, true);
 
         $this->setUser($user);
 
@@ -1118,8 +1118,8 @@ class lib_test extends \advanced_testcase {
             'visible' => 1
         ]);
 
-        assign_capability('moodle/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
-        assign_capability('moodle/course:manageactivities', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/course:manageactivities', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
 
@@ -1151,7 +1151,7 @@ class lib_test extends \advanced_testcase {
         $user = self::getDataGenerator()->create_and_enrol($course, 'editingteacher');
         $roleid = self::getDataGenerator()->create_role();
         self::getDataGenerator()->role_assign($roleid, $user->id, $context->id);
-        assign_capability('moodle/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/calendar:manageentries', CAP_PROHIBIT, $roleid, $context, true);
         $generator = self::getDataGenerator()->get_plugin_generator('mod_feedback');
         // Create an instance as a user without the calendar capabilities.
         $this->setUser($user);

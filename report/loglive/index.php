@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Displays live view of recent logs
@@ -56,7 +56,7 @@ if ($page != 0) {
 if ($logreader !== '') {
     $params['logreader'] = $logreader;
 }
-$url = new moodle_url("/report/loglive/index.php", $params);
+$url = new powereduc_url("/report/loglive/index.php", $params);
 
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('report');
@@ -66,7 +66,7 @@ $refresh = $renderable->get_refresh_rate();
 $logreader = $renderable->selectedlogreader;
 
 $strlivelogs = get_string('livelogs', 'report_loglive');
-$strupdatesevery = get_string('updatesevery', 'moodle', $refresh);
+$strupdatesevery = get_string('updatesevery', 'powereduc', $refresh);
 
 
 $PAGE->set_url($url);
@@ -92,7 +92,7 @@ if ($page == 0 && !empty($logreader)) {
     $jsparams = array('since' => $until , 'courseid' => $id, 'page' => $page, 'logreader' => $logreader,
         'interval' => $refresh, 'perpage' => $renderable->perpage);
     $PAGE->requires->strings_for_js(array('pause', 'resume'), 'report_loglive');
-    $PAGE->requires->yui_module('moodle-report_loglive-fetchlogs', 'Y.M.report_loglive.FetchLogs.init', array($jsparams));
+    $PAGE->requires->yui_module('powereduc-report_loglive-fetchlogs', 'Y.M.report_loglive.FetchLogs.init', array($jsparams));
 }
 
 // Trigger a logs viewed event.

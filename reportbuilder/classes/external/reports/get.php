@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -26,9 +26,9 @@ use core_reportbuilder\manager;
 use core_reportbuilder\permission;
 use core_reportbuilder\output\custom_report;
 use core_reportbuilder\external\custom_report_exporter;
-use moodle_url;
+use powereduc_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once("{$CFG->libdir}/externallib.php");
@@ -37,7 +37,7 @@ require_once("{$CFG->libdir}/externallib.php");
  * External method for getting a custom report
  *
  * @package     core_reportbuilder
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get extends external_api {
@@ -81,8 +81,8 @@ class get extends external_api {
             permission::require_can_view_report($report->get_report_persistent());
         }
 
-        // Set current URL and force bootstrap_renderer to initiate moodle page.
-        $PAGE->set_url(new moodle_url('/'));
+        // Set current URL and force bootstrap_renderer to initiate powereduc page.
+        $PAGE->set_url(new powereduc_url('/'));
         $OUTPUT->header();
         $PAGE->start_collecting_javascript_requirements();
 

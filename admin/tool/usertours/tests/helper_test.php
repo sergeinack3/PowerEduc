@@ -26,7 +26,7 @@ namespace tool_usertours;
 
 use advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Tests for helper.

@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_quiz;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/quiz/lib.php');
@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/mod/quiz/lib.php');
  *
  * @package    mod_quiz
  * @category   test
- * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2017 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 class calendar_event_modified_test extends \advanced_testcase {
@@ -256,7 +256,7 @@ class calendar_event_modified_test extends \advanced_testcase {
             'timestart' => $timeopen->getTimestamp()
         ]);
 
-        assign_capability('moodle/course:manageactivities', CAP_PROHIBIT, $roleid, $context, true);
+        assign_capability('powereduc/course:manageactivities', CAP_PROHIBIT, $roleid, $context, true);
 
         $this->setUser($user);
 
@@ -300,7 +300,7 @@ class calendar_event_modified_test extends \advanced_testcase {
             'timestart' => $newtimeopen->getTimestamp()
         ]);
 
-        assign_capability('moodle/course:manageactivities', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/course:manageactivities', CAP_ALLOW, $roleid, $context, true);
 
         $this->setUser($user);
 
@@ -489,7 +489,7 @@ class calendar_event_modified_test extends \advanced_testcase {
             'timestart' => $newtimeclose
         ]);
 
-        assign_capability('moodle/course:manageactivities', CAP_ALLOW, $roleid, $context, true);
+        assign_capability('powereduc/course:manageactivities', CAP_ALLOW, $roleid, $context, true);
 
         $attemptid = $DB->insert_record(
             'quiz_attempts',

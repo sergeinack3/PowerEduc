@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Global Search index page for entering queries and display of results
@@ -51,12 +51,12 @@ if (!empty($CFG->forcelogin)) {
 // Unlock the session during a search.
 \core\session\manager::write_close();
 
-require_capability('moodle/search:query', $context);
+require_capability('powereduc/search:query', $context);
 
 $searchrenderer = $PAGE->get_renderer('core_search');
 
 if (\core_search\manager::is_global_search_enabled() === false) {
-    $PAGE->set_url(new moodle_url('/search/index.php'));
+    $PAGE->set_url(new powereduc_url('/search/index.php'));
     echo $OUTPUT->header();
     echo $searchrenderer->render_search_disabled();
     echo $OUTPUT->footer();
@@ -163,7 +163,7 @@ if ($cat instanceof \core_search\area_category) {
     $urlparams['cat'] = $cat->get_name();
 }
 
-$url = new moodle_url('/search/index.php', $urlparams);
+$url = new powereduc_url('/search/index.php', $urlparams);
 $PAGE->set_url($url);
 
 // We are ready to render.

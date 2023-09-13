@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  *
  * @package    mod_data
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 2.9
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 require_once($CFG->dirroot . "/mod/data/locallib.php");
@@ -40,7 +40,7 @@ use mod_data\manager;
  *
  * @package    mod_data
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 2.9
  */
@@ -116,7 +116,7 @@ class mod_data_external extends external_api {
 
                 // Check additional permissions for returning optional private settings.
                 // I avoid intentionally to use can_[add|update]_moduleinfo.
-                if (!has_capability('moodle/course:manageactivities', $context)) {
+                if (!has_capability('powereduc/course:manageactivities', $context)) {
 
                     $fields = array('scale', 'assessed', 'assesstimestart', 'assesstimefinish', 'editany', 'notification',
                                     'timemodified');
@@ -197,7 +197,7 @@ class mod_data_external extends external_api {
      * @param int $databaseid the data instance id
      * @return array of warnings and status result
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_database($databaseid) {
 
@@ -255,7 +255,7 @@ class mod_data_external extends external_api {
      * @param int $groupid (optional) group id, 0 means that the function will determine the user group
      * @return array of warnings and access information
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_data_access_information($databaseid, $groupid = 0) {
 
@@ -274,7 +274,7 @@ class mod_data_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -369,7 +369,7 @@ class mod_data_external extends external_api {
      * @param int $perpage          number of records to return per page
      * @return array of warnings and the entries
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_entries($databaseid, $groupid = 0, $returncontents = false, $sort = null, $order = null,
             $page = 0, $perpage = 0) {
@@ -395,7 +395,7 @@ class mod_data_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -501,7 +501,7 @@ class mod_data_external extends external_api {
      * @param bool $returncontents  whether to return the entries contents or not
      * @return array of warnings and the entries
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_entry($entryid, $returncontents = false) {
         global $PAGE, $DB;
@@ -521,13 +521,13 @@ class mod_data_external extends external_api {
 
         if ($record->groupid != 0) {
             if (!groups_group_visible($record->groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         }
 
         // Check correct record entry. Group check was done before.
         if (!data_can_view_record($database, $record, $record->groupid, $canmanageentries)) {
-            throw new moodle_exception('notapprovederror', 'data');
+            throw new powereduc_exception('notapprovederror', 'data');
         }
 
         $related = array('context' => $context, 'database' => $database, 'user' => null);
@@ -591,7 +591,7 @@ class mod_data_external extends external_api {
      * @param int $databaseid the database id
      * @return array of warnings and the fields
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_fields($databaseid) {
         global $PAGE;
@@ -697,7 +697,7 @@ class mod_data_external extends external_api {
      * @param int $perpage          number of records to return per page
      * @return array of warnings and the entries
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function search_entries($databaseid, $groupid = 0, $returncontents = false, $search = '', $advsearch = [],
             $sort = null, $order = null, $page = 0, $perpage = 0) {
@@ -725,7 +725,7 @@ class mod_data_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -838,7 +838,7 @@ class mod_data_external extends external_api {
      * @param bool $approve         whether to approve (true) or unapprove the entry
      * @return array of warnings and the entries
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function approve_entry($entryid, $approve = true) {
         global $PAGE, $DB;
@@ -898,7 +898,7 @@ class mod_data_external extends external_api {
      * @param int $entryid the record entry id
      * @return array of warnings success status
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function delete_entry($entryid) {
         global $PAGE, $DB;
@@ -913,7 +913,7 @@ class mod_data_external extends external_api {
         if (data_user_can_manage_entry($record, $database, $context)) {
             data_delete_record($record->id, $database, $course->id, $cm->id);
         } else {
-            throw new moodle_exception('noaccess', 'data');
+            throw new powereduc_exception('noaccess', 'data');
         }
 
         $result = array(
@@ -971,7 +971,7 @@ class mod_data_external extends external_api {
      * @param array $data the fields data to be created
      * @return array of warnings and status result
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function add_entry($databaseid, $groupid, $data) {
         global $DB;
@@ -985,7 +985,7 @@ class mod_data_external extends external_api {
 
         $fields = $DB->get_records('data_fields', ['dataid' => $database->id]);
         if (empty($fields)) {
-            throw new moodle_exception('nofieldindatabase', 'data');
+            throw new powereduc_exception('nofieldindatabase', 'data');
         }
 
         // Check database is open in time.
@@ -1004,7 +1004,7 @@ class mod_data_external extends external_api {
 
         // Group is validated inside the function.
         if (!data_user_can_add_entry($database, $groupid, $groupmode, $context)) {
-            throw new moodle_exception('noaccess', 'data');
+            throw new powereduc_exception('noaccess', 'data');
         }
 
         // Prepare the data as is expected by the API.
@@ -1101,7 +1101,7 @@ class mod_data_external extends external_api {
      * @param array $data the fields data to be created
      * @return array of warnings and status result
      * @since Moodle 3.3
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function update_entry($entryid, $data) {
         global $DB;
@@ -1118,7 +1118,7 @@ class mod_data_external extends external_api {
         data_require_time_available($database, null, $context);
 
         if (!data_user_can_manage_entry($record, $database, $context)) {
-            throw new moodle_exception('noaccess', 'data');
+            throw new powereduc_exception('noaccess', 'data');
         }
 
         // Prepare the data as is expected by the API.

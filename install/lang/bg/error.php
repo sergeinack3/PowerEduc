@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatetempdir'] = 'Не може да създаде временна директория';
 $string['cannotfindcomponent'] = 'Не можа да намери компонент';

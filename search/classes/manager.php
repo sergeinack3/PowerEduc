@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Search subsystem manager.
@@ -24,7 +24,7 @@
 
 namespace core_search;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/lib/accesslib.php');
 
@@ -298,7 +298,7 @@ class manager {
     /**
      * Returns the search URL for course search
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
     public static function get_course_search_url() {
         if (self::can_replace_course_search()) {
@@ -307,7 +307,7 @@ class manager {
             $searchurl = '/course/search.php';
         }
 
-        return new \moodle_url($searchurl);
+        return new \powereduc_url($searchurl);
     }
 
     /**
@@ -816,7 +816,7 @@ class manager {
                             $areascontexts[$areaid][$contextid] = $contextid;
                             $modulecms[$modinstance->id] = $modinstance;
 
-                            if (!has_capability('moodle/site:accessallgroups', $modinstance->context) &&
+                            if (!has_capability('powereduc/site:accessallgroups', $modinstance->context) &&
                                     ($searchclass instanceof base_mod) &&
                                     $searchclass->supports_group_restriction()) {
                                 if ($searchclass->restrict_cm_access_by_group($modinstance)) {
@@ -914,7 +914,7 @@ class manager {
                     continue;
                 }
                 foreach ($blockcontextsbyname[$searchclass->get_block_name()] as $context) {
-                    if (has_capability('moodle/block:view', $context)) {
+                    if (has_capability('powereduc/block:view', $context)) {
                         $areascontexts[$areaid][$context->id] = $context->id;
                     }
                 }
@@ -931,7 +931,7 @@ class manager {
      * Returns requested page of documents plus additional information for paging.
      *
      * This function does not perform any kind of security checking for access, the caller code
-     * should check that the current user have moodle/search:query capability.
+     * should check that the current user have powereduc/search:query capability.
      *
      * If a page is requested that is beyond the last result, the last valid page is returned in
      * results, and actualpage indicates which page was returned.
@@ -1003,7 +1003,7 @@ class manager {
      * Returns documents from the engine based on the data provided.
      *
      * This function does not perform any kind of security checking, the caller code
-     * should check that the current user have moodle/search:query capability.
+     * should check that the current user have powereduc/search:query capability.
      *
      * It might return the results from the cache instead.
      *
@@ -1011,7 +1011,7 @@ class manager {
      * - q (query text)
      * - courseids (optional list of course ids to restrict)
      * - contextids (optional list of context ids to restrict)
-     * - context (Moodle context object for location user searched from)
+     * - context (PowerEduc context object for location user searched from)
      * - order (optional ordering, one of the types supported by the search engine e.g. 'relevance')
      * - userids (optional list of user ids to restrict)
      *
@@ -1188,7 +1188,7 @@ class manager {
      * @param bool $fullindex Whether we should reindex everything or not.
      * @param float $timelimit Time limit in seconds (0 = no time limit)
      * @param \progress_trace|null $progress Optional class for tracking progress
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @return bool Whether there was any updated document or not.
      */
     public function index($fullindex = false, $timelimit = 0, \progress_trace $progress = null) {
@@ -1290,8 +1290,8 @@ class manager {
             } else if (count($result) === 5) {
                 // Backward compatibility for engines that don't return a batch count.
                 [$numrecords, $numdocs, $numdocsignored, $lastindexeddoc, $partial] = $result;
-                // Deprecated since Moodle 3.10 MDL-68690.
-                // TODO: MDL-68776 This will be deleted in Moodle 4.2.
+                // Deprecated since PowerEduc 3.10 MDL-68690.
+                // TODO: MDL-68776 This will be deleted in PowerEduc 4.2.
                 debugging('engine::add_documents() should return $batches (5-value return is deprecated)',
                         DEBUG_DEVELOPER);
             } else {
@@ -1455,8 +1455,8 @@ class manager {
             } else if (count($result) === 5) {
                 // Backward compatibility for engines that don't return a batch count.
                 [$numrecords, $numdocs, $numdocsignored, $lastindexeddoc, $partial] = $result;
-                // Deprecated since Moodle 3.10 MDL-68690.
-                // TODO: MDL-68776 This will be deleted in Moodle 4.2 (as should the below bit).
+                // Deprecated since PowerEduc 3.10 MDL-68690.
+                // TODO: MDL-68776 This will be deleted in PowerEduc 4.2 (as should the below bit).
                 debugging('engine::add_documents() should return $batches (5-value return is deprecated)',
                         DEBUG_DEVELOPER);
             } else {
@@ -1511,7 +1511,7 @@ class manager {
     /**
      * Resets areas config.
      *
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @param string $areaid
      * @return void
      */
@@ -1520,7 +1520,7 @@ class manager {
         if (!empty($areaid)) {
             $searchareas = array();
             if (!$searchareas[$areaid] = static::get_search_area($areaid)) {
-                throw new \moodle_exception('errorareanotavailable', 'search', '', $areaid);
+                throw new \powereduc_exception('errorareanotavailable', 'search', '', $areaid);
             }
         } else {
             // Only the enabled ones.
@@ -1617,7 +1617,7 @@ class manager {
      * - timestart: Time start filter
      * - timeend: Time end filter
      *
-     * @since Moodle 3.2
+     * @since PowerEduc 3.2
      * @param array $other Other info for the event.
      * @return \core\event\search_results_viewed
      */
@@ -1974,7 +1974,7 @@ class manager {
 
                 $engine = self::instance()->get_engine();
                 $engine->delete_index_for_context($context->id);
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 debugging('Error deleting search index data for context ' . $context->id . ': ' . $e->getMessage());
             }
         }
@@ -2013,7 +2013,7 @@ class manager {
             try {
                 $engine = self::instance()->get_engine();
                 $engine->delete_index_for_course($courseid);
-            } catch (\moodle_exception $e) {
+            } catch (\powereduc_exception $e) {
                 debugging('Error deleting search index data for course ' . $courseid . ': ' . $e->getMessage());
             }
         }

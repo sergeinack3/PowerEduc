@@ -24,7 +24,7 @@
  */
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Comment created event class for core_competency areas.

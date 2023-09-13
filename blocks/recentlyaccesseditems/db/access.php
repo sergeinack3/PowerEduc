@@ -20,7 +20,7 @@
  * @copyright  2018 Victor Deniz <victor@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 $capabilities = array(
         'block/recentlyaccesseditems:myaddinstance' => array(
                 'captype' => 'write',

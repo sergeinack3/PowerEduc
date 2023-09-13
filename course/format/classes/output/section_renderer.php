@@ -24,7 +24,7 @@
 
 namespace core_courseformat\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/course/renderer.php');

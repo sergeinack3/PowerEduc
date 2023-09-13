@@ -1,22 +1,22 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * JavaScript required by the question engine.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questionengine
  * @copyright  2008 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -80,13 +80,13 @@ M.core_scroll_manager.save_scroll_action = function(e) {
 
 /**
  * If there is a parameter like scrollpos=123 in the URL, scroll to that saved position.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see question\bank\qbank_previewquestion\amd\src
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 M.core_scroll_manager.scroll_to_saved_pos = function(Y) {
     Y.log("The scroll_to_saved_pos function has been deprecated. " +
-        "Please use scrollToSavedPos() in qbank_preview/preview.js instead.", 'moodle-core-notification', 'warn');
+        "Please use scrollToSavedPos() in qbank_preview/preview.js instead.", 'powereduc-core-notification', 'warn');
 
     var matches = window.location.href.match(/^.*[?&]scrollpos=(\d*)(?:&|$|#).*$/, '$1');
     if (matches) {
@@ -96,7 +96,7 @@ M.core_scroll_manager.scroll_to_saved_pos = function(Y) {
         Y.on('domready', function() { window.scrollTo(0, matches[1]); });
 
         // And the following horror is necessary to make it work in IE 8.
-        // Note that the class ie8 on body is only there in Moodle 2.0 and OU Moodle.
+        // Note that the class ie8 on body is only there in PowerEduc 2.0 and OU PowerEduc.
         if (Y.one('body').hasClass('ie')) {
             M.core_scroll_manager.force_ie_to_scroll(Y, matches[1])
         }
@@ -159,13 +159,13 @@ M.core_question_engine.init_submit_button = function(Y, button) {
  * 5. Prevent the user from repeatedly submitting the form.
  * @param Y the Yahoo object. Needs to have the DOM and Event modules loaded.
  * @param form something that can be passed to Y.one, to find the form element.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see question\bank\qbank_previewquestion\amd\src
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 M.core_question_engine.init_form = function(Y, form) {
     Y.log("The core_question_engine.init_form function has been deprecated. " +
-        "Please use setupQuestionForm() in qbank_preview/preview.js instead.", 'moodle-core-notification', 'warn');
+        "Please use setupQuestionForm() in qbank_preview/preview.js instead.", 'powereduc-core-notification', 'warn');
 
     Y.one(form).setAttribute('autocomplete', 'off');
 
@@ -187,13 +187,13 @@ M.core_question_engine.init_form = function(Y, form) {
  * Event handler to stop a question form being submitted more than once.
  * @param e the form submit event.
  * @param form the form element.
- * @deprecated since Moodle 4.0
+ * @deprecated since PowerEduc 4.0
  * @see question\bank\qbank_previewquestion\amd\src
- * @todo Final deprecation on Moodle 4.4 MDL-72438
+ * @todo Final deprecation on PowerEduc 4.4 MDL-72438
  */
 M.core_question_engine.prevent_repeat_submission = function(e, Y) {
     Y.log("The prevent_repeat_submission function has been deprecated. " +
-        "Please use preventRepeatSubmission in qbank_preview/preview.js instead.", 'moodle-core-notification', 'warn');
+        "Please use preventRepeatSubmission in qbank_preview/preview.js instead.", 'powereduc-core-notification', 'warn');
 
     if (M.core_question_engine.questionformalreadysubmitted) {
         e.halt();

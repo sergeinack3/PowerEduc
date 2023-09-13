@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Defines the editing form for the multi-answer question type.
@@ -24,7 +24,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/question/type/numerical/questiontype.php');
 
@@ -280,7 +280,7 @@ class qtype_multianswer_edit_form extends question_edit_form {
                             case 'subquestion_replacement':
                                 continue 2;
                             default:
-                                throw new \moodle_exception('unknownquestiontype', 'question', '',
+                                throw new \powereduc_exception('unknownquestiontype', 'question', '',
                                         $wrapped->qtype);
                         }
                         $separator = '';
@@ -379,9 +379,9 @@ class qtype_multianswer_edit_form extends question_edit_form {
                                 }
                             }
                             if ($subquestion->shuffleanswers ) {
-                                $defaultvalues[$prefix.'shuffleanswers'] = get_string('yes', 'moodle');
+                                $defaultvalues[$prefix.'shuffleanswers'] = get_string('yes', 'powereduc');
                             } else {
-                                $defaultvalues[$prefix.'shuffleanswers'] = get_string('no', 'moodle');
+                                $defaultvalues[$prefix.'shuffleanswers'] = get_string('no', 'powereduc');
                             }
                         }
                         foreach ($subquestion->answer as $key => $answer) {

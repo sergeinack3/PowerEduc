@@ -1,4 +1,4 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * Simple method to check for changes to a form between two points in time.
  *
  * @module     mod_assign/grading_form_change_checker
- * @copyright  2016 Damyon Wiese <damyon@moodle.com>
+ * @copyright  2016 Damyon Wiese <damyon@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      3.1
  */

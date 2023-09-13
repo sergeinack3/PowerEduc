@@ -24,7 +24,7 @@
 
 namespace tool_brickfield\local\htmlchecker\common\checks;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once('all_checks.php');
 

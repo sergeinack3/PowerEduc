@@ -29,7 +29,7 @@
  *             and others
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
 * Create a new SoapClient object

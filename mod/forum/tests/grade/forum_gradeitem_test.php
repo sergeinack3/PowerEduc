@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Tests for the the Forum gradeitem.
@@ -30,7 +30,7 @@ use mod_forum\local\entities\forum as forum_entity;
 use gradingform_controller;
 use mod_forum\grades\forum_gradeitem;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/../generator_trait.php');
 
@@ -178,7 +178,7 @@ class forum_gradeitem_test extends \advanced_testcase {
      * @dataProvider should_grade_only_active_users_provider
      * @param bool $showonlyactiveenrolconfig Whether the 'grade_report_showonlyactiveenrol' is enabled or not.
      * @param bool $showonlyactiveenrolpreference Whether the 'grade_report_showonlyactiveenrol' preference is enabled or not.
-     * @param bool $viewsuspendeduserscapability Whether the 'moodle/course:viewsuspendedusers' capability is allowed or not.
+     * @param bool $viewsuspendeduserscapability Whether the 'powereduc/course:viewsuspendedusers' capability is allowed or not.
      * @param bool $expected The expected result.
      */
     public function test_should_grade_only_active_users(bool $showonlyactiveenrolconfig, bool $showonlyactiveenrolpreference,
@@ -204,8 +204,8 @@ class forum_gradeitem_test extends \advanced_testcase {
         // Set the 'grade_report_showonlyactiveenrol' user preference.
         set_user_preference('grade_report_showonlyactiveenrol', $showonlyactiveenrolpreference);
 
-        // Set the 'moodle/course:viewsuspendedusers' user capability.
-        assign_capability('moodle/course:viewsuspendedusers', $viewsuspendeduserscapability ?
+        // Set the 'powereduc/course:viewsuspendedusers' user capability.
+        assign_capability('powereduc/course:viewsuspendedusers', $viewsuspendeduserscapability ?
             CAP_ALLOW : CAP_PROHIBIT, $editingteacherroleid, \context_course::instance($course->id));
 
         $this->assertEquals($expected, $gradeitem->should_grade_only_active_users());

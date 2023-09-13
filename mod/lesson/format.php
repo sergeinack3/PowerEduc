@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * format.php  - Default format class for file imports/exports. Doesn't do
@@ -22,11 +22,11 @@
  * Included by import.ph
  *
  * @package mod_lesson
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Import files embedded into answer or response
@@ -322,12 +322,12 @@ function lesson_save_question_options($question, $lesson, $contextid) {
             $answer->pageid = $question->id;
             $answer->timecreated = $timenow;
             $answer->answer = null;
-            $answer->answerformat = FORMAT_MOODLE;
+            $answer->answerformat = FORMAT_POWEREDUC;
             $answer->grade = 0;
             $answer->score = 1;
             $answer->jumpto = LESSON_NEXTPAGE;
             $answer->response = null;
-            $answer->responseformat = FORMAT_MOODLE;
+            $answer->responseformat = FORMAT_POWEREDUC;
             $answer->id = $DB->insert_record("lesson_answers", $answer);
         break;
         default:
@@ -476,7 +476,7 @@ class qformat_default {
                     if ($pageid) {
                         // the new page follows on from this page
                         if (!$page = $DB->get_record("lesson_pages", array("id" => $pageid))) {
-                            throw new \moodle_exception('invalidpageid', 'lesson');
+                            throw new \powereduc_exception('invalidpageid', 'lesson');
                         }
                         $newpage->prevpageid = $pageid;
                         $newpage->nextpageid = $page->nextpageid;
@@ -628,7 +628,7 @@ class qformat_default {
     protected function readquestion($lines) {
     /// Given an array of lines known to define a question in
     /// this format, this function converts it into a question
-    /// object suitable for processing and insertion into Moodle.
+    /// object suitable for processing and insertion into PowerEduc.
 
         // We should never get there unless the qformat plugin is broken.
         throw new coding_exception('Question format plugin is missing important code: readquestion.');
@@ -687,9 +687,9 @@ class qformat_default {
         $question->image = "";
         $question->usecase = 0;
         $question->multiplier = array();
-        $question->questiontextformat = FORMAT_MOODLE;
+        $question->questiontextformat = FORMAT_POWEREDUC;
         $question->generalfeedback = '';
-        $question->generalfeedbackformat = FORMAT_MOODLE;
+        $question->generalfeedbackformat = FORMAT_POWEREDUC;
         $question->correctfeedback = '';
         $question->partiallycorrectfeedback = '';
         $question->incorrectfeedback = '';
@@ -769,7 +769,7 @@ class qformat_based_on_xml extends qformat_default {
     }
 
     /**
-     * Return the array moodle is expecting
+     * Return the array powereduc is expecting
      * for an HTML text. No processing is done on $text.
      * qformat classes that want to process $text
      * for instance to import external images files

@@ -23,7 +23,7 @@
  */
 
 namespace tool_lp\form;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\form\persistent;
 use core_competency\plan as planpersistent;

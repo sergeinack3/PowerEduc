@@ -23,7 +23,7 @@
  */
 
 namespace core_competency\external;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_competency\competency;
 use core_competency\competency_framework;

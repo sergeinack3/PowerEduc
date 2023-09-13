@@ -211,7 +211,7 @@
   <library>
     <location>jquery</location>
     <name>jQuery</name>
-    <description>jQuery is a fast, small, and feature-rich JavaScript library widely used on moodle.</description>
+    <description>jQuery is a fast, small, and feature-rich JavaScript library widely used on powereduc.</description>
     <version>3.6.1</version>
     <license>MIT</license>
     <repository>https://github.com/jquery/jquery</repository>
@@ -357,7 +357,7 @@ All rights reserved.</copyright>
     <description>RTLCSS is a framework for converting Left-To-Right (LTR) Cascading Style Sheets(CSS) to Right-To-Left (RTL).</description>
     <version>1.0.1</version>
     <license>MIT</license>
-    <repository>https://github.com/moodlehq/rtlcss-php</repository>
+    <repository>https://github.com/powereduchq/rtlcss-php</repository>
     <copyrights>
       <copyright>Frédéric Massart</copyright>
     </copyrights>

@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Change the current phase of the workshop
@@ -42,10 +42,10 @@ require_capability('mod/workshop:switchphase', $PAGE->context);
 
 if ($confirm) {
     if (!confirm_sesskey()) {
-        throw new moodle_exception('confirmsesskeybad');
+        throw new powereduc_exception('confirmsesskeybad');
     }
     if (!$workshop->switch_phase($phase)) {
-        throw new \moodle_exception('errorswitchingphase', 'workshop', $workshop->view_url());
+        throw new \powereduc_exception('errorswitchingphase', 'workshop', $workshop->view_url());
     }
     redirect($workshop->view_url());
 }
@@ -65,7 +65,7 @@ $PAGE->set_secondary_active_tab("modulepage");
 //
 echo $OUTPUT->header();
 $continuebtn = new single_button(
-    new moodle_url($PAGE->url, array('confirm' => 1)), get_string('continue'), 'post', true);
+    new powereduc_url($PAGE->url, array('confirm' => 1)), get_string('continue'), 'post', true);
 $continuebtn->class .= ' mr-3';
 echo $OUTPUT->confirm(get_string('switchphase' . $phase . 'info', 'workshop'),
                         $continuebtn, $workshop->view_url());

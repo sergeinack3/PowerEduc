@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,12 +37,12 @@ $uid = required_param('uid', PARAM_ALPHANUMEXT);
 
 $bbid = $DB->get_field('bigbluebuttonbn', 'id', ['guestlinkuid' => trim($uid)]);
 if (empty($bbid)) {
-    throw new moodle_exception('guestaccess_activitynotfound', 'mod_bigbluebuttonbn');
+    throw new powereduc_exception('guestaccess_activitynotfound', 'mod_bigbluebuttonbn');
 }
 $instance = \mod_bigbluebuttonbn\instance::get_from_instanceid($bbid);
 // Prevent access to this page if the guest access has been disabled on this instance.
 if (!$instance->is_guest_allowed()) {
-    throw new moodle_exception('guestaccess_feature_disabled', 'mod_bigbluebuttonbn');
+    throw new powereduc_exception('guestaccess_feature_disabled', 'mod_bigbluebuttonbn');
 }
 
 // Get the guest matching guest access link.

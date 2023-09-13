@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,11 +20,11 @@ use external_api;
 use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\meeting;
 use mod_bigbluebuttonbn\test\testcase_helper_trait;
-use moodle_exception;
+use powereduc_exception;
 use require_login_exception;
 use restricted_context_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/webservice/tests/helpers.php');
@@ -63,7 +63,7 @@ class end_meeting_test extends \externallib_advanced_testcase {
      * Test execute API CALL with no instance
      */
     public function test_execute_no_instance() {
-        $this->expectException(moodle_exception::class);
+        $this->expectException(powereduc_exception::class);
         $endmeeting = $this->end_meeting(1234, 5678);
     }
 

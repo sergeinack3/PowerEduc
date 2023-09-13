@@ -1,29 +1,29 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Unit tests for the core_repository implementation of the privacy API.
  *
  * @package    core_repository
  * @category   test
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_repository\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\writer;
@@ -34,7 +34,7 @@ use core_privacy\local\request\approved_userlist;
 /**
  * Unit tests for the core_repository implementation of the privacy API.
  *
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends \core_privacy\tests\provider_testcase {

@@ -23,7 +23,7 @@
  */
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * User profile info field deleted event.

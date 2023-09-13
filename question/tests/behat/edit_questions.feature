@@ -32,12 +32,12 @@ Feature: A teacher can edit questions in the question bank
     And I should not see "Test question to be edited"
     And "Edited question name" row "Created by" column of "categoryquestions" table should contain "Teacher 1"
 
-  Scenario: Edit a previously created question without permission 'moodle/question:moveall' and 'moodle/question:movemine'
+  Scenario: Edit a previously created question without permission 'powereduc/question:moveall' and 'powereduc/question:movemine'
     Given I log in as "admin"
     And the following "permission overrides" exist:
       | capability               | permission | role           | contextlevel | reference |
-      | moodle/question:movemine | Prevent    | editingteacher | System       |           |
-      | moodle/question:moveall  | Prevent    | editingteacher | System       |           |
+      | powereduc/question:movemine | Prevent    | editingteacher | System       |           |
+      | powereduc/question:moveall  | Prevent    | editingteacher | System       |           |
     When I am on the "Test question to be edited" "core_question > edit" page logged in as "teacher1"
     And I set the following fields to these values:
       | Question name | Edited question name            |
@@ -47,12 +47,12 @@ Feature: A teacher can edit questions in the question bank
     And I should not see "Test question to be edited"
     And "Edited question name" row "Created by" column of "categoryquestions" table should contain "Teacher 1"
 
-  Scenario: Edit a previously created question without permission 'moodle/question:editall' and 'moodle/question:editmine'
+  Scenario: Edit a previously created question without permission 'powereduc/question:editall' and 'powereduc/question:editmine'
     Given I log in as "admin"
     And the following "permission overrides" exist:
       | capability               | permission | role           | contextlevel | reference |
-      | moodle/question:editmine | Prevent    | editingteacher | System       |           |
-      | moodle/question:editall  | Prevent    | editingteacher | System       |           |
+      | powereduc/question:editmine | Prevent    | editingteacher | System       |           |
+      | powereduc/question:editall  | Prevent    | editingteacher | System       |           |
     When I am on the "Test question to be edited" "core_question > edit" page logged in as "teacher1"
     And I set the following fields to these values:
       | Question name | Edited question name            |

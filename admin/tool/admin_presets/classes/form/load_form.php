@@ -16,7 +16,7 @@
 
 namespace tool_admin_presets\form;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use moodleform;
 

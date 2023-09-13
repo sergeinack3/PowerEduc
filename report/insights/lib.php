@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page lists public api for tool_monitor plugin.
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * This function extends the navigation with the tool items
@@ -34,11 +34,11 @@ defined('MOODLE_INTERNAL') || die;
  */
 function report_insights_extend_navigation_course($navigation, $course, $context) {
 
-    if (\core_analytics\manager::is_analytics_enabled() && has_capability('moodle/analytics:listinsights', $context)) {
+    if (\core_analytics\manager::is_analytics_enabled() && has_capability('powereduc/analytics:listinsights', $context)) {
 
         $modelids = \core_analytics\manager::cached_models_with_insights($context);
         if (!empty($modelids)) {
-            $url = new moodle_url('/report/insights/insights.php', array('contextid' => $context->id));
+            $url = new powereduc_url('/report/insights/insights.php', array('contextid' => $context->id));
             $node = navigation_node::create(get_string('insights', 'report_insights'), $url, navigation_node::TYPE_SETTING,
                 null, null, new pix_icon('i/report', get_string('insights', 'report_insights')));
             $navigation->add_node($node);
@@ -64,7 +64,7 @@ function report_insights_myprofile_navigation(core_user\output\myprofile\tree $t
 
             $modelids = \core_analytics\manager::cached_models_with_insights($context);
             if (!empty($modelids)) {
-                $url = new moodle_url('/report/insights/insights.php', array('contextid' => $context->id));
+                $url = new powereduc_url('/report/insights/insights.php', array('contextid' => $context->id));
                 $node = new core_user\output\myprofile\node('reports', 'insights', get_string('insights', 'report_insights'),
                     null, $url);
                 $tree->add_node($node);
@@ -82,11 +82,11 @@ function report_insights_myprofile_navigation(core_user\output\myprofile\tree $t
  */
 function report_insights_extend_navigation_category_settings($navigation, $context) {
 
-    if (\core_analytics\manager::is_analytics_enabled() && has_capability('moodle/analytics:listinsights', $context)) {
+    if (\core_analytics\manager::is_analytics_enabled() && has_capability('powereduc/analytics:listinsights', $context)) {
 
         $modelids = \core_analytics\manager::cached_models_with_insights($context);
         if (!empty($modelids)) {
-            $url = new moodle_url('/report/insights/insights.php', array('contextid' => $context->id));
+            $url = new powereduc_url('/report/insights/insights.php', array('contextid' => $context->id));
 
             $node = navigation_node::create(
                 get_string('insights', 'report_insights'),

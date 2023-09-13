@@ -25,7 +25,7 @@ Feature: A selected file can be cancelled
     And I click on "Add..." "button" in the "Files" "form_row"
     And I click on "Recent files" "link" in the ".fp-repo-area" "css_element"
     And I click on "//a[contains(concat(' ', normalize-space(@class), ' '), ' fp-file ')][normalize-space(.)='empty.txt']" "xpath_element"
-    And I click on ".moodle-dialogue-focused .fp-select .fp-select-cancel" "css_element"
+    And I click on ".powereduc-dialogue-focused .fp-select .fp-select-cancel" "css_element"
     And I click on "Close" "button" in the "File picker" "dialogue"
     And I press "Save changes"
     Then I should see "upload_users.csv"

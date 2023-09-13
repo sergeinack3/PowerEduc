@@ -1,24 +1,24 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access files by providing an url
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_url
  * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -30,7 +30,7 @@ require_once(__DIR__.'/locallib.php');
  * repository_url class
  * A subclass of repository, which is used to download a file from a specific url
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_url
  * @copyright  2009 Dongsheng Cai {@link http://dongsheng.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -238,10 +238,10 @@ EOD;
     /**
      * Escapes a url by replacing spaces with %20.
      *
-     * Note: In general moodle does not automatically escape urls, but for the purposes of making this plugin more user friendly
-     * and make it consistent with some other areas in moodle (such as mod_url), urls will automatically be escaped.
+     * Note: In general powereduc does not automatically escape urls, but for the purposes of making this plugin more user friendly
+     * and make it consistent with some other areas in powereduc (such as mod_url), urls will automatically be escaped.
      *
-     * If moodle_url or PARAM_URL is changed to clean characters that need to be escaped, then this function can be removed
+     * If powereduc_url or PARAM_URL is changed to clean characters that need to be escaped, then this function can be removed
      *
      * @param string $url An unescaped url.
      * @return string The escaped url

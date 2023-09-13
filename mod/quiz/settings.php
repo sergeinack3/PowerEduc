@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Administration settings definitions for the quiz module.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/lib.php');
 
@@ -53,7 +53,7 @@ if (empty($reportsbyname) && empty($rulesbyname)) {
 } else {
     $pagetitle = get_string('generalsettings', 'admin');
 }
-$quizsettings = new admin_settingpage('modsettingquiz', $pagetitle, 'moodle/site:config');
+$quizsettings = new admin_settingpage('modsettingquiz', $pagetitle, 'powereduc/site:config');
 
 if ($ADMIN->fulltree) {
     // Introductory explanation that all the settings are defaults for the add quiz form.
@@ -295,7 +295,7 @@ if (empty($reportsbyname) && empty($rulesbyname)) {
         $reportname = $report;
 
         $settings = new admin_settingpage('modsettingsquizcat'.$reportname,
-                $strreportname, 'moodle/site:config', $module->is_enabled() === false);
+                $strreportname, 'powereduc/site:config', $module->is_enabled() === false);
         include($CFG->dirroot . "/mod/quiz/report/$reportname/settings.php");
         if (!empty($settings)) {
             $ADMIN->add('modsettingsquizcat', $settings);
@@ -305,7 +305,7 @@ if (empty($reportsbyname) && empty($rulesbyname)) {
     // Add settings pages for the quiz access rule subplugins.
     foreach ($rulesbyname as $strrulename => $rule) {
         $settings = new admin_settingpage('modsettingsquizcat' . $rule,
-                $strrulename, 'moodle/site:config', $module->is_enabled() === false);
+                $strrulename, 'powereduc/site:config', $module->is_enabled() === false);
         include($CFG->dirroot . "/mod/quiz/accessrule/$rule/settings.php");
         if (!empty($settings)) {
             $ADMIN->add('modsettingsquizcat', $settings);

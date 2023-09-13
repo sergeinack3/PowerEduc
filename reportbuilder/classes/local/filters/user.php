@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -21,7 +21,7 @@ namespace core_reportbuilder\local\filters;
 use context_system;
 use core_user;
 use lang_string;
-use MoodleQuickForm;
+use PowerEducQuickForm;
 use core_reportbuilder\local\helpers\database;
 
 /**
@@ -30,7 +30,7 @@ use core_reportbuilder\local\helpers\database;
  * This filter expects field SQL referring to a user ID (e.g. "{$tableuser}.id")
  *
  * @package     core_reportbuilder
- * @copyright   2021 Paul Holden <paulh@moodle.com>
+ * @copyright   2021 Paul Holden <paulh@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user extends base {
@@ -62,9 +62,9 @@ class user extends base {
     /**
      * Setup form
      *
-     * @param MoodleQuickForm $mform
+     * @param PowerEducQuickForm $mform
      */
-    public function setup_form(MoodleQuickForm $mform): void {
+    public function setup_form(PowerEducQuickForm $mform): void {
         $operatorlabel = get_string('filterfieldoperator', 'core_reportbuilder', $this->get_header());
         $mform->addElement('select', "{$this->name}_operator", $operatorlabel, $this->get_operators())
             ->setHiddenLabel(true);
@@ -77,7 +77,7 @@ class user extends base {
             'multiple' => true,
             'valuehtmlcallback' => static function($userid): string {
                 $user = core_user::get_user($userid);
-                return fullname($user, has_capability('moodle/site:viewfullnames', context_system::instance()));
+                return fullname($user, has_capability('powereduc/site:viewfullnames', context_system::instance()));
             }
         ];
         $mform->addElement('autocomplete', "{$this->name}_value", get_string('user'), [], $options)

@@ -23,7 +23,7 @@
  */
 namespace core\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A task to cleanup old question statistics cache.

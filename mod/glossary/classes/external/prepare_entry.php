@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
  *
  * @package    mod_glossary
  * @since      Moodle 3.10
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_glossary\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -41,7 +41,7 @@ use external_warnings;
 /**
  * This is the external method for preparing a entry for edition.
  *
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class prepare_entry extends external_api {
@@ -61,7 +61,7 @@ class prepare_entry extends external_api {
      *
      * @param  int $entryid The entry to update
      * @return array with result and warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function execute(int $entryid): array {
         global $DB;

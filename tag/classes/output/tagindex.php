@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag\output\tagindex
@@ -28,7 +28,7 @@ use renderable;
 use templatable;
 use renderer_base;
 use stdClass;
-use moodle_url;
+use powereduc_url;
 use core_tag_tag;
 
 /**
@@ -97,13 +97,13 @@ class tagindex implements templatable {
         $url = core_tag_tag::make_url($tag->tagcollid, $tag->rawname, $exclusivemode, $fromctx, $ctx, $rec);
         $urlparams = array('ta' => $this->tagarea->id);
         if ($totalpages > $page + 1) {
-            $this->record->nextpageurl = new moodle_url($url, $urlparams + array('page' => $page + 1));
+            $this->record->nextpageurl = new powereduc_url($url, $urlparams + array('page' => $page + 1));
         }
         if ($page > 0) {
-            $this->record->prevpageurl = new moodle_url($url, $urlparams + array('page' => $page - 1));
+            $this->record->prevpageurl = new powereduc_url($url, $urlparams + array('page' => $page - 1));
         }
         if (!$exclusivemode && ($totalpages > 1 || $page)) {
-            $this->record->exclusiveurl = new moodle_url($url, $urlparams + array('excl' => 1));
+            $this->record->exclusiveurl = new powereduc_url($url, $urlparams + array('excl' => 1));
         }
         $this->record->exclusivetext = get_string('exclusivemode', 'tag', $a);
         $this->record->hascontent = ($totalpages > 1 || $page || $content);
@@ -147,13 +147,13 @@ class tagindex implements templatable {
      * @return stdClass
      */
     public function export_for_template(renderer_base $output) {
-        if ($this->record->nextpageurl && $this->record->nextpageurl instanceof moodle_url) {
+        if ($this->record->nextpageurl && $this->record->nextpageurl instanceof powereduc_url) {
             $this->record->nextpageurl = $this->record->nextpageurl->out(false);
         }
-        if ($this->record->prevpageurl && $this->record->prevpageurl instanceof moodle_url) {
+        if ($this->record->prevpageurl && $this->record->prevpageurl instanceof powereduc_url) {
             $this->record->prevpageurl = $this->record->prevpageurl->out(false);
         }
-        if ($this->record->exclusiveurl && $this->record->exclusiveurl instanceof moodle_url) {
+        if ($this->record->exclusiveurl && $this->record->exclusiveurl instanceof powereduc_url) {
             $this->record->exclusiveurl = $this->record->exclusiveurl->out(false);
         }
         return $this->record;

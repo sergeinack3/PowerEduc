@@ -1,11 +1,11 @@
 <?php
-if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+if (!defined('POWEREDUC_INTERNAL')) {
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
 require_once($CFG->libdir.'/formslib.php');
 
-class mod_glossary_import_form extends moodleform {
+class mod_glossary_import_form extends powereducform {
 
     function definition() {
         global $CFG;

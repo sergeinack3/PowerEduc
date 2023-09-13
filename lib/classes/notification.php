@@ -26,7 +26,7 @@ namespace core;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class notification {
     /**

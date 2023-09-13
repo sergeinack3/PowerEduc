@@ -24,7 +24,7 @@
  */
 namespace auth_ldap\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A scheduled task class for LDAP roles sync.

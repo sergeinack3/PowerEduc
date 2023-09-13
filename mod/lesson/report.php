@@ -1,25 +1,25 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Displays the lesson statistics.
  *
  * @package mod_lesson
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or late
  **/
 
@@ -42,7 +42,7 @@ $currentgroup = groups_get_activity_group($cm, true);
 $context = context_module::instance($cm->id);
 require_capability('mod/lesson:viewreports', $context);
 
-$url = new moodle_url('/mod/lesson/report.php', array('id'=>$id));
+$url = new powereduc_url('/mod/lesson/report.php', array('id'=>$id));
 $url->param('action', $action);
 if ($pageid !== null) {
     $url->param('pageid', $pageid);
@@ -108,7 +108,7 @@ if ($action === 'delete') {
             }
         }
     }
-    redirect(new moodle_url($PAGE->url, array('action'=>'reportoverview')));
+    redirect(new powereduc_url($PAGE->url, array('action'=>'reportoverview')));
 
 } else if ($action === 'reportoverview') {
     /**************************************************************************
@@ -141,8 +141,8 @@ if ($action === 'delete') {
     groups_print_activity_menu($cm, $url);
 
     $course_context = context_course::instance($course->id);
-    if (has_capability('gradereport/grader:view', $course_context) && has_capability('moodle/grade:viewall', $course_context)) {
-        $seeallgradeslink = new moodle_url('/grade/report/grader/index.php', array('id'=>$course->id));
+    if (has_capability('gradereport/grader:view', $course_context) && has_capability('powereduc/grade:viewall', $course_context)) {
+        $seeallgradeslink = new powereduc_url('/grade/report/grader/index.php', array('id'=>$course->id));
         $seeallgradeslink = html_writer::link($seeallgradeslink, get_string('seeallcoursegrades', 'grades'));
         echo $OUTPUT->box($seeallgradeslink, 'allcoursegrades');
     }
@@ -155,7 +155,7 @@ if ($action === 'delete') {
 
     // Show bulk actions when user has capability to edit the lesson.
     if (has_capability('mod/lesson:edit', $context)) {
-        $reporturl = new moodle_url('/mod/lesson/report.php');
+        $reporturl = new powereduc_url('/mod/lesson/report.php');
         $formid  = 'mod-lesson-report-form';
 
         // Sesskey hidden input.
@@ -271,8 +271,8 @@ if ($action === 'delete') {
     groups_print_activity_menu($cm, $url);
 
     $course_context = context_course::instance($course->id);
-    if (has_capability('gradereport/grader:view', $course_context) && has_capability('moodle/grade:viewall', $course_context)) {
-        $seeallgradeslink = new moodle_url('/grade/report/grader/index.php', array('id'=>$course->id));
+    if (has_capability('gradereport/grader:view', $course_context) && has_capability('powereduc/grade:viewall', $course_context)) {
+        $seeallgradeslink = new powereduc_url('/grade/report/grader/index.php', array('id'=>$course->id));
         $seeallgradeslink = html_writer::link($seeallgradeslink, get_string('seeallcoursegrades', 'grades'));
         echo $OUTPUT->box($seeallgradeslink, 'allcoursegrades');
     }
@@ -366,7 +366,7 @@ if ($action === 'delete') {
         echo html_writer::table($table);
     }
 } else {
-    throw new \moodle_exception('unknowaction');
+    throw new \powereduc_exception('unknowaction');
 }
 
 /// Finish the page

@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * BYTESERVING_BOUNDARY - string unique string constant.
@@ -2632,7 +2632,7 @@ function send_file($path, $filename, $lifetime = null , $filter=0, $pathisstring
             } else {
                 $text = htmlentities(implode('', file($path)), ENT_QUOTES, 'UTF-8');
             }
-            $output = '<pre>'. format_text($text, FORMAT_MOODLE, $options, $COURSE->id) .'</pre>';
+            $output = '<pre>'. format_text($text, FORMAT_POWEREDUC, $options, $COURSE->id) .'</pre>';
 
             readstring_accel($output, $mimetype);
 

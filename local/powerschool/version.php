@@ -21,7 +21,7 @@
  * @var stdClass $plugin
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $plugin->component = 'local_powerschool';
 $plugin->version = 2023100500;

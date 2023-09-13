@@ -3,19 +3,19 @@
 /**
  * A collection of utility classes for use with pages.
  *
- * @module moodle-mod_quiz-util
- * @submodule moodle-mod_quiz-util-page
+ * @module powereduc-mod_quiz-util
+ * @submodule powereduc-mod_quiz-util-page
  */
 
-Y.namespace('Moodle.mod_quiz.util.page');
+Y.namespace('PowerEduc.mod_quiz.util.page');
 
 /**
  * A collection of utility classes for use with pages.
  *
- * @class Moodle.mod_quiz.util.page
+ * @class PowerEduc.mod_quiz.util.page
  * @static
  */
-Y.Moodle.mod_quiz.util.page = {
+Y.PowerEduc.mod_quiz.util.page = {
     CSS: {
         PAGE: 'page'
     },
@@ -24,10 +24,10 @@ Y.Moodle.mod_quiz.util.page = {
         ACTIONMENUBARIDSUFFIX: '-menubar',
         ACTIONMENUMENUIDSUFFIX: '-menu',
         PAGEIDPREFIX: 'page-',
-        PAGENUMBERPREFIX: M.util.get_string('page', 'moodle') + ' '
+        PAGENUMBERPREFIX: M.util.get_string('page', 'powereduc') + ' '
     },
     SELECTORS: {
-        ACTIONMENU: 'div.moodle-actionmenu',
+        ACTIONMENU: 'div.powereduc-actionmenu',
         ACTIONMENUBAR: '.menubar',
         ACTIONMENUMENU: '.menu',
         ADDASECTION: '[data-action="addasection"]',
@@ -143,8 +143,8 @@ Y.Moodle.mod_quiz.util.page = {
      * @return {node[]} An array containing page nodes.
      */
     getPages: function() {
-        return Y.all(Y.Moodle.mod_quiz.util.slot.SELECTORS.PAGECONTENT + ' ' +
-                     Y.Moodle.mod_quiz.util.slot.SELECTORS.SECTIONUL + ' ' +
+        return Y.all(Y.PowerEduc.mod_quiz.util.slot.SELECTORS.PAGECONTENT + ' ' +
+                     Y.PowerEduc.mod_quiz.util.slot.SELECTORS.SECTIONUL + ' ' +
                     this.SELECTORS.PAGE);
     },
 
@@ -222,9 +222,9 @@ Y.Moodle.mod_quiz.util.page = {
      */
     remove: function(page, keeppagebreak) {
         // Remove page break from previous slot.
-        var previousslot = page.previous(Y.Moodle.mod_quiz.util.slot.SELECTORS.SLOT);
+        var previousslot = page.previous(Y.PowerEduc.mod_quiz.util.slot.SELECTORS.SLOT);
         if (!keeppagebreak && previousslot) {
-            Y.Moodle.mod_quiz.util.slot.removePageBreak(previousslot);
+            Y.PowerEduc.mod_quiz.util.slot.removePageBreak(previousslot);
         }
         page.remove();
     },
@@ -301,8 +301,8 @@ Y.Moodle.mod_quiz.util.page = {
      * @return {node[]} An array containing page nodes.
      */
     getActionMenus: function() {
-        return Y.all(Y.Moodle.mod_quiz.util.slot.SELECTORS.PAGECONTENT + ' ' +
-                     Y.Moodle.mod_quiz.util.slot.SELECTORS.SECTIONUL + ' ' +
+        return Y.all(Y.PowerEduc.mod_quiz.util.slot.SELECTORS.PAGECONTENT + ' ' +
+                     Y.PowerEduc.mod_quiz.util.slot.SELECTORS.SECTIONUL + ' ' +
                      this.SELECTORS.ACTIONMENU);
     },
 

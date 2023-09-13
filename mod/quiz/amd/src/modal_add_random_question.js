@@ -1,23 +1,23 @@
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contain the logic for the add random question modal.
  *
  * @module     mod_quiz/modal_add_random_question
- * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2018 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define([
@@ -75,7 +75,7 @@ function(
     ModalAddRandomQuestion.prototype.constructor = ModalAddRandomQuestion;
 
     /**
-     * Save the Moodle context id that the question bank is being
+     * Save the PowerEduc context id that the question bank is being
      * rendered in.
      *
      * @method setContextId
@@ -86,7 +86,7 @@ function(
     };
 
     /**
-     * Retrieve the saved Moodle context id.
+     * Retrieve the saved PowerEduc context id.
      *
      * @method getContextId
      * @return {int}

@@ -16,7 +16,7 @@ Feature: Embed videos without the media filter
       | course      | Acceptance test site                                       |
       | name        | Video URL                                                  |
       | intro       | Example of a video url                                     |
-      | externalurl | http://download.moodle.org/mediatest/quicktime_320_180.mov |
+      | externalurl | http://download.powereduc.org/mediatest/quicktime_320_180.mov |
       | section     | 1                                                          |
     When I am on the "Video URL" "url activity" page
     Then ".video-js" "css_element" should exist

@@ -1,21 +1,21 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * My Moodle -- a user's personal dashboard
+ * My PowerEduc -- a user's personal dashboard
  *
  * - each user can currently have their own page (cloned from system and then customised)
  * - only the user can see their own dashboard
@@ -26,7 +26,7 @@
  * This script implements the user's view of the dashboard, and allows editing
  * of the dashboard.
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage my
  * @copyright  2010 Remote-Learner.net
  * @author     Hubert Chathi <hubert@remote-learner.net>
@@ -45,48 +45,48 @@ $reset  = optional_param('reset', null, PARAM_BOOL);
 
 require_login();
 
-$hassiteconfig = has_capability('moodle/site:config', context_system::instance());
-if ($hassiteconfig && moodle_needs_upgrading()) {
-    redirect(new moodle_url('/admin/index.php'));
+$hassiteconfig = has_capability('powereduc/site:config', context_system::instance());
+if ($hassiteconfig && powereduc_needs_upgrading()) {
+    redirect(new powereduc_url('/admin/index.php'));
 }
 
-$strmymoodle = get_string('myhome');
+$strmypowereduc = get_string('myhome');
 
 if (empty($CFG->enabledashboard)) {
     // Dashboard is disabled, so the /my page shouldn't be displayed.
     $defaultpage = get_default_home_page();
     if ($defaultpage == HOMEPAGE_MYCOURSES) {
         // If default page is set to "My courses", redirect to it.
-        redirect(new moodle_url('/my/courses.php'));
+        redirect(new powereduc_url('/my/courses.php'));
     } else {
         // Otherwise, raise an exception to inform the dashboard is disabled.
-        throw new moodle_exception('error:dashboardisdisabled', 'my');
+        throw new powereduc_exception('error:dashboardisdisabled', 'my');
     }
 }
 
 if (isguestuser()) {  // Force them to see system default, no editing allowed
-    // If guests are not allowed my moodle, send them to front page.
-    if (empty($CFG->allowguestmymoodle)) {
-        redirect(new moodle_url('/', array('redirect' => 0)));
+    // If guests are not allowed my powereduc, send them to front page.
+    if (empty($CFG->allowguestmypowereduc)) {
+        redirect(new powereduc_url('/', array('redirect' => 0)));
     }
 
     $userid = null;
     $USER->editing = $edit = 0;  // Just in case
     $context = context_system::instance();
-    $PAGE->set_blocks_editing_capability('moodle/my:configsyspages');  // unlikely :)
+    $PAGE->set_blocks_editing_capability('powereduc/my:configsyspages');  // unlikely :)
     $strguest = get_string('guest');
-    $pagetitle = "$strmymoodle ($strguest)";
+    $pagetitle = "$strmypowereduc ($strguest)";
 
-} else {        // We are trying to view or edit our own My Moodle page
+} else {        // We are trying to view or edit our own My PowerEduc page
     $userid = $USER->id;  // Owner of the page
     $context = context_user::instance($USER->id);
-    $PAGE->set_blocks_editing_capability('moodle/my:manageblocks');
-    $pagetitle = $strmymoodle;
+    $PAGE->set_blocks_editing_capability('powereduc/my:manageblocks');
+    $pagetitle = $strmypowereduc;
 }
 
-// Get the My Moodle page info.  Should always return something unless the database is broken.
+// Get the My PowerEduc page info.  Should always return something unless the database is broken.
 if (!$currentpage = my_get_page($userid, MY_PAGE_PRIVATE)) {
-    throw new \moodle_exception('mymoodlesetup');
+    throw new \powereduc_exception('mypowereducsetup');
 }
 
 // Start setting up the page
@@ -108,21 +108,21 @@ if (!isguestuser()) {   // Skip default home page for guests
         } else if (!empty($CFG->defaulthomepage) && $CFG->defaulthomepage == HOMEPAGE_USER) {
             $frontpagenode = $PAGE->settingsnav->add(get_string('frontpagesettings'), null, navigation_node::TYPE_SETTING, null);
             $frontpagenode->force_open();
-            $frontpagenode->add(get_string('makethismyhome'), new moodle_url('/my/', array('setdefaulthome' => true)),
+            $frontpagenode->add(get_string('makethismyhome'), new powereduc_url('/my/', array('setdefaulthome' => true)),
                     navigation_node::TYPE_SETTING);
         }
     }
 }
 
 // Toggle the editing state and switches
-if (empty($CFG->forcedefaultmymoodle) && $PAGE->user_allowed_editing()) {
+if (empty($CFG->forcedefaultmypowereduc) && $PAGE->user_allowed_editing()) {
     if ($reset !== null) {
         if (!is_null($userid)) {
             require_sesskey();
             if (!$currentpage = my_reset_page($userid, MY_PAGE_PRIVATE)) {
-                throw new \moodle_exception('reseterror', 'my');
+                throw new \powereduc_exception('reseterror', 'my');
             }
-            redirect(new moodle_url('/my'));
+            redirect(new powereduc_url('/my'));
         }
     } else if ($edit !== null) {             // Editing state was specified
         $USER->editing = $edit;       // Change editing state
@@ -137,7 +137,7 @@ if (empty($CFG->forcedefaultmymoodle) && $PAGE->user_allowed_editing()) {
             // For the page to display properly with the user context header the page blocks need to
             // be copied over to the user context.
             if (!$currentpage = my_copy_page($USER->id, MY_PAGE_PRIVATE)) {
-                throw new \moodle_exception('mymoodlesetup');
+                throw new \powereduc_exception('mypowereducsetup');
             }
             $context = context_user::instance($USER->id);
             $PAGE->set_context($context);
@@ -152,20 +152,20 @@ if (empty($CFG->forcedefaultmymoodle) && $PAGE->user_allowed_editing()) {
 
     $resetbutton = '';
     $resetstring = get_string('resetpage', 'my');
-    $reseturl = new moodle_url("$CFG->wwwroot/my/index.php", array('edit' => 1, 'reset' => 1));
+    $reseturl = new powereduc_url("$CFG->wwwroot/my/index.php", array('edit' => 1, 'reset' => 1));
 
     if (!$currentpage->userid) {
         // viewing a system page -- let the user customise it
-        $editstring = get_string('updatemymoodleon');
+        $editstring = get_string('updatemypowereducon');
         $params['edit'] = 1;
     } else if (empty($edit)) {
-        $editstring = get_string('updatemymoodleon');
+        $editstring = get_string('updatemypowereducon');
     } else {
-        $editstring = get_string('updatemymoodleoff');
+        $editstring = get_string('updatemypowereducoff');
         $resetbutton = $OUTPUT->single_button($reseturl, $resetstring);
     }
 
-    $url = new moodle_url("$CFG->wwwroot/my/index.php", $params);
+    $url = new powereduc_url("$CFG->wwwroot/my/index.php", $params);
     $button = '';
     if (!$PAGE->theme->haseditswitch) {
         $button = $OUTPUT->single_button($url, $editstring);

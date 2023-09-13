@@ -26,7 +26,7 @@
 
 namespace core\dml;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Iterator that walks through a moodle_recordset applying the provided function.

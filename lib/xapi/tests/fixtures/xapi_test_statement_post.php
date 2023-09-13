@@ -27,7 +27,7 @@ namespace core_xapi\event;
 use context_system;
 use core_xapi\local\statement;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * xAPI statement webservice testing event.

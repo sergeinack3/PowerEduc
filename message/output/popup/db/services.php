@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * External functions and service definitions.
  *
  * @package    message_popup
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $functions = array(
@@ -31,7 +31,7 @@ $functions = array(
         'description' => 'Retrieve a list of popup notifications for a user',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
     ),
     'message_popup_get_unread_popup_notification_count' => array(
         'classname' => 'message_popup_external',
@@ -40,7 +40,7 @@ $functions = array(
         'description' => 'Retrieve the count of unread popup notifications for a given user',
         'type' => 'read',
         'ajax' => true,
-        'services' => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+        'services' => array(POWEREDUC_OFFICIAL_MOBILE_SERVICE),
         'readonlysession' => true,
     ),
 );

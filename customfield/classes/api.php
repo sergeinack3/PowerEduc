@@ -32,7 +32,7 @@ use core_customfield\event\field_created;
 use core_customfield\event\field_deleted;
 use core_customfield\event\field_updated;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Class api

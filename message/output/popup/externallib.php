@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * External message popup API
  *
  * @package    message_popup
  * @category   external
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ require_once($CFG->dirroot . "/message/lib.php");
  *
  * @package    message_popup
  * @category   external
- * @copyright  2016 Ryan Wyllie <ryan@moodle.com>
+ * @copyright  2016 Ryan Wyllie <ryan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class message_popup_external extends external_api {
@@ -62,7 +62,7 @@ class message_popup_external extends external_api {
      *
      * @since  3.2
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @param  int      $useridto           the user id who received the message
      * @param  bool     $newestfirst        true for ordering by newest first, false for oldest first
      * @param  int      $limit              the number of results to return
@@ -89,7 +89,7 @@ class message_popup_external extends external_api {
         $newestfirst = $params['newestfirst'];
         $limit = $params['limit'];
         $offset = $params['offset'];
-        $issuperuser = has_capability('moodle/site:readallmessages', $context);
+        $issuperuser = has_capability('powereduc/site:readallmessages', $context);
         $renderer = $PAGE->get_renderer('core_message');
 
         if (empty($useridto)) {
@@ -98,12 +98,12 @@ class message_popup_external extends external_api {
 
         // Check if the current user is the sender/receiver or just a privileged user.
         if ($useridto != $USER->id and !$issuperuser) {
-            throw new moodle_exception('accessdenied', 'admin');
+            throw new powereduc_exception('accessdenied', 'admin');
         }
 
         if (!empty($useridto)) {
             if (!core_user::is_real_user($useridto)) {
-                throw new moodle_exception('invaliduser');
+                throw new powereduc_exception('invaliduser');
             }
         }
 
@@ -194,7 +194,7 @@ class message_popup_external extends external_api {
      *
      * @since  3.2
      * @throws invalid_parameter_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      * @param  int      $useridto       the user id who received the message
      * @return external_description
      */
@@ -215,13 +215,13 @@ class message_popup_external extends external_api {
             if (core_user::is_real_user($useridto)) {
                 $userto = core_user::get_user($useridto, '*', MUST_EXIST);
             } else {
-                throw new moodle_exception('invaliduser');
+                throw new powereduc_exception('invaliduser');
             }
         }
 
         // Check if the current user is the sender/receiver or just a privileged user.
-        if ($useridto != $USER->id and !has_capability('moodle/site:readallmessages', $context)) {
-            throw new moodle_exception('accessdenied', 'admin');
+        if ($useridto != $USER->id and !has_capability('powereduc/site:readallmessages', $context)) {
+            throw new powereduc_exception('accessdenied', 'admin');
         }
 
         return \message_popup\api::count_unread_popup_notifications($useridto);

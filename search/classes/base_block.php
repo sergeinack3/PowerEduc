@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Search area base class for blocks.
@@ -26,7 +26,7 @@
 
 namespace core_search;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Search area base class for blocks.
@@ -104,7 +104,7 @@ abstract class base_block extends base {
      *
      * @param int $modifiedfrom Return only records modified after this date
      * @param \context|null $context Context to find blocks within
-     * @return false|\moodle_recordset|null
+     * @return false|\powereduc_recordset|null
      */
     public function get_document_recordset($modifiedfrom = 0, \context $context = null) {
         global $DB;
@@ -157,19 +157,19 @@ abstract class base_block extends base {
                     $instance->pagetypepattern, DEBUG_DEVELOPER);
             $modinfo = get_fast_modinfo($courseid);
             $cm = $modinfo->get_cm($instance->cmid);
-            return new \moodle_url($cm->url, null, $anchor);
+            return new \powereduc_url($cm->url, null, $anchor);
         } else {
             // The block is at course level. Let's check the page type, although in practice we
             // currently only support the course main page.
             if ($instance->pagetypepattern === '*' || $instance->pagetypepattern === 'course-*' ||
                     preg_match('~^course-view-(.*)$~', $instance->pagetypepattern)) {
-                return new \moodle_url('/course/view.php', ['id' => $courseid], $anchor);
+                return new \powereduc_url('/course/view.php', ['id' => $courseid], $anchor);
             } else if ($instance->pagetypepattern === 'site-index') {
-                return new \moodle_url('/', ['redirect' => 0], $anchor);
+                return new \powereduc_url('/', ['redirect' => 0], $anchor);
             } else {
                 debugging('Unexpected page type for block ' . $blockinstanceid . ': ' .
                         $instance->pagetypepattern, DEBUG_DEVELOPER);
-                return new \moodle_url('/course/view.php', ['id' => $courseid], $anchor);
+                return new \powereduc_url('/course/view.php', ['id' => $courseid], $anchor);
             }
         }
     }
@@ -368,7 +368,7 @@ abstract class base_block extends base {
      * course page, in order of time added (most recent first).
      *
      * @return \Iterator Iterator of contexts to reindex
-     * @throws \moodle_exception If any DB error
+     * @throws \powereduc_exception If any DB error
      */
     public function get_contexts_to_reindex() {
         global $DB;

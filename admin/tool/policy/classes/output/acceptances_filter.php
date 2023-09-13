@@ -28,7 +28,7 @@ namespace tool_policy\output;
 use tool_policy\api;
 use tool_policy\policy_version;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Implements the widget allowing to filter the acceptance records.

@@ -24,7 +24,7 @@
 
 namespace tool_usertours\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use external_api;
 use external_function_parameters;

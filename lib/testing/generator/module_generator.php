@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Module generator base class.
@@ -251,7 +251,7 @@ abstract class testing_module_generator extends component_generator_base {
             $record->intro = 'Test '.$this->get_modulename().' ' . $this->instancecount;
         }
         if (empty($record->introeditor) && empty($record->introformat)) {
-            $record->introformat = FORMAT_MOODLE;
+            $record->introformat = FORMAT_POWEREDUC;
         }
 
         if (isset($record->tags) && !is_array($record->tags)) {
@@ -268,9 +268,9 @@ abstract class testing_module_generator extends component_generator_base {
             debugging('Did you forget to enable completion tracking for the course before generating module with completion tracking?', DEBUG_DEVELOPER);
         }
 
-        if (!empty($record->lang) && !has_capability('moodle/course:setforcedlanguage', context_course::instance($course->id))) {
+        if (!empty($record->lang) && !has_capability('powereduc/course:setforcedlanguage', context_course::instance($course->id))) {
             throw new coding_exception('Attempt to generate an activity when the current user does not have ' .
-                    'permission moodle/course:setforcedlanguage. This does not work.');
+                    'permission powereduc/course:setforcedlanguage. This does not work.');
         }
 
         // Add the module to the course.

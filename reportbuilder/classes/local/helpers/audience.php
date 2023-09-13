@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -31,7 +31,7 @@ use core_reportbuilder\local\models\audience as audience_model;
  * Class containing report audience helper methods
  *
  * @package     core_reportbuilder
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class audience {
@@ -182,7 +182,7 @@ class audience {
         }
 
         // If user can't view all reports, limit the returned list to those reports they can see.
-        if (!has_capability('moodle/reportbuilder:editall', $context, $userid)) {
+        if (!has_capability('powereduc/reportbuilder:editall', $context, $userid)) {
             $reports = self::user_reports_list($userid);
 
             [$paramprefix, $paramuserid] = database::generate_param_names(2);
@@ -191,7 +191,7 @@ class audience {
             $where = "{$reporttablealias}.id {$reportselect}";
 
             // User can also see any reports that they can edit.
-            if (has_capability('moodle/reportbuilder:edit', $context, $userid)) {
+            if (has_capability('powereduc/reportbuilder:edit', $context, $userid)) {
                 $where = "({$reporttablealias}.usercreated = :{$paramuserid} OR {$where})";
                 $params[$paramuserid] = $userid ?? $USER->id;
             }
@@ -262,14 +262,14 @@ class audience {
      *
      * @return array
      *
-     * @deprecated since Moodle 4.1 - please do not use this function any more, {@see custom_report_audience_cards_exporter}
+     * @deprecated since PowerEduc 4.1 - please do not use this function any more, {@see custom_report_audience_cards_exporter}
      */
     public static function get_all_audiences_menu_types(): array {
         debugging('The function ' . __FUNCTION__ . '() is deprecated, please do not use it any more. ' .
             'See \'custom_report_audience_cards_exporter\' class for replacement', DEBUG_DEVELOPER);
 
         $menucardsarray = [];
-        $notavailablestr = get_string('notavailable', 'moodle');
+        $notavailablestr = get_string('notavailable', 'powereduc');
 
         $audiencetypes = self::get_audience_types();
         $audiencetypeindex = 0;

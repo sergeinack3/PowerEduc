@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir.'/filelib.php');
 
@@ -26,7 +26,7 @@ require_once($CFG->libdir.'/filelib.php');
  * 2. Call request_token method to get oauth_token and oauth_token_secret, and redirect user to authorize_url,
  *    developer needs to store oauth_token and oauth_token_secret somewhere, we will use them to request
  *    access token later on
- * 3. User approved the request, and get back to moodle
+ * 3. User approved the request, and get back to powereduc
  * 4. Call get_access_token, it takes previous oauth_token and oauth_token_secret as arguments, oauth_token
  *    will be used in OAuth request, oauth_token_secret will be used to bulid signature, this method will
  *    return access_token and access_secret, store these two values in database or session
@@ -38,8 +38,8 @@ require_once($CFG->libdir.'/filelib.php');
  * 2. oauth_helper class don't store tokens and secrets, you must store them manually
  * 3. Some functions are based on http://code.google.com/p/oauth/
  *
- * @package    moodlecore
- * @copyright  2010 Dongsheng Cai <dongsheng@moodle.com>
+ * @package    powereduccore
+ * @copyright  2010 Dongsheng Cai <dongsheng@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -99,7 +99,7 @@ class oauth_helper {
         }
 
         if (!empty($args['oauth_callback'])) {
-            $this->oauth_callback = new moodle_url($args['oauth_callback']);
+            $this->oauth_callback = new powereduc_url($args['oauth_callback']);
         }
         if (!empty($args['access_token'])) {
             $this->access_token = $args['access_token'];
@@ -236,7 +236,7 @@ class oauth_helper {
         //     oauth_token_secret
         $result = $this->parse_result($content);
         if (empty($result['oauth_token'])) {
-            throw new moodle_exception('oauth1requesttoken', 'core_error', '', null, $content);
+            throw new powereduc_exception('oauth1requesttoken', 'core_error', '', null, $content);
         }
         // Build oauth authorize url.
         $result['authorize_url'] = $this->authorize_url . '?oauth_token='.$result['oauth_token'];
@@ -271,7 +271,7 @@ class oauth_helper {
         $keys = $this->parse_result($content);
 
         if (empty($keys['oauth_token']) || empty($keys['oauth_token_secret'])) {
-            throw new moodle_exception('oauth1accesstoken', 'core_error', '', null, $content);
+            throw new powereduc_exception('oauth1accesstoken', 'core_error', '', null, $content);
         }
 
         $this->set_access_token($keys['oauth_token'], $keys['oauth_token_secret']);
@@ -328,7 +328,7 @@ class oauth_helper {
      */
     public function parse_result($str) {
         if (empty($str)) {
-            throw new moodle_exception('error');
+            throw new powereduc_exception('error');
         }
         $parts = explode('&', $str);
         $result = array();
@@ -337,7 +337,7 @@ class oauth_helper {
             $result[urldecode($k)] = urldecode($v);
         }
         if (empty($result)) {
-            throw new moodle_exception('error');
+            throw new powereduc_exception('error');
         }
         return $result;
     }
@@ -395,7 +395,7 @@ abstract class oauth2_client extends curl {
     private $clientid = '';
     /** @var string $clientsecret The client secret. */
     private $clientsecret = '';
-    /** @var moodle_url $returnurl URL to return to after authenticating */
+    /** @var powereduc_url $returnurl URL to return to after authenticating */
     private $returnurl = null;
     /** @var string $scope of the authentication request */
     protected $scope = '';
@@ -427,10 +427,10 @@ abstract class oauth2_client extends curl {
      *
      * @param string $clientid
      * @param string $clientsecret
-     * @param moodle_url $returnurl
+     * @param powereduc_url $returnurl
      * @param string $scope
      */
-    public function __construct($clientid, $clientsecret, moodle_url $returnurl, $scope) {
+    public function __construct($clientid, $clientsecret, powereduc_url $returnurl, $scope) {
         parent::__construct();
         $this->clientid = $clientid;
         $this->clientsecret = $clientsecret;
@@ -486,12 +486,12 @@ abstract class oauth2_client extends curl {
     /**
      * Callback url where the request is returned to.
      *
-     * @return moodle_url url of callback
+     * @return powereduc_url url of callback
      */
     public static function callback_url() {
         global $CFG;
 
-        return new moodle_url('/admin/oauth2callback.php');
+        return new powereduc_url('/admin/oauth2callback.php');
     }
 
     /**
@@ -506,7 +506,7 @@ abstract class oauth2_client extends curl {
     /**
      * Returns the login link for this oauth request
      *
-     * @return moodle_url login url
+     * @return powereduc_url login url
      */
     public function get_login_url() {
 
@@ -530,7 +530,7 @@ abstract class oauth2_client extends curl {
             $this->get_additional_login_parameters()
         );
 
-        return new moodle_url($this->auth_url(), $params);
+        return new powereduc_url($this->auth_url(), $params);
     }
 
     /**
@@ -577,17 +577,17 @@ abstract class oauth2_client extends curl {
 
         if ($this->info['http_code'] !== 200) {
             $debuginfo = !empty($this->error) ? $this->error : $response;
-            throw new moodle_exception('oauth2upgradetokenerror', 'core_error', '', $this->info['http_code'], $debuginfo);
+            throw new powereduc_exception('oauth2upgradetokenerror', 'core_error', '', $this->info['http_code'], $debuginfo);
         }
 
         $r = json_decode($response);
 
         if (is_null($r)) {
-            throw new moodle_exception("Could not decode JSON token response");
+            throw new powereduc_exception("Could not decode JSON token response");
         }
 
         if (!empty($r->error)) {
-            throw new moodle_exception($r->error . ' ' . $r->error_description);
+            throw new powereduc_exception($r->error . ' ' . $r->error_description);
         }
 
         if (!isset($r->access_token)) {
@@ -629,7 +629,7 @@ abstract class oauth2_client extends curl {
      * @return bool
      */
     protected function request($url, $options = array(), $acceptheader = 'application/json') {
-        $murl = new moodle_url($url);
+        $murl = new powereduc_url($url);
 
         if ($this->accesstoken) {
             if ($this->use_http_get()) {

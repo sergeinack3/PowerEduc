@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains the class used for the displaying the participants table.
  *
  * @package    core_user
- * @copyright  2017 Mark Nelson <markn@moodle.com>
+ * @copyright  2017 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 declare(strict_types=1);
@@ -31,9 +31,9 @@ use core_table\dynamic as dynamic_table;
 use core_table\local\filter\filterset;
 use core_user\output\status_field;
 use core_user\table\participants_search;
-use moodle_url;
+use powereduc_url;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 
@@ -44,7 +44,7 @@ require_once($CFG->dirroot . '/user/lib.php');
  * Class for the displaying the participants table.
  *
  * @package    core_user
- * @copyright  2017 Mark Nelson <markn@moodle.com>
+ * @copyright  2017 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class participants extends \table_sql implements dynamic_table {
@@ -107,7 +107,7 @@ class participants extends \table_sql implements dynamic_table {
     /** @var \stdClass[] $viewableroles */
     private $viewableroles;
 
-    /** @var moodle_url $baseurl The base URL for the report. */
+    /** @var powereduc_url $baseurl The base URL for the report. */
     public $baseurl;
 
     /**
@@ -150,7 +150,7 @@ class participants extends \table_sql implements dynamic_table {
 
         // Get the list of fields we have to hide.
         $hiddenfields = array();
-        if (!has_capability('moodle/course:viewhiddenuserfields', $this->context)) {
+        if (!has_capability('powereduc/course:viewhiddenuserfields', $this->context)) {
             $hiddenfields = array_flip(explode(',', $CFG->hiddenuserfields));
         }
 
@@ -171,7 +171,7 @@ class participants extends \table_sql implements dynamic_table {
             $columns[] = 'lastaccess';
         }
 
-        $canreviewenrol = has_capability('moodle/course:enrolreview', $this->context);
+        $canreviewenrol = has_capability('powereduc/course:enrolreview', $this->context);
         if ($canreviewenrol && $this->courseid != SITEID) {
             $columns[] = 'status';
             $headers[] = get_string('participationstatus', 'enrol');
@@ -212,7 +212,7 @@ class participants extends \table_sql implements dynamic_table {
 
         parent::out($pagesize, $useinitialsbar, $downloadhelpbutton);
 
-        if (has_capability('moodle/course:enrolreview', $this->context)) {
+        if (has_capability('powereduc/course:enrolreview', $this->context)) {
             $params = [
                 'contextid' => $this->context->id,
                 'uniqueid' => $this->uniqueid,
@@ -235,7 +235,7 @@ class participants extends \table_sql implements dynamic_table {
             'id' => 'user' . $data->id,
             'name' => 'user' . $data->id,
             'checked' => false,
-            'label' => get_string('selectitem', 'moodle', fullname($data)),
+            'label' => get_string('selectitem', 'powereduc', fullname($data)),
             'labelclasses' => 'accesshide',
         ]);
 
@@ -332,9 +332,9 @@ class participants extends \table_sql implements dynamic_table {
         global $CFG, $OUTPUT, $PAGE;
 
         $enrolstatusoutput = '';
-        $canreviewenrol = has_capability('moodle/course:enrolreview', $this->context);
+        $canreviewenrol = has_capability('powereduc/course:enrolreview', $this->context);
         if ($canreviewenrol) {
-            $canviewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+            $canviewfullnames = has_capability('powereduc/site:viewfullnames', $this->context);
             $fullname = fullname($data, $canviewfullnames);
             $coursename = format_string($this->course->fullname, true, array('context' => $this->context));
             require_once($CFG->dirroot . '/enrol/locallib.php');
@@ -470,7 +470,7 @@ class participants extends \table_sql implements dynamic_table {
      * Guess the base url for the participants table.
      */
     public function guess_base_url(): void {
-        $this->baseurl = new moodle_url('/user/index.php', ['id' => $this->courseid]);
+        $this->baseurl = new powereduc_url('/user/index.php', ['id' => $this->courseid]);
     }
 
     /**

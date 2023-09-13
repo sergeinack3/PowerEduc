@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,17 +18,17 @@
  * Privacy Subsystem implementation for mod_folder.
  *
  * @package    mod_folder
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_folder\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The mod_folder module does not store any data.
  *
- * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @copyright  2018 Zig Tan <zig@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {

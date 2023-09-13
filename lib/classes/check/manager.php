@@ -25,7 +25,7 @@
 
 namespace core\check;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Check API manager

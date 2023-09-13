@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_question\local\bank;
 
@@ -31,30 +31,30 @@ class question_edit_contexts {
      */
     public static $caps = [
             'editq' => [
-                    'moodle/question:add',
-                    'moodle/question:editmine',
-                    'moodle/question:editall',
-                    'moodle/question:viewmine',
-                    'moodle/question:viewall',
-                    'moodle/question:usemine',
-                    'moodle/question:useall',
-                    'moodle/question:movemine',
-                    'moodle/question:moveall'],
+                    'powereduc/question:add',
+                    'powereduc/question:editmine',
+                    'powereduc/question:editall',
+                    'powereduc/question:viewmine',
+                    'powereduc/question:viewall',
+                    'powereduc/question:usemine',
+                    'powereduc/question:useall',
+                    'powereduc/question:movemine',
+                    'powereduc/question:moveall'],
             'questions' => [
-                    'moodle/question:add',
-                    'moodle/question:editmine',
-                    'moodle/question:editall',
-                    'moodle/question:viewmine',
-                    'moodle/question:viewall',
-                    'moodle/question:movemine',
-                    'moodle/question:moveall'],
+                    'powereduc/question:add',
+                    'powereduc/question:editmine',
+                    'powereduc/question:editall',
+                    'powereduc/question:viewmine',
+                    'powereduc/question:viewall',
+                    'powereduc/question:movemine',
+                    'powereduc/question:moveall'],
             'categories' => [
-                    'moodle/question:managecategory'],
+                    'powereduc/question:managecategory'],
             'import' => [
-                    'moodle/question:add'],
+                    'powereduc/question:add'],
             'export' => [
-                    'moodle/question:viewall',
-                    'moodle/question:viewmine']];
+                    'powereduc/question:viewall',
+                    'powereduc/question:viewmine']];
 
     /**
      * @var array of contexts.
@@ -140,10 +140,10 @@ class question_edit_contexts {
     public function having_add_and_use() {
         $contextswithcap = [];
         foreach ($this->allcontexts as $context) {
-            if (!has_capability('moodle/question:add', $context)) {
+            if (!has_capability('powereduc/question:add', $context)) {
                 continue;
             }
-            if (!has_any_capability(['moodle/question:useall', 'moodle/question:usemine'], $context)) {
+            if (!has_any_capability(['powereduc/question:useall', 'powereduc/question:usemine'], $context)) {
                 continue;
             }
             $contextswithcap[] = $context;
@@ -193,7 +193,7 @@ class question_edit_contexts {
      */
     public function require_cap($cap) {
         if (!$this->have_cap($cap)) {
-            throw new \moodle_exception('nopermissions', '', '', $cap);
+            throw new \powereduc_exception('nopermissions', '', '', $cap);
         }
     }
 
@@ -205,7 +205,7 @@ class question_edit_contexts {
     public function require_one_cap($caps) {
         if (!$this->have_one_cap($caps)) {
             $capsstring = join(', ', $caps);
-            throw new \moodle_exception('nopermissions', '', '', $capsstring);
+            throw new \powereduc_exception('nopermissions', '', '', $capsstring);
         }
     }
 
@@ -216,7 +216,7 @@ class question_edit_contexts {
      */
     public function require_one_edit_tab_cap($tabname) {
         if (!$this->have_one_edit_tab_cap($tabname)) {
-            throw new \moodle_exception('nopermissions', '', '', 'access question edit tab '.$tabname);
+            throw new \powereduc_exception('nopermissions', '', '', 'access question edit tab '.$tabname);
         }
     }
 }

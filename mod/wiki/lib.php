@@ -1,24 +1,24 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions and constants for module wiki
  *
- * It contains the great majority of functions defined by Moodle
+ * It contains the great majority of functions defined by PowerEduc
  * that are mandatory to develop a module.
  *
  * @package mod_wiki
@@ -34,7 +34,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Given an object containing all the necessary data,
@@ -276,7 +276,7 @@ function wiki_supports($feature) {
         return false;
     case FEATURE_RATE:
         return false;
-    case FEATURE_BACKUP_MOODLE2:
+    case FEATURE_BACKUP_POWEREDUC2:
         return true;
     case FEATURE_SHOW_DESCRIPTION:
         return true;
@@ -368,7 +368,7 @@ function wiki_grades($wikiid) {
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function wiki_scale_used() {
     throw new coding_exception('wiki_scale_used() can not be used anymore. Plugins can implement ' .
@@ -463,7 +463,7 @@ function wiki_search_form($cm, $search = '', $subwiki = null) {
         $hiddenfields[] = (object) ['type' => 'hidden', 'name' => 'subwikiid', 'value' => $subwiki->id];
     }
     $data = [
-        'action' => new moodle_url('/mod/wiki/search.php'),
+        'action' => new powereduc_url('/mod/wiki/search.php'),
         'hiddenfields' => $hiddenfields,
         'inputname' => 'searchstring',
         'query' => s($search, true),
@@ -504,7 +504,7 @@ function wiki_extend_navigation(navigation_node $navref, stdClass $course, stdCl
     }
 
     if (wiki_can_create_pages($context)) {
-        $link = new moodle_url('/mod/wiki/create.php', ['action' => 'new', 'swid' => $subwiki->id]);
+        $link = new powereduc_url('/mod/wiki/create.php', ['action' => 'new', 'swid' => $subwiki->id]);
         $navref->add(get_string('newpage', 'wiki'), $link, navigation_node::TYPE_SETTING);
     }
 
@@ -515,33 +515,33 @@ function wiki_extend_navigation(navigation_node $navref, stdClass $course, stdCl
     $canviewpage = has_capability('mod/wiki:viewpage', $context);
 
     if ($canviewpage) {
-        $link = new moodle_url('/mod/wiki/view.php', ['pageid' => $pageid]);
+        $link = new powereduc_url('/mod/wiki/view.php', ['pageid' => $pageid]);
         $navref->add(get_string('view', 'wiki'), $link, navigation_node::TYPE_SETTING);
     }
 
     if (wiki_user_can_edit($subwiki)) {
-        $link = new moodle_url('/mod/wiki/edit.php', ['pageid' => $pageid]);
+        $link = new powereduc_url('/mod/wiki/edit.php', ['pageid' => $pageid]);
         $navref->add(get_string('edit', 'wiki'), $link, navigation_node::TYPE_SETTING);
     }
 
     if (has_capability('mod/wiki:viewcomment', $context)) {
-        $link = new moodle_url('/mod/wiki/comments.php', ['pageid' => $pageid]);
+        $link = new powereduc_url('/mod/wiki/comments.php', ['pageid' => $pageid]);
         $navref->add(get_string('comments', 'wiki'), $link, navigation_node::TYPE_SETTING);
     }
 
     if ($canviewpage) {
-        $link = new moodle_url('/mod/wiki/history.php', ['pageid' => $pageid]);
+        $link = new powereduc_url('/mod/wiki/history.php', ['pageid' => $pageid]);
         $navref->add(get_string('history', 'wiki'), $link, navigation_node::TYPE_SETTING);
 
-        $link = new moodle_url('/mod/wiki/map.php', ['pageid' => $pageid]);
+        $link = new powereduc_url('/mod/wiki/map.php', ['pageid' => $pageid]);
         $navref->add(get_string('map', 'wiki'), $link, navigation_node::TYPE_SETTING);
 
-        $link = new moodle_url('/mod/wiki/files.php', ['pageid' => $pageid]);
+        $link = new powereduc_url('/mod/wiki/files.php', ['pageid' => $pageid]);
         $navref->add(get_string('files', 'wiki'), $link, navigation_node::TYPE_SETTING);
     }
 
     if (has_capability('mod/wiki:managewiki', $context)) {
-        $link = new moodle_url('/mod/wiki/admin.php', ['pageid' => $pageid]);
+        $link = new powereduc_url('/mod/wiki/admin.php', ['pageid' => $pageid]);
         $navref->add(get_string('admin', 'wiki'), $link, navigation_node::TYPE_SETTING);
     }
 }
@@ -551,7 +551,7 @@ function wiki_extend_navigation(navigation_node $navref, stdClass $course, stdCl
  * @return array
  */
 function wiki_get_extra_capabilities() {
-    return array('moodle/comment:view', 'moodle/comment:post', 'moodle/comment:delete');
+    return array('powereduc/comment:view', 'powereduc/comment:post', 'powereduc/comment:delete');
 }
 
 /**
@@ -621,7 +621,7 @@ function wiki_comment_validate($comment_param) {
     // group access
     if ($subwiki->groupid) {
         $groupmode = groups_get_activity_groupmode($cm, $course);
-        if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             if (!groups_is_member($subwiki->groupid)) {
                 throw new comment_exception('notmemberofgroup');
             }
@@ -674,7 +674,7 @@ function wiki_page_type_list($pagetype, $parentcontext, $currentcontext) {
  * @param  stdClass $course     Course object.
  * @param  stdClass $cm         Course module object.
  * @param  stdClass $context    Context object.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function wiki_view($wiki, $course, $cm, $context) {
     // Trigger course_module_viewed event.
@@ -704,7 +704,7 @@ function wiki_view($wiki, $course, $cm, $context) {
  * @param  int $uid             Optional User ID.
  * @param  array $other         Optional Other params: title, wiki ID, group ID, groupanduser, prettyview.
  * @param  stdClass $subwiki    Optional Subwiki.
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function wiki_page_view($wiki, $page, $course, $cm, $context, $uid = null, $other = null, $subwiki = null) {
 
@@ -743,7 +743,7 @@ function wiki_page_view($wiki, $page, $course, $cm, $context, $uid = null, $othe
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function wiki_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $CFG;
@@ -822,7 +822,7 @@ function mod_wiki_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/wiki/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/wiki/view.php', ['id' => $cm->id]),
         1,
         true
     );

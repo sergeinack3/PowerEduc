@@ -27,7 +27,7 @@ use backup;
 use backup_controller;
 use restore_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff.
 global $CFG;
@@ -101,19 +101,19 @@ class controller_test extends \advanced_testcase {
      */
     public function test_backup_controller() {
         // Instantiate non interactive backup_controller
-        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $this->assertTrue($bc instanceof backup_controller);
         $this->assertEquals($bc->get_status(), backup::STATUS_AWAITING);
         // Instantiate interactive backup_controller
-        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_YES, backup::MODE_GENERAL, $this->userid);
         $this->assertTrue($bc instanceof backup_controller);
         $this->assertEquals($bc->get_status(), backup::STATUS_SETTING_UI);
         $this->assertEquals(strlen($bc->get_backupid()), 32); // is one md5
 
         // Save and load one backup controller to check everything is in place
-        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $recid = $bc->save_controller();
         $newbc = mock_backup_controller::load_controller($bc->get_backupid());
@@ -122,19 +122,19 @@ class controller_test extends \advanced_testcase {
 
     public function test_backup_controller_include_files() {
         // A MODE_GENERAL controller - this should include files
-        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid);
         $this->assertEquals($bc->get_include_files(), 1);
 
 
         // The MODE_IMPORT and MODE_SAMESITE should not include files in the backup.
         // A MODE_IMPORT controller
-        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_IMPORT, $this->userid);
         $this->assertEquals($bc->get_include_files(), 0);
 
         // A MODE_SAMESITE controller
-        $bc = new mock_backup_controller(backup::TYPE_1COURSE, $this->courseid, backup::FORMAT_MOODLE,
+        $bc = new mock_backup_controller(backup::TYPE_1COURSE, $this->courseid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_IMPORT, $this->userid);
         $this->assertEquals($bc->get_include_files(), 0);
     }
@@ -146,7 +146,7 @@ class controller_test extends \advanced_testcase {
         $this->expectException(\backup_controller_exception::class);
 
         // Set up controller as a non-copy operation.
-        $bc = new \backup_controller(backup::TYPE_1COURSE, $this->courseid, backup::FORMAT_MOODLE,
+        $bc = new \backup_controller(backup::TYPE_1COURSE, $this->courseid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $this->userid, backup::RELEASESESSION_YES);
 
         $bc->set_kept_roles(array(1, 3, 5));
@@ -160,7 +160,7 @@ class controller_test extends \advanced_testcase {
 
         // Make a backup.
         make_backup_temp_directory('');
-        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_IMPORT, $this->userid);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();
@@ -209,7 +209,7 @@ class controller_test extends \advanced_testcase {
 
         // Make a backup.
         make_backup_temp_directory('');
-        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->moduleid, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_IMPORT, $this->userid);
         $backupid = $bc->get_backupid();
         $bc->execute_plan();

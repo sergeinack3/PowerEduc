@@ -20,7 +20,7 @@ information provided here is intended especially for developers.
 
 * External function mod_choice_external::get_choices_by_courses returned parameter "name" and
   mod_choice_external::get_choice_results "text" have been changed to PARAM_RAW.
-  This is because the new external_format_string function may return raw data if the global moodlewssettingraw parameter is used.
+  This is because the new external_format_string function may return raw data if the global powereducwssettingraw parameter is used.
 
 === 2.9 ===
 

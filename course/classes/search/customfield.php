@@ -28,7 +28,7 @@ use core_course\customfield\course_handler;
 use core_customfield\data_controller;
 use core_customfield\field_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Search area for course custom fields.

@@ -25,7 +25,7 @@ use core_calendar\local\event\mappers\event_mapper;
 use core_calendar\local\event\mappers\event_mapper_interface;
 use core_completion\api;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

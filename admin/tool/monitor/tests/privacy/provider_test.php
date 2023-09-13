@@ -24,7 +24,7 @@
  */
 namespace tool_monitor\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use tool_monitor\privacy\provider;
 use core_privacy\local\request\approved_contextlist;

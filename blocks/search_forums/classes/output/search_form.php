@@ -23,7 +23,7 @@
  */
 
 namespace block_search_forums\output;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use help_icon;
 use moodle_url;

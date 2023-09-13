@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of PowerEduc - https://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_user;
 
 use testable_user_selector;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/user/selector/lib.php');
@@ -29,7 +29,7 @@ require_once($CFG->dirroot.'/user/tests/fixtures/testable_user_selector.php');
  *
  * @package   core_user
  * @category  test
- * @copyright 2018 David Mudrák <david@moodle.com>
+ * @copyright 2018 David Mudrák <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class userselector_test extends \advanced_testcase {
@@ -118,7 +118,7 @@ class userselector_test extends \advanced_testcase {
         $env = $this->setup_hidden_siteidentity();
         $this->setUser($env->teacher);
 
-        assign_capability('moodle/course:viewhiddenuserfields', CAP_PREVENT, $env->teacherrole->id, $env->coursecontext->id);
+        assign_capability('powereduc/course:viewhiddenuserfields', CAP_PREVENT, $env->teacherrole->id, $env->coursecontext->id);
 
         $courseselector = new testable_user_selector('test', ['accesscontext' => $env->coursecontext]);
 
@@ -171,7 +171,7 @@ class userselector_test extends \advanced_testcase {
         // Note that inside the course, the manager can still see the hidden identifiers as this is currently
         // controlled by a separate capability for legacy reasons. This is counter-intuitive behaviour and is
         // likely to be fixed in MDL-51630.
-        assign_capability('moodle/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
+        assign_capability('powereduc/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
 
         $systemselector = new testable_user_selector('test');
         $courseselector = new testable_user_selector('test', ['accesscontext' => $env->coursecontext]);
@@ -201,8 +201,8 @@ class userselector_test extends \advanced_testcase {
         $env = $this->setup_hidden_siteidentity();
         $this->setUser($env->manager);
 
-        assign_capability('moodle/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
-        assign_capability('moodle/course:viewhiddenuserfields', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
+        assign_capability('powereduc/user:viewhiddendetails', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
+        assign_capability('powereduc/course:viewhiddenuserfields', CAP_PREVENT, $env->managerrole->id, SYSCONTEXTID, true);
 
         $systemselector = new testable_user_selector('test');
         $courseselector = new testable_user_selector('test', ['accesscontext' => $env->coursecontext]);
@@ -228,7 +228,7 @@ class userselector_test extends \advanced_testcase {
      * For legacy reasons, user selectors supported ability to override $CFG->showuseridentity.
      *
      * However, this was found as violating the principle of respecting site privacy settings. So the feature has been
-     * dropped in Moodle 3.6.
+     * dropped in PowerEduc 3.6.
      */
     public function test_hidden_siteidentity_fields_explicit_extrafields() {
         $this->resetAfterTest();

@@ -24,7 +24,7 @@
 
 namespace core_availability;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * For use in unit tests that require an info object which isn't really used.

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,18 +17,18 @@
  * Privacy Subsystem implementation for datafield_radiobutton.
  *
  * @package    datafield_radiobutton
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2018 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace datafield_radiobutton\privacy;
 use core_privacy\local\request\writer;
 use mod_data\privacy\datafield_provider;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 /**
  * Privacy Subsystem for datafield_radiobutton implementing null_provider.
  *
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2018 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider,

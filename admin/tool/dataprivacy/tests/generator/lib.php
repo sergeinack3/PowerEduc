@@ -27,7 +27,7 @@ use tool_dataprivacy\api;
 use tool_dataprivacy\category;
 use tool_dataprivacy\purpose;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Data privacy tool data generator class.

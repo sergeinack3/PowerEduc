@@ -24,7 +24,7 @@
 
 namespace core_availability\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for core_availability implementing null_provider.

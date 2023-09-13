@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for the settings form for {@link quiz_attempts_report}s.
@@ -23,7 +23,7 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
@@ -34,7 +34,7 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright 2012 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class mod_quiz_attempts_report_form extends moodleform {
+abstract class mod_quiz_attempts_report_form extends powereducform {
 
     protected function definition() {
         $mform = $this->_form;
@@ -55,7 +55,7 @@ abstract class mod_quiz_attempts_report_form extends moodleform {
                 get_string('showreport', 'quiz'));
     }
 
-    protected function standard_attempt_fields(MoodleQuickForm $mform) {
+    protected function standard_attempt_fields(PowerEducQuickForm $mform) {
 
         $mform->addElement('select', 'attempts', get_string('reportattemptsfrom', 'quiz'), array(
                     quiz_attempts_report::ENROLLED_WITH    => get_string('reportuserswith', 'quiz'),
@@ -96,15 +96,15 @@ abstract class mod_quiz_attempts_report_form extends moodleform {
         }
     }
 
-    protected function other_attempt_fields(MoodleQuickForm $mform) {
+    protected function other_attempt_fields(PowerEducQuickForm $mform) {
     }
 
-    protected function standard_preference_fields(MoodleQuickForm $mform) {
+    protected function standard_preference_fields(PowerEducQuickForm $mform) {
         $mform->addElement('text', 'pagesize', get_string('pagesize', 'quiz'));
         $mform->setType('pagesize', PARAM_INT);
     }
 
-    protected function other_preference_fields(MoodleQuickForm $mform) {
+    protected function other_preference_fields(PowerEducQuickForm $mform) {
     }
 
     public function validation($data, $files) {

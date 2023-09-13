@@ -18,7 +18,7 @@ namespace gradingform_guide;
 
 use gradingform_controller;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/grade/grading/lib.php');

@@ -274,7 +274,7 @@ class weblib_test extends advanced_testcase {
         $text = "lala <applet>xx</applet>";
         $this->assertSame($text, clean_text($text, FORMAT_PLAIN));
         $this->assertSame('lala xx', clean_text($text, FORMAT_MARKDOWN));
-        $this->assertSame('lala xx', clean_text($text, FORMAT_MOODLE));
+        $this->assertSame('lala xx', clean_text($text, FORMAT_POWEREDUC));
         $this->assertSame('lala xx', clean_text($text, FORMAT_HTML));
     }
 

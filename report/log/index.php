@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Displays different views of the logs.
@@ -99,7 +99,7 @@ if ($logreader == 'logstore_legacy') {
     $params['edulevel'] = -1;
     $edulevel = -1;
 }
-$url = new moodle_url("/report/log/index.php", $params);
+$url = new powereduc_url("/report/log/index.php", $params);
 
 $PAGE->set_url('/report/log/index.php', array('id' => $id));
 $PAGE->set_pagelayout('report');
@@ -173,7 +173,7 @@ if (empty($readers)) {
 
             if ($user) {
                 $u = $DB->get_record('user', array('id' => $user, 'deleted' => 0), '*', MUST_EXIST);
-                $userinfo = fullname($u, has_capability('moodle/site:viewfullnames', $context));
+                $userinfo = fullname($u, has_capability('powereduc/site:viewfullnames', $context));
             }
             if ($date) {
                 $dateinfo = userdate($date, get_string('strftimedaydate'));

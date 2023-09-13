@@ -24,7 +24,7 @@
 
 namespace tool_policy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core\persistent;
 
@@ -148,7 +148,7 @@ class policy_version extends persistent {
                 'choices' => [
                     FORMAT_PLAIN,
                     FORMAT_HTML,
-                    FORMAT_MOODLE,
+                    FORMAT_POWEREDUC,
                     FORMAT_MARKDOWN,
                 ],
             ],
@@ -162,7 +162,7 @@ class policy_version extends persistent {
                 'choices' => [
                     FORMAT_PLAIN,
                     FORMAT_HTML,
-                    FORMAT_MOODLE,
+                    FORMAT_POWEREDUC,
                     FORMAT_MARKDOWN,
                 ],
             ],

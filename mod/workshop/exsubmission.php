@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * View, create or edit single example submission
@@ -38,7 +38,7 @@ $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EX
 
 require_login($course, false, $cm);
 if (isguestuser()) {
-    throw new \moodle_exception('guestsarenotallowed');
+    throw new \powereduc_exception('guestsarenotallowed');
 }
 
 $workshop = $DB->get_record('workshop', array('id' => $cm->instance), '*', MUST_EXIST);
@@ -74,7 +74,7 @@ if ($example->id and ($canmanage or ($workshop->assessing_examples_allowed() and
 } elseif (is_null($example->id) and $canmanage) {
     // ok you can go
 } else {
-    throw new \moodle_exception('nopermissions', 'error', $workshop->view_url(), 'view or manage example submission');
+    throw new \powereduc_exception('nopermissions', 'error', $workshop->view_url(), 'view or manage example submission');
 }
 
 if ($id and $delete and $confirm and $canmanage) {
@@ -152,7 +152,7 @@ if ($edit and $canmanage) {
             $example->id = $formdata->id = $DB->insert_record('workshop_submissions', $formdata);
         } else {
             if (empty($formdata->id) or empty($example->id) or ($formdata->id != $example->id)) {
-                throw new moodle_exception('err_examplesubmissionid', 'workshop');
+                throw new powereduc_exception('err_examplesubmissionid', 'workshop');
             }
         }
 
@@ -203,12 +203,12 @@ if ($edit and $canmanage) {
 if ($example->id) {
     if ($canmanage and $delete) {
     echo $output->confirm(get_string('exampledeleteconfirm', 'workshop'),
-            new moodle_url($PAGE->url, array('delete' => 1, 'confirm' => 1)), $workshop->view_url());
+            new powereduc_url($PAGE->url, array('delete' => 1, 'confirm' => 1)), $workshop->view_url());
     }
     if ($canmanage and !$delete and !$DB->record_exists_select('workshop_assessments',
             'grade IS NOT NULL AND weight=1 AND submissionid = ?', array($example->id))) {
         echo $output->confirm(get_string('assessmentreferenceneeded', 'workshop'),
-                new moodle_url($PAGE->url, array('assess' => 1)), $workshop->view_url());
+                new powereduc_url($PAGE->url, array('assess' => 1)), $workshop->view_url());
     }
     echo $output->render($workshop->prepare_example_submission($example));
 }
@@ -216,16 +216,16 @@ if ($example->id) {
 echo $output->container_start('buttonsbar');
 if ($canmanage) {
     if (empty($edit) and empty($delete)) {
-        $aurl = new moodle_url($workshop->exsubmission_url($example->id), array('edit' => 'on'));
+        $aurl = new powereduc_url($workshop->exsubmission_url($example->id), array('edit' => 'on'));
         echo $output->single_button($aurl, get_string('exampleedit', 'workshop'), 'get');
 
-        $aurl = new moodle_url($workshop->exsubmission_url($example->id), array('delete' => 'on'));
+        $aurl = new powereduc_url($workshop->exsubmission_url($example->id), array('delete' => 'on'));
         echo $output->single_button($aurl, get_string('exampledelete', 'workshop'), 'get');
     }
 }
 // ...and optionally assess it
 if ($canassess or ($canmanage and empty($edit) and empty($delete))) {
-    $aurl = new moodle_url($workshop->exsubmission_url($example->id), array('assess' => 'on', 'sesskey' => sesskey()));
+    $aurl = new powereduc_url($workshop->exsubmission_url($example->id), array('assess' => 'on', 'sesskey' => sesskey()));
     echo $output->single_button($aurl, get_string('exampleassess', 'workshop'), 'get');
 }
 echo $output->container_end(); // buttonsbar

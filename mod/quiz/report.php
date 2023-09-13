@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This script controls the display of the quiz reports.
  *
  * @package   mod_quiz
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,28 +35,28 @@ $mode = optional_param('mode', '', PARAM_ALPHA);
 
 if ($id) {
     if (!$cm = get_coursemodule_from_id('quiz', $id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (!$course = $DB->get_record('course', array('id' => $cm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (!$quiz = $DB->get_record('quiz', array('id' => $cm->instance))) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
 } else {
     if (!$quiz = $DB->get_record('quiz', array('id' => $q))) {
-        throw new \moodle_exception('invalidquizid', 'quiz');
+        throw new \powereduc_exception('invalidquizid', 'quiz');
     }
     if (!$course = $DB->get_record('course', array('id' => $quiz->course))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
     if (!$cm = get_coursemodule_from_instance("quiz", $quiz->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 }
 
-$url = new moodle_url('/mod/quiz/report.php', array('id' => $cm->id));
+$url = new powereduc_url('/mod/quiz/report.php', array('id' => $cm->id));
 if ($mode !== '') {
     $url->param('mode', $mode);
 }
@@ -68,7 +68,7 @@ $PAGE->set_pagelayout('report');
 $PAGE->activityheader->disable();
 $reportlist = quiz_report_list($context);
 if (empty($reportlist)) {
-    throw new \moodle_exception('erroraccessingreport', 'quiz');
+    throw new \powereduc_exception('erroraccessingreport', 'quiz');
 }
 
 // Validate the requested report name.
@@ -77,10 +77,10 @@ if ($mode == '') {
     $url->param('mode', reset($reportlist));
     redirect($url);
 } else if (!in_array($mode, $reportlist)) {
-    throw new \moodle_exception('erroraccessingreport', 'quiz');
+    throw new \powereduc_exception('erroraccessingreport', 'quiz');
 }
 if (!is_readable("report/$mode/report.php")) {
-    throw new \moodle_exception('reportnotfound', 'quiz', '', $mode);
+    throw new \powereduc_exception('reportnotfound', 'quiz', '', $mode);
 }
 
 // Open the selected quiz report and display it.
@@ -90,7 +90,7 @@ if (is_readable($file)) {
 }
 $reportclassname = 'quiz_' . $mode . '_report';
 if (!class_exists($reportclassname)) {
-    throw new \moodle_exception('preprocesserror', 'quiz');
+    throw new \powereduc_exception('preprocesserror', 'quiz');
 }
 
 $report = new $reportclassname();

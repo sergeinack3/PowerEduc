@@ -1,12 +1,12 @@
 <?php
 
-if (!defined('MOODLE_INTERNAL')) {
+if (!defined('POWEREDUC_INTERNAL')) {
     die('Direct access to this script is forbidden!');
 }
 require_once($CFG->libdir . '/formslib.php');
 require_once($CFG->libdir . '/csvlib.class.php');
 
-class mod_data_export_form extends moodleform {
+class mod_data_export_form extends powereducform {
     var $_datafields = array();
     var $_cm;
     var $_data;

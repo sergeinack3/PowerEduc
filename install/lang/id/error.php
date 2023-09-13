@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p> Tidak dapat membuat basis data. </p> <p> Basis data yang ditentukan tidak ada dan pengguna yang diberikan tidak memiliki izin untuk membuat basis data. </p> <p> Administrator situs harus memverifikasi konfigurasi basis data. < / p>';
 $string['cannotcreatelangdir'] = 'Tidak dapat membuat direktori lang';

@@ -1,12 +1,12 @@
 <?php
 
-if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+if (!defined('POWEREDUC_INTERNAL')) {
+    die('Direct access to this script is forbidden.');    ///  It must be included from a PowerEduc page
 }
 
 require_once($CFG->dirroot . '/lib/formslib.php');
 
-class mod_wiki_comments_form extends moodleform {
+class mod_wiki_comments_form extends powereducform {
     protected function definition() {
         $mform = $this->_form;
 

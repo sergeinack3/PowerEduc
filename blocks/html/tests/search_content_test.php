@@ -24,7 +24,7 @@
 
 namespace block_html;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Unit test for search indexing.

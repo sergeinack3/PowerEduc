@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use ZipArchive;
  *
  * @package     core
  * @category    test
- * @copyright   2020 Simey Lameze <simey@moodle.com>
+ * @copyright   2020 Simey Lameze <simey@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @covers      \core\content\export\zipwriter
  */

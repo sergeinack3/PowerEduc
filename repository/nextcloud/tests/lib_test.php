@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains tests for the repository_nextcloud class.
@@ -26,7 +26,7 @@ namespace repository_nextcloud;
 use repository;
 use repository_nextcloud;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/repository/lib.php');
@@ -72,7 +72,7 @@ class lib_test extends \advanced_testcase {
         $instance = $generator->create_instance([
             'issuerid' => $this->issuer->get('id'),
             'pluginname' => 'Nextcloud',
-            'controlledlinkfoldername' => 'Moodlefiles',
+            'controlledlinkfoldername' => 'PowerEducfiles',
             'supportedreturntypes' => 'both',
             'defaultreturntype' => FILE_INTERNAL,
         ]);
@@ -509,7 +509,7 @@ JSON;
 
         $this->assertEquals($this->repo->print_login(), $this->repo->logout());
 
-        $mock->expects($this->exactly(2))->method('get_login_url')->will($this->returnValue(new \moodle_url('url')));
+        $mock->expects($this->exactly(2))->method('get_login_url')->will($this->returnValue(new \powereduc_url('url')));
 
         $this->repo->options['ajax'] = true;
         $this->assertEquals($this->repo->print_login(), $this->repo->logout());
@@ -565,13 +565,13 @@ JSON;
      */
     public function test_print_login() {
         $mock = $this->createMock(\core\oauth2\client::class);
-        $mock->expects($this->exactly(2))->method('get_login_url')->will($this->returnValue(new \moodle_url('url')));
+        $mock->expects($this->exactly(2))->method('get_login_url')->will($this->returnValue(new \powereduc_url('url')));
         $this->set_private_property($mock, 'client');
 
         // Test with ajax activated.
         $this->repo->options['ajax'] = true;
 
-        $url = new \moodle_url('url');
+        $url = new \powereduc_url('url');
         $ret = array();
         $btn = new \stdClass();
         $btn->type = 'popup';
@@ -742,12 +742,12 @@ JSON;
         $this->repo->send_file($storedfile, '', '', '');
 
         // Checks that setting for foldername are used.
-        $mock->expects($this->once())->method('is_dir')->with('Moodlefiles')->willReturn(false);
+        $mock->expects($this->once())->method('is_dir')->with('PowerEducfiles')->willReturn(false);
         // In case of false as return value mkcol is called to create the folder.
         $parsedwebdavurl = parse_url($this->issuer->get_endpoint_url('webdav'));
         $webdavprefix = $parsedwebdavurl['path'];
         $mock->expects($this->once())->method('mkcol')->with(
-            $webdavprefix . 'Moodlefiles')->willReturn(400);
+            $webdavprefix . 'PowerEducfiles')->willReturn(400);
         $this->expectException(\repository_nextcloud\request_exception::class);
         $this->expectExceptionMessage(get_string('requestnotexecuted', 'repository_nextcloud'));
         $this->repo->send_file($storedfile, '', '', '');
@@ -816,7 +816,7 @@ JSON;
 XML;
 
         // Checks that setting for foldername are used.
-        $mock->expects($this->once())->method('is_dir')->with('Moodlefiles')->willReturn(true);
+        $mock->expects($this->once())->method('is_dir')->with('PowerEducfiles')->willReturn(true);
         // In case of true as return value mkcol is not called  to create the folder.
         $shareid = 5;
 
@@ -825,7 +825,7 @@ XML;
         $mockocsclient->expects($this->exactly(2))->method('call')->with('get_information_of_share',
             array('share_id' => $shareid))->will($this->returnValue($expectedresponse));
         $this->set_private_property($mock, 'ocsclient');
-        $this->repo->expects($this->once())->method('move_file_to_folder')->with('/merged (3).txt', 'Moodlefiles',
+        $this->repo->expects($this->once())->method('move_file_to_folder')->with('/merged (3).txt', 'PowerEducfiles',
             $mock)->willReturn(array('success' => 201));
 
         $this->repo->send_file('', '', '', '');
@@ -833,7 +833,7 @@ XML;
         // Create test for statuscode 403.
 
         // Checks that setting for foldername are used.
-        $mock->expects($this->once())->method('is_dir')->with('Moodlefiles')->willReturn(true);
+        $mock->expects($this->once())->method('is_dir')->with('PowerEducfiles')->willReturn(true);
         // In case of true as return value mkcol is not called to create the folder.
         $shareid = 5;
         $mockocsclient = $this->getMockBuilder(\repository_nextcloud\ocs_client::class
@@ -843,7 +843,7 @@ XML;
         $mockocsclient->expects($this->exactly(1))->method('call')->with('get_information_of_share',
             array('share_id' => $shareid))->will($this->returnValue($expectedresponse));
         $this->set_private_property($mock, 'ocsclient');
-        $this->repo->expects($this->once())->method('move_file_to_folder')->with('/merged (3).txt', 'Moodlefiles',
+        $this->repo->expects($this->once())->method('move_file_to_folder')->with('/merged (3).txt', 'PowerEducfiles',
             $mock)->willReturn(array('success' => 201));
         $this->repo->send_file('', '', '', '');
     }

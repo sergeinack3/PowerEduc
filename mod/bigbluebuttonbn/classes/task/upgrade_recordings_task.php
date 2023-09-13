@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\local\proxy\recording_proxy;
 use mod_bigbluebuttonbn\logger;
 use mod_bigbluebuttonbn\recording;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * Class containing the scheduled task for converting recordings for the BigBlueButton version 2.5 in Moodle 4.0.
@@ -50,7 +50,7 @@ class upgrade_recordings_task extends adhoc_task {
      * @param bool $isimported
      * @return bool Whether any more logs are waiting to be processed
      * @throws \dml_exception
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function process_bigbluebuttonbn_logs(string $meetingid, bool $isimported): bool {
         global $DB;

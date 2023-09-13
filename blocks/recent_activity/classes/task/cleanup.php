@@ -25,7 +25,7 @@
 
 namespace block_recent_activity\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Task for updating RSS feeds for rss client block

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ if ($id) {
 if (!$instance) {
     $courseid = optional_param('courseid', 1, PARAM_INT);
     \core\notification::error(get_string('general_error_not_found', 'mod_bigbluebuttonbn', $id));
-    redirect(new moodle_url('/course/view.php', ['id' => $courseid]));
+    redirect(new powereduc_url('/course/view.php', ['id' => $courseid]));
 }
 
 $cm = $instance->get_cm();
@@ -90,7 +90,7 @@ switch (strtolower($action)) {
             foreach ($errors as $error) {
                 $msgerrors .= html_writer::tag('p', $error->{'message'}, ['class' => 'alert alert-danger']) . "\n";
             }
-            throw new moodle_exception('view_error_bigbluebutton', 'bigbluebuttonbn',
+            throw new powereduc_exception('view_error_bigbluebutton', 'bigbluebuttonbn',
                 $CFG->wwwroot . '/mod/bigbluebuttonbn/view.php?id=' . $id, $msgerrors, $errors);
         }
 
@@ -123,7 +123,7 @@ switch (strtolower($action)) {
         break;
     case 'join':
         if (empty($bigbluebuttonbn)) {
-            throw new moodle_exception('view_error_unable_join', 'bigbluebuttonbn');
+            throw new powereduc_exception('view_error_unable_join', 'bigbluebuttonbn');
             break;
         }
         // Check the origin page.

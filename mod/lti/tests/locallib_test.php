@@ -1,34 +1,34 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 //
-// This file is part of BasicLTI4Moodle
+// This file is part of BasicLTI4PowerEduc
 //
-// BasicLTI4Moodle is an IMS BasicLTI (Basic Learning Tools for Interoperability)
-// consumer for Moodle 1.9 and Moodle 2.0. BasicLTI is a IMS Standard that allows web
+// BasicLTI4PowerEduc is an IMS BasicLTI (Basic Learning Tools for Interoperability)
+// consumer for PowerEduc 1.9 and PowerEduc 2.0. BasicLTI is a IMS Standard that allows web
 // based learning tools to be easily integrated in LMS as native ones. The IMS BasicLTI
 // specification is part of the IMS standard Common Cartridge 1.1 Sakai and other main LMS
 // are already supporting or going to support BasicLTI. This project Implements the consumer
-// for Moodle. Moodle is a Free Open source Learning Management System by Martin Dougiamas.
-// BasicLTI4Moodle is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
+// for PowerEduc. PowerEduc is a Free Open source Learning Management System by Martin Dougiamas.
+// BasicLTI4PowerEduc is a project iniciated and leaded by Ludo(Marc Alier) and Jordi Piguillem
 // at the GESSI research group at UPC.
-// SimpleLTI consumer for Moodle is an implementation of the early specification of LTI
+// SimpleLTI consumer for PowerEduc is an implementation of the early specification of LTI
 // by Charles Severance (Dr Chuck) htp://dr-chuck.com , developed by Jordi Piguillem in a
 // Google Summer of Code 2008 project co-mentored by Charles Severance and Marc Alier.
 //
-// BasicLTI4Moodle is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
+// BasicLTI4PowerEduc is copyright 2009 by Marc Alier Forment, Jordi Piguillem and Nikolas Galanis
 // of the Universitat Politecnica de Catalunya http://www.upc.edu
 // Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier @ upc.edu.
 
@@ -51,7 +51,7 @@ namespace mod_lti;
 use mod_lti_external;
 use mod_lti_testcase;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
@@ -62,7 +62,7 @@ require_once($CFG->dirroot . '/mod/lti/tests/mod_lti_testcase.php');
  * Local library tests
  *
  * @package    mod_lti
- * @copyright  Copyright (c) 2012 Moodlerooms Inc. (http://www.moodlerooms.com)
+ * @copyright  Copyright (c) 2012 PowerEducrooms Inc. (http://www.powereducrooms.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class locallib_test extends mod_lti_testcase {
@@ -195,9 +195,9 @@ class locallib_test extends mod_lti_testcase {
     }
 
     public function test_lti_ensure_url_is_https() {
-        $this->assertEquals('https://moodle.org', lti_ensure_url_is_https('http://moodle.org'));
-        $this->assertEquals('https://moodle.org', lti_ensure_url_is_https('moodle.org'));
-        $this->assertEquals('https://moodle.org', lti_ensure_url_is_https('https://moodle.org'));
+        $this->assertEquals('https://powereduc.org', lti_ensure_url_is_https('http://powereduc.org'));
+        $this->assertEquals('https://powereduc.org', lti_ensure_url_is_https('powereduc.org'));
+        $this->assertEquals('https://powereduc.org', lti_ensure_url_is_https('https://powereduc.org'));
     }
 
     /**
@@ -205,15 +205,15 @@ class locallib_test extends mod_lti_testcase {
      */
     public function test_lti_get_url_thumbprint() {
         // Note: trailing and double slash are expected right now.  Must evaluate if it must be removed at some point.
-        $this->assertEquals('moodle.org/', lti_get_url_thumbprint('http://MOODLE.ORG'));
-        $this->assertEquals('moodle.org/', lti_get_url_thumbprint('http://www.moodle.org'));
-        $this->assertEquals('moodle.org/', lti_get_url_thumbprint('https://www.moodle.org'));
-        $this->assertEquals('moodle.org/', lti_get_url_thumbprint('moodle.org'));
-        $this->assertEquals('moodle.org//this/is/moodle', lti_get_url_thumbprint('http://moodle.org/this/is/moodle'));
-        $this->assertEquals('moodle.org//this/is/moodle', lti_get_url_thumbprint('https://moodle.org/this/is/moodle'));
-        $this->assertEquals('moodle.org//this/is/moodle', lti_get_url_thumbprint('moodle.org/this/is/moodle'));
-        $this->assertEquals('moodle.org//this/is/moodle', lti_get_url_thumbprint('moodle.org/this/is/moodle?'));
-        $this->assertEquals('moodle.org//this/is/moodle?foo=bar', lti_get_url_thumbprint('moodle.org/this/is/moodle?foo=bar'));
+        $this->assertEquals('powereduc.org/', lti_get_url_thumbprint('http://POWEREDUC.ORG'));
+        $this->assertEquals('powereduc.org/', lti_get_url_thumbprint('http://www.powereduc.org'));
+        $this->assertEquals('powereduc.org/', lti_get_url_thumbprint('https://www.powereduc.org'));
+        $this->assertEquals('powereduc.org/', lti_get_url_thumbprint('powereduc.org'));
+        $this->assertEquals('powereduc.org//this/is/powereduc', lti_get_url_thumbprint('http://powereduc.org/this/is/powereduc'));
+        $this->assertEquals('powereduc.org//this/is/powereduc', lti_get_url_thumbprint('https://powereduc.org/this/is/powereduc'));
+        $this->assertEquals('powereduc.org//this/is/powereduc', lti_get_url_thumbprint('powereduc.org/this/is/powereduc'));
+        $this->assertEquals('powereduc.org//this/is/powereduc', lti_get_url_thumbprint('powereduc.org/this/is/powereduc?'));
+        $this->assertEquals('powereduc.org//this/is/powereduc?foo=bar', lti_get_url_thumbprint('powereduc.org/this/is/powereduc?foo=bar'));
     }
 
     /*
@@ -333,8 +333,8 @@ class locallib_test extends mod_lti_testcase {
         $this->assertEquals('Example tool', $type->lti_typename);
         $this->assertEquals('Example tool description', $type->lti_description);
         $this->assertEquals('http://www.example.com/lti/provider.php', $type->lti_toolurl);
-        $this->assertEquals('http://download.moodle.org/unittest/test.jpg', $type->lti_icon);
-        $this->assertEquals('https://download.moodle.org/unittest/test.jpg', $type->lti_secureicon);
+        $this->assertEquals('http://download.powereduc.org/unittest/test.jpg', $type->lti_icon);
+        $this->assertEquals('https://download.powereduc.org/unittest/test.jpg', $type->lti_secureicon);
     }
 
     /**
@@ -350,8 +350,8 @@ class locallib_test extends mod_lti_testcase {
         $this->assertEquals('Example tool description', $lti->intro);
         $this->assertEquals('http://www.example.com/lti/provider.php', $lti->toolurl);
         $this->assertEquals('https://www.example.com/lti/provider.php', $lti->securetoolurl);
-        $this->assertEquals('http://download.moodle.org/unittest/test.jpg', $lti->icon);
-        $this->assertEquals('https://download.moodle.org/unittest/test.jpg', $lti->secureicon);
+        $this->assertEquals('http://download.powereduc.org/unittest/test.jpg', $lti->icon);
+        $this->assertEquals('https://download.powereduc.org/unittest/test.jpg', $lti->secureicon);
     }
 
     /**
@@ -379,7 +379,7 @@ class locallib_test extends mod_lti_testcase {
         $typeconfig = lti_get_type_config($typeid);
 
         $course = $this->getDataGenerator()->create_course();
-        $returnurl = new \moodle_url('/');
+        $returnurl = new \powereduc_url('/');
 
         // Default parameters.
         $result = lti_build_content_item_selection_request($typeid, $course, $returnurl);
@@ -451,10 +451,10 @@ class locallib_test extends mod_lti_testcase {
 
         $this->setAdminUser();
         $course = $this->getDataGenerator()->create_course();
-        $returnurl = new \moodle_url('/');
+        $returnurl = new \powereduc_url('/');
 
         // Should throw Exception on non-existent tool type.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         lti_build_content_item_selection_request(1, $course, $returnurl);
     }
 
@@ -477,7 +477,7 @@ class locallib_test extends mod_lti_testcase {
 
         $typeid = lti_add_type($type, $data);
         $course = $this->getDataGenerator()->create_course();
-        $returnurl = new \moodle_url('/');
+        $returnurl = new \powereduc_url('/');
 
         // Should throw coding_exception on non-array media types.
         $mediatypes = 'image/*,video/*';
@@ -504,7 +504,7 @@ class locallib_test extends mod_lti_testcase {
 
         $typeid = lti_add_type($type, $data);
         $course = $this->getDataGenerator()->create_course();
-        $returnurl = new \moodle_url('/');
+        $returnurl = new \powereduc_url('/');
 
         // Should throw coding_exception on non-array presentation targets.
         $targets = 'frame,iframe';
@@ -1049,8 +1049,8 @@ class locallib_test extends mod_lti_testcase {
 
         $message = lti_build_standard_message($instance, '2', LTI_VERSION_1);
 
-        $this->assertEquals('moodle-2', $message['ext_lms']);
-        $this->assertEquals('moodle', $message['tool_consumer_info_product_family_code']);
+        $this->assertEquals('powereduc-2', $message['ext_lms']);
+        $this->assertEquals('powereduc', $message['tool_consumer_info_product_family_code']);
         $this->assertEquals(LTI_VERSION_1, $message['lti_version']);
         $this->assertEquals('basic-lti-launch-request', $message['lti_message_type']);
         $this->assertEquals('2', $message['tool_consumer_instance_guid']);
@@ -1073,8 +1073,8 @@ class locallib_test extends mod_lti_testcase {
 
         $message = lti_build_standard_message($instance, '2', LTI_VERSION_2);
 
-        $this->assertEquals('moodle-2', $message['ext_lms']);
-        $this->assertEquals('moodle', $message['tool_consumer_info_product_family_code']);
+        $this->assertEquals('powereduc-2', $message['ext_lms']);
+        $this->assertEquals('powereduc', $message['tool_consumer_info_product_family_code']);
         $this->assertEquals(LTI_VERSION_2, $message['lti_version']);
         $this->assertEquals('basic-lti-launch-request', $message['lti_message_type']);
         $this->assertEquals('2', $message['tool_consumer_instance_guid']);
@@ -1596,7 +1596,7 @@ MwIDAQAB
             'claim' => 'lis_result_sourcedid',
             'isarray' => false
         ];
-        $endpoint = 'https://www.example.com/moodle';
+        $endpoint = 'https://www.example.com/powereduc';
         $oauthconsumerkey = 'consumerkey';
         $nonce = '';
 
@@ -1701,12 +1701,12 @@ MwIDAQAB
 
         $typeconfig = get_tool_type_config($type);
 
-        $this->assertEquals('https://www.example.com/moodle', $typeconfig['platformid']);
+        $this->assertEquals('https://www.example.com/powereduc', $typeconfig['platformid']);
         $this->assertEquals($type->clientid, $typeconfig['clientid']);
         $this->assertEquals($typeid, $typeconfig['deploymentid']);
-        $this->assertEquals('https://www.example.com/moodle/mod/lti/certs.php', $typeconfig['publickeyseturl']);
-        $this->assertEquals('https://www.example.com/moodle/mod/lti/token.php', $typeconfig['accesstokenurl']);
-        $this->assertEquals('https://www.example.com/moodle/mod/lti/auth.php', $typeconfig['authrequesturl']);
+        $this->assertEquals('https://www.example.com/powereduc/mod/lti/certs.php', $typeconfig['publickeyseturl']);
+        $this->assertEquals('https://www.example.com/powereduc/mod/lti/token.php', $typeconfig['accesstokenurl']);
+        $this->assertEquals('https://www.example.com/powereduc/mod/lti/auth.php', $typeconfig['authrequesturl']);
     }
 
     /**
@@ -1798,7 +1798,7 @@ MwIDAQAB
     }
 
     /**
-     * Test default orgid is host if not specified in config (tool installed in earlier version of Moodle).
+     * Test default orgid is host if not specified in config (tool installed in earlier version of PowerEduc).
      */
     public function test_lti_get_launch_data_default_organizationid_unset_usehost() {
         global $DB;
@@ -2084,7 +2084,7 @@ MwIDAQAB
     }
 
     /**
-     * Verify that empty curl responses lead to the proper moodle_exception, not to XML ValueError.
+     * Verify that empty curl responses lead to the proper powereduc_exception, not to XML ValueError.
      *
      * @covers ::lti_load_cartridge()
      */
@@ -2093,7 +2093,7 @@ MwIDAQAB
         // reproducible in real life (only Windows + GHA).
         \curl::mock_response('');
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         lti_load_cartridge('http://example.com/mocked/empty/response', []);
     }
 

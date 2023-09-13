@@ -394,8 +394,8 @@ class enrol_self_plugin extends enrol_plugin {
                 $messagetext = $message;
                 $messagehtml = text_to_html($messagetext, null, false, true);
             } else {
-                // This is most probably the tag/newline soup known as FORMAT_MOODLE.
-                $messagehtml = format_text($message, FORMAT_MOODLE, array('context'=>$context, 'para'=>false, 'newlines'=>true, 'filter'=>true));
+                // This is most probably the tag/newline soup known as FORMAT_POWEREDUC.
+                $messagehtml = format_text($message, FORMAT_POWEREDUC, array('context'=>$context, 'para'=>false, 'newlines'=>true, 'filter'=>true));
                 $messagetext = html_to_text($messagehtml);
             }
         } else {

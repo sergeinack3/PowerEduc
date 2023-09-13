@@ -28,7 +28,7 @@ namespace core_backup;
 use backup;
 use convert_helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;
@@ -48,25 +48,25 @@ class converterhelper_test extends \basic_testcase {
 
         // no converters available
         $descriptions = array();
-        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_MOODLE1, $descriptions);
+        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_POWEREDUC1, $descriptions);
         $this->assertEquals($path, array());
 
         // missing source and/or targets
         $descriptions = array(
             // some custom converter
             'exporter' => array(
-                'from'  => backup::FORMAT_MOODLE1,
+                'from'  => backup::FORMAT_POWEREDUC1,
                 'to'    => 'some_custom_format',
                 'cost'  => 10,
             ),
             // another custom converter
             'converter' => array(
                 'from'  => 'yet_another_crazy_custom_format',
-                'to'    => backup::FORMAT_MOODLE,
+                'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 10,
             ),
         );
-        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_MOODLE1, $descriptions);
+        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_POWEREDUC1, $descriptions);
         $this->assertEquals($path, array());
 
         $path = testable_convert_helper::choose_conversion_path('some_other_custom_format', $descriptions);
@@ -77,51 +77,51 @@ class converterhelper_test extends \basic_testcase {
         $this->assertEquals($path, array('converter'));
 
         // no conversion needed - this is supposed to be detected by the caller
-        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_MOODLE, $descriptions);
+        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_POWEREDUC, $descriptions);
         $this->assertEquals($path, array());
 
         // two alternatives
         $descriptions = array(
             // standard moodle 1.9 -> 2.x converter
             'moodle1' => array(
-                'from'  => backup::FORMAT_MOODLE1,
-                'to'    => backup::FORMAT_MOODLE,
+                'from'  => backup::FORMAT_POWEREDUC1,
+                'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 10,
             ),
             // alternative moodle 1.9 -> 2.x converter
             'alternative' => array(
-                'from'  => backup::FORMAT_MOODLE1,
-                'to'    => backup::FORMAT_MOODLE,
+                'from'  => backup::FORMAT_POWEREDUC1,
+                'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 8,
             )
         );
-        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_MOODLE1, $descriptions);
+        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_POWEREDUC1, $descriptions);
         $this->assertEquals($path, array('alternative'));
 
         // complex case
         $descriptions = array(
             // standard moodle 1.9 -> 2.x converter
             'moodle1' => array(
-                'from'  => backup::FORMAT_MOODLE1,
-                'to'    => backup::FORMAT_MOODLE,
+                'from'  => backup::FORMAT_POWEREDUC1,
+                'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 10,
             ),
             // alternative moodle 1.9 -> 2.x converter
             'alternative' => array(
-                'from'  => backup::FORMAT_MOODLE1,
-                'to'    => backup::FORMAT_MOODLE,
+                'from'  => backup::FORMAT_POWEREDUC1,
+                'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 8,
             ),
             // custom converter from 1.9 -> custom 'CFv1' format
             'cc1' => array(
-                'from'  => backup::FORMAT_MOODLE1,
+                'from'  => backup::FORMAT_POWEREDUC1,
                 'to'    => 'CFv1',
                 'cost'  => 2,
             ),
             // custom converter from custom 'CFv1' format -> moodle 2.0 format
             'cc2' => array(
                 'from'  => 'CFv1',
-                'to'    => backup::FORMAT_MOODLE,
+                'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 5,
             ),
             // custom converter from CFv1 -> CFv2 format
@@ -133,13 +133,13 @@ class converterhelper_test extends \basic_testcase {
             // custom converter from CFv2 -> moodle 2.0 format
             'cc4' => array(
                 'from'  => 'CFv2',
-                'to'    => backup::FORMAT_MOODLE,
+                'to'    => backup::FORMAT_POWEREDUC,
                 'cost'  => 2,
             ),
         );
 
         // ask the helper to find the most effective way
-        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_MOODLE1, $descriptions);
+        $path = testable_convert_helper::choose_conversion_path(backup::FORMAT_POWEREDUC1, $descriptions);
         $this->assertEquals($path, array('cc1', 'cc3', 'cc4'));
     }
 }

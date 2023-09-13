@@ -25,7 +25,7 @@
 
 namespace gradereport_history\output;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * A button that is used to select users for a form.

@@ -1,28 +1,28 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of interface functions and constants.
  *
  * @package     mod_h5pactivity
- * @copyright   2020 Ferran Recio <ferran@moodle.com>
+ * @copyright   2020 Ferran Recio <ferran@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use mod_h5pactivity\local\manager;
 use mod_h5pactivity\local\grader;
@@ -39,7 +39,7 @@ use mod_h5pactivity\local\grader;
  * @uses FEATURE_MODEDIT_DEFAULT_COMPLETION
  * @uses FEATURE_GRADE_HAS_GRADE
  * @uses FEATURE_GRADE_OUTCOMES
- * @uses FEATURE_BACKUP_MOODLE2
+ * @uses FEATURE_BACKUP_POWEREDUC2
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed True if module supports feature, false if not, null if doesn't know or string for the module purpose.
  */
@@ -61,7 +61,7 @@ function h5pactivity_supports(string $feature) {
             return true;
         case FEATURE_GRADE_OUTCOMES:
             return true;
-        case FEATURE_BACKUP_MOODLE2:
+        case FEATURE_BACKUP_POWEREDUC2:
             return true;
         case FEATURE_MOD_PURPOSE:
             return MOD_PURPOSE_CONTENT;
@@ -254,7 +254,7 @@ function h5pactivity_reset_course_form_defaults(stdClass $course): array {
 
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  *
  * This function will remove all H5P attempts in the database
  * and clean up any related data.
@@ -410,7 +410,7 @@ function h5pactivity_get_file_info(file_browser $browser, array $areas, stdClass
             ?string $filepath = null, ?string $filename = null): ?file_info_stored {
     global $CFG;
 
-    if (!has_capability('moodle/course:managefiles', $context)) {
+    if (!has_capability('powereduc/course:managefiles', $context)) {
         return null;
     }
 
@@ -663,7 +663,7 @@ function h5pactivity_get_recent_mod_activity(array &$activities, int &$index, in
 
     $cmcontext = context_module::instance($cm->id);
     $grader = has_capability('mod/h5pactivity:reviewattempts', $cmcontext);
-    $viewfullnames = has_capability('moodle/site:viewfullnames', $cmcontext);
+    $viewfullnames = has_capability('powereduc/site:viewfullnames', $cmcontext);
 
     $recentactivity = h5pactivity_fetch_recent_activity($submissions, $courseid);
 
@@ -726,7 +726,7 @@ function h5pactivity_print_recent_mod_activity(stdClass $activity, int $courseid
     $modinfo = [];
     if ($detail) {
         $modinfo['modname'] = $activity->name;
-        $modinfo['modurl'] = new moodle_url('/mod/h5pactivity/view.php', ['id' => $activity->cmid]);
+        $modinfo['modurl'] = new powereduc_url('/mod/h5pactivity/view.php', ['id' => $activity->cmid]);
         $modinfo['modicon'] = $OUTPUT->image_icon('monologo', $modnames[$activity->type], 'h5pactivity');
     }
 
@@ -735,7 +735,7 @@ function h5pactivity_print_recent_mod_activity(stdClass $activity, int $courseid
     $template = ['userpicture' => $userpicture,
         'submissiontimestamp' => $activity->timestamp,
         'modinfo' => $modinfo,
-        'userurl' => new moodle_url('/user/view.php', array('id' => $activity->user->id, 'course' => $courseid)),
+        'userurl' => new powereduc_url('/user/view.php', array('id' => $activity->user->id, 'course' => $courseid)),
         'fullname' => $activity->user->fullname];
     if (isset($activity->grade)) {
         $template['grade'] = get_string('grade_h5p', 'h5pactivity', $activity->grade);
@@ -790,7 +790,7 @@ function h5pactivity_fetch_recent_activity(array $submissions, int $courseid) : 
         $usersgroups = [];
 
         $groupmode = groups_get_activity_groupmode($cm, $course);
-        $accessallgroups = has_capability('moodle/site:accessallgroups', $cmcontext);
+        $accessallgroups = has_capability('powereduc/site:accessallgroups', $cmcontext);
 
         if ($groupmode == SEPARATEGROUPS && !$accessallgroups) {
 
@@ -843,12 +843,12 @@ function h5pactivity_extend_settings_navigation(settings_navigation $settingsnav
 
     // Attempts report.
     if ($manager->can_view_all_attempts()) {
-        $attemptsreporturl = new moodle_url('/mod/h5pactivity/report.php',
+        $attemptsreporturl = new powereduc_url('/mod/h5pactivity/report.php',
             ['a' => $settingsnav->get_page()->cm->instance]);
         $h5pactivitynode->add(get_string('attempts_report', 'h5pactivity'), $attemptsreporturl,
             settings_navigation::TYPE_SETTING, '', 'attemptsreport');
     } else if ($manager->can_view_own_attempts() && $manager->count_attempts($USER->id)) {
-        $attemptsreporturl = new moodle_url('/mod/h5pactivity/report.php',
+        $attemptsreporturl = new powereduc_url('/mod/h5pactivity/report.php',
             ['a' => $settingsnav->get_page()->cm->instance, 'userid' => $USER->id]);
         $h5pactivitynode->add(get_string('attempts_report', 'h5pactivity'), $attemptsreporturl,
             settings_navigation::TYPE_SETTING, '', 'attemptsreport');

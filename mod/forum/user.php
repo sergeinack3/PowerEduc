@@ -1,25 +1,25 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Display user activity reports for a course
  *
  * @package   mod_forum
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -45,7 +45,7 @@ $discussionsonly = ($mode !== 'posts');
 $isspecificcourse = !is_null($courseid);
 $iscurrentuser = ($USER->id == $userid);
 
-$url = new moodle_url('/mod/forum/user.php', array('id' => $userid));
+$url = new powereduc_url('/mod/forum/user.php', array('id' => $userid));
 if ($isspecificcourse) {
     $url->param('course', $courseid);
 }
@@ -69,7 +69,7 @@ $usercontext = context_user::instance($user->id, MUST_EXIST);
 if (isguestuser($user)) {
     // The guest user cannot post, so it is not possible to view any posts.
     // May as well just bail aggressively here.
-    throw new \moodle_exception('invaliduserid');
+    throw new \powereduc_exception('invaliduserid');
 }
 // Make sure the user has not been deleted
 if ($user->deleted) {
@@ -84,7 +84,7 @@ if ($user->deleted) {
 $isloggedin = isloggedin();
 $isguestuser = $isloggedin && isguestuser();
 $isparent = !$iscurrentuser && $DB->record_exists('role_assignments', array('userid'=>$USER->id, 'contextid'=>$usercontext->id));
-$hasparentaccess = $isparent && has_all_capabilities(array('moodle/user:viewdetails', 'moodle/user:readuserposts'), $usercontext);
+$hasparentaccess = $isparent && has_all_capabilities(array('powereduc/user:viewdetails', 'powereduc/user:readuserposts'), $usercontext);
 
 // Check whether a specific course has been requested
 if ($isspecificcourse) {
@@ -169,10 +169,10 @@ if (empty($result->posts)) {
             }
             // Check to see if this is a discussion or a post.
             if ($mode == 'posts') {
-                $navbar = $PAGE->navbar->add(get_string('posts', 'forum'), new moodle_url('/mod/forum/user.php',
+                $navbar = $PAGE->navbar->add(get_string('posts', 'forum'), new powereduc_url('/mod/forum/user.php',
                         array('id' => $user->id, 'course' => $courseid)));
             } else {
-                $navbar = $PAGE->navbar->add(get_string('discussions', 'forum'), new moodle_url('/mod/forum/user.php',
+                $navbar = $PAGE->navbar->add(get_string('discussions', 'forum'), new powereduc_url('/mod/forum/user.php',
                         array('id' => $user->id, 'course' => $courseid, 'mode' => 'discussions')));
             }
         }
@@ -188,10 +188,10 @@ if (empty($result->posts)) {
             }
             // Check to see if this is a discussion or a post.
             if ($mode == 'posts') {
-                $navbar = $PAGE->navbar->add(get_string('posts', 'forum'), new moodle_url('/mod/forum/user.php',
+                $navbar = $PAGE->navbar->add(get_string('posts', 'forum'), new powereduc_url('/mod/forum/user.php',
                         array('id' => $user->id, 'course' => $courseid)));
             } else {
-                $navbar = $PAGE->navbar->add(get_string('discussions', 'forum'), new moodle_url('/mod/forum/user.php',
+                $navbar = $PAGE->navbar->add(get_string('discussions', 'forum'), new powereduc_url('/mod/forum/user.php',
                         array('id' => $user->id, 'course' => $courseid, 'mode' => 'discussions')));
             }
         }
@@ -207,9 +207,9 @@ if (empty($result->posts)) {
         // the current uesr doesn't have access to.
         $notification = get_string('cannotviewusersposts', 'forum');
         if ($isspecificcourse) {
-            $url = new moodle_url('/course/view.php', array('id' => $courseid));
+            $url = new powereduc_url('/course/view.php', array('id' => $courseid));
         } else {
-            $url = new moodle_url('/');
+            $url = new powereduc_url('/');
         }
         navigation_node::override_active_url($url);
     }
@@ -226,7 +226,7 @@ if (empty($result->posts)) {
     }
     echo $OUTPUT->header();
     if (isset($courseid) && $courseid != SITEID) {
-        $backurl = new moodle_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
+        $backurl = new powereduc_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
         echo $OUTPUT->single_button($backurl, get_string('back'), 'get', ['class' => 'mb-3']);
     }
     if (!$isspecificcourse) {
@@ -308,10 +308,10 @@ if (isset($courseid) && $courseid != SITEID) {
 
     // Check to see if this is a discussion or a post.
     if ($mode == 'posts') {
-        $navbar = $PAGE->navbar->add(get_string('posts', 'forum'), new moodle_url('/mod/forum/user.php',
+        $navbar = $PAGE->navbar->add(get_string('posts', 'forum'), new powereduc_url('/mod/forum/user.php',
                 array('id' => $user->id, 'course' => $courseid)));
     } else {
-        $navbar = $PAGE->navbar->add(get_string('discussions', 'forum'), new moodle_url('/mod/forum/user.php',
+        $navbar = $PAGE->navbar->add(get_string('discussions', 'forum'), new powereduc_url('/mod/forum/user.php',
                 array('id' => $user->id, 'course' => $courseid, 'mode' => 'discussions')));
     }
     $PAGE->set_secondary_active_tab('participants');
@@ -320,7 +320,7 @@ if (isset($courseid) && $courseid != SITEID) {
 echo $OUTPUT->header();
 
 if (isset($courseid) && $courseid != SITEID) {
-    $backurl = new moodle_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
+    $backurl = new powereduc_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
     echo $OUTPUT->single_button($backurl, get_string('back'), 'get', ['class' => 'mb-3']);
 }
 echo html_writer::start_tag('div', array('class' => 'user-content'));

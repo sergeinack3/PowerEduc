@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page lists all the instances of wiki in a particular course
@@ -38,7 +38,7 @@ $id = required_param('id', PARAM_INT); // course
 $PAGE->set_url('/mod/wiki/index.php', array('id' => $id));
 
 if (!$course = $DB->get_record('course', array('id' => $id))) {
-    throw new \moodle_exception('invalidcourseid');
+    throw new \powereduc_exception('invalidcourseid');
 }
 
 require_login($course, true);
@@ -86,7 +86,7 @@ foreach ($wikis as $wiki) {
     if (!$wiki->visible) {
         $linkcss = array('class' => 'dimmed');
     }
-    $link = html_writer::link(new moodle_url('/mod/wiki/view.php', array('id' => $wiki->coursemodule)), $wiki->name, $linkcss);
+    $link = html_writer::link(new powereduc_url('/mod/wiki/view.php', array('id' => $wiki->coursemodule)), $wiki->name, $linkcss);
 
     if ($usesections) {
         $table->data[] = array(get_section_name($course, $wiki->section), $link);

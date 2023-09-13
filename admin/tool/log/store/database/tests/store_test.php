@@ -16,7 +16,7 @@
 
 namespace logstore_database;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__ . '/fixtures/event.php');
 require_once(__DIR__ . '/fixtures/store.php');

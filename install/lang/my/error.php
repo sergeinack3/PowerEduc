@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>database မတည်ဆောက်နိုင်ပါ၊၊</p>
 <p> သတ်မှတ်ထားသော database မရှိပါ။ ပေးထားသော သုံးစွဲသူမှ database တည်ဆောက်ရန် ခွင့်မပြုထားပါ၊၊</p>

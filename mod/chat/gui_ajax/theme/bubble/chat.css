@@ -126,12 +126,12 @@ Dual licensed under MIT and GNU GPLv2 © Nicolas Gallagher
     -moz-border-radius: 10px;
     border-radius: 10px;
 
-    /* moodle specific */
+    /* powereduc specific */
     margin-top: 0;
-    /* end moodle specific */
+    /* end powereduc specific */
 }
 
-/* moodle specific */
+/* powereduc specific */
 
 @media all and (max-device-width: 320px) {
     .triangle-border {
@@ -150,16 +150,16 @@ Dual licensed under MIT and GNU GPLv2 © Nicolas Gallagher
         width: 65%;
     }
 }
-/* end moodle specific */
+/* end powereduc specific */
 
 /* Variant : for left positioned triangle
 ------------------------------------------ */
 
 .triangle-border.left {
     margin-left: 30px;
-    /* moodle specific */
+    /* powereduc specific */
     float: right;
-    /* end moodle specific */
+    /* end powereduc specific */
 }
 
 /* Variant : for right positioned triangle
@@ -167,9 +167,9 @@ Dual licensed under MIT and GNU GPLv2 © Nicolas Gallagher
 
 .triangle-border.right {
     margin-right: 30px;
-    /* moodle specific */
+    /* powereduc specific */
     float: left;
-    /* end moodle specific */
+    /* end powereduc specific */
 }
 
 .triangle-border:before {

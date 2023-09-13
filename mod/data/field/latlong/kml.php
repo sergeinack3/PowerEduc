@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ $d       = required_param('d', PARAM_INT);   // database id
 $fieldid = required_param('fieldid', PARAM_INT);   // field id
 $rid     = optional_param('rid', 0, PARAM_INT);    //record id
 
-$url = new moodle_url('/mod/data/field/latlong/kml.php', array('d'=>$d, 'fieldid'=>$fieldid));
+$url = new powereduc_url('/mod/data/field/latlong/kml.php', array('d'=>$d, 'fieldid'=>$fieldid));
 if ($rid !== 0) {
     $url->param('rid', $rid);
 }
@@ -34,41 +34,41 @@ $PAGE->set_url($url);
 
 if ($rid) {
     if (! $record = $DB->get_record('data_records', array('id'=>$rid))) {
-        throw new \moodle_exception('invalidrecord', 'data');
+        throw new \powereduc_exception('invalidrecord', 'data');
     }
     if (! $data = $DB->get_record('data', array('id'=>$record->dataid))) {
-        throw new \moodle_exception('invalidid', 'data');
+        throw new \powereduc_exception('invalidid', 'data');
     }
     if (! $course = $DB->get_record('course', array('id'=>$data->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $cm = get_coursemodule_from_instance('data', $data->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $field = $DB->get_record('data_fields', array('id'=>$fieldid))) {
-        throw new \moodle_exception('invalidfieldid', 'data');
+        throw new \powereduc_exception('invalidfieldid', 'data');
     }
     if (! $field->type == 'latlong') { // Make sure we're looking at a latlong data type!
-        throw new \moodle_exception('invalidfieldtype', 'data');
+        throw new \powereduc_exception('invalidfieldtype', 'data');
     }
     if (! $content = $DB->get_record('data_content', array('fieldid'=>$fieldid, 'recordid'=>$rid))) {
-        throw new \moodle_exception('nofieldcontent', 'data');
+        throw new \powereduc_exception('nofieldcontent', 'data');
     }
 } else {   // We must have $d
     if (! $data = $DB->get_record('data', array('id'=>$d))) {
-        throw new \moodle_exception('invalidid', 'data');
+        throw new \powereduc_exception('invalidid', 'data');
     }
     if (! $course = $DB->get_record('course', array('id'=>$data->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $cm = get_coursemodule_from_instance('data', $data->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $field = $DB->get_record('data_fields', array('id'=>$fieldid))) {
-        throw new \moodle_exception('invalidfieldid', 'data');
+        throw new \powereduc_exception('invalidfieldid', 'data');
     }
     if (! $field->type == 'latlong') { // Make sure we're looking at a latlong data type!
-        throw new \moodle_exception('invalidfieldtype', 'data');
+        throw new \powereduc_exception('invalidfieldtype', 'data');
     }
     $record = NULL;
 }
@@ -78,7 +78,7 @@ require_course_login($course, true, $cm);
 $context = context_module::instance($cm->id);
 
 /// If it's hidden then it's don't show anything.  :)
-if (empty($cm->visible) and !has_capability('moodle/course:viewhiddenactivities', $context)) {
+if (empty($cm->visible) and !has_capability('powereduc/course:viewhiddenactivities', $context)) {
     $PAGE->set_title($data->name);
     echo $OUTPUT->header();
     notice(get_string("activityiscurrentlyhidden"));
@@ -96,7 +96,7 @@ if (has_capability('mod/data:managetemplates', $context)) {
 
 //header('Content-type: text/plain'); // This is handy for debug purposes to look at the KML in the browser
 header('Content-type: application/vnd.google-earth.kml+xml kml');
-header('Content-Disposition: attachment; filename="moodleearth-'.$d.'-'.$rid.'-'.$fieldid.'.kml"');
+header('Content-Disposition: attachment; filename="powereducearth-'.$d.'-'.$rid.'-'.$fieldid.'.kml"');
 
 
 echo data_latlong_kml_top();

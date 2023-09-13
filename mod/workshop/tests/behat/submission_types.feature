@@ -80,7 +80,7 @@ Feature: Submission types
     And I press "Save changes"
     And I should see "You must supply a value here." in the "Attachment" "form_row"
     And I set the following fields to these values:
-      | Attachment         | mod/workshop/tests/fixtures/moodlelogo.png |
+      | Attachment         | mod/workshop/tests/fixtures/powereduclogo.png |
     And I press "Save changes"
     And I should not see "You must supply a value here."
     And I should see "My submission"
@@ -117,7 +117,7 @@ Feature: Submission types
     When I press "Save changes"
     Then I should see "You must supply a value here." in the "Attachment" "form_row"
     And I set the following fields to these values:
-      | Attachment         | mod/workshop/tests/fixtures/moodlelogo.png |
+      | Attachment         | mod/workshop/tests/fixtures/powereduclogo.png |
     And I press "Save changes"
     And I should not see "You must supply a value here."
     And I should see "My submission"
@@ -157,7 +157,7 @@ Feature: Submission types
     And I should see "You must supply a value here." in the "Attachment" "form_row"
     And "Submission content" "form_row" should not exist
     And I set the following fields to these values:
-      | Attachment         | mod/workshop/tests/fixtures/moodlelogo.png |
+      | Attachment         | mod/workshop/tests/fixtures/powereduclogo.png |
     And I press "Save changes"
     And I should not see "You must supply a value here."
     And I should see "My submission"
@@ -186,7 +186,7 @@ Feature: Submission types
     And I press "Edit submission"
     And I set the following fields to these values:
       | Submission content |                                            |
-      | Attachment         | mod/workshop/tests/fixtures/moodlelogo.png |
+      | Attachment         | mod/workshop/tests/fixtures/powereduclogo.png |
     And I press "Save changes"
     And I should not see "You need to add a file or enter some text."
     And I should not see "You need to enter some text or add a file."

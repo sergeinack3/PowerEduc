@@ -1,28 +1,28 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package   mod_forum
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use mod_forum\local\entities\forum as forum_entity;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** Include required files */
 require_once(__DIR__ . '/deprecatedlib.php');
@@ -235,11 +235,11 @@ function forum_update_instance($forum, $mform) {
             forum_add_discussion($discussion, null, $message);
 
             if (! $discussion = $DB->get_record('forum_discussions', array('forum'=>$forum->id))) {
-                throw new \moodle_exception('cannotadd', 'forum');
+                throw new \powereduc_exception('cannotadd', 'forum');
             }
         }
         if (! $post = $DB->get_record('forum_posts', array('id'=>$discussion->firstpost))) {
-            throw new \moodle_exception('cannotfindfirstpost', 'forum');
+            throw new \powereduc_exception('cannotfindfirstpost', 'forum');
         }
 
         $cm         = get_coursemodule_from_instance('forum', $forum->id);
@@ -366,7 +366,7 @@ function forum_supports($feature) {
         case FEATURE_GRADE_HAS_GRADE:         return true;
         case FEATURE_GRADE_OUTCOMES:          return true;
         case FEATURE_RATE:                    return true;
-        case FEATURE_BACKUP_MOODLE2:          return true;
+        case FEATURE_BACKUP_POWEREDUC2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_PLAGIARISM:              return true;
         case FEATURE_ADVANCED_GRADING:        return true;
@@ -409,7 +409,7 @@ function forum_user_outline($course, $user, $mod, $forum) {
         // Item 0 is the rating.
         $grade = reset($grades->items[0]->grades);
         $gradetime = max($gradetime, grade_get_date_for_user_grade($grade, $user));
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $gradeinfo .= get_string('gradeforrating', 'forum', $grade) .  html_writer::empty_tag('br');
         } else {
             $gradeinfo .= get_string('gradeforratinghidden', 'forum') . html_writer::empty_tag('br');
@@ -420,7 +420,7 @@ function forum_user_outline($course, $user, $mod, $forum) {
     if (!empty($grades->items[1]->grades)) {
         $grade = reset($grades->items[1]->grades);
         $gradetime = max($gradetime, grade_get_date_for_user_grade($grade, $user));
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $gradeinfo .= get_string('gradeforwholeforum', 'forum', $grade) .  html_writer::empty_tag('br');
         } else {
             $gradeinfo .= get_string('gradeforwholeforumhidden', 'forum') . html_writer::empty_tag('br');
@@ -473,7 +473,7 @@ function forum_user_complete($course, $user, $mod, $forum) {
 
         $result = '';
         $grade = reset($grades);
-        if (!$grade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$grade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $result .= $OUTPUT->container(get_string("gradefor{$type}", "forum", $grade));
             if ($grade->str_feedback) {
                 $result .= $OUTPUT->container(get_string('feedback').': '.$grade->str_feedback);
@@ -499,7 +499,7 @@ function forum_user_complete($course, $user, $mod, $forum) {
 
     if ($posts = forum_get_user_posts($forum->id, $user->id)) {
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $course->id)) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
         $context = context_module::instance($cm->id);
         $discussions = forum_get_user_involved_discussions($forum->id, $user->id);
@@ -526,7 +526,7 @@ function forum_user_complete($course, $user, $mod, $forum) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function forum_filter_user_groups_discussions() {
     throw new coding_exception('forum_filter_user_groups_discussions() can not be used any more and is obsolete.');
@@ -535,7 +535,7 @@ function forum_filter_user_groups_discussions() {
 /**
  * Returns whether the discussion group is visible by the current user or not.
  *
- * @since Moodle 2.8, 2.7.1, 2.6.4
+ * @since PowerEduc 2.8, 2.7.1, 2.6.4
  * @param cm_info $cm The discussion course module
  * @param int $discussiongroupid The discussion groupid
  * @return bool
@@ -550,7 +550,7 @@ function forum_is_user_group_discussion(cm_info $cm, $discussiongroupid) {
         return false;
     }
 
-    if (has_capability('moodle/site:accessallgroups', context_module::instance($cm->id)) ||
+    if (has_capability('powereduc/site:accessallgroups', context_module::instance($cm->id)) ||
             in_array($discussiongroupid, $cm->get_modinfo()->get_groups($cm->groupingid))) {
         return true;
     }
@@ -559,7 +559,7 @@ function forum_is_user_group_discussion(cm_info $cm, $discussiongroupid) {
 }
 
 /**
- * @deprecated since Moodle 3.3, when the block_course_overview block was removed.
+ * @deprecated since PowerEduc 3.3, when the block_course_overview block was removed.
  */
 function forum_print_overview() {
     throw new coding_exception('forum_print_overview() can not be used any more and is obsolete.');
@@ -723,7 +723,7 @@ function forum_print_recent_activity($course, $viewfullnames, $timestart) {
         $list .= html_writer::end_div(); // Head.
 
         $list .= html_writer::start_div('info' . $subjectclass);
-        $discussionurl = new moodle_url('/mod/forum/discuss.php', ['d' => $post->discussion]);
+        $discussionurl = new powereduc_url('/mod/forum/discuss.php', ['d' => $post->discussion]);
         if (!empty($post->parent)) {
             $discussionurl->param('parent', $post->parent);
             $discussionurl->set_anchor('p'. $post->id);
@@ -1008,7 +1008,7 @@ function forum_get_readable_forums($userid, $courseid=0) {
     require_once($CFG->dirroot.'/course/lib.php');
 
     if (!$forummod = $DB->get_record('modules', array('name' => 'forum'))) {
-        throw new \moodle_exception('notinstalled', 'forum');
+        throw new \powereduc_exception('notinstalled', 'forum');
     }
 
     if ($courseid) {
@@ -1050,7 +1050,7 @@ function forum_get_readable_forums($userid, $courseid=0) {
             }
 
          /// group access
-            if (groups_get_activity_groupmode($cm, $course) == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+            if (groups_get_activity_groupmode($cm, $course) == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
 
                 $forum->onlygroups = $modinfo->get_groups($cm->groupingid);
                 $forum->onlygroups[] = -1;
@@ -1546,7 +1546,7 @@ function forum_count_discussions($forum, $cm, $course) {
         return $cache[$course->id][$forum->id];
     }
 
-    if (has_capability('moodle/site:accessallgroups', context_module::instance($cm->id))) {
+    if (has_capability('powereduc/site:accessallgroups', context_module::instance($cm->id))) {
         return $cache[$course->id][$forum->id];
     }
 
@@ -1663,7 +1663,7 @@ function forum_get_discussions($cm, $forumsort="", $fullpost=true, $unused=-1, $
             $currentgroup = null;
         }
 
-        if ($groupmode == VISIBLEGROUPS or has_capability('moodle/site:accessallgroups', $modcontext)) {
+        if ($groupmode == VISIBLEGROUPS or has_capability('powereduc/site:accessallgroups', $modcontext)) {
             if ($currentgroup) {
                 $groupselect = "AND (d.groupid = ? OR d.groupid = -1)";
                 $params[] = $currentgroup;
@@ -1790,7 +1790,7 @@ function forum_get_discussion_neighbours($cm, $discussion, $forum) {
     // Limiting to posts accessible according to groups.
     $groupselect = '';
     if ($groupmode) {
-        if ($groupmode == VISIBLEGROUPS || has_capability('moodle/site:accessallgroups', $modcontext)) {
+        if ($groupmode == VISIBLEGROUPS || has_capability('powereduc/site:accessallgroups', $modcontext)) {
             if ($currentgroup) {
                 $groupselect = 'AND (d.groupid = :groupid OR d.groupid = -1)';
                 $params['groupid'] = $currentgroup;
@@ -1943,7 +1943,7 @@ function forum_get_discussions_unread($cm) {
     if ($groupmode) {
         $modcontext = context_module::instance($cm->id);
 
-        if ($groupmode == VISIBLEGROUPS or has_capability('moodle/site:accessallgroups', $modcontext)) {
+        if ($groupmode == VISIBLEGROUPS or has_capability('powereduc/site:accessallgroups', $modcontext)) {
             if ($currentgroup) {
                 $groupselect = "AND (d.groupid = :currentgroup OR d.groupid = -1)";
                 $params['currentgroup'] = $currentgroup;
@@ -2013,7 +2013,7 @@ function forum_get_discussions_count($cm) {
     if ($groupmode) {
         $modcontext = context_module::instance($cm->id);
 
-        if ($groupmode == VISIBLEGROUPS or has_capability('moodle/site:accessallgroups', $modcontext)) {
+        if ($groupmode == VISIBLEGROUPS or has_capability('powereduc/site:accessallgroups', $modcontext)) {
             if ($currentgroup) {
                 $groupselect = "AND (d.groupid = ? OR d.groupid = -1)";
                 $params[] = $currentgroup;
@@ -2251,7 +2251,7 @@ function forum_rating_validate($params) {
             throw new rating_exception('cannotfindgroup');//something is wrong
         }
 
-        if (!groups_is_member($discussion->groupid) and !has_capability('moodle/site:accessallgroups', $context)) {
+        if (!groups_is_member($discussion->groupid) and !has_capability('powereduc/site:accessallgroups', $context)) {
             // do not allow rating of posts from other groups when in SEPARATEGROUPS or VISIBLEGROUPS
             throw new rating_exception('notmemberofgroup');
         }
@@ -2337,7 +2337,7 @@ function forum_print_discussion_header(&$post, $forum, $group = -1, $datestring 
 
     if (empty($modcontext)) {
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
         $modcontext = context_module::instance($cm->id);
     }
@@ -2351,7 +2351,7 @@ function forum_print_discussion_header(&$post, $forum, $group = -1, $datestring 
 
     $post->subject = format_string($post->subject,true);
 
-    $canviewfullnames = has_capability('moodle/site:viewfullnames', $modcontext);
+    $canviewfullnames = has_capability('powereduc/site:viewfullnames', $modcontext);
     $timeddiscussion = !empty($CFG->forum_enabletimedposts) && ($post->timestart || $post->timeend);
     $timedoutsidewindow = '';
     if ($timeddiscussion && ($post->timestart > time() || ($post->timeend != 0 && $post->timeend < time()))) {
@@ -2496,7 +2496,7 @@ function forum_get_discussion_subscription_icon($forum, $discussionid, $returnur
 
     $o = '';
     $subscriptionstatus = \mod_forum\subscriptions::is_subscribed($USER->id, $forum, $discussionid);
-    $subscriptionlink = new moodle_url('/mod/forum/subscribe.php', array(
+    $subscriptionlink = new powereduc_url('/mod/forum/subscribe.php', array(
         'sesskey' => sesskey(),
         'id' => $forum->id,
         'd' => $discussionid,
@@ -2564,7 +2564,7 @@ function forum_print_mode_form($id, $mode, $forumtype='') {
     $useexperimentalui = get_user_preferences('forum_useexperimentalui', false);
     if ($forumtype == 'single') {
         $select = new single_select(
-            new moodle_url("/mod/forum/view.php",
+            new powereduc_url("/mod/forum/view.php",
             array('f' => $id)),
             'mode',
             forum_get_layout_modes($useexperimentalui),
@@ -2576,7 +2576,7 @@ function forum_print_mode_form($id, $mode, $forumtype='') {
         $select->class = "forummode";
     } else {
         $select = new single_select(
-            new moodle_url("/mod/forum/discuss.php",
+            new powereduc_url("/mod/forum/discuss.php",
             array('d' => $id)),
             'mode',
             forum_get_layout_modes($useexperimentalui),
@@ -2638,7 +2638,7 @@ function forum_set_return() {
 
 /**
  * @global object
- * @param string|\moodle_url $default
+ * @param string|\powereduc_url $default
  * @return string
  */
 function forum_go_back_to($default) {
@@ -2746,7 +2746,7 @@ function forum_print_attachments($post, $cm, $type) {
         foreach ($files as $file) {
             $filename = $file->get_filename();
             $mimetype = $file->get_mimetype();
-            $iconimage = $OUTPUT->pix_icon(file_file_icon($file), get_mimetype_description($file), 'moodle', array('class' => 'icon'));
+            $iconimage = $OUTPUT->pix_icon(file_file_icon($file), get_mimetype_description($file), 'powereduc', array('class' => 'icon'));
             $path = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'.$context->id.'/mod_forum/attachment/'.$post->id.'/'.$filename);
 
             if ($type == 'html') {
@@ -2904,11 +2904,11 @@ function forum_get_file_info($browser, $areas, $course, $cm, $context, $filearea
 
     // Checks to see if the user can manage files or is the owner.
     // TODO MDL-33805 - Do not use userid here and move the capability check above.
-    if (!has_capability('moodle/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
+    if (!has_capability('powereduc/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
         return null;
     }
     // Make sure groups allow this user to see this file
-    if ($discussion->groupid > 0 && !has_capability('moodle/site:accessallgroups', $context)) {
+    if ($discussion->groupid > 0 && !has_capability('powereduc/site:accessallgroups', $context)) {
         $groupmode = groups_get_activity_groupmode($cm, $course);
         if ($groupmode == SEPARATEGROUPS && !groups_is_member($discussion->groupid)) {
             return null;
@@ -2979,7 +2979,7 @@ function forum_pluginfile($course, $cm, $context, $filearea, $args, $forcedownlo
     if ($discussion->groupid > 0) {
         $groupmode = groups_get_activity_groupmode($cm, $course);
         if ($groupmode == SEPARATEGROUPS) {
-            if (!groups_is_member($discussion->groupid) and !has_capability('moodle/site:accessallgroups', $context)) {
+            if (!groups_is_member($discussion->groupid) and !has_capability('powereduc/site:accessallgroups', $context)) {
                 return false;
             }
         }
@@ -3089,7 +3089,7 @@ function forum_add_new_post($post, $mform, $unused = null) {
         core_tag_tag::set_item_tags('mod_forum', 'forum_posts', $post->id, $context, $post->tags);
     }
 
-    // Let Moodle know that assessable content is uploaded (eg for plagiarism detection)
+    // Let PowerEduc know that assessable content is uploaded (eg for plagiarism detection)
     forum_trigger_content_uploaded_event($post, $cm, 'forum_add_new_post');
 
     return $post->id;
@@ -3102,7 +3102,7 @@ function forum_add_new_post($post, $mform, $unused = null) {
  * @param object $discussion discussion object
  * @param object $context forum context object
  * @param object $forum forum object
- * @since Moodle 3.8
+ * @since PowerEduc 3.8
  * @return void
  */
 function forum_trigger_post_updated_event($post, $discussion, $context, $forum) {
@@ -3195,7 +3195,7 @@ function forum_update_post($newpost, $mform, $unused = null) {
         forum_tp_mark_post_read($USER->id, $post);
     }
 
-    // Let Moodle know that assessable content is uploaded (eg for plagiarism detection)
+    // Let PowerEduc know that assessable content is uploaded (eg for plagiarism detection)
     forum_trigger_content_uploaded_event($post, $cm, 'forum_update_post');
 
     return true;
@@ -3279,7 +3279,7 @@ function forum_add_discussion($discussion, $mform=null, $unused=null, $userid=nu
         forum_tp_mark_post_read($post->userid, $post);
     }
 
-    // Let Moodle know that assessable content is uploaded (eg for plagiarism detection)
+    // Let PowerEduc know that assessable content is uploaded (eg for plagiarism detection)
     if (!empty($cm->id)) {
         forum_trigger_content_uploaded_event($post, $cm, 'forum_add_discussion');
     }
@@ -3484,7 +3484,7 @@ function forum_post_subscription($fromform, $forum, $discussion) {
         return "";
     } else if (\mod_forum\subscriptions::subscription_disabled($forum)) {
         $subscribed = \mod_forum\subscriptions::is_subscribed($USER->id, $forum);
-        if ($subscribed && !has_capability('moodle/course:manageactivities', context_course::instance($forum->course), $USER->id)) {
+        if ($subscribed && !has_capability('powereduc/course:manageactivities', context_course::instance($forum->course), $USER->id)) {
             // This user should not be subscribed to the forum.
             \mod_forum\subscriptions::unsubscribe_user($USER->id, $forum);
         }
@@ -3567,7 +3567,7 @@ function forum_get_subscribe_link($forum, $context, $messages = array(), $cantac
 
         $options['id'] = $forum->id;
         $options['sesskey'] = sesskey();
-        $url = new moodle_url('/mod/forum/subscribe.php', $options);
+        $url = new powereduc_url('/mod/forum/subscribe.php', $options);
         return $OUTPUT->single_button($url, $linktext, 'get', array('title' => $linktitle));
     }
 }
@@ -3679,7 +3679,7 @@ function forum_user_can_post_discussion($forum, $currentgroup=null, $unused=-1, 
     if (!$cm) {
         debugging('missing cm', DEBUG_DEVELOPER);
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
     }
 
@@ -3721,7 +3721,7 @@ function forum_user_can_post_discussion($forum, $currentgroup=null, $unused=-1, 
         }
     }
 
-    if (!$groupmode or has_capability('moodle/site:accessallgroups', $context)) {
+    if (!$groupmode or has_capability('powereduc/site:accessallgroups', $context)) {
         return true;
     }
 
@@ -3771,14 +3771,14 @@ function forum_user_can_post($forum, $discussion, $user=NULL, $cm=NULL, $course=
     if (!$cm) {
         debugging('missing cm', DEBUG_DEVELOPER);
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
     }
 
     if (!$course) {
         debugging('missing course', DEBUG_DEVELOPER);
         if (!$course = $DB->get_record('course', array('id' => $forum->course))) {
-            throw new \moodle_exception('invalidcourseid');
+            throw new \powereduc_exception('invalidcourseid');
         }
     }
 
@@ -3818,13 +3818,13 @@ function forum_user_can_post($forum, $discussion, $user=NULL, $cm=NULL, $course=
         return true;
     }
 
-    if (has_capability('moodle/site:accessallgroups', $context)) {
+    if (has_capability('powereduc/site:accessallgroups', $context)) {
         return true;
     }
 
     if ($groupmode == VISIBLEGROUPS) {
         if ($discussion->groupid == -1) {
-            // allow students to reply to all participants discussions - this was not possible in Moodle <1.8
+            // allow students to reply to all participants discussions - this was not possible in PowerEduc <1.8
             return true;
         }
         return groups_is_member($discussion->groupid);
@@ -3877,7 +3877,7 @@ function forum_user_can_see_group_discussion($discussion, $cm, $context) {
     if ($discussion->groupid > 0) {
         $groupmode = groups_get_activity_groupmode($cm);
         if ($groupmode == SEPARATEGROUPS) {
-            return groups_is_member($discussion->groupid) || has_capability('moodle/site:accessallgroups', $context);
+            return groups_is_member($discussion->groupid) || has_capability('powereduc/site:accessallgroups', $context);
         }
     }
 
@@ -3915,7 +3915,7 @@ function forum_user_can_see_discussion($forum, $discussion, $context, $user=NULL
         }
     }
     if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
 
     if (!has_capability('mod/forum:viewdiscussion', $context)) {
@@ -3979,7 +3979,7 @@ function forum_user_can_see_post($forum, $discussion, $post, $user = null, $cm =
     if (!$cm) {
         debugging('missing cm', DEBUG_DEVELOPER);
         if (!$cm = get_coursemodule_from_instance('forum', $forum->id, $forum->course)) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
     }
 
@@ -3992,7 +3992,7 @@ function forum_user_can_see_post($forum, $discussion, $post, $user = null, $cm =
 
     $canviewdiscussion = (isset($cm->cache) && !empty($cm->cache->caps['mod/forum:viewdiscussion']))
         || has_capability('mod/forum:viewdiscussion', $modcontext, $user->id);
-    if (!$canviewdiscussion && !has_all_capabilities(array('moodle/user:viewdetails', 'moodle/user:readuserposts'), context_user::instance($post->userid))) {
+    if (!$canviewdiscussion && !has_all_capabilities(array('powereduc/user:viewdetails', 'powereduc/user:readuserposts'), context_user::instance($post->userid))) {
         return false;
     }
 
@@ -4088,7 +4088,7 @@ function forum_get_recent_mod_activity(&$activities, &$index, $timestart, $cours
     $groupmode       = groups_get_activity_groupmode($cm, $course);
     $cm_context      = context_module::instance($cm->id);
     $viewhiddentimed = has_capability('mod/forum:viewhiddentimedposts', $cm_context);
-    $accessallgroups = has_capability('moodle/site:accessallgroups', $cm_context);
+    $accessallgroups = has_capability('powereduc/site:accessallgroups', $cm_context);
 
     $printposts = array();
     foreach ($posts as $post) {
@@ -4210,7 +4210,7 @@ function forum_print_recent_mod_activity($activity, $courseid, $detail, $modname
         $aname = s($activity->name);
         $output .= $OUTPUT->image_icon('monologo', $aname, $activity->type);
     }
-    $discussionurl = new moodle_url('/mod/forum/discuss.php', ['d' => $content->discussion]);
+    $discussionurl = new powereduc_url('/mod/forum/discuss.php', ['d' => $content->discussion]);
     $discussionurl->set_anchor('p' . $activity->content->id);
     $output .= html_writer::link($discussionurl, $content->subject);
     $output .= html_writer::end_div();
@@ -4220,7 +4220,7 @@ function forum_print_recent_mod_activity($activity, $courseid, $detail, $modname
         $authornamedate = $timestamp;
     } else {
         $fullname = fullname($activity->user, $viewfullnames);
-        $userurl = new moodle_url('/user/view.php');
+        $userurl = new powereduc_url('/user/view.php');
         $userurl->params(['id' => $activity->user->id, 'course' => $courseid]);
         $by = new stdClass();
         $by->name = html_writer::link($userurl, $fullname);
@@ -4628,7 +4628,7 @@ function forum_tp_count_forum_unread_posts($cm, $course, $resetreadcache = false
     }
 
     $forumcontext = context_module::instance($cm->id);
-    if (has_any_capability(['moodle/site:accessallgroups', 'mod/forum:readprivatereplies'], $forumcontext)) {
+    if (has_any_capability(['powereduc/site:accessallgroups', 'mod/forum:readprivatereplies'], $forumcontext)) {
         return $readcache[$course->id][$forumid];
     }
 
@@ -5123,13 +5123,13 @@ function forum_check_throttling($forum, $cm = null) {
  * or exceeded the number of posts specified in 'Post threshold for blocking'
  * setting.
  *
- * @since Moodle 2.5
+ * @since PowerEduc 2.5
  * @param stdClass $thresholdwarning the warning information returned
  *        from the function forum_check_throttling.
  */
 function forum_check_blocking_threshold($thresholdwarning) {
     if (!empty($thresholdwarning) && !$thresholdwarning->canpost) {
-        throw new \moodle_exception($thresholdwarning->errorcode,
+        throw new \powereduc_exception($thresholdwarning->errorcode,
                     $thresholdwarning->module,
                     $thresholdwarning->link,
                     $thresholdwarning->additional);
@@ -5167,7 +5167,7 @@ function forum_reset_gradebook($courseid, $type='') {
 }
 
 /**
- * This function is used by the reset_course_userdata function in moodlelib.
+ * This function is used by the reset_course_userdata function in powereduclib.
  * This function will remove all posts from the specified forum
  * and clean up any related data.
  *
@@ -5452,7 +5452,7 @@ function forum_get_forum_types_all() {
  * @return array
  */
 function forum_get_extra_capabilities() {
-    return ['moodle/rating:view', 'moodle/rating:viewany', 'moodle/rating:viewall', 'moodle/rating:rate'];
+    return ['powereduc/rating:view', 'powereduc/rating:viewany', 'powereduc/rating:viewall', 'powereduc/rating:rate'];
 }
 
 /**
@@ -5497,7 +5497,7 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
         // Optional subscription mode.
         $allowchoicestring = get_string('subscriptionoptional', 'forum');
         $allowchoiceaction = new action_link(
-            new moodle_url('/mod/forum/subscribe.php', [
+            new powereduc_url('/mod/forum/subscribe.php', [
                 'id' => $forumobject->id,
                 'mode' => FORUM_CHOOSESUBSCRIBE,
                 'sesskey' => sesskey(),
@@ -5510,7 +5510,7 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
         // Forced subscription mode.
         $forceforeverstring = get_string('subscriptionforced', 'forum');
         $forceforeveraction = new action_link(
-            new moodle_url('/mod/forum/subscribe.php', [
+            new powereduc_url('/mod/forum/subscribe.php', [
                 'id' => $forumobject->id,
                 'mode' => FORUM_FORCESUBSCRIBE,
                 'sesskey' => sesskey(),
@@ -5523,7 +5523,7 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
         // Initial subscription mode.
         $forceinitiallystring = get_string('subscriptionauto', 'forum');
         $forceinitiallyaction = new action_link(
-            new moodle_url('/mod/forum/subscribe.php', [
+            new powereduc_url('/mod/forum/subscribe.php', [
                 'id' => $forumobject->id,
                 'mode' => FORUM_INITIALSUBSCRIBE,
                 'sesskey' => sesskey(),
@@ -5536,7 +5536,7 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
         // Disabled subscription mode.
         $disallowchoicestring = get_string('subscriptiondisabled', 'forum');
         $disallowchoiceaction = new action_link(
-            new moodle_url('/mod/forum/subscribe.php', [
+            new powereduc_url('/mod/forum/subscribe.php', [
                 'id' => $forumobject->id,
                 'mode' => FORUM_DISALLOWSUBSCRIBE,
                 'sesskey' => sesskey(),
@@ -5588,7 +5588,7 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
     }
 
     if (has_capability('mod/forum:viewsubscribers', $settingsnav->get_page()->context)) {
-        $url = new moodle_url('/mod/forum/subscribers.php', ['id' => $forumobject->id, 'edit' => 'off']);
+        $url = new powereduc_url('/mod/forum/subscribers.php', ['id' => $forumobject->id, 'edit' => 'off']);
         $forumnode->add(get_string('subscriptions', 'forum'), $url, navigation_node::TYPE_SETTING, null, 'forumsubscriptions');
     }
 
@@ -5602,7 +5602,7 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
                     'courseid' => $forumobject->course,
                     'forumid' => $forumobject->id,
                 ];
-                $reportlink = new moodle_url("/mod/forum/report/{$reportname}/index.php", $reportlinkparams);
+                $reportlink = new powereduc_url("/mod/forum/report/{$reportname}/index.php", $reportlinkparams);
                 $forumnode->add(get_string('reports'), $reportlink, navigation_node::TYPE_CONTAINER);
             }
         }
@@ -5616,7 +5616,7 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
             } else {
                 $linktext = get_string('trackforum', 'forum');
             }
-            $url = new moodle_url('/mod/forum/settracking.php', array(
+            $url = new powereduc_url('/mod/forum/settracking.php', array(
                     'id' => $forumobject->id,
                     'sesskey' => sesskey(),
                 ));
@@ -5646,14 +5646,14 @@ function forum_extend_settings_navigation(settings_navigation $settingsnav, navi
             $string = get_string('rsssubscriberssposts','forum');
         }
 
-        $url = new moodle_url(rss_get_url($settingsnav->get_page()->cm->context->id, $userid, "mod_forum",
+        $url = new powereduc_url(rss_get_url($settingsnav->get_page()->cm->context->id, $userid, "mod_forum",
             $forumobject->id));
         $forumnode->add($string, $url, settings_navigation::TYPE_SETTING, null, null, new pix_icon('i/rss', ''));
     }
 
     $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
     if ($capabilitymanager->can_export_forum($USER)) {
-        $url = new moodle_url('/mod/forum/export.php', ['id' => $forumobject->id]);
+        $url = new powereduc_url('/mod/forum/export.php', ['id' => $forumobject->id]);
         $forumnode->add(get_string('export', 'mod_forum'), $url, navigation_node::TYPE_SETTING);
     }
 }
@@ -5698,7 +5698,7 @@ function forum_page_type_list($pagetype, $parentcontext, $currentcontext) {
 /**
  * Gets all of the courses where the provided user has posted in a forum.
  *
- * @global moodle_database $DB The database connection
+ * @global powereduc_database $DB The database connection
  * @param stdClass $user The user who's posts we are looking for
  * @param bool $discussionsonly If true only look for discussions started by the user
  * @param bool $includecontexts If set to trye contexts for the courses will be preloaded
@@ -5751,7 +5751,7 @@ function forum_get_courses_user_posted_in($user, $discussionsonly = false, $incl
 /**
  * Gets all of the forums a user has posted in for one or more courses.
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param stdClass $user
  * @param array $courseids An array of courseids to search or if not provided
  *                       all courses the user has posted within
@@ -5809,7 +5809,7 @@ function forum_get_forums_user_posted_in($user, array $courseids = null, $discus
  *
  * This function is safe to use with usercapabilities.
  *
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @param stdClass $user The user whose posts we want to get
  * @param array $courses The courses to search
  * @param bool $musthaveaccess If set to true errors will be thrown if the user
@@ -5852,7 +5852,7 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
     // users content.
     $usercontext = context_user::instance($user->id, MUST_EXIST);
     $hascapsonuser = !$iscurrentuser && $DB->record_exists('role_assignments', array('userid' => $USER->id, 'contextid' => $usercontext->id));
-    $hascapsonuser = $hascapsonuser && has_all_capabilities(array('moodle/user:viewdetails', 'moodle/user:readuserposts'), $usercontext);
+    $hascapsonuser = $hascapsonuser && has_all_capabilities(array('powereduc/user:viewdetails', 'powereduc/user:readuserposts'), $usercontext);
 
     // Before we actually search each course we need to check the user's access to the
     // course. If the user doesn't have the appropraite access then we either throw an
@@ -5871,7 +5871,7 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
             if (!is_viewing($coursecontext, $user) && !is_enrolled($coursecontext, $user)) {
                 // Need to have full access to a course to see the rest of own info
                 if ($musthaveaccess) {
-                    throw new \moodle_exception('errorenrolmentrequired', 'forum');
+                    throw new \powereduc_exception('errorenrolmentrequired', 'forum');
                 }
                 continue;
             }
@@ -5880,7 +5880,7 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
             // if they don't we immediately have a problem.
             if (!can_access_course($course)) {
                 if ($musthaveaccess) {
-                    throw new \moodle_exception('errorenrolmentrequired', 'forum');
+                    throw new \powereduc_exception('errorenrolmentrequired', 'forum');
                 }
                 continue;
             }
@@ -5891,7 +5891,7 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
             // the capability to access all groups. This is because with that capability
             // a user in group A could post in the group B forum. Grrrr.
             if (groups_get_course_groupmode($course) == SEPARATEGROUPS && $course->groupmodeforce
-              && !has_capability('moodle/site:accessallgroups', $coursecontext) && !has_capability('moodle/site:accessallgroups', $coursecontext, $user->id)) {
+              && !has_capability('powereduc/site:accessallgroups', $coursecontext) && !has_capability('powereduc/site:accessallgroups', $coursecontext, $user->id)) {
                 // If its the guest user to bad... the guest user cannot access groups
                 if (!$isloggedin or $isguestuser) {
                     // do not use require_login() here because we might have already used require_login($course)
@@ -5910,7 +5910,7 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
                     // But they're not... if it was a specific course throw an error otherwise
                     // just skip this course so that it is not searched.
                     if ($musthaveaccess) {
-                        throw new \moodle_exception("groupnotamember", '', $CFG->wwwroot."/course/view.php?id=$course->id");
+                        throw new \powereduc_exception("groupnotamember", '', $CFG->wwwroot."/course/view.php?id=$course->id");
                     }
                     continue;
                 }
@@ -5930,7 +5930,7 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
         // user doesn't have access to any courses is which the requested user has posted.
         // Although we do know at this point that the requested user has posts.
         if ($musthaveaccess) {
-            throw new \moodle_exception('permissiondenied');
+            throw new \powereduc_exception('permissiondenied');
         } else {
             return $return;
         }
@@ -5986,7 +5986,7 @@ function forum_get_posts_by_user($user, array $courses, $musthaveaccess = false,
             $forumsearchselect = array();
             if (!$iscurrentuser && !$hascapsonuser) {
                 // Make sure we check group access
-                if (groups_get_activity_groupmode($cm, $course) == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $cm->context)) {
+                if (groups_get_activity_groupmode($cm, $course) == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $cm->context)) {
                     $groups = $modinfo->get_groups($cm->groupingid);
                     $groups[] = -1;
                     list($groupid_sql, $groupid_params) = $DB->get_in_or_equal($groups, SQL_PARAMS_NAMED, 'grps'.$forumid.'_');
@@ -6119,7 +6119,7 @@ function forum_set_user_maildigest($forum, $maildigest, $user = null) {
     $digestoptions = forum_get_user_digest_options($user);
 
     if (!isset($digestoptions[$maildigest])) {
-        throw new moodle_exception('invaliddigestsetting', 'mod_forum');
+        throw new powereduc_exception('invaliddigestsetting', 'mod_forum');
     }
 
     // Attempt to retrieve any existing forum digest record.
@@ -6236,7 +6236,7 @@ function forum_get_context($forumid, $context = null) {
  * @param  stdClass $course  course object
  * @param  stdClass $cm      course module object
  * @param  stdClass $context context object
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  */
 function forum_view($forum, $course, $cm, $context) {
 
@@ -6264,7 +6264,7 @@ function forum_view($forum, $course, $cm, $context) {
  * @param  stdClass $modcontext module context object
  * @param  stdClass $forum      forum object
  * @param  stdClass $discussion discussion object
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  */
 function forum_discussion_view($modcontext, $forum, $discussion) {
     $params = array(
@@ -6284,7 +6284,7 @@ function forum_discussion_view($modcontext, $forum, $discussion) {
  * @param  stdClass $modcontext module context object
  * @param  stdClass $forum      forum object
  * @param  stdClass $discussion discussion object
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function forum_discussion_pin($modcontext, $forum, $discussion) {
     global $DB;
@@ -6308,7 +6308,7 @@ function forum_discussion_pin($modcontext, $forum, $discussion) {
  * @param  stdClass $modcontext module context object
  * @param  stdClass $forum      forum object
  * @param  stdClass $discussion discussion object
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function forum_discussion_unpin($modcontext, $forum, $discussion) {
     global $DB;
@@ -6342,7 +6342,7 @@ function mod_forum_myprofile_navigation(core_user\output\myprofile\tree $tree, $
         // May as well just bail aggressively here.
         return false;
     }
-    $postsurl = new moodle_url('/mod/forum/user.php', array('id' => $user->id));
+    $postsurl = new powereduc_url('/mod/forum/user.php', array('id' => $user->id));
     if (!empty($course)) {
         $postsurl->param('course', $course->id);
     }
@@ -6350,7 +6350,7 @@ function mod_forum_myprofile_navigation(core_user\output\myprofile\tree $tree, $
     $node = new core_user\output\myprofile\node('miscellaneous', 'forumposts', $string, null, $postsurl);
     $tree->add_node($node);
 
-    $discussionssurl = new moodle_url('/mod/forum/user.php', array('id' => $user->id, 'mode' => 'discussions'));
+    $discussionssurl = new powereduc_url('/mod/forum/user.php', array('id' => $user->id, 'mode' => 'discussions'));
     if (!empty($course)) {
         $discussionssurl->param('course', $course->id);
     }
@@ -6479,7 +6479,7 @@ function forum_discussion_is_locked($forum, $discussion) {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.2
+ * @since PowerEduc 3.2
  */
 function forum_check_updates_since(cm_info $cm, $from, $filter = array()) {
 
@@ -6507,7 +6507,7 @@ function forum_check_updates_since(cm_info $cm, $from, $filter = array()) {
  * @param  stdClass $forum   forum object
  * @param  stdClass $context context object
  * @return bool true if the user can create attachments, false otherwise
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function forum_can_create_attachment($forum, $context) {
     // If maxbytes == 1 it means no attachments at all.
@@ -6621,7 +6621,7 @@ function mod_forum_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('view'),
-        new \moodle_url('/mod/forum/view.php', ['id' => $cm->id]),
+        new \powereduc_url('/mod/forum/view.php', ['id' => $cm->id]),
         $itemcount,
         true
     );
@@ -6800,7 +6800,7 @@ function mod_forum_core_calendar_get_valid_event_timestart_range(\calendar_event
  * It will set the timeclose value of the forum instance
  * according to the type of event provided.
  *
- * @throws \moodle_exception
+ * @throws \powereduc_exception
  * @param \calendar_event $event
  * @param stdClass $forum The module instance to get the range from
  */
@@ -6831,7 +6831,7 @@ function mod_forum_core_calendar_event_timestart_updated(\calendar_event $event,
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 

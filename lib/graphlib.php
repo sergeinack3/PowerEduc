@@ -26,7 +26,7 @@
  * @subpackage lib
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /* This file contains modifications by Martin Dougiamas
  * as part of Moodle (http://moodle.com).  Modified lines

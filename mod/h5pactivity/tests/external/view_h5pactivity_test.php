@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External function test for view_h5pactivity.
  *
  * @package    mod_h5pactivity
  * @category   external
- * @since      Moodle 3.9
- * @copyright  2020 Carlos Escobedo <carlos@moodle.com>
+ * @since      PowerEduc 3.9
+ * @copyright  2020 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_h5pactivity\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -42,7 +42,7 @@ use course_modinfo;
  * External function test for view_h5pactivity.
  *
  * @package    mod_h5pactivity
- * @copyright  2020 Carlos Escobedo <carlos@moodle.com>
+ * @copyright  2020 Carlos Escobedo <carlos@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class view_h5pactivity_test extends externallib_advanced_testcase {
@@ -54,7 +54,7 @@ class view_h5pactivity_test extends externallib_advanced_testcase {
         $this->resetAfterTest();
         $this->setAdminUser();
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = view_h5pactivity::execute(0);
     }
 
@@ -71,7 +71,7 @@ class view_h5pactivity_test extends externallib_advanced_testcase {
         // Test not-enrolled user.
         $usernotenrolled = self::getDataGenerator()->create_user();
         $this->setUser($usernotenrolled);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = view_h5pactivity::execute($scenario->h5pactivity->id);
     }
 
@@ -102,7 +102,7 @@ class view_h5pactivity_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_h5pactivity\event\course_module_viewed', $event);
         $this->assertEquals($scenario->contextmodule, $event->get_context());
-        $h5pactivity = new \moodle_url('/mod/h5pactivity/view.php', array('id' => $cm->id));
+        $h5pactivity = new \powereduc_url('/mod/h5pactivity/view.php', array('id' => $cm->id));
         $this->assertEquals($h5pactivity, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
@@ -129,7 +129,7 @@ class view_h5pactivity_test extends externallib_advanced_testcase {
         course_modinfo::clear_instance_cache();
 
         $this->setUser($scenario->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = view_h5pactivity::execute($scenario->h5pactivity->id);
     }
 

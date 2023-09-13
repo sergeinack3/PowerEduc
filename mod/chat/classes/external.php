@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,12 +19,12 @@
  *
  * @package    mod_chat
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/chat/lib.php');
@@ -37,7 +37,7 @@ use mod_chat\external\chat_message_exporter;
  *
  * @package    mod_chat
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.0
  */
@@ -66,7 +66,7 @@ class mod_chat_external extends external_api {
      * @param int $groupid the user group id
      * @return array of warnings and the chat unique session id
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function login_user($chatid, $groupid = 0) {
         global $DB;
@@ -91,7 +91,7 @@ class mod_chat_external extends external_api {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -99,7 +99,7 @@ class mod_chat_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -109,7 +109,7 @@ class mod_chat_external extends external_api {
         // Get the unique chat session id.
         // Since we are going to use the chat via Web Service requests we set the ajax version (since it's the most similar).
         if (!$chatsid = chat_login_user($chat->id, 'ajax', $groupid, $course)) {
-            throw new moodle_exception('cantlogin', 'chat');
+            throw new powereduc_exception('cantlogin', 'chat');
         }
 
         $result = array();
@@ -153,7 +153,7 @@ class mod_chat_external extends external_api {
      * @param int $chatsid the chat session id
      * @return array of warnings and the user lists
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_chat_users($chatsid) {
         global $DB, $PAGE;
@@ -166,7 +166,7 @@ class mod_chat_external extends external_api {
 
         // Request and permission validation.
         if (!$chatuser = $DB->get_record('chat_users', array('sid' => $params['chatsid']))) {
-            throw new moodle_exception('notlogged', 'chat');
+            throw new powereduc_exception('notlogged', 'chat');
         }
         $chat = $DB->get_record('chat', array('id' => $chatuser->chatid), '*', MUST_EXIST);
         list($course, $cm) = get_course_and_cm_from_instance($chat, 'chat');
@@ -250,7 +250,7 @@ class mod_chat_external extends external_api {
      * @param string $beepid the beep message id
      * @return array of warnings and the new message id (0 if the message was empty)
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function send_chat_message($chatsid, $messagetext, $beepid = '') {
         global $DB;
@@ -265,7 +265,7 @@ class mod_chat_external extends external_api {
 
         // Request and permission validation.
         if (!$chatuser = $DB->get_record('chat_users', array('sid' => $params['chatsid']))) {
-            throw new moodle_exception('notlogged', 'chat');
+            throw new powereduc_exception('notlogged', 'chat');
         }
         $chat = $DB->get_record('chat', array('id' => $chatuser->chatid), '*', MUST_EXIST);
         list($course, $cm) = get_course_and_cm_from_instance($chat, 'chat');
@@ -275,7 +275,7 @@ class mod_chat_external extends external_api {
 
         require_capability('mod/chat:chat', $context);
 
-        $chatmessage = clean_text($params['messagetext'], FORMAT_MOODLE);
+        $chatmessage = clean_text($params['messagetext'], FORMAT_POWEREDUC);
 
         if (!empty($params['beepid'])) {
             $chatmessage = 'beep ' . $params['beepid'];
@@ -334,7 +334,7 @@ class mod_chat_external extends external_api {
      * @param int $chatlasttime last time messages were retrieved (epoch time)
      * @return array of warnings and the new message id (0 if the message was empty)
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_chat_latest_messages($chatsid, $chatlasttime = 0) {
         global $DB, $CFG;
@@ -348,7 +348,7 @@ class mod_chat_external extends external_api {
 
         // Request and permission validation.
         if (!$chatuser = $DB->get_record('chat_users', array('sid' => $params['chatsid']))) {
-            throw new moodle_exception('notlogged', 'chat');
+            throw new powereduc_exception('notlogged', 'chat');
         }
         $chat = $DB->get_record('chat', array('id' => $chatuser->chatid), '*', MUST_EXIST);
         list($course, $cm) = get_course_and_cm_from_instance($chat, 'chat');
@@ -379,8 +379,8 @@ class mod_chat_external extends external_api {
 
         foreach ($messages as $message) {
 
-            // FORMAT_MOODLE is mandatory in the chat plugin.
-            list($messageformatted, $format) = external_format_text($message->message, FORMAT_MOODLE, $context->id, 'mod_chat',
+            // FORMAT_POWEREDUC is mandatory in the chat plugin.
+            list($messageformatted, $format) = external_format_text($message->message, FORMAT_POWEREDUC, $context->id, 'mod_chat',
                                                                     '', 0);
 
             $returnedmessages[] = array(
@@ -449,7 +449,7 @@ class mod_chat_external extends external_api {
      * @param int $chatid the chat instance id
      * @return array of warnings and status result
      * @since Moodle 3.0
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function view_chat($chatid) {
         global $DB, $CFG;
@@ -553,7 +553,7 @@ class mod_chat_external extends external_api {
                     $chatdetails['schedule']      = $chat->schedule;
                 }
 
-                if (has_capability('moodle/course:manageactivities', $chatcontext)) {
+                if (has_capability('powereduc/course:manageactivities', $chatcontext)) {
                     $chatdetails['timemodified']  = $chat->timemodified;
                 }
                 $returnedchats[] = $chatdetails;
@@ -618,7 +618,7 @@ class mod_chat_external extends external_api {
      * @param bool $showall whether to include incomplete sessions or not
      * @return array of warnings and the sessions
      * @since Moodle 3.4
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_sessions($chatid, $groupid = 0, $showall = false) {
         global $DB;
@@ -639,14 +639,14 @@ class mod_chat_external extends external_api {
         self::validate_context($context);
 
         if (empty($chat->studentlogs) && !has_capability('mod/chat:readlog', $context)) {
-            throw new moodle_exception('nopermissiontoseethechatlog', 'chat');
+            throw new powereduc_exception('nopermissiontoseethechatlog', 'chat');
         }
 
         if (!empty($params['groupid'])) {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -654,7 +654,7 @@ class mod_chat_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;
@@ -743,7 +743,7 @@ class mod_chat_external extends external_api {
      * @param int $groupid filter messages by this group. 0 to determine the group.
      * @return array of warnings and the messages
      * @since Moodle 3.4
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function get_session_messages($chatid, $sessionstart, $sessionend, $groupid = 0) {
         global $DB, $PAGE;
@@ -765,14 +765,14 @@ class mod_chat_external extends external_api {
         self::validate_context($context);
 
         if (empty($chat->studentlogs) && !has_capability('mod/chat:readlog', $context)) {
-            throw new moodle_exception('nopermissiontoseethechatlog', 'chat');
+            throw new powereduc_exception('nopermissiontoseethechatlog', 'chat');
         }
 
         if (!empty($params['groupid'])) {
             $groupid = $params['groupid'];
             // Determine is the group is visible to user.
             if (!groups_group_visible($groupid, $course, $cm)) {
-                throw new moodle_exception('notingroup');
+                throw new powereduc_exception('notingroup');
             }
         } else {
             // Check to see if groups are being used here.
@@ -780,7 +780,7 @@ class mod_chat_external extends external_api {
                 $groupid = groups_get_activity_group($cm);
                 // Determine is the group is visible to user (this is particullary for the group 0).
                 if (!groups_group_visible($groupid, $course, $cm)) {
-                    throw new moodle_exception('notingroup');
+                    throw new powereduc_exception('notingroup');
                 }
             } else {
                 $groupid = 0;

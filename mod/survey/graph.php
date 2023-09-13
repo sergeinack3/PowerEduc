@@ -1,25 +1,25 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file is responsible for producing the graph for survey reports
  *
  * @package   mod_survey
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,7 +33,7 @@ $group = optional_param('group', 0, PARAM_INT);  // Group ID.
 $sid = optional_param('sid', false, PARAM_INT);  // Student ID.
 $qid = optional_param('qid', 0, PARAM_INT);  // Group ID.
 
-$url = new moodle_url('/mod/survey/graph.php', array('id' => $id, 'type' => $type));
+$url = new powereduc_url('/mod/survey/graph.php', array('id' => $id, 'type' => $type));
 if ($group !== 0) {
     $url->param('group', $group);
 }
@@ -46,16 +46,16 @@ if ($qid !== 0) {
 $PAGE->set_url($url);
 
 if (!$cm = get_coursemodule_from_id('survey', $id)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 
 if (!$course = $DB->get_record("course", array("id" => $cm->course))) {
-    throw new \moodle_exception('coursemisconf');
+    throw new \powereduc_exception('coursemisconf');
 }
 
 if ($sid) {
     if (!$user = $DB->get_record("user", array("id" => $sid))) {
-        throw new \moodle_exception('invaliduserid');
+        throw new \powereduc_exception('invaliduserid');
     }
 }
 
@@ -66,14 +66,14 @@ $context = context_module::instance($cm->id);
 
 if (!has_capability('mod/survey:readresponses', $context)) {
     if ($type != "student.png" or $sid != $USER->id) {
-        throw new \moodle_exception('nopermissiontoshow');
+        throw new \powereduc_exception('nopermissiontoshow');
     } else if ($groupmode and !groups_is_member($group)) {
-        throw new \moodle_exception('nopermissiontoshow');
+        throw new \powereduc_exception('nopermissiontoshow');
     }
 }
 
 if (!$survey = $DB->get_record("survey", array("id" => $cm->instance))) {
-    throw new \moodle_exception('invalidsurveyid', 'survey');
+    throw new \powereduc_exception('invalidsurveyid', 'survey');
 }
 
 // Check to see if groups are being used in this survey.

@@ -24,7 +24,7 @@
 
 namespace editor_atto\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use \core_privacy\local\request\approved_contextlist;
 use \core_privacy\local\request\writer;

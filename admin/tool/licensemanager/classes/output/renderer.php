@@ -24,7 +24,7 @@
 
 namespace tool_licensemanager\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use license_manager;
 use plugin_renderer_base;

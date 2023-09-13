@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,18 +18,18 @@
  * Email digest renderable.
  *
  * @package    message_email
- * @copyright  2019 Mark Nelson <markn@moodle.com>
+ * @copyright  2019 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace message_email\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Email digest renderable.
  *
- * @copyright  2019 Mark Nelson <markn@moodle.com>
+ * @copyright  2019 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class email_digest implements \renderable, \templatable {
@@ -97,7 +97,7 @@ class email_digest implements \renderable, \templatable {
                 continue;
             }
 
-            $viewallmessageslink = new \moodle_url('/message/index.php', ['convid' => $conversation->id]);
+            $viewallmessageslink = new \powereduc_url('/message/index.php', ['convid' => $conversation->id]);
 
             $group = new \stdClass();
             $group->id = $conversation->groupid;

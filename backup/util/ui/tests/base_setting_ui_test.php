@@ -19,7 +19,7 @@ namespace core_backup;
 use base_setting;
 use base_setting_ui;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 

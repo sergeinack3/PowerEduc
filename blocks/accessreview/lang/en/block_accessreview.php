@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['accessreview:addinstance'] = 'Add an accessibility review block';
 $string['accessreview:view'] = 'View the accessibility review';

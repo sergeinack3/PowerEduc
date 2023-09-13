@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use core_filetypes;
 use curl;
 use repository;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/filelib.php');
@@ -251,7 +251,7 @@ class filelib_test extends \advanced_testcase {
 
         // Test a request with a basic hostname filter applied.
         $testhtml = $this->getExternalTestFileUrl('/test.html');
-        $url = new \moodle_url($testhtml);
+        $url = new \powereduc_url($testhtml);
         $host = $url->get_host();
         set_config('curlsecurityblockedhosts', $host); // Blocks $host.
 
@@ -391,8 +391,8 @@ class filelib_test extends \advanced_testcase {
         $testurl = $this->getExternalTestFileUrl('/test_redir.php');
 
         // Block a host.
-        // Note: moodle.com is the URL redirected to when test_redir.php has the param extdest=1 set.
-        set_config('curlsecurityblockedhosts', 'moodle.com');
+        // Note: powereduc.com is the URL redirected to when test_redir.php has the param extdest=1 set.
+        set_config('curlsecurityblockedhosts', 'powereduc.com');
 
         // Redirecting to a non-blocked host should resolve.
         $curl = new \curl();
@@ -518,7 +518,7 @@ class filelib_test extends \advanced_testcase {
 
         // Test post request.
         $curl = new \curl();
-        $contents = $curl->post($testurl, 'data=moodletest');
+        $contents = $curl->post($testurl, 'data=powereductest');
         $response = $curl->getResponse();
         $this->assertSame('200 OK', reset($response));
         $this->assertSame(0, $curl->get_errno());
@@ -527,7 +527,7 @@ class filelib_test extends \advanced_testcase {
         // Test 100 requests.
         $curl = new \curl();
         $curl->setHeader('Expect: 100-continue');
-        $contents = $curl->post($testurl, 'data=moodletest');
+        $contents = $curl->post($testurl, 'data=powereductest');
         $response = $curl->getResponse();
         $this->assertSame('200 OK', reset($response));
         $this->assertSame(0, $curl->get_errno());
@@ -547,7 +547,7 @@ class filelib_test extends \advanced_testcase {
             'filepath' => '/',
             'filename' => 'test.txt'
         );
-        $teststring = 'moodletest';
+        $teststring = 'powereductest';
         $testfile = $fs->create_file_from_string($filerecord, $teststring);
 
         // Test post with file.
@@ -570,7 +570,7 @@ class filelib_test extends \advanced_testcase {
             'filepath' => '/',
             'filename' => 'test.txt'
         );
-        $teststring = 'moodletest';
+        $teststring = 'powereductest';
         $testfile = $fs->create_file_from_string($filerecord, $teststring);
 
         // Test post with file.
@@ -797,7 +797,7 @@ class filelib_test extends \advanced_testcase {
         // Save changed file.
         file_save_draft_area_files($draftitemid, $usercontext->id, 'user', 'private', 0);
 
-        // The file reference should be a regular moodle file now.
+        // The file reference should be a regular powereduc file now.
         $fileref = $fs->get_file($syscontext->id, 'core', 'phpunit', 0, '/', 'test.txt');
         $this->assertFalse($fileref->is_external_file());
         $this->assertSame($contenthash, $fileref->get_contenthash());
@@ -1227,16 +1227,16 @@ EOF;
         $options = $curl->get_options();
         $this->assertNotEmpty($options);
 
-        $moodlebot = \core_useragent::get_moodlebot_useragent();
+        $powereducbot = \core_useragent::get_powereducbot_useragent();
 
         $curl->call_apply_opt($options);
-        $this->assertTrue(in_array("User-Agent: $moodlebot", $curl->header));
+        $this->assertTrue(in_array("User-Agent: $powereducbot", $curl->header));
         $this->assertFalse(in_array('User-Agent: Test/1.0', $curl->header));
 
         $options['CURLOPT_USERAGENT'] = 'Test/1.0';
         $curl->call_apply_opt($options);
         $this->assertTrue(in_array('User-Agent: Test/1.0', $curl->header));
-        $this->assertFalse(in_array("User-Agent: $moodlebot", $curl->header));
+        $this->assertFalse(in_array("User-Agent: $powereducbot", $curl->header));
 
         $curl->set_option('CURLOPT_USERAGENT', 'AnotherUserAgent/1.0');
         $curl->call_apply_opt();
@@ -1251,7 +1251,7 @@ EOF;
 
         $curl->unset_option('CURLOPT_USERAGENT');
         $curl->call_apply_opt();
-        $this->assertTrue(in_array("User-Agent: $moodlebot", $curl->header));
+        $this->assertTrue(in_array("User-Agent: $powereducbot", $curl->header));
 
         // Finally, test it via exttests, to ensure the agent is sent properly.
         // Matching.
@@ -1309,7 +1309,7 @@ EOF;
                 $originaltext, 'pluginfile.php', $syscontext->id, 'user', 'private', 0, $options);
 
         $token = get_user_key('core_files', $USER->id);
-        $expectedurl = new \moodle_url("/tokenpluginfile.php/{$token}/{$syscontext->id}/user/private/0/image.png");
+        $expectedurl = new \powereduc_url("/tokenpluginfile.php/{$token}/{$syscontext->id}/user/private/0/image.png");
         $expectedtext = "Fake test with an image <img src=\"{$expectedurl}\">";
         $this->assertEquals($expectedtext, $finaltext);
 
@@ -1334,7 +1334,7 @@ EOF;
                 $originaltext, 'pluginfile.php', $syscontext->id, 'user', 'private', 0, $options);
 
         $token = get_user_key('core_files', $user->id);
-        $expectedurl = new \moodle_url("/tokenpluginfile.php/{$token}/{$syscontext->id}/user/private/0/image.png");
+        $expectedurl = new \powereduc_url("/tokenpluginfile.php/{$token}/{$syscontext->id}/user/private/0/image.png");
         $expectedtext = "Fake test with an image <img src=\"{$expectedurl}\">";
         $this->assertEquals($expectedtext, $finaltext);
     }
@@ -1358,7 +1358,7 @@ EOF;
                 $originaltext, 'pluginfile.php', $syscontext->id, 'user', 'private', 0, $options);
 
         $token = get_user_key('core_files', $USER->id);
-        $expectedurl = new \moodle_url("/tokenpluginfile.php");
+        $expectedurl = new \powereduc_url("/tokenpluginfile.php");
         $expectedurl .= "?token={$token}&file=/{$syscontext->id}/user/private/0/image.png";
         $expectedtext = "Fake test with an image <img src=\"{$expectedurl}\">";
         $this->assertEquals($expectedtext, $finaltext);

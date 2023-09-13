@@ -30,7 +30,7 @@ use memory_xml_output;
 use xml_output;
 use xml_output_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // Include all the needed stuff
 global $CFG;

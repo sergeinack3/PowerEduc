@@ -1,5 +1,5 @@
 <test>
-  <MOODLE_BACKUP>
+  <POWEREDUC_BACKUP>
     <COURSE>
       <FORMATDATA>
         <WEEKS>
@@ -37,7 +37,7 @@
         </SUBS>
       </SECONDGROUPED>
     </COURSE>
-  </MOODLE_BACKUP>
+  </POWEREDUC_BACKUP>
   <moodle2>
     <grouped id="this is not parsed at the moment because there are no final elements">
       <subs>

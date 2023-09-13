@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Log report renderer.
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 use core\log\manager;
 
 /**
@@ -48,7 +48,7 @@ class report_log_renderable implements renderable {
     /** @var stdClass course record */
     public $course;
 
-    /** @var moodle_url url of report page */
+    /** @var powereduc_url url of report page */
     public $url;
 
     /** @var int selected date from which records should be displayed */
@@ -107,7 +107,7 @@ class report_log_renderable implements renderable {
      * @param bool $showusers (optional) show users.
      * @param bool $showreport (optional) show report.
      * @param bool $showselectorform (optional) show selector form.
-     * @param moodle_url|string $url (optional) page url.
+     * @param powereduc_url|string $url (optional) page url.
      * @param int $date date (optional) timestamp of start of the day for which logs will be displayed.
      * @param string $logformat log format.
      * @param int $page (optional) page number.
@@ -132,9 +132,9 @@ class report_log_renderable implements renderable {
         }
         // Use page url if empty.
         if (empty($url)) {
-            $url = new moodle_url($PAGE->url);
+            $url = new powereduc_url($PAGE->url);
         } else {
-            $url = new moodle_url($url);
+            $url = new powereduc_url($url);
         }
         $this->selectedlogreader = $logreader;
         $url->param('logreader', $logreader);
@@ -250,7 +250,7 @@ class report_log_renderable implements renderable {
         $selectedgroup = 0;
         // Setup for group handling.
         $groupmode = groups_get_course_groupmode($this->course);
-        if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             $selectedgroup = -1;
         } else if ($groupmode) {
             $selectedgroup = $this->groupid;
@@ -306,7 +306,7 @@ class report_log_renderable implements renderable {
             // We are in course context.
             $context = context_course::instance($this->course->id);
         }
-        return fullname($user, has_capability('moodle/site:viewfullnames', $context));
+        return fullname($user, has_capability('powereduc/site:viewfullnames', $context));
     }
 
     /**
@@ -358,7 +358,7 @@ class report_log_renderable implements renderable {
         $groups = array();
         $groupmode = groups_get_course_groupmode($this->course);
         if (($groupmode == VISIBLEGROUPS) ||
-                ($groupmode == SEPARATEGROUPS and has_capability('moodle/site:accessallgroups', $context))) {
+                ($groupmode == SEPARATEGROUPS and has_capability('powereduc/site:accessallgroups', $context))) {
             // Get all groups.
             if ($cgroups = groups_get_all_groups($this->course->id)) {
                 foreach ($cgroups as $cgroup) {
@@ -397,7 +397,7 @@ class report_log_renderable implements renderable {
         if ($this->showusers) {
             if ($courseusers) {
                 foreach ($courseusers as $courseuser) {
-                     $users[$courseuser->id] = fullname($courseuser, has_capability('moodle/site:viewfullnames', $context));
+                     $users[$courseuser->id] = fullname($courseuser, has_capability('powereduc/site:viewfullnames', $context));
                 }
             }
             $users[$CFG->siteguest] = get_string('guestuser');

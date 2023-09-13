@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'mathslib', language 'en', branch 'MOODLE_19_STABLE'
+ * Strings for component 'mathslib', language 'en', branch 'POWEREDUC_19_STABLE'
  *
  * @package   core
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}

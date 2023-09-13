@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file is responsible for serving the one theme and plugin images.
@@ -23,7 +23,7 @@
  */
 
 
-// disable moodle specific debug messages and any errors in output,
+// disable powereduc specific debug messages and any errors in output,
 // comment out when debugging or better look into error log!
 define('NO_DEBUG_DISPLAY', true);
 
@@ -58,7 +58,7 @@ if ($slashargument = min_get_slash_argument()) {
     $usesvg    = (bool)min_optional_param('svg', '1', 'INT');
 }
 
-if (empty($component) or $component === 'moodle' or $component === 'core') {
+if (empty($component) or $component === 'powereduc' or $component === 'core') {
     $component = 'core';
 }
 
@@ -107,7 +107,7 @@ if ($rev > 0) {
         if (!empty($_SERVER['HTTP_IF_NONE_MATCH']) || !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
             // We do not actually need to verify the etag value because our files
             // never change in cache because we increment the rev parameter.
-            // 90 days only - based on Moodle point release cadence being every 3 months.
+            // 90 days only - based on PowerEduc point release cadence being every 3 months.
             $lifetime = 60 * 60 * 24 * 90;
             $mimetype = get_contenttype_from_ext($ext);
             header('HTTP/1.1 304 Not Modified');
@@ -122,10 +122,10 @@ if ($rev > 0) {
 }
 
 //=================================================================================
-// ok, now we need to start normal moodle script, we need to load all libs and $DB
+// ok, now we need to start normal powereduc script, we need to load all libs and $DB
 define('ABORT_AFTER_CONFIG_CANCEL', true);
 
-define('NO_MOODLE_COOKIES', true); // Session not used here
+define('NO_POWEREDUC_COOKIES', true); // Session not used here
 define('NO_UPGRADE_CHECK', true);  // Ignore upgrade check
 
 require("$CFG->dirroot/lib/setup.php");
@@ -220,7 +220,7 @@ function send_cached_image($imagepath, $etag) {
     global $CFG;
     require("$CFG->dirroot/lib/xsendfilelib.php");
 
-    // 90 days only - based on Moodle point release cadence being every 3 months.
+    // 90 days only - based on PowerEduc point release cadence being every 3 months.
     $lifetime = 60 * 60 * 24 * 90;
     $pathinfo = pathinfo($imagepath);
     $imagename = $pathinfo['filename'].'.'.$pathinfo['extension'];

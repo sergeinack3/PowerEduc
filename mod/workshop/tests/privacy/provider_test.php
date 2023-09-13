@@ -1,30 +1,30 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Provides the {@see mod_workshop\privacy\provider_test} class.
  *
  * @package     mod_workshop
  * @category    test
- * @copyright   2018 David Mudrák <david@moodle.com>
+ * @copyright   2018 David Mudrák <david@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_workshop\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -34,7 +34,7 @@ use core_privacy\tests\provider_testcase;
 /**
  * Unit tests for the privacy API implementation.
  *
- * @copyright 2018 David Mudrák <david@moodle.com>
+ * @copyright 2018 David Mudrák <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider_test extends provider_testcase {
@@ -404,7 +404,7 @@ class provider_test extends provider_testcase {
         $this->assertNotEmpty($student1assessments);
 
         foreach ($student1assessments as $assessment) {
-            // In Moodle, feedback is seen to belong to the recipient user.
+            // In PowerEduc, feedback is seen to belong to the recipient user.
             $this->assertNotEquals(get_string('privacy:request:delete:content', 'mod_workshop'), $assessment->feedbackauthor);
             $this->assertEquals(get_string('privacy:request:delete:content', 'mod_workshop'), $assessment->feedbackreviewer);
             // We delete what we can without affecting others' grades.

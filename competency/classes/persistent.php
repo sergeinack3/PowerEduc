@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace core_competency;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 // We need to alias the invalid_persistent_exception, because the persistent classes from
 // core_competency used to throw a \core_competency\invalid_persistent_exception. They now

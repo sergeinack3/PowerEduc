@@ -24,7 +24,7 @@
 
 namespace tool_mobile\output;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Mock class for get_content.

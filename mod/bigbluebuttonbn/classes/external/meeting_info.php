@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
 use mod_bigbluebuttonbn\meeting;
 use restricted_context_exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -60,7 +60,7 @@ class meeting_info extends external_api {
      * @param int $groupid
      * @param bool $updatecache
      * @return array
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      * @throws restricted_context_exception
      */
     public static function execute(
@@ -93,7 +93,7 @@ class meeting_info extends external_api {
         // Check if the BBB server is working.
         $serverversion = bigbluebutton_proxy::get_server_version();
         if ($serverversion === null) {
-            throw new \moodle_exception('general_error_no_answer', 'mod_bigbluebuttonbn',
+            throw new \powereduc_exception('general_error_no_answer', 'mod_bigbluebuttonbn',
                 bigbluebutton_proxy::get_server_not_available_url($instance),
                 bigbluebutton_proxy::get_server_not_available_message($instance));
         }

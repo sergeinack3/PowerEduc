@@ -24,7 +24,7 @@
  */
 
 namespace core_auth\privacy;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context;
 use core_privacy\local\metadata\collection;

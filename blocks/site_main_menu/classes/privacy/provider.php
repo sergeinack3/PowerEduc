@@ -24,7 +24,7 @@
 
 namespace block_site_main_menu\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_site_main_menu implementing null_provider.

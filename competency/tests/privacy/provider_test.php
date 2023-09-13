@@ -25,7 +25,7 @@
  */
 namespace core_competency\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG, $DB;
 
 use core_privacy\tests\provider_testcase;

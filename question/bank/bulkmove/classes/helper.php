@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_bulkmove;
 
@@ -55,11 +55,11 @@ class helper {
      * Get the display data for the move form.
      *
      * @param array $addcontexts the array of contexts to be considered in order to render the category select menu.
-     * @param \moodle_url $moveurl the url where the move script will point to.
-     * @param \moodle_url $returnurl return url in case the form is cancelled.
+     * @param \powereduc_url $moveurl the url where the move script will point to.
+     * @param \powereduc_url $returnurl return url in case the form is cancelled.
      * @return array the data to be rendered in the mustache where it contains the dropdown, move url and return url.
      */
-    public static function get_displaydata(array $addcontexts, \moodle_url $moveurl, \moodle_url $returnurl): array {
+    public static function get_displaydata(array $addcontexts, \powereduc_url $moveurl, \powereduc_url $returnurl): array {
         $displaydata = [];
         $displaydata ['categorydropdown'] = \qbank_managecategories\helper::question_category_select_menu($addcontexts,
             false, 0, '', -1, true);

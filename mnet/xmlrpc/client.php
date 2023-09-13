@@ -382,7 +382,7 @@ class mnet_xmlrpc_client {
         // and configure it the way we want.
         $client = new \PhpXmlRpc\Client($this->uri);
         $client->setUseCurl(\PhpXmlRpc\Client::USE_CURL_ALWAYS);
-        $client->setUserAgent('Moodle');
+        $client->setUserAgent('PowerEduc');
         $client->return_type = 'xml'; // Because MNet responses ARE NOT valid xmlrpc, don't try any validation.
 
         // TODO: Link this to DEBUG DEVELOPER or with MNET debugging...

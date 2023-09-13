@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_competency\api;
 use core_competency\plan;
@@ -102,8 +102,8 @@ function core_competency_comment_add($comment, $params) {
             'url' => $url->out(true),
             'urlname' => $urlname,
         ));
-        if ($comment->format == FORMAT_PLAIN || $comment->format == FORMAT_MOODLE) {
-            $format = FORMAT_MOODLE;
+        if ($comment->format == FORMAT_PLAIN || $comment->format == FORMAT_POWEREDUC) {
+            $format = FORMAT_POWEREDUC;
             $fullmessage = get_string('usercommentedonacompetency', 'core_competency', array(
                 'fullname' => $fullname,
                 'competency' => $competencyname,
@@ -178,8 +178,8 @@ function core_competency_comment_add($comment, $params) {
             'url' => $url->out(true),
             'urlname' => $urlname,
         ));
-        if ($comment->format == FORMAT_PLAIN || $comment->format == FORMAT_MOODLE) {
-            $format = FORMAT_MOODLE;
+        if ($comment->format == FORMAT_PLAIN || $comment->format == FORMAT_POWEREDUC) {
+            $format = FORMAT_POWEREDUC;
             $fullmessage = get_string('usercommentedonaplan', 'core_competency', array(
                 'fullname' => $fullname,
                 'plan' => $planname,

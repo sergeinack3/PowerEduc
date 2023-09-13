@@ -24,7 +24,7 @@
 
 namespace tool_filetypes;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class with static back-end methods used by the file type tool.

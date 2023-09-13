@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Impossible de crear la banca de dadas.</p>
 <p>La banca de dadas indicada n\'existeish pas e l\'utilizaire especificat a pas las autorizacions que permeton de crear ua banca de dadas.</p>.

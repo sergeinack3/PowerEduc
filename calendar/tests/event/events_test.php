@@ -26,7 +26,7 @@ namespace core_calendar\event;
 
 use core_calendar_externallib_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/calendar/tests/externallib_test.php');
 

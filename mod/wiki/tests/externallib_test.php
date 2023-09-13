@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_wiki;
 
 use externallib_advanced_testcase;
 use mod_wiki_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -31,9 +31,9 @@ require_once($CFG->dirroot . '/mod/wiki/lib.php');
  *
  * @package    mod_wiki
  * @category   external
- * @copyright  2015 Dani Palou <dani@moodle.com>
+ * @copyright  2015 Dani Palou <dani@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class externallib_test extends externallib_advanced_testcase {
 
@@ -151,7 +151,7 @@ class externallib_test extends externallib_advanced_testcase {
         $record->course = $course2->id;
         $wiki2 = self::getDataGenerator()->create_module('wiki', $record);
 
-        // Execute real Moodle enrolment as we'll call unenrol() method on the instance later.
+        // Execute real PowerEduc enrolment as we'll call unenrol() method on the instance later.
         $enrol = enrol_get_plugin('manual');
         $enrolinstances = enrol_get_instances($course2->id, true);
         foreach ($enrolinstances as $courseenrolinstance) {
@@ -290,7 +290,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::view_wiki(0);
             $this->fail('Exception expected due to invalid mod_wiki instance id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('incorrectwikiid', $e->errorcode);
         }
 
@@ -300,7 +300,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::view_wiki($this->wiki->id);
             $this->fail('Exception expected due to not enrolled user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -320,8 +320,8 @@ class externallib_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_wiki\event\course_module_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $moodlewiki = new \moodle_url('/mod/wiki/view.php', array('id' => $this->cm->id));
-        $this->assertEquals($moodlewiki, $event->get_url());
+        $powereducwiki = new \powereduc_url('/mod/wiki/view.php', array('id' => $this->cm->id));
+        $this->assertEquals($powereducwiki, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -333,7 +333,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::view_wiki($this->wiki->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannotviewpage', $e->errorcode);
         }
 
@@ -348,7 +348,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::view_page(0);
             $this->fail('Exception expected due to invalid view_page page id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('incorrectpageid', $e->errorcode);
         }
 
@@ -358,7 +358,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::view_page($this->firstpage->id);
             $this->fail('Exception expected due to not enrolled user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -378,7 +378,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_wiki\event\page_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $pageurl = new \moodle_url('/mod/wiki/view.php', array('pageid' => $this->firstpage->id));
+        $pageurl = new \powereduc_url('/mod/wiki/view.php', array('pageid' => $this->firstpage->id));
         $this->assertEquals($pageurl, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
@@ -391,7 +391,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::view_page($this->firstpage->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannotviewpage', $e->errorcode);
         }
 
@@ -406,7 +406,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::get_subwikis(0);
             $this->fail('Exception expected due to invalid get_subwikis wiki id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('incorrectwikiid', $e->errorcode);
         }
 
@@ -416,7 +416,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::get_subwikis($this->wiki->id);
             $this->fail('Exception expected due to not enrolled user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -448,7 +448,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::get_subwikis($this->wiki->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopermissions', $e->errorcode);
         }
 
@@ -458,7 +458,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test get_subwiki_pages using an invalid wiki instance.
      */
     public function test_get_subwiki_pages_invalid_instance() {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages(0);
     }
 
@@ -497,7 +497,7 @@ class externallib_test extends externallib_advanced_testcase {
         accesslib_clear_all_caches_for_unit_testing();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($this->wiki->id);
     }
 
@@ -509,7 +509,7 @@ class externallib_test extends externallib_advanced_testcase {
         $indwiki = $this->getDataGenerator()->create_module('wiki',
                                 array('course' => $this->course->id, 'wikimode' => 'individual'));
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($indwiki->id, 0, -10);
     }
 
@@ -520,7 +520,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Create testing data.
         $this->create_collaborative_wikis_with_groups();
 
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($this->wikisep->id, -111);
     }
 
@@ -533,7 +533,7 @@ class externallib_test extends externallib_advanced_testcase {
                                 array('course' => $this->course->id, 'wikimode' => 'individual'));
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($indwiki->id, 0, $this->teacher->id);
     }
 
@@ -546,7 +546,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->create_collaborative_wikis_with_groups();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($this->wikisep->id, $this->group2->id);
     }
 
@@ -559,7 +559,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->create_individual_wikis_with_groups();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($this->wikisepind->id, $this->group2->id, $this->teacher->id);
     }
 
@@ -572,7 +572,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->create_collaborative_wikis_with_groups();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($this->wikisep->id, 0);
     }
 
@@ -585,7 +585,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->create_individual_wikis_with_groups();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_pages($this->wikisepind->id, 0, $this->teacher->id);
     }
 
@@ -913,7 +913,7 @@ class externallib_test extends externallib_advanced_testcase {
      * Test get_page_contents using an invalid pageid.
      */
     public function test_get_page_contents_invalid_pageid() {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_page_contents(0);
     }
 
@@ -953,7 +953,7 @@ class externallib_test extends externallib_advanced_testcase {
         accesslib_clear_all_caches_for_unit_testing();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_page_contents($this->firstpage->id);
     }
 
@@ -966,7 +966,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->create_individual_wikis_with_groups();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_page_contents($this->fpsepg2indt->id);
     }
 
@@ -1070,7 +1070,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->create_collaborative_wikis_with_groups();
 
         $this->setUser($this->student);
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         mod_wiki_external::get_subwiki_files($this->wikisep->id, $this->group2->id);
     }
 
@@ -1095,7 +1095,7 @@ class externallib_test extends externallib_advanced_testcase {
             'isexternalfile' => false,
             'filesize' => strlen($content),
             'timemodified' => $file['timemodified'],
-            'fileurl' => \moodle_url::make_webservice_pluginfile_url($file['contextid'], $file['component'],
+            'fileurl' => \powereduc_url::make_webservice_pluginfile_url($file['contextid'], $file['component'],
                             $file['filearea'], $file['itemid'], $file['filepath'], $file['filename']),
         );
 
@@ -1114,7 +1114,7 @@ class externallib_test extends externallib_advanced_testcase {
         $expectedfile['filename'] = $file['filename'];
         $expectedfile['timemodified'] = $file['timemodified'];
         $expectedfile['filesize'] = strlen($content);
-        $expectedfile['fileurl'] = \moodle_url::make_webservice_pluginfile_url($file['contextid'], $file['component'],
+        $expectedfile['fileurl'] = \powereduc_url::make_webservice_pluginfile_url($file['contextid'], $file['component'],
                             $file['filearea'], $file['itemid'], $file['filepath'], $file['filename']);
 
         // Call the WS and check that it returns both files file.
@@ -1150,7 +1150,7 @@ class externallib_test extends externallib_advanced_testcase {
             'isexternalfile' => false,
             'filesize' => strlen($content),
             'timemodified' => $file['timemodified'],
-            'fileurl' => \moodle_url::make_webservice_pluginfile_url($file['contextid'], $file['component'],
+            'fileurl' => \powereduc_url::make_webservice_pluginfile_url($file['contextid'], $file['component'],
                             $file['filearea'], $file['itemid'], $file['filepath'], $file['filename']),
         );
 
@@ -1237,7 +1237,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::get_page_for_editing($newpage->id, 'Title1', true);
             $this->fail('Exception expected due to not page locking.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('pageislocked', $e->errorcode);
         }
 
@@ -1245,7 +1245,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::get_page_for_editing($newpage->id, null, true);
             $this->fail('Exception expected due to not page locking.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('pageislocked', $e->errorcode);
         }
 
@@ -1298,7 +1298,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::new_page($pagetitle, $pagecontent, 'html', $this->fpsepg1indstu->subwikiid);
             $this->fail('Exception expected due to creation of an existing page.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('pageexists', $e->errorcode);
         }
 
@@ -1333,7 +1333,7 @@ class externallib_test extends externallib_advanced_testcase {
             mod_wiki_external::new_page($pagetitle, $pagecontent, 'html', null, $this->wikisepind->id,
                 $this->studentnotincourse->id, $this->groupnotincourse->id);
             $this->fail('Exception expected due to creation of an invalid subwiki creation.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannoteditpage', $e->errorcode);
         }
 
@@ -1387,7 +1387,7 @@ class externallib_test extends externallib_advanced_testcase {
             wiki_set_lock($newpage->id, 1, $section, true);
             mod_wiki_external::edit_page($newpage->id, $newsectioncontent, $section);
             $this->fail('Exception expected due to locked section');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('pageislocked', $e->errorcode);
         }
 
@@ -1398,7 +1398,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_wiki_external::edit_page($newpage->id, $newsectioncontent, $section);
             $this->fail('Exception expected due to non existing section in the page.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invalidsection', $e->errorcode);
         }
 

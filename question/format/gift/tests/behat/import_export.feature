@@ -42,7 +42,7 @@ Feature: Test importing questions from GIFT format.
     And I should see "Importing 4 questions from file"
     And I should see "Match the activity to the description."
     When I press "Continue"
-    Then I should see "Moodle activities"
+    Then I should see "PowerEduc activities"
 
   @javascript @_file_upload
   Scenario: import some GIFT questions with unsupported encoding

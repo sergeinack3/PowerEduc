@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for editing question types like this one.
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -129,7 +129,7 @@ class qtype_gapselect_edit_form_base extends question_edit_form {
     /**
      * Defines form elements for answer choices.
      *
-     * @param object $mform The Moodle form object being built
+     * @param object $mform The PowerEduc form object being built
      */
     protected function definition_answer_choice(&$mform) {
         $mform->addElement('header', 'choicehdr', get_string('choices', 'qtype_gapselect'));
@@ -167,7 +167,7 @@ class qtype_gapselect_edit_form_base extends question_edit_form {
     /**
      * Creates an array with elements for a choice group.
      *
-     * @param object $mform The Moodle form we are working with
+     * @param object $mform The PowerEduc form we are working with
      * @param int $maxgroup The number of max group generate element select.
      * @return array Array for form elements
      */

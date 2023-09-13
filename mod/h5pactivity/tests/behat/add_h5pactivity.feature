@@ -16,7 +16,7 @@ Feature: Add H5P activity
       | teacher1 | C1 | editingteacher |
     And the following "permission overrides" exist:
       | capability                 | permission | role           | contextlevel | reference |
-      | moodle/h5p:updatelibraries | Allow      | editingteacher | System       |           |
+      | powereduc/h5p:updatelibraries | Allow      | editingteacher | System       |           |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on
 

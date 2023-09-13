@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,21 +18,21 @@
  * Contains helper class for the message area.
  *
  * @package    core_message
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace core_message;
 use DOMDocument;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/message/lib.php');
 
 /**
  * Helper class for the message area.
  *
- * @copyright  2016 Mark Nelson <markn@moodle.com>
+ * @copyright  2016 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class helper {
@@ -451,7 +451,7 @@ class helper {
             $data->fullname = fullname($member);
 
             // Create the URL for their profile.
-            $profileurl = new \moodle_url('/user/profile.php', ['id' => $member->id]);
+            $profileurl = new \powereduc_url('/user/profile.php', ['id' => $member->id]);
             $data->profileurl = $profileurl->out(false);
 
             // Set the user picture data.
@@ -587,7 +587,7 @@ class helper {
 
         if ($isdrawer) {
             $template = 'core_message/message_drawer';
-            $messageurl = new \moodle_url('/message/index.php');
+            $messageurl = new \powereduc_url('/message/index.php');
         } else {
             $template = 'core_message/message_index';
             $messageurl = null;
@@ -624,7 +624,7 @@ class helper {
             'isdrawer' => $isdrawer,
             'showemojipicker' => !empty($CFG->allowemojipicker),
             'messagemaxlength' => api::MESSAGE_MAX_LENGTH,
-            'caneditownmessageprofile' => has_capability('moodle/user:editownmessageprofile', \context_system::instance())
+            'caneditownmessageprofile' => has_capability('powereduc/user:editownmessageprofile', \context_system::instance())
         ];
 
         if ($sendtouser || $conversationid) {

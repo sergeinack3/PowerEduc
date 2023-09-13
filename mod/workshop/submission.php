@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * View a single (usually the own) submission, submit own work.
@@ -37,7 +37,7 @@ $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST)
 
 require_login($course, false, $cm);
 if (isguestuser()) {
-    throw new \moodle_exception('guestsarenotallowed');
+    throw new \powereduc_exception('guestsarenotallowed');
 }
 
 $workshoprecord = $DB->get_record('workshop', array('id' => $cm->instance), '*', MUST_EXIST);
@@ -121,7 +121,7 @@ if ($submission->id and ($ownsubmission or $canviewall or $isreviewer)) {
 } elseif (is_null($submission->id) and $cansubmit) {
     // ok you can go
 } else {
-    throw new \moodle_exception('nopermissions', 'error', $workshop->view_url(), 'view or create submission');
+    throw new \powereduc_exception('nopermissions', 'error', $workshop->view_url(), 'view or create submission');
 }
 
 if ($submission->id) {
@@ -225,7 +225,7 @@ if ($deletable and $delete) {
             $prompt = get_string('submissiondeleteconfirmassess', 'workshop', ['count' => $count]);
         }
     }
-    echo $output->confirm($prompt, new moodle_url($PAGE->url, ['delete' => 1, 'confirm' => 1]), $workshop->view_url());
+    echo $output->confirm($prompt, new powereduc_url($PAGE->url, ['delete' => 1, 'confirm' => 1]), $workshop->view_url());
 }
 
 // else display the submission
@@ -246,10 +246,10 @@ if (!$delete) {
     // Display create/edit button.
     if ($editable) {
         if ($submission->id) {
-            $btnurl = new moodle_url($PAGE->url, array('edit' => 'on', 'id' => $submission->id));
+            $btnurl = new powereduc_url($PAGE->url, array('edit' => 'on', 'id' => $submission->id));
             $btntxt = get_string('editsubmission', 'workshop');
         } else {
-            $btnurl = new moodle_url($PAGE->url, array('edit' => 'on'));
+            $btnurl = new powereduc_url($PAGE->url, array('edit' => 'on'));
             $btntxt = get_string('createsubmission', 'workshop');
         }
         echo $output->box($output->single_button($btnurl, $btntxt, 'get'), 'mr-1 inline');
@@ -257,13 +257,13 @@ if (!$delete) {
 
     // Display delete button.
     if ($submission->id and $deletable) {
-        $url = new moodle_url($PAGE->url, array('delete' => 1));
+        $url = new powereduc_url($PAGE->url, array('delete' => 1));
         echo $output->box($output->single_button($url, get_string('deletesubmission', 'workshop'), 'get'), 'mr-1 inline');
     }
 
     // Display assess button.
     if ($submission->id and !$edit and !$isreviewer and $canallocate and $workshop->assessing_allowed($USER->id)) {
-        $url = new moodle_url($PAGE->url, array('assess' => 1));
+        $url = new powereduc_url($PAGE->url, array('assess' => 1));
         echo $output->box($output->single_button($url, get_string('assess', 'workshop'), 'post'), 'mr-1 inline');
     }
 }

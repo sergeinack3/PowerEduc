@@ -25,7 +25,7 @@
  * @package core_course
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use \core_grades\component_gradeitems;
 
@@ -214,7 +214,7 @@ function plugin_extend_coursemodule_edit_post_actions($moduleinfo, $course) {
 /**
  * Common create/update module module actions that need to be processed as soon as a module is created/updaded.
  * For example:create grade parent category, add outcomes, rebuild caches, regrade, save plagiarism settings...
- * Please note this api does not trigger events as of MOODLE 2.6. Please trigger events before calling this api.
+ * Please note this api does not trigger events as of POWEREDUC 2.6. Please trigger events before calling this api.
  *
  * @param object $moduleinfo the module info
  * @param object $course the course of the module

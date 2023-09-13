@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace core_question;
 
 use core_question_external;
 use externallib_advanced_testcase;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -32,9 +32,9 @@ require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
  * @package    core_question
  * @covers     \core_question_external
  * @category   external
- * @copyright  2016 Pau Ferrer <pau@moodle.com>
+ * @copyright  2016 Pau Ferrer <pau@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class externallib_test extends externallib_advanced_testcase {
 
@@ -94,7 +94,7 @@ class externallib_test extends externallib_advanced_testcase {
 
             core_question_external::update_flag($qubaid, $questionid, $qaid, $slot, $checksum, true);
             $this->fail('Exception expected due to invalid checksum.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('errorsavingflags', $e->errorcode);
         }
     }
@@ -417,10 +417,10 @@ class externallib_test extends externallib_advanced_testcase {
 
         $generator->role_assign($roleid, $user->id, $systemcontext->id);
         // Prohibit all of the tag capabilities.
-        assign_capability('moodle/question:viewall', CAP_PROHIBIT, $roleid, $categorycontext->id);
+        assign_capability('powereduc/question:viewall', CAP_PROHIBIT, $roleid, $categorycontext->id);
 
         $this->setUser($user);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         core_question_external::get_random_question_summaries(
             $category->id,
             $includesubcategories,

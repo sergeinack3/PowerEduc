@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of internal classes and functions for module SCORM
@@ -59,7 +59,7 @@ define('SCORM_FORCEATTEMPT_ALWAYS', 2);
 
 /**
  * @package   mod_scorm
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class scorm_package_file_info extends file_info_stored {
@@ -947,7 +947,7 @@ function scorm_print_launch ($user, $scorm, $action, $cm) {
                                          $DB->sql_isempty('scorm_scoes', 'organization', false, false),
                                          array($scorm->id), 'sortorder, id', 'id,title')) {
         if (count($orgs) > 1) {
-            $select = new single_select(new moodle_url($action), 'organization', $orgs, $organization, null);
+            $select = new single_select(new powereduc_url($action), 'organization', $orgs, $organization, null);
             $select->label = get_string('organizations', 'scorm');
             $select->class = 'scorm-center';
             echo $OUTPUT->render($select);
@@ -1057,7 +1057,7 @@ function scorm_simple_play($scorm, $user, $context, $cmid) {
         if ($scorm->skipview >= SCORM_SKIPVIEW_FIRST) {
             $sco = current($scoes);
             $result = scorm_get_toc($user, $scorm, $cmid, TOCFULLURL, $orgidentifier);
-            $url = new moodle_url('/mod/scorm/player.php', array('a' => $scorm->id, 'currentorg' => $orgidentifier));
+            $url = new powereduc_url('/mod/scorm/player.php', array('a' => $scorm->id, 'currentorg' => $orgidentifier));
 
             // Set last incomplete sco to launch first if forcenewattempt not set to always.
             if (!empty($result->sco->id) && $scorm->forcenewattempt != SCORM_FORCEATTEMPT_ALWAYS) {
@@ -1249,7 +1249,7 @@ function scorm_element_cmp($a, $b) {
  * Generate the user attempt status string
  *
  * @param object $user Current context user
- * @param object $scorm a moodle scrom object - mdl_scorm
+ * @param object $scorm a powereduc scrom object - mdl_scorm
  * @return string - Attempt status string
  */
 function scorm_get_attempt_status($user, $scorm, $cm='') {
@@ -1336,7 +1336,7 @@ function scorm_get_attempt_status($user, $scorm, $cm='') {
         if (has_capability('mod/scorm:deleteownresponses', $context) &&
             $DB->record_exists('scorm_scoes_track', array('userid' => $user->id, 'scormid' => $scorm->id))) {
             // Check to see if any data is stored for this user.
-            $deleteurl = new moodle_url($PAGE->url, array('action' => 'delete', 'sesskey' => sesskey()));
+            $deleteurl = new powereduc_url($PAGE->url, array('action' => 'delete', 'sesskey' => sesskey()));
             $result .= $OUTPUT->single_button($deleteurl, get_string('deleteallattempts', 'scorm'));
         }
     }
@@ -1348,7 +1348,7 @@ function scorm_get_attempt_status($user, $scorm, $cm='') {
  * Get SCORM attempt count
  *
  * @param object $user Current context user
- * @param object $scorm a moodle scrom object - mdl_scorm
+ * @param object $scorm a powereduc scrom object - mdl_scorm
  * @param bool $returnobjects if true returns a object with attempts, if false returns count of attempts.
  * @param bool $ignoremissingcompletion - ignores attempts that haven't reported a grade/completion.
  * @return int - no. of attempts so far
@@ -1391,7 +1391,7 @@ function scorm_get_attempt_count($userid, $scorm, $returnobjects = false, $ignor
 /**
  * Figure out with this is a debug situation
  *
- * @param object $scorm a moodle scrom object - mdl_scorm
+ * @param object $scorm a powereduc scrom object - mdl_scorm
  * @return boolean - debugging true/false
  */
 function scorm_debugging($scorm) {
@@ -1973,7 +1973,7 @@ function scorm_get_toc($user, $scorm, $cmid, $toclink=TOCJSLINK, $currentorg='',
             $modestr = '&mode='.$mode;
         }
 
-        $url = new moodle_url('/mod/scorm/player.php?a='.$scorm->id.'&currentorg='.$currentorg.$modestr);
+        $url = new powereduc_url('/mod/scorm/player.php?a='.$scorm->id.'&currentorg='.$currentorg.$modestr);
         $result->tocmenu = $OUTPUT->single_select($url, 'scoid', $tocmenu, $result->sco->id, null, "tocmenu");
     }
 
@@ -2128,7 +2128,7 @@ function scorm_check_launchable_sco($scorm, $scoid) {
  * @param  stdClass  $context          Module context, required if $checkviewreportcap is set to true
  * @param  int  $userid                User id override
  * @return array                       status (available or not and possible warnings)
- * @since  Moodle 3.0
+ * @since  PowerEduc 3.0
  */
 function scorm_get_availability_status($scorm, $checkviewreportcap = false, $context = null, $userid = null) {
     $open = true;
@@ -2167,8 +2167,8 @@ function scorm_get_availability_status($scorm, $checkviewreportcap = false, $con
  * @param  stdClass  $scorm            SCORM record
  * @param  boolean $checkviewreportcap Check the scorm:viewreport cap
  * @param  stdClass  $context          Module context, required if $checkviewreportcap is set to true
- * @throws moodle_exception
- * @since  Moodle 3.0
+ * @throws powereduc_exception
+ * @since  PowerEduc 3.0
  */
 function scorm_require_available($scorm, $checkviewreportcap = false, $context = null) {
 
@@ -2176,7 +2176,7 @@ function scorm_require_available($scorm, $checkviewreportcap = false, $context =
 
     if (!$available) {
         $reason = current(array_keys($warnings));
-        throw new moodle_exception($reason, 'scorm', '', $warnings[$reason]);
+        throw new powereduc_exception($reason, 'scorm', '', $warnings[$reason]);
     }
 
 }
@@ -2188,7 +2188,7 @@ function scorm_require_available($scorm, $checkviewreportcap = false, $context =
  * @param  int $scoid The SCO id in database
  * @param  stdClass $context context object
  * @return array the SCO object and URL
- * @since  Moodle 3.1
+ * @since  PowerEduc 3.1
  */
 function scorm_get_sco_and_launch_url($scorm, $scoid, $context) {
     global $CFG, $DB;
@@ -2262,8 +2262,8 @@ function scorm_get_sco_and_launch_url($scorm, $scoid, $context) {
         // This SCORM content sits in a repository that allows relative links.
         $scolaunchurl = "$CFG->wwwroot/pluginfile.php/$context->id/mod_scorm/imsmanifest/$scorm->revision/$launcher";
     } else if ($scorm->scormtype === SCORM_TYPE_LOCAL or $scorm->scormtype === SCORM_TYPE_LOCALSYNC) {
-        // Note: do not convert this to use moodle_url().
-        // SCORM does not work without slasharguments and moodle_url() encodes querystring vars.
+        // Note: do not convert this to use powereduc_url().
+        // SCORM does not work without slasharguments and powereduc_url() encodes querystring vars.
         $scolaunchurl = "$CFG->wwwroot/pluginfile.php/$context->id/mod_scorm/content/$scorm->revision/$launcher";
     }
     return array($sco, $scolaunchurl);
@@ -2277,7 +2277,7 @@ function scorm_get_sco_and_launch_url($scorm, $scoid, $context) {
  * @param  stdClass $cm      course module object
  * @param  stdClass $context context object
  * @param  string $scourl    SCO URL
- * @since Moodle 3.1
+ * @since PowerEduc 3.1
  */
 function scorm_launch_sco($scorm, $sco, $cm, $context, $scourl) {
 

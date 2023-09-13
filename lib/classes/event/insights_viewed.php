@@ -29,7 +29,7 @@
  */
 
 namespace core\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Event triggered after a user views the insights page.

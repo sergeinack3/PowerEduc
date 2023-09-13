@@ -24,7 +24,7 @@
 
 namespace core_h5p;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use core_h5p\local\library\autoloader;
 use core_xapi\local\statement\item_activity;

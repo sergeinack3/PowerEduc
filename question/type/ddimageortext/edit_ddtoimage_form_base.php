@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Base class for editing form for the drag-and-drop images onto images question type.
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base class for drag-and-drop onto images editing form definition.
@@ -63,7 +63,7 @@ abstract class qtype_ddtoimage_edit_form_base extends question_edit_form {
     /**
      * definition_inner adds all specific fields to the form.
      *
-     * @param MoodleQuickForm $mform (the form being built).
+     * @param PowerEducQuickForm $mform (the form being built).
      */
     protected function definition_inner($mform) {
 
@@ -91,7 +91,7 @@ abstract class qtype_ddtoimage_edit_form_base extends question_edit_form {
     /**
      * Make and add drop zones to the form.
      *
-     * @param object $mform The Moodle form object.
+     * @param object $mform The PowerEduc form object.
      * @param int $imagerepeats The initial number of repeat elements.
      */
     protected function definition_drop_zones($mform, $imagerepeats) {
@@ -118,7 +118,7 @@ abstract class qtype_ddtoimage_edit_form_base extends question_edit_form {
     /**
      * Returns an array with a drop zone form element.
      *
-     * @param object $mform The Moodle form object.
+     * @param object $mform The PowerEduc form object.
      * @param int $imagerepeats The number of repeat images.
      * @return array Array with the dropzone element.
      */
@@ -134,7 +134,7 @@ abstract class qtype_ddtoimage_edit_form_base extends question_edit_form {
     /**
      * Builds and adds the needed form items for draggable items.
      *
-     * @param object $mform The Moodle form object.
+     * @param object $mform The PowerEduc form object.
      * @param int $itemrepeatsatstart The initial number of repeat elements.
      */
     abstract protected function definition_draggable_items($mform, $itemrepeatsatstart);
@@ -142,7 +142,7 @@ abstract class qtype_ddtoimage_edit_form_base extends question_edit_form {
     /**
      * Creates and returns a set of form elements to make a draggable item.
      *
-     * @param object $mform The Moodle form object.
+     * @param object $mform The PowerEduc form object.
      * @return array An array of form elements.
      */
     abstract protected function draggable_item($mform);

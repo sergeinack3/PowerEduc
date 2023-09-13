@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Private url module utility functions
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/filelib.php");
 require_once("$CFG->libdir/resourcelib.php");
@@ -300,7 +300,7 @@ function url_display_embed($url, $cm, $course) {
 
     $link = html_writer::tag('a', $fullurl, array('href'=>str_replace('&amp;', '&', $fullurl)));
     $clicktoopen = get_string('clicktoopen', 'url', $link);
-    $moodleurl = new moodle_url($fullurl);
+    $powereducurl = new powereduc_url($fullurl);
 
     $extension = resourcelib_get_extension($url->externalurl);
 
@@ -313,9 +313,9 @@ function url_display_embed($url, $cm, $course) {
     if (in_array($mimetype, array('image/gif','image/jpeg','image/png'))) {  // It's an image
         $code = resourcelib_embed_image($fullurl, $title);
 
-    } else if ($mediamanager->can_embed_url($moodleurl, $embedoptions)) {
+    } else if ($mediamanager->can_embed_url($powereducurl, $embedoptions)) {
         // Media (audio/video) file.
-        $code = $mediamanager->embed_url($moodleurl, $title, 0, 0, $embedoptions);
+        $code = $mediamanager->embed_url($powereducurl, $title, 0, 0, $embedoptions);
 
     } else {
         // anything else - just try object tag enlarged as much as possible
@@ -343,10 +343,10 @@ function url_get_final_display_type($url) {
         return $url->display;
     }
 
-    // detect links to local moodle pages
+    // detect links to local powereduc pages
     if (strpos($url->externalurl, $CFG->wwwroot) === 0) {
         if (strpos($url->externalurl, 'file.php') === false and strpos($url->externalurl, '.php') !== false ) {
-            // most probably our moodle page with navigation
+            // most probably our powereduc page with navigation
             return RESOURCELIB_DISPLAY_OPEN;
         }
     }
@@ -544,10 +544,10 @@ function url_guess_icon($fullurl, $size = null) {
 
     try {
         // There can be some cases where the url is invalid making parse_url() to return false.
-        // That will make moodle_url class to throw an exception, so we need to catch the exception to prevent errors.
-        $moodleurl = new moodle_url($fullurl);
-        $fullurl = $moodleurl->out_omit_querystring();
-    } catch (\moodle_exception $e) {
+        // That will make powereduc_url class to throw an exception, so we need to catch the exception to prevent errors.
+        $powereducurl = new powereduc_url($fullurl);
+        $fullurl = $powereducurl->out_omit_querystring();
+    } catch (\powereduc_exception $e) {
         // If an exception is thrown, means the url is invalid. No need to log exception.
         return null;
     }

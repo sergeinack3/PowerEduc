@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,13 +24,13 @@
 
 namespace booktool_print\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use plugin_renderer_base;
 use html_writer;
 use context_module;
-use moodle_url;
-use moodle_exception;
+use powereduc_url;
+use powereduc_exception;
 
 /**
  * The renderer for the book print tool.
@@ -45,7 +45,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param print_book_page $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_print_book_page(print_book_page $page) {
         $data = $page->export_for_template($this);
@@ -57,7 +57,7 @@ class renderer extends plugin_renderer_base {
      *
      * @param print_book_chapter_page $page
      * @return string html for the page
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public function render_print_book_chapter_page(print_book_chapter_page $page) {
         $data = $page->export_for_template($this);
@@ -151,11 +151,11 @@ class renderer extends plugin_renderer_base {
                 }
 
                 if (!$ch->subchapter) {
-                    $toc .= html_writer::link(new moodle_url('#ch' . $ch->id), $title,
+                    $toc .= html_writer::link(new powereduc_url('#ch' . $ch->id), $title,
                             array('title' => s($title), 'class' => 'font-weight-bold text-decoration-none'));
                     $toc .= html_writer::start_tag('ul');
                 } else {
-                    $toc .= html_writer::link(new moodle_url('#ch' . $ch->id), $title,
+                    $toc .= html_writer::link(new powereduc_url('#ch' . $ch->id), $title,
                             array('title' => s($title), 'class' => 'text-decoration-none'));
                     $toc .= html_writer::end_tag('li');
                 }

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Public API of the competency report.
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * This function extends the navigation with the report items
@@ -38,8 +38,8 @@ function report_competency_extend_navigation_course($navigation, $course, $conte
         return;
     }
 
-    if (has_capability('moodle/competency:coursecompetencyview', $context)) {
-        $url = new moodle_url('/report/competency/index.php', array('id' => $course->id));
+    if (has_capability('powereduc/competency:coursecompetencyview', $context)) {
+        $url = new powereduc_url('/report/competency/index.php', array('id' => $course->id));
         $name = get_string('pluginname', 'report_competency');
         $navigation->add($name, $url, navigation_node::TYPE_SETTING, null, null, new pix_icon('i/report', ''));
     }
@@ -56,9 +56,9 @@ function report_competency_extend_navigation_module($navigation, $cm) {
         return;
     }
 
-    if (has_any_capability(array('moodle/competency:usercompetencyview', 'moodle/competency:coursecompetencymanage'),
+    if (has_any_capability(array('powereduc/competency:usercompetencyview', 'powereduc/competency:coursecompetencymanage'),
             context_course::instance($cm->course))) {
-        $url = new moodle_url('/report/competency/index.php', array('id' => $cm->course, 'mod' => $cm->id));
+        $url = new powereduc_url('/report/competency/index.php', array('id' => $cm->course, 'mod' => $cm->id));
         $name = get_string('pluginname', 'report_competency');
         $navigation->add($name, $url, navigation_node::TYPE_SETTING, null, 'competencybreakdown',
             new pix_icon('i/competencies', ''))->set_show_in_secondary_navigation(false);

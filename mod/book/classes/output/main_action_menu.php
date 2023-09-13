@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  * Output the action menu for this activity.
  *
  * @package   mod_book
- * @copyright 2021 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2021 Adrian Greeve <adrian@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,14 +26,14 @@ namespace mod_book\output;
 
 use templatable;
 use renderable;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
  * Output the action menu for the book activity.
  *
  * @package   mod_book
- * @copyright 2021 Adrian Greeve <adrian@moodle.com>
+ * @copyright 2021 Adrian Greeve <adrian@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class main_action_menu implements templatable, renderable {
@@ -136,14 +136,14 @@ class main_action_menu implements templatable, renderable {
         if ($next) {
             $nextdata = [
                 'title' => get_string('navnext', 'mod_book'),
-                'url' => (new moodle_url('/mod/book/view.php', ['id' => $this->cmid, 'chapterid' => $next->id]))->out(false)
+                'url' => (new powereduc_url('/mod/book/view.php', ['id' => $this->cmid, 'chapterid' => $next->id]))->out(false)
             ];
             $data['next'] = $nextdata;
         }
         if ($previous) {
             $previousdata = [
                 'title' => get_string('navprev', 'mod_book'),
-                'url' => (new moodle_url('/mod/book/view.php', ['id' => $this->cmid, 'chapterid' => $previous->id]))->out(false)
+                'url' => (new powereduc_url('/mod/book/view.php', ['id' => $this->cmid, 'chapterid' => $previous->id]))->out(false)
             ];
             $data['previous'] = $previousdata;
         }

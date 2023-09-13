@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'gradeimport_direct', language 'en', branch 'MOODLE_28_STABLE'
+ * Strings for component 'gradeimport_direct', language 'en', branch 'POWEREDUC_28_STABLE'
  *
  * @package   gradeimport_direct
  * @copyright 2014 Adrian Greeve <adrian@moodle.com>

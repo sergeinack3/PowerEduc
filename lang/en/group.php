@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'group', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'group', language 'en', branch 'POWEREDUC_20_STABLE'
  *
  * @package   core
  * @copyright 2006 The Open University

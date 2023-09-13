@@ -32,7 +32,7 @@ use grade_grade;
 use grade_item;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Abstract class used as a base for the 3 screens.

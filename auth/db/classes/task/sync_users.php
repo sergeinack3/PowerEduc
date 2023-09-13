@@ -24,7 +24,7 @@
 
 namespace auth_db\task;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Sync users task class

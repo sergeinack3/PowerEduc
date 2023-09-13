@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page handles listing of quiz overrides
@@ -45,7 +45,7 @@ if (!$canedit) {
 }
 
 $quizgroupmode = groups_get_activity_groupmode($cm);
-$showallgroups = ($quizgroupmode == NOGROUPS) || has_capability('moodle/site:accessallgroups', $context);
+$showallgroups = ($quizgroupmode == NOGROUPS) || has_capability('powereduc/site:accessallgroups', $context);
 
 // Get the course groups that the current user can access.
 $groups = $showallgroups ? groups_get_all_groups($cm->course) : groups_get_activity_allowed_groups($cm);
@@ -60,7 +60,7 @@ if ($mode != "user" and $mode != "group") {
 }
 $groupmode = ($mode == "group");
 
-$url = new moodle_url('/mod/quiz/overrides.php', ['cmid' => $cm->id, 'mode' => $mode]);
+$url = new powereduc_url('/mod/quiz/overrides.php', ['cmid' => $cm->id, 'mode' => $mode]);
 
 $title = get_string('overridesforquiz', 'quiz',
         format_string($quiz->name, true, ['context' => $context]));
@@ -168,11 +168,11 @@ if ($canedit) {
     $table->colclasses[] = 'colaction';
     $table->headspan[] = 1;
 }
-$userurl = new moodle_url('/user/view.php', []);
-$groupurl = new moodle_url('/group/overview.php', ['id' => $cm->course]);
+$userurl = new powereduc_url('/user/view.php', []);
+$groupurl = new powereduc_url('/group/overview.php', ['id' => $cm->course]);
 
-$overridedeleteurl = new moodle_url('/mod/quiz/overridedelete.php');
-$overrideediturl = new moodle_url('/mod/quiz/overrideedit.php');
+$overridedeleteurl = new powereduc_url('/mod/quiz/overridedelete.php');
+$overrideediturl = new powereduc_url('/mod/quiz/overrideedit.php');
 
 $hasinactive = false; // Whether there are any inactive overrides.
 
@@ -234,13 +234,13 @@ foreach ($overrides as $override) {
     if ($groupmode) {
         $groupcell = new html_table_cell();
         $groupcell->rowspan = count($fields);
-        $groupcell->text = html_writer::link(new moodle_url($groupurl, ['group' => $override->groupid]),
+        $groupcell->text = html_writer::link(new powereduc_url($groupurl, ['group' => $override->groupid]),
                 $override->name . $extranamebit);
         $usercells[] = $groupcell;
     } else {
         $usercell = new html_table_cell();
         $usercell->rowspan = count($fields);
-        $usercell->text = html_writer::link(new moodle_url($userurl, ['id' => $override->userid]),
+        $usercell->text = html_writer::link(new powereduc_url($userurl, ['id' => $override->userid]),
                 fullname($override) . $extranamebit);
         $usercells[] = $usercell;
 

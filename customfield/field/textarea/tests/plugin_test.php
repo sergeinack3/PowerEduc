@@ -52,16 +52,16 @@ class plugin_test extends \advanced_testcase {
                 'configdata' => ['required' => 1]]);
         $this->cfields[3] = $this->get_generator()->create_field(
             ['categoryid' => $this->cfcat->get('id'), 'shortname' => 'myfield3', 'type' => 'textarea',
-                'configdata' => ['defaultvalue' => 'Value3', 'defaultvalueformat' => FORMAT_MOODLE]]);
+                'configdata' => ['defaultvalue' => 'Value3', 'defaultvalueformat' => FORMAT_POWEREDUC]]);
 
         $this->courses[1] = $this->getDataGenerator()->create_course();
         $this->courses[2] = $this->getDataGenerator()->create_course();
         $this->courses[3] = $this->getDataGenerator()->create_course();
 
         $this->cfdata[1] = $this->get_generator()->add_instance_data($this->cfields[1], $this->courses[1]->id,
-            ['text' => 'Value1', 'format' => FORMAT_MOODLE]);
+            ['text' => 'Value1', 'format' => FORMAT_POWEREDUC]);
         $this->cfdata[2] = $this->get_generator()->add_instance_data($this->cfields[1], $this->courses[2]->id,
-            ['text' => 'Value2', 'format' => FORMAT_MOODLE]);
+            ['text' => 'Value2', 'format' => FORMAT_POWEREDUC]);
 
         $this->setUser($this->getDataGenerator()->create_user());
     }

@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qtype_multianswer;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/engine/upgrade/tests/helper.php');
@@ -692,10 +692,10 @@ class upgrade_old_attempt_data_test extends \question_attempt_upgrader_test_base
             'questiontext' => '<p>This question consists of some text with an answer embedded right  here {#1}</p>
         <p>and right after that you will have to deal with this short answer  {#2}</p>
         <p>and finally we have a floating point number  {#3}.</p>
-        <p>The  multichoice question can also be shown in the vertical  display of the standard moodle multiple choice. {#4}</p>
+        <p>The  multichoice question can also be shown in the vertical  display of the standard powereduc multiple choice. {#4}</p>
         <p>Or in an horizontal display that is included here in a table {#5}</p>
-        <p>A shortanswer question where case must match. Write moodle in  upper case letters {#6}</p>
-        <p>Note that addresses like www.moodle.org and smileys :-) all work as normal:</p>
+        <p>A shortanswer question where case must match. Write powereduc in  upper case letters {#6}</p>
+        <p>Note that addresses like www.powereduc.org and smileys :-) all work as normal:</p>
         <p>a) How good is this? {#7}</p>
         <p>b) What grade would you give it? {#8}</p>',
             'questiontextformat' => '1',
@@ -1049,7 +1049,7 @@ class upgrade_old_attempt_data_test extends \question_attempt_upgrader_test_base
                         'category' => '2',
                         'parent' => '19',
                         'name' => 'Cloze',
-                        'questiontext' => '{1:SHORTANSWER_C:moodle#Feedback for moodle in lower  case ~=MOODLE#Feedback for MOODLE in upper case ~%50%Moodle#Feedback for  only first letter in upper case}',
+                        'questiontext' => '{1:SHORTANSWER_C:powereduc#Feedback for powereduc in lower  case ~=POWEREDUC#Feedback for POWEREDUC in upper case ~%50%PowerEduc#Feedback for  only first letter in upper case}',
                         'questiontextformat' => '0',
                         'generalfeedback' => '',
                         'generalfeedbackformat' => '1',
@@ -1069,25 +1069,25 @@ class upgrade_old_attempt_data_test extends \question_attempt_upgrader_test_base
                                 46 => (object) array(
                                     'id' => '46',
                                     'question' => '25',
-                                    'answer' => 'moodle',
+                                    'answer' => 'powereduc',
                                     'answerformat' => '0',
                                     'fraction' => '0.0000000',
-                                    'feedback' => 'Feedback for moodle in lower  case',
+                                    'feedback' => 'Feedback for powereduc in lower  case',
                                     'feedbackformat' => '1',
                                 ),
                                 47 => (object) array(
                                     'id' => '47',
                                     'question' => '25',
-                                    'answer' => 'MOODLE',
+                                    'answer' => 'POWEREDUC',
                                     'answerformat' => '0',
                                     'fraction' => '1.0000000',
-                                    'feedback' => 'Feedback for MOODLE in upper case',
+                                    'feedback' => 'Feedback for POWEREDUC in upper case',
                                     'feedbackformat' => '1',
                                 ),
                                 48 => (object) array(
                                     'id' => '48',
                                     'question' => '25',
-                                    'answer' => 'Moodle',
+                                    'answer' => 'PowerEduc',
                                     'answerformat' => '0',
                                     'fraction' => '0.5000000',
                                     'feedback' => 'Feedback for  only first letter in upper case',
@@ -1231,7 +1231,7 @@ class upgrade_old_attempt_data_test extends \question_attempt_upgrader_test_base
                 'attempt' => '16',
                 'question' => '19',
                 'seq_number' => '1',
-                'answer' => '1-31,2-dsf,3-sadf,4-39,5-44,6-MOODLE,7-49,8-100%',
+                'answer' => '1-31,2-dsf,3-sadf,4-39,5-44,6-POWEREDUC,7-49,8-100%',
                 'timestamp' => '1306425739',
                 'event' => '3',
                 'grade' => '5.0000000',
@@ -1243,7 +1243,7 @@ class upgrade_old_attempt_data_test extends \question_attempt_upgrader_test_base
                 'attempt' => '16',
                 'question' => '19',
                 'seq_number' => '2',
-                'answer' => '1-31,2-dsf,3-sadf,4-39,5-44,6-MOODLE,7-49,8-100%',
+                'answer' => '1-31,2-dsf,3-sadf,4-39,5-44,6-POWEREDUC,7-49,8-100%',
                 'timestamp' => '1306425739',
                 'event' => '6',
                 'grade' => '5.0000000',
@@ -1268,19 +1268,19 @@ and right after that you will have to deal with this short answer _____
 
 and finally we have a floating point number _____.
 
-The multichoice question can also be shown in the vertical display of the standard moodle multiple choice. {1. Wrong answer; 2. Another wrong answer; 3. Correct answer; 4. Answer that gives half the credit}
+The multichoice question can also be shown in the vertical display of the standard powereduc multiple choice. {1. Wrong answer; 2. Another wrong answer; 3. Correct answer; 4. Answer that gives half the credit}
 
 Or in an horizontal display that is included here in a table {a. Wrong answer; b. Another wrong answer; c. Correct answer; d. Answer that gives half the credit}
 
-A shortanswer question where case must match. Write moodle in upper case letters _____
+A shortanswer question where case must match. Write powereduc in upper case letters _____
 
-Note that addresses like www.moodle.org and smileys :-) all work as normal:
+Note that addresses like www.powereduc.org and smileys :-) all work as normal:
 
 a) How good is this? {Yes; No}
 
 b) What grade would you give it? _____',
-            'rightanswer' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: MOODLE; part 7: Yes; part 8: 3',
-            'responsesummary' => 'part 1: Correct answer; part 2: dsf; part 3: sadf; part 4: 2. Another wrong answer; part 5: c. Correct answer; part 6: MOODLE; part 7: Yes; part 8: 100%',
+            'rightanswer' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: POWEREDUC; part 7: Yes; part 8: 3',
+            'responsesummary' => 'part 1: Correct answer; part 2: dsf; part 3: sadf; part 4: 2. Another wrong answer; part 5: c. Correct answer; part 6: POWEREDUC; part 7: Yes; part 8: 100%',
             'timemodified' => '1306425739',
             'steps' => array(
                 0 => (object) array(
@@ -1297,7 +1297,7 @@ b) What grade would you give it? _____',
                 1 => (object) array(
                     'data' => array('sub1_answer' => 2, 'sub2_answer' => 'dsf',
                         'sub3_answer' => 'sadf', 'sub4_answer' => 1,
-                        'sub5_answer' => 2, 'sub6_answer' => 'MOODLE',
+                        'sub5_answer' => 2, 'sub6_answer' => 'POWEREDUC',
                         'sub7_answer' => 0, 'sub8_answer' => '100%', '-_try' => 1,
                         '-_rawfraction' => 0.38461538461538466, '-submit' => 1),
                     'fraction' => 0.38461538461538466,
@@ -1309,7 +1309,7 @@ b) What grade would you give it? _____',
                 2 => (object) array(
                     'data' => array('sub1_answer' => 2, 'sub2_answer' => 'dsf',
                         'sub3_answer' => 'sadf', 'sub4_answer' => 1,
-                        'sub5_answer' => 2, 'sub6_answer' => 'MOODLE',
+                        'sub5_answer' => 2, 'sub6_answer' => 'POWEREDUC',
                         'sub7_answer' => 0, 'sub8_answer' => '100%', '-finish' => 1,
                         '-_try' => 1, '-_rawfraction' => 0.38461538461538466),
                     'fraction' => 0.38461538461538466,
@@ -1377,10 +1377,10 @@ b) What grade would you give it? _____',
             'questiontext' => '<p>This question consists of some text with an answer embedded right  here {#1}</p>
         <p>and right after that you will have to deal with this short answer  {#2}</p>
         <p>and finally we have a floating point number  {#3}.</p>
-        <p>The  multichoice question can also be shown in the vertical  display of the standard moodle multiple choice. {#4}</p>
+        <p>The  multichoice question can also be shown in the vertical  display of the standard powereduc multiple choice. {#4}</p>
         <p>Or in an horizontal display that is included here in a table {#5}</p>
-        <p>A shortanswer question where case must match. Write moodle in  upper case letters {#6}</p>
-        <p>Note that addresses like www.moodle.org and smileys :-) all work as normal:</p>
+        <p>A shortanswer question where case must match. Write powereduc in  upper case letters {#6}</p>
+        <p>Note that addresses like www.powereduc.org and smileys :-) all work as normal:</p>
         <p>a) How good is this? {#7}</p>
         <p>b) What grade would you give it? {#8}</p>',
             'questiontextformat' => '1',
@@ -1734,7 +1734,7 @@ b) What grade would you give it? _____',
                         'category' => '2',
                         'parent' => '19',
                         'name' => 'Cloze',
-                        'questiontext' => '{1:SHORTANSWER_C:moodle#Feedback for moodle in lower  case ~=MOODLE#Feedback for MOODLE in upper case ~%50%Moodle#Feedback for  only first letter in upper case}',
+                        'questiontext' => '{1:SHORTANSWER_C:powereduc#Feedback for powereduc in lower  case ~=POWEREDUC#Feedback for POWEREDUC in upper case ~%50%PowerEduc#Feedback for  only first letter in upper case}',
                         'questiontextformat' => '0',
                         'generalfeedback' => '',
                         'generalfeedbackformat' => '1',
@@ -1754,25 +1754,25 @@ b) What grade would you give it? _____',
                                 46 => (object) array(
                                     'id' => '46',
                                     'question' => '25',
-                                    'answer' => 'moodle',
+                                    'answer' => 'powereduc',
                                     'answerformat' => '0',
                                     'fraction' => '0.0000000',
-                                    'feedback' => 'Feedback for moodle in lower  case',
+                                    'feedback' => 'Feedback for powereduc in lower  case',
                                     'feedbackformat' => '1',
                                 ),
                                 47 => (object) array(
                                     'id' => '47',
                                     'question' => '25',
-                                    'answer' => 'MOODLE',
+                                    'answer' => 'POWEREDUC',
                                     'answerformat' => '0',
                                     'fraction' => '1.0000000',
-                                    'feedback' => 'Feedback for MOODLE in upper case',
+                                    'feedback' => 'Feedback for POWEREDUC in upper case',
                                     'feedbackformat' => '1',
                                 ),
                                 48 => (object) array(
                                     'id' => '48',
                                     'question' => '25',
-                                    'answer' => 'Moodle',
+                                    'answer' => 'PowerEduc',
                                     'answerformat' => '0',
                                     'fraction' => '0.5000000',
                                     'feedback' => 'Feedback for  only first letter in upper case',
@@ -1941,18 +1941,18 @@ and right after that you will have to deal with this short answer _____
 
 and finally we have a floating point number _____.
 
-The multichoice question can also be shown in the vertical display of the standard moodle multiple choice. {1. Wrong answer; 2. Another wrong answer; 3. Correct answer; 4. Answer that gives half the credit}
+The multichoice question can also be shown in the vertical display of the standard powereduc multiple choice. {1. Wrong answer; 2. Another wrong answer; 3. Correct answer; 4. Answer that gives half the credit}
 
 Or in an horizontal display that is included here in a table {a. Wrong answer; b. Another wrong answer; c. Correct answer; d. Answer that gives half the credit}
 
-A shortanswer question where case must match. Write moodle in upper case letters _____
+A shortanswer question where case must match. Write powereduc in upper case letters _____
 
-Note that addresses like www.moodle.org and smileys :-) all work as normal:
+Note that addresses like www.powereduc.org and smileys :-) all work as normal:
 
 a) How good is this? {Yes; No}
 
 b) What grade would you give it? _____',
-            'rightanswer' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: MOODLE; part 7: Yes; part 8: 3',
+            'rightanswer' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: POWEREDUC; part 7: Yes; part 8: 3',
             'responsesummary' => 'part 1: ; part 2: ; part 3: ; part 4: ; part 5: ; part 6: ; part 7: ; part 8: ',
             'timemodified' => 1306425757,
             'steps' => array(
@@ -2034,10 +2034,10 @@ b) What grade would you give it? _____',
             'questiontext' => '<p>This question consists of some text with an answer embedded right  here {#1}</p>
         <p>and right after that you will have to deal with this short answer  {#2}</p>
         <p>and finally we have a floating point number  {#3}.</p>
-        <p>The  multichoice question can also be shown in the vertical  display of the standard moodle multiple choice. {#4}</p>
+        <p>The  multichoice question can also be shown in the vertical  display of the standard powereduc multiple choice. {#4}</p>
         <p>Or in an horizontal display that is included here in a table {#5}</p>
-        <p>A shortanswer question where case must match. Write moodle in  upper case letters {#6}</p>
-        <p>Note that addresses like www.moodle.org and smileys :-) all work as normal:</p>
+        <p>A shortanswer question where case must match. Write powereduc in  upper case letters {#6}</p>
+        <p>Note that addresses like www.powereduc.org and smileys :-) all work as normal:</p>
         <p>a) How good is this? {#7}</p>
         <p>b) What grade would you give it? {#8}</p>',
             'questiontextformat' => '1',
@@ -2391,7 +2391,7 @@ b) What grade would you give it? _____',
                         'category' => '2',
                         'parent' => '19',
                         'name' => 'Cloze',
-                        'questiontext' => '{1:SHORTANSWER_C:moodle#Feedback for moodle in lower  case ~=MOODLE#Feedback for MOODLE in upper case ~%50%Moodle#Feedback for  only first letter in upper case}',
+                        'questiontext' => '{1:SHORTANSWER_C:powereduc#Feedback for powereduc in lower  case ~=POWEREDUC#Feedback for POWEREDUC in upper case ~%50%PowerEduc#Feedback for  only first letter in upper case}',
                         'questiontextformat' => '0',
                         'generalfeedback' => '',
                         'generalfeedbackformat' => '1',
@@ -2411,25 +2411,25 @@ b) What grade would you give it? _____',
                                 46 => (object) array(
                                     'id' => '46',
                                     'question' => '25',
-                                    'answer' => 'moodle',
+                                    'answer' => 'powereduc',
                                     'answerformat' => '0',
                                     'fraction' => '0.0000000',
-                                    'feedback' => 'Feedback for moodle in lower  case',
+                                    'feedback' => 'Feedback for powereduc in lower  case',
                                     'feedbackformat' => '1',
                                 ),
                                 47 => (object) array(
                                     'id' => '47',
                                     'question' => '25',
-                                    'answer' => 'MOODLE',
+                                    'answer' => 'POWEREDUC',
                                     'answerformat' => '0',
                                     'fraction' => '1.0000000',
-                                    'feedback' => 'Feedback for MOODLE in upper case',
+                                    'feedback' => 'Feedback for POWEREDUC in upper case',
                                     'feedbackformat' => '1',
                                 ),
                                 48 => (object) array(
                                     'id' => '48',
                                     'question' => '25',
-                                    'answer' => 'Moodle',
+                                    'answer' => 'PowerEduc',
                                     'answerformat' => '0',
                                     'fraction' => '0.5000000',
                                     'feedback' => 'Feedback for  only first letter in upper case',
@@ -2585,7 +2585,7 @@ b) What grade would you give it? _____',
                 'attempt' => '18',
                 'question' => '19',
                 'seq_number' => '2',
-                'answer' => '1-31,2-asdgf,3-28.3,4-40,5-44,6-MOODLE,7-49,8-13',
+                'answer' => '1-31,2-asdgf,3-28.3,4-40,5-44,6-POWEREDUC,7-49,8-13',
                 'timestamp' => '1306425836',
                 'event' => '3',
                 'grade' => '5.7000000',
@@ -2597,7 +2597,7 @@ b) What grade would you give it? _____',
                 'attempt' => '18',
                 'question' => '19',
                 'seq_number' => '3',
-                'answer' => '1-31,2-Correct answer,3-23.8,4-40,5-44,6-MOODLE,7-49,8-3',
+                'answer' => '1-31,2-Correct answer,3-23.8,4-40,5-44,6-POWEREDUC,7-49,8-3',
                 'timestamp' => '1306425886',
                 'event' => '3',
                 'grade' => '9.4000000',
@@ -2609,7 +2609,7 @@ b) What grade would you give it? _____',
                 'attempt' => '18',
                 'question' => '19',
                 'seq_number' => '4',
-                'answer' => '1-31,2-Correct answer,3-23.8,4-40,5-44,6-MOODLE,7-49,8-3',
+                'answer' => '1-31,2-Correct answer,3-23.8,4-40,5-44,6-POWEREDUC,7-49,8-3',
                 'timestamp' => '1306425886',
                 'event' => '6',
                 'grade' => '9.4000000',
@@ -2634,19 +2634,19 @@ and right after that you will have to deal with this short answer _____
 
 and finally we have a floating point number _____.
 
-The multichoice question can also be shown in the vertical display of the standard moodle multiple choice. {1. Wrong answer; 2. Another wrong answer; 3. Correct answer; 4. Answer that gives half the credit}
+The multichoice question can also be shown in the vertical display of the standard powereduc multiple choice. {1. Wrong answer; 2. Another wrong answer; 3. Correct answer; 4. Answer that gives half the credit}
 
 Or in an horizontal display that is included here in a table {a. Wrong answer; b. Another wrong answer; c. Correct answer; d. Answer that gives half the credit}
 
-A shortanswer question where case must match. Write moodle in upper case letters _____
+A shortanswer question where case must match. Write powereduc in upper case letters _____
 
-Note that addresses like www.moodle.org and smileys :-) all work as normal:
+Note that addresses like www.powereduc.org and smileys :-) all work as normal:
 
 a) How good is this? {Yes; No}
 
 b) What grade would you give it? _____',
-            'rightanswer' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: MOODLE; part 7: Yes; part 8: 3',
-            'responsesummary' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: MOODLE; part 7: Yes; part 8: 3',
+            'rightanswer' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: POWEREDUC; part 7: Yes; part 8: 3',
+            'responsesummary' => 'part 1: Correct answer; part 2: Correct answer; part 3: 23.8; part 4: 3. Correct answer; part 5: c. Correct answer; part 6: POWEREDUC; part 7: Yes; part 8: 3',
             'timemodified' => '1306425886',
             'steps' => array(
                 0 => (object) array(
@@ -2680,7 +2680,7 @@ b) What grade would you give it? _____',
                     'userid' => 3,
                     'data' => array('sub1_answer' => '2', 'sub2_answer' => 'asdgf',
                             'sub3_answer' => '28.3', 'sub4_answer' => '2',
-                            'sub5_answer' => '2', 'sub6_answer' => 'MOODLE',
+                            'sub5_answer' => '2', 'sub6_answer' => 'POWEREDUC',
                             'sub7_answer' => '0', 'sub8_answer' => '13', '-_try' => 2,
                             '-_rawfraction' => 0.53846153846153845, '-submit' => 1),
                 ),
@@ -2692,7 +2692,7 @@ b) What grade would you give it? _____',
                     'userid' => 3,
                     'data' => array('sub1_answer' => '2', 'sub2_answer' => 'Correct answer',
                             'sub3_answer' => '23.8', 'sub4_answer' => '2',
-                            'sub5_answer' => '2', 'sub6_answer' => 'MOODLE',
+                            'sub5_answer' => '2', 'sub6_answer' => 'POWEREDUC',
                             'sub7_answer' => '0', 'sub8_answer' => '3', '-_try' => 3,
                             '-_rawfraction' => 0.92307692307692311, '-submit' => 1),
                 ),
@@ -2704,7 +2704,7 @@ b) What grade would you give it? _____',
                     'userid' => 3,
                     'data' => array('sub1_answer' => '2', 'sub2_answer' => 'Correct answer',
                             'sub3_answer' => '23.8', 'sub4_answer' => '2',
-                            'sub5_answer' => '2', 'sub6_answer' => 'MOODLE',
+                            'sub5_answer' => '2', 'sub6_answer' => 'POWEREDUC',
                             'sub7_answer' => '0', 'sub8_answer' => '3', '-_try' => 3,
                             '-_rawfraction' => 0.92307692307692311, '-finish' => 1),
                 ),

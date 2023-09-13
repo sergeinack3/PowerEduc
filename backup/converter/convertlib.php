@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/backup/util/includes/convert_includes.php');
 
@@ -179,7 +179,7 @@ abstract class base_converter implements loggable {
      *
      * Moodle 2.x format is being detected by the core itself. The converters are
      * therefore supposed to detect the source format. Eventually, if the target
-     * format os not {@link backup::FORMAT_MOODLE} then they should be able to
+     * format os not {@link backup::FORMAT_POWEREDUC} then they should be able to
      * detect both source and target formats.
      *
      * @param string $tempdir the name of the backup directory
@@ -193,8 +193,8 @@ abstract class base_converter implements loggable {
      * Returns the basic information about the converter
      *
      * The returned array must contain the following keys:
-     * 'from' - the supported source format, eg. backup::FORMAT_MOODLE1
-     * 'to'   - the supported target format, eg. backup::FORMAT_MOODLE
+     * 'from' - the supported source format, eg. backup::FORMAT_POWEREDUC1
+     * 'to'   - the supported target format, eg. backup::FORMAT_POWEREDUC
      * 'cost' - the cost of the conversion, non-negative non-zero integer
      */
     public static function description() {

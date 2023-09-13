@@ -1,26 +1,26 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Library of functions and constants for module glossary
- * outside of what is required for the core moodle api
+ * outside of what is required for the core powereduc api
  *
  * @package   mod_glossary
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -212,7 +212,7 @@ class glossary_full_portfolio_caller extends portfolio_module_caller_base {
  * class to export a single glossary entry
  *
  * @package   mod_glossary
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class glossary_entry_portfolio_caller extends portfolio_module_caller_base {
@@ -409,7 +409,7 @@ class glossary_entry_portfolio_caller extends portfolio_module_caller_base {
         $output .= '<td class="entry">' . "\n";
 
         $output .= '<div class="concept">';
-        $output .= format_text($OUTPUT->heading($entry->concept, 3), FORMAT_MOODLE, $options);
+        $output .= format_text($OUTPUT->heading($entry->concept, 3), FORMAT_POWEREDUC, $options);
         $output .= '</div> ' . "\n";
 
         $entry->definition = format_text($entry->definition, $entry->definitionformat, $options);
@@ -462,7 +462,7 @@ class glossary_entry_portfolio_caller extends portfolio_module_caller_base {
  * Class representing the virtual node with all itemids in the file browser
  *
  * @category  files
- * @copyright 2012 David Mudrak <david@moodle.com>
+ * @copyright 2012 David Mudrak <david@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class glossary_file_info_container extends file_info {
@@ -738,7 +738,7 @@ function mod_glossary_get_tagged_entries($tag, $exclusivemode = false, $fromctx 
             context_helper::preload_from_record($item);
             $modinfo = get_fast_modinfo($item->courseid);
             $cm = $modinfo->get_cm($item->cmid);
-            $pageurl = new moodle_url('/mod/glossary/showentry.php', array('eid' => $item->id, 'displayformat' => 'dictionary'));
+            $pageurl = new powereduc_url('/mod/glossary/showentry.php', array('eid' => $item->id, 'displayformat' => 'dictionary'));
             $pagename = format_string($item->concept, true, array('context' => context_module::instance($item->cmid)));
             $pagename = html_writer::link($pageurl, $pagename);
             $courseurl = course_get_url($item->courseid, $cm->sectionnum);

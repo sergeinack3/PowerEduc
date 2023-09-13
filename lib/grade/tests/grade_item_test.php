@@ -16,7 +16,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once(__DIR__.'/fixtures/lib.php');
 
@@ -698,7 +698,7 @@ class grade_item_test extends \grade_base_testcase {
         $grade_item->insert();
 
         // Override the student grade.
-        $grade_item->update_final_grade($this->user[1]->id, 7, 'gradebook', '', FORMAT_MOODLE);
+        $grade_item->update_final_grade($this->user[1]->id, 7, 'gradebook', '', FORMAT_POWEREDUC);
 
         // Check the student's grade has the correct min and max grade.
         $grade_grade = \grade_grade::fetch(array('userid'=>$this->user[1]->id, 'itemid'=>$grade_item->id));

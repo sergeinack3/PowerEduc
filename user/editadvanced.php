@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Allows you to edit a users profile
@@ -71,13 +71,13 @@ if ($id == -1) {
     $user->confirmed = 1;
     $user->deleted = 0;
     $user->timezone = '99';
-    require_capability('moodle/user:create', $systemcontext);
+    require_capability('powereduc/user:create', $systemcontext);
     admin_externalpage_setup('addnewuser', '', array('id' => -1));
     $PAGE->set_primary_active_tab('siteadminnode');
-    $PAGE->navbar->add(get_string('addnewuser', 'moodle'), $PAGE->url);
+    $PAGE->navbar->add(get_string('addnewuser', 'powereduc'), $PAGE->url);
 } else {
     // Editing existing user.
-    require_capability('moodle/user:update', $systemcontext);
+    require_capability('powereduc/user:update', $systemcontext);
     $user = $DB->get_record('user', array('id' => $id), '*', MUST_EXIST);
     $PAGE->set_context(context_user::instance($user->id));
     $PAGE->navbar->includesettingsbase = true;
@@ -96,11 +96,11 @@ if ($user->id != -1 and is_mnet_remote_user($user)) {
 }
 
 if ($user->id != $USER->id and is_siteadmin($user) and !is_siteadmin($USER)) {  // Only admins may edit other admins.
-    throw new \moodle_exception('useradmineditadmin');
+    throw new \powereduc_exception('useradmineditadmin');
 }
 
 if (isguestuser($user->id)) { // The real guest user can not be edited.
-    throw new \moodle_exception('guestnoeditprofileother');
+    throw new \powereduc_exception('guestnoeditprofileother');
 }
 
 if ($user->deleted) {
@@ -152,7 +152,7 @@ $filemanageroptions = array('maxbytes'       => $CFG->maxbytes,
 file_prepare_draft_area($draftitemid, $filemanagercontext->id, 'user', 'newicon', 0, $filemanageroptions);
 $user->imagefile = $draftitemid;
 // Create form.
-$userform = new user_editadvanced_form(new moodle_url($PAGE->url, array('returnto' => $returnto)), array(
+$userform = new user_editadvanced_form(new powereduc_url($PAGE->url, array('returnto' => $returnto)), array(
     'editoroptions' => $editoroptions,
     'filemanageroptions' => $filemanageroptions,
     'user' => $user));
@@ -161,12 +161,12 @@ $userform = new user_editadvanced_form(new moodle_url($PAGE->url, array('returnt
 // Deciding where to send the user back in most cases.
 if ($returnto === 'profile') {
     if ($course->id != SITEID) {
-        $returnurl = new moodle_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
+        $returnurl = new powereduc_url('/user/view.php', array('id' => $user->id, 'course' => $course->id));
     } else {
-        $returnurl = new moodle_url('/user/profile.php', array('id' => $user->id));
+        $returnurl = new powereduc_url('/user/profile.php', array('id' => $user->id));
     }
 } else {
-    $returnurl = new moodle_url('/user/preferences.php', array('userid' => $user->id));
+    $returnurl = new powereduc_url('/user/preferences.php', array('userid' => $user->id));
 }
 
 if ($userform->is_cancelled()) {
@@ -216,7 +216,7 @@ if ($userform->is_cancelled()) {
         // Pass a true old $user here.
         if (!$authplugin->user_update($user, $usernew)) {
             // Auth update failed.
-            throw new \moodle_exception('cannotupdateuseronexauth', '', '', $user->auth);
+            throw new \powereduc_exception('cannotupdateuseronexauth', '', '', $user->auth);
         }
         user_update_user($usernew, false, false);
 
@@ -224,7 +224,7 @@ if ($userform->is_cancelled()) {
         if (!empty($usernew->newpassword)) {
             if ($authplugin->can_change_password()) {
                 if (!$authplugin->user_update_password($usernew, $usernew->newpassword)) {
-                    throw new \moodle_exception('cannotupdatepasswordonextauth', '', '', $usernew->auth);
+                    throw new \powereduc_exception('cannotupdatepasswordonextauth', '', '', $usernew->auth);
                 }
                 unset_user_preference('create_password', $usernew); // Prevent cron from generating the password.
 

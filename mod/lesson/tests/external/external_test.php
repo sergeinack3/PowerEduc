@@ -1,27 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Lesson module external functions tests
  *
  * @package    mod_lesson
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 
 namespace mod_lesson\external;
@@ -30,7 +30,7 @@ use externallib_advanced_testcase;
 use mod_lesson_external;
 use lesson;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -41,9 +41,9 @@ require_once($CFG->dirroot . '/mod/lesson/locallib.php');
  * Silly class to access mod_lesson_external internal methods.
  *
  * @package mod_lesson
- * @copyright 2017 Juan Leyva <juan@moodle.com>
+ * @copyright 2017 Juan Leyva <juan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 class testable_mod_lesson_external extends mod_lesson_external {
 
@@ -54,7 +54,7 @@ class testable_mod_lesson_external extends mod_lesson_external {
      * @param  array   $params request parameters
      * @param  boolean $return whether to return the errors or throw exceptions
      * @return [array          the errors (if return set to true)
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public static function validate_attempt(lesson $lesson, $params, $return = false) {
         return parent::validate_attempt($lesson, $params, $return);
@@ -66,9 +66,9 @@ class testable_mod_lesson_external extends mod_lesson_external {
  *
  * @package    mod_lesson
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.3
+ * @since      PowerEduc 3.3
  */
 class external_test extends externallib_advanced_testcase {
 
@@ -117,7 +117,7 @@ class external_test extends externallib_advanced_testcase {
         $record->name = '<span lang="en" class="multilang">English</span><span lang="es" class="multilang">Español</span>';
         $lesson2 = self::getDataGenerator()->create_module('lesson', $record);
 
-        // Execute real Moodle enrolment as we'll call unenrol() method on the instance later.
+        // Execute real PowerEduc enrolment as we'll call unenrol() method on the instance later.
         $enrol = enrol_get_plugin('manual');
         $enrolinstances = enrol_get_instances($course2->id, true);
         foreach ($enrolinstances as $courseenrolinstance) {
@@ -379,7 +379,7 @@ class external_test extends externallib_advanced_testcase {
      * Test test_view_lesson invalid id.
      */
     public function test_view_lesson_invalid_id() {
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_lesson_external::view_lesson(0);
     }
 
@@ -390,7 +390,7 @@ class external_test extends externallib_advanced_testcase {
         // Test not-enrolled user.
         $usernotenrolled = self::getDataGenerator()->create_user();
         $this->setUser($usernotenrolled);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_lesson_external::view_lesson($this->lesson->id);
     }
 
@@ -415,8 +415,8 @@ class external_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_lesson\event\course_module_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $moodlelesson = new \moodle_url('/mod/lesson/view.php', array('id' => $this->cm->id));
-        $this->assertEquals($moodlelesson, $event->get_url());
+        $powereduclesson = new \powereduc_url('/mod/lesson/view.php', array('id' => $this->cm->id));
+        $this->assertEquals($powereduclesson, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
     }
@@ -433,7 +433,7 @@ class external_test extends externallib_advanced_testcase {
         \course_modinfo::clear_instance_cache();
 
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_lesson_external::view_lesson($this->lesson->id);
     }
 
@@ -497,7 +497,7 @@ class external_test extends externallib_advanced_testcase {
 
         // Test exception.
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = mod_lesson_external::get_questions_attempts($this->lesson->id, $attemptnumber, false, null, $this->teacher->id);
     }
 
@@ -561,7 +561,7 @@ class external_test extends externallib_advanced_testcase {
 
         // Test exception. As student try to retrieve grades from teacher.
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = mod_lesson_external::get_user_grade($this->lesson->id, $this->teacher->id);
     }
 
@@ -833,7 +833,7 @@ class external_test extends externallib_advanced_testcase {
         // Should fails as student.
         $this->setUser($this->student);
         // Now, try to review this attempt. We should not be able because is a non-finished attempt.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_lesson_external::launch_attempt($this->lesson->id, '', 1, true);
     }
 
@@ -912,7 +912,7 @@ class external_test extends externallib_advanced_testcase {
 
         // Fail as student.
         $this->setUser($this->student);
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         mod_lesson_external::launch_attempt($this->lesson->id, '', 1, true);
     }
 
@@ -985,7 +985,7 @@ class external_test extends externallib_advanced_testcase {
         // Now check using a normal student account.
         $this->setUser($this->student);
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = mod_lesson_external::get_page_data($this->lesson->id, $this->page2->id, '', false, true);
     }
 
@@ -1264,7 +1264,7 @@ class external_test extends externallib_advanced_testcase {
         $this->assertEquals(1, $result['userstats']['gradeinfo']['total']);     // Total correct answers.
         $this->assertEquals(100, $result['userstats']['gradeinfo']['grade']);   // Correct answer.
 
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $result = mod_lesson_external::get_user_attempt($this->lesson->id, $this->teacher->id, 0);
     }
 

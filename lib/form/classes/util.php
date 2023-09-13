@@ -24,7 +24,7 @@
 
 namespace core_form;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * General utility class for form-related methods.

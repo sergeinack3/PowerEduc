@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Script to download the export of a single question.
@@ -45,7 +45,7 @@ if ($cmid) {
     $thiscontext = context_course::instance($courseid);
     $urlparams['courseid'] = $courseid;
 } else {
-    throw new moodle_exception('missingcourseorcmid', 'question');
+    throw new powereduc_exception('missingcourseorcmid', 'question');
 }
 require_sesskey();
 
@@ -57,7 +57,7 @@ $questiondata = question_bank::load_question_data($questionid);
 question_require_capability_on($questiondata, 'view');
 
 // Initialise $PAGE. Nothing is output, so this does not really matter. Just avoids notices.
-$nexturl = new moodle_url('/question/type/stack/questiontestrun.php', $urlparams);
+$nexturl = new powereduc_url('/question/type/stack/questiontestrun.php', $urlparams);
 $PAGE->set_url('/question/bank/exporttoxml/exportone.php', $urlparams);
 $PAGE->set_heading($COURSE->fullname);
 $PAGE->set_pagelayout('admin');

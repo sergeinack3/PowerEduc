@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -137,9 +137,9 @@ class accesslib_has_capability_test extends \advanced_testcase {
         $contexts->cat1bcourse1block = \context_block::instance($cat1bcourse1block->id);
         $contexts->cat1bcourse2block = \context_block::instance($cat1bcourse2block->id);
 
-        $writecapability = 'moodle/block:edit';
-        $readcapability = 'moodle/block:view';
-        $managecapability = 'moodle/site:managecontextlocks';
+        $writecapability = 'powereduc/block:edit';
+        $readcapability = 'powereduc/block:view';
+        $managecapability = 'powereduc/site:managecontextlocks';
 
         $this->setAdminUser();
         $totest = (array) $contexts;
@@ -303,9 +303,9 @@ class accesslib_has_capability_test extends \advanced_testcase {
         $contexts->cat1bcourse1block = \context_block::instance($cat1bcourse1block->id);
         $contexts->cat1bcourse2block = \context_block::instance($cat1bcourse2block->id);
 
-        $writecapability = 'moodle/block:edit';
-        $readcapability = 'moodle/block:view';
-        $managecapability = 'moodle/site:managecontextlocks';
+        $writecapability = 'powereduc/block:edit';
+        $readcapability = 'powereduc/block:view';
+        $managecapability = 'powereduc/site:managecontextlocks';
 
         $this->setAdminUser();
         $totest = (array) $contexts;
@@ -527,7 +527,7 @@ class accesslib_has_capability_test extends \advanced_testcase {
         $testcontext = $contexts->$loginascontext;
         \core\session\manager::loginas($user->id, $testcontext);
 
-        $capability = 'moodle/block:view';
+        $capability = 'powereduc/block:view';
         foreach ($testcontexts as $contextname => $hascapability) {
             $this->assertEquals($hascapability, has_capability($capability, $contexts->$contextname));
         }
@@ -552,7 +552,7 @@ class accesslib_has_capability_test extends \advanced_testcase {
         $testcontext = $contexts->$loginascontext;
         \core\session\manager::loginas($user->id, $testcontext);
 
-        $capability = 'moodle/block:view';
+        $capability = 'powereduc/block:view';
         foreach ($testcontexts as $contextname => $hascapability) {
             $this->assertEquals($hascapability, has_capability($capability, $contexts->$contextname));
         }

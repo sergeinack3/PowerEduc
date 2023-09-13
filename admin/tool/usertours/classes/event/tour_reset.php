@@ -24,7 +24,7 @@
 
 namespace tool_usertours\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The tool_usertours tour_reset event.

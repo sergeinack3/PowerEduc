@@ -25,7 +25,7 @@ namespace core\oauth2;
 
 use Exception;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/filelib.php');
 

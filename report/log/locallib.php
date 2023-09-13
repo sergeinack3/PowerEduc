@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains functions used by the log reports
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 if (!defined('REPORT_LOG_MAX_DISPLAY')) {
     define('REPORT_LOG_MAX_DISPLAY', 150); // days
@@ -204,7 +204,7 @@ function report_log_userday($userid, $courseid, $daystart, $logreader = '') {
  * @global stdClass $USER
  * @global stdClass $CFG
  * @global stdClass $SITE
- * @global moodle_database $DB
+ * @global powereduc_database $DB
  * @global core_renderer $OUTPUT
  * @global stdClass $SESSION
  * @uses CONTEXT_SYSTEM
@@ -251,7 +251,7 @@ function report_log_print_mnet_selector_form($hostid, $course, $selecteduser=0, 
         $context = context_course::instance($course->id);
 
         /// Setup for group handling.
-        if ($course->groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($course->groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             $selectedgroup = -1;
             $showgroups = false;
         } else if ($course->groupmode) {
@@ -308,7 +308,7 @@ function report_log_print_mnet_selector_form($hostid, $course, $selecteduser=0, 
     if ($showusers) {
         if ($courseusers) {
             foreach ($courseusers as $courseuser) {
-                $users[$courseuser->id] = fullname($courseuser, has_capability('moodle/site:viewfullnames', $context));
+                $users[$courseuser->id] = fullname($courseuser, has_capability('powereduc/site:viewfullnames', $context));
             }
         }
         $users[$CFG->siteguest] = get_string('guestuser');
@@ -481,7 +481,7 @@ function report_log_print_mnet_selector_form($hostid, $course, $selecteduser=0, 
             $a = new stdClass();
             $a->url = "$CFG->wwwroot/report/log/index.php?chooselog=0&group=$selectedgroup&user=$selecteduser"
                 ."&id=$course->id&date=$selecteddate&modid=$selectedactivity&showcourses=1&showusers=$showusers";
-            print_string('logtoomanycourses','moodle',$a);
+            print_string('logtoomanycourses','powereduc',$a);
         }
     }
 
@@ -516,7 +516,7 @@ function report_log_print_mnet_selector_form($hostid, $course, $selecteduser=0, 
         $a = new stdClass();
         $a->url = "$CFG->wwwroot/report/log/index.php?chooselog=0&group=$selectedgroup&user=$selecteduser"
             ."&id=$course->id&date=$selecteddate&modid=$selectedactivity&showusers=1&showcourses=$showcourses";
-        print_string('logtoomanyusers','moodle',$a);
+        print_string('logtoomanyusers','powereduc',$a);
     }
 
     echo html_writer::label(get_string('date'), 'menudate', false, array('class' => 'accesshide'));

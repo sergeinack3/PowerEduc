@@ -1,27 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Quiz module external functions tests.
  *
  * @package    mod_quiz
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 
 namespace mod_quiz\external;
@@ -32,7 +32,7 @@ use mod_quiz_display_options;
 use quiz;
 use quiz_attempt;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -42,9 +42,9 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  * Silly class to access mod_quiz_external internal methods.
  *
  * @package mod_quiz
- * @copyright 2016 Juan Leyva <juan@moodle.com>
+ * @copyright 2016 Juan Leyva <juan@powereduc.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since  Moodle 3.1
+ * @since  PowerEduc 3.1
  */
 class testable_mod_quiz_external extends mod_quiz_external {
 
@@ -76,9 +76,9 @@ class testable_mod_quiz_external extends mod_quiz_external {
  *
  * @package    mod_quiz
  * @category   external
- * @copyright  2016 Juan Leyva <juan@moodle.com>
+ * @copyright  2016 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.1
+ * @since      PowerEduc 3.1
  */
 class external_test extends externallib_advanced_testcase {
 
@@ -197,7 +197,7 @@ class external_test extends externallib_advanced_testcase {
         $record->intro = '<button>Test with HTML allowed.</button>';
         $quiz2 = self::getDataGenerator()->create_module('quiz', $record);
 
-        // Execute real Moodle enrolment as we'll call unenrol() method on the instance later.
+        // Execute real PowerEduc enrolment as we'll call unenrol() method on the instance later.
         $enrol = enrol_get_plugin('manual');
         $enrolinstances = enrol_get_instances($course2->id, true);
         foreach ($enrolinstances as $courseenrolinstance) {
@@ -340,7 +340,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::view_quiz(0);
             $this->fail('Exception expected due to invalid mod_quiz instance id.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('invalidrecord', $e->errorcode);
         }
 
@@ -350,7 +350,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::view_quiz($this->quiz->id);
             $this->fail('Exception expected due to not enrolled user.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -371,8 +371,8 @@ class external_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_quiz\event\course_module_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $moodlequiz = new \moodle_url('/mod/quiz/view.php', array('id' => $this->cm->id));
-        $this->assertEquals($moodlequiz, $event->get_url());
+        $powereducquiz = new \powereduc_url('/mod/quiz/view.php', array('id' => $this->cm->id));
+        $this->assertEquals($powereducquiz, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -386,7 +386,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::view_quiz($this->quiz->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -846,7 +846,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::start_attempt($quiz->id, array(array("name" => "quizpassword", "value" => 'bad')));
             $this->fail('Exception expected due to invalid passwod.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals(get_string('passworderror', 'quizaccess_password'), $e->errorcode);
         }
 
@@ -865,7 +865,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::start_attempt($quiz->id, array(array("name" => "quizpassword", "value" => 'abc')));
             $this->fail('Exception expected due to attempt not finished.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('attemptstillinprogress', $e->errorcode);
         }
 
@@ -942,7 +942,7 @@ class external_test extends externallib_advanced_testcase {
                             'preflightdata' => array(array("name" => "quizpassword", "value" => 'bad')));
             testable_mod_quiz_external::validate_attempt($params);
             $this->fail('Exception expected due to invalid passwod.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals(get_string('passworderror', 'quizaccess_password'), $e->errorcode);
         }
 
@@ -958,7 +958,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             testable_mod_quiz_external::validate_attempt($params);
             $this->fail('Exception expected due to page out of range.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('Invalid page number', $e->errorcode);
         }
 
@@ -975,7 +975,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             testable_mod_quiz_external::validate_attempt($params);
             $this->fail('Exception expected due to passed dates.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('attempterror', $e->errorcode);
         }
 
@@ -986,7 +986,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             testable_mod_quiz_external::validate_attempt($params, false);
             $this->fail('Exception expected due to attempt finished.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('attemptalreadyclosed', $e->errorcode);
         }
 
@@ -1011,7 +1011,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             testable_mod_quiz_external::validate_attempt($params);
             $this->fail('Exception expected due to not your attempt.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('notyourattempt', $e->errorcode);
         }
     }
@@ -1505,7 +1505,7 @@ class external_test extends externallib_advanced_testcase {
             $params = array('attemptid' => $attempt->id);
             testable_mod_quiz_external::validate_attempt_review($params);
             $this->fail('Exception expected due not closed attempt.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('attemptclosed', $e->errorcode);
         }
 
@@ -1528,7 +1528,7 @@ class external_test extends externallib_advanced_testcase {
             $params = array('attemptid' => $attempt->id);
             testable_mod_quiz_external::validate_attempt_review($params);
             $this->fail('Exception expected due missing permissions.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('noreviewattempt', $e->errorcode);
         }
     }
@@ -1643,7 +1643,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::view_attempt($attempt->id, 0);
             $this->fail('Exception expected due to try to see a previous page.');
-        } catch (\moodle_quiz_exception $e) {
+        } catch (\powereduc_quiz_exception $e) {
             $this->assertEquals('Out of sequence access', $e->errorcode);
         }
 
@@ -1675,8 +1675,8 @@ class external_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_quiz\event\attempt_summary_viewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodlequiz = new \moodle_url('/mod/quiz/summary.php', array('attempt' => $attempt->id));
-        $this->assertEquals($moodlequiz, $event->get_url());
+        $powereducquiz = new \powereduc_url('/mod/quiz/summary.php', array('attempt' => $attempt->id));
+        $this->assertEquals($powereducquiz, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -1716,8 +1716,8 @@ class external_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_quiz\event\attempt_reviewed', $event);
         $this->assertEquals($context, $event->get_context());
-        $moodlequiz = new \moodle_url('/mod/quiz/review.php', array('attempt' => $attempt->id));
-        $this->assertEquals($moodlequiz, $event->get_url());
+        $powereducquiz = new \powereduc_url('/mod/quiz/review.php', array('attempt' => $attempt->id));
+        $this->assertEquals($powereducquiz, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
 
@@ -1770,7 +1770,7 @@ class external_test extends externallib_advanced_testcase {
         $result = mod_quiz_external::get_quiz_feedback_for_grade($this->quiz->id, 10);
         $result = \external_api::clean_returnvalue(mod_quiz_external::get_quiz_feedback_for_grade_returns(), $result);
         $this->assertEquals('', $result['feedbacktext']);
-        $this->assertEquals(FORMAT_MOODLE, $result['feedbacktextformat']);
+        $this->assertEquals(FORMAT_POWEREDUC, $result['feedbacktextformat']);
     }
 
     /**
@@ -2027,7 +2027,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::view_attempt($attemptobj->get_attemptid(), 3, []);
             $this->fail('Exception expected due to out of sequence access.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
     }
@@ -2058,7 +2058,7 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::get_attempt_data($attemptobj->get_attemptid(), 2);
             $this->fail('Exception expected due to out of sequence access.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
         // Now we moved to page 1, we should see page 2 and 1 but not 0 or 3.
@@ -2067,14 +2067,14 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::get_attempt_data($attemptobj->get_attemptid(), 0);
             $this->fail('Exception expected due to out of sequence access.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
 
         try {
             mod_quiz_external::get_attempt_data($attemptobj->get_attemptid(), 3);
             $this->fail('Exception expected due to out of sequence access.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
 
@@ -2128,7 +2128,7 @@ class external_test extends externallib_advanced_testcase {
      * @param int|null $userid
      * @param bool|null $ispreview
      * @return quiz_attempt
-     * @throws \moodle_exception
+     * @throws \powereduc_exception
      */
     private function create_quiz_attempt_object(quiz $quizobj, ?int $userid = null, ?bool $ispreview = false): quiz_attempt {
         global $USER;

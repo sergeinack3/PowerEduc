@@ -1,23 +1,23 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This plugin is used to access user's dropbox files
  *
- * @since Moodle 2.0
+ * @since PowerEduc 2.0
  * @package    repository_dropbox
  * @copyright  2012 Marina Glancy
  * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
@@ -39,7 +39,7 @@ class repository_dropbox extends repository {
     private $dropbox;
 
     /**
-     * @var int         The maximum file size to cache in the moodle filepool.
+     * @var int         The maximum file size to cache in the powereduc filepool.
      */
     public $cachelimit = null;
 
@@ -52,7 +52,7 @@ class repository_dropbox extends repository {
         $options['page'] = optional_param('p', 1, PARAM_INT);
         parent::__construct($repositoryid, $context, $options);
 
-        $returnurl = new moodle_url('/repository/repository_callback.php', [
+        $returnurl = new powereduc_url('/repository/repository_callback.php', [
                 'callback'  => 'yes',
                 'repo_id'   => $repositoryid,
                 'sesskey'   => sesskey(),
@@ -94,7 +94,7 @@ class repository_dropbox extends repository {
             $options['sendcachedexternalfile'] = true;
             \core\session\manager::write_close();
             send_stored_file($storedfile, $lifetime, $filter, $forcedownload, $options);
-        } catch (moodle_exception $e) {
+        } catch (powereduc_exception $e) {
             // Redirect to Dropbox, it will show the error.
             // Note: We redirect to Dropbox shared link, not to the download link here!
             \core\session\manager::write_close();
@@ -135,7 +135,7 @@ class repository_dropbox extends repository {
      * Cache file from external repository by reference.
      * {@link repository::get_file_reference()}
      * {@link repository::get_file()}
-     * Invoked at MOODLE/repository/repository_ajax.php.
+     * Invoked at POWEREDUC/repository/repository_ajax.php.
      *
      * @inheritDocs
      */
@@ -155,7 +155,7 @@ class repository_dropbox extends repository {
      * location of reference original.
      *
      * This method is called when file is picked for the first time only. When file
-     * (either copy or a reference) is already in moodle and it is being picked
+     * (either copy or a reference) is already in powereduc and it is being picked
      * again to another file area (also as a copy or as a reference), the value of
      * files.source is copied.
      *
@@ -413,7 +413,7 @@ class repository_dropbox extends repository {
      * @return string
      */
     protected function get_file_download_link($sharedurl) {
-        $url = new \moodle_url($sharedurl);
+        $url = new \powereduc_url($sharedurl);
         $url->param('dl', 1);
 
         return $url->out(false);
@@ -468,7 +468,7 @@ class repository_dropbox extends repository {
     }
 
     /**
-     * Caches all references to Dropbox files in moodle filepool.
+     * Caches all references to Dropbox files in powereduc filepool.
      *
      * Invoked by {@link repository_dropbox_cron()}. Only files smaller than
      * {@link repository_dropbox::max_cache_bytes()} and only files which
@@ -489,14 +489,14 @@ class repository_dropbox extends repository {
                 // and synchronise file size of all others.
                 $this->import_external_file_contents($file, $this->max_cache_bytes());
                 $fetchedreferences[$file->get_referencefileid()] = true;
-            } catch (moodle_exception $e) {
+            } catch (powereduc_exception $e) {
                 // If an exception is thrown, just continue. This is only a pre-fetch to help speed up general use.
             }
         }
     }
 
     /**
-     * Add Plugin settings input to Moodle form.
+     * Add Plugin settings input to PowerEduc form.
      *
      * @inheritDocs
      */
@@ -560,12 +560,12 @@ class repository_dropbox extends repository {
     /**
      * Return the OAuth 2 Redirect URI.
      *
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     public static function get_oauth2callbackurl() {
         global $CFG;
 
-        return new moodle_url('/admin/oauth2callback.php');
+        return new powereduc_url('/admin/oauth2callback.php');
     }
 
     /**
@@ -587,10 +587,10 @@ class repository_dropbox extends repository {
      * This function must be implemented for external repositories supporting
      * FILE_REFERENCE, it is called for existing aliases when their filesize,
      * contenthash or timemodified are requested. It is not called for internal
-     * repositories (see {@link repository::has_moodle_files()}), references to
+     * repositories (see {@link repository::has_powereduc_files()}), references to
      * internal files are updated immediately when source is modified.
      *
-     * Referenced files may optionally keep their content in Moodle filepool (for
+     * Referenced files may optionally keep their content in PowerEduc filepool (for
      * thumbnail generation or to be able to serve cached copy). In this
      * case both contenthash and filesize need to be synchronized. Otherwise repositories
      * should use contenthash of empty file and correct filesize in bytes.
@@ -751,11 +751,11 @@ class repository_dropbox extends repository {
      * Grab the thumbnail URL for the specified entry.
      *
      * @param   object      $entry      The file entry as retrieved from the API
-     * @return  moodle_url
+     * @return  powereduc_url
      */
     protected function get_thumbnail_url($entry) {
         if ($this->dropbox->supports_thumbnail($entry)) {
-            $thumburl = new moodle_url('/repository/dropbox/thumbnail.php', [
+            $thumburl = new powereduc_url('/repository/dropbox/thumbnail.php', [
                 // The id field in dropbox is unique - no need to specify a revision.
                 'source'    => $entry->id,
                 'path'      => $entry->path_lower,
@@ -770,7 +770,7 @@ class repository_dropbox extends repository {
     }
 
     /**
-     * Returns the maximum size of the Dropbox files to cache in moodle.
+     * Returns the maximum size of the Dropbox files to cache in powereduc.
      *
      * Note that {@link repository_dropbox::sync_reference()} will try to cache images even
      * when they are bigger in order to generate thumbnails. However there is

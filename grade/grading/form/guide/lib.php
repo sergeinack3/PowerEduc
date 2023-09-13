@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/grade/grading/form/lib.php');
 
@@ -164,8 +164,8 @@ class gradingform_guide_controller extends gradingform_controller {
         foreach ($newcriteria as $id => $criterion) {
             if (preg_match('/^NEWID\d+$/', $id)) {
                 // Insert criterion into DB.
-                $data = array('definitionid' => $this->definition->id, 'descriptionformat' => FORMAT_MOODLE,
-                    'descriptionmarkersformat' => FORMAT_MOODLE); // TODO format is not supported yet.
+                $data = array('definitionid' => $this->definition->id, 'descriptionformat' => FORMAT_POWEREDUC,
+                    'descriptionmarkersformat' => FORMAT_POWEREDUC); // TODO format is not supported yet.
                 foreach ($criteriafields as $key) {
                     if (array_key_exists($key, $criterion)) {
                         $data[$key] = $criterion[$key];
@@ -213,7 +213,7 @@ class gradingform_guide_controller extends gradingform_controller {
         foreach ($newcomment as $id => $comment) {
             if (preg_match('/^NEWID\d+$/', $id)) {
                 // Insert criterion into DB.
-                $data = array('definitionid' => $this->definition->id, 'descriptionformat' => FORMAT_MOODLE);
+                $data = array('definitionid' => $this->definition->id, 'descriptionformat' => FORMAT_POWEREDUC);
                 foreach ($commentfields as $key) {
                     if (array_key_exists($key, $comment)) {
                         // Check if key is the comment's description.
@@ -854,7 +854,7 @@ class gradingform_guide_instance extends gradingform_instance {
         foreach ($data['criteria'] as $criterionid => $record) {
             if (!array_key_exists($criterionid, $currentgrade['criteria'])) {
                 $newrecord = array('instanceid' => $this->get_id(), 'criterionid' => $criterionid,
-                    'score' => $record['score'], 'remarkformat' => FORMAT_MOODLE);
+                    'score' => $record['score'], 'remarkformat' => FORMAT_POWEREDUC);
                 if (isset($record['remark'])) {
                     $newrecord['remark'] = $record['remark'];
                 }

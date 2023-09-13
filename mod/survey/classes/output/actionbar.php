@@ -1,22 +1,22 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_survey\output;
 
-use moodle_url;
+use powereduc_url;
 use renderable;
 use renderer_base;
 use templatable;
@@ -26,7 +26,7 @@ use url_select;
  * Output the rendered elements for the tertiary nav page action
  *
  * @package mod_survey
- * @copyright 2021 Sujith Haridasan <sujith@moodle.com>
+ * @copyright 2021 Sujith Haridasan <sujith@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class actionbar implements renderable, templatable {
@@ -47,7 +47,7 @@ class actionbar implements renderable, templatable {
     /**
      * Current url.
      *
-     * @var moodle_url $currenturl
+     * @var powereduc_url $currenturl
      */
     private $currenturl;
 
@@ -56,9 +56,9 @@ class actionbar implements renderable, templatable {
      *
      * @param int $id The course module id.
      * @param string $action The action string.
-     * @param moodle_url $currenturl The current URL.
+     * @param powereduc_url $currenturl The current URL.
      */
-    public function __construct(int $id, string $action, moodle_url $currenturl) {
+    public function __construct(int $id, string $action, powereduc_url $currenturl) {
         $this->id = $id;
         $this->action = $action;
         $this->currenturl = $currenturl;
@@ -74,7 +74,7 @@ class actionbar implements renderable, templatable {
         $actions = $this->get_available_reports();
 
         foreach ($actions as $action => $straction) {
-            $url = new moodle_url($this->currenturl, ['id' => $this->id, 'action' => $action]);
+            $url = new powereduc_url($this->currenturl, ['id' => $this->id, 'action' => $action]);
             $menu[$url->out(false)] = $straction;
         }
         return new url_select($menu, $this->currenturl->out(false), null, 'surveyresponseselect');
@@ -117,7 +117,7 @@ class actionbar implements renderable, templatable {
         ];
 
         if (has_capability('mod/survey:download', $PAGE->cm->context)) {
-            $downloadlink = (new moodle_url('/mod/survey/report.php', ['id' => $this->id, 'action' => 'download']))->out(false);
+            $downloadlink = (new powereduc_url('/mod/survey/report.php', ['id' => $this->id, 'action' => 'download']))->out(false);
             $data['download'] = [
                 'link' => $downloadlink,
                 'text' => get_string('downloadresults', 'mod_survey'),

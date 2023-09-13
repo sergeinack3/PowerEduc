@@ -18,7 +18,7 @@ namespace core_course;
 
 use course_request;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/course/lib.php');

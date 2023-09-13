@@ -24,7 +24,7 @@
 
 namespace auth_oauth2;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use pix_icon;
 use moodle_url;

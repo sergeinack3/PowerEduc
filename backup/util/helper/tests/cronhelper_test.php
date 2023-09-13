@@ -28,7 +28,7 @@ namespace core_backup;
 use backup;
 use backup_cron_automated_helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/backup/util/helper/backup_cron_helper.class.php');
@@ -352,7 +352,7 @@ class cronhelper_test extends \advanced_testcase {
         $timepriortobackup = time();
         $this->waitForSecond();
         $otherarray = [
-            'format' => backup::FORMAT_MOODLE,
+            'format' => backup::FORMAT_POWEREDUC,
             'mode' => backup::MODE_GENERAL,
             'interactive' => backup::INTERACTIVE_YES,
             'type' => backup::TYPE_1COURSE,

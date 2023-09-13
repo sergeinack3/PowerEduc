@@ -1,24 +1,24 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of workshop module functions needed by Moodle core and other subsystems
+ * Library of workshop module functions needed by PowerEduc core and other subsystems
  *
- * All the functions neeeded by Moodle core, gradebook, file subsystem etc
+ * All the functions neeeded by PowerEduc core, gradebook, file subsystem etc
  * are placed here.
  *
  * @package    mod_workshop
@@ -26,7 +26,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/calendar/lib.php');
 
@@ -39,13 +39,13 @@ define('WORKSHOP_SUBMISSION_TYPE_AVAILABLE', 1);
 define('WORKSHOP_SUBMISSION_TYPE_REQUIRED', 2);
 
 ////////////////////////////////////////////////////////////////////////////////
-// Moodle core API                                                            //
+// PowerEduc core API                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Returns the information if the module supports a feature
  *
- * @see plugin_supports() in lib/moodlelib.php
+ * @see plugin_supports() in lib/powereduclib.php
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed True if module supports feature, false if not, null if doesn't know or string for the module purpose.
  */
@@ -55,7 +55,7 @@ function workshop_supports($feature) {
         case FEATURE_GROUPS:            return true;
         case FEATURE_GROUPINGS:         return true;
         case FEATURE_MOD_INTRO:         return true;
-        case FEATURE_BACKUP_MOODLE2:    return true;
+        case FEATURE_BACKUP_POWEREDUC2:    return true;
         case FEATURE_COMPLETION_TRACKS_VIEWS:
             return true;
         case FEATURE_SHOW_DESCRIPTION:  return true;
@@ -411,7 +411,7 @@ function workshop_user_outline($course, $user, $mod, $workshop) {
     if (!empty($grades->items[0]->grades)) {
         $submissiongrade = reset($grades->items[0]->grades);
         $time = max($time, $submissiongrade->dategraded);
-        if (!$submissiongrade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$submissiongrade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $info .= get_string('submissiongrade', 'workshop') . ': ' . $submissiongrade->str_long_grade
                 . html_writer::empty_tag('br');
         } else {
@@ -422,7 +422,7 @@ function workshop_user_outline($course, $user, $mod, $workshop) {
     if (!empty($grades->items[1]->grades)) {
         $assessmentgrade = reset($grades->items[1]->grades);
         $time = max($time, $assessmentgrade->dategraded);
-        if (!$assessmentgrade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$assessmentgrade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $info .= get_string('gradinggrade', 'workshop') . ': ' . $assessmentgrade->str_long_grade;
         } else {
             $info .= get_string('gradinggrade', 'workshop') . ': ' . get_string('hidden', 'grades');
@@ -459,7 +459,7 @@ function workshop_user_complete($course, $user, $mod, $workshop) {
 
     if (!empty($grades->items[0]->grades)) {
         $submissiongrade = reset($grades->items[0]->grades);
-        if (!$submissiongrade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$submissiongrade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $info = get_string('submissiongrade', 'workshop') . ': ' . $submissiongrade->str_long_grade;
         } else {
             $info = get_string('submissiongrade', 'workshop') . ': ' . get_string('hidden', 'grades');
@@ -468,7 +468,7 @@ function workshop_user_complete($course, $user, $mod, $workshop) {
     }
     if (!empty($grades->items[1]->grades)) {
         $assessmentgrade = reset($grades->items[1]->grades);
-        if (!$assessmentgrade->hidden || has_capability('moodle/grade:viewhidden', context_course::instance($course->id))) {
+        if (!$assessmentgrade->hidden || has_capability('powereduc/grade:viewhidden', context_course::instance($course->id))) {
             $info = get_string('gradinggrade', 'workshop') . ': ' . $assessmentgrade->str_long_grade;
         } else {
             $info = get_string('gradinggrade', 'workshop') . ': ' . get_string('hidden', 'grades');
@@ -480,7 +480,7 @@ function workshop_user_complete($course, $user, $mod, $workshop) {
         $canviewsubmission = true;
         if (groups_get_activity_groupmode($workshop->cm) == SEPARATEGROUPS) {
             // user must have accessallgroups or share at least one group with the submission author
-            if (!has_capability('moodle/site:accessallgroups', $workshop->context)) {
+            if (!has_capability('powereduc/site:accessallgroups', $workshop->context)) {
                 $usersgroups = groups_get_activity_allowed_groups($workshop->cm);
                 $authorsgroups = groups_get_all_groups($workshop->course->id, $user->id, $workshop->cm->groupingid, 'g.id');
                 $sharedgroups = array_intersect_key($usersgroups, $authorsgroups);
@@ -597,7 +597,7 @@ function workshop_print_recent_activity($course, $viewfullnames, $timestart) {
                 }
 
                 if (has_capability('mod/workshop:viewallsubmissions', $context)) {
-                    if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+                    if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
                         if (isguestuser()) {
                             // shortcut - guest user does not belong into any group
                             break;
@@ -650,7 +650,7 @@ function workshop_print_recent_activity($course, $viewfullnames, $timestart) {
                 }
 
                 if (has_capability('mod/workshop:viewallassessments', $context)) {
-                    if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+                    if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
                         if (isguestuser()) {
                             // shortcut - guest user does not belong into any group
                             break;
@@ -689,7 +689,7 @@ function workshop_print_recent_activity($course, $viewfullnames, $timestart) {
         $shown = true;
         echo $OUTPUT->heading(get_string('recentsubmissions', 'workshop') . ':', 6);
         foreach ($submissions as $id => $submission) {
-            $link = new moodle_url('/mod/workshop/submission.php', array('id'=>$id, 'cmid'=>$submission->cmid));
+            $link = new powereduc_url('/mod/workshop/submission.php', array('id'=>$id, 'cmid'=>$submission->cmid));
             if ($submission->authornamevisible) {
                 $author = $users[$submission->authorid];
             } else {
@@ -704,7 +704,7 @@ function workshop_print_recent_activity($course, $viewfullnames, $timestart) {
         echo $OUTPUT->heading(get_string('recentassessments', 'workshop') . ':', 6);
         core_collator::asort_objects_by_property($assessments, 'timemodified');
         foreach ($assessments as $id => $assessment) {
-            $link = new moodle_url('/mod/workshop/assessment.php', array('asid' => $id));
+            $link = new powereduc_url('/mod/workshop/assessment.php', array('asid' => $id));
             if ($assessment->reviewernamevisible) {
                 $reviewer = $users[$assessment->reviewerid];
             } else {
@@ -795,8 +795,8 @@ function workshop_get_recent_mod_activity(&$activities, &$index, $timestart, $co
 
     $groupmode       = groups_get_activity_groupmode($cm, $course);
     $context         = context_module::instance($cm->id);
-    $grader          = has_capability('moodle/grade:viewall', $context);
-    $accessallgroups = has_capability('moodle/site:accessallgroups', $context);
+    $grader          = has_capability('powereduc/grade:viewall', $context);
+    $accessallgroups = has_capability('powereduc/site:accessallgroups', $context);
     $viewauthors     = has_capability('mod/workshop:viewauthornames', $context);
     $viewreviewers   = has_capability('mod/workshop:viewreviewernames', $context);
 
@@ -841,7 +841,7 @@ function workshop_get_recent_mod_activity(&$activities, &$index, $timestart, $co
                 }
 
                 if (has_capability('mod/workshop:viewallsubmissions', $context)) {
-                    if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+                    if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
                         if (isguestuser()) {
                             // shortcut - guest user does not belong into any group
                             break;
@@ -894,7 +894,7 @@ function workshop_get_recent_mod_activity(&$activities, &$index, $timestart, $co
                 }
 
                 if (has_capability('mod/workshop:viewallassessments', $context)) {
-                    if ($groupmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+                    if ($groupmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
                         if (isguestuser()) {
                             // shortcut - guest user does not belong into any group
                             break;
@@ -987,7 +987,7 @@ function workshop_print_recent_mod_activity($activity, $courseid, $detail, $modn
 
         if ($detail) {
             echo html_writer::start_tag('h4', array('class'=>'workshop'));
-            $url = new moodle_url('/mod/workshop/view.php', array('id'=>$activity->cmid));
+            $url = new powereduc_url('/mod/workshop/view.php', array('id'=>$activity->cmid));
             $name = s($activity->name);
             echo $OUTPUT->image_icon('monologo', $name, $activity->type);
             echo ' ' . $modnames[$activity->type];
@@ -996,14 +996,14 @@ function workshop_print_recent_mod_activity($activity, $courseid, $detail, $modn
         }
 
         echo html_writer::start_tag('div', array('class'=>'title'));
-        $url = new moodle_url('/mod/workshop/submission.php', array('cmid'=>$activity->cmid, 'id'=>$activity->content->id));
+        $url = new powereduc_url('/mod/workshop/submission.php', array('cmid'=>$activity->cmid, 'id'=>$activity->content->id));
         $name = s($activity->content->title);
         echo html_writer::tag('strong', html_writer::link($url, $name));
         echo html_writer::end_tag('div');
 
         if (!empty($activity->user)) {
             echo html_writer::start_tag('div', array('class'=>'user'));
-            $url = new moodle_url('/user/view.php', array('id'=>$activity->user->id, 'course'=>$courseid));
+            $url = new powereduc_url('/user/view.php', array('id'=>$activity->user->id, 'course'=>$courseid));
             $name = fullname($activity->user);
             $link = html_writer::link($url, $name);
             echo get_string('submissionby', 'workshop', $link);
@@ -1024,7 +1024,7 @@ function workshop_print_recent_mod_activity($activity, $courseid, $detail, $modn
 
         if ($detail) {
             echo html_writer::start_tag('h4', array('class'=>'workshop'));
-            $url = new moodle_url('/mod/workshop/view.php', array('id'=>$activity->cmid));
+            $url = new powereduc_url('/mod/workshop/view.php', array('id'=>$activity->cmid));
             $name = s($activity->name);
             echo $OUTPUT->image_icon('monologo', $name, $activity->type);
             echo ' ' . $modnames[$activity->type];
@@ -1033,14 +1033,14 @@ function workshop_print_recent_mod_activity($activity, $courseid, $detail, $modn
         }
 
         echo html_writer::start_tag('div', array('class'=>'title'));
-        $url = new moodle_url('/mod/workshop/assessment.php', array('asid'=>$activity->content->id));
+        $url = new powereduc_url('/mod/workshop/assessment.php', array('asid'=>$activity->content->id));
         $name = s($activity->content->submissiontitle);
         echo html_writer::tag('em', html_writer::link($url, $name));
         echo html_writer::end_tag('div');
 
         if (!empty($activity->user)) {
             echo html_writer::start_tag('div', array('class'=>'user'));
-            $url = new moodle_url('/user/view.php', array('id'=>$activity->user->id, 'course'=>$courseid));
+            $url = new powereduc_url('/user/view.php', array('id'=>$activity->user->id, 'course'=>$courseid));
             $name = fullname($activity->user);
             $link = html_writer::link($url, $name);
             echo get_string('assessmentbyfullname', 'workshop', $link);
@@ -1060,7 +1060,7 @@ function workshop_print_recent_mod_activity($activity, $courseid, $detail, $modn
 }
 
 /**
- * @deprecated since Moodle 3.8
+ * @deprecated since PowerEduc 3.8
  */
 function workshop_scale_used() {
     throw new coding_exception('workshop_scale_used() can not be used anymore. Plugins can implement ' .
@@ -1326,7 +1326,7 @@ function workshop_pluginfile($course, $cm, $context, $filearea, array $args, $fo
                         send_file_not_found();
                     } else {
                         $gmode = groups_get_activity_groupmode($cm, $course);
-                        if ($gmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+                        if ($gmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
                             // check there is at least one common group with both the $USER
                             // and the submission author
                             $sql = "SELECT 'x'
@@ -1378,7 +1378,7 @@ function workshop_pluginfile($course, $cm, $context, $filearea, array $args, $fo
             send_file_not_found();
         } else {
             $gmode = groups_get_activity_groupmode($cm, $course);
-            if ($gmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+            if ($gmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
                 // Check there is at least one common group with both the $USER
                 // and the submission author.
                 $sql = "SELECT 'x'
@@ -1449,7 +1449,7 @@ function workshop_get_file_info($browser, $areas, $course, $cm, $context, $filea
         // make sure the user can see the particular submission in separate groups mode
         $gmode = groups_get_activity_groupmode($cm, $course);
 
-        if ($gmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($gmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             // check there is at least one common group with both the $USER
             // and the submission author (this is not expected to be a frequent
             // usecase so we can live with pretty ineffective one query per submission here...)
@@ -1482,7 +1482,7 @@ function workshop_get_file_info($browser, $areas, $course, $cm, $context, $filea
 
         // Checks to see if the user can manage files or is the owner.
         // TODO MDL-33805 - Do not use userid here and move the capability check above.
-        if (!has_capability('moodle/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
+        if (!has_capability('powereduc/course:managefiles', $context) && $storedfile->get_userid() != $USER->id) {
             return null;
         }
 
@@ -1535,7 +1535,7 @@ function workshop_get_file_info($browser, $areas, $course, $cm, $context, $filea
 
         // Make sure the user can see the particular assessment in separate groups mode.
         $gmode = groups_get_activity_groupmode($cm, $course);
-        if ($gmode == SEPARATEGROUPS and !has_capability('moodle/site:accessallgroups', $context)) {
+        if ($gmode == SEPARATEGROUPS and !has_capability('powereduc/site:accessallgroups', $context)) {
             // Check there is at least one common group with both the $USER
             // and the submission author.
             $sql = "SELECT 'x'
@@ -1565,7 +1565,7 @@ function workshop_get_file_info($browser, $areas, $course, $cm, $context, $filea
         }
 
         // Check to see if the user can manage files or is the owner.
-        if (!has_capability('moodle/course:managefiles', $context) and $storedfile->get_userid() != $USER->id) {
+        if (!has_capability('powereduc/course:managefiles', $context) and $storedfile->get_userid() != $USER->id) {
             return null;
         }
 
@@ -1612,7 +1612,7 @@ function workshop_extend_navigation(navigation_node $navref, stdclass $course, s
     global $CFG;
 
     if (has_capability('mod/workshop:submit', context_module::instance($cm->id))) {
-        $url = new moodle_url('/mod/workshop/submission.php', array('cmid' => $cm->id));
+        $url = new powereduc_url('/mod/workshop/submission.php', array('cmid' => $cm->id));
         $mysubmission = $navref->add(get_string('mysubmission', 'workshop'), $url);
         $mysubmission->mainnavonly = true;
     }
@@ -1629,12 +1629,12 @@ function workshop_extend_navigation(navigation_node $navref, stdclass $course, s
  */
 function workshop_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $workshopnode=null) {
     if (has_capability('mod/workshop:editdimensions', $settingsnav->get_page()->cm->context)) {
-        $url = new moodle_url('/mod/workshop/editform.php', array('cmid' => $settingsnav->get_page()->cm->id));
+        $url = new powereduc_url('/mod/workshop/editform.php', array('cmid' => $settingsnav->get_page()->cm->id));
         $workshopnode->add(get_string('assessmentform', 'workshop'), $url,
         settings_navigation::TYPE_SETTING, null, 'workshopassessement');
     }
     if (has_capability('mod/workshop:allocate', $settingsnav->get_page()->cm->context)) {
-        $url = new moodle_url('/mod/workshop/allocation.php', array('cmid' => $settingsnav->get_page()->cm->id));
+        $url = new powereduc_url('/mod/workshop/allocation.php', array('cmid' => $settingsnav->get_page()->cm->id));
         $workshopnode->add(get_string('submissionsallocation', 'workshop'), $url, settings_navigation::TYPE_SETTING);
     }
 }
@@ -1793,7 +1793,7 @@ function mod_workshop_core_calendar_provide_event_action(calendar_event $event,
 
     return $factory->create_instance(
         get_string('viewworkshopsummary', 'workshop'),
-        new \moodle_url('/mod/workshop/view.php', array('id' => $cm->id)),
+        new \powereduc_url('/mod/workshop/view.php', array('id' => $cm->id)),
         1,
         true
     );
@@ -1930,7 +1930,7 @@ function mod_workshop_core_calendar_event_timestart_updated(\calendar_event $eve
     $context = context_module::instance($coursemodule->id);
 
     // The user does not have the capability to modify this activity.
-    if (!has_capability('moodle/course:manageactivities', $context)) {
+    if (!has_capability('powereduc/course:manageactivities', $context)) {
         return;
     }
 
@@ -1979,7 +1979,7 @@ function mod_workshop_core_calendar_event_timestart_updated(\calendar_event $eve
 /**
  * Extends the course reset form with workshop specific settings.
  *
- * @param MoodleQuickForm $mform
+ * @param PowerEducQuickForm $mform
  */
 function workshop_reset_course_form_definition($mform) {
 
@@ -2075,7 +2075,7 @@ function mod_workshop_get_fontawesome_icon_map() {
  * @param  int $from the time to check updates from
  * @param  array $filter  if we need to check only specific updates
  * @return stdClass an object with the different type of areas indicating if they were updated or not
- * @since Moodle 3.4
+ * @since PowerEduc 3.4
  */
 function workshop_check_updates_since(cm_info $cm, $from, $filter = array()) {
     global $DB, $USER;

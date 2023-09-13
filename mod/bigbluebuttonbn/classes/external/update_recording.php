@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ use mod_bigbluebuttonbn\local\bigbluebutton\recordings\recording_action;
 use mod_bigbluebuttonbn\local\bigbluebutton\recordings\recording_helper;
 use mod_bigbluebuttonbn\recording;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -122,7 +122,7 @@ class update_recording extends external_api {
                 PARAM_INT,
                 'bigbluebuttonbn instance id, this might be a different one from the one set in recordingid in case of importing'
             ),
-            'recordingid' => new external_value(PARAM_INT, 'The moodle internal recording ID'),
+            'recordingid' => new external_value(PARAM_INT, 'The powereduc internal recording ID'),
             'action' => new external_value(PARAM_ALPHANUMEXT, 'The action to perform'),
             'additionaloptions' => new external_value(PARAM_RAW, 'Additional options', VALUE_REQUIRED, null),
         ]);

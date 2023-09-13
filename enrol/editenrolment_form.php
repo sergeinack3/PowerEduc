@@ -24,7 +24,7 @@
 
 use core_enrol\enrol_helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/formslib.php");
 

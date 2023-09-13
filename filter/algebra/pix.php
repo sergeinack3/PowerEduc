@@ -5,7 +5,7 @@
 
 // disable moodle specific debug messages and any errors in output
 define('NO_DEBUG_DISPLAY', true);
-define('NO_MOODLE_COOKIES', true); // Because it interferes with caching
+define('NO_POWEREDUC_COOKIES', true); // Because it interferes with caching
 
     require_once('../../config.php');
 

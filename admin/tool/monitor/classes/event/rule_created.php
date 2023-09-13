@@ -24,7 +24,7 @@
 
 namespace tool_monitor\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The tool_monitor rule created event class.

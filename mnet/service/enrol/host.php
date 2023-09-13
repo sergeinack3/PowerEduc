@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Displays a list of remote courses offered by a given host for our students
@@ -24,7 +24,7 @@
  *
  * @package    mnetservice
  * @subpackage enrol
- * @copyright  2010 David Mudrak <david@moodle.com>
+ * @copyright  2010 David Mudrak <david@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,7 +36,7 @@ $hostid   = required_param('id', PARAM_INT); // remote host id
 $usecache = optional_param('usecache', true, PARAM_BOOL); // use cached list of courses
 
 admin_externalpage_setup('mnetenrol', '', array('id'=>$hostid, 'usecache'=>1),
-        new moodle_url('/mnet/service/enrol/host.php'));
+        new powereduc_url('/mnet/service/enrol/host.php'));
 $service = mnetservice_enrol::get_instance();
 
 if (!$service->is_available()) {
@@ -49,7 +49,7 @@ if (!$service->is_available()) {
 $hosts = $service->get_remote_publishers();
 
 if (empty($hosts[$hostid])) {
-    throw new \moodle_exception('wearenotsubscribedtothishost', 'mnetservice_enrol');
+    throw new \powereduc_exception('wearenotsubscribedtothishost', 'mnetservice_enrol');
 }
 $host = $hosts[$hostid];
 
@@ -59,7 +59,7 @@ if (!$usecache) {
 }
 $courses = $service->get_remote_courses($host->id, $usecache);
 if (is_string($courses)) {
-    throw new \moodle_exception('fetchingcourses', 'mnetservice_enrol', '', null, $service->format_error_message($courses));
+    throw new \powereduc_exception('fetchingcourses', 'mnetservice_enrol', '', null, $service->format_error_message($courses));
 }
 
 echo $OUTPUT->header();
@@ -68,7 +68,7 @@ if (empty($courses)) {
     $a = (object)array('hostname' => s($host->hostname), 'hosturl' => s($host->hosturl));
     echo $OUTPUT->box(get_string('availablecoursesonnone','mnetservice_enrol', $a), 'noticebox');
     if ($usecache) {
-        echo $OUTPUT->single_button(new moodle_url($PAGE->url, array('usecache'=>0, 'sesskey'=>sesskey())),
+        echo $OUTPUT->single_button(new powereduc_url($PAGE->url, array('usecache'=>0, 'sesskey'=>sesskey())),
                                     get_string('refetch', 'mnetservice_enrol'), 'get');
     }
     echo $OUTPUT->footer();
@@ -97,7 +97,7 @@ foreach ($courses as $course) {
         $table->data[] = $row;
         $prevcat = $course->categoryid;
     }
-    $editbtn = $OUTPUT->single_button(new moodle_url('/mnet/service/enrol/course.php',
+    $editbtn = $OUTPUT->single_button(new powereduc_url('/mnet/service/enrol/course.php',
                                       array('host'=>$host->id, 'course'=>$course->id, 'usecache'=>0, 'sesskey'=>sesskey())),
                                       get_string('editenrolments', 'mnetservice_enrol'), 'get');
     $row = new html_table_row();
@@ -112,7 +112,7 @@ foreach ($courses as $course) {
 echo html_writer::table($table);
 
 if ($usecache) {
-    echo $OUTPUT->single_button(new moodle_url($PAGE->url, array('usecache'=>0, 'sesskey'=>sesskey())),
+    echo $OUTPUT->single_button(new powereduc_url($PAGE->url, array('usecache'=>0, 'sesskey'=>sesskey())),
                                 get_string('refetch', 'mnetservice_enrol'), 'get');
 }
 

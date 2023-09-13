@@ -24,7 +24,7 @@
 
 namespace filter_tidy\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_tidy implementing null_provider.

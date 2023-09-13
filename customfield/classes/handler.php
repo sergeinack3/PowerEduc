@@ -27,7 +27,7 @@ namespace core_customfield;
 use core_customfield\output\field_data;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Base class for custom fields handlers

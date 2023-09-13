@@ -27,7 +27,7 @@ namespace tool_usertours;
 use context_system;
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Step class.
@@ -63,7 +63,7 @@ class step {
     protected $content;
 
     /**
-     * @var     int  $contentformat    The content format: FORMAT_MOODLE/FORMAT_HTML/FORMAT_PLAIN/FORMAT_MARKDOWN.
+     * @var     int  $contentformat    The content format: FORMAT_POWEREDUC/FORMAT_HTML/FORMAT_PLAIN/FORMAT_MARKDOWN.
      */
     protected $contentformat;
 
@@ -167,7 +167,7 @@ class step {
             $this->title    = $record->title;
             $this->content  = $record->content;
         }
-        $this->contentformat = isset($record->contentformat) ? $record->contentformat : FORMAT_MOODLE;
+        $this->contentformat = isset($record->contentformat) ? $record->contentformat : FORMAT_POWEREDUC;
         $this->targettype   = $record->targettype;
         $this->targetvalue  = $record->targetvalue;
         $this->sortorder    = $record->sortorder;
@@ -280,7 +280,7 @@ class step {
      * Set the content value for this step.
      *
      * @param   string      $value      The new content to use.
-     * @param   int         $format     The new format to use: FORMAT_MOODLE/FORMAT_HTML/FORMAT_PLAIN/FORMAT_MARKDOWN.
+     * @param   int         $format     The new format to use: FORMAT_POWEREDUC/FORMAT_HTML/FORMAT_PLAIN/FORMAT_MARKDOWN.
      * @return  $this
      */
     public function set_content($value, $format = FORMAT_HTML) {

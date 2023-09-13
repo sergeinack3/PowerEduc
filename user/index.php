@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Lists all the users within a given course.
@@ -34,7 +34,7 @@ use core_table\local\filter\filter;
 use core_table\local\filter\integer_filter;
 use core_table\local\filter\string_filter;
 
-$participantsperpage = intval(get_config('moodlecourse', 'participantsperpage'));
+$participantsperpage = intval(get_config('powereduccourse', 'participantsperpage'));
 define('DEFAULT_PAGE_SIZE', (!empty($participantsperpage) ? $participantsperpage : 20));
 
 $page         = optional_param('page', 0, PARAM_INT); // Which page to show.
@@ -55,7 +55,7 @@ $PAGE->set_url('/user/index.php', array(
 if ($contextid) {
     $context = context::instance_by_id($contextid, MUST_EXIST);
     if ($context->contextlevel != CONTEXT_COURSE) {
-        throw new \moodle_exception('invalidcontext');
+        throw new \powereduc_exception('invalidcontext');
     }
     $course = $DB->get_record('course', array('id' => $context->instanceid), '*', MUST_EXIST);
 } else {
@@ -89,7 +89,7 @@ $PAGE->set_heading($course->fullname);
 $PAGE->set_pagetype('course-view-participants');
 $PAGE->set_docs_path('enrol/users');
 $PAGE->add_body_class('path-user');                     // So we can style it independently.
-$PAGE->set_other_editing_capability('moodle/course:manageactivities');
+$PAGE->set_other_editing_capability('powereduc/course:manageactivities');
 
 // Expand the users node in the settings navigation when it exists because those pages
 // are related to this one.
@@ -121,7 +121,7 @@ echo $OUTPUT->heading(get_string('enrolledusers', 'enrol'));
 $filterset = new \core_user\table\participants_filterset();
 $filterset->add_filter(new integer_filter('courseid', filter::JOINTYPE_DEFAULT, [(int)$course->id]));
 
-$canaccessallgroups = has_capability('moodle/site:accessallgroups', $context);
+$canaccessallgroups = has_capability('powereduc/site:accessallgroups', $context);
 $filtergroupids = $urlgroupid ? [$urlgroupid] : [];
 
 // Force group filtering if user should only see a subset of groups' users.
@@ -213,7 +213,7 @@ echo html_writer::start_tag('div', array('class' => 'btn-group'));
 
 if ($participanttable->get_page_size() < $participanttable->totalrows) {
     // Select all users, refresh table showing all users and mark them all selected.
-    $label = get_string('selectalluserswithcount', 'moodle', $participanttable->totalrows);
+    $label = get_string('selectalluserswithcount', 'powereduc', $participanttable->totalrows);
     echo html_writer::empty_tag('input', [
         'type' => 'button',
         'id' => 'checkall',
@@ -224,10 +224,10 @@ if ($participanttable->get_page_size() < $participanttable->totalrows) {
 }
 echo html_writer::end_tag('div');
 $displaylist = array();
-if (!empty($CFG->messaging) && has_all_capabilities(['moodle/site:sendmessage', 'moodle/course:bulkmessaging'], $context)) {
+if (!empty($CFG->messaging) && has_all_capabilities(['powereduc/site:sendmessage', 'powereduc/course:bulkmessaging'], $context)) {
     $displaylist['#messageselect'] = get_string('messageselectadd');
 }
-if (!empty($CFG->enablenotes) && has_capability('moodle/notes:manage', $context) && $context->id != $frontpagectx->id) {
+if (!empty($CFG->enablenotes) && has_capability('powereduc/notes:manage', $context) && $context->id != $frontpagectx->id) {
     $displaylist['#addgroupnote'] = get_string('addnewnote', 'notes');
 }
 
@@ -238,7 +238,7 @@ $formats = core_plugin_manager::instance()->get_plugins_of_type('dataformat');
 foreach ($formats as $format) {
     if ($format->is_enabled()) {
         $params = ['operation' => 'download_participants', 'dataformat' => $format->name];
-        $url = new moodle_url('bulkchange.php', $params);
+        $url = new powereduc_url('bulkchange.php', $params);
         $downloadoptions[$url->out(false)] = get_string('dataformat', $format->component);
     }
 }
@@ -261,7 +261,7 @@ if ($context->id != $frontpagectx->id) {
         $pluginoptions = [];
         foreach ($bulkoperations as $key => $bulkoperation) {
             $params = ['plugin' => $plugin->get_name(), 'operation' => $key];
-            $url = new moodle_url('bulkchange.php', $params);
+            $url = new powereduc_url('bulkchange.php', $params);
             $pluginoptions[$url->out(false)] = $bulkoperation->get_title();
         }
         if (!empty($pluginoptions)) {

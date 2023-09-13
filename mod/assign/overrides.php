@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This page handles listing of assign overrides
@@ -46,7 +46,7 @@ $context = context_module::instance($cm->id);
 require_capability('mod/assign:manageoverrides', $context);
 
 $assigngroupmode = groups_get_activity_groupmode($cm);
-$accessallgroups = ($assigngroupmode == NOGROUPS) || has_capability('moodle/site:accessallgroups', $context);
+$accessallgroups = ($assigngroupmode == NOGROUPS) || has_capability('powereduc/site:accessallgroups', $context);
 
 $overridecountgroup = $DB->count_records('assign_overrides', array('userid' => null, 'assignid' => $assign->id));
 
@@ -63,10 +63,10 @@ if ($mode != "user" and $mode != "group") {
 }
 $groupmode = ($mode == "group");
 
-$url = new moodle_url('/mod/assign/overrides.php', array('cmid' => $cm->id, 'mode' => $mode));
+$url = new powereduc_url('/mod/assign/overrides.php', array('cmid' => $cm->id, 'mode' => $mode));
 
 $PAGE->set_url($url);
-navigation_node::override_active_url(new moodle_url('/mod/assign/overrides.php', ['cmid' => $cmid]));
+navigation_node::override_active_url(new powereduc_url('/mod/assign/overrides.php', ['cmid' => $cmid]));
 
 if ($action == 'movegroupoverride') {
     $id = required_param('id', PARAM_INT);
@@ -166,11 +166,11 @@ $table->head = array(
         get_string('action'),
 );
 
-$userurl = new moodle_url('/user/view.php', array());
-$groupurl = new moodle_url('/group/overview.php', array('id' => $cm->course));
+$userurl = new powereduc_url('/user/view.php', array());
+$groupurl = new powereduc_url('/group/overview.php', array('id' => $cm->course));
 
-$overridedeleteurl = new moodle_url('/mod/assign/overridedelete.php');
-$overrideediturl = new moodle_url('/mod/assign/overrideedit.php');
+$overridedeleteurl = new powereduc_url('/mod/assign/overridedelete.php');
+$overrideediturl = new powereduc_url('/mod/assign/overrideedit.php');
 
 $hasinactive = false; // Whether there are any inactive overrides.
 

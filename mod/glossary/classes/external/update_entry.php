@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
  *
  * @package    mod_glossary
  * @since      Moodle 3.10
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_glossary\external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -39,12 +39,12 @@ use external_value;
 use external_format_value;
 use external_warnings;
 use core_text;
-use moodle_exception;
+use powereduc_exception;
 
 /**
  * This is the external method for updating a glossary entry.
  *
- * @copyright  2020 Juan Leyva <juan@moodle.com>
+ * @copyright  2020 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_entry extends external_api {
@@ -87,7 +87,7 @@ class update_entry extends external_api {
      * @param int $definitionformat the concept definition format
      * @param array  $options    additional settings
      * @return array with result and warnings
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     public static function execute(int $entryid, string $concept, string $definition, int $definitionformat,
             array $options = []): array {
@@ -110,7 +110,7 @@ class update_entry extends external_api {
                 core_text::strtolower($entry->concept) != core_text::strtolower(trim($params['concept']))) {
 
             if (glossary_concept_exists($glossary, $params['concept'])) {
-                throw new moodle_exception('errconceptalreadyexists', 'glossary');
+                throw new powereduc_exception('errconceptalreadyexists', 'glossary');
             }
         }
 
@@ -150,7 +150,7 @@ class update_entry extends external_api {
                     }
                     break;
                 default:
-                    throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                    throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
             }
         }
 

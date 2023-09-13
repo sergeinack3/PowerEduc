@@ -1,25 +1,25 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_forum;
 
 use externallib_advanced_testcase;
 use mod_forum_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/mod/forum/lib.php');
  *
  * @package    mod_forum
  * @category   external
- * @copyright  2012 Mark Nelson <markn@moodle.com>
+ * @copyright  2012 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class externallib_test extends externallib_advanced_testcase {
@@ -60,12 +60,12 @@ class externallib_test extends externallib_advanced_testcase {
      *
      * @param stored_file $file
      * @param array $values
-     * @param moodle_url|null $url
+     * @param powereduc_url|null $url
      * @return array
      */
-    protected function get_expected_attachment(\stored_file $file, array $values  = [], ?\moodle_url $url = null): array {
+    protected function get_expected_attachment(\stored_file $file, array $values  = [], ?\powereduc_url $url = null): array {
         if (!$url) {
-            $url = \moodle_url::make_pluginfile_url(
+            $url = \powereduc_url::make_pluginfile_url(
                 $file->get_contextid(),
                 $file->get_component(),
                 $file->get_filearea(),
@@ -167,7 +167,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Enrol the user in two courses.
         // DataGenerator->enrol_user automatically sets a role for the user with the permission mod/form:viewdiscussion.
         $this->getDataGenerator()->enrol_user($user->id, $course1->id, null, 'manual');
-        // Execute real Moodle enrolment as we'll call unenrol() method on the instance later.
+        // Execute real PowerEduc enrolment as we'll call unenrol() method on the instance later.
         $enrol = enrol_get_plugin('manual');
         $enrolinstances = enrol_get_instances($course2->id, true);
         foreach ($enrolinstances as $courseenrolinstance) {
@@ -274,7 +274,7 @@ class externallib_test extends externallib_advanced_testcase {
         $this->setUser(0);
         try {
             $response = mod_forum_external::toggle_favourite_state($discussion1->id, 0);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
     }
@@ -527,7 +527,7 @@ class externallib_test extends externallib_advanced_testcase {
                 'edit' => null,
                 'delete' =>null,
                 'split' => null,
-                'reply' => (new \moodle_url('/mod/forum/post.php#mformforum', [
+                'reply' => (new \powereduc_url('/mod/forum/post.php#mformforum', [
                     'reply' => $discussion1reply2->id
                 ]))->out(false),
                 'export' => null,
@@ -588,7 +588,7 @@ class externallib_test extends externallib_advanced_testcase {
                 'edit' => null,
                 'delete' =>null,
                 'split' => null,
-                'reply' => (new \moodle_url('/mod/forum/post.php#mformforum', [
+                'reply' => (new \powereduc_url('/mod/forum/post.php#mformforum', [
                     'reply' => $discussion1reply1->id
                 ]))->out(false),
                 'export' => null,
@@ -1017,7 +1017,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::get_forum_discussions_paginated($forum1->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('noviewdiscussionspermission', $e->errorcode);
         }
 
@@ -1028,7 +1028,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::get_forum_discussions_paginated($forum1->id);
             $this->fail('Exception expected due to being unenrolled from the course.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -1228,7 +1228,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::get_forum_discussions($forum1->id);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('noviewdiscussionspermission', $e->errorcode);
         }
 
@@ -1239,7 +1239,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::get_forum_discussions($forum1->id);
             $this->fail('Exception expected due to being unenrolled from the course.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -1470,7 +1470,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::add_discussion_post($discussion->firstpost, 'some subject', 'some text here...');
             $this->fail('Exception expected due to being unenrolled from the course.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('requireloginerror', $e->errorcode);
         }
 
@@ -1500,7 +1500,7 @@ class externallib_test extends externallib_advanced_testcase {
         global $DB; // Yes, we are going to use DB facilities too, because cannot rely on other functions for checking
                     // the format. They eat it completely (going back to FORMAT_HTML. So we only can trust DB for further
                     // processing.
-        $formats = [FORMAT_PLAIN, FORMAT_MOODLE, FORMAT_MARKDOWN, FORMAT_HTML];
+        $formats = [FORMAT_PLAIN, FORMAT_POWEREDUC, FORMAT_MARKDOWN, FORMAT_HTML];
         $options = [];
         foreach ($formats as $format) {
             $createdpost = mod_forum_external::add_discussion_post($discussion->firstpost,
@@ -1515,7 +1515,7 @@ class externallib_test extends externallib_advanced_testcase {
         // format is HTML, inferred from editor in preferences).
         $options = [['name' => 'topreferredformat', 'value' => true]];
         $createdpost = mod_forum_external::add_discussion_post($discussion->firstpost,
-            'interesting subject', 'with some https://example.com link', $options, FORMAT_MOODLE);
+            'interesting subject', 'with some https://example.com link', $options, FORMAT_POWEREDUC);
         $createdpost = \external_api::clean_returnvalue(mod_forum_external::add_discussion_post_returns(), $createdpost);
         $dbpost = $DB->get_record('forum_posts', ['id' => $createdpost['postid']]);
         // Format HTML and content converted, we should get.
@@ -1591,7 +1591,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::add_discussion_post($discussion->firstpost, 'some subject', 'some text here...');
             $this->fail('Exception expected due to invalid permissions for posting.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('nopostforum', $e->errorcode);
         }
     }
@@ -1707,7 +1707,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::add_discussion($forum->id, 'the subject', 'some text here...');
             $this->fail('Exception expected due to invalid permissions.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannotcreatediscussion', $e->errorcode);
         }
 
@@ -1822,14 +1822,14 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::add_discussion($forum->id, 'the subject', 'some text here...');
             $this->fail('Exception expected due to invalid group permissions.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannotcreatediscussion', $e->errorcode);
         }
 
         try {
             mod_forum_external::add_discussion($forum->id, 'the subject', 'some text here...', 0);
             $this->fail('Exception expected due to invalid group permissions.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannotcreatediscussion', $e->errorcode);
         }
 
@@ -1840,7 +1840,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::add_discussion($forum->id, 'the subject', 'some text here...', $group->id);
             $this->fail('Exception expected due to invalid group permissions.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannotcreatediscussion', $e->errorcode);
         }
 
@@ -1851,7 +1851,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             mod_forum_external::add_discussion($forum->id, 'the subject', 'some text here...', $group->id + 1);
             $this->fail('Exception expected due to invalid group.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('cannotcreatediscussion', $e->errorcode);
         }
 
@@ -1930,7 +1930,7 @@ class externallib_test extends externallib_advanced_testcase {
         try {
             $result = mod_forum_external::set_lock_state($forum->id, $discussion->id, 0);
             $this->fail('Exception expected due to missing capability.');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertEquals('errorcannotlock', $e->errorcode);
         }
 
@@ -2681,16 +2681,16 @@ class externallib_test extends externallib_advanced_testcase {
                             'viewisolated' => $isolatedurluser->out(false),
                             'viewparent' => $urlfactory->get_view_post_url_from_post_id(
                                 $discussion1reply1->discussion, $discussion1reply1->parent)->out(false),
-                            'edit' => (new \moodle_url('/mod/forum/post.php', [
+                            'edit' => (new \powereduc_url('/mod/forum/post.php', [
                                 'edit' => $discussion1reply1->id
                             ]))->out(false),
-                            'delete' => (new \moodle_url('/mod/forum/post.php', [
+                            'delete' => (new \powereduc_url('/mod/forum/post.php', [
                                 'delete' => $discussion1reply1->id
                             ]))->out(false),
-                            'split' => (new \moodle_url('/mod/forum/post.php', [
+                            'split' => (new \powereduc_url('/mod/forum/post.php', [
                                 'prune' => $discussion1reply1->id
                             ]))->out(false),
-                            'reply' => (new \moodle_url('/mod/forum/post.php#mformforum', [
+                            'reply' => (new \powereduc_url('/mod/forum/post.php#mformforum', [
                                 'reply' => $discussion1reply1->id
                             ]))->out(false),
                             'export' => null,
@@ -2746,14 +2746,14 @@ class externallib_test extends externallib_advanced_testcase {
                                 $discussion1firstpostobject->discussion, $discussion1firstpostobject->id)->out(false),
                             'viewisolated' => $isolatedurlparent->out(false),
                             'viewparent' => null,
-                            'edit' => (new \moodle_url('/mod/forum/post.php', [
+                            'edit' => (new \powereduc_url('/mod/forum/post.php', [
                                 'edit' => $discussion1firstpostobject->id
                             ]))->out(false),
-                            'delete' => (new \moodle_url('/mod/forum/post.php', [
+                            'delete' => (new \powereduc_url('/mod/forum/post.php', [
                                 'delete' => $discussion1firstpostobject->id
                             ]))->out(false),
                             'split' => null,
-                            'reply' => (new \moodle_url('/mod/forum/post.php#mformforum', [
+                            'reply' => (new \powereduc_url('/mod/forum/post.php#mformforum', [
                                 'reply' => $discussion1firstpostobject->id
                             ]))->out(false),
                             'export' => null,
@@ -2824,16 +2824,16 @@ class externallib_test extends externallib_advanced_testcase {
                             'viewisolated' => $isolatedurluser->out(false),
                             'viewparent' => $urlfactory->get_view_post_url_from_post_id(
                                 $discussion2reply1->discussion, $discussion2reply1->parent)->out(false),
-                            'edit' => (new \moodle_url('/mod/forum/post.php', [
+                            'edit' => (new \powereduc_url('/mod/forum/post.php', [
                                 'edit' => $discussion2reply1->id
                             ]))->out(false),
-                            'delete' => (new \moodle_url('/mod/forum/post.php', [
+                            'delete' => (new \powereduc_url('/mod/forum/post.php', [
                                 'delete' => $discussion2reply1->id
                             ]))->out(false),
-                            'split' => (new \moodle_url('/mod/forum/post.php', [
+                            'split' => (new \powereduc_url('/mod/forum/post.php', [
                                 'prune' => $discussion2reply1->id
                             ]))->out(false),
-                            'reply' => (new \moodle_url('/mod/forum/post.php#mformforum', [
+                            'reply' => (new \powereduc_url('/mod/forum/post.php#mformforum', [
                                 'reply' => $discussion2reply1->id
                             ]))->out(false),
                             'export' => null,
@@ -2889,14 +2889,14 @@ class externallib_test extends externallib_advanced_testcase {
                                 $discussion2firstpostobject->discussion, $discussion2firstpostobject->id)->out(false),
                             'viewisolated' => $isolatedurlparent->out(false),
                             'viewparent' => null,
-                            'edit' => (new \moodle_url('/mod/forum/post.php', [
+                            'edit' => (new \powereduc_url('/mod/forum/post.php', [
                                 'edit' => $discussion2firstpostobject->id
                             ]))->out(false),
-                            'delete' => (new \moodle_url('/mod/forum/post.php', [
+                            'delete' => (new \powereduc_url('/mod/forum/post.php', [
                                 'delete' => $discussion2firstpostobject->id
                             ]))->out(false),
                             'split' => null,
-                            'reply' => (new \moodle_url('/mod/forum/post.php#mformforum', [
+                            'reply' => (new \powereduc_url('/mod/forum/post.php#mformforum', [
                                 'reply' => $discussion2firstpostobject->id
                             ]))->out(false),
                             'export' => null,
@@ -3365,9 +3365,9 @@ class externallib_test extends externallib_advanced_testcase {
     }
 
     /**
-     * Test that we can update the message format of a post to {@see FORMAT_MOODLE}
+     * Test that we can update the message format of a post to {@see FORMAT_POWEREDUC}
      */
-    public function test_update_discussion_post_set_message_format_moodle(): void {
+    public function test_update_discussion_post_set_message_format_powereduc(): void {
         global $DB, $USER;
 
         $this->resetAfterTest(true);
@@ -3388,7 +3388,7 @@ class externallib_test extends externallib_advanced_testcase {
         // Update discussion post message & messageformat.
         $result = \external_api::clean_returnvalue(
             mod_forum_external::update_discussion_post_returns(),
-            mod_forum_external::update_discussion_post($discussion->firstpost, '', 'Update discussion message', FORMAT_MOODLE)
+            mod_forum_external::update_discussion_post($discussion->firstpost, '', 'Update discussion message', FORMAT_POWEREDUC)
         );
         $this->assertTrue($result['status']);
 
@@ -3396,7 +3396,7 @@ class externallib_test extends externallib_advanced_testcase {
         $updatedpost = $DB->get_record('forum_posts', ['id' => $discussion->firstpost], 'message,messageformat');
         $this->assertEquals((object) [
             'message' => 'Update discussion message',
-            'messageformat' => FORMAT_MOODLE,
+            'messageformat' => FORMAT_POWEREDUC,
         ], $updatedpost);
     }
 }

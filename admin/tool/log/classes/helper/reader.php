@@ -24,7 +24,7 @@
 
 namespace tool_log\helper;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Reader helper trait.

@@ -23,28 +23,28 @@ $show       = optional_param('show', '', PARAM_ALPHA);           // [ concept | 
 
 if (!empty($id)) {
     if (! $cm = get_coursemodule_from_id('glossary', $id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
-        throw new \moodle_exception('coursemisconf');
+        throw new \powereduc_exception('coursemisconf');
     }
     if (! $glossary = $DB->get_record("glossary", array("id"=>$cm->instance))) {
-        throw new \moodle_exception('invalidid', 'glossary');
+        throw new \powereduc_exception('invalidid', 'glossary');
     }
 
 } else if (!empty($g)) {
     if (! $glossary = $DB->get_record("glossary", array("id"=>$g))) {
-        throw new \moodle_exception('invalidid', 'glossary');
+        throw new \powereduc_exception('invalidid', 'glossary');
     }
     if (! $course = $DB->get_record("course", array("id"=>$glossary->course))) {
-        throw new \moodle_exception('invalidcourseid');
+        throw new \powereduc_exception('invalidcourseid');
     }
     if (!$cm = get_coursemodule_from_instance("glossary", $glossary->id, $course->id)) {
-        throw new \moodle_exception('invalidcoursemodule');
+        throw new \powereduc_exception('invalidcoursemodule');
     }
     $id = $cm->id;
 } else {
-    throw new \moodle_exception('invalidid', 'glossary');
+    throw new \powereduc_exception('invalidid', 'glossary');
 }
 $cm = cm_info::create($cm);
 
@@ -276,7 +276,7 @@ $strwaitingapproval = get_string('pendingapproval', 'glossary');
 /// If we are in approval mode, prit special header
 $PAGE->set_title($glossary->name);
 $PAGE->set_heading($course->fullname);
-$url = new moodle_url('/mod/glossary/view.php', array('id'=>$cm->id));
+$url = new powereduc_url('/mod/glossary/view.php', array('id'=>$cm->id));
 if (isset($mode) && $mode) {
     $url->param('mode', $mode);
 }
@@ -387,7 +387,7 @@ if ($allentries) {
     }
 
     //Build paging bar
-    $baseurl = new moodle_url('/mod/glossary/view.php', ['id' => $id, 'mode' => $mode, 'hook' => $hook,
+    $baseurl = new powereduc_url('/mod/glossary/view.php', ['id' => $id, 'mode' => $mode, 'hook' => $hook,
         'sortkey' => $sortkey, 'sortorder' => $sortorder, 'fullsearch' => $fullsearch]);
     $paging = glossary_get_paging_bar($count, $page, $entriesbypage, $baseurl->out() . '&amp;',
         9999, 10, '&nbsp;&nbsp;', $specialtext, -1);
@@ -444,7 +444,7 @@ if ($allentries) {
                     echo '<th align="left">';
                     $user = mod_glossary_entry_query_builder::get_user_from_record($entry);
                     echo $OUTPUT->user_picture($user, array('courseid'=>$course->id));
-                    $pivottoshow = fullname($user, has_capability('moodle/site:viewfullnames', context_course::instance($course->id)));
+                    $pivottoshow = fullname($user, has_capability('powereduc/site:viewfullnames', context_course::instance($course->id)));
                 } else {
                     echo '<th >';
                 }
@@ -479,7 +479,7 @@ if ($allentries) {
         $entriesshown++;
     }
     // The all entries value may be a recordset or an array.
-    if ($allentries instanceof moodle_recordset) {
+    if ($allentries instanceof powereduc_recordset) {
         $allentries->close();
     }
 }

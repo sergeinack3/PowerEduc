@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -41,7 +41,7 @@ use core_reportbuilder\local\helpers\user_filter_manager;
  * @covers      \core_reportbuilder\local\helpers\custom_fields
  * @covers      \core_reportbuilder\local\report\base
  * @covers      \core_reportbuilder\system_report
- * @copyright   2021 David Matamoros <davidmc@moodle.com>
+ * @copyright   2021 David Matamoros <davidmc@powereduc.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_test extends advanced_testcase {
@@ -156,11 +156,11 @@ class course_test extends advanced_testcase {
         $this->assertEquals('Gregorian', $courserow['calendartype']);
         $this->assertEquals('afterburner', $courserow['theme']);
         $this->assertEquals(get_string_manager()->get_list_of_translations()['en'], $courserow['lang']);
-        $expected = '<a href="https://www.example.com/moodle/course/view.php?id=' . $course1->id . '">Course 1</a>';
+        $expected = '<a href="https://www.example.com/powereduc/course/view.php?id=' . $course1->id . '">Course 1</a>';
         $this->assertEquals($expected, $courserow['coursefullnamewithlink']);
-        $expected = '<a href="https://www.example.com/moodle/course/view.php?id=' . $course1->id . '">C1</a>';
+        $expected = '<a href="https://www.example.com/powereduc/course/view.php?id=' . $course1->id . '">C1</a>';
         $this->assertEquals($expected, $courserow['courseshortnamewithlink']);
-        $expected = '<a href="https://www.example.com/moodle/course/view.php?id=' . $course1->id . '">IDNumber1</a>';
+        $expected = '<a href="https://www.example.com/powereduc/course/view.php?id=' . $course1->id . '">IDNumber1</a>';
         $this->assertEquals($expected, $courserow['courseidnumberewithlink']);
         $this->assertEquals('Do. Or do not. There is no try', $courserow['customfield_cf1']);
         $this->assertEquals('Chewie, we are home', $courserow['customfield_cf2']);

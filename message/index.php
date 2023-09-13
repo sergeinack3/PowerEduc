@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ if (isguestuser()) {
 }
 
 if (empty($CFG->messaging)) {
-    throw new \moodle_exception('disabled', 'message');
+    throw new \powereduc_exception('disabled', 'message');
 }
 
 // The id of the user we want to view messages from.
@@ -58,11 +58,11 @@ if ($userid) {
 
 if ($userid) {
     if (!\core_message\api::can_send_message($userid, $USER->id)) {
-        throw new moodle_exception('Can not contact user');
+        throw new powereduc_exception('Can not contact user');
     }
 }
 
-$url = new moodle_url('/message/index.php');
+$url = new powereduc_url('/message/index.php');
 if ($userid) {
     $url->param('id', $userid);
 }

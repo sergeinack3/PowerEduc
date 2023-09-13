@@ -20,7 +20,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('POWEREDUC_INTERNAL') or die('Direct access to this script is forbidden.');
 
 require_once($CFG->dirroot . '/backup/cc/entities.class.php');
 require_once($CFG->dirroot . '/backup/cc/entity.label.class.php');
@@ -154,22 +154,22 @@ class cc2moodle {
 
         $sheet_base = static::loadsheet(SHEET_BASE);
 
-        // MOODLE_BACKUP / INFO / DETAILS / MOD
+        // POWEREDUC_BACKUP / INFO / DETAILS / MOD
         $node_info_details_mod = $this->create_code_info_details_mod();
 
-        // MOODLE_BACKUP / BLOCKS / BLOCK
+        // POWEREDUC_BACKUP / BLOCKS / BLOCK
         $node_course_blocks_block = $this->create_node_course_blocks_block();
 
-        // MOODLE_BACKUP / COURSES / SECTIONS / SECTION
+        // POWEREDUC_BACKUP / COURSES / SECTIONS / SECTION
         $node_course_sections_section = $this->create_node_course_sections_section();
 
-        // MOODLE_BACKUP / COURSES / QUESTION_CATEGORIES
+        // POWEREDUC_BACKUP / COURSES / QUESTION_CATEGORIES
         $node_course_question_categories = $this->create_node_question_categories();
 
-        // MOODLE_BACKUP / COURSES / MODULES / MOD
+        // POWEREDUC_BACKUP / COURSES / MODULES / MOD
         $node_course_modules_mod = $this->create_node_course_modules_mod();
 
-        // MOODLE_BACKUP / COURSE / HEADER
+        // POWEREDUC_BACKUP / COURSE / HEADER
         $node_course_header = $this->create_node_course_header();
 
         // GENERAL INFO
@@ -329,7 +329,7 @@ class cc2moodle {
                 $i++;
                 $node_node_course_sections_section_mods_mod = $this->create_node_course_sections_section_mods_mod($topic['index']);
 
-                if ($topic['moodle_type'] == MOODLE_TYPE_LABEL) {
+                if ($topic['moodle_type'] == POWEREDUC_TYPE_LABEL) {
 
                     $find_tags = array('[#section_id#]',
                                        '[#section_number#]',
@@ -466,7 +466,7 @@ class cc2moodle {
 
             foreach ($childs as $child) {
 
-                if ($child['moodle_type'] == MOODLE_TYPE_LABEL) {
+                if ($child['moodle_type'] == POWEREDUC_TYPE_LABEL) {
                     if ($child['index'] == $child['root_parent']) {
                         $is_summary = true;
                     } else {
@@ -538,30 +538,30 @@ class cc2moodle {
 
         $this->create_instances($items);
 
-        $count_quiz = $this->count_instances(MOODLE_TYPE_QUIZ);
-        $count_forum = $this->count_instances(MOODLE_TYPE_FORUM);
-        $count_resource = $this->count_instances(MOODLE_TYPE_RESOURCE);
-        $count_label = $this->count_instances(MOODLE_TYPE_LABEL);
+        $count_quiz = $this->count_instances(POWEREDUC_TYPE_QUIZ);
+        $count_forum = $this->count_instances(POWEREDUC_TYPE_FORUM);
+        $count_resource = $this->count_instances(POWEREDUC_TYPE_RESOURCE);
+        $count_label = $this->count_instances(POWEREDUC_TYPE_LABEL);
 
         $sheet_info_details_mod_instances_instance = static::loadsheet(SHEET_INFO_DETAILS_MOD_INSTANCE);
 
         if ($count_resource > 0) {
-            $resource_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_resource, static::$instances['instances'][MOODLE_TYPE_RESOURCE]);
+            $resource_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_resource, static::$instances['instances'][POWEREDUC_TYPE_RESOURCE]);
         }
         if ($count_quiz > 0) {
-            $quiz_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_quiz, static::$instances['instances'][MOODLE_TYPE_QUIZ]);
+            $quiz_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_quiz, static::$instances['instances'][POWEREDUC_TYPE_QUIZ]);
         }
         if ($count_forum > 0) {
-            $forum_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_forum, static::$instances['instances'][MOODLE_TYPE_FORUM]);
+            $forum_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_forum, static::$instances['instances'][POWEREDUC_TYPE_FORUM]);
         }
         if ($count_label > 0) {
-            $label_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_label, static::$instances['instances'][MOODLE_TYPE_LABEL]);
+            $label_instance = $this->create_mod_info_details_mod_instances_instance($sheet_info_details_mod_instances_instance, $count_label, static::$instances['instances'][POWEREDUC_TYPE_LABEL]);
         }
 
-        $resource_mod = $count_resource ? $this->create_mod_info_details_mod(MOODLE_TYPE_RESOURCE, $resource_instance) : '';
-        $quiz_mod = $count_quiz ? $this->create_mod_info_details_mod(MOODLE_TYPE_QUIZ, $quiz_instance) : '';
-        $forum_mod = $count_forum ? $this->create_mod_info_details_mod(MOODLE_TYPE_FORUM, $forum_instance) : '';
-        $label_mod = $count_label ? $this->create_mod_info_details_mod(MOODLE_TYPE_LABEL, $label_instance) : '';
+        $resource_mod = $count_resource ? $this->create_mod_info_details_mod(POWEREDUC_TYPE_RESOURCE, $resource_instance) : '';
+        $quiz_mod = $count_quiz ? $this->create_mod_info_details_mod(POWEREDUC_TYPE_QUIZ, $quiz_instance) : '';
+        $forum_mod = $count_forum ? $this->create_mod_info_details_mod(POWEREDUC_TYPE_FORUM, $forum_instance) : '';
+        $label_mod = $count_label ? $this->create_mod_info_details_mod(POWEREDUC_TYPE_LABEL, $label_instance) : '';
 
         //TODO: label
         return $label_mod . $resource_mod . $quiz_mod . $forum_mod;
@@ -706,31 +706,31 @@ class cc2moodle {
         $type = TYPE_UNKNOWN;
 
         if ($cc_type == static::CC_TYPE_FORUM) {
-            $type = MOODLE_TYPE_FORUM;
+            $type = POWEREDUC_TYPE_FORUM;
         }
 
         if ($cc_type == static::CC_TYPE_QUIZ) {
-            $type = MOODLE_TYPE_QUIZ;
+            $type = POWEREDUC_TYPE_QUIZ;
         }
 
         if ($cc_type == static::CC_TYPE_WEBLINK) {
-            $type = MOODLE_TYPE_RESOURCE;
+            $type = POWEREDUC_TYPE_RESOURCE;
         }
 
         if ($cc_type == static::CC_TYPE_WEBCONTENT) {
-            $type = MOODLE_TYPE_RESOURCE;
+            $type = POWEREDUC_TYPE_RESOURCE;
         }
 
         if ($cc_type == static::CC_TYPE_ASSOCIATED_CONTENT) {
-            $type = MOODLE_TYPE_RESOURCE;
+            $type = POWEREDUC_TYPE_RESOURCE;
         }
 
         if ($cc_type == static::CC_TYPE_QUESTION_BANK) {
-            $type = MOODLE_TYPE_QUESTION_BANK;
+            $type = POWEREDUC_TYPE_QUESTION_BANK;
         }
         //TODO: label
         if ($cc_type == static::CC_TYPE_EMPTY) {
-            $type = MOODLE_TYPE_LABEL;
+            $type = POWEREDUC_TYPE_LABEL;
         }
 
         return $type;

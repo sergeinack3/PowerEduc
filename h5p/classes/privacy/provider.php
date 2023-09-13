@@ -24,7 +24,7 @@
 
 namespace core_h5p\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider implementation for h5p core subsystem.

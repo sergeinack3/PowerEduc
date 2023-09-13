@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@ use core_form\dynamic_form;
 use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\local\exceptions\bigbluebutton_exception;
 use mod_bigbluebuttonbn\task\send_guest_emails;
-use moodle_exception;
-use moodle_url;
+use powereduc_exception;
+use powereduc_url;
 use MoodleQuickForm;
 
 /**
@@ -120,13 +120,13 @@ class guest_add extends dynamic_form {
      * Get BigblueButton instance from context params
      *
      * @return instance
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function get_instance_from_params(): instance {
         $bbid = $this->optional_param('id', null, PARAM_INT);
         $groupid = $this->optional_param('groupid', null, PARAM_INT);
         if (empty($bbid)) {
-            throw new moodle_exception('guestaccess_add_no_id', 'mod_bigbluebuttonbn');
+            throw new powereduc_exception('guestaccess_add_no_id', 'mod_bigbluebuttonbn');
         }
         $instance = instance::get_from_instanceid($bbid);
         if ($groupid) {
@@ -188,7 +188,7 @@ class guest_add extends dynamic_form {
      * Check if current user has access to this form, otherwise throw exception.
      *
      * @return void
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function check_access_for_dynamic_submission(): void {
         $context = $this->get_context_for_dynamic_submission();
@@ -211,10 +211,10 @@ class guest_add extends dynamic_form {
     /**
      * Returns url to set in $PAGE->set_url() when form is being rendered or submitted via AJAX.
      *
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_page_url_for_dynamic_submission(): moodle_url {
+    protected function get_page_url_for_dynamic_submission(): powereduc_url {
         $context = $this->get_context_for_dynamic_submission();
-        return new moodle_url('/mod/bigbluebuttonbn/view.php', ['id' => $context->instanceid]);
+        return new powereduc_url('/mod/bigbluebuttonbn/view.php', ['id' => $context->instanceid]);
     }
 }

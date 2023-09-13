@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
  * Privacy class for requesting user data.
  *
  * @package    message_email
- * @copyright  2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2018 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace message_email\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use \core_privacy\local\metadata\collection;
 use \core_privacy\local\request\contextlist;
@@ -37,7 +37,7 @@ use \core_privacy\local\request\approved_userlist;
  * Privacy class for requesting user data.
  *
  * @package    message_email
- * @copyright  2018 Mihail Geshoski <mihail@moodle.com>
+ * @copyright  2018 Mihail Geshoski <mihail@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements

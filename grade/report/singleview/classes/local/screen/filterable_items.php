@@ -24,7 +24,7 @@
 
 namespace gradereport_singleview\local\screen;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * The gradebook interface for a filterable class.

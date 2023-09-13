@@ -1,4 +1,4 @@
-CONTRIBUTING TO MOODLE
+CONTRIBUTING TO POWEREDUC
 ======================
 
 Moodle is made by people like you. We are members of a big worldwide community

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -160,7 +160,7 @@ $string['enrolmentdurationlength'] = 'User must remain enrolled for';
 $string['err_noactivities'] = 'Completion information is not enabled for any activity, so none can be displayed. You can enable completion information by editing the settings for an activity.';
 $string['err_nocourses'] = 'Course completion is not enabled for any other courses, so none can be displayed. You can enable course completion in the course settings.';
 $string['err_nograde'] = 'A course pass grade has not been set for this course. To enable this criteria type you must create a pass grade for this course.';
-$string['err_noroles'] = 'There are no roles with the capability moodle/course:markcomplete in this course.';
+$string['err_noroles'] = 'There are no roles with the capability powereduc/course:markcomplete in this course.';
 $string['err_nousers'] = 'There are no students in this course or group for whom completion information is displayed. (Completion information is displayed only for users with the capability \'Be shown on completion reports\'. The capability is allowed for the default role of student only, so if there are no students, you will see this message.)';
 $string['err_settingslocked'] = 'One or more students have already completed a criterion so the settings have been locked. Unlocking the settings will delete user completion data and may cause confusion.';
 $string['err_system'] = 'An internal error occurred in the completion system. (System administrators can enable debugging information to see more detail.)';
@@ -176,7 +176,7 @@ $string['gradexrequired'] = '{$a} required';
 $string['inprogress'] = 'In progress';
 $string['manual'] = 'Manual';
 $string['manualcompletionby'] = 'Manual completion by others';
-$string['manualcompletionbynote'] = 'Note: The capability moodle/course:markcomplete must be allowed for a role to appear in the list.';
+$string['manualcompletionbynote'] = 'Note: The capability powereduc/course:markcomplete must be allowed for a role to appear in the list.';
 $string['manualselfcompletion'] = 'Manual self completion';
 $string['manualselfcompletionnote'] = 'Note: The self completion block should be added to the course if manual self completion is enabled.';
 $string['markcomplete'] = 'Mark complete';

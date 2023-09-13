@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qbank_history;
 
 use core_question\local\bank\question_edit_contexts;
 use core_question\local\bank\view;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 
 /**
@@ -41,23 +41,23 @@ class question_history_view extends view {
     /**
      * Base url for the return.
      *
-     * @var \moodle_url $basereturnurl
+     * @var \powereduc_url $basereturnurl
      */
     protected $basereturnurl;
 
     /**
      * Constructor for the history.
      * @param question_edit_contexts $contexts the contexts of api call
-     * @param moodle_url $pageurl url of the page
+     * @param powereduc_url $pageurl url of the page
      * @param stdClass $course course settings
      * @param int $entryid quiz settings
      * @param string $returnurl url to return to
      */
-    public function __construct(question_edit_contexts $contexts, moodle_url $pageurl, stdClass $course, int $entryid,
+    public function __construct(question_edit_contexts $contexts, powereduc_url $pageurl, stdClass $course, int $entryid,
                                 string $returnurl) {
         parent::__construct($contexts, $pageurl, $course);
         $this->entryid = $entryid;
-        $this->basereturnurl = new \moodle_url($returnurl);
+        $this->basereturnurl = new \powereduc_url($returnurl);
     }
 
     protected function wanted_columns(): array {

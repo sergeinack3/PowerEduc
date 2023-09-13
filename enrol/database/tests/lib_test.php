@@ -25,7 +25,7 @@ namespace enrol_database;
 
 use course_enrolment_manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**

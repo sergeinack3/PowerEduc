@@ -24,7 +24,7 @@
 
 namespace dataformat_ods\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy provider implementation for dataformat_ods.

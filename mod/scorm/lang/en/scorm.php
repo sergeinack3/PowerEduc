@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'scorm', language 'en'
  *
  * @package   mod_scorm
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['toc'] = 'TOC';
@@ -28,7 +28,7 @@ $string['aicchacptimeout_desc'] = 'Length of time in minutes that an external AI
 $string['aicchacpkeepsessiondata'] = 'AICC HACP session data';
 $string['aicchacpkeepsessiondata_desc'] = 'Length of time in days to keep the external AICC HACP session data (a high setting will fill up the table with old data but may be useful when debugging)';
 $string['aiccuserid'] = 'AICC pass numeric user id';
-$string['aiccuserid_desc'] = 'The AICC standard for usernames is very restrictive compared with Moodle, and allows for alphanumeric characters, dash and underscore only. Periods, spaces and the @ symbol are not permitted. If enabled, user ID numbers are passed to the AICC package instead of usernames.';
+$string['aiccuserid_desc'] = 'The AICC standard for usernames is very restrictive compared with PowerEduc, and allows for alphanumeric characters, dash and underscore only. Periods, spaces and the @ symbol are not permitted. If enabled, user ID numbers are passed to the AICC package instead of usernames.';
 $string['activation'] = 'Activation';
 $string['activityloading'] = 'You will be automatically redirected to the activity in';
 $string['activityoverview'] = 'You have SCORM packages that need attention';
@@ -372,7 +372,7 @@ $string['review'] = 'Review';
 $string['reviewmode'] = 'Review mode';
 $string['rightanswer'] = 'Right answer';
 $string['scormstandard'] = 'SCORM standards mode';
-$string['scormstandarddesc'] = 'When disabled, Moodle allows SCORM 1.2 packages to store more than the specification allows, and uses Moodle full name format settings when passing the users name to the SCORM package.';
+$string['scormstandarddesc'] = 'When disabled, PowerEduc allows SCORM 1.2 packages to store more than the specification allows, and uses PowerEduc full name format settings when passing the users name to the SCORM package.';
 $string['scoes'] = 'Learning objects';
 $string['score'] = 'Score';
 $string['scorm:addinstance'] = 'Add a new SCORM package';
@@ -454,7 +454,7 @@ $string['width'] = 'Width';
 $string['window'] = 'Window';
 $string['youmustselectastatus'] = 'You must select a status to require';
 
-// Deprecated since Moodle 4.0.
+// Deprecated since PowerEduc 4.0.
 $string['info'] = 'Info';
 $string['displayactivityname'] = 'Display activity name';
 $string['displayactivityname_help'] = 'Whether or not to display the activity name above the SCORM player.';

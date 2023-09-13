@@ -24,7 +24,7 @@
 
 namespace dataformat_html;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * html data format writer

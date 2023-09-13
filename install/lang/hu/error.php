@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatedboninstall'] = '<p>Az adatbázis nem hozható létre.</p> <p>A megadott adatbázis nem létezik, a felhasználó pedig nem jogosult létrehozni egyet.</p> <p>A portál rendszergazdájának ellenőrizni kell az adatbázis-beállításokat.</p>';
 $string['cannotcreatelangdir'] = 'Nem hozható létre a lang könyvtár.';

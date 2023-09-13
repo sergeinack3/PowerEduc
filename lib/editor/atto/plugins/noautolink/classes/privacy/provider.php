@@ -24,7 +24,7 @@
 
 namespace atto_noautolink\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_noautolink implementing null_provider.

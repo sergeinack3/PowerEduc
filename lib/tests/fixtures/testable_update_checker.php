@@ -25,7 +25,7 @@
  */
 namespace core\update;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Modified version of {@link \core\update\checker} suitable for testing.
@@ -110,14 +110,14 @@ class testable_checker extends checker {
                         'release' => '2.3.3 (Build: 20121201)',
                         'maturity' => 200,
                         'url' => 'https://download.moodle.org/',
-                        'download' => 'https://download.moodle.org/download.php/MOODLE_23_STABLE/moodle-2.3.3-latest.zip',
+                        'download' => 'https://download.moodle.org/download.php/POWEREDUC_23_STABLE/moodle-2.3.3-latest.zip',
                     ),
                     array(
                         'version' => 2012120100.00,
                         'release' => '2.4dev (Build: 20121201)',
                         'maturity' => 50,
                         'url' => 'https://download.moodle.org/',
-                        'download' => 'https://download.moodle.org/download.php/MOODLE_24_STABLE/moodle-2.4.0-latest.zip',
+                        'download' => 'https://download.moodle.org/download.php/POWEREDUC_24_STABLE/moodle-2.4.0-latest.zip',
                     ),
                 ),
                 'mod_foo' => array(

@@ -26,7 +26,7 @@ namespace tool_langimport;
 
 use coding_exception;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 /**
  * Helper class for the language import tool.

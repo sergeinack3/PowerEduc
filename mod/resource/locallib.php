@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Private resource module utility functions
@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/filelib.php");
 require_once("$CFG->libdir/resourcelib.php");
@@ -66,7 +66,7 @@ function resource_display_embed($resource, $cm, $course, $file) {
     $clicktoopen = resource_get_clicktoopen($file, $resource->revision);
 
     $context = context_module::instance($cm->id);
-    $moodleurl = moodle_url::make_pluginfile_url($context->id, 'mod_resource', 'content', $resource->revision,
+    $powereducurl = powereduc_url::make_pluginfile_url($context->id, 'mod_resource', 'content', $resource->revision,
             $file->get_filepath(), $file->get_filename());
 
     $mimetype = $file->get_mimetype();
@@ -81,22 +81,22 @@ function resource_display_embed($resource, $cm, $course, $file) {
     );
 
     if (file_mimetype_in_typegroup($mimetype, 'web_image')) {  // It's an image
-        $code = resourcelib_embed_image($moodleurl->out(), $title);
+        $code = resourcelib_embed_image($powereducurl->out(), $title);
 
     } else if ($mimetype === 'application/pdf') {
         // PDF document
-        $code = resourcelib_embed_pdf($moodleurl->out(), $title, $clicktoopen);
+        $code = resourcelib_embed_pdf($powereducurl->out(), $title, $clicktoopen);
 
-    } else if ($mediamanager->can_embed_url($moodleurl, $embedoptions)) {
+    } else if ($mediamanager->can_embed_url($powereducurl, $embedoptions)) {
         // Media (audio/video) file.
-        $code = $mediamanager->embed_url($moodleurl, $title, 0, 0, $embedoptions);
+        $code = $mediamanager->embed_url($powereducurl, $title, 0, 0, $embedoptions);
 
     } else {
         // We need a way to discover if we are loading remote docs inside an iframe.
-        $moodleurl->param('embed', 1);
+        $powereducurl->param('embed', 1);
 
         // anything else - just try object tag enlarged as much as possible
-        $code = resourcelib_embed_general($moodleurl, $title, $clicktoopen, $mimetype);
+        $code = resourcelib_embed_general($powereducurl, $title, $clicktoopen, $mimetype);
     }
 
     // Let the module handle the display.

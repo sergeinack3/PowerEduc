@@ -30,6 +30,6 @@
  * The forms needed by registration pages.
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 debugging('Support for alternative hubs has been removed from Moodle in 3.4.', DEBUG_DEVELOPER);

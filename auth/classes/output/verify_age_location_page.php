@@ -24,7 +24,7 @@
 
 namespace core_auth\output;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use renderable;
 use renderer_base;

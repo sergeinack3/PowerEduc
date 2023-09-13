@@ -24,7 +24,7 @@
 
 namespace auth_shibboleth;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * The helper class for the Shibboleth authentication plugin.

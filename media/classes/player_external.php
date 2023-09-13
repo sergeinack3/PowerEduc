@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Base class for players which handle external links (YouTube etc).
@@ -60,14 +60,14 @@ abstract class core_media_player_external extends core_media_player {
 
     /**
      * Obtains HTML code to embed the link.
-     * @param moodle_url $url Single URL to embed
+     * @param powereduc_url $url Single URL to embed
      * @param string $name Display name; '' to use default
      * @param int $width Optional width; 0 to use default
      * @param int $height Optional height; 0 to use default
      * @param array $options Options array
      * @return string HTML code for embed
      */
-    protected abstract function embed_external(moodle_url $url, $name, $width, $height, $options);
+    protected abstract function embed_external(powereduc_url $url, $name, $width, $height, $options);
 
     public function list_supported_urls(array $urls, array $options = array()) {
         // These only work with a SINGLE url (there is no fallback).

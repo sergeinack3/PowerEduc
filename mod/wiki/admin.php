@@ -1,19 +1,19 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Delete wiki pages or versions
@@ -40,23 +40,23 @@ $toversion = optional_param('toversion', 0, PARAM_INT); // max version to be del
 $fromversion = optional_param('fromversion', 0, PARAM_INT); // min version to be deleted
 
 if (!$page = wiki_get_page($pageid)) {
-    throw new \moodle_exception('incorrectpageid', 'wiki');
+    throw new \powereduc_exception('incorrectpageid', 'wiki');
 }
 if (!$subwiki = wiki_get_subwiki($page->subwikiid)) {
-    throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+    throw new \powereduc_exception('incorrectsubwikiid', 'wiki');
 }
 if (!$cm = get_coursemodule_from_instance("wiki", $subwiki->wikiid)) {
-    throw new \moodle_exception('invalidcoursemodule');
+    throw new \powereduc_exception('invalidcoursemodule');
 }
 $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 if (!$wiki = wiki_get_wiki($subwiki->wikiid)) {
-    throw new \moodle_exception('incorrectwikiid', 'wiki');
+    throw new \powereduc_exception('incorrectwikiid', 'wiki');
 }
 
 require_login($course, true, $cm);
 
 if (!wiki_user_can_view($subwiki, $wiki)) {
-    throw new \moodle_exception('cannotviewpage', 'wiki');
+    throw new \powereduc_exception('cannotviewpage', 'wiki');
 }
 
 $context = context_module::instance($cm->id);
@@ -68,7 +68,7 @@ if (!empty($delete) && confirm_sesskey()) {
         // Validate that we are deleting from the same subwiki.
         $deletepage = wiki_get_page($delete);
         if (!$deletepage || $deletepage->subwikiid != $page->subwikiid) {
-            throw new \moodle_exception('incorrectsubwikiid', 'wiki');
+            throw new \powereduc_exception('incorrectsubwikiid', 'wiki');
         }
     }
     wiki_delete_pages($context, $delete, $page->subwikiid);
@@ -76,7 +76,7 @@ if (!empty($delete) && confirm_sesskey()) {
     //current pageid is invalid after deletion.
     if ($pageid == $delete) {
         $params = array('swid' => $page->subwikiid, 'title' => $page->title);
-        $url = new moodle_url('/mod/wiki/create.php', $params);
+        $url = new powereduc_url('/mod/wiki/create.php', $params);
         redirect($url);
     }
 }
@@ -90,7 +90,7 @@ if (!empty($toversion) && !empty($fromversion) && confirm_sesskey()) {
     $totalversionstodelete += 1; //added 1 as toversion should be included
 
     if (($totalversionstodelete >= $versioncount) || ($versioncount <= 1)) {
-        throw new \moodle_exception('incorrectdeleteversions', 'wiki');
+        throw new \powereduc_exception('incorrectdeleteversions', 'wiki');
     } else {
         $versions = array();
         for ($i = $fromversion; $i <= $toversion; $i++) {

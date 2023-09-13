@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -193,7 +193,7 @@ class mod_bigbluebuttonbn_generator extends \testing_module_generator {
 
         if (isset($data['imported']) && filter_var($data['imported'], FILTER_VALIDATE_BOOLEAN)) {
             if (empty($data['importedid'])) {
-                throw new moodle_exception('error');
+                throw new powereduc_exception('error');
             }
             $recording = recording::get_record(['recordingid' => $data['importedid']]);
             $recording->imported = true;
@@ -246,7 +246,7 @@ class mod_bigbluebuttonbn_generator extends \testing_module_generator {
             'sequence' => 1,
             'meta' => [
                 'bn-presenter-name' => $data['presentername'] ?? 'Fake presenter',
-                'bn-recording-ready-url' => new moodle_url('/mod/bigbluebuttonbn/bbb_broker.php', [
+                'bn-recording-ready-url' => new powereduc_url('/mod/bigbluebuttonbn/bbb_broker.php', [
                     'action' => 'recording_ready',
                     'bigbluebuttonbn' => $instance->get_instance_id()
                 ]),
@@ -300,7 +300,7 @@ class mod_bigbluebuttonbn_generator extends \testing_module_generator {
                 'bbb-context-label' => $instance->get_course()->shortname,
                 'bbb-context-name' => $instance->get_course()->fullname,
                 'bbb-origin' => 'Moodle',
-                'bbb-origin-tag' => 'moodle-mod_bigbluebuttonbn (TODO version)',
+                'bbb-origin-tag' => 'powereduc-mod_bigbluebuttonbn (TODO version)',
                 'bbb-recording-description' => $instance->get_meeting_description(),
                 'bbb-recording-name' => $instance->get_meeting_name(),
             ],
@@ -360,10 +360,10 @@ class mod_bigbluebuttonbn_generator extends \testing_module_generator {
      *
      * @param string $endpoint
      * @param array $params
-     * @return moodle_url
+     * @return powereduc_url
      */
-    protected function get_mocked_server_url(string $endpoint = '', array $params = []): moodle_url {
-        return new moodle_url(TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER . '/' . $endpoint, $params);
+    protected function get_mocked_server_url(string $endpoint = '', array $params = []): powereduc_url {
+        return new powereduc_url(TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER . '/' . $endpoint, $params);
     }
 
     /**
@@ -373,7 +373,7 @@ class mod_bigbluebuttonbn_generator extends \testing_module_generator {
      * @param array $params
      * @param array $mockdata
      * @return SimpleXMLElement|bool
-     * @throws moodle_exception
+     * @throws powereduc_exception
      */
     protected function send_mock_request(string $endpoint, array $params = [], array $mockdata = []): SimpleXMLElement {
         $url = $this->get_mocked_server_url($endpoint, $params);
@@ -394,7 +394,7 @@ class mod_bigbluebuttonbn_generator extends \testing_module_generator {
 
         $retvalue = @simplexml_load_string($result, 'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
         if ($retvalue === false) {
-            throw new moodle_exception('mockserverconnfailed', 'mod_bigbluebutton');
+            throw new powereduc_exception('mockserverconnfailed', 'mod_bigbluebutton');
         }
         return $retvalue;
     }

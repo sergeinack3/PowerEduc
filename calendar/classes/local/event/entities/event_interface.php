@@ -26,7 +26,7 @@ namespace core_calendar\local\event\entities;
 
 use core_calendar\local\event\proxies\proxy_interface;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface for an event class.

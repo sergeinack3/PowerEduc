@@ -22,7 +22,7 @@
  */
 namespace core\event;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class blog_entry_deleted

@@ -27,7 +27,7 @@ namespace core_h5p;
 use context_system;
 use core_h5p\local\library\autoloader;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Helper class for the H5P area.

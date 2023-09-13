@@ -24,7 +24,7 @@
 
 namespace tool_uploadcourse\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for tool_uploadcourse implementing null_provider.

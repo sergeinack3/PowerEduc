@@ -24,7 +24,7 @@
  */
 
 namespace core_h5p\event;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * H5P viewed event class.

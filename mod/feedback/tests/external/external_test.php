@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * @package    mod_feedback
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.3
  */
@@ -30,7 +30,7 @@ use externallib_advanced_testcase;
 use feedback_item_multichoice;
 use mod_feedback_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -42,7 +42,7 @@ require_once($CFG->dirroot . '/mod/feedback/lib.php');
  *
  * @package    mod_feedback
  * @category   external
- * @copyright  2017 Juan Leyva <juan@moodle.com>
+ * @copyright  2017 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @since      Moodle 3.3
  */
@@ -270,7 +270,7 @@ class external_test extends externallib_advanced_testcase {
      */
     public function test_view_feedback_invalid_id() {
         // Test invalid instance id.
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::view_feedback(0);
     }
     /**
@@ -279,7 +279,7 @@ class external_test extends externallib_advanced_testcase {
     public function test_view_feedback_not_enrolled_user() {
         $usernotenrolled = self::getDataGenerator()->create_user();
         $this->setUser($usernotenrolled);
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::view_feedback(0);
     }
     /**
@@ -290,7 +290,7 @@ class external_test extends externallib_advanced_testcase {
         // We need a explicit prohibit since this capability is allowed for students by default.
         assign_capability('mod/feedback:view', CAP_PROHIBIT, $this->studentrole->id, $this->context->id);
         accesslib_clear_all_caches_for_unit_testing();
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::view_feedback(0);
     }
     /**
@@ -309,8 +309,8 @@ class external_test extends externallib_advanced_testcase {
         // Checking that the event contains the expected values.
         $this->assertInstanceOf('\mod_feedback\event\course_module_viewed', $event);
         $this->assertEquals($this->context, $event->get_context());
-        $moodledata = new \moodle_url('/mod/feedback/view.php', array('id' => $this->cm->id));
-        $this->assertEquals($moodledata, $event->get_url());
+        $powereducdata = new \powereduc_url('/mod/feedback/view.php', array('id' => $this->cm->id));
+        $this->assertEquals($powereducdata, $event->get_url());
         $this->assertEventContextNotUsed($event);
         $this->assertNotEmpty($event->get_name());
     }
@@ -773,7 +773,7 @@ class external_test extends externallib_advanced_testcase {
      */
     public function test_get_non_respondents_no_permissions() {
         $this->setUser($this->student);
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::get_non_respondents($this->feedback->id);
     }
 
@@ -782,7 +782,7 @@ class external_test extends externallib_advanced_testcase {
      */
     public function test_get_non_respondents_from_anonymous_feedback() {
         $this->setUser($this->student);
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $this->expectExceptionMessage(get_string('anonymous', 'feedback'));
         mod_feedback_external::get_non_respondents($this->feedback->id);
     }
@@ -852,7 +852,7 @@ class external_test extends externallib_advanced_testcase {
         // Create separated groups.
         $DB->set_field('course', 'groupmode', SEPARATEGROUPS);
         $DB->set_field('course', 'groupmodeforce', 1);
-        assign_capability('moodle/site:accessallgroups', CAP_PROHIBIT, $this->teacherrole->id, $this->context);
+        assign_capability('powereduc/site:accessallgroups', CAP_PROHIBIT, $this->teacherrole->id, $this->context);
         accesslib_clear_all_caches_for_unit_testing();
 
         $group1 = $generator->create_group(array('courseid' => $this->course->id));
@@ -965,7 +965,7 @@ class external_test extends externallib_advanced_testcase {
         $this->setUser($this->student);
 
         $this->expectExceptionMessage(get_string('anonymous', 'feedback'));
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::get_last_completed($this->feedback->id);
     }
 
@@ -992,7 +992,7 @@ class external_test extends externallib_advanced_testcase {
         $this->setUser($this->student);
 
         $this->expectExceptionMessage(get_string('anonymous', 'feedback'));
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::get_last_completed($this->feedback->id);
     }
 
@@ -1035,7 +1035,7 @@ class external_test extends externallib_advanced_testcase {
         $this->setUser($this->student);
 
         $this->expectExceptionMessage(get_string('not_completed_yet', 'feedback'));
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::get_last_completed($this->feedback->id);
     }
 
@@ -1061,7 +1061,7 @@ class external_test extends externallib_advanced_testcase {
         // Access the site feedback via course where I'm not enrolled.
         $othercourse = $this->getDataGenerator()->create_course();
 
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         mod_feedback_external::get_feedback_access_information($sitefeedback->id, $othercourse->id);
     }
 
@@ -1085,7 +1085,7 @@ class external_test extends externallib_advanced_testcase {
         $othercourse = $this->getDataGenerator()->create_course();
         $this->getDataGenerator()->enrol_user($this->student->id, $othercourse->id, $this->studentrole->id, 'manual');
 
-        $this->expectException('\moodle_exception');
+        $this->expectException('\powereduc_exception');
         $this->expectExceptionMessage(get_string('cannotaccess', 'mod_feedback'));
         mod_feedback_external::get_feedback_access_information($sitefeedback->id, $othercourse->id);
     }

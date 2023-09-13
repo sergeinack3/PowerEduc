@@ -24,7 +24,7 @@
 
 namespace core_filters\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for core_filters implementing null_provider.

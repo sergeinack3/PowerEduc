@@ -49,7 +49,7 @@ use restore_controller;
 use stdClass;
 use testing_data_generator;
 
-defined('MOODLE_INTERNAL') or die();
+defined('POWEREDUC_INTERNAL') or die();
 
 // Require library globally because it's constants are used within dataProvider methods, executed before setUpBeforeClass.
 global $CFG;
@@ -2211,7 +2211,7 @@ class courselib_test extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
 
         // Create backup file and save it to the backup location.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $userid);
         $sink = $this->redirectEvents();
         $bc->execute_plan();
@@ -2257,7 +2257,7 @@ class courselib_test extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
 
         // Create backup file and save it to the backup location.
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
             backup::INTERACTIVE_NO, backup::MODE_GENERAL, $userid);
         $bc->execute_plan();
         $results = $bc->get_results();

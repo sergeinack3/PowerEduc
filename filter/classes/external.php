@@ -23,7 +23,7 @@
  */
 
 namespace core_filters;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->libdir . '/filterlib.php');

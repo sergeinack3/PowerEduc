@@ -24,7 +24,7 @@
 
 namespace gradereport_singleview\local\ui;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use grade_grade;
 
@@ -120,7 +120,7 @@ class exclude extends grade_attribute_format implements be_checked, be_disabled,
 
             // Fill in arbitrary grade to be excluded.
             $gradeitem->update_final_grade(
-                $this->grade->userid, null, 'singleview', null, FORMAT_MOODLE
+                $this->grade->userid, null, 'singleview', null, FORMAT_POWEREDUC
             );
 
             $gradeparams = [

@@ -27,7 +27,7 @@ namespace tool_dataprivacy\event;
 use \tool_dataprivacy\api;
 use \tool_dataprivacy\data_request;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Event observers supported by this module.

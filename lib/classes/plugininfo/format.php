@@ -25,7 +25,7 @@ namespace core\plugininfo;
 
 use moodle_url, part_of_admin_tree, admin_settingpage, core_plugin_manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Class for course formats

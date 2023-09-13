@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Exception indicating user is not allowed to use external function in the current context.
@@ -224,7 +224,7 @@ class external_api {
 
             // Do not allow access to write or delete webservices as a public user.
             if ($externalfunctioninfo->loginrequired && !WS_SERVER) {
-                if (defined('NO_MOODLE_COOKIES') && NO_MOODLE_COOKIES && !PHPUNIT_TEST) {
+                if (defined('NO_POWEREDUC_COOKIES') && NO_POWEREDUC_COOKIES && !PHPUNIT_TEST) {
                     throw new moodle_exception('servicerequireslogin', 'webservice');
                 }
                 if (!isloggedin()) {
@@ -893,7 +893,7 @@ class external_format_value extends external_value {
         }
 
         $desc = $textfieldname . ' format (' . FORMAT_HTML . ' = HTML, '
-                . FORMAT_MOODLE . ' = MOODLE, '
+                . FORMAT_POWEREDUC . ' = POWEREDUC, '
                 . FORMAT_PLAIN . ' = PLAIN or '
                 . FORMAT_MARKDOWN . ' = MARKDOWN)';
 
@@ -910,7 +910,7 @@ class external_format_value extends external_value {
  * @since Moodle 2.3
  */
 function external_validate_format($format) {
-    $allowedformats = array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN);
+    $allowedformats = array(FORMAT_HTML, FORMAT_POWEREDUC, FORMAT_PLAIN, FORMAT_MARKDOWN);
     if (!in_array($format, $allowedformats)) {
         throw new moodle_exception('formatnotsupported', 'webservice', '' , null,
                 'The format with value=' . $format . ' is not supported by this Moodle site');
@@ -1120,7 +1120,7 @@ function external_generate_token_for_current_user($service) {
         $token = array_pop($tokens);
     } else {
         $context = context_system::instance();
-        $isofficialservice = $service->shortname == MOODLE_OFFICIAL_MOBILE_SERVICE;
+        $isofficialservice = $service->shortname == POWEREDUC_OFFICIAL_MOBILE_SERVICE;
 
         if (($isofficialservice and has_capability('moodle/webservice:createmobiletoken', $context)) or
                 (!is_siteadmin($USER) && has_capability('moodle/webservice:createtoken', $context))) {
@@ -1189,7 +1189,7 @@ function external_log_token_request($token) {
     // Check if we need to notify the user about the new login via token.
     $loginip = getremoteaddr();
     if ($USER->lastip != $loginip &&
-            ((!WS_SERVER && !CLI_SCRIPT && NO_MOODLE_COOKIES) || PHPUNIT_TEST)) {
+            ((!WS_SERVER && !CLI_SCRIPT && NO_POWEREDUC_COOKIES) || PHPUNIT_TEST)) {
 
         $logintime = time();
         $useragent = \core_useragent::get_user_agent_string();

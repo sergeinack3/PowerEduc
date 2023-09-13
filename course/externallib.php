@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 use core_course\external\course_summary_exporter;
 use core_availability\info;
@@ -411,7 +411,7 @@ class core_course_external extends external_api {
                     'id' => -1,
                     'name' => '',
                     'summary' => '',
-                    'summaryformat' => FORMAT_MOODLE,
+                    'summaryformat' => FORMAT_POWEREDUC,
                     'modules' => $stealthmodules
                 );
             }
@@ -1412,7 +1412,7 @@ class core_course_external extends external_api {
 
         // Backup the course.
 
-        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $course->id, backup::FORMAT_POWEREDUC,
         backup::INTERACTIVE_NO, backup::MODE_SAMESITE, $USER->id);
 
         foreach ($backupsettings as $name => $value) {
@@ -1616,7 +1616,7 @@ class core_course_external extends external_api {
         require_capability('moodle/backup:backuptargetimport', $importfromcontext);
         require_capability('moodle/restore:restoretargetimport', $importtocontext);
 
-        $bc = new backup_controller(backup::TYPE_1COURSE, $importfrom->id, backup::FORMAT_MOODLE,
+        $bc = new backup_controller(backup::TYPE_1COURSE, $importfrom->id, backup::FORMAT_POWEREDUC,
                 backup::INTERACTIVE_NO, backup::MODE_IMPORT, $USER->id);
 
         foreach ($backupsettings as $name => $value) {

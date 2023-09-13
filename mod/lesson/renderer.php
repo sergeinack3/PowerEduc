@@ -1,29 +1,29 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle renderer used to display special elements of the lesson module
+ * PowerEduc renderer used to display special elements of the lesson module
  *
  * @package mod_lesson
  * @copyright  2009 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class mod_lesson_renderer extends plugin_renderer_base {
     /**
@@ -55,7 +55,7 @@ class mod_lesson_renderer extends plugin_renderer_base {
 
         $canmanage = has_capability('mod/lesson:manage', $context);
         $activityheader = $this->page->activityheader;
-        $activitypage = new moodle_url('/mod/' . $this->page->activityname . '/view.php');
+        $activitypage = new powereduc_url('/mod/' . $this->page->activityname . '/view.php');
         $setactive = $activitypage->compare($this->page->url, URL_MATCH_BASE);
         if ($activityheader->is_title_allowed()) {
             $title = $canmanage && $setactive ?
@@ -173,12 +173,12 @@ class mod_lesson_renderer extends plugin_renderer_base {
         $output = $this->output->box(get_string('youhaveseen','lesson'), 'generalbox boxaligncenter');
         $output .= $this->output->box_start('center');
 
-        $yeslink = html_writer::link(new moodle_url('/mod/lesson/view.php', array('id' => $this->page->cm->id,
+        $yeslink = html_writer::link(new powereduc_url('/mod/lesson/view.php', array('id' => $this->page->cm->id,
             'pageid' => $lastpageseenid, 'startlastseen' => 'yes')), get_string('yes'), array('class' => 'btn btn-primary'));
         $output .= html_writer::tag('span', $yeslink, array('class'=>'lessonbutton standardbutton'));
         $output .= '&nbsp;';
 
-        $nolink = html_writer::link(new moodle_url('/mod/lesson/view.php', array('id' => $this->page->cm->id,
+        $nolink = html_writer::link(new powereduc_url('/mod/lesson/view.php', array('id' => $this->page->cm->id,
             'pageid' => $lesson->firstpageid, 'startlastseen' => 'no')), get_string('no'), array('class' => 'btn btn-secondary'));
         $output .= html_writer::tag('span', $nolink, array('class'=>'lessonbutton standardbutton'));
 
@@ -226,7 +226,7 @@ class mod_lesson_renderer extends plugin_renderer_base {
         while ($pageid != 0) {
             $page = $lesson->load_page($pageid);
             $data = array();
-            $url = new moodle_url('/mod/lesson/edit.php', array(
+            $url = new powereduc_url('/mod/lesson/edit.php', array(
                 'id'     => $this->page->cm->id,
                 'mode'   => 'single',
                 'pageid' => $page->id
@@ -348,7 +348,7 @@ class mod_lesson_renderer extends plugin_renderer_base {
 
         $links = array();
 
-        $importquestionsurl = new moodle_url('/mod/lesson/import.php',array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid));
+        $importquestionsurl = new powereduc_url('/mod/lesson/import.php',array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid));
         $links[] = html_writer::link($importquestionsurl, get_string('importquestions', 'lesson'));
 
         $manager = lesson_page_type_manager::get($lesson);
@@ -356,7 +356,7 @@ class mod_lesson_renderer extends plugin_renderer_base {
             $links[] = html_writer::link($link['addurl'], $link['name']);
         }
 
-        $addquestionurl = new moodle_url('/mod/lesson/editpage.php', array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid));
+        $addquestionurl = new powereduc_url('/mod/lesson/editpage.php', array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid));
         $links[] = html_writer::link($addquestionurl, get_string('addaquestionpagehere', 'lesson'));
 
         return $this->output->box(implode(" | \n", $links), 'addlinks');
@@ -374,7 +374,7 @@ class mod_lesson_renderer extends plugin_renderer_base {
         $output = $this->output->heading(get_string("whatdofirst", "lesson"), 3);
         $links = array();
 
-        $importquestionsurl = new moodle_url('/mod/lesson/import.php',array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid));
+        $importquestionsurl = new powereduc_url('/mod/lesson/import.php',array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid));
         $links[] = html_writer::link($importquestionsurl, get_string('importquestions', 'lesson'));
 
         $manager = lesson_page_type_manager::get($lesson);
@@ -383,7 +383,7 @@ class mod_lesson_renderer extends plugin_renderer_base {
             $links[] = html_writer::link($link['addurl'], $link['name']);
         }
 
-        $addquestionurl = new moodle_url('/mod/lesson/editpage.php', array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid, 'firstpage'=>1));
+        $addquestionurl = new powereduc_url('/mod/lesson/editpage.php', array('id'=>$this->page->cm->id, 'pageid'=>$prevpageid, 'firstpage'=>1));
         $links[] = html_writer::link($addquestionurl, get_string('addaquestionpage', 'lesson'));
 
         return $this->output->box($output.'<p>'.implode('</p><p>', $links).'</p>', 'generalbox firstpageoptions');
@@ -403,30 +403,30 @@ class mod_lesson_renderer extends plugin_renderer_base {
         $actions = array();
 
         if ($printmove) {
-            $url = new moodle_url('/mod/lesson/lesson.php',
+            $url = new powereduc_url('/mod/lesson/lesson.php',
                     array('id' => $this->page->cm->id, 'action' => 'move', 'pageid' => $page->id, 'sesskey' => sesskey()));
             $label = get_string('movepagenamed', 'lesson', format_string($page->title));
             $img = $this->output->pix_icon('t/move', $label);
             $actions[] = html_writer::link($url, $img, array('title' => $label));
         }
-        $url = new moodle_url('/mod/lesson/editpage.php', array('id' => $this->page->cm->id, 'pageid' => $page->id, 'edit' => 1));
+        $url = new powereduc_url('/mod/lesson/editpage.php', array('id' => $this->page->cm->id, 'pageid' => $page->id, 'edit' => 1));
         $label = get_string('updatepagenamed', 'lesson', format_string($page->title));
         $img = $this->output->pix_icon('t/edit', $label);
         $actions[] = html_writer::link($url, $img, array('title' => $label));
 
         // Duplicate action.
-        $url = new moodle_url('/mod/lesson/lesson.php', array('id' => $this->page->cm->id, 'pageid' => $page->id,
+        $url = new powereduc_url('/mod/lesson/lesson.php', array('id' => $this->page->cm->id, 'pageid' => $page->id,
                 'action' => 'duplicate', 'sesskey' => sesskey()));
         $label = get_string('duplicatepagenamed', 'lesson', format_string($page->title));
         $img = $this->output->pix_icon('e/copy', $label, 'mod_lesson');
         $actions[] = html_writer::link($url, $img, array('title' => $label));
 
-        $url = new moodle_url('/mod/lesson/view.php', array('id' => $this->page->cm->id, 'pageid' => $page->id));
+        $url = new powereduc_url('/mod/lesson/view.php', array('id' => $this->page->cm->id, 'pageid' => $page->id));
         $label = get_string('previewpagenamed', 'lesson', format_string($page->title));
         $img = $this->output->pix_icon('t/preview', $label);
         $actions[] = html_writer::link($url, $img, array('title' => $label));
 
-        $url = new moodle_url('/mod/lesson/lesson.php',
+        $url = new powereduc_url('/mod/lesson/lesson.php',
                 array('id' => $this->page->cm->id, 'action' => 'confirmdelete', 'pageid' => $page->id, 'sesskey' => sesskey()));
         $label = get_string('deletepagenamed', 'lesson', format_string($page->title));
         $img = $this->output->pix_icon('t/delete', $label);
@@ -441,7 +441,7 @@ class mod_lesson_renderer extends plugin_renderer_base {
             }
             $options[0] = get_string('addaquestionpage', 'lesson');
 
-            $addpageurl = new moodle_url('/mod/lesson/editpage.php', array('id'=>$this->page->cm->id, 'pageid'=>$page->id, 'sesskey'=>sesskey()));
+            $addpageurl = new powereduc_url('/mod/lesson/editpage.php', array('id'=>$this->page->cm->id, 'pageid'=>$page->id, 'sesskey'=>sesskey()));
             $addpageselect = new single_select($addpageurl, 'qtype', $options, null, array(''=>get_string('addanewpage', 'lesson').'...'), 'addpageafter'.$page->id);
             $addpageselect->attributes = ['aria-label' => get_string('actions', 'lesson')];
             $addpageselector = $this->output->render($addpageselect);
@@ -627,13 +627,13 @@ class mod_lesson_renderer extends plugin_renderer_base {
             $output .= $data->activitylink;
         }
 
-        $url = new moodle_url('/course/view.php', array('id' => $course->id));
+        $url = new powereduc_url('/course/view.php', array('id' => $course->id));
         $output .= html_writer::link($url, get_string('returnto', 'lesson', format_string($course->fullname, true)),
                 array('class' => 'centerpadded lessonbutton standardbutton pr-3'));
 
         if (has_capability('gradereport/user:view', context_course::instance($course->id))
                 && $course->showgrades && $lesson->grade != 0 && !$lesson->practice) {
-            $url = new moodle_url('/grade/index.php', array('id' => $course->id));
+            $url = new powereduc_url('/grade/index.php', array('id' => $course->id));
             $output .= html_writer::link($url, get_string('viewgrades', 'lesson'),
                 array('class' => 'centerpadded lessonbutton standardbutton pr-3'));
         }

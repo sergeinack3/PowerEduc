@@ -1,29 +1,29 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External forum API
  *
  * @package    mod_forum
- * @copyright  2012 Mark Nelson <markn@moodle.com>
+ * @copyright  2012 Mark Nelson <markn@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once("$CFG->libdir/externallib.php");
 
@@ -36,7 +36,7 @@ class mod_forum_external extends external_api {
      * Describes the parameters for get_forum.
      *
      * @return external_function_parameters
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_forums_by_courses_parameters() {
         return new external_function_parameters (
@@ -54,7 +54,7 @@ class mod_forum_external extends external_api {
      *
      * @param array $courseids the course ids
      * @return array the forum details
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_forums_by_courses($courseids = array()) {
         global $CFG;
@@ -120,7 +120,7 @@ class mod_forum_external extends external_api {
      * Describes the get_forum return value.
      *
      * @return external_single_structure
-     * @since Moodle 2.5
+     * @since PowerEduc 2.5
      */
     public static function get_forums_by_courses_returns() {
         // This should be using helper_for_get_mods_by_courses::standard_coursemodule_elements_returns, but it is so horribly
@@ -290,7 +290,7 @@ class mod_forum_external extends external_api {
      *
      * @deprecated since 3.7
      * @return external_function_parameters
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     public static function get_forum_discussions_paginated_parameters() {
         return new external_function_parameters (
@@ -316,7 +316,7 @@ class mod_forum_external extends external_api {
      * @param int $perpage items per page
      *
      * @return array the forum discussion details including warnings
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     public static function get_forum_discussions_paginated($forumid, $sortby = 'timemodified', $sortdirection = 'DESC',
             $page = -1, $perpage = 0) {
@@ -372,7 +372,7 @@ class mod_forum_external extends external_api {
         $alldiscussions = forum_get_discussions($cm, $sort, true, -1, -1, true, $page, $perpage, FORUM_POSTS_ALL_USER_GROUPS);
 
         if ($alldiscussions) {
-            $canviewfullname = has_capability('moodle/site:viewfullnames', $modcontext);
+            $canviewfullname = has_capability('powereduc/site:viewfullnames', $modcontext);
 
             // Get the unreads array, this takes a forum id and returns data for all discussions.
             $unreads = array();
@@ -383,7 +383,7 @@ class mod_forum_external extends external_api {
             }
             // The forum function returns the replies for all the discussions in a given forum.
             $canseeprivatereplies = has_capability('mod/forum:readprivatereplies', $modcontext);
-            $canlock = has_capability('moodle/course:manageactivities', $modcontext, $USER);
+            $canlock = has_capability('powereduc/course:manageactivities', $modcontext, $USER);
             $replies = forum_count_discussion_replies($forumid, $sort, -1, $page, $perpage, $canseeprivatereplies);
 
             foreach ($alldiscussions as $discussion) {
@@ -488,7 +488,7 @@ class mod_forum_external extends external_api {
      *
      * @deprecated since 3.7
      * @return external_single_structure
-     * @since Moodle 2.8
+     * @since PowerEduc 2.8
      */
     public static function get_forum_discussions_paginated_returns() {
         return new external_single_structure(
@@ -540,7 +540,7 @@ class mod_forum_external extends external_api {
      * Describes the parameters for get_forum_discussions.
      *
      * @return external_function_parameters
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_forum_discussions_parameters() {
         return new external_function_parameters (
@@ -566,7 +566,7 @@ class mod_forum_external extends external_api {
      *
      *
      * @return array the forum discussion details including warnings
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_forum_discussions(int $forumid, ?int $sortorder = -1, ?int $page = -1,
             ?int $perpage = 0, ?int $groupid = 0) {
@@ -624,7 +624,7 @@ class mod_forum_external extends external_api {
         $forumvault = $vaultfactory->get_forum_vault();
         $forum = $forumvault->get_from_id($forumid);
         if (!$forum) {
-            throw new \moodle_exception("Unable to find forum with id {$forumid}");
+            throw new \powereduc_exception("Unable to find forum with id {$forumid}");
         }
         $forumdatamapper = $legacydatamapperfactory->get_forum_data_mapper();
         $forumrecord = $forumdatamapper->to_legacy_object($forum);
@@ -642,7 +642,7 @@ class mod_forum_external extends external_api {
 
         // Check they have the view forum capability.
         if (!$capabilitymanager->can_view_discussions($USER)) {
-            throw new moodle_exception('noviewdiscussionspermission', 'forum');
+            throw new powereduc_exception('noviewdiscussionspermission', 'forum');
         }
 
         $alldiscussions = mod_forum_get_discussion_summaries($forum, $USER, $groupid, $sortorder, $page, $perpage);
@@ -774,7 +774,7 @@ class mod_forum_external extends external_api {
      * Describes the get_forum_discussions return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_forum_discussions_returns() {
         return new external_single_structure(
@@ -828,7 +828,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_forum_parameters() {
         return new external_function_parameters(
@@ -843,8 +843,8 @@ class mod_forum_external extends external_api {
      *
      * @param int $forumid the forum instance id
      * @return array of warnings and status result
-     * @since Moodle 2.9
-     * @throws moodle_exception
+     * @since PowerEduc 2.9
+     * @throws powereduc_exception
      */
     public static function view_forum($forumid) {
         global $DB, $CFG;
@@ -878,7 +878,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_forum_returns() {
         return new external_single_structure(
@@ -893,7 +893,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_forum_discussion_parameters() {
         return new external_function_parameters(
@@ -908,8 +908,8 @@ class mod_forum_external extends external_api {
      *
      * @param int $discussionid the discussion id
      * @return array of warnings and status result
-     * @since Moodle 2.9
-     * @throws moodle_exception
+     * @since PowerEduc 2.9
+     * @throws powereduc_exception
      */
     public static function view_forum_discussion($discussionid) {
         global $DB, $CFG, $USER;
@@ -949,7 +949,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 2.9
+     * @since PowerEduc 2.9
      */
     public static function view_forum_discussion_returns() {
         return new external_single_structure(
@@ -964,7 +964,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function add_discussion_post_parameters() {
         return new external_function_parameters(
@@ -1003,8 +1003,8 @@ class mod_forum_external extends external_api {
      * @param array $options optional settings
      * @param string $messageformat The format of the message, defaults to FORMAT_HTML for BC
      * @return array of warnings and the new post id
-     * @since Moodle 3.0
-     * @throws moodle_exception
+     * @since PowerEduc 3.0
+     * @throws powereduc_exception
      */
     public static function add_discussion_post($postid, $subject, $message, $options = array(), $messageformat = FORMAT_HTML) {
         global $CFG, $USER;
@@ -1033,11 +1033,11 @@ class mod_forum_external extends external_api {
         $warnings = array();
 
         if (!$parent = forum_get_post_full($params['postid'])) {
-            throw new moodle_exception('invalidparentpostid', 'forum');
+            throw new powereduc_exception('invalidparentpostid', 'forum');
         }
 
         if (!$discussion = $discussionvault->get_from_id($parent->discussion)) {
-            throw new moodle_exception('notpartofdiscussion', 'forum');
+            throw new powereduc_exception('notpartofdiscussion', 'forum');
         }
 
         // Request and permission validation.
@@ -1086,13 +1086,13 @@ class mod_forum_external extends external_api {
                     $value = clean_param($option['value'], PARAM_BOOL);
                     break;
                 default:
-                    throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                    throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
             }
             $options[$name] = $value;
         }
 
         if (!$capabilitymanager->can_post_in_discussion($USER, $discussion)) {
-            throw new moodle_exception('nopostforum', 'forum');
+            throw new powereduc_exception('nopostforum', 'forum');
         }
 
         $thresholdwarning = forum_check_throttling($forumrecord, $cm);
@@ -1154,7 +1154,7 @@ class mod_forum_external extends external_api {
                 forum_post_subscription($settings, $forumrecord, $discussionrecord);
             }
         } else {
-            throw new moodle_exception('couldnotadd', 'forum');
+            throw new powereduc_exception('couldnotadd', 'forum');
         }
 
         $builderfactory = \mod_forum\local\container::get_builder_factory();
@@ -1186,7 +1186,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function add_discussion_post_returns() {
         return new external_single_structure(
@@ -1236,7 +1236,7 @@ class mod_forum_external extends external_api {
 
         // Does the user have the ability to favourite the discussion?
         if (!$capabilitymanager->can_favourite_discussion($USER)) {
-            throw new moodle_exception('cannotfavourite', 'forum');
+            throw new powereduc_exception('cannotfavourite', 'forum');
         }
         $usercontext = context_user::instance($USER->id);
         $ufservice = \core_favourites\service_factory::get_service_for_user_context($usercontext);
@@ -1258,7 +1258,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function toggle_favourite_state_returns() {
         return discussion_exporter::get_read_structure();
@@ -1282,7 +1282,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function add_discussion_parameters() {
         return new external_function_parameters(
@@ -1319,8 +1319,8 @@ class mod_forum_external extends external_api {
      * @param int $groupid the user course group
      * @param array $options optional settings
      * @return array of warnings and the new discussion id
-     * @since Moodle 3.0
-     * @throws moodle_exception
+     * @since PowerEduc 3.0
+     * @throws powereduc_exception
      */
     public static function add_discussion($forumid, $subject, $message, $groupid = 0, $options = array()) {
         global $DB, $CFG;
@@ -1371,7 +1371,7 @@ class mod_forum_external extends external_api {
                     }
                     break;
                 default:
-                    throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                    throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
             }
             $options[$name] = $value;
         }
@@ -1392,7 +1392,7 @@ class mod_forum_external extends external_api {
         }
 
         if (!forum_user_can_post_discussion($forum, $groupid, -1, $cm, $context)) {
-            throw new moodle_exception('cannotcreatediscussion', 'forum');
+            throw new powereduc_exception('cannotcreatediscussion', 'forum');
         }
 
         $thresholdwarning = forum_check_throttling($forum, $cm);
@@ -1448,7 +1448,7 @@ class mod_forum_external extends external_api {
             $settings->discussionsubscribe = $options['discussionsubscribe'];
             forum_post_subscription($settings, $forum, $discussion);
         } else {
-            throw new moodle_exception('couldnotadd', 'forum');
+            throw new powereduc_exception('couldnotadd', 'forum');
         }
 
         $result = array();
@@ -1461,7 +1461,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function add_discussion_returns() {
         return new external_single_structure(
@@ -1476,7 +1476,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function can_add_discussion_parameters() {
         return new external_function_parameters(
@@ -1494,8 +1494,8 @@ class mod_forum_external extends external_api {
      * @param int $forumid the forum instance id
      * @param int $groupid the group to check, default to active group. Use -1 to check if the user can post in all the groups.
      * @return array of warnings and the status (true if the user can add discussions)
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function can_add_discussion($forumid, $groupid = null) {
         global $DB, $CFG;
@@ -1529,7 +1529,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function can_add_discussion_returns() {
         return new external_single_structure(
@@ -1548,7 +1548,7 @@ class mod_forum_external extends external_api {
      * Describes the parameters for get_forum_access_information.
      *
      * @return external_external_function_parameters
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_forum_access_information_parameters() {
         return new external_function_parameters (
@@ -1563,8 +1563,8 @@ class mod_forum_external extends external_api {
      *
      * @param int $forumid forum instance id
      * @return array of warnings and the access information
-     * @since Moodle 3.7
-     * @throws  moodle_exception
+     * @since PowerEduc 3.7
+     * @throws  powereduc_exception
      */
     public static function get_forum_access_information($forumid) {
         global $DB;
@@ -1595,7 +1595,7 @@ class mod_forum_external extends external_api {
      * Describes the get_forum_access_information return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      */
     public static function get_forum_access_information_returns() {
 
@@ -1648,7 +1648,7 @@ class mod_forum_external extends external_api {
 
         if (!\mod_forum\subscriptions::is_subscribable($forumrecord)) {
             // Nothing to do. We won't actually output any content here though.
-            throw new \moodle_exception('cannotsubscribe', 'mod_forum');
+            throw new \powereduc_exception('cannotsubscribe', 'mod_forum');
         }
 
         $issubscribed = \mod_forum\subscriptions::is_subscribed(
@@ -1721,7 +1721,7 @@ class mod_forum_external extends external_api {
         $managerfactory = mod_forum\local\container::get_manager_factory();
         $capabilitymanager = $managerfactory->get_capability_manager($forum);
         if (!$capabilitymanager->can_manage_forum($USER)) {
-            throw new moodle_exception('errorcannotlock', 'forum');
+            throw new powereduc_exception('errorcannotlock', 'forum');
         }
 
         // If the targetstate(currentstate) is not 0 then it should be set to the current time.
@@ -1797,7 +1797,7 @@ class mod_forum_external extends external_api {
         $legacydatamapperfactory = mod_forum\local\container::get_legacy_data_mapper_factory();
         if (!$capabilitymanager->can_pin_discussions($USER)) {
             // Nothing to do. We won't actually output any content here though.
-            throw new \moodle_exception('cannotpindiscussions', 'mod_forum');
+            throw new \powereduc_exception('cannotpindiscussions', 'mod_forum');
         }
 
         $discussion->set_pinned($targetstate);
@@ -1837,7 +1837,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function delete_post_parameters() {
         return new external_function_parameters(
@@ -1852,8 +1852,8 @@ class mod_forum_external extends external_api {
      *
      * @param int $postid post to be deleted, it can be a discussion topic post.
      * @return array of warnings and the status (true if the post/discussion was deleted)
-     * @since Moodle 3.8
-     * @throws moodle_exception
+     * @since PowerEduc 3.8
+     * @throws powereduc_exception
      */
     public static function delete_post($postid) {
         global $USER, $CFG;
@@ -1872,18 +1872,18 @@ class mod_forum_external extends external_api {
         $postentity = $postvault->get_from_id($params['postid']);
 
         if (empty($postentity)) {
-            throw new moodle_exception('invalidpostid', 'forum');
+            throw new powereduc_exception('invalidpostid', 'forum');
         }
 
         $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
 
         if (empty($discussionentity)) {
-            throw new moodle_exception('notpartofdiscussion', 'forum');
+            throw new powereduc_exception('notpartofdiscussion', 'forum');
         }
 
         $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
         if (empty($forumentity)) {
-            throw new moodle_exception('invalidforumid', 'forum');
+            throw new powereduc_exception('invalidforumid', 'forum');
         }
 
         $context = $forumentity->get_context();
@@ -1931,7 +1931,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function delete_post_returns() {
         return new external_single_structure(
@@ -2101,7 +2101,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function get_discussion_post_parameters() {
         return new external_function_parameters(
@@ -2116,8 +2116,8 @@ class mod_forum_external extends external_api {
      *
      * @param int $postid post to fetch
      * @return array of post and warnings (if any)
-     * @since Moodle 3.8
-     * @throws moodle_exception
+     * @since PowerEduc 3.8
+     * @throws powereduc_exception
      */
     public static function get_discussion_post($postid) {
         global $USER, $CFG;
@@ -2134,15 +2134,15 @@ class mod_forum_external extends external_api {
 
         $postentity = $postvault->get_from_id($params['postid']);
         if (empty($postentity)) {
-            throw new moodle_exception('invalidpostid', 'forum');
+            throw new powereduc_exception('invalidpostid', 'forum');
         }
         $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
         if (empty($discussionentity)) {
-            throw new moodle_exception('notpartofdiscussion', 'forum');
+            throw new powereduc_exception('notpartofdiscussion', 'forum');
         }
         $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
         if (empty($forumentity)) {
-            throw new moodle_exception('invalidforumid', 'forum');
+            throw new powereduc_exception('invalidforumid', 'forum');
         }
         self::validate_context($forumentity->get_context());
 
@@ -2150,7 +2150,7 @@ class mod_forum_external extends external_api {
         $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
 
         if (!$capabilitymanager->can_view_post($USER, $discussionentity, $postentity)) {
-            throw new moodle_exception('noviewdiscussionspermission', 'forum');
+            throw new powereduc_exception('noviewdiscussionspermission', 'forum');
         }
 
         $builderfactory = mod_forum\local\container::get_builder_factory();
@@ -2168,7 +2168,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function get_discussion_post_returns() {
         return new external_single_structure(
@@ -2183,7 +2183,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function prepare_draft_area_for_post_parameters() {
         return new external_function_parameters(
@@ -2212,8 +2212,8 @@ class mod_forum_external extends external_api {
      * @param int $draftitemid the draft item id to use. 0 to generate a new one.
      * @param array $filestokeep only keep these files in the draft file area. Empty for keeping all.
      * @return array of files in the area, the area options and the draft item id
-     * @since Moodle 3.8
-     * @throws moodle_exception
+     * @since PowerEduc 3.8
+     * @throws powereduc_exception
      */
     public static function prepare_draft_area_for_post($postid, $area, $draftitemid = 0, $filestokeep = []) {
         global $USER;
@@ -2243,15 +2243,15 @@ class mod_forum_external extends external_api {
 
         $postentity = $postvault->get_from_id($params['postid']);
         if (empty($postentity)) {
-            throw new moodle_exception('invalidpostid', 'forum');
+            throw new powereduc_exception('invalidpostid', 'forum');
         }
         $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
         if (empty($discussionentity)) {
-            throw new moodle_exception('notpartofdiscussion', 'forum');
+            throw new powereduc_exception('notpartofdiscussion', 'forum');
         }
         $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
         if (empty($forumentity)) {
-            throw new moodle_exception('invalidforumid', 'forum');
+            throw new powereduc_exception('invalidforumid', 'forum');
         }
 
         $context = $forumentity->get_context();
@@ -2261,7 +2261,7 @@ class mod_forum_external extends external_api {
         $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
 
         if (!$capabilitymanager->can_edit_post($USER, $discussionentity, $postentity)) {
-            throw new moodle_exception('noviewdiscussionspermission', 'forum');
+            throw new powereduc_exception('noviewdiscussionspermission', 'forum');
         }
 
         if ($params['area'] == 'attachment') {
@@ -2322,7 +2322,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function prepare_draft_area_for_post_returns() {
         return new external_single_structure(
@@ -2347,7 +2347,7 @@ class mod_forum_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function update_discussion_post_parameters() {
         return new external_function_parameters(
@@ -2388,8 +2388,8 @@ class mod_forum_external extends external_api {
      * @param int $messageformat The format of the message, defaults to FORMAT_HTML
      * @param array $options different configuration options for the post to be updated.
      * @return array of warnings and the status (true if the post/discussion was deleted)
-     * @since Moodle 3.8
-     * @throws moodle_exception
+     * @since PowerEduc 3.8
+     * @throws powereduc_exception
      * @todo support more options: timed posts, groups change and tags.
      */
     public static function update_discussion_post($postid, $subject = '', $message = '', $messageformat = FORMAT_HTML,
@@ -2426,7 +2426,7 @@ class mod_forum_external extends external_api {
                     $value = clean_param($option['value'], PARAM_INT);
                     break;
                 default:
-                    throw new moodle_exception('errorinvalidparam', 'webservice', '', $name);
+                    throw new powereduc_exception('errorinvalidparam', 'webservice', '', $name);
             }
             $options[$name] = $value;
         }
@@ -2443,15 +2443,15 @@ class mod_forum_external extends external_api {
 
         $postentity = $postvault->get_from_id($params['postid']);
         if (empty($postentity)) {
-            throw new moodle_exception('invalidpostid', 'forum');
+            throw new powereduc_exception('invalidpostid', 'forum');
         }
         $discussionentity = $discussionvault->get_from_id($postentity->get_discussion_id());
         if (empty($discussionentity)) {
-            throw new moodle_exception('notpartofdiscussion', 'forum');
+            throw new powereduc_exception('notpartofdiscussion', 'forum');
         }
         $forumentity = $forumvault->get_from_id($discussionentity->get_forum_id());
         if (empty($forumentity)) {
-            throw new moodle_exception('invalidforumid', 'forum');
+            throw new powereduc_exception('invalidforumid', 'forum');
         }
         $forum = $forumdatamapper->to_legacy_object($forumentity);
         $capabilitymanager = $managerfactory->get_capability_manager($forumentity);
@@ -2460,7 +2460,7 @@ class mod_forum_external extends external_api {
         self::validate_context($modcontext);
 
         if (!$capabilitymanager->can_edit_post($USER, $discussionentity, $postentity)) {
-            throw new moodle_exception('cannotupdatepost', 'forum');
+            throw new powereduc_exception('cannotupdatepost', 'forum');
         }
 
         // Get the original post.
@@ -2536,7 +2536,7 @@ class mod_forum_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.8
+     * @since PowerEduc 3.8
      */
     public static function update_discussion_post_returns() {
         return new external_single_structure(

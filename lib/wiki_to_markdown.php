@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**#@+
  *  state defines
@@ -45,7 +45,7 @@ define( "LIST_DEFINITION", 4 ); // definition list active
 /**#@-*/
 
 /**
- * @package   moodlecore
+ * @package   powereduccore
  * @copyright Howard Miller, 2005
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -298,7 +298,7 @@ class WikiToMarkdown {
     $line = preg_replace("/ ([a-zA-Z]+):([0-9]+)\(([^)]+)\)/i",
        " [\\3](".$CFG->wwwroot."/mod/\\1/view.php?id=\\2) ", $line );
 
-    $coursefileurl = array(moodle_url::make_legacyfile_url($this->courseid, null));
+    $coursefileurl = array(powereduc_url::make_legacyfile_url($this->courseid, null));
 
     // Replace picture resource link
     $line = preg_replace("#/([a-zA-Z0-9./_-]+)(png|gif|jpg)\(([^)]+)\)#i",

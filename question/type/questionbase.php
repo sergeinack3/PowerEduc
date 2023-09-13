@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file defines the class {@link question_definition} and its subclasses.
@@ -35,14 +35,14 @@
  * Other interfaces:
  * - question_response_answer_comparer
  *
- * @package    moodlecore
+ * @package    powereduccore
  * @subpackage questiontypes
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 
 /**
@@ -333,10 +333,10 @@ abstract class question_definition {
     }
 
     /**
-     * @param moodle_page the page we are outputting to.
+     * @param powereduc_page the page we are outputting to.
      * @return qtype_renderer the renderer to use for outputting this question.
      */
-    public function get_renderer(moodle_page $page) {
+    public function get_renderer(powereduc_page $page) {
         return $page->get_renderer($this->qtype->plugin_name());
     }
 
@@ -380,7 +380,7 @@ abstract class question_definition {
      * - mod/quiz/report/responses/tests/fixtures/steps00.csv
      * - mod/quiz/report/statistics/tests/fixtures/stepsXX.csv
      *
-     * Also see {@link https://github.com/jamiepratt/moodle-quiz_simulate}, a quiz report plug in for uploading and downloading
+     * Also see {@link https://github.com/jamiepratt/powereduc-quiz_simulate}, a quiz report plug in for uploading and downloading
      * student responses as csv files.
      *
      * @param array $simulatedresponse an array of data representing a student response
@@ -492,7 +492,7 @@ abstract class question_definition {
     /**
      * Return the question settings that define this question as structured data.
      *
-     * This is used by external systems such as the Moodle mobile app, which want to display the question themselves,
+     * This is used by external systems such as the PowerEduc mobile app, which want to display the question themselves,
      * rather than using the renderer provided.
      *
      * This method should only return the data that the student is allowed to see or know, given the current state of

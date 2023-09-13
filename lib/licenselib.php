@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,11 +22,11 @@
  * @since      Moodle 2.0
  * @package    core
  * @subpackage lib
- * @copyright  2010 Dongsheng Cai <dongsheng@moodle.com>
+ * @copyright  2010 Dongsheng Cai <dongsheng@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 class license_manager {
 
@@ -68,7 +68,7 @@ class license_manager {
      *            fullname  => string the fullname of the license [required]
      *            source => string the homepage of the license type[required]
      *            enabled => int is it enabled?
-     *            version  => int a version number used by moodle [required]
+     *            version  => int a version number used by powereduc [required]
      * }
      */
     static public function save($license) {
@@ -153,7 +153,7 @@ class license_manager {
      *
      * @param object $license the license to update record for.
      *
-     * @throws \moodle_exception if attempting to update a core license.
+     * @throws \powereduc_exception if attempting to update a core license.
      */
     static protected function update($license) {
         global $DB;
@@ -167,7 +167,7 @@ class license_manager {
      *
      * @param string $licenseshortname the shortname of license.
      *
-     * @throws \moodle_exception when attempting to delete a license you are not allowed to.
+     * @throws \powereduc_exception when attempting to delete a license you are not allowed to.
      */
     static public function delete($licenseshortname) {
         global $DB;
@@ -179,7 +179,7 @@ class license_manager {
                 // Check that the license is not in use by any files, if so it cannot be deleted.
                 $countfilesusinglicense = $DB->count_records('files', ['license' => $licenseshortname]);
                 if ($countfilesusinglicense > 0) {
-                    throw new moodle_exception('cannotdeletelicenseinuse', 'license');
+                    throw new powereduc_exception('cannotdeletelicenseinuse', 'license');
                 }
                 $deletedsortorder = $licensetodelete->sortorder;
                 $DB->delete_records('license', ['id' => $licensetodelete->id]);
@@ -199,10 +199,10 @@ class license_manager {
                 self::set_active_licenses();
 
             } else {
-                throw new moodle_exception('cannotdeletecore', 'license');
+                throw new powereduc_exception('cannotdeletecore', 'license');
             }
         } else {
-            throw new moodle_exception('licensenotfoundshortname', 'license', $licenseshortname);
+            throw new powereduc_exception('licensenotfoundshortname', 'license', $licenseshortname);
         }
     }
 
@@ -244,7 +244,7 @@ class license_manager {
      * @param int $direction value to change sortorder of license by.
      * @param string $licenseshortname the shortname of license to changes sortorder for.
      *
-     * @throws \moodle_exception if attempting to use invalid direction value.
+     * @throws \powereduc_exception if attempting to use invalid direction value.
      */
     static public function change_license_sortorder(int $direction, string $licenseshortname) : void {
 
@@ -313,7 +313,7 @@ class license_manager {
         global $CFG;
         // Site default license cannot be disabled!
         if ($license == $CFG->sitedefaultlicense) {
-            throw new \moodle_exception('error');
+            throw new \powereduc_exception('error');
         }
         if ($license = self::get_license_by_shortname($license)) {
             $license->enabled = self::LICENSE_DISABLED;
@@ -377,7 +377,7 @@ class license_manager {
     }
 
     /**
-     * Install moodle built-in licenses.
+     * Install powereduc built-in licenses.
      */
     static public function install_licenses() {
         global $CFG;

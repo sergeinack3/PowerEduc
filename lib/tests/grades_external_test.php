@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ namespace core;
 
 use core_grades_external;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 
@@ -67,7 +67,7 @@ class grades_external_test extends \externallib_advanced_testcase {
         $this->setUser($parent);
         $student1context = \context_user::instance($student1->id);
         // Creates a new role, gives it the capability and gives $USER that role.
-        $parentroleid = $this->assignUserCapability('moodle/grade:viewall', $student1context->id);
+        $parentroleid = $this->assignUserCapability('powereduc/grade:viewall', $student1context->id);
         // Enrol the user in the course using the new role.
         $this->getDataGenerator()->enrol_user($parent->id, $course->id, $parentroleid);
 
@@ -210,8 +210,8 @@ class grades_external_test extends \externallib_advanced_testcase {
                 0,
                 array( array('studentid' => $student1->id, 'grade' => $student1grade))
             );
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
             $this->assertTrue(true);
         }
 
@@ -227,8 +227,8 @@ class grades_external_test extends \externallib_advanced_testcase {
                 0,
                 array( array('studentid' => $student1->id, 'grade' => $student1grade))
             );
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
             $this->assertTrue(true);
         }
 
@@ -244,15 +244,15 @@ class grades_external_test extends \externallib_advanced_testcase {
                 array(),
                 array('hidden' => 1)
             );
-            $this->fail('moodle_exception expected');
-        } catch (\moodle_exception $ex) {
+            $this->fail('powereduc_exception expected');
+        } catch (\powereduc_exception $ex) {
             $this->assertTrue(true);
         }
 
-        // Give the student role 'moodle/grade:hide' and they should now be able to hide the grade item.
+        // Give the student role 'powereduc/grade:hide' and they should now be able to hide the grade item.
         $studentrole = $DB->get_record('role', array('shortname' => 'student'));
         $coursecontext = \context_course::instance($course->id);
-        assign_capability('moodle/grade:hide', CAP_ALLOW, $studentrole->id, $coursecontext->id);
+        assign_capability('powereduc/grade:hide', CAP_ALLOW, $studentrole->id, $coursecontext->id);
         accesslib_clear_all_caches_for_unit_testing();
 
         // Check the activity isn't already hidden.

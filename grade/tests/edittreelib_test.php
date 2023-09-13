@@ -19,7 +19,7 @@ namespace core_grades;
 use grade_edit_tree;
 use grade_edit_tree_column;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot.'/grade/edit/tree/lib.php');

@@ -24,7 +24,7 @@
  */
 namespace core_calendar\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 global $CFG;
 
 require_once($CFG->dirroot . '/calendar/lib.php');

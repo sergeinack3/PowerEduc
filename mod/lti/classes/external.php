@@ -1,32 +1,32 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External tool module external API
  *
  * @package    mod_lti
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 
 use core_course\external\helper_for_get_mods_by_courses;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/lti/lib.php');
@@ -37,9 +37,9 @@ require_once($CFG->dirroot . '/mod/lti/locallib.php');
  *
  * @package    mod_lti
  * @category   external
- * @copyright  2015 Juan Leyva <juan@moodle.com>
+ * @copyright  2015 Juan Leyva <juan@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  */
 class mod_lti_external extends external_api {
 
@@ -47,7 +47,7 @@ class mod_lti_external extends external_api {
      * Returns structure be used for returning a tool type from a web service.
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     private static function tool_type_return_structure() {
         return new external_single_structure(
@@ -96,7 +96,7 @@ class mod_lti_external extends external_api {
      * Returns description of a tool proxy
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     private static function tool_proxy_return_structure() {
         return new external_function_parameters(
@@ -121,7 +121,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_tool_proxies_parameters() {
         return new external_function_parameters(
@@ -136,8 +136,8 @@ class mod_lti_external extends external_api {
      *
      * @param bool $orphanedonly Retrieve only tool proxies that do not have a corresponding tool type
      * @return array of tool types
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function get_tool_proxies($orphanedonly) {
         $params = self::validate_parameters(self::get_tool_proxies_parameters(),
@@ -149,7 +149,7 @@ class mod_lti_external extends external_api {
         $context = context_system::instance();
 
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         return lti_get_tool_proxies($orphanedonly);
     }
@@ -158,7 +158,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value.
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_tool_proxies_returns() {
         return new external_multiple_structure(
@@ -170,7 +170,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_tool_launch_data_parameters() {
         return new external_function_parameters(
@@ -185,8 +185,8 @@ class mod_lti_external extends external_api {
      *
      * @param int $toolid the external tool instance id
      * @return array of warnings and launch data
-     * @since Moodle 3.0
-     * @throws moodle_exception
+     * @since PowerEduc 3.0
+     * @throws powereduc_exception
      */
     public static function get_tool_launch_data($toolid) {
         global $DB, $CFG;
@@ -229,7 +229,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_tool_launch_data_returns() {
         return new external_single_structure(
@@ -252,7 +252,7 @@ class mod_lti_external extends external_api {
      * Describes the parameters for get_ltis_by_courses.
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_ltis_by_courses_parameters() {
         return new external_function_parameters (
@@ -270,7 +270,7 @@ class mod_lti_external extends external_api {
      *
      * @param array $courseids the course ids
      * @return array the lti details
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_ltis_by_courses($courseids = array()) {
         global $CFG;
@@ -301,7 +301,7 @@ class mod_lti_external extends external_api {
 
                 // Entry to return.
                 $module = helper_for_get_mods_by_courses::standard_coursemodule_element_values(
-                        $lti, 'mod_lti', 'moodle/course:manageactivities', 'mod/lti:view');
+                        $lti, 'mod_lti', 'powereduc/course:manageactivities', 'mod/lti:view');
 
                 $viewablefields = [];
                 if (has_capability('mod/lti:view', $context)) {
@@ -309,7 +309,7 @@ class mod_lti_external extends external_api {
                 }
 
                 // Check additional permissions for returning optional private settings.
-                if (has_capability('moodle/course:manageactivities', $context)) {
+                if (has_capability('powereduc/course:manageactivities', $context)) {
                     $additionalfields = array('timecreated', 'timemodified', 'typeid', 'toolurl', 'securetoolurl',
                         'instructorchoicesendname', 'instructorchoicesendemailaddr', 'instructorchoiceallowroster',
                         'instructorchoiceallowsetting', 'instructorcustomparameters', 'instructorchoiceacceptgrades', 'grade',
@@ -335,7 +335,7 @@ class mod_lti_external extends external_api {
      * Describes the get_ltis_by_courses return value.
      *
      * @return external_single_structure
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_ltis_by_courses_returns() {
 
@@ -384,7 +384,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_lti_parameters() {
         return new external_function_parameters(
@@ -399,8 +399,8 @@ class mod_lti_external extends external_api {
      *
      * @param int $ltiid the lti instance id
      * @return array of warnings and status result
-     * @since Moodle 3.0
-     * @throws moodle_exception
+     * @since PowerEduc 3.0
+     * @throws powereduc_exception
      */
     public static function view_lti($ltiid) {
         global $DB;
@@ -432,7 +432,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function view_lti_returns() {
         return new external_single_structure(
@@ -447,7 +447,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function create_tool_proxy_parameters() {
         return new external_function_parameters(
@@ -474,8 +474,8 @@ class mod_lti_external extends external_api {
      * @param string[] $capabilityoffered List of capabilities this tool proxy should be offered
      * @param string[] $serviceoffered List of services this tool proxy should be offered
      * @return object The new tool proxy
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function create_tool_proxy($name, $registrationurl, $capabilityoffered, $serviceoffered) {
         $params = self::validate_parameters(self::create_tool_proxy_parameters(),
@@ -492,12 +492,12 @@ class mod_lti_external extends external_api {
 
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         // Can't create duplicate proxies with the same URL.
         $duplicates = lti_get_tool_proxies_from_registration_url($registrationurl);
         if (!empty($duplicates)) {
-            throw new moodle_exception('duplicateregurl', 'mod_lti');
+            throw new powereduc_exception('duplicateregurl', 'mod_lti');
         }
 
         $config = new stdClass();
@@ -530,7 +530,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function create_tool_proxy_returns() {
         return self::tool_proxy_return_structure();
@@ -540,7 +540,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function delete_tool_proxy_parameters() {
         return new external_function_parameters(
@@ -555,8 +555,8 @@ class mod_lti_external extends external_api {
      *
      * @param int $id the lti instance id
      * @return object The tool proxy
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function delete_tool_proxy($id) {
         $params = self::validate_parameters(self::delete_tool_proxy_parameters(),
@@ -567,7 +567,7 @@ class mod_lti_external extends external_api {
 
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         $toolproxy = lti_get_tool_proxy($id);
 
@@ -580,7 +580,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function delete_tool_proxy_returns() {
         return self::tool_proxy_return_structure();
@@ -590,7 +590,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.0
+     * @since PowerEduc 3.0
      */
     public static function get_tool_proxy_registration_request_parameters() {
         return new external_function_parameters(
@@ -605,8 +605,8 @@ class mod_lti_external extends external_api {
      *
      * @param int $id the lti instance id
      * @return array of registration parameters
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function get_tool_proxy_registration_request($id) {
         $params = self::validate_parameters(self::get_tool_proxy_registration_request_parameters(),
@@ -617,7 +617,7 @@ class mod_lti_external extends external_api {
 
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         $toolproxy = lti_get_tool_proxy($id);
         return lti_build_registration_request($toolproxy);
@@ -627,7 +627,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_tool_proxy_registration_request_returns() {
         return new external_function_parameters(
@@ -647,7 +647,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_tool_types_parameters() {
         return new external_function_parameters(
@@ -662,8 +662,8 @@ class mod_lti_external extends external_api {
      *
      * @param int $toolproxyid The tool proxy id
      * @return array of tool types
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function get_tool_types($toolproxyid) {
         global $PAGE;
@@ -677,7 +677,7 @@ class mod_lti_external extends external_api {
         $context = context_system::instance();
 
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         if (!empty($toolproxyid)) {
             $types = lti_get_lti_types_from_proxy_id($toolproxyid);
@@ -692,7 +692,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function get_tool_types_returns() {
         return new external_multiple_structure(
@@ -704,7 +704,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function create_tool_type_parameters() {
         return new external_function_parameters(
@@ -723,8 +723,8 @@ class mod_lti_external extends external_api {
      * @param string $key The consumer key to identify this consumer
      * @param string $secret The secret
      * @return array created tool type
-     * @since Moodle 3.1
-     * @throws moodle_exception If the tool type could not be created
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception If the tool type could not be created
      */
     public static function create_tool_type($cartridgeurl, $key, $secret) {
         $params = self::validate_parameters(self::create_tool_type_parameters(),
@@ -739,7 +739,7 @@ class mod_lti_external extends external_api {
 
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         $id = null;
 
@@ -763,7 +763,7 @@ class mod_lti_external extends external_api {
 
             lti_load_type_from_cartridge($cartridgeurl, $data);
             if (empty($data->lti_toolurl)) {
-                throw new moodle_exception('unabletocreatetooltype', 'mod_lti');
+                throw new powereduc_exception('unabletocreatetooltype', 'mod_lti');
             } else {
                 $id = lti_add_type($type, $data);
             }
@@ -773,7 +773,7 @@ class mod_lti_external extends external_api {
             $type = lti_get_type($id);
             return serialise_tool_type($type);
         } else {
-            throw new moodle_exception('unabletocreatetooltype', 'mod_lti');
+            throw new powereduc_exception('unabletocreatetooltype', 'mod_lti');
         }
     }
 
@@ -781,7 +781,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function create_tool_type_returns() {
         return self::tool_type_return_structure();
@@ -791,7 +791,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function update_tool_type_parameters() {
         return new external_function_parameters(
@@ -812,8 +812,8 @@ class mod_lti_external extends external_api {
      * @param string $description The name of the tool type
      * @param int $state The state of the tool type
      * @return array updated tool type
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function update_tool_type($id, $name, $description, $state) {
         $params = self::validate_parameters(self::update_tool_type_parameters(),
@@ -830,12 +830,12 @@ class mod_lti_external extends external_api {
 
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         $type = lti_get_type($id);
 
         if (empty($type)) {
-            throw new moodle_exception('unabletofindtooltype', 'mod_lti', '', array('id' => $id));
+            throw new powereduc_exception('unabletofindtooltype', 'mod_lti', '', array('id' => $id));
         }
 
         if (!empty($name)) {
@@ -851,7 +851,7 @@ class mod_lti_external extends external_api {
             if (in_array($state, array(1, 2, 3))) {
                 $type->state = $state;
             } else {
-                throw new moodle_exception("Invalid state: $state - must be 1, 2, or 3");
+                throw new powereduc_exception("Invalid state: $state - must be 1, 2, or 3");
             }
         }
 
@@ -864,7 +864,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function update_tool_type_returns() {
         return self::tool_type_return_structure();
@@ -874,7 +874,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function delete_tool_type_parameters() {
         return new external_function_parameters(
@@ -889,8 +889,8 @@ class mod_lti_external extends external_api {
      *
      * @param int $id The id of the tool type to be deleted
      * @return array deleted tool type
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function delete_tool_type($id) {
         $params = self::validate_parameters(self::delete_tool_type_parameters(),
@@ -901,7 +901,7 @@ class mod_lti_external extends external_api {
 
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         $type = lti_get_type($id);
 
@@ -923,7 +923,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function delete_tool_type_returns() {
         return new external_function_parameters(
@@ -937,7 +937,7 @@ class mod_lti_external extends external_api {
      * Returns description of method parameters
      *
      * @return external_function_parameters
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function is_cartridge_parameters() {
         return new external_function_parameters(
@@ -952,8 +952,8 @@ class mod_lti_external extends external_api {
      *
      * @param string $url Url that may or may not be an xml cartridge
      * @return bool True if the url is for a cartridge.
-     * @since Moodle 3.1
-     * @throws moodle_exception
+     * @since PowerEduc 3.1
+     * @throws powereduc_exception
      */
     public static function is_cartridge($url) {
         $params = self::validate_parameters(self::is_cartridge_parameters(),
@@ -964,7 +964,7 @@ class mod_lti_external extends external_api {
 
         $context = context_system::instance();
         self::validate_context($context);
-        require_capability('moodle/site:config', $context);
+        require_capability('powereduc/site:config', $context);
 
         $iscartridge = lti_is_cartridge($url);
 
@@ -975,7 +975,7 @@ class mod_lti_external extends external_api {
      * Returns description of method result value
      *
      * @return external_description
-     * @since Moodle 3.1
+     * @since PowerEduc 3.1
      */
     public static function is_cartridge_returns() {
         return new external_function_parameters(

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 declare(strict_types=1);
 
@@ -24,7 +24,7 @@ use context_user;
 use core_component;
 use html_writer;
 use lang_string;
-use moodle_url;
+use powereduc_url;
 use stdClass;
 use core_user\fields;
 use core_reportbuilder\local\filters\boolean_select;
@@ -43,7 +43,7 @@ use core_reportbuilder\local\report\filter;
  * This entity defines all the user columns and filters to be used in any report.
  *
  * @package    core_reportbuilder
- * @copyright  2020 Sara Arjona <sara@moodle.com> based on Marina Glancy code.
+ * @copyright  2020 Sara Arjona <sara@powereduc.com> based on Marina Glancy code.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user extends base {
@@ -173,7 +173,7 @@ class user extends base {
         $fullnamesort = explode(', ', $fullnameselect);
 
         $userpictureselect = fields::for_userpic()->get_sql($usertablealias, false, '', '', false)->selects;
-        $viewfullnames = has_capability('moodle/site:viewfullnames', context_system::instance());
+        $viewfullnames = has_capability('powereduc/site:viewfullnames', context_system::instance());
 
         // Fullname column.
         $columns[] = (new column(
@@ -230,7 +230,7 @@ class user extends base {
                     }
 
                     if ($fullnamefield === 'fullnamewithlink') {
-                        return html_writer::link(new moodle_url('/user/profile.php', ['id' => $row->id]),
+                        return html_writer::link(new powereduc_url('/user/profile.php', ['id' => $row->id]),
                             fullname($row, $viewfullnames));
                     }
                     if ($fullnamefield === 'fullnamewithpicture') {
@@ -238,7 +238,7 @@ class user extends base {
                             fullname($row, $viewfullnames);
                     }
                     if ($fullnamefield === 'fullnamewithpicturelink') {
-                        return html_writer::link(new moodle_url('/user/profile.php', ['id' => $row->id]),
+                        return html_writer::link(new powereduc_url('/user/profile.php', ['id' => $row->id]),
                             $OUTPUT->user_picture($row, ['link' => false, 'alttext' => false]) .
                             fullname($row, $viewfullnames));
                     }
@@ -424,7 +424,7 @@ class user extends base {
             'suspended' => new lang_string('suspended'),
             'confirmed' => new lang_string('confirmed', 'admin'),
             'username' => new lang_string('username'),
-            'moodlenetprofile' => new lang_string('moodlenetprofile', 'user'),
+            'powereducnetprofile' => new lang_string('powereducnetprofile', 'user'),
             'timecreated' => new lang_string('timecreated', 'core_reportbuilder'),
         ];
     }
@@ -468,7 +468,7 @@ class user extends base {
         $tablealias = $this->get_table_alias('user');
 
         // Fullname filter.
-        $canviewfullnames = has_capability('moodle/site:viewfullnames', context_system::instance());
+        $canviewfullnames = has_capability('powereduc/site:viewfullnames', context_system::instance());
         [$fullnamesql, $fullnameparams] = fields::get_sql_fullname($tablealias, $canviewfullnames);
         $filters[] = (new filter(
             text::class,
@@ -530,7 +530,7 @@ class user extends base {
         $filters[] = (new filter(
             select::class,
             'auth',
-            new lang_string('authentication', 'moodle'),
+            new lang_string('authentication', 'powereduc'),
             $this->get_entity_name(),
             "{$tablealias}.auth"
         ))

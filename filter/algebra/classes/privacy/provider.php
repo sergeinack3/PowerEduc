@@ -24,7 +24,7 @@
 
 namespace filter_algebra\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for filter_algebra implementing null_provider.

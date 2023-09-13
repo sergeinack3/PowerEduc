@@ -18,7 +18,7 @@ namespace core_grading;
 
 use grading_manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/grade/grading/lib.php'); // Include the code to test

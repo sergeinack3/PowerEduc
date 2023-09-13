@@ -1,34 +1,34 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Local library file for Lesson.  These are non-standard functions that are used
  * only by Lesson.
  *
  * @package mod_lesson
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://powereduc.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or late
  **/
 
 /** Make sure this isn't being directly accessed */
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /** Include the files that are required by this module */
-require_once($CFG->dirroot.'/course/moodleform_mod.php');
+require_once($CFG->dirroot.'/course/powereducform_mod.php');
 require_once($CFG->dirroot . '/mod/lesson/lib.php');
 require_once($CFG->libdir . '/filelib.php');
 
@@ -183,7 +183,7 @@ function lesson_unseen_branch_jump($lesson, $userid) {
     }
 
     if (!$seenbranches = $lesson->get_content_pages_viewed($retakes, $userid, 'timeseen DESC')) {
-        throw new \moodle_exception('cannotfindrecords', 'lesson');
+        throw new \powereduc_exception('cannotfindrecords', 'lesson');
     }
 
     // get the lesson pages
@@ -237,7 +237,7 @@ function lesson_random_question_jump($lesson, $pageid) {
     // get the lesson pages
     $params = array ("lessonid" => $lesson->id);
     if (!$lessonpages = $DB->get_records_select("lesson_pages", "lessonid = :lessonid", $params)) {
-        throw new \moodle_exception('cannotfindpages', 'lesson');
+        throw new \powereduc_exception('cannotfindpages', 'lesson');
     }
 
     // go up the pages till branch table
@@ -465,7 +465,7 @@ function lesson_mediafile_block_contents($cmid, $lesson) {
     $options['width'] = $lesson->mediawidth;
     $options['height'] = $lesson->mediaheight;
 
-    $link = new moodle_url('/mod/lesson/mediafile.php?id='.$cmid);
+    $link = new powereduc_url('/mod/lesson/mediafile.php?id='.$cmid);
     $action = new popup_action('click', $link, 'lessonmediafile', $options);
     $content = $OUTPUT->action_link($link, get_string('mediafilepopup', 'lesson'), $action, array('title'=>get_string('mediafilepopup', 'lesson')));
 
@@ -570,8 +570,8 @@ function lesson_menu_block_contents($cmid, $lesson) {
 /**
  * Adds header buttons to the page for the lesson
  *
- * @deprecated since Moodle 4.0 in favour of tertiary navigation.
- * @todo MDL-73545 This will be deleted in Moodle 4.4
+ * @deprecated since PowerEduc 4.0 in favour of tertiary navigation.
+ * @todo MDL-73545 This will be deleted in PowerEduc 4.4
  * @param object $cm
  * @param object $context
  * @param bool $extraeditbuttons
@@ -584,10 +584,10 @@ function lesson_add_header_buttons($cm, $context, $extraeditbuttons=false, $less
 
     if (has_capability('mod/lesson:edit', $context) && $extraeditbuttons) {
         if ($lessonpageid === null) {
-            throw new \moodle_exception('invalidpageid', 'lesson');
+            throw new \powereduc_exception('invalidpageid', 'lesson');
         }
         if (!empty($lessonpageid) && $lessonpageid != LESSON_EOL) {
-            $url = new moodle_url('/mod/lesson/editpage.php', array(
+            $url = new powereduc_url('/mod/lesson/editpage.php', array(
                 'id'       => $cm->id,
                 'pageid'   => $lessonpageid,
                 'edit'     => 1,
@@ -613,10 +613,10 @@ function lesson_get_media_html($lesson, $context) {
 
     // get the media file link
     if (strpos($lesson->mediafile, '://') !== false) {
-        $url = new moodle_url($lesson->mediafile);
+        $url = new powereduc_url($lesson->mediafile);
     } else {
         // the timemodified is used to prevent caching problems, instead of '/' we should better read from files table and use sortorder
-        $url = moodle_url::make_pluginfile_url($context->id, 'mod_lesson', 'mediafile', $lesson->timemodified, '/', ltrim($lesson->mediafile, '/'));
+        $url = powereduc_url::make_pluginfile_url($context->id, 'mod_lesson', 'mediafile', $lesson->timemodified, '/', ltrim($lesson->mediafile, '/'));
     }
     $title = $lesson->mediafile;
 
@@ -694,7 +694,7 @@ function lesson_process_group_deleted_in_course($courseid, $groupid = null) {
  * @param  lesson $lesson       lesson instance
  * @param  mixed $currentgroup  false if not group used, 0 for all groups, group id (int) to filter by that groups
  * @return mixed false if there is no information otherwise html_table and stdClass with the table and data
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function lesson_get_overview_report_table_and_data(lesson $lesson, $currentgroup) {
     global $DB, $CFG, $OUTPUT;
@@ -1016,7 +1016,7 @@ function lesson_get_overview_report_table_and_data(lesson $lesson, $currentgroup
                         $timetotake = null;
                     }
                 }
-                $attempturl = new moodle_url('/mod/lesson/report.php', $attempturlparams);
+                $attempturl = new powereduc_url('/mod/lesson/report.php', $attempturlparams);
                 $attemptlink = html_writer::link($attempturl, $attemptlinkcontents, ['class' => 'lesson-attempt-link']);
 
                 if ($caneditlesson) {
@@ -1096,7 +1096,7 @@ function lesson_get_overview_report_table_and_data(lesson $lesson, $currentgroup
  * @param  int $userid     the user id
  * @param  int $attempt    the attempt number
  * @return array the user answers (array) and user data stats (object)
- * @since  Moodle 3.3
+ * @since  PowerEduc 3.3
  */
 function lesson_get_user_detailed_report_data(lesson $lesson, $userid, $attempt) {
     global $DB;
@@ -1246,7 +1246,7 @@ function lesson_get_user_deadline($courseid) {
     global $DB, $USER;
 
     // For teacher and manager/admins return lesson's deadline.
-    if (has_capability('moodle/course:update', context_course::instance($courseid))) {
+    if (has_capability('powereduc/course:update', context_course::instance($courseid))) {
         $sql = "SELECT lesson.id, lesson.deadline AS userdeadline
                   FROM {lesson} lesson
                  WHERE lesson.course = :courseid";
@@ -1286,7 +1286,7 @@ function lesson_get_user_deadline($courseid) {
  * @copyright  2009 Sam Hemelryk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class lesson_add_page_form_base extends moodleform {
+abstract class lesson_add_page_form_base extends powereducform {
 
     /**
      * This is the classic define that is used to identify this pagetype.
@@ -1653,7 +1653,7 @@ class lesson extends lesson_base {
      * @param object $properties
      * @param stdClass $cm course module object
      * @param stdClass $course course object
-     * @since Moodle 3.3
+     * @since PowerEduc 3.3
      */
     public function __construct($properties, $cm = null, $course = null) {
         parent::__construct($properties);
@@ -1682,7 +1682,7 @@ class lesson extends lesson_base {
         global $DB;
 
         if (!$lesson = $DB->get_record('lesson', array('id' => $lessonid))) {
-            throw new \moodle_exception('invalidcoursemodule');
+            throw new \powereduc_exception('invalidcoursemodule');
         }
         return new lesson($lesson);
     }
@@ -1812,7 +1812,7 @@ class lesson extends lesson_base {
      * @return bool true if only active users should be shown.
      */
     public function show_only_active_users() {
-        return !has_capability('moodle/course:viewsuspendedusers', $this->get_context());
+        return !has_capability('powereduc/course:viewsuspendedusers', $this->get_context());
     }
 
     /**
@@ -2002,7 +2002,7 @@ class lesson extends lesson_base {
      * @param  string $sort          an order to sort the results in (a valid SQL ORDER BY parameter)
      * @param  string $fields        a comma separated list of fields to return
      * @return array of pages
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_content_pages_viewed($lessonattempt, $userid = null, $sort = '', $fields = '*') {
         global $USER, $DB;
@@ -2068,7 +2068,7 @@ class lesson extends lesson_base {
             if (!$this->loadedallpages) {
                 $firstpageid = $DB->get_field('lesson_pages', 'id', array('lessonid'=>$this->properties->id, 'prevpageid'=>0));
                 if (!$firstpageid) {
-                    throw new \moodle_exception('cannotfindfirstpage', 'lesson');
+                    throw new \powereduc_exception('cannotfindfirstpage', 'lesson');
                 }
                 $this->firstpageid = $firstpageid;
             } else {
@@ -2089,7 +2089,7 @@ class lesson extends lesson_base {
             if (!$this->loadedallpages) {
                 $lastpageid = $DB->get_field('lesson_pages', 'id', array('lessonid'=>$this->properties->id, 'nextpageid'=>0));
                 if (!$lastpageid) {
-                    throw new \moodle_exception('cannotfindlastpage', 'lesson');
+                    throw new \powereduc_exception('cannotfindlastpage', 'lesson');
                 }
                 $this->lastpageid = $lastpageid;
             } else {
@@ -2328,7 +2328,7 @@ class lesson extends lesson_base {
             if ($modname) {
                 $instancename = $DB->get_field($modname, 'name', array('id' => $module->instance));
                 if ($instancename) {
-                    return html_writer::link(new moodle_url('/mod/'.$modname.'/view.php',
+                    return html_writer::link(new powereduc_url('/mod/'.$modname.'/view.php',
                         array('id' => $this->properties->activitylink)), get_string('activitylinkname',
                         'lesson', $instancename), array('class' => 'centerpadded lessonbutton standardbutton pr-3'));
                 }
@@ -2718,7 +2718,7 @@ class lesson extends lesson_base {
         $pages = $this->load_all_pages();
 
         if (!array_key_exists($pageid, $pages) || ($after!=0 && !array_key_exists($after, $pages))) {
-            throw new \moodle_exception('cannotfindpages', 'lesson', "$CFG->wwwroot/mod/lesson/edit.php?id=$cm->id");
+            throw new \powereduc_exception('cannotfindpages', 'lesson', "$CFG->wwwroot/mod/lesson/edit.php?id=$cm->id");
         }
 
         $pagetomove = clone($pages[$pageid]);
@@ -2782,7 +2782,7 @@ class lesson extends lesson_base {
      * Return the lesson context object.
      *
      * @return stdClass context
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_context() {
         if ($this->context == null) {
@@ -2795,7 +2795,7 @@ class lesson extends lesson_base {
      * Set the lesson course module object.
      *
      * @param stdClass $cm course module objct
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     private function set_cm($cm) {
         $this->cm = $cm;
@@ -2805,7 +2805,7 @@ class lesson extends lesson_base {
      * Return the lesson course module object.
      *
      * @return stdClass course module
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_cm() {
         if ($this->cm == null) {
@@ -2818,7 +2818,7 @@ class lesson extends lesson_base {
      * Set the lesson course object.
      *
      * @param stdClass $course course objct
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     private function set_courserecord($course) {
         $this->courserecord = $course;
@@ -2828,7 +2828,7 @@ class lesson extends lesson_base {
      * Return the lesson course object.
      *
      * @return stdClass course
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_courserecord() {
         global $DB;
@@ -2843,7 +2843,7 @@ class lesson extends lesson_base {
      * Check if the user can manage the lesson activity.
      *
      * @return bool true if the user can manage the lesson
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function can_manage() {
         return has_capability('mod/lesson:manage', $this->get_context());
@@ -2853,7 +2853,7 @@ class lesson extends lesson_base {
      * Check if time restriction is applied.
      *
      * @return mixed false if  there aren't restrictions or an object with the restriction information
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_time_restriction_status() {
         if ($this->can_manage()) {
@@ -2876,7 +2876,7 @@ class lesson extends lesson_base {
      *
      * @param string $userpassword the user password to check (if the restriction is set)
      * @return mixed false if there aren't restrictions or an object with the restriction information
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_password_restriction_status($userpassword) {
         global $USER;
@@ -2909,7 +2909,7 @@ class lesson extends lesson_base {
      * Check if dependencies restrictions are applied.
      *
      * @return mixed false if there aren't restrictions or an object with the restriction information
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_dependencies_restriction_status() {
         global $DB, $USER;
@@ -2970,7 +2970,7 @@ class lesson extends lesson_base {
      * Check if the lesson is in review mode. (The user already finished it and retakes are not allowed).
      *
      * @return bool true if is in review mode
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function is_in_review_mode() {
         global $DB, $USER;
@@ -3046,7 +3046,7 @@ class lesson extends lesson_base {
      *
      * @param  int $userid the user id
      * @return int the retries count
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function count_user_retries($userid) {
         global $DB;
@@ -3059,7 +3059,7 @@ class lesson extends lesson_base {
      *
      * @param int $retriescount the number of retries for the lesson (the last retry number).
      * @return true if the user left the timed session
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function left_during_timed_session($retriescount) {
         global $DB, $USER;
@@ -3071,7 +3071,7 @@ class lesson extends lesson_base {
     /**
      * Trigger module viewed event and set the module viewed for completion.
      *
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function set_module_viewed() {
         global $CFG;
@@ -3100,7 +3100,7 @@ class lesson extends lesson_base {
      * @param  int      $limitfrom return a subset of records, starting at this point (optional).
      * @param  int      $limitnum  return a subset comprising this many records in total (optional, required if $limitfrom is set).
      * @return array    list of timers for the given user in the lesson
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_user_timers($userid = null, $sort = '', $fields = '*', $limitfrom = 0, $limitnum = 0) {
         global $DB, $USER;
@@ -3118,7 +3118,7 @@ class lesson extends lesson_base {
      *
      * @param  stdClass $timer timer object
      * @return bool True if the user is on time, false is the user ran out of time
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function check_time($timer) {
         if ($this->properties->timelimit) {
@@ -3140,7 +3140,7 @@ class lesson extends lesson_base {
      *
      * @param lesson_page $page page object
      * @param reviewmode $bool whether we are in review mode or not
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function add_messages_on_page_view(lesson_page $page, $reviewmode) {
         global $DB, $USER;
@@ -3188,7 +3188,7 @@ class lesson extends lesson_base {
      * Get the ongoing score message for the user (depending on the user permission and lesson settings).
      *
      * @return str the ongoing score message
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function get_ongoing_score_message() {
         global $USER, $DB;
@@ -3220,7 +3220,7 @@ class lesson extends lesson_base {
      * Calculate the progress of the current user in the lesson.
      *
      * @return int the progress (scale 0-100)
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function calculate_progress() {
         global $USER, $DB;
@@ -3284,8 +3284,8 @@ class lesson extends lesson_base {
      * @param  bool $reviewmode whether we are in review mode or not
      * @param  bool $redirect  Optional, default to true. Set to false to avoid redirection and return the page to redirect.
      * @return array the page object and contents
-     * @throws moodle_exception
-     * @since  Moodle 3.3
+     * @throws powereduc_exception
+     * @since  PowerEduc 3.3
      */
     public function prepare_page_and_contents($pageid, $lessonoutput, $reviewmode, $redirect = true) {
         global $USER, $CFG;
@@ -3312,7 +3312,7 @@ class lesson extends lesson_base {
             if (isset($USER->modattempts[$this->properties->id])) {
                 $retries = $this->count_user_retries($USER->id);
                 if (!$attempts = $this->get_attempts($retries - 1, false, $page->id)) {
-                    throw new moodle_exception('cannotfindpreattempt', 'lesson');
+                    throw new powereduc_exception('cannotfindpreattempt', 'lesson');
                 }
                 $attempt = end($attempts);
                 $USER->modattempts[$this->properties->id] = $attempt;
@@ -3348,7 +3348,7 @@ class lesson extends lesson_base {
      * @param  lesson_page $page      lesson page
      * @param  int         $newpageid the new page id
      * @return int the real page to jump to (or end of lesson)
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function calculate_new_page_on_jump(lesson_page $page, $newpageid) {
         global $USER, $DB;
@@ -3425,7 +3425,7 @@ class lesson extends lesson_base {
      * Process page responses.
      *
      * @param lesson_page $page page object
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function process_page_responses(lesson_page $page) {
         $context = $this->get_context();
@@ -3457,7 +3457,7 @@ class lesson extends lesson_base {
      * @param lesson_page $page page object
      * @param stdClass $result the page processing result object
      * @param bool $reviewmode whether we are in review mode or not
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function add_messages_on_page_process(lesson_page $page, $result, $reviewmode) {
 
@@ -3485,7 +3485,7 @@ class lesson extends lesson_base {
      *
      * @param string $outoftime used to check to see if the student ran out of time
      * @return stdclass an object with all the page data ready for rendering
-     * @since  Moodle 3.3
+     * @since  PowerEduc 3.3
      */
     public function process_eol_page($outoftime) {
         global $DB, $USER;
@@ -3604,7 +3604,7 @@ class lesson extends lesson_base {
                     if (isset($USER->modattempts[$this->properties->id])) { // If reviewing, make sure update old grade record.
                         if (!$grades = $DB->get_records("lesson_grades",
                             array("lessonid" => $this->properties->id, "userid" => $USER->id), "completed DESC", '*', 0, 1)) {
-                            throw new moodle_exception('cannotfindgrade', 'lesson');
+                            throw new powereduc_exception('cannotfindgrade', 'lesson');
                         }
                         $oldgrade = array_shift($grades);
                         $grade->id = $oldgrade->id;
@@ -3666,7 +3666,7 @@ class lesson extends lesson_base {
             // $ntries is decremented above.
             if (!$attempts = $this->get_attempts($ntries)) {
                 $attempts = array();
-                $url = new moodle_url('/mod/lesson/view.php', array('id' => $cm->id));
+                $url = new powereduc_url('/mod/lesson/view.php', array('id' => $cm->id));
             } else {
                 $firstattempt = current($attempts);
                 $pageid = $firstattempt->pageid;
@@ -3675,7 +3675,7 @@ class lesson extends lesson_base {
                 $lastattempt = end($attempts);
                 $USER->modattempts[$this->properties->id] = $lastattempt->pageid;
 
-                $url = new moodle_url('/mod/lesson/view.php', array('id' => $cm->id, 'pageid' => $pageid));
+                $url = new powereduc_url('/mod/lesson/view.php', array('id' => $cm->id, 'pageid' => $pageid));
             }
             $data->reviewlesson = $url->out(false);
         } else if ($this->properties->modattempts && $canmanage) {
@@ -3920,7 +3920,7 @@ abstract class lesson_page extends lesson_base {
         if ($properties->pageid) {
             $prevpage = $DB->get_record("lesson_pages", array("id" => $properties->pageid), 'id, nextpageid');
             if (!$prevpage) {
-                throw new \moodle_exception('cannotfindpages', 'lesson');
+                throw new \powereduc_exception('cannotfindpages', 'lesson');
             }
             $newpage->prevpageid = $prevpage->id;
             $newpage->nextpageid = $prevpage->nextpageid;
@@ -3987,7 +3987,7 @@ abstract class lesson_page extends lesson_base {
         } else {
             $page = $DB->get_record("lesson_pages", array("id" => $id));
             if (!$page) {
-                throw new \moodle_exception('cannotfindpages', 'lesson');
+                throw new \powereduc_exception('cannotfindpages', 'lesson');
             }
         }
         $manager = lesson_page_type_manager::get($lesson);
@@ -4110,7 +4110,7 @@ abstract class lesson_page extends lesson_base {
             $this->answers = array();
             $answers = $DB->get_records('lesson_answers', array('pageid'=>$this->properties->id, 'lessonid'=>$this->lesson->id), 'id');
             if (!$answers) {
-                // It is possible that a lesson upgraded from Moodle 1.9 still
+                // It is possible that a lesson upgraded from PowerEduc 1.9 still
                 // contains questions without any answers [MDL-25632].
                 // debugging(get_string('cannotfindanswer', 'lesson'));
                 return array();
@@ -4144,7 +4144,7 @@ abstract class lesson_page extends lesson_base {
      * Records an attempt at this page
      *
      * @final
-     * @global moodle_database $DB
+     * @global powereduc_database $DB
      * @param stdClass $context
      * @return stdClass Returns the result of the attempt
      */
@@ -4597,7 +4597,7 @@ abstract class lesson_page extends lesson_base {
                     } else {
                         // Branch tables, shortanswer and mumerical pages have only a text field.
                         $this->answers[$i]->answer = $properties->answer_editor[$i];
-                        $this->answers[$i]->answerformat = FORMAT_MOODLE;
+                        $this->answers[$i]->answerformat = FORMAT_POWEREDUC;
                     }
                 } else {
                     // If there is no data posted which means we want to reset the stored values.
@@ -4714,7 +4714,7 @@ abstract class lesson_page extends lesson_base {
                 } else {
                     // Branch tables, shortanswer and mumerical pages have only a text field.
                     $answer->answer = $properties->answer_editor[$i];
-                    $answer->answerformat = FORMAT_MOODLE;
+                    $answer->answerformat = FORMAT_POWEREDUC;
                 }
             }
             if (!empty($properties->response_editor[$i]) && is_array($properties->response_editor[$i])) {
@@ -4767,7 +4767,7 @@ abstract class lesson_page extends lesson_base {
         $result->response        = '';
         $result->newpageid       = 0;       // stay on the page
         $result->studentanswer   = '';      // use this to store student's answer(s) in order to display it on feedback page
-        $result->studentanswerformat = FORMAT_MOODLE;
+        $result->studentanswerformat = FORMAT_POWEREDUC;
         $result->userresponse    = null;
         $result->feedback        = '';
         // Store data that was POSTd by a form. This is currently used to perform any logic after the 1st write to the db
@@ -5036,7 +5036,7 @@ abstract class lesson_page extends lesson_base {
      * @param bool $includedirs whether or not include directories
      * @param int $updatedsince return files updated since this time
      * @return array list of stored_file objects
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public function get_files($includedirs = true, $updatedsince = 0) {
         $fs = get_file_storage();
@@ -5047,7 +5047,7 @@ abstract class lesson_page extends lesson_base {
     /**
      * Make updates to the form data if required.
      *
-     * @since Moodle 3.7
+     * @since PowerEduc 3.7
      * @param stdClass $data The form data to update.
      * @return stdClass The updated fom data.
      */
@@ -5108,7 +5108,7 @@ class lesson_page_answer extends lesson_base {
      * @param bool $includedirs whether or not include directories
      * @param int $updatedsince return files updated since this time
      * @return array list of stored_file objects
-     * @since  Moodle 3.2
+     * @since  PowerEduc 3.2
      */
     public function get_files($includedirs = true, $updatedsince = 0) {
 
@@ -5234,7 +5234,7 @@ class lesson_page_type_manager {
     public function load_page($pageid, lesson $lesson) {
         global $DB;
         if (!($page =$DB->get_record('lesson_pages', array('id'=>$pageid, 'lessonid'=>$lesson->id)))) {
-            throw new \moodle_exception('cannotfindpages', 'lesson');
+            throw new \powereduc_exception('cannotfindpages', 'lesson');
         }
         $pagetype = get_class($this->types[$page->qtype]);
         $page = new $pagetype($page, $lesson);

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'tool_spamcleaner', language 'en', branch 'MOODLE_22_STABLE'
+ * Strings for component 'tool_spamcleaner', language 'en', branch 'POWEREDUC_22_STABLE'
  *
  * @package    tool
  * @subpackage spamcleaner

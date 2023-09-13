@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Unit tests for workshop api class defined in mod/workshop/locallib.php
@@ -29,7 +29,7 @@ use workshop;
 use workshop_example_assessment;
 use workshop_example_reference_assessment;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/mod/workshop/locallib.php'); // Include the code to test
@@ -388,7 +388,7 @@ class locallib_test extends \advanced_testcase {
         $a = $this->workshop->prepare_example_assessment($fakerawrecord);
         // verify
         $this->assertTrue($a instanceof workshop_example_assessment);
-        $this->assertTrue($a->url instanceof \moodle_url);
+        $this->assertTrue($a->url instanceof \powereduc_url);
 
         // modify setup
         $fakerawrecord->weight = 1;
@@ -690,7 +690,7 @@ class locallib_test extends \advanced_testcase {
 
         // Revoke the accessallgroups from non-editing teachers (tutors).
         $roleids = $DB->get_records_menu('role', null, '', 'shortname, id');
-        unassign_capability('moodle/site:accessallgroups', $roleids['teacher']);
+        unassign_capability('powereduc/site:accessallgroups', $roleids['teacher']);
 
         // Create test use accounts.
         $teacher1 = $generator->create_user();

@@ -1,6 +1,6 @@
 <?php
 
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ $fielddelimiter  = optional_param('fielddelimiter', ',', PARAM_CLEANHTML); // ch
 $fieldenclosure = optional_param('fieldenclosure', '', PARAM_CLEANHTML);   // characters used as record delimiters for csv file import
 $redirectbackto = optional_param('backto', '', PARAM_LOCALURL); // The location to redirect back to.
 
-$url = new moodle_url('/mod/data/import.php');
+$url = new powereduc_url('/mod/data/import.php');
 if ($rid !== 0) {
     $url->param('rid', $rid);
 }
@@ -66,12 +66,12 @@ require_login($course, false, $cm);
 $context = context_module::instance($cm->id);
 require_capability('mod/data:manageentries', $context);
 
-$form = new mod_data_import_form(new moodle_url('/mod/data/import.php'), ['dataid' => $data->id,
+$form = new mod_data_import_form(new powereduc_url('/mod/data/import.php'), ['dataid' => $data->id,
     'backtourl' => $redirectbackto]);
 
 if ($form->is_cancelled()) {
     $redirectbackto = !empty($redirectbackto) ? $redirectbackto :
-        new \moodle_url('/mod/data/view.php', ['d' => $data->id]);
+        new \powereduc_url('/mod/data/view.php', ['d' => $data->id]);
     redirect($redirectbackto);
 }
 

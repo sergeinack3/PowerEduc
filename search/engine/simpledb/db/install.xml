@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="search/engine/simpledb/db" VERSION="20220504" COMMENT="XMLDB file for Moodle search/engine/simpledb"
+<XMLDB PATH="search/engine/simpledb/db" VERSION="20220504" COMMENT="XMLDB file for PowerEduc search/engine/simpledb"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >

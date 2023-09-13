@@ -23,7 +23,7 @@
  */
 
 namespace tool_mobile;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->dirroot/webservice/lib.php");
@@ -665,7 +665,7 @@ class external extends external_api {
         \core\session\manager::set_user($user);
 
         // Check if the service exists and is enabled.
-        $service = $DB->get_record('external_services', ['shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1]);
+        $service = $DB->get_record('external_services', ['shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1]);
         if (empty($service)) {
             // will throw exception if no token found
             throw new moodle_exception('servicenotavailable', 'webservice');

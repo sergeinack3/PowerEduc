@@ -24,7 +24,7 @@
 
 namespace block_tag_youtube\privacy;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_tag_youtube implementing null_provider.

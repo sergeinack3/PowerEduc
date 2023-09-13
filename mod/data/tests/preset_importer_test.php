@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ use mod_data\local\importer\preset_importer;
  *
  * @package    mod_data
  * @category   test
- * @copyright  2022 Amaia Anabitarte <amaia@moodle.com>
+ * @copyright  2022 Amaia Anabitarte <amaia@powereduc.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \mod_data\local\importer\preset_importer
  */
@@ -447,12 +447,12 @@ class preset_importer_test extends \advanced_testcase {
         $this->assertInstanceOf('\mod_data\local\importer\preset_existing_importer', $preset);
 
         // An empty preset name throws an exception.
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         try {
             preset_importer::create_from_plugin_or_directory($manager, '');
         } finally {
             // A non-existing preset name throws an exception.
-            $this->expectException('moodle_exception');
+            $this->expectException('powereduc_exception');
             preset_importer::create_from_plugin_or_directory($manager, $USER->id . '/Non-existing');
         }
     }

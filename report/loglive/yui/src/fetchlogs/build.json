@@ -1,7 +1,7 @@
 {
-    "name": "moodle-report_loglive-fetchlogs",
+    "name": "powereduc-report_loglive-fetchlogs",
     "builds": {
-        "moodle-report_loglive-fetchlogs": {
+        "powereduc-report_loglive-fetchlogs": {
             "jsfiles": [
                 "fetchlogs.js"
             ]

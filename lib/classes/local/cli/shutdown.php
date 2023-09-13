@@ -24,7 +24,7 @@
 
 namespace core\local\cli;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * CLI script shutdown helper class.

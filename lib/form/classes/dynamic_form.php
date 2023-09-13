@@ -19,7 +19,7 @@ namespace core_form;
 use context;
 use moodle_url;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');

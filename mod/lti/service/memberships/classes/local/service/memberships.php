@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains a class definition for the Memberships service
@@ -25,13 +25,13 @@
 
 namespace ltiservice_memberships\local\service;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * A service implementing Memberships.
  *
  * @package    ltiservice_memberships
- * @since      Moodle 3.0
+ * @since      PowerEduc 3.0
  * @copyright  2015 Vital Source Technologies http://vitalsource.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -44,7 +44,7 @@ class memberships extends \mod_lti\local\ltiservice\service_base {
     /** Context-level role for Learner */
     const CONTEXT_ROLE_LEARNER = 'http://purl.imsglobal.org/vocab/lis/v2/membership#Learner';
     /** Capability used to identify Instructors */
-    const INSTRUCTOR_CAPABILITY = 'moodle/course:manageactivities';
+    const INSTRUCTOR_CAPABILITY = 'powereduc/course:manageactivities';
     /** Always include field */
     const ALWAYS_INCLUDE_FIELD = 1;
     /** Allow the instructor to decide if included */
@@ -126,7 +126,7 @@ class memberships extends \mod_lti\local\ltiservice\service_base {
      * for LTI instance (null if context-level request)
      *
      * @return string
-     * @deprecated since Moodle 3.7 MDL-62599 - please do not use this function any more.
+     * @deprecated since PowerEduc 3.7 MDL-62599 - please do not use this function any more.
      * @see memberships::get_members_json($resource, $context, $course, $role, $limitfrom, $limitnum, $lti, $info, $response)
      */
     public static function get_users_json($resource, $context, $contextid, $tool, $role, $limitfrom, $limitnum, $lti, $info) {
@@ -446,7 +446,7 @@ class memberships extends \mod_lti\local\ltiservice\service_base {
                                                                                      $lti->servicesalt,
                                                                                      $lti->typeid));
                     // Add outcome service URL.
-                    $serviceurl = new \moodle_url('/mod/lti/service.php');
+                    $serviceurl = new \powereduc_url('/mod/lti/service.php');
                     $serviceurl = $serviceurl->out();
                     $forcessl = false;
                     if (!empty($CFG->mod_lti_forcessl)) {
@@ -507,7 +507,7 @@ class memberships extends \mod_lti\local\ltiservice\service_base {
     /**
      * Adds form elements for membership add/edit page.
      *
-     * @param \MoodleQuickForm $mform
+     * @param \PowerEducQuickForm $mform
      */
     public function get_configuration_options(&$mform) {
         $elementname = $this->get_component_id();

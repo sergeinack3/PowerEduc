@@ -24,7 +24,7 @@ Feature: A teacher can password protect a lesson
       | intro       | Test lesson description |
       | section     | 1                       |
       | usepassword | 1                       |
-      | password    | moodle_rules            |
+      | password    | powereduc_rules            |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I follow "Test lesson"
@@ -40,10 +40,10 @@ Feature: A teacher can password protect a lesson
     When I follow "Test lesson"
     Then I should see "Test lesson is a password protected lesson"
     And I should not see "First page contents"
-    And I set the field "userpassword" to "moodle"
+    And I set the field "userpassword" to "powereduc"
     And I press "Continue"
     And I should see "Login failed, please try again..."
     And I should see "Test lesson is a password protected lesson"
-    And I set the field "userpassword" to "moodle_rules"
+    And I set the field "userpassword" to "powereduc_rules"
     And I press "Continue"
     And I should see "First page contents"

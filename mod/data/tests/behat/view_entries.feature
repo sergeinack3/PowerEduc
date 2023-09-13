@@ -34,20 +34,20 @@ Feature: Users can view and search database entries
   Scenario: Students can view, list and search entries
     Given the following "mod_data > entries" exist:
       | database | Test field name | Test field 2 name | Test field 3 name      |
-      | data1    | Student entry 1 |                   | https://moodledev.io   |
+      | data1    | Student entry 1 |                   | https://powereducdev.io   |
       | data1    | Student entry 2 |                   |                        |
       | data1    | Student entry 3 |                   |                        |
     When I log in as "student1"
     And I am on the "Test database name" "data activity" page
     Then I should see "Student entry 1"
     # Confirm that the URL field is displayed as a link.
-    And "https://moodledev.io" "link" should exist
+    And "https://powereducdev.io" "link" should exist
     And I should see "Student entry 2"
     And I should see "Student entry 3"
     And I select "Single view" from the "jump" singleselect
     And I should see "Student entry 1"
     # Confirm that the URL field is displayed as a link.
-    And "https://moodledev.io" "link" should exist
+    And "https://powereducdev.io" "link" should exist
     And I should not see "Student entry 2"
     And "2" "link" should exist
     And "3" "link" should exist
@@ -150,8 +150,8 @@ Feature: Users can view and search database entries
   Scenario: Database entries can be deleted in batch if delcheck is present
     Given the following "mod_data > entries" exist:
       | database | user     | Test field name | Test field 2 name      | Test field 3 name |
-      | data1    | student1 | Student entry 1 | Some student content 1 | http://moodle.com |
-      | data1    | teacher1 | Teacher entry 2 | Some teacher content 2 | http://moodle.com |
+      | data1    | student1 | Student entry 1 | Some student content 1 | http://powereduc.com |
+      | data1    | teacher1 | Teacher entry 2 | Some teacher content 2 | http://powereduc.com |
     And I am on the "Test database name" "data activity" page logged in as teacher1
     And I navigate to "Templates" in current page administration
     And I set the field "Templates tertiary navigation" to "List view template"
@@ -168,8 +168,8 @@ Feature: Users can view and search database entries
   Scenario: Database entries cannot be deleted in batch if delcheck is not present
     Given the following "mod_data > entries" exist:
       | database | user     | Test field name | Test field 2 name      | Test field 3 name |
-      | data1    | student1 | Student entry 1 | Some student content 1 | http://moodle.com |
-      | data1    | teacher1 | Teacher entry 2 | Some teacher content 2 | http://moodle.com |
+      | data1    | student1 | Student entry 1 | Some student content 1 | http://powereduc.com |
+      | data1    | teacher1 | Teacher entry 2 | Some teacher content 2 | http://powereduc.com |
     And I am on the "Test database name" "data activity" page logged in as teacher1
     Then I should not see "Select all"
     And I should not see "Delete selected"

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Form to edit a users profile
@@ -22,8 +22,8 @@
  * @package core_user
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    //  It must be included from a Moodle page.
+if (!defined('POWEREDUC_INTERNAL')) {
+    die('Direct access to this script is forbidden.');    //  It must be included from a PowerEduc page.
 }
 
 require_once($CFG->dirroot.'/lib/formslib.php');
@@ -34,7 +34,7 @@ require_once($CFG->dirroot.'/lib/formslib.php');
  * @copyright 1999 Martin Dougiamas  http://dougiamas.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class user_edit_form extends moodleform {
+class user_edit_form extends powereducform {
 
     /**
      * Define the form.
@@ -70,8 +70,8 @@ class user_edit_form extends moodleform {
         $mform->addElement('hidden', 'course', $COURSE->id);
         $mform->setType('course', PARAM_INT);
 
-        // Print the required moodle fields first.
-        $mform->addElement('header', 'moodle', $strgeneral);
+        // Print the required powereduc fields first.
+        $mform->addElement('header', 'powereduc', $strgeneral);
 
         // Shared fields.
         useredit_shared_definition($mform, $editoroptions, $filemanageroptions, $user);
@@ -88,12 +88,12 @@ class user_edit_form extends moodleform {
         if ($usernotfullysetup) {
             $userpicturewarning = $mform->createElement('warning', 'userpicturewarning', 'notifymessage', get_string('newpictureusernotsetup'));
             $enabledusernamefields = useredit_get_enabled_name_fields();
-            if ($mform->elementExists('moodle_additional_names')) {
-                $mform->insertElementBefore($userpicturewarning, 'moodle_additional_names');
-            } else if ($mform->elementExists('moodle_interests')) {
-                $mform->insertElementBefore($userpicturewarning, 'moodle_interests');
+            if ($mform->elementExists('powereduc_additional_names')) {
+                $mform->insertElementBefore($userpicturewarning, 'powereduc_additional_names');
+            } else if ($mform->elementExists('powereduc_interests')) {
+                $mform->insertElementBefore($userpicturewarning, 'powereduc_interests');
             } else {
-                $mform->insertElementBefore($userpicturewarning, 'moodle_optional');
+                $mform->insertElementBefore($userpicturewarning, 'powereduc_optional');
             }
 
             // This is expected to exist when the form is submitted.
@@ -228,7 +228,7 @@ class user_edit_form extends moodleform {
             $errors['email'] = get_string('toomanybounces');
         }
 
-        if (isset($usernew->email) and !empty($CFG->verifychangedemail) and !isset($errors['email']) and !has_capability('moodle/user:update', context_system::instance())) {
+        if (isset($usernew->email) and !empty($CFG->verifychangedemail) and !isset($errors['email']) and !has_capability('powereduc/user:update', context_system::instance())) {
             $errorstr = email_is_not_allowed($usernew->email);
             if ($errorstr !== false) {
                 $errors['email'] = $errorstr;

@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * This file contains the script used to register a new external tool.
@@ -37,14 +37,14 @@ $tab          = optional_param('tab', '', PARAM_ALPHAEXT);
 $returnto     = optional_param('returnto', '', PARAM_ALPHA);
 
 if ($returnto == 'toolconfigure') {
-    $returnurl = new moodle_url($CFG->wwwroot . '/mod/lti/toolconfigure.php');
+    $returnurl = new powereduc_url($CFG->wwwroot . '/mod/lti/toolconfigure.php');
 }
 
 // No guest autologin.
 require_login(0, false);
 
 $isupdate = !empty($id);
-$pageurl = new moodle_url('/mod/lti/registersettings.php');
+$pageurl = new powereduc_url('/mod/lti/registersettings.php');
 if ($isupdate) {
     $pageurl->param('id', $id);
 }
@@ -55,7 +55,7 @@ $PAGE->set_url($pageurl);
 
 admin_externalpage_setup('ltitoolproxies');
 
-$redirect = new moodle_url('/mod/lti/toolproxies.php', array('tab' => $tab));
+$redirect = new powereduc_url('/mod/lti/toolproxies.php', array('tab' => $tab));
 $redirect = $redirect->out();
 if (!empty($returnurl)) {
     $redirect = $returnurl;

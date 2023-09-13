@@ -19,7 +19,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Rendering of files viewer related widgets.

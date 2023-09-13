@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ namespace mod_bigbluebuttonbn\completion;
 use core_completion\activity_custom_completion;
 use mod_bigbluebuttonbn\instance;
 use mod_bigbluebuttonbn\logger;
-use moodle_exception;
+use powereduc_exception;
 use stdClass;
 
 /**
@@ -55,7 +55,7 @@ class custom_completion extends activity_custom_completion {
         $instance = instance::get_from_cmid($this->cm->id);
 
         if (empty($instance)) {
-            throw new moodle_exception("Can't find bigbluebuttonbn instance {$this->cm->instance}");
+            throw new powereduc_exception("Can't find bigbluebuttonbn instance {$this->cm->instance}");
         }
 
         // Default return value.
@@ -188,7 +188,7 @@ class custom_completion extends activity_custom_completion {
         $instance = instance::get_from_cmid($this->cm->id);
 
         if (empty($instance)) {
-            throw new moodle_exception("Can't find bigbluebuttonbn instance {$this->cm->instance}");
+            throw new powereduc_exception("Can't find bigbluebuttonbn instance {$this->cm->instance}");
         }
         $summary = "";
         $filters = self::FILTERS[$rule] ?? [logger::EVENT_SUMMARY];
@@ -215,7 +215,7 @@ class custom_completion extends activity_custom_completion {
         $instance = instance::get_from_cmid($this->cm->id);
 
         if (empty($instance)) {
-            throw new moodle_exception("Can't find bigbluebuttonbn instance {$this->cm->instance}");
+            throw new powereduc_exception("Can't find bigbluebuttonbn instance {$this->cm->instance}");
         }
         $filters = self::FILTERS[$rule] ?? [logger::EVENT_SUMMARY];
         return logger::get_user_completion_logs_max_timestamp($instance, $this->userid, $filters);

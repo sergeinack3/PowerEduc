@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Contains class core_tag_external
@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->dirroot/webservice/externallib.php");
@@ -75,12 +75,12 @@ class core_tag_external extends external_api {
         $tags = self::validate_parameters(self::update_tags_parameters(), array('tags' => $tags));
 
         $systemcontext = context_system::instance();
-        $canmanage = has_capability('moodle/tag:manage', $systemcontext);
-        $canedit = has_capability('moodle/tag:edit', $systemcontext);
+        $canmanage = has_capability('powereduc/tag:manage', $systemcontext);
+        $canedit = has_capability('powereduc/tag:edit', $systemcontext);
         $warnings = array();
 
         if (empty($CFG->usetags)) {
-            throw new moodle_exception('tagsaredisabled', 'tag');
+            throw new powereduc_exception('tagsaredisabled', 'tag');
         }
 
         $renderer = $PAGE->get_renderer('core');
@@ -196,14 +196,14 @@ class core_tag_external extends external_api {
         $systemcontext = context_system::instance();
         self::validate_context($systemcontext);
 
-        $canmanage = has_capability('moodle/tag:manage', $systemcontext);
-        $canedit = has_capability('moodle/tag:edit', $systemcontext);
+        $canmanage = has_capability('powereduc/tag:manage', $systemcontext);
+        $canedit = has_capability('powereduc/tag:edit', $systemcontext);
 
         $return = array();
         $warnings = array();
 
         if (empty($CFG->usetags)) {
-            throw new moodle_exception('tagsaredisabled', 'tag');
+            throw new powereduc_exception('tagsaredisabled', 'tag');
         }
 
         $renderer = $PAGE->get_renderer('core');
@@ -341,7 +341,7 @@ class core_tag_external extends external_api {
      * Parameters for function get_tagindex_per_area()
      *
      * @return external_function_parameters
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tagindex_per_area_parameters() {
         return new external_function_parameters(
@@ -365,8 +365,8 @@ class core_tag_external extends external_api {
      * Returns the tag index per multiple areas if requested.
      *
      * @param array $params Tag index required information.
-     * @throws moodle_exception
-     * @since  Moodle 3.7
+     * @throws powereduc_exception
+     * @since  PowerEduc 3.7
      */
     public static function get_tagindex_per_area($params) {
         global $CFG, $PAGE;
@@ -386,7 +386,7 @@ class core_tag_external extends external_api {
         );
 
         if (empty($CFG->usetags)) {
-            throw new moodle_exception('tagsaredisabled', 'tag');
+            throw new powereduc_exception('tagsaredisabled', 'tag');
         }
 
         if (!empty($params['tag'])) {
@@ -395,14 +395,14 @@ class core_tag_external extends external_api {
                 $tags = core_tag_tag::guess_by_name($params['tag'], '*');
                 if (count($tags) > 1) {
                     // It is in more that one collection, do not display.
-                    throw new moodle_exception('Tag is in more that one collection, please indicate one.');
+                    throw new powereduc_exception('Tag is in more that one collection, please indicate one.');
                 } else if (count($tags) == 1) {
                     $tag = reset($tags);
                 }
             } else {
                 if (!$tag = core_tag_tag::get_by_name($params['tc'], $params['tag'], '*')) {
                     // Not found in collection.
-                    throw new moodle_exception('notagsfound', 'tag');
+                    throw new powereduc_exception('notagsfound', 'tag');
                 }
             }
         } else if (!empty($params['id'])) {
@@ -410,7 +410,7 @@ class core_tag_external extends external_api {
         }
 
         if (empty($tag)) {
-            throw new moodle_exception('notagsfound', 'tag');
+            throw new powereduc_exception('notagsfound', 'tag');
         }
 
         // Login to the course / module if applicable.
@@ -446,7 +446,7 @@ class core_tag_external extends external_api {
      * Return structure for get_tagindex_per_area
      *
      * @return external_description
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tagindex_per_area_returns() {
         return new external_multiple_structure(
@@ -458,7 +458,7 @@ class core_tag_external extends external_api {
      * Returns description of get_tag_areas() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_areas_parameters() {
         return new external_function_parameters(array());
@@ -468,14 +468,14 @@ class core_tag_external extends external_api {
      * Retrieves existing tag areas.
      *
      * @return array an array of warnings and objects containing the plugin information
-     * @throws moodle_exception
-     * @since  Moodle 3.7
+     * @throws powereduc_exception
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_areas() {
         global $CFG, $PAGE;
 
         if (empty($CFG->usetags)) {
-            throw new moodle_exception('tagsaredisabled', 'tag');
+            throw new powereduc_exception('tagsaredisabled', 'tag');
         }
 
         $context = context_system::instance();
@@ -508,7 +508,7 @@ class core_tag_external extends external_api {
      * Returns description of get_tag_areas() result value.
      *
      * @return external_description
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_areas_returns() {
         return new external_single_structure(
@@ -525,7 +525,7 @@ class core_tag_external extends external_api {
      * Returns description of get_tag_collections() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_collections_parameters() {
         return new external_function_parameters(array());
@@ -535,14 +535,14 @@ class core_tag_external extends external_api {
      * Retrieves existing tag collections.
      *
      * @return array an array of warnings and tag collections
-     * @throws moodle_exception
-     * @since  Moodle 3.7
+     * @throws powereduc_exception
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_collections() {
         global $CFG, $PAGE;
 
         if (empty($CFG->usetags)) {
-            throw new moodle_exception('tagsaredisabled', 'tag');
+            throw new powereduc_exception('tagsaredisabled', 'tag');
         }
 
         $context = context_system::instance();
@@ -567,7 +567,7 @@ class core_tag_external extends external_api {
      * Returns description of get_tag_collections() result value.
      *
      * @return external_description
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_collections_returns() {
         return new external_single_structure(
@@ -584,7 +584,7 @@ class core_tag_external extends external_api {
      * Returns description of get_tag_cloud() parameters.
      *
      * @return external_function_parameters
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_cloud_parameters() {
         return new external_function_parameters(
@@ -616,8 +616,8 @@ class core_tag_external extends external_api {
      * @param int $ctx only retrieve tag instances in this context
      * @param int $rec retrieve tag instances in the $ctx context and it's children (default 1)
      * @return array an array of warnings and tag cloud information and items
-     * @throws moodle_exception
-     * @since  Moodle 3.7
+     * @throws powereduc_exception
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_cloud($tagcollid = 0, $isstandard = false, $limit = 150, $sort = 'name',
             $search = '', $fromctx = 0, $ctx = 0, $rec = 1) {
@@ -637,7 +637,7 @@ class core_tag_external extends external_api {
         );
 
         if (empty($CFG->usetags)) {
-            throw new moodle_exception('tagsaredisabled', 'tag');
+            throw new powereduc_exception('tagsaredisabled', 'tag');
         }
 
         $context = context_system::instance();
@@ -658,7 +658,7 @@ class core_tag_external extends external_api {
      * Returns description of get_tag_cloud() result value.
      *
      * @return external_description
-     * @since  Moodle 3.7
+     * @since  PowerEduc 3.7
      */
     public static function get_tag_cloud_returns() {
         return new external_single_structure(

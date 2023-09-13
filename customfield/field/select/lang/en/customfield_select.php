@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['errordefaultvaluenotinlist'] = 'The default value must be one of the options from the list above.';
 $string['errornotenoughoptions'] = 'Please provide at least two options, with each on a new line.';

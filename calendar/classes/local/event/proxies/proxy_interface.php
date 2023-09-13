@@ -24,7 +24,7 @@
 
 namespace core_calendar\local\event\proxies;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Interface for a proxy class.

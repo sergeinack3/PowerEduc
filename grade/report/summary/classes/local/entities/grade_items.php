@@ -26,7 +26,7 @@ use core_reportbuilder\local\entities\base;
 use core_reportbuilder\local\report\column;
 use core_reportbuilder\local\report\filter;
 
-defined('MOODLE_INTERNAL') || die;
+defined('POWEREDUC_INTERNAL') || die;
 
 require_once($CFG->dirroot . '/grade/report/summary/lib.php');
 require_once($CFG->dirroot . '/grade/lib.php');

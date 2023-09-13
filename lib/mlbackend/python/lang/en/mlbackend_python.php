@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,13 +26,13 @@ $string['errornoconfigdata'] = 'The server configuration is not complete.';
 $string['errorserver'] = 'Server error {$a}';
 $string['host'] = 'Host';
 $string['hostdesc'] = 'Host';
-$string['packageinstalledshouldbe'] = 'The moodlemlbackend Python package should be updated. The required version is "{$a->required}" and the installed version is "{$a->installed}".';
-$string['packageinstalledtoohigh'] = 'The moodlemlbackend Python package is not compatible with this version of Moodle. The required version is "{$a->required}" or higher as long as it is API-compatible. The installed version "{$a->installed}" is too high.';
+$string['packageinstalledshouldbe'] = 'The powereducmlbackend Python package should be updated. The required version is "{$a->required}" and the installed version is "{$a->installed}".';
+$string['packageinstalledtoohigh'] = 'The powereducmlbackend Python package is not compatible with this version of Moodle. The required version is "{$a->required}" or higher as long as it is API-compatible. The installed version "{$a->installed}" is too high.';
 $string['pluginname'] = 'Python machine learning backend';
 $string['port'] = 'Port';
 $string['portdesc'] = 'Port';
 $string['privacy:metadata'] = 'The Python machine learning backend plugin does not store any personal data.';
-$string['pythonpackagenotinstalled'] = 'The moodlemlbackend Python package is not installed or there is a problem with it. Please execute "{$a}" from command line interface for more info.';
+$string['pythonpackagenotinstalled'] = 'The powereducmlbackend Python package is not installed or there is a problem with it. Please execute "{$a}" from command line interface for more info.';
 $string['pythonpathnotdefined'] = 'The path to your executable Python binary has not been defined. Please visit "{$a}" to set it.';
 $string['serversettingsinfo'] = 'If \'Use a server\' is enabled, the server settings will be displayed.';
 $string['username'] = 'Username';

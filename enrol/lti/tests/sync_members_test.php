@@ -30,7 +30,7 @@ use IMSGlobal\LTI\ToolProvider\ResourceLink;
 use IMSGlobal\LTI\ToolProvider\ToolConsumer;
 use IMSGlobal\LTI\ToolProvider\User;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Tests for the sync_members scheduled task class.

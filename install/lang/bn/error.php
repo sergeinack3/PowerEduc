@@ -27,7 +27,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 $string['cannotcreatelangdir'] = 'lang ডিরেক্টরি তৈরি করতে পারে না';
 $string['cannotcreatetempdir'] = 'টেম্প ডিরেক্টরি তৈরি করতে পারে না';

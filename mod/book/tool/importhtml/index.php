@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -81,7 +81,7 @@ if ($mform->is_cancelled()) {
     $file = reset($files);
     toolbook_importhtml_import_chapters($file, $data->type, $book, $context);
 
-    echo $OUTPUT->continue_button(new moodle_url('/mod/book/view.php', array('id'=>$id)));
+    echo $OUTPUT->continue_button(new powereduc_url('/mod/book/view.php', array('id'=>$id)));
     echo $OUTPUT->footer();
     die;
 }

@@ -24,7 +24,7 @@
  */
 
 namespace tool_messageinbound\privacy;
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 use context;
 use context_user;

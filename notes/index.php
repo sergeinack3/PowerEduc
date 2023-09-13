@@ -1,18 +1,18 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * file index.php
@@ -30,10 +30,10 @@ $filtertype   = optional_param('filtertype', '', PARAM_ALPHA);
 $filterselect = optional_param('filterselect', 0, PARAM_INT);
 
 if (empty($CFG->enablenotes)) {
-    throw new \moodle_exception('notesdisabled', 'notes');
+    throw new \powereduc_exception('notesdisabled', 'notes');
 }
 
-$url = new moodle_url('/notes/index.php');
+$url = new powereduc_url('/notes/index.php');
 if ($courseid != SITEID) {
     $url->param('course', $courseid);
 }
@@ -85,7 +85,7 @@ if ($course->id == SITEID) {
     $coursecontext = context_course::instance($course->id);
 }
 
-require_capability('moodle/notes:view', $coursecontext);
+require_capability('powereduc/notes:view', $coursecontext);
 $systemcontext = context_system::instance();
 
 // Trigger event.
@@ -100,19 +100,19 @@ if ($userid && $course->id == SITEID) {
         $notenode = $PAGE->navigation->find('notes', null)->make_inactive();
     }
 
-    $notesurl = new moodle_url('/notes/index.php', array('user' => $userid));
+    $notesurl = new powereduc_url('/notes/index.php', array('user' => $userid));
     $PAGE->navbar->add(get_string('notes', 'notes'), $notesurl);
 } else if ($course->id != SITEID) {
     $notenode = $PAGE->navigation->find('currentcoursenotes', null)->make_inactive();
 
-    $notesurl = new moodle_url('/notes/index.php', array('user' => $userid, 'course' => $courseid));
+    $notesurl = new powereduc_url('/notes/index.php', array('user' => $userid, 'course' => $courseid));
     $PAGE->navbar->add(get_string('notes', 'notes'), $notesurl);
 
     $PAGE->set_context(context_course::instance($courseid));
 } else {
     $link = null;
     if (course_can_view_participants($coursecontext) || course_can_view_participants($systemcontext)) {
-        $link = new moodle_url('/user/index.php', array('id' => $course->id));
+        $link = new powereduc_url('/user/index.php', array('id' => $course->id));
     }
 }
 
@@ -127,7 +127,7 @@ if ($course->id == SITEID) {
 echo $OUTPUT->header();
 
 if ($course->id != SITEID) {
-    $backurl = new moodle_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
+    $backurl = new powereduc_url('/user/view.php', ['id' => $userid, 'course' => $courseid]);
     echo $OUTPUT->single_button($backurl, get_string('back'), 'get', ['class' => 'mb-3']);
 
     $headerinfo = array('heading' => fullname($user), 'user' => $user);
@@ -145,8 +145,8 @@ echo $OUTPUT->box_start();
 
 if ($courseid != SITEID) {
     $context = context_course::instance($courseid);
-    $addid = has_capability('moodle/notes:manage', $context) ? $courseid : 0;
-    $view = has_capability('moodle/notes:view', $context);
+    $addid = has_capability('powereduc/notes:manage', $context) ? $courseid : 0;
+    $view = has_capability('powereduc/notes:view', $context);
     $fullname = format_string($course->fullname, true, array('context' => $context));
     note_print_notes(
         '<a name="sitenotes"></a>' . $strsitenotes,
@@ -177,7 +177,7 @@ if ($courseid != SITEID) {
     );
 
 } else {  // Normal course.
-    $view = has_capability('moodle/notes:view', context_system::instance());
+    $view = has_capability('powereduc/notes:view', context_system::instance());
     note_print_notes('<a name="sitenotes"></a>' . $strsitenotes, 0, $view, 0, $userid, NOTES_STATE_SITE, 0);
     echo '<a name="coursenotes"></a>';
 
@@ -187,8 +187,8 @@ if ($courseid != SITEID) {
             $ccontext = context_course::instance($c->id);
             $cfullname = format_string($c->fullname, true, array('context' => $ccontext));
             $header = '<a href="' . $CFG->wwwroot . '/course/view.php?id=' . $c->id . '">' . $cfullname . '</a>';
-            $viewcoursenotes = has_capability('moodle/notes:view', $ccontext);
-            if (has_capability('moodle/notes:manage', $ccontext)) {
+            $viewcoursenotes = has_capability('powereduc/notes:view', $ccontext);
+            if (has_capability('powereduc/notes:manage', $ccontext)) {
                 $addid = $c->id;
             } else {
                 $addid = 0;

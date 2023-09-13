@@ -24,7 +24,7 @@
 
 namespace core\progress;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Progress handler that updates a database table with the progress.

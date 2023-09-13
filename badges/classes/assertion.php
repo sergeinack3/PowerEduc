@@ -24,7 +24,7 @@
  * @author     Yuliya Bozhko <yuliya.bozhko@totaralms.com>
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 /**
  * Open Badges Assertions specification 1.0 {@link https://github.com/mozilla/openbadges-backpack/wiki/Assertions}

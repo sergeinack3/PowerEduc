@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,9 +33,9 @@
  *                         the reason is to allow testing of incomplete drivers that do not allow full PHPUnit environment
  *                         initialisation (the database can be empty).
  * $CFG->phpunit_extra_drivers = array(
- *      1=>array('dbtype'=>'mysqli', 'dbhost'=>'localhost', 'dbname'=>'moodle', 'dbuser'=>'root', 'dbpass'=>'', 'prefix'=>'phpu2_'),
- *      2=>array('dbtype'=>'pgsql', 'dbhost'=>'localhost', 'dbname'=>'moodle', 'dbuser'=>'postgres', 'dbpass'=>'', 'prefix'=>'phpu2_'),
- *      3=>array('dbtype'=>'sqlsrv', 'dbhost'=>'127.0.0.1', 'dbname'=>'moodle', 'dbuser'=>'sa', 'dbpass'=>'', 'prefix'=>'phpu2_'),
+ *      1=>array('dbtype'=>'mysqli', 'dbhost'=>'localhost', 'dbname'=>'powereduc', 'dbuser'=>'root', 'dbpass'=>'', 'prefix'=>'phpu2_'),
+ *      2=>array('dbtype'=>'pgsql', 'dbhost'=>'localhost', 'dbname'=>'powereduc', 'dbuser'=>'postgres', 'dbpass'=>'', 'prefix'=>'phpu2_'),
+ *      3=>array('dbtype'=>'sqlsrv', 'dbhost'=>'127.0.0.1', 'dbname'=>'powereduc', 'dbuser'=>'sa', 'dbpass'=>'', 'prefix'=>'phpu2_'),
  *      4=>array('dbtype'=>'oci', 'dbhost'=>'127.0.0.1', 'dbname'=>'XE', 'dbuser'=>'sa', 'dbpass'=>'', 'prefix'=>'t_'),
  * );
  * define('PHPUNIT_TEST_DRIVER')=1; //number is index in the previous array
@@ -46,10 +46,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class database_driver_testcase extends base_testcase {
-    /** @var moodle_database connection to extra database */
+    /** @var powereduc_database connection to extra database */
     private static $extradb = null;
 
-    /** @var moodle_database used in these tests*/
+    /** @var powereduc_database used in these tests*/
     protected $tdb;
 
     /**
@@ -89,7 +89,7 @@ abstract class database_driver_testcase extends base_testcase {
         $prefix = $CFG->phpunit_extra_drivers[PHPUNIT_TEST_DRIVER]['prefix'];
         $dboptions = empty($CFG->phpunit_extra_drivers[PHPUNIT_TEST_DRIVER]['dboptions']) ? array() : $CFG->phpunit_extra_drivers[PHPUNIT_TEST_DRIVER]['dboptions'];
 
-        $classname = "{$dbtype}_{$dblibrary}_moodle_database";
+        $classname = "{$dbtype}_{$dblibrary}_powereduc_database";
         require_once("$CFG->libdir/dml/$classname.php");
         $d = new $classname();
         if (!$d->driver_installed()) {

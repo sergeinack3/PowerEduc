@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace qtype_calculated;
 
 use qtype_calculated_variable_substituter;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/type/calculated/question.php');
@@ -43,19 +43,19 @@ class variablesubstituter_test extends \advanced_testcase {
     }
 
     public function test_cannot_use_nonnumbers() {
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $vs = new qtype_calculated_variable_substituter(array('a' => 'frog', 'b' => -2), '.');
     }
 
     public function test_invalid_expression() {
         $vs = new qtype_calculated_variable_substituter(array('a' => 1, 'b' => 2), '.');
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $vs->calculate('{a} + {b}?');
     }
 
     public function test_tricky_invalid_expression() {
         $vs = new qtype_calculated_variable_substituter(array('a' => 1, 'b' => 2), '.');
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $vs->calculate('{a}{b}'); // Have to make sure this does not just evaluate to 12.
     }
 
@@ -66,7 +66,7 @@ class variablesubstituter_test extends \advanced_testcase {
         }
 
         $vs = new qtype_calculated_variable_substituter(array('a' => 1, 'b' => 0), '.');
-        $this->expectException(\moodle_exception::class);
+        $this->expectException(\powereduc_exception::class);
         $vs->calculate('{a} / {b}');
     }
 
@@ -86,7 +86,7 @@ class variablesubstituter_test extends \advanced_testcase {
     }
 
     public function test_expression_has_unmapped_placeholder() {
-        $this->expectException('moodle_exception');
+        $this->expectException('powereduc_exception');
         $this->expectExceptionMessage(get_string('illegalformulasyntax', 'qtype_calculated', '{c}'));
         $vs = new qtype_calculated_variable_substituter(array('a' => 1, 'b' => 2), '.');
         $vs->calculate('{c} - {a} + {b}');

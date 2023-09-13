@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Edit a custom report
  *
  * @package   core_reportbuilder
- * @copyright 2021 David Matamoros <davidmc@moodle.com>
+ * @copyright 2021 David Matamoros <davidmc@powereduc.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,8 +37,8 @@ require_once("{$CFG->libdir}/adminlib.php");
 
 $reportid = required_param('id', PARAM_INT);
 
-admin_externalpage_setup('customreports', null, ['id' => $reportid], new moodle_url('/reportbuilder/edit.php'));
-navigation_node::override_active_url(new moodle_url('/reportbuilder/index.php'));
+admin_externalpage_setup('customreports', null, ['id' => $reportid], new powereduc_url('/reportbuilder/edit.php'));
+navigation_node::override_active_url(new powereduc_url('/reportbuilder/index.php'));
 
 $report = manager::get_report_from_id($reportid);
 permission::require_can_edit_report($report->get_report_persistent());

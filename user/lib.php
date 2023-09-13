@@ -1,24 +1,24 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of PowerEduc - http://powereduc.org/
 //
-// Moodle is free software: you can redistribute it and/or modify
+// PowerEduc is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// Moodle is distributed in the hope that it will be useful,
+// PowerEduc is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with PowerEduc.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * External user API
  *
  * @package   core_user
- * @copyright 2009 Moodle Pty Ltd (http://moodle.com)
+ * @copyright 2009 PowerEduc Pty Ltd (http://powereduc.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ define('USER_FILTER_STRING', 6);
 /**
  * Creates a user
  *
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @param stdClass $user user to create
  * @param bool $updatepassword if true, authentication plugin will update password.
  * @param bool $triggerevent set false if user_created event should not be triggred.
@@ -49,15 +49,15 @@ function user_create_user($user, $updatepassword = true, $triggerevent = true) {
 
     // Check username.
     if (trim($user->username) === '') {
-        throw new moodle_exception('invalidusernameblank');
+        throw new powereduc_exception('invalidusernameblank');
     }
 
     if ($user->username !== core_text::strtolower($user->username)) {
-        throw new moodle_exception('usernamelowercase');
+        throw new powereduc_exception('usernamelowercase');
     }
 
     if ($user->username !== core_user::clean_field($user->username, 'username')) {
-        throw new moodle_exception('invalidusername');
+        throw new powereduc_exception('invalidusername');
     }
 
     // Save the password in a temp value for later.
@@ -65,7 +65,7 @@ function user_create_user($user, $updatepassword = true, $triggerevent = true) {
 
         // Check password toward the password policy.
         if (!check_password_policy($user->password, $errmsg, $user)) {
-            throw new moodle_exception($errmsg);
+            throw new powereduc_exception($errmsg);
         }
 
         $userpassword = $user->password;
@@ -149,7 +149,7 @@ function user_create_user($user, $updatepassword = true, $triggerevent = true) {
 /**
  * Update a user with a user object (will compare against the ID)
  *
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @param stdClass $user the user to update
  * @param bool $updatepassword if true, authentication plugin will update password.
  * @param bool $triggerevent set false if user_updated event should not be triggred.
@@ -166,10 +166,10 @@ function user_update_user($user, $updatepassword = true, $triggerevent = true) {
     // Check username.
     if (isset($user->username)) {
         if ($user->username !== core_text::strtolower($user->username)) {
-            throw new moodle_exception('usernamelowercase');
+            throw new powereduc_exception('usernamelowercase');
         } else {
             if ($user->username !== core_user::clean_field($user->username, 'username')) {
-                throw new moodle_exception('invalidusername');
+                throw new powereduc_exception('invalidusername');
             }
         }
     }
@@ -179,7 +179,7 @@ function user_update_user($user, $updatepassword = true, $triggerevent = true) {
 
         // Check password toward the password policy.
         if (!check_password_policy($user->password, $errmsg, $user)) {
-            throw new moodle_exception($errmsg);
+            throw new powereduc_exception($errmsg);
         }
 
         $passwd = $user->password;
@@ -268,11 +268,11 @@ function user_get_default_fields() {
  * Give user record from mdl_user, build an array contains all user details.
  *
  * Warning: description file urls are 'webservice/pluginfile.php' is use.
- *          it can be changed with $CFG->moodlewstextformatlinkstoimagesfile
+ *          it can be changed with $CFG->powereducwstextformatlinkstoimagesfile
  *
- * @throws moodle_exception
+ * @throws powereduc_exception
  * @param stdClass $user user record from mdl_user
- * @param stdClass $course moodle course
+ * @param stdClass $course powereduc course
  * @param array $userfields required fields
  * @return array|null
  */
@@ -289,7 +289,7 @@ function user_get_user_details($user, $course = null, array $userfields = array(
 
     foreach ($userfields as $thefield) {
         if (!in_array($thefield, $defaultfields)) {
-            throw new moodle_exception('invaliduserfield', 'error', '', $thefield);
+            throw new powereduc_exception('invaliduserfield', 'error', '', $thefield);
         }
     }
 
@@ -305,11 +305,11 @@ function user_get_user_details($user, $course = null, array $userfields = array(
     if (!empty($course)) {
         $context = context_course::instance($course->id);
         $usercontext = context_user::instance($user->id);
-        $canviewdetailscap = (has_capability('moodle/user:viewdetails', $context) || has_capability('moodle/user:viewdetails', $usercontext));
+        $canviewdetailscap = (has_capability('powereduc/user:viewdetails', $context) || has_capability('powereduc/user:viewdetails', $usercontext));
     } else {
         $context = context_user::instance($user->id);
         $usercontext = $context;
-        $canviewdetailscap = has_capability('moodle/user:viewdetails', $usercontext);
+        $canviewdetailscap = has_capability('powereduc/user:viewdetails', $usercontext);
     }
 
     $currentuser = ($user->id == $USER->id);
@@ -320,19 +320,19 @@ function user_get_user_details($user, $course = null, array $userfields = array(
     $showuseridentityfields = \core_user\fields::get_identity_fields($context, false);
 
     if (!empty($course)) {
-        $canviewhiddenuserfields = has_capability('moodle/course:viewhiddenuserfields', $context);
+        $canviewhiddenuserfields = has_capability('powereduc/course:viewhiddenuserfields', $context);
     } else {
-        $canviewhiddenuserfields = has_capability('moodle/user:viewhiddendetails', $context);
+        $canviewhiddenuserfields = has_capability('powereduc/user:viewhiddendetails', $context);
     }
-    $canviewfullnames = has_capability('moodle/site:viewfullnames', $context);
+    $canviewfullnames = has_capability('powereduc/site:viewfullnames', $context);
     if (!empty($course)) {
-        $canviewuseremail = has_capability('moodle/course:useremail', $context);
+        $canviewuseremail = has_capability('powereduc/course:useremail', $context);
     } else {
         $canviewuseremail = false;
     }
     $cannotviewdescription   = !empty($CFG->profilesforenrolledusersonly) && !$currentuser && !$DB->record_exists('role_assignments', array('userid' => $user->id));
     if (!empty($course)) {
-        $canaccessallgroups = has_capability('moodle/site:accessallgroups', $context);
+        $canaccessallgroups = has_capability('powereduc/site:accessallgroups', $context);
     } else {
         $canaccessallgroups = false;
     }
@@ -346,7 +346,7 @@ function user_get_user_details($user, $course = null, array $userfields = array(
     $userdetails['id'] = $user->id;
 
     if (in_array('username', $userfields)) {
-        if ($currentuser or has_capability('moodle/user:viewalldetails', $context)) {
+        if ($currentuser or has_capability('powereduc/user:viewalldetails', $context)) {
             $userdetails['username'] = $user->username;
         }
     }
@@ -492,20 +492,20 @@ function user_get_user_details($user, $course = null, array $userfields = array(
     // Departement/Institution/Idnumber are not displayed on any profile, however you can get them from editing profile.
     if (in_array('idnumber', $userfields) && $user->idnumber) {
         if (in_array('idnumber', $showuseridentityfields) or $currentuser or
-                has_capability('moodle/user:viewalldetails', $context)) {
+                has_capability('powereduc/user:viewalldetails', $context)) {
             $userdetails['idnumber'] = $user->idnumber;
         }
     }
     if (in_array('institution', $userfields) && $user->institution) {
         if (in_array('institution', $showuseridentityfields) or $currentuser or
-                has_capability('moodle/user:viewalldetails', $context)) {
+                has_capability('powereduc/user:viewalldetails', $context)) {
             $userdetails['institution'] = $user->institution;
         }
     }
     // Isset because it's ok to have department 0.
     if (in_array('department', $userfields) && isset($user->department)) {
         if (in_array('department', $showuseridentityfields) or $currentuser or
-                has_capability('moodle/user:viewalldetails', $context)) {
+                has_capability('powereduc/user:viewalldetails', $context)) {
             $userdetails['department'] = $user->department;
         }
     }
@@ -565,7 +565,7 @@ function user_get_user_details($user, $course = null, array $userfields = array(
         $userdetails['preferences'] = $preferences;
     }
 
-    if ($currentuser or has_capability('moodle/user:viewalldetails', $context)) {
+    if ($currentuser or has_capability('powereduc/user:viewalldetails', $context)) {
         $extrafields = ['auth', 'confirmed', 'lang', 'theme', 'timezone', 'mailformat'];
         foreach ($extrafields as $extrafield) {
             if (in_array($extrafield, $userfields) && isset($user->$extrafield)) {
@@ -636,11 +636,11 @@ function user_get_user_details_courses($user, array $userfields = []) {
 function can_view_user_details_cap($user, $course = null) {
     // Check $USER has the capability to view the user details at user context.
     $usercontext = context_user::instance($user->id);
-    $result = has_capability('moodle/user:viewdetails', $usercontext);
+    $result = has_capability('powereduc/user:viewdetails', $usercontext);
     // Otherwise can $USER see them at course context.
     if (!$result && !empty($course)) {
         $context = context_course::instance($course->id);
-        $result = has_capability('moodle/user:viewdetails', $context);
+        $result = has_capability('powereduc/user:viewdetails', $context);
     }
     return $result;
 }
@@ -686,7 +686,7 @@ function user_count_login_failures($user, $reset = true) {
  * stdClass with fields type, url, title.
  *
  * @param string $text the menu items definition
- * @param moodle_page $page the current page
+ * @param powereduc_page $page the current page
  * @return array
  */
 function user_convert_text_to_menu_items($text, $page) {
@@ -748,8 +748,8 @@ function user_convert_text_to_menu_items($text, $page) {
                 $bits[1] = user_mygrades_url();
             }
 
-            // Make sure the url is a moodle url.
-            $bits[1] = new moodle_url(trim($bits[1]));
+            // Make sure the url is a powereduc url.
+            $bits[1] = new powereduc_url(trim($bits[1]));
         }
         $child->url = $bits[1];
 
@@ -763,7 +763,7 @@ function user_convert_text_to_menu_items($text, $page) {
  * Get a list of essential user navigation items.
  *
  * @param stdclass $user user object.
- * @param moodle_page $page page object.
+ * @param powereduc_page $page page object.
  * @param array $options associative array.
  *     options are:
  *     - avatarsize=35 (size of avatar image)
@@ -786,7 +786,7 @@ function user_convert_text_to_menu_items($text, $page) {
  *
  *          userid         int        the id of the user in question
  *          userfullname   string     the user's full name
- *          userprofileurl moodle_url the url of the user's profile
+ *          userprofileurl powereduc_url the url of the user's profile
  *          useravatar     string     a HTML fragment - the rendered
  *                                    user_picture for this user
  *          userloginfail  string     an error string denoting the number
@@ -799,7 +799,7 @@ function user_convert_text_to_menu_items($text, $page) {
  *          asotheruser        bool    whether viewing as another user
  *          realuserid         int        the id of the user in question
  *          realuserfullname   string     the user's full name
- *          realuserprofileurl moodle_url the url of the user's profile
+ *          realuserprofileurl powereduc_url the url of the user's profile
  *          realuseravatar     string     a HTML fragment - the rendered
  *                                        user_picture for this user
  *
@@ -834,7 +834,7 @@ function user_get_user_navigation_info($user, $page, $options = array()) {
     // Get basic user metadata.
     $returnobject->metadata['userid'] = $user->id;
     $returnobject->metadata['userfullname'] = fullname($user);
-    $returnobject->metadata['userprofileurl'] = new moodle_url('/user/profile.php', array(
+    $returnobject->metadata['userprofileurl'] = new powereduc_url('/user/profile.php', array(
         'id' => $user->id
     ));
 
@@ -894,9 +894,9 @@ function user_get_user_navigation_info($user, $page, $options = array()) {
     // Links: Preferences.
     $preferences = new stdClass();
     $preferences->itemtype = 'link';
-    $preferences->url = new moodle_url('/user/preferences.php');
+    $preferences->url = new powereduc_url('/user/preferences.php');
     $preferences->title = get_string('preferences');
-    $preferences->titleidentifier = 'preferences,moodle';
+    $preferences->titleidentifier = 'preferences,powereduc';
     $returnobject->navitems[] = $preferences;
 
 
@@ -905,14 +905,14 @@ function user_get_user_navigation_info($user, $page, $options = array()) {
             // Build role-return link instead of logout link.
             $rolereturn = new stdClass();
             $rolereturn->itemtype = 'link';
-            $rolereturn->url = new moodle_url('/course/switchrole.php', array(
+            $rolereturn->url = new powereduc_url('/course/switchrole.php', array(
                 'id' => $course->id,
                 'sesskey' => sesskey(),
                 'switchrole' => 0,
                 'returnurl' => $page->url->out_as_local_url(false)
             ));
             $rolereturn->title = get_string('switchrolereturn');
-            $rolereturn->titleidentifier = 'switchrolereturn,moodle';
+            $rolereturn->titleidentifier = 'switchrolereturn,powereduc';
             $returnobject->navitems[] = $rolereturn;
 
             $returnobject->metadata['asotherrole'] = true;
@@ -925,13 +925,13 @@ function user_get_user_navigation_info($user, $page, $options = array()) {
         if (is_array($roles) && (count($roles) > 0)) {
             $switchrole = new stdClass();
             $switchrole->itemtype = 'link';
-            $switchrole->url = new moodle_url('/course/switchrole.php', array(
+            $switchrole->url = new powereduc_url('/course/switchrole.php', array(
                 'id' => $course->id,
                 'switchrole' => -1,
                 'returnurl' => $page->url->out_as_local_url(false)
             ));
             $switchrole->title = get_string('switchroleto');
-            $switchrole->titleidentifier = 'switchroleto,moodle';
+            $switchrole->titleidentifier = 'switchroleto,powereduc';
             $returnobject->navitems[] = $switchrole;
         }
     }
@@ -943,7 +943,7 @@ function user_get_user_navigation_info($user, $page, $options = array()) {
         // user is disguised as.
         $returnobject->metadata['realuserid'] = $realuser->id;
         $returnobject->metadata['realuserfullname'] = fullname($realuser);
-        $returnobject->metadata['realuserprofileurl'] = new moodle_url('/user/profile.php', [
+        $returnobject->metadata['realuserprofileurl'] = new powereduc_url('/user/profile.php', [
             'id' => $realuser->id
         ]);
         $returnobject->metadata['realuseravatar'] = $OUTPUT->user_picture($realuser, $avataroptions);
@@ -951,20 +951,20 @@ function user_get_user_navigation_info($user, $page, $options = array()) {
         // Build a user-revert link.
         $userrevert = new stdClass();
         $userrevert->itemtype = 'link';
-        $userrevert->url = new moodle_url('/course/loginas.php', [
+        $userrevert->url = new powereduc_url('/course/loginas.php', [
             'id' => $course->id,
             'sesskey' => sesskey()
         ]);
         $userrevert->title = get_string('logout');
-        $userrevert->titleidentifier = 'logout,moodle';
+        $userrevert->titleidentifier = 'logout,powereduc';
         $returnobject->navitems[] = $userrevert;
     } else {
         // Build a logout link.
         $logout = new stdClass();
         $logout->itemtype = 'link';
-        $logout->url = new moodle_url('/login/logout.php', ['sesskey' => sesskey()]);
+        $logout->url = new powereduc_url('/login/logout.php', ['sesskey' => sesskey()]);
         $logout->title = get_string('logout');
-        $logout->titleidentifier = 'logout,moodle';
+        $logout->titleidentifier = 'logout,powereduc';
         $returnobject->navitems[] = $logout;
     }
 
@@ -1048,12 +1048,12 @@ function user_is_previously_used_password($userid, $password) {
 }
 
 /**
- * Remove a user device from the Moodle database (for PUSH notifications usually).
+ * Remove a user device from the PowerEduc database (for PUSH notifications usually).
  *
  * @param string $uuid The device UUID.
  * @param string $appid The app id. If empty all the devices matching the UUID for the user will be removed.
  * @return bool true if removed, false if the device didn't exists in the database
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  */
 function user_remove_user_device($uuid, $appid = "") {
     global $DB, $USER;
@@ -1077,7 +1077,7 @@ function user_remove_user_device($uuid, $appid = "") {
  *
  * @param stdClass  $course course  object
  * @param stdClass  $context course context object
- * @since Moodle 2.9
+ * @since PowerEduc 2.9
  */
 function user_list_view($course, $context) {
 
@@ -1106,10 +1106,10 @@ function user_mygrades_url($userid = null, $courseid = SITEID) {
     if (isset($CFG->grade_mygrades_report) && $CFG->grade_mygrades_report != 'external') {
         if (isset($userid) && $USER->id != $userid) {
             // Send to the gradebook report.
-            $url = new moodle_url('/grade/report/' . $CFG->grade_mygrades_report . '/index.php',
+            $url = new powereduc_url('/grade/report/' . $CFG->grade_mygrades_report . '/index.php',
                     array('id' => $courseid, 'userid' => $userid));
         } else {
-            $url = new moodle_url('/grade/report/' . $CFG->grade_mygrades_report . '/index.php');
+            $url = new powereduc_url('/grade/report/' . $CFG->grade_mygrades_report . '/index.php');
         }
     } else if (isset($CFG->grade_mygrades_report) && $CFG->grade_mygrades_report == 'external'
             && !empty($CFG->gradereport_mygradeurl)) {
@@ -1198,7 +1198,7 @@ function user_can_view_profile($user, $course = null, $usercontext = null) {
         if (empty($usercontext)) {
             $usercontext = context_user::instance($user->id);
         }
-        if (has_capability('moodle/user:viewdetails', $usercontext) || has_capability('moodle/user:viewalldetails', $usercontext)) {
+        if (has_capability('powereduc/user:viewdetails', $usercontext) || has_capability('powereduc/user:viewalldetails', $usercontext)) {
             return true;
         }
         // This returns context information, so we can preload below.
@@ -1212,8 +1212,8 @@ function user_can_view_profile($user, $course = null, $usercontext = null) {
     foreach ($userscourses as $userscourse) {
         context_helper::preload_from_record($userscourse);
         $coursecontext = context_course::instance($userscourse->id);
-        if (has_capability('moodle/user:viewdetails', $coursecontext) ||
-            has_capability('moodle/user:viewalldetails', $coursecontext)) {
+        if (has_capability('powereduc/user:viewdetails', $coursecontext) ||
+            has_capability('powereduc/user:viewalldetails', $coursecontext)) {
             if (!groups_user_groups_visible($userscourse, $user->id)) {
                 // Not a member of the same group.
                 continue;

@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://powereduc.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
+defined('POWEREDUC_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
@@ -170,7 +170,7 @@ class externallib_test extends \advanced_testcase {
         $this->assertSame(external_format_text($test, $testformat, $context, 'core', '', 0, $options), $correct);
 
         $test = '<p><a id="test"></a><a href="#test">Text</a></p>'."\n".'Newline';
-        $testformat = FORMAT_MOODLE;
+        $testformat = FORMAT_POWEREDUC;
         $correct = array('<p><a id="test"></a><a href="#test">Text</a></p> Newline', FORMAT_HTML);
         $options = new \stdClass();
         $options->newlines = false;
@@ -179,7 +179,7 @@ class externallib_test extends \advanced_testcase {
         $this->assertSame(external_format_text($test, $testformat, $context, 'core', '', 0, $options), $correct);
 
         $test = '<p><a id="test"></a><a href="#test">Text</a></p>';
-        $testformat = FORMAT_MOODLE;
+        $testformat = FORMAT_POWEREDUC;
         $correct = array('<div class="text_to_html">'.$test.'</div>', FORMAT_HTML);
         $options = new \stdClass();
         $options->para = true;
@@ -188,7 +188,7 @@ class externallib_test extends \advanced_testcase {
         $this->assertSame(external_format_text($test, $testformat, $context, 'core', '', 0, $options), $correct);
 
         $test = '<p><a id="test"></a><a href="#test">Text</a></p>';
-        $testformat = FORMAT_MOODLE;
+        $testformat = FORMAT_POWEREDUC;
         $correct = array($test, FORMAT_HTML);
         $options = new \stdClass();
         $options->context = $context;
@@ -271,7 +271,7 @@ class externallib_test extends \advanced_testcase {
         $testdata = array('value' => null);
         try {
             $cleanedvalue = \external_api::clean_returnvalue($returndesc, $testdata);
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf(\invalid_response_exception::class, $e);
             $this->assertStringContainsString('of PHP type "NULL"', $e->debuginfo);
         }
@@ -356,21 +356,21 @@ class externallib_test extends \advanced_testcase {
         try {
             $fetchedcontext = test_exernal_api::get_context_wrapper(array("contextid" => 0));
             $this->fail('Exception expected from get_context_wrapper()');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf(\invalid_parameter_exception::class, $e);
         }
 
         try {
             $fetchedcontext = test_exernal_api::get_context_wrapper(array("instanceid" => 0));
             $this->fail('Exception expected from get_context_wrapper()');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf(\invalid_parameter_exception::class, $e);
         }
 
         try {
             $fetchedcontext = test_exernal_api::get_context_wrapper(array("contextid" => null));
             $this->fail('Exception expected from get_context_wrapper()');
-        } catch (\moodle_exception $e) {
+        } catch (\powereduc_exception $e) {
             $this->assertInstanceOf(\invalid_parameter_exception::class, $e);
         }
 
@@ -589,7 +589,7 @@ class externallib_test extends \advanced_testcase {
         global $CFG, $DB;
 
         $this->DB = $DB;
-        $DB = $this->getMockBuilder('moodle_database')->getMock();
+        $DB = $this->getMockBuilder('powereduc_database')->getMock();
 
         $content = base64_encode("Let us create a nice simple file.");
         $timemodified = 102030405;
@@ -667,7 +667,7 @@ class externallib_test extends \advanced_testcase {
         $CFG->enablemobilewebservice = 1;
         $user1 = $this->getDataGenerator()->create_user();
         $user2 = $this->getDataGenerator()->create_user();
-        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1));
+        $service = $DB->get_record('external_services', array('shortname' => POWEREDUC_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1));
 
         $this->setUser($user1);
         $timenow = time();
