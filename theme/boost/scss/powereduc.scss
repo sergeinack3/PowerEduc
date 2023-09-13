@@ -1,0 +1,50 @@
+$breadcrumb-divider: "▶" !default;
+$breadcrumb-divider-rtl: "◀" !default;
+
+// Specific overrides to make Bootstrap RTL.
+@import "powereduc/bootstrap-rtl";
+
+// Old PowerEduc stuff from base theme.
+// Massive, needs broken up.
+@import "powereduc/variables";
+@import "powereduc/core";
+@import "powereduc/icons";
+@import "powereduc/admin";
+@import "powereduc/blocks";
+@import "powereduc/calendar";
+@import "powereduc/contentbank";
+@import "powereduc/course";
+@import "powereduc/drawer";
+@import "powereduc/filemanager";
+@import "powereduc/message";
+@import "powereduc/question";
+@import "powereduc/user";
+@import "powereduc/search";
+@import "powereduc/forms";
+@import "powereduc/login";
+@import "powereduc/modules";
+@import "powereduc/chat";
+@import "powereduc/reports";
+@import "powereduc/backup-restore";
+@import "powereduc/tables";
+@import "powereduc/buttons";
+@import "powereduc/grade";
+@import "powereduc/templates";
+@import "powereduc/undo";
+@import "powereduc/debug";
+@import "powereduc/sticky-footer";
+@import "powereduc/popover-region";
+@import "powereduc/tool_usertours";
+@import "powereduc/print";
+@import "powereduc/modal";
+@import "powereduc/layout";
+@import "powereduc/prefixes";
+@import "powereduc/atto";
+@import "powereduc/toasts";
+@import "powereduc/navbar";
+@import "powereduc/reportbuilder";
+@import "powereduc/courseindex";
+@import "powereduc/moremenu";
+@import "powereduc/primarynavigation";
+@import "powereduc/secondarynavigation";
+@import "powereduc/tertiarynavigation";

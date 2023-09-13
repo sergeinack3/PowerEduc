@@ -1,0 +1,1 @@
+YUI.add("powereduc-mod_quiz-util-base",function(o,d){o.namespace("PowerEduc.mod_quiz.util")},"@VERSION@");
